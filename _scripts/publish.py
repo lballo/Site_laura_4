@@ -275,14 +275,35 @@ def blocks_to_html(blocks, client=None):
                 url = img_data["external"]["url"]
             else:
                 url = ""
-            caption = rich_text_to_html(img_data.get("caption", []))
-            alt = rich_text_to_plain(img_data.get("caption", [])) or "illustration"
+            raw_caption = rich_text_to_plain(img_data.get("caption", []))
+
+            # Convention : "alt: texte SEO | légende visible"
+            # Si pas de "alt:", la légende sert pour les deux
+            if raw_caption.lower().startswith("alt:"):
+                rest = raw_caption[4:].strip()
+                if "|" in rest:
+                    alt_text, caption_text = rest.split("|", 1)
+                    alt_text = alt_text.strip()
+                    caption_text = caption_text.strip()
+                else:
+                    alt_text = rest
+                    caption_text = ""
+            elif "|" in raw_caption:
+                # "alt | légende" sans préfixe alt:
+                alt_text, caption_text = raw_caption.split("|", 1)
+                alt_text = alt_text.strip()
+                caption_text = caption_text.strip()
+            else:
+                alt_text = raw_caption or "illustration"
+                caption_text = raw_caption
+
             cap_html = (
-                f'\n      <p class="image-caption">{caption}</p>' if caption else ""
+                f'\n      <p class="image-caption">{html_module.escape(caption_text)}</p>'
+                if caption_text else ""
             )
             html_parts.append(
                 f'    <div class="full-image">\n'
-                f'      <img src="{url}" alt="{html_module.escape(alt)}" loading="lazy">'
+                f'      <img src="{url}" alt="{html_module.escape(alt_text)}" loading="lazy">'
                 f"{cap_html}\n"
                 f"    </div>"
             )
@@ -784,3 +805,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
