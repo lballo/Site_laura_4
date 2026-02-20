@@ -1,35 +1,6 @@
 {
   "articles": [
     {
-      "id": "empathie-hypersensible",
-      "title": "Comment gérer son hyper-empathie en tant qu’hypersensible?",
-      "slug": "empathie-hypersensible",
-      "url": "/empathie-hypersensible",
-      "date": "2026-02-20",
-      "readingTime": "7 min",
-      "excerpt": "Pourquoi les hypersensibles sont-ils souvent hyperempathes ? Découvrez la différence entre empathie et compassion et comment éviter la contamination émotionnelle",
-      "tags": [
-        "hypersensibilite",
-        "gestion-des-emotions",
-        "comprehension-de-soi"
-      ],
-      "situations": [
-        "sensible",
-        "comprehension"
-      ],
-      "searchKeywords": [
-        "empathie",
-        "hypersensible",
-        "comment",
-        "gérer",
-        "hyper",
-        "tant"
-      ],
-      "category": "Hypersensibilité",
-      "image": "https://lauraballo.com/wp-content/uploads/2022/11/shutterstock_1890934138-min-1-1024x683.jpg",
-      "featured": false
-    },
-    {
       "id": "st-psycho",
       "title": "Stranger Things : une lecture psychologique et thérapeutique",
       "slug": "stranger-things-lecture-psychologique",
