@@ -1,6 +1,35 @@
 {
   "articles": [
     {
+      "id": "empathie-hypersensible",
+      "title": "Comment gérer son hyper-empathie en tant qu’hypersensible?",
+      "slug": "empathie-hypersensible",
+      "url": "/empathie-hypersensible",
+      "date": "2026-02-20",
+      "readingTime": "6 min",
+      "excerpt": "Pourquoi les hypersensibles sont-ils souvent hyperempathes ? Découvrez la différence entre empathie et compassion et comment éviter la contamination émotionnelle",
+      "tags": [
+        "hypersensibilite",
+        "gestion-des-emotions",
+        "comprehension-de-soi"
+      ],
+      "situations": [
+        "sensible",
+        "comprehension"
+      ],
+      "searchKeywords": [
+        "empathie",
+        "hypersensible",
+        "comment",
+        "gérer",
+        "hyper",
+        "tant"
+      ],
+      "category": "Hypersensibilité",
+      "image": "https://lauraballo.com/wp-content/uploads/2022/11/shutterstock_1890934138-min-1-1024x683.jpg",
+      "featured": false
+    },
+    {
       "id": "st-psycho",
       "title": "Stranger Things : une lecture psychologique et thérapeutique",
       "slug": "stranger-things-lecture-psychologique",
@@ -8,9 +37,31 @@
       "date": "2026-01-29",
       "readingTime": "8 min",
       "excerpt": "Pourquoi cette série fascine bien au-delà de l'horreur et comment elle explore avec finesse les mécanismes profonds du trauma, de la mémoire et de la reconstruction identitaire.",
-      "tags": ["comprehension-de-soi", "culture"],
-      "situations": ["comprehension"],
-      "searchKeywords": ["trauma", "memoire", "inconscient", "stranger things", "psychologie", "sensible", "jugement", "emotion", "refoulement", "therapie", "guerir", "relation", "eleven", "upside down", "monstrueux", "peur"],
+      "tags": [
+        "comprehension-de-soi",
+        "culture"
+      ],
+      "situations": [
+        "comprehension"
+      ],
+      "searchKeywords": [
+        "trauma",
+        "memoire",
+        "inconscient",
+        "stranger things",
+        "psychologie",
+        "sensible",
+        "jugement",
+        "emotion",
+        "refoulement",
+        "therapie",
+        "guerir",
+        "relation",
+        "eleven",
+        "upside down",
+        "monstrueux",
+        "peur"
+      ],
       "category": "Psychologie & Culture",
       "image": "/assets/img/blog/stranger-things.jpg",
       "featured": true
@@ -23,9 +74,33 @@
       "date": "2026-01-28",
       "readingTime": "8 min",
       "excerpt": "Dire non est difficile pour les hypersensibles. Découvrez pourquoi la colère est votre alliée et comment poser des limites claires avec bienveillance.",
-      "tags": ["hypersensibilite", "affirmation-de-soi", "communication", "gestion-des-conflits"],
-      "situations": ["limites", "sensible"],
-      "searchKeywords": ["hypersensible", "limites", "dire non", "culpabilite", "assertivite", "colere", "communication", "autorité", "dire non", "valeurs", "respect de soi", "refuser", "proteger", "CNV", "colere saine"],
+      "tags": [
+        "hypersensibilite",
+        "affirmation-de-soi",
+        "communication",
+        "gestion-des-conflits"
+      ],
+      "situations": [
+        "limites",
+        "sensible"
+      ],
+      "searchKeywords": [
+        "hypersensible",
+        "limites",
+        "dire non",
+        "culpabilite",
+        "assertivite",
+        "colere",
+        "communication",
+        "autorité",
+        "dire non",
+        "valeurs",
+        "respect de soi",
+        "refuser",
+        "proteger",
+        "CNV",
+        "colere saine"
+      ],
       "category": "Hypersensibilité",
       "image": "/assets/img/blog/limites.png",
       "featured": false
@@ -38,9 +113,33 @@
       "date": "2026-01-25",
       "readingTime": "9 min",
       "excerpt": "Carapace, caméléon ou fuite : découvrez les mécanismes inconscients des hypersensibles et comment transformer ces stratégies en forces authentiques.",
-      "tags": ["hypersensibilite", "comprehension-de-soi"],
-      "situations": ["comprehension", "sensible"],
-      "searchKeywords": ["hypersensible", "hypersensibilite", "sensibilité", "carapace", "cameleon", "fuite", "adaptation", "mecanismes", "protection", "non-soi", "masque", "rejet", "acceptation", "vulnerabilite", "authenticite", "sois fort", "fais plaisir"],
+      "tags": [
+        "hypersensibilite",
+        "comprehension-de-soi"
+      ],
+      "situations": [
+        "comprehension",
+        "sensible"
+      ],
+      "searchKeywords": [
+        "hypersensible",
+        "hypersensibilite",
+        "sensibilité",
+        "carapace",
+        "cameleon",
+        "fuite",
+        "adaptation",
+        "mecanismes",
+        "protection",
+        "non-soi",
+        "masque",
+        "rejet",
+        "acceptation",
+        "vulnerabilite",
+        "authenticite",
+        "sois fort",
+        "fais plaisir"
+      ],
       "category": "Hypersensibilité",
       "image": "/assets/img/blog/strategies-hypersensibles.jpg",
       "featured": false
@@ -53,9 +152,32 @@
       "date": "2026-01-22",
       "readingTime": "6 min",
       "excerpt": "Comment clarifier votre identité professionnelle et construire un positionnement qui résonne avec vos valeurs profondes et votre singularité.",
-      "tags": ["leadership", "strategie"],
-      "situations": ["positionnement"],
-      "searchKeywords": ["positionnement", "identite", "clarte", "direction", "flou", "perdu", "carriere", "voie", "mission", "valeurs", "vision", "qui je suis", "ma place", "unique", "singularite", "different", "bilans de compétences"],
+      "tags": [
+        "leadership",
+        "strategie"
+      ],
+      "situations": [
+        "positionnement"
+      ],
+      "searchKeywords": [
+        "positionnement",
+        "identite",
+        "clarte",
+        "direction",
+        "flou",
+        "perdu",
+        "carriere",
+        "voie",
+        "mission",
+        "valeurs",
+        "vision",
+        "qui je suis",
+        "ma place",
+        "unique",
+        "singularite",
+        "different",
+        "bilans de compétences"
+      ],
       "category": "Leadership",
       "image": "/assets/img/blog/positionnement.jpg",
       "featured": false
@@ -68,9 +190,28 @@
       "date": "2026-01-20",
       "readingTime": "10 min",
       "excerpt": "Les 4 piliers essentiels pour comprendre, accueillir et transformer vos émotions en force de leadership.",
-      "tags": ["gestion-des-emotions", "leadership", "comprehension-de-soi"],
-      "situations": ["sensible"],
-      "searchKeywords": ["intelligence emotionnelle", "gestion emotions", "conscience emotionnelle", "comprendre emotions", "leadership emotionnel", "4 piliers", "communication emotionnelle", "ressentir", "exprimer", "accueillir", "journal emotionnel", "vocabulaire emotionnel"],
+      "tags": [
+        "gestion-des-emotions",
+        "leadership",
+        "comprehension-de-soi"
+      ],
+      "situations": [
+        "sensible"
+      ],
+      "searchKeywords": [
+        "intelligence emotionnelle",
+        "gestion emotions",
+        "conscience emotionnelle",
+        "comprendre emotions",
+        "leadership emotionnel",
+        "4 piliers",
+        "communication emotionnelle",
+        "ressentir",
+        "exprimer",
+        "accueillir",
+        "journal emotionnel",
+        "vocabulaire emotionnel"
+      ],
       "category": "Intelligence émotionnelle",
       "image": "/assets/img/blog/prise-de-parole.png",
       "featured": true
@@ -83,9 +224,25 @@
       "date": "2026-01-15",
       "readingTime": "7 min",
       "excerpt": "Pourquoi la douceur n'est pas une faiblesse mais une force stratégique qui transforme votre impact et crée une autorité durable.",
-      "tags": ["leadership", "hypersensibilite", "communication"],
-      "situations": ["sensible", "leadership"],
-      "searchKeywords": ["douceur", "sensible", "gentil", "faiblesse", "trop gentil", "empathie", "bienveillance", "vulnerable"],
+      "tags": [
+        "leadership",
+        "hypersensibilite",
+        "communication"
+      ],
+      "situations": [
+        "sensible",
+        "leadership"
+      ],
+      "searchKeywords": [
+        "douceur",
+        "sensible",
+        "gentil",
+        "faiblesse",
+        "trop gentil",
+        "empathie",
+        "bienveillance",
+        "vulnerable"
+      ],
       "category": "Hypersensibilité",
       "image": "/assets/img/blog/douceur.png",
       "featured": false
