@@ -1,0 +1,30 @@
+{
+  "rewrites": [
+    {
+      "source": "/:slug((?!accompagnements|api|assets|blog|formations|legal|quizz|favicon|apple-touch)[a-z0-9][a-z0-9-]*)",
+      "destination": "/blog/articles/:slug.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/blog/articles/:slug.html",
+      "destination": "/:slug",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/articles/:slug((?!index)[a-z0-9][a-z0-9-]*)",
+      "destination": "/:slug",
+      "statusCode": 301
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-XSS-Protection", "value": "1; mode=block" }
+      ]
+    }
+  ]
+}
