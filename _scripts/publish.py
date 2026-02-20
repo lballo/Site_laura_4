@@ -139,6 +139,8 @@ def rich_text_to_html(rich_text_array):
     for rt in rich_text_array:
         text = rt.get("plain_text", "")
         text = html_module.escape(text)
+        # Convertir les retours à la ligne (Shift+Enter dans Notion) en <br>
+        text = text.replace("\n", "<br>\n")
         ann = rt.get("annotations", {})
         href = rt.get("href")
         if ann.get("code"):
@@ -163,7 +165,7 @@ def rich_text_to_plain(rich_text_array):
     return "".join(rt.get("plain_text", "") for rt in rich_text_array)
 
 
-def blocks_to_html(blocks):
+def blocks_to_html(blocks, client=None):
     """
     Convertit les blocs Notion en HTML.
     
@@ -184,6 +186,15 @@ def blocks_to_html(blocks):
     i = 0
     first_p = True
 
+    def get_children_html(block):
+        """Récupère et convertit les blocs enfants (puces imbriquées, etc.)"""
+        if not block.get("has_children") or not client:
+            return ""
+        children = client.get_page_blocks(block["id"])
+        if not children:
+            return ""
+        return "\n" + blocks_to_html(children, client)
+
     while i < len(blocks):
         block = blocks[i]
         btype = block.get("type", "")
@@ -196,6 +207,10 @@ def blocks_to_html(blocks):
                     first_p = False
                 else:
                     html_parts.append(f"    <p>{text}</p>")
+            # Paragraphe vide = saut de ligne intentionnel
+            children_html = get_children_html(block)
+            if children_html:
+                html_parts.append(children_html)
 
         elif btype in ("heading_1", "heading_2"):
             text = rich_text_to_html(block[btype]["rich_text"])
@@ -210,8 +225,10 @@ def blocks_to_html(blocks):
         elif btype == "bulleted_list_item":
             items = []
             while i < len(blocks) and blocks[i].get("type") == "bulleted_list_item":
-                text = rich_text_to_html(blocks[i]["bulleted_list_item"]["rich_text"])
-                items.append(f"      <li>{text}</li>")
+                b = blocks[i]
+                text = rich_text_to_html(b["bulleted_list_item"]["rich_text"])
+                children_html = get_children_html(b)
+                items.append(f"      <li>{text}{children_html}</li>")
                 i += 1
             html_parts.append("    <ul>\n" + "\n".join(items) + "\n    </ul>")
             first_p = False
@@ -220,8 +237,10 @@ def blocks_to_html(blocks):
         elif btype == "numbered_list_item":
             items = []
             while i < len(blocks) and blocks[i].get("type") == "numbered_list_item":
-                text = rich_text_to_html(blocks[i]["numbered_list_item"]["rich_text"])
-                items.append(f"      <li>{text}</li>")
+                b = blocks[i]
+                text = rich_text_to_html(b["numbered_list_item"]["rich_text"])
+                children_html = get_children_html(b)
+                items.append(f"      <li>{text}{children_html}</li>")
                 i += 1
             html_parts.append("    <ol>\n" + "\n".join(items) + "\n    </ol>")
             first_p = False
@@ -561,7 +580,7 @@ def main():
     articles_list = load_articles_json(ARTICLES_JSON_PATH)
     print(f"✅ {ARTICLES_JSON_PATH} : {len(articles_list)} articles existants")
 
-    # 3. Requêter Notion
+    # 3. Requêter Notion — articles à PUBLIER
     print("\n🔍 Recherche des articles à publier...")
     pages = client.query_database(
         DATABASE_ID,
@@ -572,12 +591,56 @@ def main():
     )
     print(f"   → {len(pages)} article(s) trouvé(s)\n")
 
-    if not pages:
-        print("ℹ️  Aucun article à publier. Fin.")
+    # 3b. Requêter Notion — articles à SUPPRIMER
+    print("🗑️  Recherche des articles à supprimer...")
+    pages_to_delete = client.query_database(
+        DATABASE_ID,
+        filter_obj={
+            "property": "Action à effectuer",
+            "select": {"equals": "Supprimer article"},
+        },
+    )
+    print(f"   → {len(pages_to_delete)} article(s) à supprimer\n")
+
+    if not pages and not pages_to_delete:
+        print("ℹ️  Rien à faire. Fin.")
         return
 
     modified_files = []
+    deleted_files = []
     published_page_ids = []
+    deleted_page_ids = []
+
+    # ── SUPPRESSION ──
+    for page in pages_to_delete:
+        page_id = page["id"]
+        title = extract_property(page, "Titre de l'article", "title")
+        notion_url = extract_property(page, "URL", "url")
+        slug = extract_slug_from_url(notion_url) or slugify(title)
+
+        print(f"🗑️  {title}")
+        print(f"   slug → {slug}")
+
+        # Supprimer le fichier HTML
+        html_file = Path(OUTPUT_DIR) / f"{slug}.html"
+        if html_file.exists():
+            html_file.unlink()
+            deleted_files.append(str(html_file))
+            print(f"   ✅ Fichier supprimé : {html_file}")
+        else:
+            print(f"   ⚠️  Fichier introuvable : {html_file}")
+
+        # Supprimer de articles.json
+        before_count = len(articles_list)
+        articles_list = [a for a in articles_list if a.get("slug") != slug]
+        if len(articles_list) < before_count:
+            print(f"   ✅ Retiré de articles.json")
+        else:
+            print(f"   ⚠️  Pas trouvé dans articles.json")
+
+        deleted_page_ids.append((page_id, title))
+
+    # ── PUBLICATION ──
 
     for page in pages:
         page_id = page["id"]
@@ -601,7 +664,7 @@ def main():
 
         # Contenu (blocs de la page Notion)
         blocks = client.get_page_blocks(page_id)
-        content_html = blocks_to_html(blocks)
+        content_html = blocks_to_html(blocks, client)
 
         if not content_html.strip():
             print(f"   ⚠️  Contenu vide — ignoré")
@@ -660,12 +723,25 @@ def main():
     print(f"🗺️  {SITEMAP_PATH} régénéré")
 
     # 6. Git
-    titles = [t for _, t in published_page_ids]
-    commit_msg = f"📝 Publié : {', '.join(titles)}"
+    # Build commit message
+    parts = []
+    if published_page_ids:
+        pub_titles = [t for _, t in published_page_ids]
+        parts.append(f"📝 Publié : {', '.join(pub_titles)}")
+    if deleted_page_ids:
+        del_titles = [t for _, t in deleted_page_ids]
+        parts.append(f"🗑️ Supprimé : {', '.join(del_titles)}")
+    commit_msg = " | ".join(parts)
     if len(commit_msg) > 100:
-        commit_msg = f"📝 Publié : {len(titles)} article(s)"
+        commit_msg = f"📝 {len(published_page_ids)} publié(s), 🗑️ {len(deleted_page_ids)} supprimé(s)"
 
     print(f"\n🚀 Commit & push...")
+    # Git rm pour les fichiers supprimés
+    for f in deleted_files:
+        try:
+            subprocess.run(["git", "rm", "-f", f], check=True, capture_output=True)
+        except subprocess.CalledProcessError:
+            pass
     pushed = git_commit_and_push(modified_files, commit_msg)
 
     # 7. Mettre à jour Notion
@@ -686,8 +762,23 @@ def main():
             except Exception as e:
                 print(f"   ⚠️  {title}: {e}")
 
+        for page_id, title in deleted_page_ids:
+            try:
+                client.update_page(
+                    page_id,
+                    {
+                        "Action à effectuer": {
+                            "select": {"name": "publié et indexé"}
+                        },
+                        "Article transféré": {"checkbox": False},
+                    },
+                )
+                print(f"   🗑️ {title} → supprimé du site")
+            except Exception as e:
+                print(f"   ⚠️  {title}: {e}")
+
     print("\n" + "═" * 55)
-    print(f"  ✅ Terminé — {len(published_page_ids)} article(s)")
+    print(f"  ✅ Terminé — {len(published_page_ids)} publié(s), {len(deleted_page_ids)} supprimé(s)")
     print("═" * 55)
 
 
