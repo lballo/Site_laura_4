@@ -396,19 +396,6 @@ def extract_property(page, prop_name, prop_type="rich_text"):
 def generate_html(template, data):
     output = template
 
-    # Featured image HTML (image principale de l'article)
-    if data.get("image"):
-        alt_text = html_module.escape(data.get("image_alt", "")) or "illustration"
-        featured_image_html = (
-            f'  <section class="content-section section-content">\n'
-            f'    <div class="full-image">\n'
-            f'      <img src="{data["image"]}" alt="{alt_text}" loading="lazy">\n'
-            f'    </div>\n'
-            f'  </section>'
-        )
-    else:
-        featured_image_html = ""
-
     replacements = {
         "{{TITLE_SEO}}": data["title_seo"],
         "{{META_DESCRIPTION}}": html_module.escape(data["meta_description"]),
@@ -424,7 +411,6 @@ def generate_html(template, data):
         "{{READING_TIME}}": data["reading_time"],
         "{{CONTENT}}": data["content_html"],
         "{{IMAGE_URL}}": data["image"],
-        "{{FEATURED_IMAGE_HTML}}": featured_image_html,
         "{{SLUG}}": data["slug"],
         "{{SEARCH_KEYWORDS_JS}}": json.dumps(data["tags_slugs"], ensure_ascii=False),
         "{{SCHEMA_JSON}}": json.dumps(data["schema_org"], ensure_ascii=False, indent=4),
