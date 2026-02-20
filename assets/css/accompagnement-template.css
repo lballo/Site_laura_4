@@ -1,0 +1,725 @@
+/* ============================================
+   ACCOMPAGNEMENT TEMPLATE — CSS RÉUTILISABLE
+   lauraballo.com/assets/css/accompagnement-template.css
+   ============================================ */
+
+:root {
+  --black: #1A1A1A;
+  --white: #FFFFFF;
+  --light-beige: #FBF4EE;
+  --warm-beige: #E8DDD6;
+  --warm-gray: #6B6560;
+  --text-dark: #2C2C2C;
+  --accent: #C4A574;
+  --accent-light: #D4B894;
+  --pop-red: #B8534A;
+  --success: #7BA05B;
+  
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-light: 'Cormorant Garamond', Georgia, serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  color: var(--text-dark);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================
+   HERO - Fond noir
+   ============================================ */
+.hero {
+  min-height: 100vh;
+  background: var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 40px;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 800px;
+}
+
+.hero h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.25;
+  margin-bottom: 24px;
+}
+
+.hero h1 .highlight {
+  color: var(--pop-red);
+}
+
+.hero-subtitle {
+  font-family: var(--font-light);
+  font-size: 25px;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 18px 40px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.btn-primary {
+  background: var(--pop-red);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background: #a04840;
+  transform: translateY(-2px);
+}
+
+.hero-trust {
+  margin-top: 20px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ============================================
+   SECTION PROBLÈME - Fond blanc
+   ============================================ */
+.problem-section {
+  background: var(--white);
+  padding: 80px 40px;
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(26px, 4vw, 38px);
+  font-weight: 400;
+  color: var(--pop-red);
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.section-subtitle {
+  font-family: var(--font-heading);
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 400;
+  color: var(--text-dark);
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.problem-list {
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.problem-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.problem-icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  background: rgba(184, 83, 74, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--pop-red);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* ── TAILLE AUGMENTÉE : textes problème ✕ ── */
+.problem-text {
+  font-size: 22px;
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+/* ============================================
+   SECTION EMPATHIE - Fond beige
+   ============================================ */
+.empathy-section {
+  background: var(--light-beige);
+  padding: 80px 40px;
+}
+
+.empathy-content {
+  max-width: 950px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.empathy-image {
+  text-align: center;
+}
+
+.empathy-image img,
+.empathy-image svg {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.empathy-placeholder {
+  width: 100%;
+  height: 320px;
+  background: var(--warm-beige);
+  border-radius: 4px;
+}
+
+.empathy-text h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(26px, 4vw, 36px);
+  font-weight: 400;
+  color: var(--pop-red);
+  margin-bottom: 12px;
+}
+
+.empathy-text h3 {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--text-dark);
+  margin-bottom: 24px;
+}
+
+/* ── TAILLE AUGMENTÉE : textes empathie ── */
+.empathy-text p {
+  font-size: 22px;
+  color: var(--text-dark);
+  margin-bottom: 16px;
+  line-height: 1.7;
+}
+
+.empathy-text strong {
+  color: var(--pop-red);
+}
+
+.empathy-text .signature {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 20px;
+  color: var(--text-dark);
+  margin-top: 24px;
+}
+
+/* ============================================
+   SECTION AUDIENCE - Fond noir
+   ============================================ */
+.audience-section {
+  background: var(--black);
+  padding: 80px 40px;
+}
+
+.audience-section .section-title {
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: clamp(18px, 3vw, 24px);
+}
+
+.audience-section .section-subtitle {
+  color: var(--white);
+  margin-bottom: 50px;
+}
+
+.audience-list {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.audience-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.audience-chevron {
+  color: var(--pop-red);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.audience-text {
+  font-size: 22px;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+}
+
+/* ============================================
+   SECTION TRANSFORMATION - Fond blanc
+   ============================================ */
+.transform-section {
+  background: var(--white);
+  padding: 80px 40px;
+}
+
+.transform-intro {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 50px;
+}
+
+.transform-intro p {
+  font-family: var(--font-light);
+  font-size: 22px;
+  font-style: italic;
+  color: var(--text-dark);
+  line-height: 1.7;
+}
+
+.transform-list {
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.transform-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.transform-check {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  background: var(--success);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* ── TAILLE AUGMENTÉE : textes transformation ✓ ── */
+.transform-text {
+  font-size: 22px;
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+/* ============================================
+   SECTION RÉSULTATS - Fond beige
+   ============================================ */
+.results-section {
+  background: var(--light-beige);
+  padding: 80px 40px;
+}
+
+.results-section .section-title {
+  color: var(--text-dark);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.results-intro {
+  text-align: center;
+  max-width: 750px;
+  margin: 0 auto 50px;
+}
+
+.results-intro p {
+  font-family: var(--font-light);
+  font-size: 22px;
+  color: var(--warm-gray);
+  line-height: 1.7;
+}
+
+.results-intro strong {
+  color: var(--text-dark);
+}
+
+.results-subtitle {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--text-dark);
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-top: 40px;
+}
+
+.result-card {
+  background: var(--white);
+  padding: 48px 28px 32px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  position: relative;
+  margin-top: 30px;
+}
+
+.result-icon {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.result-icon svg {
+  width: 56px;
+  height: 56px;
+}
+
+.result-card h4 {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--text-dark);
+  margin-bottom: 14px;
+}
+
+.result-card p {
+  font-size: 20px;
+  color: var(--warm-gray);
+  line-height: 1.6;
+}
+
+/* ============================================
+   SECTION FORMAT - Fond blanc
+   ============================================ */
+.format-section {
+  background: var(--white);
+  padding: 80px 40px;
+}
+
+.format-section .section-title {
+  color: var(--pop-red);
+}
+
+.format-content {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 50px;
+  align-items: start;
+}
+
+.format-list {
+  list-style: none;
+}
+
+.format-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--warm-beige);
+}
+
+.format-list li:last-child {
+  border-bottom: none;
+}
+
+.format-check {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  background: var(--success);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.format-text {
+  font-size: 16px;
+  color: var(--text-dark);
+  line-height: 1.5;
+}
+
+.format-text strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.format-text span {
+  color: var(--warm-gray);
+  font-size: 15px;
+}
+
+.format-price-card {
+  background: var(--light-beige);
+  padding: 40px 32px;
+  text-align: center;
+}
+
+.format-price-label {
+  font-family: var(--font-light);
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--warm-gray);
+  margin-bottom: 8px;
+}
+
+.format-price {
+  font-family: var(--font-heading);
+  font-size: 48px;
+  font-weight: 400;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+
+.format-price-detail {
+  font-size: 14px;
+  color: var(--warm-gray);
+  margin-bottom: 28px;
+}
+
+.format-price-features {
+  text-align: left;
+  margin-bottom: 28px;
+}
+
+.format-price-features p {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--text-dark);
+  margin-bottom: 10px;
+}
+
+.format-price-features p::before {
+  content: '✓';
+  color: var(--success);
+  font-weight: 700;
+}
+
+/* ============================================
+   SECTION FAQ - Fond noir
+   ============================================ */
+.faq-section {
+  background: var(--black);
+  padding: 80px 40px;
+}
+
+.faq-section .section-title {
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 50px;
+}
+
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto 50px;
+}
+
+.faq-card {
+  background: var(--white);
+  padding: 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.faq-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.faq-question span {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-dark);
+  line-height: 1.4;
+}
+
+.faq-icon {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--warm-beige);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--warm-gray);
+  transition: all 0.3s ease;
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.faq-answer p {
+  font-size: 15px;
+  color: var(--warm-gray);
+  line-height: 1.6;
+  padding-top: 16px;
+}
+
+.faq-card.active .faq-icon {
+  transform: rotate(45deg);
+  background: var(--pop-red);
+  border-color: var(--pop-red);
+  color: var(--white);
+}
+
+.faq-card.active .faq-answer {
+  max-height: 200px;
+}
+
+.faq-cta {
+  text-align: center;
+}
+
+/* ============================================
+   CTA FINAL - Fond beige
+   ============================================ */
+.cta-section {
+  background: var(--light-beige);
+  padding: 80px 40px;
+  text-align: center;
+}
+
+.cta-section h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(26px, 4vw, 36px);
+  font-weight: 400;
+  color: var(--text-dark);
+  margin-bottom: 20px;
+}
+
+.cta-section p {
+  font-family: var(--font-light);
+  font-size: 18px;
+  color: var(--warm-gray);
+  max-width: 600px;
+  margin: 0 auto 32px;
+  line-height: 1.7;
+}
+
+.cta-guarantee {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+.guarantee-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--warm-gray);
+}
+
+.guarantee-icon {
+  color: var(--success);
+  font-weight: 700;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+  background: var(--black);
+  padding: 32px 40px;
+  text-align: center;
+}
+
+.footer p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.footer a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+  .hero, section {
+    padding: 60px 24px;
+  }
+
+  .empathy-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .format-content {
+    grid-template-columns: 1fr;
+  }
+
+  .faq-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-guarantee {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}

@@ -1,0 +1,328 @@
+/* ============================================
+   BANNIÈRE COOKIES RGPD - STYLES
+   Fichier : assets/css/cookies.css
+   ============================================ */
+
+/* Overlay semi-transparent */
+.cc-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 9998;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.cc-overlay.cc-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Conteneur principal de la bannière */
+.cc-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.08);
+  z-index: 9999;
+  padding: 2rem;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: var(--font-body, system-ui, -apple-system, sans-serif);
+}
+
+.cc-banner.cc-visible {
+  transform: translateY(0);
+}
+
+/* Wrapper pour centrer le contenu */
+.cc-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Titre de la bannière */
+.cc-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-dark, #1a1a1a);
+  margin: 0 0 0.75rem 0;
+  letter-spacing: -0.01em;
+}
+
+/* Texte descriptif */
+.cc-text {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--warm-gray, #6B6560);
+  margin: 0 0 1.5rem 0;
+}
+
+/* Conteneur des boutons */
+.cc-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+/* Style de base des boutons */
+.cc-btn {
+  padding: 0.85rem 1.75rem;
+  border-radius: 2px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-family: var(--font-body, system-ui, sans-serif);
+}
+
+/* Bouton principal - Accepter */
+.cc-btn-accept {
+  background: var(--black, #1A1A1A);
+  color: var(--white, #ffffff);
+}
+
+.cc-btn-accept:hover {
+  background: var(--text-dark, #2C2C2C);
+  transform: translateY(-1px);
+}
+
+/* Bouton Refuser - Même importance visuelle */
+.cc-btn-reject {
+  background: var(--white, #ffffff);
+  color: var(--black, #1A1A1A);
+  border: 2px solid var(--black, #1A1A1A);
+}
+
+.cc-btn-reject:hover {
+  background: var(--light-beige, #FBF4EE);
+  transform: translateY(-1px);
+}
+
+/* Bouton Paramétrer */
+.cc-btn-settings {
+  background: transparent;
+  color: var(--warm-gray, #6B6560);
+  border: 2px solid var(--warm-beige, #E8DDD6);
+}
+
+.cc-btn-settings:hover {
+  border-color: var(--accent, #C4A574);
+  color: var(--text-dark, #2C2C2C);
+}
+
+/* ===== PANNEAU DES PARAMÈTRES ===== */
+.cc-settings-panel {
+  display: none;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--warm-beige, #E8DDD6);
+}
+
+.cc-settings-panel.cc-visible {
+  display: block;
+}
+
+.cc-settings-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-dark, #1a1a1a);
+  margin: 0 0 1rem 0;
+}
+
+/* Option de cookie individuelle */
+.cc-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--light-beige, #FBF4EE);
+}
+
+.cc-option:last-child {
+  border-bottom: none;
+}
+
+.cc-option-info {
+  flex: 1;
+  padding-right: 1rem;
+}
+
+.cc-option-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-dark, #1a1a1a);
+  margin: 0 0 0.25rem 0;
+}
+
+.cc-option-desc {
+  font-size: 0.8rem;
+  color: var(--warm-gray, #6B6560);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Toggle switch personnalisé */
+.cc-toggle {
+  position: relative;
+  width: 48px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.cc-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.cc-toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--warm-beige, #E8DDD6);
+  border-radius: 26px;
+  transition: 0.3s;
+}
+
+.cc-toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background: white;
+  border-radius: 50%;
+  transition: 0.3s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.cc-toggle input:checked + .cc-toggle-slider {
+  background: var(--accent, #C4A574);
+}
+
+.cc-toggle input:checked + .cc-toggle-slider:before {
+  transform: translateX(22px);
+}
+
+.cc-toggle input:disabled + .cc-toggle-slider {
+  background: var(--warm-beige, #E8DDD6);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Bouton de sauvegarde des préférences */
+.cc-settings-buttons {
+  margin-top: 1.25rem;
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* ===== LIEN POUR MODIFIER LES CHOIX ===== */
+.cc-reopen-link {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 0.6rem 1rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  color: var(--warm-gray, #6B6560);
+  text-decoration: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  z-index: 9990;
+  transition: all 0.2s ease;
+  font-family: var(--font-body, system-ui, sans-serif);
+  cursor: pointer;
+  border: none;
+  display: none;
+}
+
+.cc-reopen-link.cc-visible {
+  display: block;
+}
+
+.cc-reopen-link:hover {
+  color: var(--text-dark, #1a1a1a);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+}
+
+/* Bouton cookies dans le footer */
+.footer-cookie-btn {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+  transition: color 0.3s ease;
+}
+
+.footer-cookie-btn:hover {
+  color: var(--accent, #C4A574);
+}
+
+/* ===== RESPONSIVE MOBILE ===== */
+@media (max-width: 640px) {
+  .cc-banner {
+    padding: 1.5rem 1rem;
+  }
+  
+  .cc-title {
+    font-size: 1rem;
+  }
+  
+  .cc-text {
+    font-size: 0.85rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .cc-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .cc-btn {
+    width: 100%;
+    text-align: center;
+    padding: 0.9rem 1.5rem;
+  }
+  
+  .cc-option {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .cc-option-info {
+    padding-right: 0;
+  }
+  
+  .cc-settings-buttons {
+    flex-direction: column;
+  }
+  
+  .cc-settings-buttons .cc-btn {
+    width: 100%;
+  }
+  
+  .cc-reopen-link {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

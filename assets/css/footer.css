@@ -1,0 +1,157 @@
+/* ============================================
+   FOOTER.CSS - Footer partagé du site Laura Ballo
+   Fichier : assets/css/footer.css
+   Dépend des variables CSS définies dans la page
+   ============================================ */
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+  background: var(--black);
+  padding: 80px 60px 40px;
+  color: var(--white);
+}
+
+.footer-grid {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr repeat(3, 1fr);
+  gap: 60px;
+}
+
+.footer-brand h3 {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.footer-brand p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.footer-social {
+  display: flex;
+  gap: 16px;
+}
+
+.social-link {
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  transition: all var(--transition-base);
+}
+
+.social-link:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-4px);
+}
+
+.footer-column h4 {
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 24px;
+  font-weight: 600;
+}
+
+.footer-column a {
+  display: block;
+  font-size: 15px;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 14px;
+  transition: all var(--transition-base);
+}
+
+.footer-column a:hover {
+  color: var(--accent);
+  transform: translateX(4px);
+}
+
+.footer-bottom {
+  max-width: 1300px;
+  margin: 60px auto 0;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-bottom p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.5);
+}
+
+.footer-legal {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-legal a,
+.footer-legal button {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  transition: color var(--transition-base);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.footer-legal a:hover,
+.footer-legal button:hover {
+  color: var(--accent);
+}
+
+/* ============================================
+   RESPONSIVE - TABLET (1024px)
+   ============================================ */
+@media (max-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+}
+
+/* ============================================
+   RESPONSIVE - MOBILE (768px)
+   ============================================ */
+@media (max-width: 768px) {
+  .footer {
+    padding: 60px 20px 30px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .footer-social {
+    justify-content: center;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-legal {
+    justify-content: center;
+  }
+}

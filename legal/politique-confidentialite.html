@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Politique de Confidentialité • Laura Ballo Coaching</title>
+  <meta name="description" content="Politique de confidentialité et protection des données personnelles - Laura Ballo Coaching Leadership Premium.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://lauraballo.com/politique-confidentialite">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #1A1A1A;
+      --white: #FFFFFF;
+      --light-beige: #FBF4EE;
+      --warm-beige: #E8DDD6;
+      --warm-gray: #6B6560;
+      --text-dark: #2C2C2C;
+      --text-muted: #D9C9BA;
+      --accent: #C4A574;
+      --accent-light: #D4B894;
+      --accent-dark: #A68B5B;
+
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-script: 'Mrs Saint Delafield', cursive;
+      --font-light: 'Cormorant Garamond', Georgia, serif;
+
+      --space-xs: 8px;
+      --space-sm: 16px;
+      --space-md: 24px;
+      --space-lg: 40px;
+      --space-xl: 60px;
+      --space-xxl: 100px;
+
+      --transition-base: 0.3s ease;
+      --shadow-md: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text-dark);
+      line-height: 1.7;
+      background: var(--light-beige);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: var(--accent-dark);
+      text-decoration: none;
+      transition: color var(--transition-base);
+    }
+
+    a:hover {
+      color: var(--accent);
+    }
+
+    ::selection {
+      background: var(--accent);
+      color: var(--white);
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      padding: 16px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(251, 244, 238, 0.98);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-md);
+      z-index: 1000;
+    }
+
+    .nav-logo {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-dark);
+      padding: 10px 20px;
+      border: 1px solid var(--warm-beige);
+      border-radius: 30px;
+      transition: all var(--transition-base);
+    }
+
+    .nav-back:hover {
+      background: var(--accent);
+      color: var(--white);
+      border-color: var(--accent);
+    }
+
+    /* Hero légal */
+    .legal-hero {
+      padding: 160px 60px 80px;
+      text-align: center;
+      background: linear-gradient(180deg, var(--warm-beige) 0%, var(--light-beige) 100%);
+    }
+
+    .legal-hero h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: var(--space-sm);
+    }
+
+    .legal-hero p {
+      font-family: var(--font-light);
+      font-size: 1.1rem;
+      color: var(--warm-gray);
+    }
+
+    /* Contenu légal */
+    .legal-content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: var(--space-xl) var(--space-lg);
+    }
+
+    .legal-section {
+      margin-bottom: var(--space-xl);
+    }
+
+    .legal-section h2 {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: var(--space-md);
+      padding-bottom: var(--space-sm);
+      border-bottom: 2px solid var(--accent);
+      display: inline-block;
+    }
+
+    .legal-section h3 {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--text-dark);
+      margin: var(--space-md) 0 var(--space-sm);
+    }
+
+    .legal-section p {
+      margin-bottom: var(--space-sm);
+      color: var(--text-dark);
+    }
+
+    .legal-section ul {
+      margin: var(--space-sm) 0 var(--space-md) var(--space-md);
+    }
+
+    .legal-section li {
+      margin-bottom: var(--space-xs);
+      color: var(--text-dark);
+    }
+
+    .info-box {
+      background: var(--white);
+      padding: var(--space-md);
+      border-radius: 12px;
+      border-left: 4px solid var(--accent);
+      margin: var(--space-md) 0;
+    }
+
+    .info-box p {
+      margin-bottom: var(--space-xs);
+    }
+
+    .info-box p:last-child {
+      margin-bottom: 0;
+    }
+
+    .info-box strong {
+      color: var(--accent-dark);
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 100%);
+      color: var(--white);
+      padding: var(--space-md);
+      border-radius: 12px;
+      margin: var(--space-md) 0;
+    }
+
+    .highlight-box strong {
+      color: var(--white);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: var(--space-md) 0;
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: var(--space-sm);
+      text-align: left;
+      border-bottom: 1px solid var(--warm-beige);
+    }
+
+    th {
+      background: var(--accent);
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--black);
+      color: var(--white);
+      padding: var(--space-xl) var(--space-lg) var(--space-lg);
+    }
+
+    .footer-content {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: var(--space-sm);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+      margin: var(--space-md) 0;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      font-size: 14px;
+      transition: color var(--transition-base);
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    .footer-copyright {
+      color: var(--warm-gray);
+      font-size: 13px;
+      margin-top: var(--space-md);
+      padding-top: var(--space-md);
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav {
+        padding: 16px 20px;
+      }
+
+      .legal-hero {
+        padding: 140px 20px 60px;
+      }
+
+      .legal-content {
+        padding: var(--space-lg) var(--space-sm);
+      }
+
+      .footer {
+        padding: var(--space-lg) var(--space-sm);
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: var(--space-sm);
+      }
+
+      table {
+        font-size: 14px;
+      }
+
+      th, td {
+        padding: var(--space-xs);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="/" class="nav-logo">Laura Ballo</a>
+    <a href="/" class="nav-back">
+      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+      </svg>
+      Retour à l'accueil
+    </a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="legal-hero">
+    <h1>Politique de Confidentialité</h1>
+    <p>Protection de vos données personnelles • Dernière mise à jour : Février 2026</p>
+  </section>
+
+  <!-- Contenu -->
+  <main class="legal-content">
+
+    <section class="legal-section">
+      <h2>1. Introduction</h2>
+      
+      <p>La protection de vos données personnelles est une priorité pour Laura Ballo. Cette politique de confidentialité vous informe sur la façon dont vos données sont collectées, utilisées et protégées lorsque vous utilisez le site www.lauraballo.com.</p>
+      
+      <div class="info-box">
+        <p><strong>Responsable du traitement :</strong> Laura BALLO</p>
+        <p><strong>Adresse :</strong> 4/6 Av. Joannes Hubert, 69160 Tassin-la-Demi-Lune, France</p>
+        <p><strong>Email :</strong> <a href="mailto:contact@lauraballo.com">contact@lauraballo.com</a></p>
+        <p><strong>SIRET :</strong> 843 370 255 000 39</p>
+      </div>
+    </section>
+
+    <section class="legal-section">
+      <h2>2. Données collectées</h2>
+      
+      <h3>2.1. Données que vous nous fournissez directement</h3>
+      <p>Lorsque vous utilisez nos services, vous pouvez être amené à nous fournir certaines informations :</p>
+      <ul>
+        <li><strong>Données d'identification :</strong> nom, prénom, adresse email, numéro de téléphone</li>
+        <li><strong>Données professionnelles :</strong> fonction, entreprise, secteur d'activité</li>
+        <li><strong>Données de paiement :</strong> coordonnées bancaires (traitées par notre prestataire de paiement sécurisé)</li>
+        <li><strong>Données de communication :</strong> messages, demandes, commentaires</li>
+      </ul>
+
+      <h3>2.2. Données collectées automatiquement</h3>
+      <p>Lors de votre navigation sur le site, certaines données techniques sont collectées automatiquement :</p>
+      <ul>
+        <li>Adresse IP</li>
+        <li>Type et version du navigateur</li>
+        <li>Système d'exploitation</li>
+        <li>Pages visitées et temps passé</li>
+        <li>Source de référence</li>
+        <li>Date et heure de connexion</li>
+      </ul>
+    </section>
+
+    <section class="legal-section">
+      <h2>3. Finalités du traitement</h2>
+      
+      <p>Vos données personnelles sont collectées pour les finalités suivantes :</p>
+      
+      <table>
+        <tr>
+          <th>Finalité</th>
+          <th>Base légale</th>
+        </tr>
+        <tr>
+          <td>Gestion des demandes de contact</td>
+          <td>Consentement</td>
+        </tr>
+        <tr>
+          <td>Réservation d'appels découverte (Calendly)</td>
+          <td>Exécution du contrat</td>
+        </tr>
+        <tr>
+          <td>Envoi de newsletters et communications</td>
+          <td>Consentement</td>
+        </tr>
+        <tr>
+          <td>Exécution des prestations de coaching</td>
+          <td>Exécution du contrat</td>
+        </tr>
+        <tr>
+          <td>Facturation et gestion comptable</td>
+          <td>Obligation légale</td>
+        </tr>
+        <tr>
+          <td>Amélioration du site et des services</td>
+          <td>Intérêt légitime</td>
+        </tr>
+        <tr>
+          <td>Statistiques et analyse d'audience</td>
+          <td>Consentement (cookies)</td>
+        </tr>
+      </table>
+    </section>
+
+    <section class="legal-section">
+      <h2>4. Destinataires des données</h2>
+      
+      <h3>4.1. Pas de vente de données</h3>
+      <p>Vos données personnelles ne sont jamais vendues à des tiers.</p>
+      
+      <h3>4.2. Sous-traitants</h3>
+      <p>Vos données peuvent être partagées avec nos sous-traitants techniques, dans le strict cadre des finalités définies ci-dessus :</p>
+      <ul>
+        <li><strong>Hébergement :</strong> Vercel Inc. (États-Unis - conforme RGPD via DPF)</li>
+        <li><strong>Prise de rendez-vous :</strong> Calendly</li>
+        <li><strong>Analyse d'audience :</strong> Google Analytics</li>
+        <li><strong>Emailing :</strong> [Votre solution emailing]</li>
+      </ul>
+      
+      <h3>4.3. Transferts hors UE</h3>
+      <p>Certains de nos sous-traitants sont situés hors de l'Union européenne (notamment aux États-Unis). Dans ce cas, nous nous assurons que des garanties appropriées sont mises en place (Clauses Contractuelles Types, Data Privacy Framework).</p>
+    </section>
+
+    <section class="legal-section">
+      <h2>5. Durée de conservation</h2>
+      
+      <table>
+        <tr>
+          <th>Type de données</th>
+          <th>Durée de conservation</th>
+        </tr>
+        <tr>
+          <td>Données de contact (prospects)</td>
+          <td>3 ans après le dernier contact</td>
+        </tr>
+        <tr>
+          <td>Données clients</td>
+          <td>Durée de la relation + 5 ans (prescription légale)</td>
+        </tr>
+        <tr>
+          <td>Données de facturation</td>
+          <td>10 ans (obligation comptable)</td>
+        </tr>
+        <tr>
+          <td>Cookies de mesure d'audience</td>
+          <td>13 mois maximum</td>
+        </tr>
+        <tr>
+          <td>Données de navigation (logs)</td>
+          <td>12 mois</td>
+        </tr>
+      </table>
+    </section>
+
+    <section class="legal-section">
+      <h2>6. Vos droits</h2>
+      
+      <p>Conformément au RGPD et à la loi Informatique et Libertés, vous disposez des droits suivants :</p>
+      
+      <ul>
+        <li><strong>Droit d'accès :</strong> obtenir la confirmation que des données vous concernant sont traitées et en obtenir une copie</li>
+        <li><strong>Droit de rectification :</strong> faire corriger des données inexactes ou incomplètes</li>
+        <li><strong>Droit à l'effacement :</strong> demander la suppression de vos données dans certains cas</li>
+        <li><strong>Droit à la limitation :</strong> demander la suspension du traitement dans certains cas</li>
+        <li><strong>Droit à la portabilité :</strong> recevoir vos données dans un format structuré et couramment utilisé</li>
+        <li><strong>Droit d'opposition :</strong> vous opposer au traitement pour des raisons tenant à votre situation particulière</li>
+        <li><strong>Droit de retirer votre consentement :</strong> à tout moment, sans que cela n'affecte la licéité du traitement antérieur</li>
+      </ul>
+      
+      <div class="highlight-box">
+        <p><strong>Pour exercer vos droits :</strong></p>
+        <p>Envoyez votre demande à <a href="mailto:contact@lauraballo.com" style="color: white; text-decoration: underline;">contact@lauraballo.com</a> accompagnée d'une copie de votre pièce d'identité.</p>
+        <p>Nous nous engageons à répondre dans un délai d'un mois.</p>
+      </div>
+      
+      <p>Vous pouvez également introduire une réclamation auprès de la CNIL :</p>
+      <div class="info-box">
+        <p><strong>CNIL – Commission Nationale de l'Informatique et des Libertés</strong></p>
+        <p>3 Place de Fontenoy, TSA 80715, 75334 Paris Cedex 07</p>
+        <p>Site : <a href="https://www.cnil.fr" target="_blank" rel="noopener">www.cnil.fr</a></p>
+      </div>
+    </section>
+
+    <section class="legal-section">
+      <h2>7. Sécurité des données</h2>
+      
+      <p>Nous mettons en œuvre les mesures techniques et organisationnelles appropriées pour garantir la sécurité de vos données :</p>
+      <ul>
+        <li>Chiffrement des données en transit (HTTPS/SSL)</li>
+        <li>Accès restreint aux données personnelles</li>
+        <li>Hébergement sécurisé conforme RGPD</li>
+        <li>Mots de passe robustes et authentification sécurisée</li>
+        <li>Sauvegardes régulières</li>
+      </ul>
+      
+      <p>En cas de violation de données susceptible d'engendrer un risque élevé pour vos droits et libertés, nous nous engageons à vous en informer dans les meilleurs délais.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2>8. Cookies</h2>
+      
+      <p>Notre site utilise des cookies et autres traceurs. Pour en savoir plus sur les cookies que nous utilisons et gérer vos préférences, veuillez consulter notre <a href="politique-cookies.html">Politique de Cookies</a>.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2>9. Modification de la politique</h2>
+      
+      <p>Nous nous réservons le droit de modifier cette politique de confidentialité à tout moment. En cas de modification substantielle, nous vous en informerons par email ou par un avis visible sur le site.</p>
+      
+      <p>Nous vous encourageons à consulter régulièrement cette page pour rester informé de nos pratiques.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2>10. Contact</h2>
+      
+      <p>Pour toute question concernant cette politique de confidentialité ou le traitement de vos données personnelles :</p>
+      
+      <div class="info-box">
+        <p><strong>Laura BALLO</strong></p>
+        <p>Email : <a href="mailto:contact@lauraballo.com">contact@lauraballo.com</a></p>
+        <p>Adresse : 4/6 Av. Joannes Hubert, 69160 Tassin-la-Demi-Lune, France</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">Laura Ballo</div>
+      <div class="footer-links">
+        <a href="/">Accueil</a>
+        <a href="mentions-legales.html">Mentions légales</a>
+        <a href="politique-confidentialite.html">Confidentialité</a>
+        <a href="politique-cookies.html">Cookies</a>
+        <a href="cgv.html">CGV</a>
+      </div>
+      <p class="footer-copyright">© 2026 Laura Ballo • Coaching Leadership Premium • Tous droits réservés</p>
+    </div>
+  </footer>
+
+</body>
+</html>

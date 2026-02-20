@@ -1,0 +1,410 @@
+/* ============================================
+   NAV.CSS - Navigation partagée du site Laura Ballo
+   Fichier : assets/css/nav.css
+   Dépend des variables CSS définies dans la page
+   ============================================ */
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  padding: 16px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  z-index: 1000;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav.scrolled {
+  background: rgba(251, 244, 238, 0.98);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-md);
+  padding: 12px 60px;
+}
+
+.nav-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
+  width: 0%;
+  transition: width 0.1s linear;
+}
+
+.nav-logo {
+  width: 200px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  transition: transform var(--transition-base);
+}
+
+.nav.scrolled .nav-logo {
+  width: 180px;
+  height: 70px;
+}
+
+.nav-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+  align-items: center;
+}
+
+.nav-links a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--white);
+  letter-spacing: 0.5px;
+  opacity: 0.9;
+  transition: all var(--transition-base);
+  position: relative;
+  padding: 8px 0;
+}
+
+.nav-links a::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: width var(--transition-base);
+}
+
+.nav-links a:hover::before {
+  width: 100%;
+}
+
+.nav-links a:hover {
+  opacity: 1;
+  color: var(--accent);
+}
+
+.nav.scrolled .nav-links a {
+  color: var(--text-dark);
+}
+
+/* Menu déroulant Quiz */
+.nav-dropdown {
+  position: relative;
+}
+
+.nav-dropdown > a {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav-dropdown > a::after {
+  content: '';
+  border: solid currentColor;
+  border-width: 0 1.5px 1.5px 0;
+  display: inline-block;
+  padding: 2px;
+  transform: rotate(45deg);
+  margin-top: -2px;
+  transition: transform var(--transition-base);
+}
+
+.nav-dropdown:hover > a::after {
+  transform: rotate(-135deg);
+}
+
+.nav-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: var(--white);
+  min-width: 220px;
+  padding: 12px 0;
+  border-radius: 8px;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-base);
+  z-index: 100;
+}
+
+.nav-dropdown:hover .nav-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.nav-dropdown-menu a {
+  display: block;
+  padding: 10px 24px;
+  font-size: 14px;
+  color: var(--text-dark) !important;
+  transition: all var(--transition-base);
+}
+
+.nav-dropdown-menu a:hover {
+  background: var(--light-beige);
+  color: var(--accent) !important;
+  padding-left: 28px;
+}
+
+.nav-dropdown-menu a::before {
+  display: none;
+}
+
+.nav-availability {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: rgba(123, 160, 91, 0.15);
+  border: 1px solid rgba(123, 160, 91, 0.3);
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--success);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.availability-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--success);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.9); }
+}
+
+.nav-burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  width: 28px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.nav-burger span {
+  width: 100%;
+  height: 2px;
+  background: var(--white);
+  transition: all var(--transition-base);
+  border-radius: 2px;
+}
+
+.nav.scrolled .nav-burger span {
+  background: var(--text-dark);
+}
+
+.nav-burger.active span:nth-child(1) {
+  transform: rotate(45deg) translateY(7px);
+}
+
+.nav-burger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-burger.active span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-7px);
+}
+
+.nav-mobile {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(251, 244, 238, 0.98);
+  backdrop-filter: blur(20px);
+  z-index: 999;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  padding: 100px 30px;
+}
+
+.nav-mobile.active {
+  display: flex;
+}
+
+.nav-mobile a {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  color: var(--text-dark);
+  transition: all var(--transition-base);
+}
+
+.nav-mobile a:hover {
+  color: var(--accent);
+  transform: translateX(10px);
+}
+
+/* Menu déroulant mobile (details/summary) */
+.nav-mobile .nav-mobile-dropdown {
+  width: 100%;
+  text-align: center;
+}
+
+.nav-mobile .nav-mobile-dropdown summary {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  color: var(--text-dark);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all var(--transition-base);
+}
+
+.nav-mobile .nav-mobile-dropdown summary::-webkit-details-marker {
+  display: none;
+}
+
+.nav-mobile .nav-mobile-dropdown summary::after {
+  content: '';
+  border: solid var(--text-dark);
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 4px;
+  transform: rotate(45deg);
+  margin-top: -4px;
+  transition: transform var(--transition-base);
+}
+
+.nav-mobile .nav-mobile-dropdown[open] summary::after {
+  transform: rotate(-135deg);
+  margin-top: 4px;
+}
+
+.nav-mobile .nav-mobile-dropdown summary:hover {
+  color: var(--accent);
+}
+
+.nav-mobile .nav-mobile-dropdown summary:hover::after {
+  border-color: var(--accent);
+}
+
+.nav-mobile .nav-mobile-dropdown__items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px 0 8px;
+}
+
+.nav-mobile .nav-mobile-dropdown__items a {
+  font-family: var(--font-body);
+  font-size: 18px;
+  color: var(--warm-gray);
+  padding-left: 20px;
+}
+
+.nav-mobile .nav-mobile-dropdown__items a:hover {
+  color: var(--accent);
+  transform: translateX(10px);
+}
+
+/* Bouton CTA mobile */
+.nav-mobile .btn.btn-primary {
+  background: var(--black);
+  color: var(--white);
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  padding: 18px 36px;
+  margin-top: 16px;
+  border-radius: 4px;
+  transition: all var(--transition-base);
+}
+
+.nav-mobile .btn.btn-primary:hover,
+.nav-mobile .btn.btn-primary:active {
+  background: var(--text-dark);
+  opacity: 0.95;
+  transform: none;
+}
+
+/* Bouton CTA nav (Réserver un appel) */
+.nav-links .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  border: 2px solid transparent;
+  text-decoration: none;
+  border-radius: 2px;
+}
+
+.nav-links .btn.btn-secondary {
+  background: var(--accent);
+  color: var(--white);
+  border-color: var(--accent);
+  opacity: 1;
+}
+
+.nav-links .btn.btn-secondary:hover {
+  background: var(--accent-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.nav-links .btn.btn-secondary::before {
+  display: none;
+}
+
+/* ============================================
+   RESPONSIVE - TABLET (1024px)
+   ============================================ */
+@media (max-width: 1024px) {
+  .nav {
+    padding: 15px 30px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .nav-burger {
+    display: flex;
+  }
+}
+
+/* ============================================
+   RESPONSIVE - MOBILE (768px)
+   ============================================ */
+@media (max-width: 768px) {
+  .nav {
+    padding: 15px 20px;
+  }
+
+  .nav-logo {
+    width: 160px;
+    height: 65px;
+  }
+}

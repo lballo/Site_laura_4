@@ -1,0 +1,31 @@
+<!-- ============================================
+     HEADER FORMATION - Navigation épurée
+     Fichier : assets/components/header-formation.html
+     ============================================ -->
+
+<!-- NAVIGATION -->
+<nav class="nav" id="nav">
+  <div class="nav-progress" id="navProgress"></div>
+  <a href="/" class="nav-logo">
+    <img src="/assets/img/Laura-Ballo-white-high-res.png" alt="Laura Ballo - Coaching Leadership Premium">
+  </a>
+  <div class="nav-links">
+    <a href="/">Accueil</a>
+    <a href="/formations/index.html">Formations</a>
+    <a href="/blog/index.html">Blog</a>
+    <a href="/#contact" class="btn btn-secondary">Réserver un appel</a>
+  </div>
+  <button class="nav-burger" id="navBurger" onclick="toggleMobileMenu()" aria-label="Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="nav-mobile" id="navMobile">
+  <a href="/" onclick="closeMobileMenu()">Accueil</a>
+  <a href="/formations/index.html" onclick="closeMobileMenu()">Formations</a>
+  <a href="/blog/index.html" onclick="closeMobileMenu()">Blog</a>
+  <a href="/#contact" class="btn btn-primary" onclick="closeMobileMenu()">Réserver un appel</a>
+</div>

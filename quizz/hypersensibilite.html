@@ -1,0 +1,1812 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz – Êtes-vous hypersensible ? | Laura Ballo</title>
+    <meta name="description" content="Découvrez votre profil de sensibilité grâce à ce quiz en 30 questions. Évaluez vos 5 dimensions émotionnelles et obtenez des conseils personnalisés.">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Quiz – Êtes-vous hypersensible ?">
+    <meta property="og:description" content="30 questions pour découvrir votre profil de sensibilité et transformer votre rapport aux émotions.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://lauraballo.com/quizz/hypersensibilite.html">
+    <meta property="og:image" content="https://lauraballo.com/assets/img/quiz-hypersensibilite-og.jpg">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Laura Ballo">
+    <link rel="canonical" href="https://lauraballo.com/quizz/hypersensibilite.html">
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Quiz",
+        "name": "Êtes-vous hypersensible ?",
+        "description": "Test de personnalité en 30 questions pour découvrir votre profil de sensibilité",
+        "author": {
+            "@type": "Person",
+            "name": "Laura Ballo"
+        }
+    }
+    </script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Karla:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!--
+    ╔═══════════════════════════════════════════════════════════════════════════╗
+    ║  MODIFICATIONS v2 — UX Typeform Premium                                   ║
+    ║  1. Clic sur réponse = avance auto (délai 150ms, anti-double clic 250ms)  ║
+    ║  2. Navigation clavier: ↑↓ focus options, Enter valide, ←/Backspace retour║
+    ║  3. Gate email OBLIGATOIRE avant résultats (aucun bypass possible)        ║
+    ║  4. UX Typeform sur gateScreen: Enter navigue/soumet, ↑↓ entre champs     ║
+    ║  5. Bouton "Précédent" conservé, réponse mémorisée au retour              ║
+    ╚═══════════════════════════════════════════════════════════════════════════╝
+    -->
+    
+    <style>
+        :root {
+            --cream: #FAF8F5;
+            --sand: #E8E4DD;
+            --terracotta: #C4A77D;
+            --terracotta-dark: #A68B5B;
+            --charcoal: #2C2C2C;
+            --soft-black: #1A1A1A;
+            --sage: #8B9A7C;
+            --coral: #D4847C;
+            --amber: #D4A574;
+            --blue-light: #E3F2FD;
+            --blue: #1565C0;
+            --green-light: #E8F5E9;
+            --green: #2E7D32;
+            --yellow-light: #FFF8E1;
+            --yellow: #F57F17;
+            --red-light: #FFEBEE;
+            --red: #C62828;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Karla', sans-serif; 
+            background: var(--cream); 
+            color: var(--charcoal); 
+            min-height: 100vh; 
+            line-height: 1.7; 
+            font-weight: 300; 
+        }
+        
+        .container { 
+            max-width: 800px; 
+            margin: 0 auto; 
+            padding: 60px 30px; 
+        }
+        
+        /* ========== HEADER ========== */
+        .quiz-header { 
+            text-align: center; 
+            margin-bottom: 50px; 
+            opacity: 0; 
+            animation: fadeUp 1s ease forwards; 
+        }
+        
+        .quiz-header h1 { 
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: clamp(2.2rem, 5vw, 3.5rem); 
+            font-weight: 400; 
+            color: var(--soft-black); 
+            letter-spacing: -0.02em; 
+            margin-bottom: 15px; 
+        }
+        
+        .quiz-header .subtitle { 
+            font-size: 1rem; 
+            color: var(--terracotta-dark); 
+            font-weight: 400; 
+            letter-spacing: 0.15em; 
+            text-transform: uppercase; 
+        }
+        
+        .intro-text { 
+            text-align: center; 
+            max-width: 600px; 
+            margin: 0 auto 40px; 
+            color: #666; 
+            font-size: 1rem; 
+            opacity: 0; 
+            animation: fadeUp 1s ease 0.2s forwards; 
+        }
+        
+        /* ========== CAPTURE FORM ========== */
+        .capture-form-container { 
+            max-width: 450px; 
+            margin: 0 auto; 
+            opacity: 0; 
+            animation: fadeUp 1s ease 0.4s forwards; 
+        }
+        
+        .capture-form { 
+            background: white; 
+            border-radius: 20px; 
+            padding: 40px; 
+            box-shadow: 0 10px 60px rgba(0,0,0,0.06); 
+        }
+        
+        .form-group { margin-bottom: 20px; }
+        
+        .form-group label { 
+            display: block; 
+            font-size: 0.85rem; 
+            font-weight: 500; 
+            color: var(--charcoal); 
+            margin-bottom: 8px; 
+        }
+        
+        .form-group input { 
+            width: 100%; 
+            padding: 16px 20px; 
+            border: 1px solid var(--sand); 
+            border-radius: 12px; 
+            font-family: 'Karla', sans-serif; 
+            font-size: 1rem; 
+            color: var(--charcoal); 
+            background: var(--cream); 
+            transition: all 0.3s ease; 
+        }
+        
+        .form-group input:focus { 
+            outline: none; 
+            border-color: var(--terracotta); 
+            background: white; 
+            box-shadow: 0 0 0 4px rgba(196, 167, 125, 0.1); 
+        }
+        
+        .form-group input::placeholder { color: #aaa; }
+        
+        .required { color: var(--coral); font-weight: 500; }
+        
+        .form-consent { margin: 25px 0; }
+        
+        .checkbox-container { 
+            display: flex; 
+            align-items: flex-start; 
+            gap: 12px; 
+            cursor: pointer; 
+            font-size: 0.9rem; 
+            color: #666; 
+            line-height: 1.5; 
+        }
+        
+        .checkbox-container input[type="checkbox"] { display: none; }
+        
+        .checkmark { 
+            width: 22px; 
+            height: 22px; 
+            border: 2px solid var(--sand); 
+            border-radius: 6px; 
+            flex-shrink: 0; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            transition: all 0.3s ease; 
+            margin-top: 2px; 
+        }
+        
+        .checkbox-container input:checked + .checkmark { 
+            background: var(--terracotta); 
+            border-color: var(--terracotta); 
+        }
+        
+        .checkbox-container input:checked + .checkmark::after { 
+            content: '✓'; 
+            color: white; 
+            font-size: 0.8rem; 
+            font-weight: bold; 
+        }
+        
+        .form-submit-btn { width: 100%; margin-top: 10px; padding: 18px 35px; }
+        
+        .privacy-note { 
+            text-align: center; 
+            font-size: 0.85rem; 
+            color: #999; 
+            margin-top: 25px; 
+            opacity: 0; 
+            animation: fadeUp 1s ease 0.5s forwards; 
+        }
+        
+        /* ========== PROGRESS BAR ========== */
+        .progress-container { 
+            margin-bottom: 40px; 
+            opacity: 0; 
+            animation: fadeUp 1s ease 0.3s forwards; 
+        }
+        
+        .progress-info { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 12px; 
+        }
+        
+        .dimension-label { 
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: 1.1rem; 
+            font-style: italic; 
+            color: var(--terracotta-dark); 
+        }
+        
+        .progress-count { 
+            font-size: 0.85rem; 
+            color: #999; 
+            letter-spacing: 0.1em; 
+        }
+        
+        .progress-bar { 
+            height: 4px; 
+            background: var(--sand); 
+            border-radius: 2px; 
+            overflow: hidden; 
+        }
+        
+        .progress-fill { 
+            height: 100%; 
+            background: linear-gradient(90deg, var(--terracotta), var(--sage)); 
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
+            border-radius: 2px; 
+        }
+        
+        /* ========== QUESTION CARD ========== */
+        .question-card { 
+            background: white; 
+            border-radius: 20px; 
+            padding: 45px; 
+            margin-bottom: 25px; 
+            box-shadow: 0 10px 60px rgba(0,0,0,0.06); 
+            transform: translateY(20px); 
+            opacity: 0; 
+            animation: fadeUp 0.6s ease forwards; 
+            position: relative; 
+            overflow: hidden; 
+        }
+        
+        .question-card::before { 
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 4px; 
+            height: 100%; 
+            background: linear-gradient(180deg, var(--terracotta), var(--sage)); 
+        }
+        
+        .question-number { 
+            font-size: 0.75rem; 
+            letter-spacing: 0.2em; 
+            text-transform: uppercase; 
+            color: var(--terracotta); 
+            margin-bottom: 12px; 
+        }
+        
+        .question-text { 
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: 1.5rem; 
+            font-weight: 400; 
+            color: var(--soft-black); 
+            margin-bottom: 30px; 
+            line-height: 1.5; 
+        }
+        
+        /* ========== OPTIONS ========== */
+        .options-container { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 10px; 
+        }
+        
+        .option { 
+            display: flex; 
+            align-items: center; 
+            padding: 16px 22px; 
+            border: 1px solid var(--sand); 
+            border-radius: 12px; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            background: var(--cream); 
+            outline: none;
+        }
+        
+        .option:hover { 
+            border-color: var(--terracotta); 
+            background: white; 
+            transform: translateX(5px); 
+        }
+        
+        .option.selected { 
+            border-color: var(--terracotta); 
+            background: linear-gradient(135deg, rgba(196, 167, 125, 0.1), rgba(139, 154, 124, 0.1)); 
+        }
+        
+        /* Focus keyboard navigation - discret */
+        .option.focused,
+        .option:focus-visible { 
+            border-color: var(--terracotta); 
+            box-shadow: 0 0 0 2px rgba(196, 167, 125, 0.3);
+            background: white;
+        }
+        
+        .option-radio { 
+            width: 20px; 
+            height: 20px; 
+            border: 2px solid var(--sand); 
+            border-radius: 50%; 
+            margin-right: 15px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            transition: all 0.3s ease; 
+            flex-shrink: 0; 
+        }
+        
+        .option.selected .option-radio { border-color: var(--terracotta); }
+        
+        .option.selected .option-radio::after { 
+            content: ''; 
+            width: 10px; 
+            height: 10px; 
+            background: var(--terracotta); 
+            border-radius: 50%; 
+            animation: pop 0.3s ease; 
+        }
+        
+        .option-value { 
+            font-weight: 500; 
+            color: var(--terracotta-dark); 
+            margin-right: 12px; 
+            min-width: 20px; 
+        }
+        
+        .option-label { color: var(--charcoal); font-size: 0.95rem; }
+        
+        /* ========== NAVIGATION ========== */
+        .nav-buttons { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-top: 35px; 
+            opacity: 0; 
+            animation: fadeUp 1s ease 0.4s forwards; 
+        }
+        
+        .btn { 
+            padding: 16px 35px; 
+            border: none; 
+            border-radius: 50px; 
+            font-family: 'Karla', sans-serif; 
+            font-size: 0.9rem; 
+            font-weight: 500; 
+            letter-spacing: 0.1em; 
+            cursor: pointer; 
+            transition: all 0.4s ease; 
+            text-decoration: none; 
+            display: inline-block; 
+            text-align: center; 
+        }
+        
+        .btn-secondary { 
+            background: transparent; 
+            color: var(--charcoal); 
+            border: 1px solid var(--sand); 
+        }
+        
+        .btn-secondary:hover { 
+            border-color: var(--terracotta); 
+            color: var(--terracotta-dark); 
+        }
+        
+        .btn-primary { 
+            background: var(--soft-black); 
+            color: white; 
+        }
+        
+        .btn-primary:hover { 
+            background: var(--terracotta-dark); 
+            transform: translateY(-2px); 
+            box-shadow: 0 10px 30px rgba(166, 139, 91, 0.3); 
+        }
+        
+        .btn:disabled { 
+            opacity: 0.4; 
+            cursor: not-allowed; 
+            transform: none !important; 
+        }
+        
+        /* Masquer le bouton Suivant en mode Typeform (clic auto) */
+        .nav-buttons .btn-primary.hidden-typeform {
+            display: none;
+        }
+        
+        /* ========== RESULTS ========== */
+        .results-container { display: none; }
+        
+        .results-header { 
+            text-align: center; 
+            margin-bottom: 50px; 
+        }
+        
+        .results-greeting { 
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: 1.3rem; 
+            font-style: italic; 
+            color: var(--terracotta-dark); 
+            margin-bottom: 10px; 
+        }
+        
+        .results-header h2 { 
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: 2.5rem; 
+            font-weight: 400; 
+            color: var(--soft-black); 
+            margin-bottom: 15px; 
+        }
+        
+        .total-score { 
+            display: inline-flex; 
+            align-items: baseline; 
+            gap: 8px; 
+            margin: 25px 0; 
+        }
+        
+        .score-number { 
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: 4.5rem; 
+            font-weight: 400; 
+            line-height: 1; 
+        }
+        
+        .score-max { font-size: 1.4rem; color: #999; }
+        
+        .result-level { 
+            display: inline-block; 
+            padding: 12px 28px; 
+            border-radius: 50px; 
+            font-size: 0.85rem; 
+            font-weight: 500; 
+            letter-spacing: 0.12em; 
+            text-transform: uppercase; 
+            margin-top: 10px; 
+        }
+        
+        .level-blue { background: linear-gradient(135deg, #E3F2FD, #BBDEFB); color: #1565C0; }
+        .level-green { background: linear-gradient(135deg, #E8F5E9, #C8E6C9); color: #2E7D32; }
+        .level-yellow { background: linear-gradient(135deg, #FFF8E1, #FFE082); color: #F57F17; }
+        .level-red { background: linear-gradient(135deg, #FFEBEE, #FFCDD2); color: #C62828; }
+        
+        /* ========== DIMENSIONS GRID ========== */
+        .dimensions-section { margin-bottom: 40px; }
+        
+        .dimensions-title { 
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: 1.5rem; 
+            text-align: center; 
+            margin-bottom: 25px; 
+            color: var(--soft-black); 
+        }
+        
+        .dimensions-grid { 
+            display: grid; 
+            gap: 15px; 
+        }
+        
+        .dimension-card { 
+            background: white; 
+            border-radius: 16px; 
+            padding: 22px 25px; 
+            box-shadow: 0 5px 30px rgba(0,0,0,0.05); 
+            display: flex; 
+            align-items: center; 
+            gap: 20px; 
+        }
+        
+        .dimension-score-circle { 
+            width: 55px; 
+            height: 55px; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: 1.4rem; 
+            font-weight: 500; 
+            flex-shrink: 0; 
+        }
+        
+        .dimension-info { flex: 1; }
+        
+        .dimension-info h4 { 
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: 1.1rem; 
+            font-weight: 500; 
+            color: var(--soft-black); 
+            margin-bottom: 5px; 
+        }
+        
+        .dimension-info p {
+            font-size: 0.85rem;
+            color: #888;
+            margin: 0;
+        }
+        
+        .dimension-bar { 
+            height: 6px; 
+            background: var(--sand); 
+            border-radius: 3px; 
+            overflow: hidden; 
+            margin-top: 10px; 
+        }
+        
+        .dimension-bar-fill { 
+            height: 100%; 
+            border-radius: 3px; 
+            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1); 
+        }
+        
+        /* ========== INTERPRETATION CARD ========== */
+        .interpretation-card { 
+            background: white; 
+            border-radius: 20px; 
+            padding: 40px; 
+            box-shadow: 0 10px 60px rgba(0,0,0,0.06); 
+            position: relative; 
+            overflow: hidden; 
+            margin-bottom: 35px; 
+        }
+        
+        .interpretation-card::before { 
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            height: 4px; 
+        }
+        
+        .interpretation-card.level-blue::before { background: linear-gradient(90deg, #64B5F6, #90CAF9); }
+        .interpretation-card.level-green::before { background: linear-gradient(90deg, #81C784, #A5D6A7); }
+        .interpretation-card.level-yellow::before { background: linear-gradient(90deg, #FFD54F, #FFE082); }
+        .interpretation-card.level-red::before { background: linear-gradient(90deg, #E57373, #EF9A9A); }
+        
+        .interpretation-title { 
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: 1.6rem; 
+            font-weight: 500; 
+            color: var(--soft-black); 
+            margin-bottom: 25px; 
+        }
+        
+        .interpretation-section {
+            margin-bottom: 25px;
+        }
+        
+        .interpretation-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .interpretation-section h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            color: var(--terracotta-dark);
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .interpretation-text { 
+            margin-bottom: 12px; 
+            color: #555; 
+            line-height: 1.8;
+        }
+        
+        .interpretation-text:last-child {
+            margin-bottom: 0;
+        }
+        
+        .interpretation-text strong { color: var(--charcoal); }
+        
+        .mantra-box {
+            background: linear-gradient(135deg, rgba(196, 167, 125, 0.1), rgba(139, 154, 124, 0.1));
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin-top: 25px;
+            text-align: center;
+        }
+        
+        .mantra-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--terracotta-dark);
+            margin-bottom: 8px;
+        }
+        
+        .mantra-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--soft-black);
+            line-height: 1.5;
+        }
+        
+        /* ========== EXERCISES SECTION ========== */
+        .exercises-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 60px rgba(0,0,0,0.06);
+            margin-bottom: 35px;
+        }
+        
+        .exercises-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--soft-black);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .exercise-card {
+            background: var(--cream);
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin-bottom: 15px;
+        }
+        
+        .exercise-card:last-child {
+            margin-bottom: 0;
+        }
+        
+        .exercise-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+        
+        .exercise-icon {
+            font-size: 1.3rem;
+        }
+        
+        .exercise-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--soft-black);
+        }
+        
+        .exercise-description {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.7;
+        }
+        
+        /* ========== CTA SECTION ========== */
+        .cta-section { 
+            background: white; 
+            border-radius: 20px; 
+            padding: 45px; 
+            box-shadow: 0 10px 60px rgba(0,0,0,0.06); 
+            text-align: center; 
+            margin-bottom: 35px; 
+        }
+        
+        .cta-title { 
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: 1.7rem; 
+            color: var(--soft-black); 
+            margin-bottom: 18px; 
+        }
+        
+        .cta-text { 
+            color: #666; 
+            margin-bottom: 28px; 
+            max-width: 520px; 
+            margin-left: auto; 
+            margin-right: auto; 
+            line-height: 1.7;
+        }
+        
+        .cta-buttons { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 15px; 
+            align-items: center; 
+        }
+        
+        .btn-cta-primary { 
+            background: var(--terracotta-dark); 
+            color: white; 
+            padding: 18px 40px; 
+            font-size: 1rem; 
+        }
+        
+        .btn-cta-primary:hover { background: var(--soft-black); }
+        
+        .btn-cta-secondary { 
+            background: transparent; 
+            border: 1px solid var(--terracotta); 
+            color: var(--terracotta-dark); 
+            padding: 16px 35px; 
+        }
+        
+        .btn-cta-secondary:hover { 
+            background: var(--terracotta); 
+            color: white; 
+        }
+        
+        /* ========== ARTICLES CTA ========== */
+        .articles-cta { 
+            display: grid; 
+            gap: 15px; 
+            margin-top: 25px; 
+        }
+        
+        .article-link { 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+            padding: 18px 20px; 
+            background: var(--cream); 
+            border-radius: 12px; 
+            text-decoration: none; 
+            color: var(--charcoal); 
+            transition: all 0.3s ease; 
+            text-align: left; 
+        }
+        
+        .article-link:hover { 
+            background: white; 
+            transform: translateX(5px); 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05); 
+        }
+        
+        .article-icon { 
+            width: 48px; 
+            height: 48px; 
+            background: white; 
+            border-radius: 12px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 1.4rem; 
+            flex-shrink: 0; 
+        }
+        
+        .article-info h4 { 
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: 1.05rem; 
+            margin-bottom: 4px; 
+            color: var(--soft-black); 
+        }
+        
+        .article-info p { 
+            font-size: 0.85rem; 
+            color: #888; 
+            margin: 0;
+        }
+        
+        /* ========== RESTART ========== */
+        .restart-btn { 
+            display: block; 
+            margin: 30px auto 0; 
+            padding: 16px 40px; 
+        }
+        
+        /* ========== ANIMATIONS ========== */
+        @keyframes fadeUp { 
+            from { opacity: 0; transform: translateY(20px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        
+        @keyframes pop { 
+            0% { transform: scale(0); } 
+            50% { transform: scale(1.2); } 
+            100% { transform: scale(1); } 
+        }
+        
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 600px) {
+            .container { padding: 40px 20px; }
+            .question-card { padding: 30px 22px; }
+            .question-text { font-size: 1.25rem; }
+            .nav-buttons { flex-direction: column; gap: 12px; }
+            .btn { width: 100%; text-align: center; }
+            .dimension-card { flex-direction: column; text-align: center; gap: 15px; }
+            .interpretation-card, .cta-section, .exercises-section { padding: 30px 22px; }
+            .results-header h2 { font-size: 2rem; }
+            .score-number { font-size: 3.5rem; }
+            .capture-form { padding: 30px 25px; }
+        }
+        
+        .hidden { display: none !important; }
+        
+        .start-screen { text-align: center; }
+        
+        .start-icon { 
+            font-size: 3.5rem; 
+            margin-bottom: 25px; 
+            opacity: 0; 
+            animation: fadeUp 1s ease 0.4s forwards; 
+        }
+        
+        .instructions { 
+            background: white; 
+            border-radius: 16px; 
+            padding: 30px; 
+            margin: 35px 0; 
+            text-align: left; 
+            box-shadow: 0 5px 30px rgba(0,0,0,0.05); 
+            opacity: 0; 
+            animation: fadeUp 1s ease 0.5s forwards; 
+        }
+        
+        .instructions h3 { 
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: 1.2rem; 
+            margin-bottom: 18px; 
+            color: var(--soft-black); 
+        }
+        
+        .scale-item { 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+            margin-bottom: 10px; 
+            padding: 10px 15px; 
+            background: var(--cream); 
+            border-radius: 8px; 
+        }
+        
+        .scale-number { 
+            font-weight: 500; 
+            color: var(--terracotta-dark); 
+            min-width: 25px; 
+        }
+        
+        .start-btn { 
+            opacity: 0; 
+            animation: fadeUp 1s ease 0.6s forwards; 
+        }
+        
+        /* ========== GATE SCREEN ========== */
+        .gate-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+        
+        .gate-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeUp 1s ease forwards;
+        }
+        
+        .gate-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+            color: #2E7D32;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.05s forwards;
+        }
+        
+        .gate-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--soft-black);
+            margin-bottom: 15px;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.1s forwards;
+        }
+        
+        .gate-subtitle {
+            color: #666;
+            font-size: 1rem;
+            max-width: 480px;
+            margin: 0 auto;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.2s forwards;
+        }
+        
+        .gate-unsubscribe {
+            font-size: 0.85rem;
+            color: #999;
+            margin-top: 12px;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.25s forwards;
+        }
+        
+        /* Keyboard hint */
+        .keyboard-hint {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #bbb;
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.7s forwards;
+        }
+        
+        .keyboard-hint kbd {
+            display: inline-block;
+            padding: 2px 6px;
+            font-family: 'Karla', sans-serif;
+            font-size: 0.75rem;
+            background: var(--sand);
+            border-radius: 4px;
+            margin: 0 2px;
+        }
+        
+        @media (max-width: 600px) {
+            .keyboard-hint { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- ========== INTRO SCREEN (anciennement captureScreen) ========== -->
+        <div id="captureScreen" class="start-screen">
+            <header class="quiz-header">
+                <h1>Êtes-vous hypersensible ?</h1>
+                <p class="subtitle">Test de personnalité en 30 questions</p>
+            </header>
+            <p class="intro-text">Découvrez votre profil de sensibilité et explorez vos 5 dimensions émotionnelles.<br>Recevez vos résultats détaillés et des ressources personnalisées.</p>
+            <div class="start-icon">✨</div>
+            <div class="instructions">
+                <h3>Comment répondre ?</h3>
+                <p style="margin-bottom: 18px; color: #666;">Pour chaque affirmation, indiquez à quel point elle vous correspond :</p>
+                <div class="scale-item"><span class="scale-number">0</span><span>Pas du tout</span></div>
+                <div class="scale-item"><span class="scale-number">1</span><span>Un peu</span></div>
+                <div class="scale-item"><span class="scale-number">2</span><span>Souvent</span></div>
+                <div class="scale-item"><span class="scale-number">3</span><span>Tout à fait</span></div>
+            </div>
+            <button class="btn btn-primary start-btn" onclick="startQuiz()">Commencer le quiz →</button>
+        </div>
+
+        <!-- ========== QUIZ SCREEN ========== -->
+        <div id="quizScreen" class="hidden">
+            <header class="quiz-header"><h1>Êtes-vous hypersensible ?</h1></header>
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span class="dimension-label" id="dimensionLabel">Dimension 1</span>
+                    <span class="progress-count" id="progressCount">1 / 30</span>
+                </div>
+                <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width: 3.33%"></div></div>
+            </div>
+            <div class="question-card" id="questionCard">
+                <div class="question-number" id="questionNumber">Question 1</div>
+                <p class="question-text" id="questionText">Chargement...</p>
+                <div class="options-container" id="optionsContainer">
+                    <div class="option" tabindex="0" data-value="0" onclick="selectOption(this, 0)"><div class="option-radio"></div><span class="option-value">0</span><span class="option-label">Pas du tout</span></div>
+                    <div class="option" tabindex="0" data-value="1" onclick="selectOption(this, 1)"><div class="option-radio"></div><span class="option-value">1</span><span class="option-label">Un peu</span></div>
+                    <div class="option" tabindex="0" data-value="2" onclick="selectOption(this, 2)"><div class="option-radio"></div><span class="option-value">2</span><span class="option-label">Souvent</span></div>
+                    <div class="option" tabindex="0" data-value="3" onclick="selectOption(this, 3)"><div class="option-radio"></div><span class="option-value">3</span><span class="option-label">Tout à fait</span></div>
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" id="prevBtn" onclick="prevQuestion()">← Précédent</button>
+                <button class="btn btn-primary hidden-typeform" id="nextBtn" onclick="nextQuestion()" disabled>Suivant →</button>
+            </div>
+            <p class="keyboard-hint">Utilisez <kbd>↑</kbd> <kbd>↓</kbd> pour naviguer, <kbd>Entrée</kbd> pour valider</p>
+        </div>
+
+        <!-- ========== GATE SCREEN (formulaire après quiz) ========== -->
+        <div id="gateScreen" class="hidden">
+            <div class="gate-header">
+                <div class="gate-icon">✅</div>
+                <div class="gate-badge">Progression terminée</div>
+                <h2 class="gate-title">Vos résultats sont prêts</h2>
+                <p class="gate-subtitle">Saisissez votre email pour afficher vos résultats détaillés.</p>
+                <p class="gate-unsubscribe">Vous pourrez vous désinscrire en 1 clic.</p>
+            </div>
+            <div class="capture-form-container">
+                <form id="gateForm" class="capture-form" onsubmit="submitGateForm(event)" novalidate>
+                    <div class="form-group">
+                        <label for="firstName">Prénom <span class="required">*</span></label>
+                        <input type="text" id="firstName" name="firstName" required placeholder="Votre prénom" data-gate-field="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Nom <span class="required">*</span></label>
+                        <input type="text" id="lastName" name="lastName" required placeholder="Votre nom" data-gate-field="2">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required placeholder="votre@email.com" data-gate-field="3">
+                    </div>
+                    <div class="form-consent">
+                        <label class="checkbox-container" tabindex="0" data-gate-field="4" id="consentLabel">
+                            <input type="checkbox" id="consent" required>
+                            <span class="checkmark"></span>
+                            <span class="consent-text">J'accepte de recevoir mes résultats et des conseils personnalisés par email <span class="required">*</span></span>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary form-submit-btn">Voir mes résultats →</button>
+                </form>
+            </div>
+            <p class="privacy-note">🔒 Vos données sont protégées et ne seront jamais partagées.</p>
+            <p class="keyboard-hint">Appuyez sur <kbd>Entrée</kbd> pour passer au champ suivant</p>
+        </div>
+
+        <!-- ========== RESULTS SCREEN ========== -->
+        <div id="resultsScreen" class="results-container">
+            <div class="results-header">
+                <p class="results-greeting" id="resultsGreeting">Bonjour,</p>
+                <h2>Votre profil de sensibilité</h2>
+                <div class="total-score"><span class="score-number" id="totalScore">0</span><span class="score-max">/ 90</span></div>
+                <div class="result-level" id="resultLevel">Chargement...</div>
+            </div>
+            
+            <div class="dimensions-section">
+                <h3 class="dimensions-title">Vos scores par dimension</h3>
+                <div class="dimensions-grid" id="dimensionsGrid"></div>
+            </div>
+            
+            <div class="interpretation-card" id="interpretationCard">
+                <h3 class="interpretation-title" id="interpretationTitle">Interprétation</h3>
+                <div id="interpretationContent"></div>
+            </div>
+            
+            <div class="exercises-section" id="exercisesSection">
+                <h3 class="exercises-title">Exercices recommandés pour vous</h3>
+                <div id="exercisesContent"></div>
+            </div>
+            
+            <div class="cta-section" id="ctaSection"></div>
+            
+            <button class="btn btn-secondary restart-btn" onclick="restartQuiz()">Refaire le quiz</button>
+        </div>
+    </div>
+
+    <script>
+        // ========== CONFIGURATION ==========
+        // Credentials ConvertKit sécurisées côté serveur (.env + api/subscribe.php)
+        const SUBSCRIBE_API_ENDPOINT = '/api/subscribe';
+        
+        // Seuls ces profils seront envoyés à ConvertKit
+        const SUBSCRIBE_LEVELS = ['yellow', 'red'];
+        
+        const CALENDLY_LINK = 'https://calendly.com/laura-ballo1993/echangecoaching';
+        const PDF_LINK = '/assets/pdf/guide-hypersensibilite.pdf';
+        
+        // Articles pour les profils faible/modérée
+        const ARTICLES = [
+            { 
+                title: "Développer son intelligence émotionnelle", 
+                description: "Les 4 piliers pour transformer vos émotions en force", 
+                url: "/blog/articles/intelligence-emotionnelle.html", 
+                icon: "🧠" 
+            },
+            { 
+                title: "Les 3 stratégies d'adaptation des hypersensibles", 
+                description: "Comprendre et transformer vos mécanismes de protection", 
+                url: "/blog/articles/strategies-hypersensibles.html", 
+                icon: "🔑" 
+            },
+            { 
+                title: "Comment poser ses limites sans culpabiliser", 
+                description: "L'art de dire non avec bienveillance", 
+                url: "/blog/articles/poser-limites-hypersensible.html", 
+                icon: "🛡️" 
+            }
+        ];
+        
+        // ========== VARIABLES GLOBALES ==========
+        let userData = { firstName: '', lastName: '', email: '' };
+        let pendingResult = null;
+        let currentQuestion = 0;
+        let answers = new Array(30).fill(null);
+        
+        // Variables UX Typeform
+        let isTransitioning = false;
+        let focusedOptionIndex = -1;
+        let emailSubmitted = false; // Sécurité gate
+
+        // ========== QUIZ DATA - 30 QUESTIONS ========== 
+        const dimensions = [
+            { 
+                name: "Sensibilité émotionnelle", 
+                color: "#D4847C",
+                description: "Résonance affective et empathie profonde",
+                questions: [
+                    "Je suis souvent submergé(e) par mes émotions dans des situations intenses.",
+                    "Je ressens les émotions des autres comme s'il s'agissait des miennes.",
+                    "Je prends à cœur les tensions ou malentendus, même lorsqu'ils paraissent mineurs aux yeux des autres.",
+                    "Je ressens des émotions profondes sans raison apparente.",
+                    "J'ai une palette émotionnelle très riche et nuancée.",
+                    "Je peux être ému(e) aux larmes par une musique, un film ou une œuvre d'art."
+                ] 
+            },
+            { 
+                name: "Hyper-réceptivité sensorielle", 
+                color: "#8B9A7C",
+                description: "Besoin de calme et fatigue environnementale",
+                questions: [
+                    "Les bruits forts ou soudains me mettent rapidement mal à l'aise.",
+                    "Les lumières vives ou clignotantes me dérangent facilement.",
+                    "Je suis sensible aux odeurs fortes, même quand les autres ne les remarquent pas.",
+                    "Les environnements bruyants ou bondés me fatiguent rapidement.",
+                    "Je me sens facilement submergé(e) par trop d'informations ou de sollicitations extérieures.",
+                    "J'ai besoin de calme et de moments de solitude pour me ressourcer."
+                ] 
+            },
+            { 
+                name: "Traitement cognitif profond", 
+                color: "#C4A77D",
+                description: "Tendance à l'analyse et rumination possible",
+                questions: [
+                    "Je réfléchis longuement avant d'agir ou de prendre une décision.",
+                    "J'analyse souvent mes interactions sociales après coup.",
+                    "J'ai tendance à anticiper les conséquences possibles d'une situation.",
+                    "J'ai du mal à « faire léger » quand un sujet me touche.",
+                    "J'ai parfois du mal à lâcher prise mentalement.",
+                    "Je peux ressentir plusieurs émotions contradictoires en même temps, ce qui me rend confus(e)."
+                ] 
+            },
+            { 
+                name: "Sens et intensité", 
+                color: "#A68B5B",
+                description: "Quête de sens et intolérance à la superficialité",
+                questions: [
+                    "J'ai besoin que ce que je fais ait du sens.",
+                    "Je ne supporte pas les injustices.",
+                    "Je me sens vite en décalage avec des environnements superficiels.",
+                    "Le plus important pour moi est la qualité humaine des relations.",
+                    "J'ai une forte intuition.",
+                    "J'ai parfois la sensation de ne pas être réellement compris(e)."
+                ] 
+            },
+            { 
+                name: "Limites relationnelles", 
+                color: "#D4A574",
+                description: "Difficulté à se protéger et risque de don excessif",
+                questions: [
+                    "Mettre des limites et dire non est compliqué pour moi.",
+                    "Je me sens souvent responsable du bien-être des autres.",
+                    "J'ai l'impression de beaucoup donner sans recevoir à ma juste mesure.",
+                    "Les critiques ou conflits me mettent très mal à l'aise, même lorsqu'ils ne me concernent pas directement.",
+                    "J'ai tendance à m'oublier au profit des autres.",
+                    "Je ressens parfois un épuisement émotionnel ou mental."
+                ] 
+            }
+        ];
+
+        // ========== INTERPRETATIONS - 4 PROFILS ==========
+        const interpretations = {
+            blue: { 
+                title: "Sensibilité faible", 
+                range: "0 à 22",
+                levelClass: "level-blue",
+                content: `
+                    <div class="interpretation-section">
+                        <h4>Votre fonctionnement</h4>
+                        <p class="interpretation-text">Vous possédez une <strong>capacité naturelle à filtrer les stimuli émotionnels et sensoriels</strong>. Votre système nerveux traite les informations de manière plutôt linéaire, sans amplification excessive. Cela vous permet de traverser des situations stressantes ou chargées émotionnellement avec une relative stabilité intérieure.</p>
+                    </div>
+                    <div class="interpretation-section">
+                        <h4>Vos forces</h4>
+                        <p class="interpretation-text">Vous faites preuve d'une <strong>grande résistance au stress environnemental</strong>. Les atmosphères tendues, bruyantes ou conflictuelles ne vous affectent pas outre mesure. Vous savez garder la tête froide dans les moments critiques et prendre du recul facilement. Cette stabilité vous permet d'être un point d'ancrage pour votre entourage et de gérer les crises avec pragmatisme.</p>
+                    </div>
+                    <div class="interpretation-section">
+                        <h4>Vos zones de vigilance</h4>
+                        <p class="interpretation-text">Votre faible réactivité émotionnelle peut parfois créer un décalage avec des personnes plus sensibles. Vous pourriez involontairement minimiser leurs ressentis ou ne pas percevoir certaines subtilités relationnelles. Il peut aussi vous arriver de passer à côté de signaux faibles — les vôtres comme ceux des autres.</p>
+                    </div>
+                    <div class="mantra-box">
+                        <p class="mantra-label">Votre mantra</p>
+                        <p class="mantra-text">« Ma stabilité est un socle. J'apprends à y ajouter la nuance. »</p>
+                    </div>
+                `,
+                exercises: [
+                    { icon: "📝", name: "Journal émotionnel", description: "Chaque soir, notez 2-3 émotions ressenties dans la journée. Nommez-les précisément et identifiez ce qui les a déclenchées." },
+                    { icon: "👂", name: "Écoute active", description: "Dans vos prochaines conversations, pratiquez l'écoute sans interrompre. Reformulez ce que l'autre a dit avant de répondre." },
+                    { icon: "🎨", name: "Immersion sensorielle", description: "Une fois par semaine, exposez-vous intentionnellement à une expérience sensorielle riche (concert, nature, musée) et observez vos réactions." }
+                ]
+            },
+            green: { 
+                title: "Sensibilité modérée", 
+                range: "23 à 45",
+                levelClass: "level-green",
+                content: `
+                    <div class="interpretation-section">
+                        <h4>Votre fonctionnement</h4>
+                        <p class="interpretation-text">Vous présentez un <strong>équilibre sain entre réceptivité et filtrage</strong>. Votre sensibilité est suffisamment développée pour percevoir les nuances émotionnelles et sensorielles de votre environnement, tout en conservant une capacité de régulation efficace. Vous pouvez vous adapter à des contextes variés sans être submergé(e).</p>
+                    </div>
+                    <div class="interpretation-section">
+                        <h4>Vos forces</h4>
+                        <p class="interpretation-text">Vous combinez <strong>empathie et résilience</strong>. Vous êtes capable de comprendre les autres sans vous y perdre, de ressentir sans être envahi(e). Cette position médiane vous confère une grande adaptabilité sociale et professionnelle. Vous pouvez naviguer dans des environnements exigeants tout en restant connecté(e) à vos ressentis.</p>
+                    </div>
+                    <div class="interpretation-section">
+                        <h4>Vos zones de vigilance</h4>
+                        <p class="interpretation-text">Dans certaines périodes de stress ou de fatigue, vous pouvez basculer temporairement vers une sensibilité plus élevée. Il est important de rester attentif(ve) à vos signaux internes et de maintenir une hygiène de vie émotionnelle préventive, avant d'atteindre vos limites.</p>
+                    </div>
+                    <div class="mantra-box">
+                        <p class="mantra-label">Votre mantra</p>
+                        <p class="mantra-text">« Je ressens avec justesse. Mon équilibre est ma force. »</p>
+                    </div>
+                `,
+                exercises: [
+                    { icon: "🔄", name: "Check-in émotionnel", description: "3 fois par jour (matin, midi, soir), prenez 1 minute pour identifier votre état émotionnel sur une échelle de 1 à 10." },
+                    { icon: "⚖️", name: "Équilibre social", description: "Alternez consciemment entre moments de connexion sociale et moments de solitude régénératrice." },
+                    { icon: "🎯", name: "Intentions claires", description: "Avant chaque interaction importante, clarifiez votre intention et vos limites. Qu'êtes-vous prêt(e) à donner ? À recevoir ?" }
+                ]
+            },
+            yellow: { 
+                title: "Hypersensibilité modérée", 
+                range: "46 à 67",
+                levelClass: "level-yellow",
+                content: `
+                    <div class="interpretation-section">
+                        <h4>Votre fonctionnement</h4>
+                        <p class="interpretation-text">Vous faites partie des personnes à <strong>sensibilité élevée</strong>. Votre système nerveux capte davantage d'informations que la moyenne, ce qui vous confère une perception fine et nuancée du monde. Cette richesse perceptive est un véritable atout, mais elle nécessite une gestion consciente pour ne pas devenir une source d'épuisement.</p>
+                    </div>
+                    <div class="interpretation-section">
+                        <h4>Vos forces</h4>
+                        <p class="interpretation-text">Vous possédez une <strong>intelligence émotionnelle naturelle</strong>. Vous percevez les non-dits, les ambiances, les micro-expressions. Cette acuité vous permet d'anticiper, de créer des liens profonds et d'apporter une qualité de présence rare. Vous êtes souvent la personne vers qui les autres se tournent pour être écoutés et compris.</p>
+                    </div>
+                    <div class="interpretation-section">
+                        <h4>Vos zones de vigilance</h4>
+                        <p class="interpretation-text">Votre réceptivité peut vous rendre vulnérable à la surcharge sensorielle et émotionnelle. Vous risquez parfois de confondre vos émotions avec celles des autres, ou de vous épuiser à force de trop percevoir. Il est essentiel d'apprendre à poser des limites claires et à vous accorder des temps de récupération réguliers.</p>
+                    </div>
+                    <div class="mantra-box">
+                        <p class="mantra-label">Votre mantra</p>
+                        <p class="mantra-text">« Ma sensibilité est un radar précieux. J'apprends à le calibrer. »</p>
+                    </div>
+                `,
+                exercises: [
+                    { icon: "🛡️", name: "Pratique des limites", description: "Cette semaine, dites « non » à une demande qui ne vous convient pas. Observez votre ressenti avant, pendant et après." },
+                    { icon: "🧘", name: "Ancrage quotidien", description: "Pratiquez 5 minutes de respiration profonde chaque matin. Les pieds au sol, ressentez votre corps comme un contenant stable." },
+                    { icon: "🔍", name: "Différenciation émotionnelle", description: "Face à une émotion forte, demandez-vous : « Est-ce que c'est à moi ? » Apprenez à distinguer vos émotions de celles des autres." }
+                ]
+            },
+            red: { 
+                title: "Hypersensibilité élevée", 
+                range: "68 à 90",
+                levelClass: "level-red",
+                content: `
+                    <div class="interpretation-section">
+                        <h4>Votre fonctionnement</h4>
+                        <p class="interpretation-text">Vous faites partie des personnes à <strong>très haute sensibilité</strong>. Votre système perceptif fonctionne à plein régime en permanence : vous captez tout, vous ressentez tout, vous traitez tout en profondeur. Ce mode de fonctionnement vous confère une richesse intérieure exceptionnelle, mais il requiert aussi une hygiène de vie émotionnelle rigoureuse pour ne pas basculer dans l'épuisement.</p>
+                    </div>
+                    <div class="interpretation-section">
+                        <h4>Vos forces</h4>
+                        <p class="interpretation-text">Vous possédez une <strong>capacité de perception hors norme</strong>. Vous voyez ce que d'autres ne voient pas, vous ressentez ce qui n'est pas dit, vous percevez les dynamiques invisibles. Cette acuité fait de vous une personne profondément intuitive, créative, et capable d'une connexion humaine d'une qualité rare. Vous portez en vous un potentiel de leadership singulier, fondé sur l'authenticité et la profondeur.</p>
+                    </div>
+                    <div class="interpretation-section">
+                        <h4>Vos zones de vigilance</h4>
+                        <p class="interpretation-text">Votre sensibilité extrême peut vous rendre vulnérable à l'épuisement émotionnel, à l'anxiété, voire à des épisodes de saturation sensorielle. Vous pouvez avoir tendance à vous oublier, à trop donner, à absorber la souffrance des autres. Le risque d'isolement ou de sentiment de « trop » est réel. Les environnements toxiques ou très stimulants peuvent littéralement vous consumer.</p>
+                    </div>
+                    <div class="mantra-box">
+                        <p class="mantra-label">Votre mantra</p>
+                        <p class="mantra-text">« Je ne suis pas trop. Je suis entier(e). Ma profondeur est mon territoire. »</p>
+                    </div>
+                `,
+                exercises: [
+                    { icon: "🏠", name: "Sanctuaire personnel", description: "Créez un espace de récupération chez vous : lumière douce, silence, objets apaisants. Utilisez-le 20 minutes par jour minimum." },
+                    { icon: "✍️", name: "Décharge émotionnelle", description: "Écrivez librement pendant 10 minutes chaque soir tout ce qui vous traverse. Ne relisez pas. C'est un exutoire, pas un journal." },
+                    { icon: "⚡", name: "Signaux d'alerte", description: "Identifiez vos 3 premiers signes de saturation (tension corporelle, irritabilité, repli...). Dès qu'ils apparaissent : pause non négociable." }
+                ]
+            }
+        };
+
+        // ========== FUNCTIONS ==========
+        
+        // Envoi à ConvertKit via proxy sécurisé (API key côté serveur)
+        async function sendToConvertKit(level, score) {
+            // Vérifier si ce niveau doit être envoyé
+            if (!SUBSCRIBE_LEVELS.includes(level)) {
+                console.log('ℹ️ Profil non ciblé, pas d\'envoi à ConvertKit');
+                return;
+            }
+            
+            const levelLabels = {
+                'yellow': 'Hypersensibilité modérée',
+                'red': 'Hypersensibilité élevée'
+            };
+            
+            try {
+                const response = await fetch(SUBSCRIBE_API_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: userData.email,
+                        first_name: userData.firstName,
+                        fields: {
+                            last_name: userData.lastName,
+                            quiz_result: levelLabels[level],
+                            quiz_score: score.toString()
+                        }
+                    })
+                });
+                
+                if (response.ok) {
+                    console.log('✅ Contact inscrit à ConvertKit:', levelLabels[level]);
+                } else {
+                    console.error('❌ Erreur ConvertKit:', response.status);
+                }
+            } catch (error) {
+                console.error('❌ Erreur ConvertKit:', error);
+            }
+        }
+        
+        // Reset des animations
+        function resetAnimations(screenId) {
+            document.querySelectorAll(`#${screenId} [style*="animation"]`).forEach(el => {
+                el.style.animation = 'none';
+                el.offsetHeight;
+                el.style.animation = '';
+            });
+        }
+
+        // Démarrage du quiz (depuis l'écran d'intro)
+        function startQuiz() {
+            document.getElementById('captureScreen').classList.add('hidden');
+            document.getElementById('quizScreen').classList.remove('hidden');
+            loadQuestion();
+        }
+
+        // Chargement d'une question
+        function loadQuestion() {
+            const dimIndex = Math.floor(currentQuestion / 6);
+            const qIndex = currentQuestion % 6;
+            const dimension = dimensions[dimIndex];
+            
+            document.getElementById('dimensionLabel').textContent = dimension.name;
+            document.getElementById('progressCount').textContent = `${currentQuestion + 1} / 30`;
+            document.getElementById('progressFill').style.width = `${((currentQuestion + 1) / 30) * 100}%`;
+            document.getElementById('questionNumber').textContent = `Question ${currentQuestion + 1}`;
+            document.getElementById('questionText').textContent = dimension.questions[qIndex];
+            
+            const options = document.querySelectorAll('.option');
+            options.forEach((opt, i) => {
+                opt.classList.remove('selected', 'focused');
+            });
+            
+            // Restaurer la réponse si déjà sélectionnée
+            if (answers[currentQuestion] !== null) {
+                options[answers[currentQuestion]].classList.add('selected');
+                focusedOptionIndex = answers[currentQuestion];
+            } else {
+                focusedOptionIndex = -1;
+            }
+            
+            document.getElementById('prevBtn').style.visibility = currentQuestion === 0 ? 'hidden' : 'visible';
+            
+            // Reset transition flag
+            isTransitioning = false;
+        }
+
+        // Sélection d'une option (UX Typeform: clic = avance auto)
+        function selectOption(element, value) {
+            // Protection anti-double clic
+            if (isTransitioning) return;
+            
+            // Marquer comme sélectionné
+            document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected', 'focused'));
+            element.classList.add('selected');
+            answers[currentQuestion] = value;
+            focusedOptionIndex = value;
+            
+            // Avancer automatiquement après délai (UX Typeform)
+            isTransitioning = true;
+            
+            setTimeout(() => {
+                if (currentQuestion < 29) {
+                    currentQuestion++;
+                    loadQuestion();
+                } else {
+                    // Fin du quiz → calculer et stocker les résultats, puis afficher gateScreen
+                    calculateAndStorePendingResult();
+                    showGateScreen();
+                }
+                // Reset après 250ms total pour éviter double transition
+                setTimeout(() => {
+                    isTransitioning = false;
+                }, 100);
+            }, 150);
+        }
+
+        // Question précédente
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+
+        // Question suivante (gardé pour accessibilité, mais masqué par défaut)
+        function nextQuestion() {
+            if (answers[currentQuestion] === null) return;
+            
+            if (currentQuestion < 29) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                // Fin du quiz → calculer et stocker les résultats, puis afficher gateScreen
+                calculateAndStorePendingResult();
+                showGateScreen();
+            }
+        }
+
+        // Calcul du niveau
+        function getLevel(score) {
+            if (score <= 22) return 'blue';
+            if (score <= 45) return 'green';
+            if (score <= 67) return 'yellow';
+            return 'red';
+        }
+
+        // Calculer et stocker les résultats en attente
+        function calculateAndStorePendingResult() {
+            const dimensionScores = [];
+            for (let d = 0; d < 5; d++) {
+                let sum = 0;
+                for (let q = 0; q < 6; q++) {
+                    sum += answers[d * 6 + q];
+                }
+                dimensionScores.push(sum);
+            }
+            
+            const totalScore = dimensionScores.reduce((a, b) => a + b, 0);
+            const level = getLevel(totalScore);
+            
+            // Stocker les résultats
+            pendingResult = {
+                totalScore: totalScore,
+                level: level,
+                dimensionScores: dimensionScores
+            };
+        }
+
+        // Afficher l'écran de capture (gate)
+        function showGateScreen() {
+            document.getElementById('quizScreen').classList.add('hidden');
+            document.getElementById('gateScreen').classList.remove('hidden');
+            resetAnimations('gateScreen');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Focus premier champ
+            setTimeout(() => {
+                document.getElementById('firstName').focus();
+            }, 500);
+        }
+
+        // Validation email format
+        function isValidEmail(email) {
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regex.test(email);
+        }
+
+        // Soumission du formulaire gate
+        function submitGateForm(event) {
+            event.preventDefault();
+            
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const consent = document.getElementById('consent').checked;
+            
+            // Validation
+            if (!firstName) {
+                document.getElementById('firstName').focus();
+                return;
+            }
+            if (!lastName) {
+                document.getElementById('lastName').focus();
+                return;
+            }
+            if (!email || !isValidEmail(email)) {
+                document.getElementById('email').focus();
+                return;
+            }
+            if (!consent) {
+                document.getElementById('consentLabel').focus();
+                return;
+            }
+            
+            // Récupérer les données utilisateur
+            userData.firstName = firstName;
+            userData.lastName = lastName;
+            userData.email = email;
+            
+            // Marquer email comme soumis (sécurité gate)
+            emailSubmitted = true;
+            
+            // Masquer gateScreen et afficher les résultats
+            document.getElementById('gateScreen').classList.add('hidden');
+            showResultsFromPending();
+        }
+
+        // Afficher les résultats à partir des données en attente
+        function showResultsFromPending() {
+            // SÉCURITÉ: Vérifier que l'email a été soumis
+            if (!emailSubmitted || !pendingResult) {
+                console.error('Accès aux résultats non autorisé');
+                return;
+            }
+            
+            const { totalScore, level, dimensionScores } = pendingResult;
+            const interpretation = interpretations[level];
+            
+            // Envoi à ConvertKit (uniquement pour hypersensibilité modérée et élevée)
+            sendToConvertKit(level, totalScore);
+            
+            // Afficher l'écran résultats
+            document.getElementById('resultsScreen').style.display = 'block';
+            
+            // Affichage du score
+            document.getElementById('resultsGreeting').textContent = userData.firstName ? `${userData.firstName},` : '';
+            document.getElementById('totalScore').textContent = totalScore;
+            document.getElementById('resultLevel').textContent = interpretation.title;
+            document.getElementById('resultLevel').className = `result-level ${interpretation.levelClass}`;
+            
+            // Affichage des dimensions
+            const grid = document.getElementById('dimensionsGrid');
+            grid.innerHTML = '';
+            
+            dimensionScores.forEach((score, i) => {
+                const dim = dimensions[i];
+                const percentage = (score / 18) * 100;
+                const isHigh = score >= 12;
+                
+                grid.innerHTML += `
+                    <div class="dimension-card">
+                        <div class="dimension-score-circle" style="background: ${dim.color}20; color: ${dim.color};">${score}/18</div>
+                        <div class="dimension-info">
+                            <h4>${dim.name}</h4>
+                            <p>${isHigh ? dim.description : 'Dans la moyenne'}</p>
+                            <div class="dimension-bar">
+                                <div class="dimension-bar-fill" style="width: ${percentage}%; background: ${dim.color};"></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            // Interprétation
+            document.getElementById('interpretationCard').className = `interpretation-card ${interpretation.levelClass}`;
+            document.getElementById('interpretationTitle').textContent = interpretation.title;
+            document.getElementById('interpretationContent').innerHTML = interpretation.content;
+            
+            // Exercices
+            const exercisesContent = document.getElementById('exercisesContent');
+            exercisesContent.innerHTML = '';
+            interpretation.exercises.forEach(ex => {
+                exercisesContent.innerHTML += `
+                    <div class="exercise-card">
+                        <div class="exercise-header">
+                            <span class="exercise-icon">${ex.icon}</span>
+                            <span class="exercise-name">${ex.name}</span>
+                        </div>
+                        <p class="exercise-description">${ex.description}</p>
+                    </div>
+                `;
+            });
+            
+            // CTA différencié
+            const ctaSection = document.getElementById('ctaSection');
+            
+            if (level === 'blue' || level === 'green') {
+                // Sensibilité faible ou moyenne → Articles
+                ctaSection.innerHTML = `
+                    <h3 class="cta-title">Développez votre intelligence émotionnelle</h3>
+                    <p class="cta-text">Votre sensibilité équilibrée est un atout. Pour aller plus loin et mieux comprendre les personnes sensibles autour de vous, découvrez ces ressources sélectionnées :</p>
+                    <div class="articles-cta">
+                        ${ARTICLES.map(article => `
+                            <a href="${article.url}" class="article-link" target="_blank">
+                                <div class="article-icon">${article.icon}</div>
+                                <div class="article-info">
+                                    <h4>${article.title}</h4>
+                                    <p>${article.description}</p>
+                                </div>
+                            </a>
+                        `).join('')}
+                    </div>
+                `;
+            } else {
+                // Hypersensibilité modérée ou élevée → Guide + Calendly
+                ctaSection.innerHTML = `
+                    <h3 class="cta-title">Transformez votre sensibilité en force</h3>
+                    <p class="cta-text">Votre hypersensibilité est un don précieux. Apprenez à la canaliser, à poser vos limites et à en faire votre plus grand atout avec un accompagnement personnalisé.</p>
+                    <div class="cta-buttons">
+                        <a href="${CALENDLY_LINK}" target="_blank" class="btn btn-cta-primary">📞 Réserver un appel découverte (30 min)</a>
+                        <a href="${PDF_LINK}" download class="btn btn-cta-secondary">📘 Télécharger le guide : Les 5 clés pour réguler son hypersensibilité</a>
+                    </div>
+                `;
+            }
+            
+            // Scroll en haut
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Recommencer le quiz
+        function restartQuiz() {
+            // Reset des données
+            currentQuestion = 0;
+            answers = new Array(30).fill(null);
+            userData = { firstName: '', lastName: '', email: '' };
+            pendingResult = null;
+            emailSubmitted = false;
+            focusedOptionIndex = -1;
+            isTransitioning = false;
+            
+            // Reset du formulaire gate
+            document.getElementById('gateForm').reset();
+            
+            // Masquer tous les écrans sauf captureScreen
+            document.getElementById('resultsScreen').style.display = 'none';
+            document.getElementById('gateScreen').classList.add('hidden');
+            document.getElementById('quizScreen').classList.add('hidden');
+            document.getElementById('captureScreen').classList.remove('hidden');
+            
+            resetAnimations('captureScreen');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // ========== NAVIGATION CLAVIER QUIZ (Typeform-like) ==========
+        document.addEventListener('keydown', function(e) {
+            const quizScreen = document.getElementById('quizScreen');
+            const gateScreen = document.getElementById('gateScreen');
+            
+            // Navigation sur le quiz
+            if (!quizScreen.classList.contains('hidden')) {
+                handleQuizKeyboard(e);
+            }
+            
+            // Navigation sur le formulaire gate
+            if (!gateScreen.classList.contains('hidden')) {
+                handleGateKeyboard(e);
+            }
+        });
+        
+        function handleQuizKeyboard(e) {
+            const options = document.querySelectorAll('.option');
+            const optionsCount = options.length;
+            
+            switch(e.key) {
+                case 'ArrowDown':
+                    e.preventDefault();
+                    focusedOptionIndex = (focusedOptionIndex + 1) % optionsCount;
+                    updateOptionFocus(options);
+                    break;
+                    
+                case 'ArrowUp':
+                    e.preventDefault();
+                    focusedOptionIndex = focusedOptionIndex <= 0 ? optionsCount - 1 : focusedOptionIndex - 1;
+                    updateOptionFocus(options);
+                    break;
+                    
+                case 'Enter':
+                    e.preventDefault();
+                    if (focusedOptionIndex >= 0 && focusedOptionIndex < optionsCount) {
+                        selectOption(options[focusedOptionIndex], focusedOptionIndex);
+                    }
+                    break;
+                    
+                case 'ArrowLeft':
+                case 'Backspace':
+                    // Éviter si focus dans un input
+                    if (document.activeElement.tagName === 'INPUT') return;
+                    e.preventDefault();
+                    prevQuestion();
+                    break;
+                    
+                // Raccourcis numériques 0-3
+                case '0':
+                case '1':
+                case '2':
+                case '3':
+                    e.preventDefault();
+                    const num = parseInt(e.key);
+                    selectOption(options[num], num);
+                    break;
+            }
+        }
+        
+        function updateOptionFocus(options) {
+            options.forEach((opt, i) => {
+                opt.classList.remove('focused');
+                if (i === focusedOptionIndex) {
+                    opt.classList.add('focused');
+                    opt.focus();
+                }
+            });
+        }
+        
+        // ========== NAVIGATION CLAVIER GATE (Typeform-like) ==========
+        function handleGateKeyboard(e) {
+            if (e.key !== 'Enter' && e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
+            
+            const fields = [
+                document.getElementById('firstName'),
+                document.getElementById('lastName'),
+                document.getElementById('email'),
+                document.getElementById('consentLabel')
+            ];
+            
+            const currentField = document.activeElement;
+            const currentIndex = fields.findIndex(f => f === currentField || f.contains(currentField));
+            
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                
+                // Si c'est la checkbox
+                if (currentField === document.getElementById('consentLabel') || 
+                    currentField === document.getElementById('consent')) {
+                    // Toggle checkbox et soumettre si tout est ok
+                    const checkbox = document.getElementById('consent');
+                    checkbox.checked = !checkbox.checked;
+                    if (checkbox.checked) {
+                        // Soumettre le formulaire
+                        submitGateForm(new Event('submit'));
+                    }
+                    return;
+                }
+                
+                // Valider champ actuel
+                if (currentField && currentField.checkValidity && !currentField.checkValidity()) {
+                    currentField.reportValidity();
+                    return;
+                }
+                
+                // Passer au champ suivant
+                if (currentIndex >= 0 && currentIndex < fields.length - 1) {
+                    const nextField = fields[currentIndex + 1];
+                    if (nextField.tagName === 'LABEL') {
+                        nextField.focus();
+                    } else {
+                        nextField.focus();
+                    }
+                } else if (currentIndex === 2) {
+                    // Email → consent
+                    const consentLabel = document.getElementById('consentLabel');
+                    consentLabel.focus();
+                } else if (currentIndex === 3) {
+                    // Consent → soumettre si coché
+                    const checkbox = document.getElementById('consent');
+                    if (checkbox.checked) {
+                        submitGateForm(new Event('submit'));
+                    }
+                }
+            }
+            
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                if (currentIndex >= 0 && currentIndex < fields.length - 1) {
+                    fields[currentIndex + 1].focus();
+                }
+            }
+            
+            if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                if (currentIndex > 0) {
+                    fields[currentIndex - 1].focus();
+                }
+            }
+        }
+        
+        // Toggle checkbox avec espace sur le label
+        document.getElementById('consentLabel')?.addEventListener('keydown', function(e) {
+            if (e.key === ' ') {
+                e.preventDefault();
+                const checkbox = document.getElementById('consent');
+                checkbox.checked = !checkbox.checked;
+            }
+        });
+    </script>
+</body>
+</html>

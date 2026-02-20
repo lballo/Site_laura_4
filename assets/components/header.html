@@ -1,0 +1,83 @@
+<!-- ============================================
+     HEADER / NAVIGATION
+     Fichier : assets/components/header.html
+     ============================================ -->
+
+<!-- NAVIGATION -->
+<nav class="nav" id="nav">
+  <div class="nav-progress" id="navProgress"></div>
+  <a href="/" class="nav-logo">
+    <img src="/assets/img/Laura-Ballo-white-high-res.png" alt="Laura Ballo - Coaching Leadership Premium">
+  </a>
+  <div class="nav-links">
+    <a href="/">Accueil</a>
+    <a href="/formations/index.html">Formations</a>
+    <div class="nav-dropdown">
+      <a href="#">Accompagnements</a>
+      <div class="nav-dropdown-menu">
+        <a href="/accompagnements/diagnostic.html">Diagnostic</a>
+        <a href="/accompagnements/positionnement.html">Positionnement stratégique</a>
+        <a href="/accompagnements/incarnation.html">Présence et parole incarnée</a>
+        <a href="/accompagnements/storytelling.html">Storytelling signature</a>
+        <a href="/accompagnements/prise-de-parole.html">Préparer une prise de parole à enjeux</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <a href="#">Quiz</a>
+      <div class="nav-dropdown-menu">
+        <a href="/quizz/hypersensibilite.html">Hypersensibilité</a>
+      </div>
+    </div>
+    <a href="/conferences/index.html">Conférences</a>
+    <a href="/blog/index.html">Blog</a>
+    <div class="nav-dropdown">
+      <a href="#">À propos</a>
+      <div class="nav-dropdown-menu">
+        <a href="/#process">Méthodologie</a>
+        <a href="/#temoignages">Témoignages</a>
+        <a href="/#faq">FAQ</a>
+        <a href="/#a-propos">Qui suis-je</a>
+      </div>
+    </div>
+    <a href="/#contact" class="btn btn-secondary">Réserver un appel</a>
+  </div>
+  <button class="nav-burger" id="navBurger" onclick="toggleMobileMenu()" aria-label="Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="nav-mobile" id="navMobile">
+  <a href="/" onclick="closeMobileMenu()">Accueil</a>
+  <a href="/formations/index.html" onclick="closeMobileMenu()">Formations</a>
+  <details class="nav-mobile-dropdown">
+    <summary>Accompagnements</summary>
+    <div class="nav-mobile-dropdown__items">
+      <a href="/accompagnements/diagnostic.html" onclick="closeMobileMenu()">Diagnostic</a>
+      <a href="/accompagnements/positionnement.html" onclick="closeMobileMenu()">Positionnement stratégique</a>
+      <a href="/accompagnements/incarnation.html" onclick="closeMobileMenu()">Présence et parole incarnée</a>
+      <a href="/accompagnements/storytelling.html" onclick="closeMobileMenu()">Storytelling signature</a>
+      <a href="/accompagnements/prise-de-parole.html" onclick="closeMobileMenu()">Prise de parole à enjeux</a>
+    </div>
+  </details>
+  <details class="nav-mobile-dropdown">
+    <summary>Quiz</summary>
+    <div class="nav-mobile-dropdown__items">
+      <a href="/quizz/hypersensibilite.html" onclick="closeMobileMenu()">Hypersensibilité</a>
+    </div>
+  </details>
+  <a href="/conferences/index.html" onclick="closeMobileMenu()">Conférences</a>
+  <a href="/blog/index.html" onclick="closeMobileMenu()">Blog</a>
+  <details class="nav-mobile-dropdown">
+    <summary>À propos</summary>
+    <div class="nav-mobile-dropdown__items">
+      <a href="/#process" onclick="closeMobileMenu()">Méthodologie</a>
+      <a href="/#temoignages" onclick="closeMobileMenu()">Témoignages</a>
+      <a href="/#faq" onclick="closeMobileMenu()">FAQ</a>
+      <a href="/#a-propos" onclick="closeMobileMenu()">Qui suis-je</a>
+    </div>
+  </details>
+  <a href="/#contact" class="btn btn-primary" onclick="closeMobileMenu()">Réserver un appel</a>
+</div>
