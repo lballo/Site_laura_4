@@ -26,6 +26,36 @@
   </url>
 
   <url>
+    <loc>https://lauraballo.com/accompagnements/leadership-incarne.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://lauraballo.com/accompagnements/parole-signature.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://lauraballo.com/accompagnements/storytelling-signature.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://lauraballo.com/accompagnements/prise-de-parole-enjeux.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://lauraballo.com/accompagnements/structuration-ia.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
     <loc>https://lauraballo.com/quizz/hypersensibilite.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -88,3 +118,4 @@
   </url>
 
 </urlset>
+
