@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Questionnaire de satisfaction — Laura Ballo Coaching</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #FBF4EE;
+      --white: #FFFFFF;
+      --section-dark: #E8DDD6;
+      --btn: #A08E84;
+      --btn-hover: #7a6b62;
+      --dark: #2C2420;
+      --text: #4a3c35;
+      --text-light: #8a7068;
+      --border: #d9cec7;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--section-dark);
+      padding: 18px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 16px;
+    }
+
+    header .logo-img {
+      height: 52px;
+      width: auto;
+      display: block;
+      flex-shrink: 0;
+    }
+
+    header .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      color: var(--dark);
+      letter-spacing: 0.08em;
+      font-weight: 500;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: var(--bg);
+      padding: 60px 24px 50px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      border: 1px solid rgba(160,142,132,0.2);
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -40px; left: -40px;
+      width: 150px; height: 150px;
+      border-radius: 50%;
+      border: 1px solid rgba(160,142,132,0.15);
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--btn);
+      border: 1px solid var(--btn);
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: var(--dark);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .hero h1 em {
+      color: var(--btn);
+      font-style: italic;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--text);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    .programme-badge {
+      background: rgba(160,142,132,0.15);
+      border: 1px solid rgba(160,142,132,0.35);
+      border-radius: 8px;
+      padding: 10px 20px;
+      display: inline-block;
+      margin-top: 20px;
+      font-size: 0.85rem;
+      color: var(--btn-hover);
+      letter-spacing: 0.05em;
+    }
+
+    .programme-badge strong {
+      font-weight: 500;
+    }
+
+    /* ── Form container ── */
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    .form-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 2px 16px rgba(44,36,32,0.05);
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      color: var(--dark);
+      font-weight: 500;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--section-dark);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::before {
+      content: '';
+      width: 3px;
+      height: 20px;
+      background: var(--btn);
+      border-radius: 2px;
+      display: block;
+    }
+
+    /* ── Fields ── */
+    .field-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 520px) {
+      .field-group { grid-template-columns: 1fr; }
+      .form-card { padding: 24px 20px; }
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field.full { grid-column: 1 / -1; }
+
+    label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+
+    label .required {
+      color: var(--terracotta);
+      margin-left: 2px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.95rem;
+      color: var(--dark);
+      background: var(--white);
+      transition: border-color 0.2s;
+      outline: none;
+    }
+
+    input:focus, textarea:focus {
+      border-color: var(--btn);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+      line-height: 1.6;
+      background: var(--white) !important;
+    }
+
+    /* ── Star rating ── */
+    .rating-group {
+      margin-bottom: 24px;
+    }
+
+    .rating-label {
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: 10px;
+      line-height: 1.5;
+      font-weight: 400;
+    }
+
+    .rating-label .required { color: var(--terracotta); }
+
+    .stars {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .stars input[type="radio"] { display: none; }
+
+    .stars label {
+      cursor: pointer;
+      font-size: 1.6rem;
+      color: var(--beige-dark);
+      transition: color 0.15s, transform 0.15s;
+      text-transform: none;
+      letter-spacing: 0;
+      font-weight: 400;
+      padding: 4px 2px;
+      line-height: 1;
+    }
+
+    .stars label:hover,
+    .stars label:hover ~ label,
+    .stars input:checked ~ label {
+      color: var(--gold);
+    }
+
+    /* Reverse order trick for CSS-only star rating */
+    .stars {
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+    }
+
+    .stars label:hover,
+    .stars label:hover ~ label { color: var(--btn); }
+
+    .stars input:checked ~ label { color: var(--btn); }
+
+    /* ── Submit ── */
+    .submit-area {
+      text-align: center;
+      margin-top: 32px;
+    }
+
+    .btn-submit {
+      background: var(--btn);
+      color: var(--white);
+      border: none;
+      padding: 16px 48px;
+      border-radius: 50px;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      text-transform: uppercase;
+    }
+
+    .btn-submit:hover {
+      background: var(--btn-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(44,36,32,0.15);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* ── Messages ── */
+    .msg {
+      display: none;
+      padding: 16px 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    .msg.success {
+      background: #edf7f0;
+      border: 1px solid #a8d5b5;
+      color: #2d6a4f;
+    }
+
+    .msg.error {
+      background: #fdf0ee;
+      border: 1px solid #e8b4a8;
+      color: #8b2e1f;
+    }
+
+    /* ── Success screen ── */
+    .success-screen {
+      display: none;
+      text-align: center;
+      padding: 60px 24px;
+    }
+
+    .success-screen .check {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .success-screen h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      color: var(--dark);
+      margin-bottom: 12px;
+      font-weight: 400;
+    }
+
+    .success-screen p {
+      color: var(--text-light);
+      line-height: 1.7;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 0.78rem;
+      color: var(--text-light);
+      letter-spacing: 0.03em;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <img src="/assets/img/Laura-Ballo-white-low-res.png" alt="Laura Ballo" class="logo-img" />
+  <div class="logo">Laura Ballo Coaching</div>
+</header>
+
+<div class="hero">
+  <div class="hero-tag">Votre avis compte</div>
+  <h1><em id="hero-prenom"></em> Comment avez-vous vécu<br>l'accompagnement <em id="hero-programme">?</em></h1>
+  <p>Votre retour d'expérience est précieux. Il me permet d'améliorer continuellement la qualité de l'accompagnement et de mieux servir mes futurs clients.</p>
+  <div class="programme-badge" id="programme-badge" style="display:none">
+    Programme : <strong id="badge-nom"></strong>
+  </div>
+</div>
+
+<div class="container">
+
+  <div id="form-wrapper">
+    <form id="satisfaction-form" novalidate>
+
+      <!-- Section 2 : Évaluations -->
+      <div class="form-card">
+        <div class="section-title">Votre évaluation</div>
+
+        <!-- Satisfaction générale -->
+        <div class="rating-group">
+          <div class="rating-label">Quelle est votre satisfaction générale concernant votre programme ? <span class="required">*</span></div>
+          <div class="stars" id="stars-satisfaction">
+            <input type="radio" name="satisfaction" id="s5" value="5" required />
+            <label for="s5" title="5 étoiles">★</label>
+            <input type="radio" name="satisfaction" id="s4" value="4" />
+            <label for="s4" title="4 étoiles">★</label>
+            <input type="radio" name="satisfaction" id="s3" value="3" />
+            <label for="s3" title="3 étoiles">★</label>
+            <input type="radio" name="satisfaction" id="s2" value="2" />
+            <label for="s2" title="2 étoiles">★</label>
+            <input type="radio" name="satisfaction" id="s1" value="1" />
+            <label for="s1" title="1 étoile">★</label>
+          </div>
+        </div>
+
+        <!-- Besoin initial -->
+        <div class="rating-group">
+          <div class="rating-label">A-t-il répondu à votre besoin initial ? <span class="required">*</span></div>
+          <div class="stars">
+            <input type="radio" name="besoin" id="b5" value="5" required />
+            <label for="b5">★</label>
+            <input type="radio" name="besoin" id="b4" value="4" />
+            <label for="b4">★</label>
+            <input type="radio" name="besoin" id="b3" value="3" />
+            <label for="b3">★</label>
+            <input type="radio" name="besoin" id="b2" value="2" />
+            <label for="b2">★</label>
+            <input type="radio" name="besoin" id="b1" value="1" />
+            <label for="b1">★</label>
+          </div>
+        </div>
+
+        <!-- Professionnalisme -->
+        <div class="rating-group">
+          <div class="rating-label">Évaluation du professionnalisme du coach (respect du cadre, horaires, posture) <span class="required">*</span></div>
+          <div class="stars">
+            <input type="radio" name="professionnalisme" id="p5" value="5" required />
+            <label for="p5">★</label>
+            <input type="radio" name="professionnalisme" id="p4" value="4" />
+            <label for="p4">★</label>
+            <input type="radio" name="professionnalisme" id="p3" value="3" />
+            <label for="p3">★</label>
+            <input type="radio" name="professionnalisme" id="p2" value="2" />
+            <label for="p2">★</label>
+            <input type="radio" name="professionnalisme" id="p1" value="1" />
+            <label for="p1">★</label>
+          </div>
+        </div>
+
+        <!-- Disponibilité -->
+        <div class="rating-group">
+          <div class="rating-label">À combien évalueriez-vous la disponibilité de votre coach ? <span class="required">*</span></div>
+          <div class="stars">
+            <input type="radio" name="disponibilite" id="d5" value="5" required />
+            <label for="d5">★</label>
+            <input type="radio" name="disponibilite" id="d4" value="4" />
+            <label for="d4">★</label>
+            <input type="radio" name="disponibilite" id="d3" value="3" />
+            <label for="d3">★</label>
+            <input type="radio" name="disponibilite" id="d2" value="2" />
+            <label for="d2">★</label>
+            <input type="radio" name="disponibilite" id="d1" value="1" />
+            <label for="d1">★</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 3 : Commentaires -->
+      <div class="form-card">
+        <div class="section-title">Vos remarques</div>
+        <div class="field">
+          <label>Avez-vous des axes d'amélioration, des remarques ou recommandations ?</label>
+          <textarea name="remarques" id="remarques" placeholder="Partagez librement vos observations…"></textarea>
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <div class="submit-area">
+        <button type="submit" class="btn-submit" id="btn-submit">
+          Envoyer mon évaluation
+        </button>
+        <div class="msg success" id="msg-success">✓ Réponse envoyée, merci pour votre retour !</div>
+        <div class="msg error" id="msg-error">Une erreur est survenue, veuillez réessayer.</div>
+      </div>
+
+    </form>
+  </div>
+
+  <!-- Écran de confirmation -->
+  <div class="success-screen" id="success-screen">
+    <div class="check">🌿</div>
+    <h2>Merci pour votre retour</h2>
+    <p>Votre évaluation a bien été transmise. Votre avis contribue à l'amélioration continue de mes accompagnements.</p>
+  </div>
+
+</div>
+
+<footer>
+  Laura Ballo Coaching — Questionnaire confidentiel
+</footer>
+
+<script>
+  // ── Lecture du paramètre programme dans l'URL ──
+  const params = new URLSearchParams(window.location.search);
+  const programme = params.get("p") || "";
+  const prenom = params.get("prenom") || "";
+  const clientId = params.get("client") || "";
+
+  // Titre personnalisé
+  if (prenom) {
+    document.getElementById("hero-prenom").textContent = prenom + ",";
+  }
+  if (programme) {
+    document.getElementById("hero-programme").textContent = programme + " ?";
+    document.getElementById("badge-nom").textContent = programme;
+    document.getElementById("programme-badge").style.display = "inline-block";
+  } else {
+    document.getElementById("hero-programme").textContent = "votre programme ?";
+  }
+
+  // ── Soumission du formulaire ──
+  document.getElementById("satisfaction-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const btn = document.getElementById("btn-submit");
+    const msgSuccess = document.getElementById("msg-success");
+    const msgError = document.getElementById("msg-error");
+
+    msgSuccess.style.display = "none";
+    msgError.style.display = "none";
+
+    // Validation
+    const satisfaction = document.querySelector('input[name="satisfaction"]:checked')?.value;
+    const besoin = document.querySelector('input[name="besoin"]:checked')?.value;
+    const professionnalisme = document.querySelector('input[name="professionnalisme"]:checked')?.value;
+    const disponibilite = document.querySelector('input[name="disponibilite"]:checked')?.value;
+
+    if (!satisfaction || !besoin || !professionnalisme || !disponibilite) {
+      msgError.textContent = "Merci de renseigner toutes les évaluations (*)";
+      msgError.style.display = "block";
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = "Envoi en cours…";
+
+    const payload = {
+      clientId,
+      prenom,
+      programme,
+      satisfaction,
+      besoin,
+      professionnalisme,
+      disponibilite,
+      remarques: document.getElementById("remarques").value.trim(),
+    };
+
+    try {
+      const res = await fetch("/api/satisfaction", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (res.ok) {
+        // Afficher l'écran de confirmation
+        document.getElementById("form-wrapper").style.display = "none";
+        document.getElementById("success-screen").style.display = "block";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        throw new Error("Erreur API");
+      }
+    } catch {
+      msgError.textContent = "Une erreur est survenue. Veuillez réessayer ou contacter laura@lauraballo.com";
+      msgError.style.display = "block";
+      btn.disabled = false;
+      btn.textContent = "Envoyer mon évaluation";
+    }
+  });
+</script>
+
+</body>
+</html>
