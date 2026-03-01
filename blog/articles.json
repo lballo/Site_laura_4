@@ -1,6 +1,35 @@
 {
   "articles": [
     {
+      "id": "prise-de-parole-stress",
+      "title": "Prise de parole stress et émotions: l’art de la mise en résonance",
+      "slug": "prise-de-parole-stress",
+      "url": "/prise-de-parole-stress",
+      "date": "2026-03-01",
+      "readingTime": "5 min",
+      "excerpt": "Prise de parole stress: souvent nous avons le sentiment que nos émotions nous bloquent, qu'en est-il réellement?",
+      "tags": [
+        "prise-de-parole",
+        "communication"
+      ],
+      "situations": [
+        "leadership",
+        "stress"
+      ],
+      "searchKeywords": [
+        "prise",
+        "parole",
+        "stress",
+        "émotions",
+        "art",
+        "mise",
+        "résonance"
+      ],
+      "category": "Prise de parole en public",
+      "image": "https://lauraballo.com/wp-content/uploads/2023/11/personne_sur_une_scne_face__un_public_en_robe_.jpg",
+      "featured": false
+    },
+    {
       "id": "st-psycho",
       "title": "Stranger Things : une lecture psychologique et thérapeutique",
       "slug": "stranger-things-lecture-psychologique",
