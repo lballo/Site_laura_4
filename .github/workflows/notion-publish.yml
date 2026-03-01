@@ -23,12 +23,14 @@ jobs:
       - name: 📦 Dépendances
         run: pip install -r _scripts/requirements.txt
 
-      - name: 🚀 Publier
+      - name: 🚀 Publier articles
         env:
           NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
           ARTICLES_JSON_PATH: blog/articles.json
           TEMPLATE_PATH: _templates/article.html
           OUTPUT_DIR: blog/articles
-          SITEMAP_PATH: sitemap.xml
         run: python _scripts/publish.py
+
+      - name: 🗺️ Régénérer sitemap
+        run: python _scripts/generate_sitemap.py
