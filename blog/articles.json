@@ -1,6 +1,35 @@
 {
   "articles": [
     {
+      "id": "empathie-hypersensible",
+      "title": "Comment gérer son hyper-empathie en tant qu’hypersensible?",
+      "slug": "empathie-hypersensible",
+      "url": "/empathie-hypersensible",
+      "date": "2026-03-04",
+      "readingTime": "7 min",
+      "excerpt": "Pourquoi les hypersensibles sont-ils souvent hyperempathes ? Découvrez la différence entre empathie et compassion et comment éviter la contamination émotionnelle",
+      "tags": [
+        "hypersensibilite",
+        "gestion-des-emotions",
+        "comprehension-de-soi"
+      ],
+      "situations": [
+        "sensible",
+        "comprehension"
+      ],
+      "searchKeywords": [
+        "empathie",
+        "hypersensible",
+        "comment",
+        "gérer",
+        "hyper",
+        "tant"
+      ],
+      "category": "Hypersensibilité",
+      "image": "/assets/img/blog/empathie-hypersensible-main.webp",
+      "featured": false
+    },
+    {
       "id": "prise-de-parole-stress",
       "title": "Prise de parole stress et émotions: l’art de la mise en résonance",
       "slug": "prise-de-parole-stress",
