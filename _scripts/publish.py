@@ -2,18 +2,8 @@
 """
 ═══════════════════════════════════════════════════════════
   Notion → Site Publisher — Laura Ballo Coaching
-═══════════════════════════════════════════════════════════
-  Lit les articles Notion avec statut "Article à publier",
-  génère les pages HTML dans blog/articles/slug.html,
-  met à jour blog/articles.json, puis commit sur GitHub.
-  
-  URLs publiques : lauraballo.com/slug
-  (Vercel rewrite /slug → /blog/articles/slug.html)
-
-  Usage (GitHub Action) : workflow_dispatch
-  Usage (local) :
-    export NOTION_API_KEY="secret_xxx"
-    python _scripts/publish.py
+  VERSION : téléchargement images SANS redimensionnement
+            (conversion WebP uniquement)
 ═══════════════════════════════════════════════════════════
 """
 
@@ -26,9 +16,11 @@ import math
 import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
+from io import BytesIO
 import unicodedata
 
 import requests
+from PIL import Image
 
 # ─────────────────────────────────────────────────────────
 # CONFIG
@@ -36,14 +28,17 @@ import requests
 NOTION_API_KEY = os.environ.get("NOTION_API_KEY", "")
 DATABASE_ID = os.environ.get("NOTION_DATABASE_ID", "300075e127d2809eaac2e85bba8280ef")
 
-# Chemins relatifs au repo
 ARTICLES_JSON_PATH = os.environ.get("ARTICLES_JSON_PATH", "blog/articles.json")
 TEMPLATE_PATH = os.environ.get("TEMPLATE_PATH", "_templates/article.html")
 OUTPUT_DIR = os.environ.get("OUTPUT_DIR", "blog/articles")
+IMAGES_DIR = "assets/img/blog"
 
 SITE_URL = "https://lauraballo.com"
 NOTION_API = "https://api.notion.com/v1"
 NOTION_VERSION = "2022-06-28"
+
+# Compression images
+WEBP_QUALITY = 85
 
 # ─────────────────────────────────────────────────────────
 # MAPPING TAGS → SLUGS
@@ -128,6 +123,67 @@ class NotionClient:
 
 
 # ═════════════════════════════════════════════════════════
+# GESTION DES IMAGES
+# ═════════════════════════════════════════════════════════
+def download_and_compress(url, filename):
+    """
+    Télécharge une image depuis n'importe quelle URL (Notion ou WordPress),
+    la convertit en WebP sans modifier les dimensions,
+    et la sauvegarde dans IMAGES_DIR.
+    Retourne le chemin local /assets/img/blog/filename.webp
+    """
+    try:
+        resp = requests.get(url, timeout=20)
+        resp.raise_for_status()
+
+        img = Image.open(BytesIO(resp.content))
+
+        # Conversion en RGB si nécessaire (PNG avec transparence, etc.)
+        if img.mode in ("RGBA", "P"):
+            img = img.convert("RGB")
+
+        # Sauvegarde WebP — dimensions originales conservées
+        output_dir = Path(IMAGES_DIR)
+        output_dir.mkdir(parents=True, exist_ok=True)
+        output_path = output_dir / f"{filename}.webp"
+        img.save(output_path, "WEBP", quality=WEBP_QUALITY)
+
+        print(f"   🖼️  Image : {img.width}x{img.height}px → {output_path.stat().st_size // 1024}KB")
+        return f"/{IMAGES_DIR}/{filename}.webp"
+
+    except Exception as e:
+        print(f"   ⚠️  Échec téléchargement image : {e}")
+        return url  # Fallback sur l'URL originale
+
+
+def get_main_image(page, slug):
+    """
+    Récupère l'image principale :
+    1. Champ "Image" (Files & Media) — upload Notion
+    2. Champ "Image URL" (URL) — URL WordPress ou externe
+    Dans les deux cas, télécharge et compresse.
+    """
+    props = page.get("properties", {})
+
+    # 1. Champ "Image" (Files & Media)
+    files = props.get("Image", {}).get("files", [])
+    if files:
+        file_obj = files[0]
+        if file_obj.get("type") == "file":
+            url = file_obj["file"]["url"]
+        else:
+            url = file_obj["external"]["url"]
+        return download_and_compress(url, f"{slug}-main")
+
+    # 2. Champ "Image URL" (fallback WordPress)
+    image_url = props.get("Image URL", {}).get("url", "") or ""
+    if image_url:
+        return download_and_compress(image_url, f"{slug}-main")
+
+    return ""
+
+
+# ═════════════════════════════════════════════════════════
 # NOTION BLOCKS → HTML
 # ═════════════════════════════════════════════════════════
 def rich_text_to_html(rich_text_array):
@@ -162,7 +218,10 @@ def rich_text_to_plain(rich_text_array):
     return "".join(rt.get("plain_text", "") for rt in rich_text_array)
 
 
-def blocks_to_html(blocks, client=None):
+def blocks_to_html(blocks, client=None, slug="article", img_counter=None):
+    if img_counter is None:
+        img_counter = [0]
+
     html_parts = []
     i = 0
     first_p = True
@@ -173,7 +232,7 @@ def blocks_to_html(blocks, client=None):
         children = client.get_page_blocks(block["id"])
         if not children:
             return ""
-        return "\n" + blocks_to_html(children, client)
+        return "\n" + blocks_to_html(children, client, slug, img_counter)
 
     while i < len(blocks):
         block = blocks[i]
@@ -254,6 +313,7 @@ def blocks_to_html(blocks, client=None):
                 url = img_data["external"]["url"]
             else:
                 url = ""
+
             raw_caption = rich_text_to_plain(img_data.get("caption", []))
 
             if raw_caption.lower().startswith("alt:"):
@@ -272,6 +332,12 @@ def blocks_to_html(blocks, client=None):
             else:
                 alt_text = raw_caption or "illustration"
                 caption_text = raw_caption
+
+            # Téléchargement et compression
+            if url:
+                img_counter[0] += 1
+                filename = f"{slug}-{img_counter[0]}"
+                url = download_and_compress(url, filename)
 
             cap_html = (
                 f'\n      <p class="image-caption">{html_module.escape(caption_text)}</p>'
@@ -354,7 +420,6 @@ def extract_property(page, prop_name, prop_type="rich_text"):
 # ═════════════════════════════════════════════════════════
 def generate_html(template, data):
     output = template
-
     replacements = {
         "{{TITLE_SEO}}": data["title_seo"],
         "{{META_DESCRIPTION}}": html_module.escape(data["meta_description"]),
@@ -437,7 +502,6 @@ def build_json_entry(data):
     }
     keywords.extend([w for w in title_words if w not in stopwords and len(w) > 2])
     keywords = list(dict.fromkeys(keywords))
-
     return {
         "id": data["slug"],
         "title": data["title"],
@@ -464,6 +528,7 @@ def git_commit_and_push(files, message):
         subprocess.run(["git", "config", "user.email", "bot@lauraballo.com"], check=True)
         for f in files:
             subprocess.run(["git", "add", f], check=True)
+        subprocess.run(["git", "add", IMAGES_DIR], check=True)
         result = subprocess.run(["git", "status", "--porcelain"], capture_output=True, text=True)
         if not result.stdout.strip():
             print("  ℹ️  Aucun changement à committer.")
@@ -486,12 +551,11 @@ def main():
         sys.exit(1)
 
     print("═" * 55)
-    print("  Notion → Site Publisher")
+    print("  Notion → Site Publisher (sans redimensionnement)")
     print("═" * 55)
 
     client = NotionClient(NOTION_API_KEY)
 
-    # 1. Template
     template_path = Path(TEMPLATE_PATH)
     if not template_path.exists():
         print(f"❌ Template introuvable : {TEMPLATE_PATH}")
@@ -499,29 +563,20 @@ def main():
     template = template_path.read_text(encoding="utf-8")
     print(f"✅ Template : {TEMPLATE_PATH}")
 
-    # 2. articles.json
     articles_list = load_articles_json(ARTICLES_JSON_PATH)
     print(f"✅ {ARTICLES_JSON_PATH} : {len(articles_list)} articles existants")
 
-    # 3. Requêter Notion — articles à PUBLIER
     print("\n🔍 Recherche des articles à publier...")
     pages = client.query_database(
         DATABASE_ID,
-        filter_obj={
-            "property": "Action à effectuer",
-            "select": {"equals": "Article à publier"},
-        },
+        filter_obj={"property": "Action à effectuer", "select": {"equals": "Article à publier"}},
     )
     print(f"   → {len(pages)} article(s) trouvé(s)\n")
 
-    # 3b. Requêter Notion — articles à SUPPRIMER
     print("🗑️  Recherche des articles à supprimer...")
     pages_to_delete = client.query_database(
         DATABASE_ID,
-        filter_obj={
-            "property": "Action à effectuer",
-            "select": {"equals": "Supprimer article"},
-        },
+        filter_obj={"property": "Action à effectuer", "select": {"equals": "Supprimer article"}},
     )
     print(f"   → {len(pages_to_delete)} article(s) à supprimer\n")
 
@@ -541,9 +596,6 @@ def main():
         slug = extract_property(page, "Slug", "rich_text") or slugify(title)
 
         print(f"🗑️  {title}")
-        print(f"   slug → {slug}")
-
-        # Supprimer le fichier HTML
         html_file = Path(OUTPUT_DIR) / f"{slug}.html"
         if html_file.exists():
             html_file.unlink()
@@ -552,45 +604,38 @@ def main():
         else:
             print(f"   ⚠️  Fichier introuvable : {html_file}")
 
-        # Supprimer de articles.json
         before_count = len(articles_list)
         articles_list = [a for a in articles_list if a.get("slug") != slug]
         if len(articles_list) < before_count:
             print(f"   ✅ Retiré de articles.json")
-        else:
-            print(f"   ⚠️  Pas trouvé dans articles.json")
 
         deleted_page_ids.append((page_id, title))
 
     # ── PUBLICATION ──
     for page in pages:
         page_id = page["id"]
-
-        # Propriétés
         title = extract_property(page, "Titre de l'article", "title")
         title_seo = extract_property(page, "Titre SEO", "rich_text") or f"{title} | Laura Ballo"
         meta_desc = extract_property(page, "Méta description", "rich_text") or ""
         expression_cle = extract_property(page, "Expression clé principale", "rich_text") or ""
         slug = extract_property(page, "Slug", "rich_text") or slugify(title)
-        image_url = extract_property(page, "Image", "url") or ""
         image_alt = extract_property(page, "Alt", "rich_text") or ""
         tags = extract_property(page, "Tags", "multi_select")
         situations = extract_property(page, "Situation", "multi_select")
 
         print(f"📝 {title}")
-        print(f"   slug   → {slug}")
-        print(f"   url    → {SITE_URL}/{slug}")
-        print(f"   fichier→ {OUTPUT_DIR}/{slug}.html")
+        print(f"   slug → {slug}")
 
-        # Contenu (blocs de la page Notion)
+        image_url = get_main_image(page, slug)
+
         blocks = client.get_page_blocks(page_id)
-        content_html = blocks_to_html(blocks, client)
+        img_counter = [0]
+        content_html = blocks_to_html(blocks, client, slug, img_counter)
 
         if not content_html.strip():
             print(f"   ⚠️  Contenu vide — ignoré")
             continue
 
-        # Données
         today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
         reading_time = f"{estimate_reading_time(content_html)} min"
         category = tags[0] if tags else "Leadership"
@@ -617,7 +662,6 @@ def main():
         }
         article_data["schema_org"] = build_schema_org(article_data)
 
-        # Générer blog/articles/slug.html
         output_path = Path(OUTPUT_DIR)
         output_path.mkdir(parents=True, exist_ok=True)
         output_file = output_path / f"{slug}.html"
@@ -626,26 +670,21 @@ def main():
         modified_files.append(str(output_file))
         print(f"   ✅ HTML généré")
 
-        # articles.json
         json_entry = build_json_entry(article_data)
         articles_list = upsert_article(articles_list, json_entry)
         print(f"   ✅ JSON mis à jour")
 
         published_page_ids.append((page_id, title))
 
-    # 4. Sauvegarder articles.json
     save_articles_json(ARTICLES_JSON_PATH, articles_list)
     modified_files.append(ARTICLES_JSON_PATH)
     print(f"\n💾 {ARTICLES_JSON_PATH} ({len(articles_list)} articles)")
 
-    # 5. Git
     parts = []
     if published_page_ids:
-        pub_titles = [t for _, t in published_page_ids]
-        parts.append(f"📝 Publié : {', '.join(pub_titles)}")
+        parts.append(f"📝 Publié : {', '.join(t for _, t in published_page_ids)}")
     if deleted_page_ids:
-        del_titles = [t for _, t in deleted_page_ids]
-        parts.append(f"🗑️ Supprimé : {', '.join(del_titles)}")
+        parts.append(f"🗑️ Supprimé : {', '.join(t for _, t in deleted_page_ids)}")
     commit_msg = " | ".join(parts)
     if len(commit_msg) > 100:
         commit_msg = f"📝 {len(published_page_ids)} publié(s), 🗑️ {len(deleted_page_ids)} supprimé(s)"
@@ -658,33 +697,18 @@ def main():
             pass
     pushed = git_commit_and_push(modified_files, commit_msg)
 
-    # 6. Mettre à jour Notion
     if pushed:
         print(f"\n🔄 Mise à jour Notion...")
         for page_id, title in published_page_ids:
             try:
-                client.update_page(
-                    page_id,
-                    {
-                        "Action à effectuer": {
-                            "select": {"name": "Publié"}
-                        },
-                    },
-                )
+                client.update_page(page_id, {"Action à effectuer": {"select": {"name": "Publié"}}})
                 print(f"   ✅ {title} → 'Publié'")
             except Exception as e:
                 print(f"   ⚠️  {title}: {e}")
 
         for page_id, title in deleted_page_ids:
             try:
-                client.update_page(
-                    page_id,
-                    {
-                        "Action à effectuer": {
-                            "select": {"name": "Article supprimé du site"}
-                        },
-                    },
-                )
+                client.update_page(page_id, {"Action à effectuer": {"select": {"name": "Article supprimé du site"}}})
                 print(f"   🗑️ {title} → 'Article supprimé du site'")
             except Exception as e:
                 print(f"   ⚠️  {title}: {e}")
