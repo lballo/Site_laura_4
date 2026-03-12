@@ -230,7 +230,7 @@
         <span class="label-sm">Nouveau</span>
         <h3>Storytelling Signature</h3>
         <p>Une nouvelle manière de raconter votre histoire. Racontez votre histoire de manière captivante et mémorable, devenez une légende.</p>
-        <a href="#" class="btn btn-primary"><span>Découvrir le programme</span></a>
+        <a href="#" class="btn btn-primary"><span>Découvrir l'atelier</span></a>
       </div>
       <div class="storytelling-price">
         <p class="price">900 €</p>
@@ -291,38 +291,19 @@
     <cite>— Laura Ballo</cite>
   </div>
 
-  <!-- TROIS PILIERS -->
-  <section class="projects-section" id="accompagnements">
+  <!-- DERNIERS ARTICLES DU BLOG -->
+  <section class="blog-section" id="blog">
     <div class="container">
-      <div class="projects-header">
-        <span class="subtitle">Accompagnements</span>
-        <h2>Les trois piliers de votre transformation</h2>
+      <div class="blog-header">
+        <span class="section-label">Blog</span>
+        <h2 class="section-title">Mes derniers articles</h2>
+        <p class="section-description">Une véritable exploration d'articles qui abordent le leadership, le management, la psychologie cognitive, la gestion des émotions... Un véritable temps pour soi.</p>
       </div>
-      <div class="projects-intro">
-        <p>Chaque accompagnement est conçu pour répondre à un besoin spécifique de votre parcours. <span class="highlight">Ensemble, ils forment un système complet</span> pour révéler et incarner votre leadership authentique.</p>
+      <div class="blog-grid" id="blog-grid">
+        <!-- Rempli dynamiquement par JS depuis articles.json -->
       </div>
-      <div class="projects-grid">
-        <div class="project-card fade-in">
-          <span class="corner-tl"></span><span class="corner-br"></span>
-          <p class="duration">2 heures</p>
-          <h3>Le Diagnostic</h3>
-          <p class="desc">Un premier échange en profondeur pour comprendre qui vous êtes vraiment et identifier vos blocages.</p>
-        </div>
-        <div class="project-card fade-in">
-          <span class="corner-tl"></span><span class="corner-br"></span>
-          <p class="duration">3 mois</p>
-          <h3>Leadership Incarné</h3>
-          <p class="desc">Un accompagnement complet pour développer votre présence, votre posture et votre impact.</p>
-        </div>
-        <div class="project-card fade-in">
-          <span class="corner-tl"></span><span class="corner-br"></span>
-          <p class="duration">6 mois</p>
-          <h3>Parole Signature</h3>
-          <p class="desc">Le programme le plus complet pour maîtriser l'art de communiquer votre vision et inspirer.</p>
-        </div>
-      </div>
-      <div class="projects-cta">
-        <a href="https://calendly.com/laura-ballo1993/echangecoaching" class="btn btn-primary" target="_blank" rel="noopener"><span>Réserver un appel découverte</span></a>
+      <div class="blog-cta">
+        <a href="/blog/" class="btn btn-primary"><span>Voir tous les articles</span></a>
       </div>
     </div>
   </section>
@@ -433,6 +414,42 @@
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    /* Chargement des 3 derniers articles du blog */
+    (async function loadLatestArticles() {
+      try {
+        const res = await fetch('/blog/articles.json');
+        const data = await res.json();
+        const articles = data.articles
+          .sort((a, b) => new Date(b.date) - new Date(a.date))
+          .slice(0, 3);
+
+        const grid = document.getElementById('blog-grid');
+        grid.innerHTML = articles.map(article => {
+          const date = new Date(article.date).toLocaleDateString('fr-FR', {
+            day: 'numeric', month: 'long', year: 'numeric'
+          });
+          return `
+            <a href="${article.url}" class="blog-card fade-in">
+              <div class="blog-card-image">
+                <img src="${article.image}" alt="${article.title}" loading="lazy">
+              </div>
+              <div class="blog-card-content">
+                <span class="blog-card-category">${article.category}</span>
+                <h3 class="blog-card-title">${article.title}</h3>
+                <p class="blog-card-excerpt">${article.excerpt}</p>
+                <span class="blog-card-meta">${date} · ${article.readingTime}</span>
+              </div>
+            </a>
+          `;
+        }).join('');
+
+        /* Observer les nouvelles cartes pour le fade-in */
+        grid.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+      } catch (e) {
+        console.warn('Articles non chargés :', e);
+      }
+    })();
   </script>
 </body>
 </html>
