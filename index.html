@@ -426,9 +426,6 @@
 
         const grid = document.getElementById('blog-grid');
         grid.innerHTML = articles.map(article => {
-          const date = new Date(article.date).toLocaleDateString('fr-FR', {
-            day: 'numeric', month: 'long', year: 'numeric'
-          });
           return `
             <a href="${article.url}" class="blog-card fade-in">
               <div class="blog-card-image">
@@ -438,7 +435,7 @@
                 <span class="blog-card-category">${article.category}</span>
                 <h3 class="blog-card-title">${article.title}</h3>
                 <p class="blog-card-excerpt">${article.excerpt}</p>
-                <span class="blog-card-meta">${date} · ${article.readingTime}</span>
+                <span class="blog-card-link">En savoir plus</span>
               </div>
             </a>
           `;
