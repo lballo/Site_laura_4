@@ -65,23 +65,56 @@
   <!-- Collections -->
   <section class="collections-section">
     <h3 class="collections-title">Collections</h3>
-    <div class="collections-grid">
+    <div class="collections-grid" id="collections-grid">
       <button class="collection-btn active" data-tag="all">Tous les articles</button>
-      <button class="collection-btn" data-tag="leadership">Leadership</button>
-      <button class="collection-btn" data-tag="strategie">Stratégie</button>
-      <button class="collection-btn" data-tag="gestion-du-changement">Gestion du changement</button>
-      <button class="collection-btn" data-tag="gestion-des-conflits">Gestion des conflits</button>
-      <button class="collection-btn" data-tag="hypersensibilite">Hypersensibilité</button>
-      <button class="collection-btn" data-tag="gestion-des-emotions">Gestion des émotions</button>
-      <button class="collection-btn" data-tag="comprehension-de-soi">Compréhension de soi</button>
-      <button class="collection-btn" data-tag="culture">Culture</button>
-      <button class="collection-btn" data-tag="communication">Communication</button>
-      <button class="collection-btn" data-tag="prise-de-parole">Prise de parole en public</button>
-      <button class="collection-btn" data-tag="media-training">Média training</button>
-      <button class="collection-btn" data-tag="story-telling">Story telling</button>
-      <button class="collection-btn" data-tag="affirmation-de-soi">Affirmation de soi</button>
+      <!-- Généré dynamiquement depuis articles.json -->
     </div>
   </section>
+
+  <script>
+    /* Génération dynamique des boutons de collection depuis articles.json */
+    (async function loadCollections() {
+      try {
+        const res = await fetch('/blog/articles.json');
+        const data = await res.json();
+        const grid = document.getElementById('collections-grid');
+
+        if (data.collections && data.collections.length > 0) {
+          /* Utiliser les collections exportées par publish.py */
+          data.collections.forEach(col => {
+            const btn = document.createElement('button');
+            btn.className = 'collection-btn';
+            btn.dataset.tag = col.slug;
+            btn.textContent = col.label;
+            grid.appendChild(btn);
+          });
+        } else {
+          /* Fallback : extraire les tags uniques depuis les articles */
+          const tagSet = new Set();
+          data.articles.forEach(a => (a.tags || []).forEach(t => tagSet.add(t)));
+          tagSet.forEach(slug => {
+            const btn = document.createElement('button');
+            btn.className = 'collection-btn';
+            btn.dataset.tag = slug;
+            btn.textContent = slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+            grid.appendChild(btn);
+          });
+        }
+      } catch (e) {
+        console.warn('Collections non chargées :', e);
+      }
+    })();
+
+    /* Event delegation : gestion des clics sur les boutons de collection (générés dynamiquement) */
+    document.getElementById('collections-grid').addEventListener('click', function(e) {
+      const btn = e.target.closest('.collection-btn');
+      if (!btn) return;
+      this.querySelectorAll('.collection-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      /* Déclenche un événement custom que blog.js peut écouter */
+      window.dispatchEvent(new CustomEvent('collection-changed', { detail: { tag: btn.dataset.tag } }));
+    });
+  </script>
 
   <!-- Article à la une -->
   <section class="featured-hero-section">
