@@ -44,19 +44,23 @@ WEBP_QUALITY = 85
 # MAPPING TAGS → SLUGS
 # ─────────────────────────────────────────────────────────
 TAG_SLUG_MAP = {
-    "Prise de parole en public": "prise-de-parole",
-    "Communication": "communication",
-    "Compréhension de soi": "comprehension-de-soi",
-    "Gestion des émotions": "gestion-des-emotions",
-    "Hypersensibilité": "hypersensibilite",
     "Leadership": "leadership",
+    "Management": "management",
     "Stratégie": "strategie",
-    "Affirmation de soi": "affirmation-de-soi",
-    "Story telling": "story-telling",
-    "Culture": "culture",
+    "Prise de parole en public": "prise-de-parole",
+    "Storytelling": "storytelling",
+    "Média training": "media-training",
+    "Communication": "communication",
     "Gestion des conflits": "gestion-des-conflits",
     "Gestion du changement": "gestion-du-changement",
-    "Média training": "media-training",
+    "Gestion des émotions": "gestion-des-emotions",
+    "Hypersensibilité": "hypersensibilite",
+    "Compréhension de soi": "comprehension-de-soi",
+    "Affirmation de soi": "affirmation-de-soi",
+    "Culture": "culture",
+    "IA & automation": "ia-automation",
+    "Intelligence émotionnelle": "intelligence-emotionnelle",
+    "Développement personnel": "developpement-personnel",
 }
 
 MOIS_FR = {
@@ -475,8 +479,13 @@ def load_articles_json(path):
 
 def save_articles_json(path, articles):
     articles.sort(key=lambda a: a.get("date", ""), reverse=True)
+    # Générer les collections (tags) pour le blog dynamique
+    collections = [
+        {"slug": slug, "label": label}
+        for label, slug in TAG_SLUG_MAP.items()
+    ]
     with open(path, "w", encoding="utf-8") as f:
-        json.dump({"articles": articles}, f, ensure_ascii=False, indent=2)
+        json.dump({"collections": collections, "articles": articles}, f, ensure_ascii=False, indent=2)
 
 
 def upsert_article(articles_list, new_entry):
