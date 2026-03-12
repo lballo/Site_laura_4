@@ -1,7 +1,8 @@
 {
+  "cleanUrls": true,
   "rewrites": [
     {
-      "source": "/:slug((?!accompagnements|api|assets|blog|formations|legal|quizz|favicon|apple-touch)[a-z0-9][a-z0-9-]*)",
+      "source": "/:slug((?!accompagnements|api|assets|blog|conferences-inspirantes|formations|legal|quizz|favicon|apple-touch)[a-z0-9][a-z0-9-]*)",
       "destination": "/blog/articles/:slug.html"
     }
   ],
@@ -21,13 +22,19 @@
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "X-XSS-Protection", "value": "1; mode=block" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        }
       ]
     }
   ]
-}
-{
-  "cleanUrls": true
 }
