@@ -1018,6 +1018,114 @@ img {
 }
 
 /* ============================================
+   BLOG SECTION (Derniers articles)
+   ============================================ */
+.blog-section {
+  padding: clamp(80px, 10vw, 120px) 0;
+  background-color: var(--white);
+}
+
+.blog-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 60px;
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(32px, 4vw, 48px);
+}
+
+.blog-card {
+  background: var(--white);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-base);
+}
+
+.blog-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.blog-card-image {
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+}
+
+.blog-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.blog-card:hover .blog-card-image img {
+  transform: scale(1.04);
+}
+
+.blog-card-content {
+  padding: 28px 24px 32px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.blog-card-category {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 14px;
+  display: block;
+}
+
+.blog-card-title {
+  font-family: var(--font-heading);
+  font-size: clamp(18px, 2vw, 22px);
+  font-weight: 500;
+  color: var(--text-dark);
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+
+.blog-card-excerpt {
+  font-size: 15px;
+  color: var(--warm-gray);
+  line-height: 1.7;
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+
+.blog-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  transition: gap var(--transition-base);
+}
+
+.blog-card-link::after {
+  content: '→';
+  transition: transform var(--transition-base);
+}
+
+.blog-card:hover .blog-card-link {
+  gap: 12px;
+}
+
+.blog-cta {
+  text-align: center;
+  margin-top: 60px;
+}
+
+/* ============================================
    RESPONSIVE - TABLET (1024px)
    ============================================ */
 @media (max-width: 1024px) {
@@ -1062,6 +1170,13 @@ img {
   }
 
   .projects-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .blog-grid {
     grid-template-columns: 1fr;
     max-width: 500px;
     margin-left: auto;
@@ -1232,4 +1347,9 @@ img {
   .projects-header h2 {
     font-size: clamp(24px, 7vw, 36px);
   }
+
+  .blog-card-image {
+    height: 200px;
+  }
 }
+
