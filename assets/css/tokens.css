@@ -1,0 +1,84 @@
+/* ============================================
+   TOKENS.CSS — Palette centralisée lauraballo.com
+   Fichier : assets/css/tokens.css
+
+   ⚠️  Ce fichier DOIT être chargé EN PREMIER,
+       avant tous les autres CSS de la page :
+
+       <link rel="stylesheet" href="/assets/css/tokens.css">
+       <link rel="stylesheet" href="/assets/css/nav.css">
+       <link rel="stylesheet" href="/assets/css/main.css">
+       ...
+
+   Pour changer la charte du site entier :
+   modifier uniquement les valeurs ci-dessous.
+   ============================================ */
+
+:root {
+  /* ---------- NEUTRES DE BASE ---------- */
+  --black: #1A1A1A;
+  --white: #FFFFFF;
+  --text-dark: #2C2C2C;
+
+  /* ---------- FONDS CLAIRS ---------- */
+  --light-beige: #FAF4EF;   /* fond clair principal */
+  --cream:       #F6F0EC;   /* fond clair alternatif (alternance sections) */
+  --warm-beige:  #E8DDD6;   /* cartes, bordures douces, placeholders */
+
+  /* ---------- GRIS & BRUNS CHAUDS ---------- */
+  --warm-gray:   #6D6659;   /* texte secondaire principal */
+  --warm-gray-2: #786C63;   /* variante plus claire (citations, légendes) */
+  --dark-brown:  #6B5548;   /* accents textuels profonds, titres sombres */
+
+  /* ---------- TAUPE / NEUTRES HABILLÉS ---------- */
+  --taupe-light: #BEA695;   /* intermédiaire chaud clair (séparateurs, fonds subtils) */
+  --taupe:       #AFA098;   /* intermédiaire neutre (labels, textes tertiaires) */
+
+  /* ---------- ACCENT TERRACOTTA ---------- */
+  --accent:       #C8554A;  /* couleur principale (boutons, liens, titres forts) */
+  --accent-dark:  #A8453B;  /* hover boutons — version plus sombre de l'accent */
+  --accent-light: #D97063;  /* version plus claire (fonds tintés, highlights doux) */
+  --pop-red:      #C8554A;  /* alias CTA (même valeur que --accent) */
+
+  /* ---------- VALIDATION ---------- */
+  --success: #7BA05B;       /* coches, validations */
+
+  /* ---------- LEGACY (conservés pour compatibilité) ---------- */
+  --text-muted: #D9C9BA;
+  --trust-blue: #4A7C9E;
+
+  /* ============================================
+     TYPOGRAPHIE
+     ============================================ */
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body:    system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-light:   'Cormorant Garamond', Georgia, serif;
+  --font-script:  'Mrs Saint Delafield', cursive;
+  --font-article: 'Crimson Pro', Georgia, serif;
+  --font-sans:    'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* ============================================
+     ESPACEMENTS
+     ============================================ */
+  --space-xs:  8px;
+  --space-sm:  16px;
+  --space-md:  24px;
+  --space-lg:  40px;
+  --space-xl:  60px;
+  --space-xxl: 100px;
+
+  /* ============================================
+     TRANSITIONS
+     ============================================ */
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.5s ease;
+
+  /* ============================================
+     OMBRES
+     ============================================ */
+  --shadow-sm: 0 2px 8px   rgba(0,0,0,0.06);
+  --shadow-md: 0 8px 24px  rgba(0,0,0,0.08);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
+  --shadow-xl: 0 24px 64px rgba(0,0,0,0.16);
+}
