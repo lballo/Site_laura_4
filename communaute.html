@@ -55,7 +55,7 @@ details[open] .faq-icon{transform:rotate(45deg);}
       <!-- Colonne gauche : texte -->
       <div class="reveal">
         <div class="flex mb-6">
-          <img src="images/Laura-Ballo-black-low-res.png" alt="Logo Laura Ballo" width="220" height="220" />
+          <img src="/assets/img/Laura-Ballo-black-low-res.png" alt="Logo Laura Ballo" width="220" height="220" />
         </div>
         <h1 class="title-abhaya mb-6" style="color:var(--brown-d);font-size:clamp(2.25rem,4.5vw,3.5rem);line-height:1.2;">
           Prends ta place.<br/>
@@ -78,7 +78,7 @@ details[open] .faq-icon{transform:rotate(45deg);}
       <!-- Colonne droite : image -->
       <div class="relative reveal-scale">
         <div class="overflow-hidden shadow-2xl" style="aspect-ratio:4/5;">
-          <img src="images/laura-portrait.jpg" alt="Laura Ballo" class="w-full h-full object-cover"/>
+          <img src="/assets/img/laura-portrait.jpg" alt="Laura Ballo" class="w-full h-full object-cover"/>
         </div>
         <div class="absolute -bottom-5 -left-5 bg-white p-4 rounded-2xl shadow-xl hidden md:block">
           <p style="color:var(--terra);font-size:.875rem;font-weight:700;letter-spacing:.05em;margin:0;">+ de 2500 dirigeants accompagnés</p>
@@ -101,7 +101,7 @@ details[open] .faq-icon{transform:rotate(45deg);}
     <div class="grid lg:grid-cols-[450px_1fr] gap-12 lg:gap-24 items-start">
       <div class="reveal-left">
         <div class="overflow-hidden shadow-xl" style="aspect-ratio:3/4;">
-          <img src="images/entrepreneur-sensible.jpg" alt="Entrepreneur sensible" class="w-full h-full object-cover" />
+          <img src="/assets/img/entrepreneur-sensible.jpg" alt="Entrepreneur sensible" class="w-full h-full object-cover" />
         </div>
       </div>
       <div class="reveal-right">
@@ -177,7 +177,7 @@ Il n’y a rien à chercher à être, tu es assez comme tu es. Tu n’as pas bes
 <!-- POUR QUI -->
 <section class="py-24 relative overflow-hidden">
   <div class="absolute inset-0">
-    <img src="images/pour-qui-bg.jpg" alt="" class="w-full h-full object-cover" style="opacity:.38;"/>
+    <img src="/assets/img/pour-qui-bg.jpg" alt="" class="w-full h-full object-cover" style="opacity:.38;"/>
     <div class="absolute inset-0" style="background:linear-gradient(180deg,rgba(248,240,236,.78),rgba(248,240,236,.88));"></div>
   </div>
   <div class="max-w-5xl mx-auto px-6 lg:px-12 text-center relative z-10">
@@ -253,7 +253,7 @@ Il n’y a rien à chercher à être, tu es assez comme tu es. Tu n’as pas bes
       <div class="reveal-left space-y-6" id="benefits"></div>
       <div class="reveal-right">
         <div class="overflow-hidden" style="aspect-ratio:3/4;">
-          <img src="images/transformation.jpg" alt="Transformation" class="w-full h-full object-cover"/>
+          <img src="/assets/img/transformation.jpg" alt="Transformation" class="w-full h-full object-cover"/>
         </div>
       </div>
     </div>
@@ -295,7 +295,7 @@ Il n’y a rien à chercher à être, tu es assez comme tu es. Tu n’as pas bes
       </div>
       <div class="reveal-scale">
         <div class="overflow-hidden" style="aspect-ratio:4/5;">
-          <img src="images/laura-portrait.jpg" alt="Laura" class="w-full h-full object-cover"/>
+          <img src="/assets/img/laura-portrait.jpg" alt="Laura" class="w-full h-full object-cover"/>
         </div>
       </div>
     </div>
@@ -305,7 +305,7 @@ Il n’y a rien à chercher à être, tu es assez comme tu es. Tu n’as pas bes
 <!-- STORYTELLING -->
 <section class="py-32 relative overflow-hidden">
   <!-- Background photo avec effet figé au scroll -->
-  <div class="absolute inset-0 bg-center bg-cover" style="background-image:url('images/section-ambiance.jpg');background-attachment:fixed;"></div>
+  <div class="absolute inset-0 bg-center bg-cover" style="background-image:url('/assets/img/section-ambiance.jpg');background-attachment:fixed;"></div>
   <!-- Voile crème au-dessus de l'image -->
   <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(248,240,236,.8),rgba(255,255,255,.72),rgba(237,209,191,.82));"></div>
 
@@ -340,7 +340,7 @@ Il n’y a rien à chercher à être, tu es assez comme tu es. Tu n’as pas bes
 
       <!-- Colonne gauche : logo -->
       <div class="flex justify-center lg:justify-end">
-        <img src="images/logo-presence.png" alt="Logo Réseau Présence Vibratoire" style="max-width:340px;width:100%;height:auto;" />
+        <img src="/assets/img/logo-presence.png" alt="Logo Réseau Présence Vibratoire" style="max-width:340px;width:100%;height:auto;" />
       </div>
 
       <!-- Colonne droite : promesse (centrée) -->
@@ -357,7 +357,7 @@ Il n’y a rien à chercher à être, tu es assez comme tu es. Tu n’as pas bes
 <!-- 3 RAISONS -->
 <section class="py-24 relative overflow-hidden">
   <div class="absolute inset-0">
-    <img src="images/cta-bg.jpg" alt="" class="w-full h-full object-cover" style="opacity:.12;"/>
+    <img src="/assets/img/cta-bg.jpg" alt="" class="w-full h-full object-cover" style="opacity:.12;"/>
     <div class="absolute inset-0" style="background:linear-gradient(180deg,rgba(255,255,255,.93),rgba(248,240,236,.95));"></div>
   </div>
   <div class="max-w-6xl mx-auto px-6 lg:px-12 relative z-10">
@@ -562,9 +562,9 @@ const benefits = [
 document.getElementById('benefits').innerHTML = benefits.map(([t,x])=>`<div class="flex gap-3 items-start">${CHK_G}<p style="color:var(--brown-d);font-size:1.1875rem;line-height:1.7;"><b>${t}</b> : ${x}</p></div>`).join('');
 
 const testis = [
-  ["Samuel P.","Chef de chœur et coach","Hyper énergique, très impliquée, pro et knowledgeable sur son sujet ! Merci Laura, grâce à toi, je suis davantage connecté aux publics auxquels je parle, que ça soit en réunion, conférence, Zoom… Je recommande chaudement Laura pour améliorer votre confiance en vous et votre aisance à l'oral !","images/temoignage-samuel.jpg"],
-  ["Sandrine","Thérapeute","Je me suis retrouvée, je me suis éveillée, j'ai repris confiance en moi, ça a été juste magique pour moi. Je ne remercierais jamais assez Laura pour ça, pour ce coaching. Pour moi c'est un tout qui a fait que je me suis révélée, qu'à l'intérieur de moi tout a changé.","images/temoignage-sandrine.jpg"],
-  ["Romain B.","Créateur de site web","Laura est une coach versée dans l'empathie. Elle est très à l'écoute de ses clients. Soucieuse de leur succès, elle fournit un accompagnement en profondeur de qualité. Je recommande !","images/temoignage-romain.jpg"]
+  ["Samuel P.","Chef de chœur et coach","Hyper énergique, très impliquée, pro et knowledgeable sur son sujet ! Merci Laura, grâce à toi, je suis davantage connecté aux publics auxquels je parle, que ça soit en réunion, conférence, Zoom… Je recommande chaudement Laura pour améliorer votre confiance en vous et votre aisance à l'oral !","/assets/img/temoignage-samuel.jpg"],
+  ["Sandrine","Thérapeute","Je me suis retrouvée, je me suis éveillée, j'ai repris confiance en moi, ça a été juste magique pour moi. Je ne remercierais jamais assez Laura pour ça, pour ce coaching. Pour moi c'est un tout qui a fait que je me suis révélée, qu'à l'intérieur de moi tout a changé.","/assets/img/temoignage-sandrine.jpg"],
+  ["Romain B.","Créateur de site web","Laura est une coach versée dans l'empathie. Elle est très à l'écoute de ses clients. Soucieuse de leur succès, elle fournit un accompagnement en profondeur de qualité. Je recommande !","/assets/img/temoignage-romain.jpg"]
 ];
 document.getElementById('testi').innerHTML = testis.map(([n,r,t,img])=>`<div class="card-testi bg-white p-8 rounded-3xl reveal"><div class="flex items-center gap-4 mb-6"><div class="w-16 h-16 rounded-full overflow-hidden" style="box-shadow:0 0 0 4px rgba(196,143,114,.2);"><img src="${img}" alt="${n}" class="w-full h-full object-cover"/></div><div><p style="color:var(--brown-d);font-size:1.125rem;font-weight:600;margin:0;">${n}</p><p style="color:var(--terra);font-size:.875rem;font-weight:500;margin:0;">${r}</p></div></div><div class="relative"><div class="absolute -left-2 -top-2" style="color:rgba(196,143,114,.2);font-size:4rem;line-height:1;">"</div><p class="relative z-10 pl-6" style="color:var(--brown-d);font-size:1rem;line-height:1.7;">${t}</p></div></div>`).join('');
 
