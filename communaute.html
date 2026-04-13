@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Réseau Présence Vibratoire — Laura Ballo</title>
+<meta name="description" content="Une communauté bienveillante pour les entrepreneurs et dirigeants sensibles qui veulent prendre leur place avec clarté, justesse et impact." />
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Parisienne&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F8F0EC; --peach:#EDD1BF; --sand:#C48F72;
+  --terra:#C8554A; --terra-d:#AA564C; --rust:#9B594A;
+  --brown-d:#573D38; --brown-m:#775038; --taupe:#98675B;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--brown-d);-webkit-font-smoothing:antialiased;background:var(--cream);}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease-out,transform .8s ease-out;}
+.reveal.in{opacity:1;transform:translateY(0);}
+.reveal-scale{opacity:0;transform:scale(.95);transition:opacity .8s ease-out,transform .8s ease-out;}
+.reveal-scale.in{opacity:1;transform:scale(1);}
+.reveal-left{opacity:0;transform:translateX(-30px);transition:opacity .8s ease-out,transform .8s ease-out;}
+.reveal-left.in{opacity:1;transform:translateX(0);}
+.reveal-right{opacity:0;transform:translateX(30px);transition:opacity .8s ease-out,transform .8s ease-out;}
+.reveal-right.in{opacity:1;transform:translateX(0);}
+.btn-primary{background:var(--terra);color:#fff;transition:all .25s ease;}
+.btn-primary:hover{background:var(--terra-d);box-shadow:0 10px 25px -10px rgba(200,85,74,.5);}
+.btn-outline{background:#fff;color:var(--brown-d);border:2px solid var(--terra);transition:all .25s ease;}
+.btn-outline:hover{border-color:var(--terra-d);}
+.btn-white{background:#fff;color:var(--terra);transition:transform .2s,box-shadow .2s;box-shadow:0 25px 50px -12px rgba(0,0,0,.25);}
+.btn-white:hover{transform:translateY(-2px) scale(1.03);}
+.gradient-text{background:linear-gradient(90deg,var(--rust),var(--taupe),var(--terra));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.divider{width:64px;height:4px;background:linear-gradient(90deg,transparent,var(--terra),transparent);margin:0 auto 1.5rem;border-radius:2px;}
+.card-testi{border:2px solid rgba(196,143,114,.1);transition:all .3s ease;}
+.card-testi:hover{border-color:rgba(200,85,74,.3);box-shadow:0 20px 40px -15px rgba(0,0,0,.15);}
+.pill-check{background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border:2px solid rgba(255,255,255,.3);}
+.glass{background:rgba(255,255,255,.2);backdrop-filter:blur(18px);border:2px solid rgba(255,255,255,.4);}
+.parisienne{font-family:'Parisienne',cursive;}
+.title-abhaya{font-family:'Abhaya Libre',Georgia,serif;font-weight:500;letter-spacing:-0.005em;}
+details summary::-webkit-details-marker{display:none;}
+details summary::marker{display:none;}
+details[open] .faq-icon{transform:rotate(45deg);}
+.faq-icon{transition:transform .25s ease;display:inline-block;}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="relative overflow-hidden py-20" style="background:#F3ECE8;">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
+
+      <!-- Colonne gauche : texte -->
+      <div class="reveal">
+        <div class="flex mb-6">
+          <img src="/assets/img/Laura-Ballo-black-low-res.png" alt="Logo Laura Ballo" width="220" height="220" />
+        </div>
+        <h1 class="title-abhaya mb-6" style="color:var(--brown-d);font-size:clamp(2.25rem,4.5vw,3.5rem);line-height:1.2;">
+          Prends ta place.<br/>
+          Affirme ton autorité.<br/>
+          Incarne une présence et une parole <span style="color:var(--terra);">signature.</span>
+        </h1>
+        <p class="mb-8 max-w-xl" style="color:var(--brown-m);font-size:1.125rem;line-height:1.75;font-weight:400;">
+          La communauté des entrepreneurs et dirigeants sensibles qui veulent prendre leur place, oser se montrer, prendre la parole et devenir précurseur.se.
+        </p>
+        <div class="flex flex-wrap gap-4 mb-8">
+          <a href="#formules" class="btn-primary px-8 py-4 rounded-full inline-block" style="font-size:1rem;font-weight:600;">A partir de 79€/mois</a>
+        </div>
+        <div class="flex flex-wrap items-center gap-x-6 gap-y-3" style="color:var(--brown-m);font-size:.875rem;">
+          <div class="flex items-center gap-2"><span style="color:var(--terra);font-size:1.25rem;">✓</span> Sans engagement</div>
+          <div class="flex items-center gap-2"><span style="color:var(--terra);font-size:1.25rem;">✓</span> Accès immédiat</div>
+          <div class="flex items-center gap-2"><span style="color:var(--terra);font-size:1.25rem;">✓</span> 14 jours satisfait ou remboursé</div>
+        </div>
+      </div>
+
+      <!-- Colonne droite : image -->
+      <div class="relative reveal-scale">
+        <div class="overflow-hidden shadow-2xl" style="aspect-ratio:4/5;">
+          <img src="/assets/img/laura-portrait.jpg" alt="Laura Ballo" class="w-full h-full object-cover"/>
+        </div>
+        <div class="absolute -bottom-5 -left-5 bg-white p-4 rounded-2xl shadow-xl hidden md:block">
+          <p style="color:var(--terra);font-size:.875rem;font-weight:700;letter-spacing:.05em;margin:0;">+ de 2500 dirigeants accompagnés</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROBLÉMATIQUE -->
+<section class="py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    <div class="text-center mb-6 reveal">
+      <h2 class="mb-6" style="font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--brown-d);">Ce que tu ressens actuellement...</h2>
+      <p class="max-w-3xl mx-auto mb-16" style="color:var(--brown-m);font-size:1.5rem;line-height:1.7;">
+        Tu es <b>un.e entrepreneur.se, artiste, ou encore un dirigeant.e créatif et sensible</b>. Tu portes une <b>vision unique</b> mais tu n'oses pas encore l'incarner pleinement. Ce que tu te dis probablement :
+      </p>
+    </div>
+    <div class="grid lg:grid-cols-[450px_1fr] gap-12 lg:gap-24 items-start">
+      <div class="reveal-left">
+        <div class="overflow-hidden shadow-xl" style="aspect-ratio:3/4;">
+          <img src="/assets/img/entrepreneur-sensible.jpg" alt="Entrepreneur sensible" class="w-full h-full object-cover" />
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="space-y-6" id="probList"></div>
+        <div class="mt-10">
+          <p class="mb-6" style="color:var(--terra);font-size:1.125rem;font-weight:600;line-height:1.6;">La bonne nouvelle ? Tu n'es pas seul·e et tout ça peut changer ✨</p>
+          <a href="#paiement" class="btn-primary px-8 py-4 rounded-full inline-block" style="font-size:1rem;font-weight:600;">Découvrir la communauté</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRANSITION -->
+<section class="py-16 bg-white">
+  <div class="max-w-3xl mx-auto px-6 lg:px-12 text-center reveal">
+    <p style="color:var(--brown-d);font-size:1.375rem;line-height:1.7;">
+      Je tenais à te dire une chose : <b>tu as le droit de prendre ta place et d'être leader avec ta sensibilité et ta singularité.</b><br/>Le programme Présence va te permettre de revenir à ton essentiel pour incarner pleinement ton message.
+    </p>
+  </div>
+</section>
+
+<!-- MA SINGULARITÉ -->
+<section class="py-24 relative overflow-hidden" style="background:#786C63;">
+  <div class="absolute inset-0">
+    <div class="absolute top-10 left-1/4 w-[500px] h-[500px] rounded-full" style="background:rgba(74,59,55,.3);filter:blur(140px);"></div>
+    <div class="absolute bottom-10 right-1/4 w-[500px] h-[500px] rounded-full" style="background:rgba(74,59,55,.22);filter:blur(140px);"></div>
+  </div>
+  <div class="relative z-10 max-w-4xl mx-auto px-6 lg:px-12">
+    <div class="text-center mb-16 reveal">
+      <div class="inline-block mb-4" style="color:rgba(255,255,255,.7);font-size:.875rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;">Pourquoi ce programme est unique</div>
+      <h2 class="mb-6 text-white" style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(2rem,4vw,2.75rem);font-weight:700;">La singularité de Présence ✨</h2>
+      <p class="max-w-2xl mx-auto" style="color:rgba(255,255,255,.85);font-size:1.125rem;line-height:1.7;">Ce que tu ne trouveras nulle part ailleurs — et pourquoi ça change tout.</p>
+    </div>
+
+    <div class="space-y-8">
+
+      <div class="flex gap-6 items-start reveal">
+        <div class="flex-shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center" style="background:rgba(255,255,255,.12);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div>
+          <h3 class="mb-2 text-white" style="font-size:1.25rem;font-weight:700;line-height:1.3;">Une safe place et un cadre sécurisant</h3>
+          <p style="color:rgba(255,255,255,.8);font-size:1.0625rem;line-height:1.75;">Parce que le travail sur la présence et la parole peut toucher à une dimension thérapeutique, je mets en place un cadre et une déontologie claire. Il n'y a aucune obligation de faire ou de ne pas faire (on s'encourage mutuellement bien sûr). Le non-jugement et l'acceptation de chacun dans sa sensibilité et sa différence, le respect du rythme de chacun, la  confidentialité ou encore le respect de soi et des autres est absolument essentiel . Le cadre soutient ta profondeur et ta vulnérabilité.</p>
+        </div>
+      </div>
+
+      <div class="flex gap-6 items-start reveal">
+        <div class="flex-shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center" style="background:rgba(255,255,255,.12);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        </div>
+        <div>
+          <h3 class="mb-2 text-white" style="font-size:1.25rem;font-weight:700;line-height:1.3;">Tu es accueilli.e comme tu es</h3>
+          <p style="color:rgba(255,255,255,.8);font-size:1.0625rem;line-height:1.75;">
+Il n’y a rien à chercher à être, tu es assez comme tu es. Tu n’as pas besoin d'être plus ou de devenir la meilleure version de toi-même, tu es parfait.e comme tu es. La présence allie énergétique et concret, elle est un retour profond à soi. Tu prends ta place ici et maintenant.</p>
+        </div>
+      </div>
+
+      <div class="flex gap-6 items-start reveal">
+        <div class="flex-shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center" style="background:rgba(255,255,255,.12);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>
+        </div>
+        <div>
+          <h3 class="mb-2 text-white" style="font-size:1.25rem;font-weight:700;line-height:1.3;">Un programme qui agit sur l'être <em>et</em> sur le faire</h3>
+          <p style="color:rgba(255,255,255,.8);font-size:1.0625rem;line-height:1.75;">Ce que je transmets ce ne sont pas que des techniques. Oui il y a de vraies techniques mais c’est surtout une manière de revenir à ton essence et d'incarner <b>pour de vrai</b>. Au sein de Présence, on travaille aussi le fait de te sentir à la hauteur pour assumer un rôle de précurseur et oser révéler ta singularité.</p>
+        </div>
+      </div>
+ 
+    </div>
+  </div>
+</section>
+
+<!-- POUR QUI -->
+<section class="py-24 relative overflow-hidden">
+  <div class="absolute inset-0">
+    <img src="/assets/img/pour-qui-bg.jpg" alt="" class="w-full h-full object-cover" style="opacity:.38;"/>
+    <div class="absolute inset-0" style="background:linear-gradient(180deg,rgba(248,240,236,.78),rgba(248,240,236,.88));"></div>
+  </div>
+  <div class="max-w-5xl mx-auto px-6 lg:px-12 text-center relative z-10">
+    <div class="reveal">
+      <h2 class="mb-6" style="font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:700;color:var(--brown-d);">Cette communauté est faite pour toi si...</h2>
+      <p class="mb-12 max-w-2xl mx-auto" style="color:var(--brown-m);font-size:1.125rem;line-height:1.7;">Tu es entrepreneur, dirigeant, artiste ou leader créatif avec une sensibilité unique</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8" id="whoFor"></div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section class="py-24 bg-white relative overflow-hidden">
+  <div class="max-w-6xl mx-auto px-6 lg:px-12">
+    <div class="text-center mb-16 reveal">
+      <div class="divider"></div>
+      <h2 class="mb-6" style="font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--brown-d);">Comment on t'accompagne ? 🌟</h2>
+      <p class="max-w-3xl mx-auto" style="color:var(--brown-m);font-size:1.125rem;line-height:1.7;">Pas un énième programme formaté, mais une vraie expérience sensorielle et vibratoire qui mêle technique et incarnation</p>
+    </div>
+    <div class="grid lg:grid-cols-3 gap-8 mb-20" id="pillars"></div>
+
+    <div class="p-12 rounded-3xl text-white relative overflow-hidden shadow-2xl reveal" style="background:#6D6659;">
+      <div class="relative z-10">
+        <div class="divider" style="background:linear-gradient(90deg,var(--terra),var(--sand));"></div>
+        <h3 class="mb-4 text-center" style="font-size:2rem;font-weight:700;">Ce que tu reçois chaque mois 🔥</h3>
+        <p class="text-center mb-12 max-w-2xl mx-auto" style="color:rgba(255,255,255,.8);font-size:1rem;line-height:1.6;">Un accompagnement complet et varié pour progresser à ton rythme</p>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="p-8 rounded-2xl" style="background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,var(--terra),var(--sand));font-size:1.5rem;">🎥</div>
+              <h4 style="font-size:1.5rem;font-weight:700;">2 Lives mensuels</h4>
+            </div>
+            <div class="space-y-4" id="lives"></div>
+          </div>
+          <div class="p-8 rounded-2xl" style="background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,var(--terra),var(--sand));font-size:1.5rem;">🎯</div>
+              <h4 style="font-size:1.5rem;font-weight:700;">Bonus premium</h4>
+            </div>
+            <div class="space-y-4" id="bonus"></div>
+          </div>
+          <div class="p-8 rounded-2xl" style="background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,var(--terra),var(--sand));font-size:1.5rem;">🤝</div>
+              <h4 style="font-size:1.5rem;font-weight:700;">Une interview ensemble</h4>
+            </div>
+            <p style="color:rgba(255,255,255,.9);font-size:1rem;line-height:1.6;">Quand tu te sens prêt·e, on enregistre une interview ensemble pour mettre en lumière ton parcours, ta vision et ton univers.(disponible pour les formules Essentielle et Présence)</p>
+          </div>
+          <div class="p-8 rounded-2xl" style="background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,var(--terra),var(--sand));font-size:1.5rem;">💞</div>
+              <h4 style="font-size:1.5rem;font-weight:700;">Connexion entre membres</h4>
+            </div>
+            <p style="color:rgba(255,255,255,.9);font-size:1rem;line-height:1.6;">Un espace pour créer des liens authentiques, échanger en dehors des lives et nourrir des collaborations entre membres du Réseau.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AVANTAGES -->
+<section class="py-24 relative overflow-hidden" style="background:linear-gradient(180deg,var(--cream),#fff,var(--cream));">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    <div class="text-center mb-6 reveal">
+      <div class="divider"></div>
+      <h2 class="mb-6" style="font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--brown-d);">Ce qui va changer pour toi 🔥</h2>
+      <p class="max-w-3xl mx-auto mb-16" style="color:var(--brown-m);font-size:1.25rem;line-height:1.7;">
+        Au sein du <b>Réseau Présence Vibratoire</b>, tu vas vivre une <b>transformation profonde</b>. Voici ce qui change concrètement dans ta vie et ton business :
+      </p>
+    </div>
+    <div class="grid lg:grid-cols-[1fr_550px] gap-12 lg:gap-24 items-start">
+      <div class="reveal-left space-y-6" id="benefits"></div>
+      <div class="reveal-right">
+        <div class="overflow-hidden" style="aspect-ratio:3/4;">
+          <img src="/assets/img/transformation.jpg" alt="Transformation" class="w-full h-full object-cover"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ACCENT INTRO TÉMOIGNAGES -->
+<section class="py-20" style="background:#6E6557;">
+  <div class="max-w-3xl mx-auto px-6 lg:px-12 text-center reveal">
+    <p class="text-white" style="font-size:1.5rem;line-height:1.6;font-weight:500;">
+      Lorsque tu prends ta place, tu n'as plus besoin de prouver, d'être validé par les autres ou de chercher à être. Tu incarnes ta présence et ton message.<br/>
+    </p>
+  </div>
+</section>
+
+<!-- TÉMOIGNAGES -->
+<section class="py-24 bg-white">
+  <div class="max-w-6xl mx-auto px-6 lg:px-12">
+    <div class="text-center mb-16 reveal">
+      <div class="divider"></div>
+      <h2 class="mb-6" style="font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--brown-d);">Ils ont sauté le pas 💬</h2>
+      <p class="max-w-2xl mx-auto" style="color:var(--brown-m);font-size:1.125rem;line-height:1.7;">Les transformations vécues par les membres de la communauté</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8" id="testi"></div>
+  </div>
+</section>
+
+<!-- QUI SUIS-JE -->
+<section class="py-24" style="background:#ffffff;">
+  <div class="max-w-6xl mx-auto px-6 lg:px-12">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div class="reveal-left text-center lg:px-4">
+        <h2 class="mb-10" style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(2rem,3.5vw,2.75rem);font-weight:700;color:#1a1a1a;line-height:1.15;">Bonjour,<br/>je m'appelle Laura !</h2>
+        <div class="space-y-6 mb-10 max-w-lg mx-auto" style="color:#3a3a3a;font-size:1rem;line-height:1.75;">
+          <p>Coach et formatrice en leadership et prise de parole, j'ai formé plus de 2 500 professionnels et j'interviens notamment au sein de l'Institut François Bocquet sur des enjeux d'affirmation de soi, de communication et de leadership.</p>
+          <p>À la croisée de la stratégie, des émotions et de l'expression, mon approche s'appuie sur un parcours singulier : école de commerce (EDHEC), arts de la scène (chant lyrique, théâtre, méthode Meisner), hypnothérapie, PNL et pratiques énergétiques.</p>
+          <p>Autrice de <em>Vos recettes anti-trac pour prendre la parole</em> et hôte des podcasts <em>Expression</em> et <em>Présence</em>, j'œuvre à faire émerger des leaders incarnés, qui allient sens et présence.</p>
+        </div>
+        <div class="parisienne" style="color:#1a1a1a;font-size:3.5rem;line-height:1;">Laura B.</div>
+      </div>
+      <div class="reveal-scale">
+        <div class="overflow-hidden" style="aspect-ratio:4/5;">
+          <img src="/assets/img/laura-portrait.jpg" alt="Laura" class="w-full h-full object-cover"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORYTELLING -->
+<section class="py-32 relative overflow-hidden">
+  <!-- Background photo avec effet figé au scroll -->
+  <div class="absolute inset-0 bg-center bg-cover" style="background-image:url('/assets/img/section-ambiance.jpg');background-attachment:fixed;"></div>
+  <!-- Voile crème au-dessus de l'image -->
+  <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(248,240,236,.8),rgba(255,255,255,.72),rgba(237,209,191,.82));"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
+    <div class="max-w-4xl reveal" style="background:rgba(255,255,255,.6);padding:3rem 2.5rem;">
+      <div class="inline-block mb-4" style="color:var(--terra);font-size:.875rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;">
+        Une histoire vraie
+      </div>
+      <h2 class="mb-10" style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--brown-d);line-height:1.2;">
+        Comment tout a commencé
+      </h2>
+      <div class="space-y-5" style="color:var(--brown-d);font-size:1.0625rem;line-height:1.85;">
+        <p>Pendant plusieurs années, que ce soit dans ma vie personnelle ou professionnelle, j'avais ce sentiment de ne pas rentrer dans les cases, dans le moule, de ne pas être à ma place.</p>
+        <p>D'être trop ou pas assez. Pas assez grande, pas assez parfaite : « <em>tu es un volcan émotionnel</em> », « <em>tu en fais trop</em> » me disait-on. Mes émotions ne rentraient pas dans le cadre — compliqué de faire rentrer un rond dans un carré — alors je me suis amputée d'une partie de moi-même. Ça a été ma <b>stratégie de survie</b> pendant des années.</p>
+        <p>J'essayais d'atteindre un standard de leadership, d'abord en entreprise puis dans le développement personnel, de devenir la meilleure version de moi-même, une version parfaite. Pour enfin entrer dans les cases et avoir le sentiment d'appartenir, d'exister.</p>
+        <p>Sauf que la réalité, c'est que cette stratégie m'a éloignée de moi-même. À vouloir être validée par les autres, je me suis perdue : plusieurs burn out dans ma vie professionnelle, des relations sentimentales qui ne fonctionnaient pas. S'adapter en permanence aux autres, ça a un coût.</p>
+        <p>Le déclic, je l'ai eu en traversant une relation toxique. J'étais seule face au groupe. Je me suis effondrée. J'ai remis en question ce que j'étais, mon intégrité, mes valeurs.</p>
+        <p>Et puis j'ai compris une chose : <b>les autres n'avaient pas le pouvoir de me définir.</b></p>
+        <p>Je me suis progressivement relevée. J'ai repris mon pouvoir, je me suis reliée à moi, à mes besoins. J'ai appris à me défaire des « <em>il faut</em> » qui n'étaient pas les miens et qui pourtant dictaient mes choix.</p>
+        <p>J'ai appris à fonctionner en cohérence avec ce que je suis, avec mes valeurs. À poser des limites fermes, parfois non négociables. À oser un avis différent, à l'affirmer même quand il détonne.</p>
+        <p>Aujourd'hui, je n'essaie plus de rentrer dans les cases.</p>
+        <p>Je ne cherche plus à être acceptée. Je suis, simplement. Je prends ma place et je ne demande plus la permission. C'est aussi la richesse de ce parcours que je transmets.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BANDEAU PROMESSE -->
+<section class="w-full" style="background:#6E6557;">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 py-16 lg:py-20">
+    <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+
+      <!-- Colonne gauche : logo -->
+      <div class="flex justify-center lg:justify-end">
+        <img src="/assets/img/logo-presence.png" alt="Logo Réseau Présence Vibratoire" style="max-width:340px;width:100%;height:auto;" />
+      </div>
+
+      <!-- Colonne droite : promesse (centrée) -->
+      <div class="text-center">
+        <p class="text-white" style="font-size:1.5rem;line-height:1.6;font-weight:500;">
+          La communauté qui t'aide à incarner ta parole et ta présence avec authenticité. Pour les entrepreneurs et dirigeants sensibles qui veulent prendre leur place avec clarté, justesse et impact.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 3 RAISONS -->
+<section class="py-24 relative overflow-hidden">
+  <div class="absolute inset-0">
+    <img src="/assets/img/cta-bg.jpg" alt="" class="w-full h-full object-cover" style="opacity:.12;"/>
+    <div class="absolute inset-0" style="background:linear-gradient(180deg,rgba(255,255,255,.93),rgba(248,240,236,.95));"></div>
+  </div>
+  <div class="max-w-6xl mx-auto px-6 lg:px-12 relative z-10">
+    <div class="text-center mb-16 reveal">
+      <div class="divider"></div>
+      <h2 class="mb-6" style="font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--brown-d);">Pourquoi rejoindre la communauté ? 💎</h2>
+      <p class="max-w-2xl mx-auto" style="color:var(--brown-m);font-size:1.125rem;line-height:1.7;">
+        Trois raisons essentielles qui font toute la différence
+      </p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8" id="reasons"></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="py-24 bg-white">
+  <div class="max-w-4xl mx-auto px-6 lg:px-12">
+    <div class="text-center mb-16 reveal">
+      <div class="divider"></div>
+      <h2 class="mb-6" style="font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--brown-d);">Tu te poses peut-être ces questions</h2>
+      <p class="max-w-2xl mx-auto" style="color:var(--brown-m);font-size:1.125rem;line-height:1.7;">Les vraies questions qu'on n'ose pas toujours poser.</p>
+    </div>
+    <div class="space-y-4" id="faq"></div>
+  </div>
+</section>
+
+<!-- FORMULES -->
+<section id="formules" class="py-24" style="background:#FAF4EF;">
+    <div class="max-w-6xl mx-auto px-6 lg:px-12">
+    <div class="text-center mb-16 reveal">
+      <div class="divider"></div>
+      <h2 class="mb-6" style="font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--brown-d);">Mes différentes formules ☀️</h2>
+      <p class="max-w-2xl mx-auto" style="color:var(--brown-m);font-size:1.125rem;line-height:1.7;">
+        Des formules flexibles et sans engagement qui s'adaptent à tes besoins.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+
+      <!-- Formule 1 : Réseau -->
+      <div class="p-8 rounded-2xl reveal flex flex-col" style="background:#ffffff;border:1.5px solid rgba(196,143,114,.25);box-shadow:0 10px 30px -15px rgba(87,61,56,.1);">
+        <div class="mb-6">
+          <h3 class="title-abhaya mb-2" style="color:var(--brown-d);font-size:1.625rem;font-weight:600;">Réseau Only</h3>
+          <p style="color:var(--brown-m);font-size:.9375rem;line-height:1.5;">La communauté pour avancer à ton rythme.</p>
+        </div>
+        <div class="mb-6">
+          <div class="flex items-baseline gap-1">
+            <span style="color:var(--brown-d);font-size:3rem;font-weight:700;line-height:1;">79€</span>
+            <span style="color:var(--brown-m);font-size:1rem;">/mois</span>
+          </div>
+          <p style="color:var(--brown-m);font-size:.8125rem;margin-top:.25rem;">Sans engagement</p>
+        </div>
+        <ul class="space-y-3 mb-8 flex-grow" style="color:var(--brown-d);font-size:.9375rem;line-height:1.6;">
+          <li class="flex gap-2"><span style="color:var(--terra);flex-shrink:0;font-weight:700;">✓</span><span>Accès à la communauté et à tous les lives mensuels</span></li>
+          <li class="flex gap-2"><span style="color:var(--terra);flex-shrink:0;font-weight:700;">✓</span><span>Bibliothèque de replays illimitée et accès aux ressources</span></li>
+          <li class="flex gap-2"><span style="color:var(--terra);flex-shrink:0;font-weight:700;">✓</span><span>Pitch Academy mensuelle et conférence expert</span></li>
+          <li class="flex gap-2"><span style="color:var(--terra);flex-shrink:0;font-weight:700;">✓</span><span>Espace d'échange entre membres</span></li>
+        </ul>
+        <a href="https://calendly.com/laura-ballo1993/rendez-vous-reseau-presence" target="_blank" class="btn-primary w-full px-6 py-3 rounded-full text-center inline-block" style="font-size:.9375rem;font-weight:600;">Je prends rendez-vous</a>      </div>
+
+      <!-- Formule 2 : Essentielle (mise en avant) -->
+      <div class="p-8 rounded-2xl reveal flex flex-col relative" style="background:linear-gradient(160deg,#fff 0%,#FAEDE7 50%,#F5DCD1 100%);border:2.5px solid var(--terra);box-shadow:0 25px 50px -15px rgba(200,85,74,.3);">
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full" style="background:var(--terra);color:#fff;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;">Le plus choisi</div>
+        <div class="mb-6">
+          <h3 class="title-abhaya mb-2" style="color:var(--brown-d);font-size:1.625rem;font-weight:600;">Essentielle</h3>
+          <p style="color:var(--brown-m);font-size:.9375rem;line-height:1.5;">Le juste équilibre entre collectif et individuel.</p>
+        </div>
+        <div class="mb-6">
+          <div class="flex items-baseline gap-1">
+            <span style="color:var(--terra);font-size:3rem;font-weight:700;line-height:1;">199€</span>
+            <span style="color:var(--brown-m);font-size:1rem;">/mois</span>
+          </div>
+          <p style="color:var(--brown-m);font-size:.8125rem;margin-top:.25rem;">Sans engagement</p>
+        </div>
+        <ul class="space-y-3 mb-8 flex-grow" style="color:var(--brown-d);font-size:.9375rem;line-height:1.6;">
+          <li class="flex gap-2"><span style="color:var(--terra);flex-shrink:0;font-weight:700;">✓</span><span><b>Tout ce qui est inclus dans le Réseau</b></span></li>
+          <li class="flex gap-2"><span style="color:var(--terra);flex-shrink:0;font-weight:700;">✓</span><span><b>1 diagnostic initial offert</b> pour évaluer ton niveau et poser un objectif</span></li>
+          <li class="flex gap-2"><span style="color:var(--terra);flex-shrink:0;font-weight:700;">✓</span><span><b>1 session de coaching individuelle</b> par mois, en visio</span></li>
+          <li class="flex gap-2"><span style="color:var(--terra);flex-shrink:0;font-weight:700;">✓</span><span><b>1 interview personnalisée</b> pour mettre en lumière ton parcours</span></li>
+        </ul>
+        <a href="https://calendly.com/laura-ballo1993/echangecoaching" target="_blank" class="btn-primary w-full px-6 py-3 rounded-full text-center inline-block" style="font-size:.9375rem;font-weight:600;">Je prends rendez-vous</a>      </div>
+
+      <!-- Formule 3 : Présence -->
+      <div class="p-8 rounded-2xl reveal flex flex-col" style="background:#ffffff;border:1.5px solid rgba(196,143,114,.25);box-shadow:0 10px 30px -15px rgba(87,61,56,.1);">
+        <div class="mb-6">
+          <h3 class="title-abhaya mb-2" style="color:var(--brown-d);font-size:1.625rem;font-weight:600;">Présence</h3>
+          <p style="color:var(--brown-m);font-size:.9375rem;line-height:1.5;">L'accompagnement intensif pour accélérer ta transformation.</p>
+        </div>
+        <div class="mb-6">
+          <div class="flex items-baseline gap-1">
+            <span style="color:var(--brown-d);font-size:3rem;font-weight:700;line-height:1;">299€</span>
+            <span style="color:var(--brown-m);font-size:1rem;">/mois</span>
+          </div>
+          <p style="color:var(--brown-m);font-size:.8125rem;margin-top:.25rem;">Sans engagement</p>
+        </div>
+        <ul class="space-y-3 mb-8 flex-grow" style="color:var(--brown-d);font-size:.9375rem;line-height:1.6;">
+          <li class="flex gap-2"><span style="color:var(--terra);flex-shrink:0;font-weight:700;">✓</span><span><b>Tout ce qui est inclus dans le Réseau Only</b></span></li>
+          <li class="flex gap-2"><span style="color:var(--terra);flex-shrink:0;font-weight:700;">✓</span><span><b>1 diagnostic initial offert</b></span></li>
+          <li class="flex gap-2"><span style="color:var(--terra);flex-shrink:0;font-weight:700;">✓</span><span><b>2 sessions de coaching individuelles</b> par mois, en visio</span></li>
+          <li class="flex gap-2"><span style="color:var(--terra);flex-shrink:0;font-weight:700;">✓</span><span><b>Interview personnalisée</b> + communication sur mes réseaux</span></li>
+          <li class="flex gap-2"><span style="color:var(--terra);flex-shrink:0;font-weight:700;">✓</span><span><b>Création de shorts</b> pour amplifier ta visibilité</span></li>
+        </ul>
+        <a href="https://calendly.com/laura-ballo1993/echangecoaching" target="_blank" class="btn-primary w-full px-6 py-3 rounded-full text-center inline-block" style="font-size:.9375rem;font-weight:600;">Je prends rendez-vous</a>
+      </div>
+
+    </div>
+
+    <p class="text-center mt-12 max-w-2xl mx-auto" style="color:var(--brown-m);font-size:.9375rem;line-height:1.6;">
+      Toutes les formules sont sans engagement. Tu peux changer de niveau ou arrêter à tout moment.
+    </p>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="py-24 relative overflow-hidden" style="background:#afa098;">
+  <div class="relative z-10 max-w-4xl mx-auto px-6 lg:px-12 text-center">
+    <div class="reveal">
+      <div class="w-20 h-1 mx-auto mb-8 rounded-full" style="background:rgba(255,255,255,.8);"></div>
+      <h2 class="mb-6 text-white" style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;text-shadow:0 2px 10px rgba(0,0,0,.3);">Prêt·e à incarner ta puissance ?</h2>
+      <p class="mb-10 max-w-2xl mx-auto" style="color:rgba(255,255,255,.95);font-size:1.25rem;line-height:1.7;">
+        Rejoins une communauté de personnes inspirantes qui osent être elles-mêmes et rayonner leur présence unique.
+      </p>
+      <p class="mb-10 max-w-2xl mx-auto" style="color:rgba(255,255,255,.9);font-size:1.0625rem;line-height:1.7;">
+        Prenons 15 minutes pour faire connaissance et vérifier ensemble que le Réseau correspond à ce que tu cherches.
+      </p>
+
+      <a href="https://calendly.com/laura-ballo1993/rendez-vous-reseau-presence" target="_blank" id="paiement" class="inline-block px-10 py-5 rounded-full mb-8" style="background:#fff;color:var(--terra);font-size:1.125rem;font-weight:700;box-shadow:0 25px 50px -12px rgba(0,0,0,.3);transition:transform .2s,box-shadow .2s;">
+        Je prends rendez-vous →
+      </a>
+
+      <div class="flex flex-wrap items-center gap-x-6 gap-y-3 justify-center" style="color:rgba(255,255,255,.95);font-size:.875rem;">
+        <div class="flex items-center gap-2"><span style="font-size:1.25rem;">✓</span> Appel découverte gratuit</div>
+        <div class="flex items-center gap-2"><span style="font-size:1.25rem;">✓</span> 15 minutes</div>
+        <div class="flex items-center gap-2"><span style="font-size:1.25rem;">✓</span> Sans engagement</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="py-10 border-t" style="background:#ffffff;border-color:rgba(196,143,114,.3);">
+  <div class="max-w-6xl mx-auto px-6 lg:px-12">
+    <nav class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 mb-4" style="font-size:.875rem;">
+      <a href="/legal/mentions-legales" style="color:var(--brown-m);" class="hover:text-[color:var(--terra)] transition-colors">Mentions légales</a>
+      <a href="/legal/politique-confidentialite" style="color:var(--brown-m);" class="hover:text-[color:var(--terra)] transition-colors">Confidentialité</a>
+      <a href="/legal/cgv" style="color:var(--brown-m);" class="hover:text-[color:var(--terra)] transition-colors">CGV</a>
+      <a href="/legal/cookies" style="color:var(--brown-m);" class="hover:text-[color:var(--terra)] transition-colors">Cookies</a>
+    </nav>
+    <p class="text-center" style="color:var(--taupe);font-size:.8125rem;">© <span id="year"></span> Laura Ballo — Tous droits réservés</p>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// Data injection
+const X_ICON = '<svg class="flex-shrink-0 mt-1" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C8554A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>';
+const CHK_G = '<svg class="flex-shrink-0 mt-1" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+const CHK_S = '<svg class="flex-shrink-0 mt-1" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C48F72" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+
+const probs = [
+  ["Tu ne rentres pas dans les cases","Au travail, en société, dans ton couple, tu as toujours eu ce sentiment d'être à côté. Trop, ou pas assez. Tu ne te sens pas accepté·e comme tu es."],
+  ["Tu te censures dans ton expression","Tu as appris à lisser tes émotions, à arrondir les angles, à ne surtout pas exprimer ce qui pourrait déranger. Tu n'oses pas affirmer un point de vue différent des autres."],
+  ["Tu n'oses pas prendre ta place","Tu as une vision, un projet, une voix — mais quelque chose te retient de la porter pleinement. La peur du jugement, le syndrome de l'imposteur, l'habitude de t'effacer."],
+  ["Tu ne te sens pas à la hauteur","Face aux responsabilités que tu portes, tu as l'impression de ne pas être assez pour les assumer pleinement."],
+  ["Tu as peur du jugement de l'autre","Oser prendre la parole de manière authentique est compliqué, tu as l'impression de porter un masque et de te cacher face à la critique."],
+  ["Tu as du mal à accepter tes émotions et ta singularité","Tu n'arrives pas à te montrer pleinement comme tu es, dans toute ta vulnérabilité. Tu gardes toujours une part de toi en retrait."],
+  ["Tu as du mal à dire non","T'affirmer est compliqué, même quand il s'agit de poser des limites qui te protègent. Tu cèdes, tu t'arranges, tu finis par accepter ce qui ne te convient pas."]
+];
+document.getElementById('probList').innerHTML = probs.map(([t,x])=>`<div class="flex gap-3 items-start">${X_ICON}<p style="color:var(--brown-d);font-size:1.1875rem;line-height:1.7;"><b>${t}</b> : ${x}</p></div>`).join('');
+
+const SPARK = '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>';
+const HEART = '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>';
+const ZAP = '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>';
+const who = [
+  [SPARK,"Tu es créatif·ve","Tu portes une vision unique et tu veux la partager au monde"],
+  [HEART,"Tu es sensible","Ton hypersensibilité est une force que tu veux assumer pleinement"],
+  [ZAP,"Tu as des responsabilités","Tu diriges, tu inspires, tu veux incarner ton leadership"]
+];
+document.getElementById('whoFor').innerHTML = who.map(([ic,t,d])=>`<div class="bg-white p-8 rounded-3xl shadow-lg reveal"><div class="w-24 h-24 flex items-center justify-center mx-auto mb-6" style="color:var(--terra);">${ic}</div><h3 class="mb-4" style="color:var(--brown-d);font-size:1.25rem;font-weight:700;">${t}</h3><p style="color:var(--brown-m);font-size:1rem;line-height:1.6;">${d}</p></div>`).join('');
+
+const pillars = [
+  ["🔥","Puissance","T'ancrer dans ton corps, ressentir tes émotions et les assumer comme ta source de puissance"],
+  ["✨","Présence signature","Revenir à ton essentiel, te reconnecter à ton pouvoir personnel et l'incarner pleinement dans ta vie"],
+  ["🎙️","Parole incarnée","Prendre la parole avec assurance, exprimer tes émotions et transformer ta sensibilité en force"]
+];
+document.getElementById('pillars').innerHTML = pillars.map(([e,t,d])=>`<div class="p-8 rounded-3xl reveal" style="background:var(--cream);"><div class="mb-4" style="font-size:3rem;">${e}</div><h3 class="mb-4" style="color:var(--terra);font-size:1.5rem;font-weight:700;">${t}</h3><p style="color:var(--brown-d);font-size:1rem;line-height:1.7;">${d}</p></div>`).join('');
+
+const lives = ["1 live énergétique pour travailler ton flow, tes croyances et créer du lien","1 masterclass pour maîtriser la prise de parole et la communication orale"];
+document.getElementById('lives').innerHTML = lives.map(t=>`<div class="flex gap-3">${CHK_S}<span style="color:rgba(255,255,255,.9);font-size:1rem;line-height:1.6;">${t}</span></div>`).join('');
+const bonus = ["1 session Pitch Academy pour affiner ton discours","1 intervenant expert invité chaque mois"];
+document.getElementById('bonus').innerHTML = bonus.map(t=>`<div class="flex gap-3">${CHK_S}<span style="color:rgba(255,255,255,.9);font-size:1rem;line-height:1.6;">${t}</span></div>`).join('');
+
+const benefits = [
+  ["Reprendre ta place sans demander la permission","Oser occuper l'espace qui est le tien, sans te justifier ni t'excuser — dans ta vie comme dans ta vie professionnelle."],
+  ["Affirmer ton autorité et ton avis, même quand il détonne","Porter ta vision singulière avec confiance, devenir précurseur."],
+  ["Poser des limites fermes, parfois non négociables","Apprendre à dire non sans culpabilité, à te protéger sans devenir rigide. Arrêter de t'effacer pour les autres."],
+  ["Fonctionner en cohérence avec qui tu es","Prendre des décisions qui découlent de tes valeurs, pas des attentes des autres ou des « il faut » qui ne t'appartiennent pas."],
+  ["Transformer ta sensibilité en force d'impact","Faire de ton hypersensibilité un atout stratégique plutôt qu'une faiblesse. Cesser de t'amputer d'une partie de toi."],
+  ["Te sentir pleinement légitime","Te sentir capable d'assumer pleinement des fonctions à responsabilité en te sentant à la hauteur et sans te nier "],
+  ["Incarner ta parole et ta présence avec vérité et justesse","Porter des messages forts qui te ressemblent et oser te mettre en lumière."],
+  ["Te libérer du besoin de validation","Construire une autorité naturelle ancrée en toi, qui ne dépend plus du regard ni de l'accord des autres."]
+];
+document.getElementById('benefits').innerHTML = benefits.map(([t,x])=>`<div class="flex gap-3 items-start">${CHK_G}<p style="color:var(--brown-d);font-size:1.1875rem;line-height:1.7;"><b>${t}</b> : ${x}</p></div>`).join('');
+
+const testis = [
+  ["Samuel P.","Chef de chœur et coach","Hyper énergique, très impliquée, pro et knowledgeable sur son sujet ! Merci Laura, grâce à toi, je suis davantage connecté aux publics auxquels je parle, que ça soit en réunion, conférence, Zoom… Je recommande chaudement Laura pour améliorer votre confiance en vous et votre aisance à l'oral !","/assets/img/temoignage-samuel.jpg"],
+  ["Sandrine","Thérapeute","Je me suis retrouvée, je me suis éveillée, j'ai repris confiance en moi, ça a été juste magique pour moi. Je ne remercierais jamais assez Laura pour ça, pour ce coaching. Pour moi c'est un tout qui a fait que je me suis révélée, qu'à l'intérieur de moi tout a changé.","/assets/img/temoignage-sandrine.jpg"],
+  ["Romain B.","Créateur de site web","Laura est une coach versée dans l'empathie. Elle est très à l'écoute de ses clients. Soucieuse de leur succès, elle fournit un accompagnement en profondeur de qualité. Je recommande !","/assets/img/temoignage-romain.jpg"]
+];
+document.getElementById('testi').innerHTML = testis.map(([n,r,t,img])=>`<div class="card-testi bg-white p-8 rounded-3xl reveal"><div class="flex items-center gap-4 mb-6"><div class="w-16 h-16 rounded-full overflow-hidden" style="box-shadow:0 0 0 4px rgba(196,143,114,.2);"><img src="${img}" alt="${n}" class="w-full h-full object-cover"/></div><div><p style="color:var(--brown-d);font-size:1.125rem;font-weight:600;margin:0;">${n}</p><p style="color:var(--terra);font-size:.875rem;font-weight:500;margin:0;">${r}</p></div></div><div class="relative"><div class="absolute -left-2 -top-2" style="color:rgba(196,143,114,.2);font-size:4rem;line-height:1;">"</div><p class="relative z-10 pl-6" style="color:var(--brown-d);font-size:1rem;line-height:1.7;">${t}</p></div></div>`).join('');
+
+const reasons = [
+  ["01","Une approche incarnée et sensorielle","Pas de théorie hors-sol. Chaque session mêle ressenti corporel, exercices pratiques et transmission concrète pour des transformations qui s'ancrent vraiment."],
+  ["02","Un espace bienveillant et sans jugement","Une communauté triée sur le volet de personnes sensibles et inspirantes, où tu peux oser, te tromper, grandir et être pleinement toi-même en toute sécurité. Mes espaces sont de vrais terrains d'expérimentation"],
+  ["03","Un accompagnement accessible et flexible","à partir de 79€/mois sans engagement, avec replays et ressources accessibles à ton rythme. Tu progresses quand tu veux, où tu veux, selon tes besoins."]
+];
+document.getElementById('reasons').innerHTML = reasons.map(([n,t,d])=>`<div class="p-8 rounded-3xl reveal" style="background:var(--cream);"><div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6" style="background:var(--terra);color:#fff;font-size:1.5rem;font-weight:800;">${n}</div><h3 class="mb-4" style="color:var(--brown-d);font-size:1.375rem;font-weight:700;">${t}</h3><p style="color:var(--brown-m);font-size:1rem;line-height:1.7;">${d}</p></div>`).join('');
+
+const faqs = [
+  ["Je suis trop réservé·e pour m'exprimer en live. C'est éliminatoire ?","Non. Beaucoup de membres restent silencieux pendant des semaines avant de prendre la parole — et c'est parfaitement accueilli. Ta simple présence à l'écoute fait déjà partie du travail, parce que s'autoriser à être là, c'est déjà prendre sa place. Mon objectif est de proposer une safe place au sein de laquelle tu es totalement libre"],
+  ["Et si je ne me sens pas à l'aise dans le groupe ?","Tout est fait pour que tu te sentes pleinement intégré et à ta place dans le groupe avec ta singularité et ta sensibilité. Si jamais tu ressens que ce n’est pas le bon endroit pour toi tu es bien entendu libre de partir à tout moment, ton abonnement est sans engagement"],  
+  ["C'est encore un truc de développement personnel vague ?","Non. Le travail est concret : exercices somatiques pour t'ancrer, méthode de prise de parole en public, travail sur drivers (sois fort, sois parfait...), écoute active, questionnement, reformulation. Tu repars avec des outils concrets pour t'affirmer et oser être pleinement toi, pas juste des « bonnes vibrations »."],
+  ["Qu'est-ce qui se passe si je rate un live ?","Tous les lives sont enregistrés et disponibles en replay dans ton espace membre, sans limite de temps. Tu peux aussi poser tes questions à l'avance si tu sais que tu ne pourras pas être présent·e."],
+  ["Je suis déjà accompagné·e par un thérapeute ou un coach. C'est compatible ?","Cela peut tout à fait être compatible. Mon objectif est de t'accompagner à prendre la meilleure décision adaptée à ton besoin. Je te propose de <a href=\"https://calendly.com/laura-ballo1993/echangecoaching\" target=\"_blank\" style=\"color:#C8554A;text-decoration:underline;font-weight:600;\">prendre rendez-vous</a> pour en discuter directement. Parfois, je peux demander l'aval du professionnel de santé concerné pour être sûre que l'accompagnement soit adapté et corresponde au mieux à ton besoin."],
+  ["Quelle formule choisir ?","La formule Réseau Only (79€) est idéale si tu veux avancer à ton rythme au sein du collectif. Essentielle (199€) ajoute une session de coaching individuelle par mois — c'est la plus choisie parce qu'elle combine l'énergie du groupe et un suivi personnalisé sur tes enjeux propres. Présence (299€) est pensée pour celles et ceux qui veulent accélérer leur transformation, avec 2 sessions par mois et un accompagnement complet sur l'affirmation de leur singularité (interview, communication, shorts)."],
+  ["Est-ce que je peux changer de formule en cours de route ?","Oui, à tout moment. Tu peux monter en gamme si tu ressens le besoin d'un accompagnement plus soutenu, ou au contraire revenir à une formule plus légère. Aucune pénalité, aucun engagement de durée."],
+  ["Je ne suis pas entrepreneur·e, c'est quand même pour moi ?","Oui. La communauté est ouverte à tout leader créatif et sensible, qui s'adapte trop aux autres, ou qui veut reprendre sa place — que ce soit dans un contexte professionnel, associatif, personnel ou créatif. Ce qui compte, c'est l'envie de travailler ton affirmation et ta présence."],
+  ["Pourquoi ces tarifs ?","Les tarifs correspondent à la valeur qui est délivrée dans ce programme. Ce prix est essentiel pour que chaque membre s'engage vraiment. C'est aussi un filtre — il garde la communauté sérieuse et engagée."],
+  ["Comment se passent les sessions de coaching individuelles (formules Essentielle et Présence) ?","Les sessions se déroulent en visio, à un rythme que l'on cale ensemble. Elles durent environ 1h30. Tu arrives avec tes enjeux du moment — une situation où tu n'oses pas t'affirmer, une limite à poser, une prise de parole en public, un blocage émotionnel— et on travaille concrètement dessus. Le diagnostic initial offert permet d'analyser tes prises de parole et de poser un objectif concret dès la première séance."]
+];
+document.getElementById('faq').innerHTML = faqs.map(([q,a],i)=>`<details class="reveal" style="border-bottom:1px solid rgba(111,101,87,.12);"><summary style="padding:1.75rem 0;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:3rem;"><span style="font-size:1.25rem;font-weight:500;color:var(--brown-d);line-height:1.45;flex:0 1 75%;">${q}</span><span class="faq-icon" style="color:var(--brown-m);font-size:1.75rem;line-height:1;flex-shrink:0;font-weight:300;">+</span></summary><div style="padding:0 0 2rem;color:var(--brown-m);font-size:1.125rem;line-height:1.8;max-width:85%;">${a}</div></details>`).join('');
+
+// Reveal on scroll
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('in'), i*60);
+      io.unobserve(e.target);
+    }
+  });
+},{threshold:.12,rootMargin:'0px 0px -80px 0px'});
+document.querySelectorAll('.reveal,.reveal-scale,.reveal-left,.reveal-right').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
