@@ -17,10 +17,16 @@
   <meta property="og:url" content="https://lauraballo.com/conferences-inspirantes">
   <meta property="og:locale" content="fr_FR">
   <meta property="og:site_name" content="Laura Ballo">
-  <meta property="og:image" content="https://lauraballo.com/assets/img/laura.png">
+  <meta property="og:image" content="https://lauraballo.com/assets/img/conference-hero.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Laura Ballo – Conférences inspirantes sur le leadership et la prise de parole">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Conférences inspirantes | Laura Ballo">
+  <meta name="twitter:description" content="Conférences transformationnelles : prise de parole, storytelling, leadership sensible.">
+  <meta name="twitter:image" content="https://lauraballo.com/assets/img/conference-hero.jpg">
 
   <!-- Favicons -->
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -30,9 +36,13 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Parisienne&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Tailwind (utilitaire) -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/tokens.css">
   <link rel="stylesheet" href="/assets/css/nav.css">
   <link rel="stylesheet" href="/assets/css/footer.css">
   <link rel="stylesheet" href="/assets/css/cookies.css">
@@ -55,12 +65,12 @@
     "mainEntity": {
       "@type": "ItemList",
       "name": "Conférences de Laura Ballo",
-      "numberOfItems": 3,
+      "numberOfItems": 5,
       "itemListElement": [
         {
           "@type": "Event",
           "position": 1,
-          "name": "Développez votre présence oratoire — La parole signature",
+          "name": "Prendre la parole avec présence émotionnelle",
           "description": "Comment passer d'une parole fonctionnelle à une parole qui marque. Présence, posture, souffle : les clés d'une communication incarnée.",
           "eventAttendanceMode": "https://schema.org/MixedEventAttendanceMode",
           "organizer": { "@type": "Person", "name": "Laura Ballo" },
@@ -69,8 +79,8 @@
         {
           "@type": "Event",
           "position": 2,
-          "name": "Storytelling & émotions — La puissance des histoires",
-          "description": "Pourquoi les histoires touchent là où les arguments échouent. Structurer un récit qui connecte, émeut et transforme.",
+          "name": "Faire vivre une expérience à votre public : le storytelling incarné",
+          "description": "Transformer une prise de parole en expérience marquante grâce au storytelling incarné : récit, corps, émotion, silence.",
           "eventAttendanceMode": "https://schema.org/MixedEventAttendanceMode",
           "organizer": { "@type": "Person", "name": "Laura Ballo" },
           "offers": { "@type": "Offer", "availability": "https://schema.org/InStock", "url": "https://calendly.com/laura-ballo1993/echangecoaching" }
@@ -78,8 +88,26 @@
         {
           "@type": "Event",
           "position": 3,
-          "name": "Pourquoi votre sensibilité fait-elle partie de votre leadership ?",
+          "name": "Leadership sensible et intelligence émotionnelle",
           "description": "La sensibilité n'est pas un obstacle au leadership — c'est son accélérateur. Réconcilier vulnérabilité et autorité naturelle.",
+          "eventAttendanceMode": "https://schema.org/MixedEventAttendanceMode",
+          "organizer": { "@type": "Person", "name": "Laura Ballo" },
+          "offers": { "@type": "Offer", "availability": "https://schema.org/InStock", "url": "https://calendly.com/laura-ballo1993/echangecoaching" }
+        },
+        {
+          "@type": "Event",
+          "position": 4,
+          "name": "Gestion des conflits et assertivité",
+          "description": "Désamorcer l'escalade émotionnelle, poser des limites claires et négocier sans perdre la relation.",
+          "eventAttendanceMode": "https://schema.org/MixedEventAttendanceMode",
+          "organizer": { "@type": "Person", "name": "Laura Ballo" },
+          "offers": { "@type": "Offer", "availability": "https://schema.org/InStock", "url": "https://calendly.com/laura-ballo1993/echangecoaching" }
+        },
+        {
+          "@type": "Event",
+          "position": 5,
+          "name": "Communication assertive et affirmation de soi",
+          "description": "Dire non sans culpabiliser, trancher sans dominer, exprimer un désaccord sans dureté.",
           "eventAttendanceMode": "https://schema.org/MixedEventAttendanceMode",
           "organizer": { "@type": "Person", "name": "Laura Ballo" },
           "offers": { "@type": "Offer", "availability": "https://schema.org/InStock", "url": "https://calendly.com/laura-ballo1993/echangecoaching" }
@@ -90,85 +118,465 @@
   </script>
 </head>
 <body>
-  <!-- HEADER (chargé automatiquement) -->
-  <div id="header-placeholder"></div>
 
-  <!-- HERO -->
-  <section class="conf-hero">
-    <h1>Mes conférences : Transformez votre parole en signature artistique</h1>
-    <a href="https://calendly.com/laura-ballo1993/echangecoaching" class="btn-accent" target="_blank" rel="noopener">Me contacter</a>
-  </section>
+<!-- ============ NAVIGATION (chargée depuis composant partagé) ============ -->
+<div id="header-placeholder"></div>
 
-  <!-- INTRO -->
-  <section class="conf-intro">
-    <p>Découvrez nos conférences inspirantes ! Une conférence est bien plus que de la prise de parole, il s'agit d'une expérience transformationnelle, motivationnelle. Depuis plusieurs années je donne des conférences et j'accompagne des leaders à le faire. Mes conférences sont basées sur la méthode de mise en résonance que j'ai développé et que je transmets.</p>
-  </section>
-
-  <!-- CONFÉRENCE 1 — image à gauche, texte à droite -->
-  <section class="conf-row">
-    <div class="conf-row-image">
-      <img src="/assets/img/laura-avatar.jpg" alt="Laura Ballo en conférence sur la présence oratoire et la parole signature" loading="lazy" width="800" height="900">
+<!-- ============ HERO PARALLAX ============ -->
+<header class="hero-parallax relative" style="min-height:720px;" role="banner">
+  <div class="absolute inset-0" style="background:rgba(0,0,0,.55);"></div>
+  <div class="relative z-10 max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-16 flex flex-col justify-center" style="min-height:720px;padding-top:120px;padding-bottom:90px;">
+    <div class="max-w-2xl hero-animate">
+      <h1 class="text-white mb-8 sm:mb-10" style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(2rem,5vw,4rem);line-height:1.15;font-weight:400;">
+        "Transformez votre parole<br>en <em style="font-style:italic;color:#F0C9A8;">signature artistique</em>"
+      </h1>
+      <p class="text-white mb-8 sm:mb-10" style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(1rem,2vw,1.25rem);line-height:1.7;font-weight:400;opacity:.95;max-width:560px;">
+        Conférences inspirantes en présence émotionnelle&nbsp;: une expérience transformationnelle pour révéler la puissance de votre voix singulière.
+      </p>
+      <a href="#parlons-en" class="inline-flex items-center gap-3 text-white btn-dark px-6 sm:px-8 py-4 rounded-sm" style="font-size:1rem;font-weight:500;min-height:48px;">
+        Je prends rendez-vous
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
     </div>
-    <div class="conf-row-content">
-      <h2>🎙️ Développez votre présence oratoire — La parole signature</h2>
-      <p>Comment passer d'une parole fonctionnelle à une parole qui marque. Présence, posture, souffle : les clés d'une communication incarnée qui crée l'impact.</p>
-      <div class="conf-row-tags">
-        <span class="conf-row-tag">Prise de parole</span>
-        <span class="conf-row-tag">Leadership</span>
-        <span class="conf-row-tag">45–90 min</span>
+
+    <!-- Signature en bas à droite -->
+    <div class="absolute bottom-12 right-12 hidden lg:block">
+      <img src="/assets/img/Laura-Ballo-white-signature.png" alt="" width="200" height="60" style="opacity:.95;" aria-hidden="true">
+    </div>
+  </div>
+</header>
+
+<!-- ============ BANDE LOGOS ENTREPRISES ============ -->
+<section class="bg-white" style="padding:3rem 0;border-bottom:1px solid rgba(87,61,56,.08);" aria-label="Entreprises clientes">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    <div class="flex flex-wrap items-center justify-center lg:justify-between gap-x-8 sm:gap-x-12 gap-y-6 sm:gap-y-8">
+      <img src="/assets/img/logos/freewheel.png"            alt="FreeWheel"              class="logo-client" width="140" height="42" loading="lazy">
+      <img src="/assets/img/logos/airliquide.png"           alt="Air Liquide"            class="logo-client" width="140" height="42" loading="lazy">
+      <img src="/assets/img/logos/icn.png"                  alt="ICN Business School"    class="logo-client" width="140" height="42" loading="lazy">
+      <img src="/assets/img/logos/client4.png"              alt="Client partenaire"      class="logo-client" width="140" height="42" loading="lazy">
+      <img src="/assets/img/logos/commission-europeenne.png" alt="Commission européenne" class="logo-client" width="140" height="42" loading="lazy">
+      <img src="/assets/img/logos/esic.png"                 alt="ESIC"                   class="logo-client" width="140" height="42" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ============ INTRO CENTRÉE ============ -->
+<section class="py-20 sm:py-24 lg:py-28 relative overflow-hidden" style="background:var(--white);">
+  <div class="relative max-w-3xl mx-auto px-6 lg:px-12 text-center reveal">
+    <p class="mb-4 title-playfair" style="color:var(--terra);font-size:1.25rem;line-height:1;font-style:italic;letter-spacing:.02em;">
+      au commencement…
+    </p>
+    <p style="color:var(--brown-d);font-size:clamp(1.0625rem,2vw,1.3125rem);line-height:1.85;font-weight:400;">
+      Une conférence est bien plus que de la prise de parole, il s'agit d'une <b>expérience transformationnelle</b>, motivationnelle. Depuis plusieurs années je donne des conférences et j'accompagne des leaders à le faire. Mes conférences sont basées sur la <b>méthode de mise en résonance</b> que j'ai développée et que je transmets.
+    </p>
+  </div>
+</section>
+
+<!-- ============ SECTION 1 : Mon approche (fond beige) ============ -->
+<section class="py-20 sm:py-24 lg:py-28 relative overflow-hidden" style="background:var(--cream);">
+  <div class="relative max-w-7xl mx-auto px-6 lg:px-12">
+    <div class="grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-24 items-center">
+
+      <!-- Texte -->
+      <div class="reveal-left">
+        <div class="section-label mb-5" style="color:var(--brown-m);font-size:.8125rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;">
+          Mon approche
+        </div>
+        <h2 class="title-abhaya mb-6" style="color:var(--brown-d);font-size:clamp(1.75rem,3.8vw,2.875rem);line-height:1.2;">
+          Une <span style="color:var(--terra);">présence qui résonne</span>,<br>une parole qui transforme
+        </h2>
+        <p class="mb-6" style="color:var(--brown-m);font-size:1.0625rem;line-height:1.8;">
+          Mes conférences ne sont pas des monologues d'expertise — ce sont des <b>expériences vivantes</b>, où chaque participant repart avec quelque chose qui s'est mis en mouvement à l'intérieur.
+        </p>
+        <p class="mb-8 sm:mb-10" style="color:var(--brown-m);font-size:1.0625rem;line-height:1.8;">
+          Je travaille sur l'incarnation, le ressenti, la connexion authentique au public. Mon approche mêle prise de parole, intelligence émotionnelle et présence scénique pour créer un impact durable, bien au-delà du simple discours.
+        </p>
+
+        <!-- Pills d'infos pratiques -->
+        <div class="flex flex-wrap gap-3 mb-8 sm:mb-10">
+          <div class="flex items-center gap-2 px-4 py-2 rounded-full" style="background:var(--white);border:1px solid rgba(183,45,43,.15);">
+            <span style="color:var(--terra);" aria-hidden="true">⏱</span>
+            <span style="color:var(--brown-d);font-size:.9rem;font-weight:500;">30 min — 2h</span>
+          </div>
+          <div class="flex items-center gap-2 px-4 py-2 rounded-full" style="background:var(--white);border:1px solid rgba(183,45,43,.15);">
+            <span style="color:var(--terra);" aria-hidden="true">📍</span>
+            <span style="color:var(--brown-d);font-size:.9rem;font-weight:500;">Présentiel ou distanciel</span>
+          </div>
+          <div class="flex items-center gap-2 px-4 py-2 rounded-full" style="background:var(--white);border:1px solid rgba(183,45,43,.15);">
+            <span style="color:var(--terra);" aria-hidden="true">✦</span>
+            <span style="color:var(--brown-d);font-size:.9rem;font-weight:500;">100% personnalisée</span>
+          </div>
+        </div>
+
+        <a href="#parlons-en" class="btn-primary inline-flex items-center gap-2 px-8 py-4 rounded-md" style="font-size:1rem;font-weight:600;min-height:48px;">
+          En savoir plus
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
       </div>
-      <a href="https://calendly.com/laura-ballo1993/echangecoaching" class="conf-link" target="_blank" rel="noopener">Réserver cette conférence</a>
-    </div>
-  </section>
 
-  <!-- CONFÉRENCE 2 — texte à gauche, image à droite -->
-  <section class="conf-row">
-    <div class="conf-row-image">
-      <img src="/assets/img/laura-avatar.jpg" alt="Conférence storytelling et émotions par Laura Ballo" loading="lazy" width="800" height="900">
-    </div>
-    <div class="conf-row-content">
-      <h2>✨ Storytelling & émotions — La puissance des histoires</h2>
-      <p>Pourquoi les histoires touchent là où les arguments échouent. Apprenez à structurer un récit qui connecte, émeut et transforme votre audience.</p>
-      <div class="conf-row-tags">
-        <span class="conf-row-tag">Storytelling</span>
-        <span class="conf-row-tag">Communication</span>
-        <span class="conf-row-tag">45–90 min</span>
+      <!-- Image avec bloc de couleur -->
+      <div class="reveal-right img-with-block">
+        <div class="img-card" style="aspect-ratio:4/5;">
+          <img src="/assets/img/conference-1.jpg" alt="Laura Ballo donnant une conférence sur la présence émotionnelle" loading="lazy" width="600" height="750">
+        </div>
       </div>
-      <a href="https://calendly.com/laura-ballo1993/echangecoaching" class="conf-link" target="_blank" rel="noopener">Réserver cette conférence</a>
-    </div>
-  </section>
 
-  <!-- CONFÉRENCE 3 — image à gauche, texte à droite -->
-  <section class="conf-row">
-    <div class="conf-row-image">
-      <img src="/assets/img/laura-avatar.jpg" alt="Conférence sur la sensibilité et le leadership par Laura Ballo" loading="lazy" width="800" height="900">
     </div>
-    <div class="conf-row-content">
-      <h2>🦋 Pourquoi votre sensibilité fait-elle partie de votre leadership ?</h2>
-      <p>La sensibilité n'est pas un obstacle au leadership — c'est son accélérateur. Une conférence qui réconcilie vulnérabilité et autorité naturelle.</p>
-      <div class="conf-row-tags">
-        <span class="conf-row-tag">Hypersensibilité</span>
-        <span class="conf-row-tag">Intelligence émotionnelle</span>
-        <span class="conf-row-tag">45–90 min</span>
+  </div>
+</section>
+
+<!-- ============ BANNIÈRE CITATION ============ -->
+<section class="quote-banner py-14 sm:py-16 lg:py-20" aria-label="Citation">
+  <div class="relative z-10 max-w-3xl mx-auto px-6 lg:px-12 text-center reveal">
+    <div class="mb-6 inline-flex items-center justify-center" style="width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);" aria-hidden="true">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.571-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z"/></svg>
+    </div>
+    <blockquote>
+      <p class="title-playfair text-white mb-6" style="font-size:clamp(1rem,2vw,1.5rem);line-height:1.5;font-weight:400;font-style:italic;">
+        « Une parole vraiment incarnée ne convainc pas — elle <span style="color:#F0C9A8;">éveille</span>. Elle invite l'autre à se reconnaître, à se redresser, à oser sa propre voix. »
+      </p>
+      <footer class="flex items-center justify-center gap-3">
+        <div style="width:32px;height:1px;background:rgba(255,255,255,.4);" aria-hidden="true"></div>
+        <cite class="text-white not-italic" style="font-size:.8125rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;opacity:.9;">
+          Laura Ballo
+        </cite>
+        <div style="width:32px;height:1px;background:rgba(255,255,255,.4);" aria-hidden="true"></div>
+      </footer>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ============ SECTION 2 : Pour qui (fond blanc) ============ -->
+<section class="py-20 sm:py-24 lg:py-28 relative overflow-hidden" style="background:var(--white);">
+  <div class="blob hidden lg:block" style="width:400px;height:400px;background:var(--cream);top:10%;left:15%;opacity:.9;z-index:0;"></div>
+
+  <div class="relative max-w-7xl mx-auto px-6 lg:px-12">
+    <div class="grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-24 items-center">
+
+      <!-- Image avec bloc crème -->
+      <div class="reveal-left img-with-block img-with-block-cream lg:order-1 order-2">
+        <div class="img-card" style="aspect-ratio:4/5;">
+          <img src="/assets/img/conference-2.jpg" alt="Public engagé lors d'une conférence Laura Ballo" loading="lazy" width="600" height="750">
+        </div>
       </div>
-      <a href="https://calendly.com/laura-ballo1993/echangecoaching" class="conf-link" target="_blank" rel="noopener">Réserver cette conférence</a>
+
+      <!-- Texte -->
+      <div class="reveal-right lg:order-2 order-1">
+        <div class="section-label mb-5" style="color:var(--brown-m);font-size:.8125rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;">
+          Pour qui
+        </div>
+        <h2 class="title-abhaya mb-6" style="color:var(--brown-d);font-size:clamp(1.75rem,3.8vw,2.875rem);line-height:1.2;">
+          Pour les organisations qui veulent <span style="color:var(--terra);">inspirer et transformer</span> leurs équipes
+        </h2>
+        <p class="mb-6" style="color:var(--brown-m);font-size:1.0625rem;line-height:1.8;">
+          J'interviens auprès d'<b>entreprises, organisations, associations et événements professionnels</b> qui osent remettre <b>l'humain au cœur de la performance</b>.
+        </p>
+        <p class="mb-6" style="color:var(--brown-m);font-size:1.0625rem;line-height:1.8;">
+          Mon approche cultive un équilibre rare&nbsp;: celui où l'empathie et la sensibilité ne s'opposent pas à l'exigence, mais la nourrissent. C'est justement <b>cette finesse qui élève les standards</b> — et qui transforme durablement les équipes comme les individus.
+        </p>
+        <p class="mb-8 sm:mb-10" style="color:var(--brown-m);font-size:1.0625rem;line-height:1.8;">
+          Mes thématiques de prédilection&nbsp;: <b>l'affirmation de soi</b>, <b>la prise de parole en public</b>, <b>l'intelligence émotionnelle</b>, <b>le leadership sensible</b> et <b>la singularité comme moteur d'impact</b>.
+        </p>
+        <div class="grid grid-cols-2 gap-4 mb-8 sm:mb-10">
+          <div class="stat-pill">
+            <p class="title-playfair" style="color:var(--terra);font-size:clamp(2rem,4vw,2.5rem);font-weight:700;line-height:1;font-style:italic;">+150</p>
+            <p class="mt-2" style="color:var(--brown-m);font-size:.95rem;line-height:1.4;">conférences<br>délivrées</p>
+          </div>
+          <div class="stat-pill">
+            <p class="title-playfair" style="color:var(--terra);font-size:clamp(2rem,4vw,2.5rem);font-weight:700;line-height:1;font-style:italic;">2500+</p>
+            <p class="mt-2" style="color:var(--brown-m);font-size:.95rem;line-height:1.4;">personnes<br>touchées</p>
+          </div>
+        </div>
+        <a href="#parlons-en" class="btn-primary inline-flex items-center gap-2 px-8 py-4 rounded-md" style="font-size:1rem;font-weight:600;min-height:48px;">
+          Voir mes thématiques
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- CTA -->
-  <section class="conf-cta">
-    <h2>Envie d'inviter Laura ?</h2>
-    <p>Chaque conférence est personnalisable selon votre contexte, votre public et vos enjeux.</p>
-    <a href="https://calendly.com/laura-ballo1993/echangecoaching" class="btn-accent" target="_blank" rel="noopener">Prendre rendez-vous</a>
-  </section>
+<!-- ============ CONFÉRENCE SIGNATURE ============ -->
+<section class="py-20 sm:py-24 lg:py-28 relative overflow-hidden" style="background:var(--white);">
+  <div class="absolute top-0 right-0 w-1/3 h-full pointer-events-none hidden lg:block" style="background:var(--cream);"></div>
+  
+  <div class="relative max-w-7xl mx-auto px-6 lg:px-12">
+    <!-- Entête -->
+    <div class="text-center mb-12 sm:mb-16 reveal">
+      <p class="mb-4" style="color:var(--terra);font-size:.875rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;">
+        Conférence Signature
+      </p>
+      <div class="inline-block" style="width:60px;height:3px;background:var(--terra);" aria-hidden="true"></div>
+    </div>
 
-  <!-- FOOTER (chargé automatiquement) -->
-  <div id="footer-placeholder"></div>
+    <!-- Carte mise en avant -->
+    <div class="grid lg:grid-cols-[1.1fr_1fr] gap-0 items-stretch" style="background:var(--white);box-shadow:0 40px 80px -30px rgba(87,61,56,.25);border-radius:12px;overflow:hidden;">
+      
+      <!-- Image + badge -->
+      <div class="relative reveal-left" style="min-height:360px;aspect-ratio:4/3;">
+        <img src="/assets/img/conference-signature.jpg" alt="Conférence signature de Laura Ballo sur la présence émotionnelle" class="w-full h-full object-cover" style="position:absolute;inset:0;" loading="lazy" width="700" height="525">
+        <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(0,0,0,.2) 0%,rgba(0,0,0,.55) 100%);"></div>
+        
+        <!-- Badge flottant -->
+        <div class="absolute top-6 left-6 sm:top-8 sm:left-8 flex items-center gap-2 px-4 py-2 rounded-full" style="background:rgba(255,255,255,.95);backdrop-filter:blur(10px);">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--terra);display:inline-block;" aria-hidden="true"></span>
+          <span style="color:var(--brown-d);font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;">La plus demandée</span>
+        </div>
 
-  <!-- COOKIES (chargé automatiquement) -->
-  <div id="cookies-placeholder"></div>
+        <!-- Citation en overlay bas -->
+        <div class="absolute bottom-0 left-0 right-0 p-6 sm:p-8 lg:p-10">
+          <p class="text-white title-playfair" style="font-size:clamp(1rem,2vw,1.25rem);line-height:1.5;font-style:italic;font-weight:400;">
+            "Une prise de parole qui touche, parce qu'elle vient vraiment de l'intérieur."
+          </p>
+        </div>
+      </div>
 
-  <!-- Script principal -->
-  <script src="/assets/js/includes.js"></script>
+      <!-- Contenu -->
+      <div class="reveal-right p-6 sm:p-10 lg:p-14 flex flex-col justify-center">
+        <p class="mb-3" style="color:var(--brown-m);font-size:.8125rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;">
+          Thématique · 60 à 90 min
+        </p>
+        <h3 class="title-abhaya mb-5" style="color:var(--brown-d);font-size:clamp(1.5rem,3vw,2.5rem);line-height:1.15;">
+          Prendre la parole <span style="color:var(--terra);font-style:italic;">avec présence émotionnelle</span>
+        </h3>
+        <p class="mb-6" style="color:var(--brown-m);font-size:1.0625rem;line-height:1.75;">
+          Une conférence-expérience pour celles et ceux qui veulent transformer leur manière de s'exprimer en public. Au-delà des techniques de rhétorique, j'invite à une prise de parole <b>incarnée</b>, où l'émotion n'est plus un obstacle à maîtriser mais le cœur même du message. Exercices somatiques, ancrage corporel et connexion à l'auditoire&nbsp;: un cheminement qui <b>libère la voix</b>, <b>ancre la posture</b> et <b>révèle la présence</b> de chaque participant.
+        </p>
+
+        <!-- Ce qu'ils repartent avec -->
+        <div class="mb-6 sm:mb-8 p-5 rounded-lg" style="background:var(--cream);">
+          <p class="mb-3" style="color:var(--brown-d);font-size:.875rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;">
+            Ce que votre public repart avec
+          </p>
+          <ul class="space-y-2" role="list">
+            <li class="flex items-start gap-2" style="color:var(--brown-m);font-size:.95rem;line-height:1.6;">
+              <span style="color:var(--terra);font-weight:700;flex-shrink:0;" aria-hidden="true">→</span>
+              Des outils concrets pour dépasser le trac et habiter pleinement la scène
+            </li>
+            <li class="flex items-start gap-2" style="color:var(--brown-m);font-size:.95rem;line-height:1.6;">
+              <span style="color:var(--terra);font-weight:700;flex-shrink:0;" aria-hidden="true">→</span>
+              Une expérience corporelle de sa propre présence émotionnelle
+            </li>
+            <li class="flex items-start gap-2" style="color:var(--brown-m);font-size:.95rem;line-height:1.6;">
+              <span style="color:var(--terra);font-weight:700;flex-shrink:0;" aria-hidden="true">→</span>
+              Une parole plus juste, plus vivante, plus en lien avec soi et avec l'autre
+            </li>
+          </ul>
+        </div>
+
+        <!-- Tags thématiques -->
+        <div class="flex flex-wrap gap-2 mb-6 sm:mb-8">
+          <span class="px-3 py-1 rounded-full" style="background:var(--white);border:1px solid rgba(183,45,43,.3);color:var(--terra);font-size:.8125rem;font-weight:500;">Prise de parole</span>
+          <span class="px-3 py-1 rounded-full" style="background:var(--white);border:1px solid rgba(183,45,43,.3);color:var(--terra);font-size:.8125rem;font-weight:500;">Présence émotionnelle</span>
+          <span class="px-3 py-1 rounded-full" style="background:var(--white);border:1px solid rgba(183,45,43,.3);color:var(--terra);font-size:.8125rem;font-weight:500;">Incarnation</span>
+          <span class="px-3 py-1 rounded-full" style="background:var(--white);border:1px solid rgba(183,45,43,.3);color:var(--terra);font-size:.8125rem;font-weight:500;">Oralité</span>
+        </div>
+
+        <a href="#parlons-en" class="btn-primary inline-flex items-center gap-2 self-start px-7 py-3.5 rounded-md" style="font-size:.95rem;font-weight:600;min-height:48px;">
+          Réserver cette conférence
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+    </div>
+
+    <p class="text-center mt-10" style="color:var(--brown-m);font-size:.95rem;">
+      D'autres thématiques disponibles sur demande&nbsp;: intelligence émotionnelle, leadership sensible, storytelling incarné…
+    </p>
+  </div>
+</section>
+
+<!-- ============ AUTRES CONFÉRENCES ============ -->
+<section class="py-20 sm:py-24 lg:py-28" style="background:var(--cream);">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+
+    <!-- Entête -->
+    <div class="text-center mb-12 sm:mb-16 reveal">
+      <p class="mb-4" style="color:var(--terra);font-size:.875rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;">
+        Autres conférences
+      </p>
+      <h2 class="title-abhaya" style="color:var(--brown-d);font-size:clamp(1.75rem,3.8vw,2.875rem);line-height:1.2;">
+        Explorez mes autres <span style="color:var(--terra);font-style:italic;">thématiques</span>
+      </h2>
+    </div>
+
+    <!-- Grille 2x2 -->
+    <div class="grid sm:grid-cols-2 gap-6 sm:gap-8 lg:gap-10">
+
+      <!-- Carte 1 : Storytelling incarné -->
+      <article class="conference-card reveal">
+        <div style="aspect-ratio:16/9;overflow:hidden;">
+          <img src="/assets/img/conference-storytelling.jpg" alt="Conférence storytelling incarné — Faire vivre une expérience à votre public" loading="lazy" width="640" height="360" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+        <div class="p-6 sm:p-8">
+          <p class="mb-3" style="color:var(--brown-m);font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;">
+            Storytelling · Présence
+          </p>
+          <h3 class="title-abhaya mb-4" style="color:var(--brown-d);font-size:clamp(1.375rem,2vw,1.625rem);line-height:1.2;">
+            Faire vivre une expérience à votre public&nbsp;: <span style="color:var(--terra);font-style:italic;">le storytelling incarné</span>
+          </h3>
+          <p class="mb-6" style="color:var(--brown-m);font-size:.9375rem;line-height:1.7;">
+            Comment transformer une prise de parole en expérience marquante&nbsp;? Cette conférence explore les leviers du storytelling incarné&nbsp;: récit, corps, émotion, silence. Pour que votre message cesse d'être entendu — et commence à être ressenti.
+          </p>
+          <div class="flex items-center gap-2 pt-4" style="border-top:1px solid rgba(87,61,56,.1);color:var(--brown-d);font-size:.875rem;font-weight:500;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--terra);" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>45 à 60 min · Présentiel ou distanciel</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Carte 2 : Leadership sensible -->
+      <article class="conference-card reveal">
+        <div style="aspect-ratio:16/9;overflow:hidden;">
+          <img src="/assets/img/conference-leadership.jpg" alt="Conférence leadership sensible et intelligence émotionnelle" loading="lazy" width="640" height="360" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+        <div class="p-6 sm:p-8">
+          <p class="mb-3" style="color:var(--brown-m);font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;">
+            Leadership · Intelligence émotionnelle
+          </p>
+          <h3 class="title-abhaya mb-4" style="color:var(--brown-d);font-size:clamp(1.375rem,2vw,1.625rem);line-height:1.2;">
+            Leadership sensible et <span style="color:var(--terra);font-style:italic;">intelligence émotionnelle</span>
+          </h3>
+          <p class="mb-6" style="color:var(--brown-m);font-size:.9375rem;line-height:1.7;">
+            Et si la sensibilité n'était pas une faiblesse à compenser, mais le matériau même d'un leadership d'impact&nbsp;? Une conférence pour repenser le management à partir de l'écoute et de la compréhension de soi et des autres.
+          </p>
+          <div class="flex items-center gap-2 pt-4" style="border-top:1px solid rgba(87,61,56,.1);color:var(--brown-d);font-size:.875rem;font-weight:500;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--terra);" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>60 min · Conférence inspirante</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Carte 3 : Gestion des conflits -->
+      <article class="conference-card reveal">
+        <div style="aspect-ratio:16/9;overflow:hidden;">
+          <img src="/assets/img/conference-conflits.jpg" alt="Conférence gestion des conflits et assertivité en entreprise" loading="lazy" width="640" height="360" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+        <div class="p-6 sm:p-8">
+          <p class="mb-3" style="color:var(--brown-m);font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;">
+            Conflits · Négociation
+          </p>
+          <h3 class="title-abhaya mb-4" style="color:var(--brown-d);font-size:clamp(1.375rem,2vw,1.625rem);line-height:1.2;">
+            Gestion des conflits et <span style="color:var(--terra);font-style:italic;">assertivité</span>
+          </h3>
+          <p class="mb-6" style="color:var(--brown-m);font-size:.9375rem;line-height:1.7;">
+            Les conflits ne sont pas à éviter, mais à traverser. Cette conférence outille vos équipes pour aborder les tensions avec justesse&nbsp;: désamorcer l'escalade émotionnelle, poser des limites claires et négocier sans perdre la relation. Une approche qui allie ancrage corporel et communication consciente.
+          </p>
+          <div class="flex items-center gap-2 pt-4" style="border-top:1px solid rgba(87,61,56,.1);color:var(--brown-d);font-size:.875rem;font-weight:500;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--terra);" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>60 à 90 min · Atelier interactif</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Carte 4 : Communication assertive -->
+      <article class="conference-card reveal">
+        <div style="aspect-ratio:16/9;overflow:hidden;">
+          <img src="/assets/img/conference-assertivite.jpg" alt="Conférence communication assertive et affirmation de soi" loading="lazy" width="640" height="360" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+        <div class="p-6 sm:p-8">
+          <p class="mb-3" style="color:var(--brown-m);font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;">
+            Assertivité · Affirmation de soi
+          </p>
+          <h3 class="title-abhaya mb-4" style="color:var(--brown-d);font-size:clamp(1.375rem,2vw,1.625rem);line-height:1.2;">
+            La communication assertive et <span style="color:var(--terra);font-style:italic;">affirmation de soi</span>
+          </h3>
+          <p class="mb-6" style="color:var(--brown-m);font-size:.9375rem;line-height:1.7;">
+            Dire non sans culpabiliser, trancher sans dominer, exprimer un désaccord sans dureté. Cette conférence propose des clés concrètes pour oser s'affirmer au quotidien — dans les échanges professionnels, les décisions à prendre et les limites à poser — tout en restant en lien avec soi et avec l'autre.
+          </p>
+          <div class="flex items-center gap-2 pt-4" style="border-top:1px solid rgba(87,61,56,.1);color:var(--brown-d);font-size:.875rem;font-weight:500;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--terra);" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>60 à 90 min · Atelier interactif</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA FINAL ============ -->
+<section id="parlons-en" class="py-20 sm:py-24 lg:py-32 relative overflow-hidden" style="background:var(--white);">
+  <div class="blob hidden lg:block" style="width:500px;height:500px;background:var(--terra);top:-10%;right:-10%;opacity:.06;"></div>
+  <div class="blob hidden lg:block" style="width:350px;height:350px;background:var(--quote-bg);bottom:-10%;left:-5%;opacity:.25;animation-delay:-7s;"></div>
+
+  <div class="relative max-w-3xl mx-auto px-6 lg:px-12 text-center reveal">
+    <h2 class="title-abhaya mb-6" style="color:var(--brown-d);font-size:clamp(2rem,5vw,4rem);line-height:1.1;">
+      Envie d'inviter <span style="font-style:italic;color:var(--terra);">Laura</span> ?
+    </h2>
+    <p class="mb-8 sm:mb-10 mx-auto" style="color:var(--brown-m);font-size:clamp(1rem,2vw,1.1875rem);line-height:1.75;max-width:600px;">
+      Chaque conférence est <b>personnalisable</b> selon votre contexte, votre public et vos enjeux. Discutons ensemble de ce qui ferait sens pour votre événement.
+    </p>
+    <div class="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4">
+      <a href="https://calendly.com/laura-ballo1993/echangecoaching" target="_blank" rel="noopener"
+         class="btn-dark inline-flex items-center gap-2 px-9 py-4 rounded-md w-full sm:w-auto justify-center" style="font-size:1rem;font-weight:600;min-height:48px;">
+        Prendre rendez-vous
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="mailto:contact@lauraballo.com" 
+         class="btn-outline inline-flex items-center gap-2 px-8 py-4 rounded-md w-full sm:w-auto justify-center" style="font-size:1rem;font-weight:600;min-height:48px;">
+        Écrire un email
+      </a>
+    </div>
+    <div class="mt-10 sm:mt-12 flex items-center justify-center gap-3">
+      <span style="color:var(--terra);font-size:.875rem;" aria-hidden="true">✦</span>
+      <p class="title-playfair" style="color:var(--brown-m);font-size:.9375rem;font-style:italic;letter-spacing:.02em;">
+        Réponse sous 48h · Échange offert et sans engagement
+      </p>
+      <span style="color:var(--terra);font-size:.875rem;" aria-hidden="true">✦</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER (chargé depuis composant partagé) ============ -->
+<div id="footer-placeholder"></div>
+
+<!-- ============ COOKIES (chargé depuis composant partagé) ============ -->
+<div id="cookies-placeholder"></div>
+
+<!-- ============ SCRIPTS ============ -->
+<script>
+// Chargement des composants partagés
+async function loadComponent(url, placeholderId) {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) return;
+    const html = await res.text();
+    const el = document.getElementById(placeholderId);
+    if (el) {
+      el.innerHTML = html;
+      el.querySelectorAll('script').forEach(old => {
+        const s = document.createElement('script');
+        if (old.src) s.src = old.src;
+        else s.textContent = old.textContent;
+        old.replaceWith(s);
+      });
+    }
+  } catch (e) { console.warn('Composant non chargé :', url, e); }
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadComponent('/assets/components/header.html', 'header-placeholder');
+  await loadComponent('/assets/components/footer.html', 'footer-placeholder');
+  await loadComponent('/assets/components/cookies.html', 'cookies-placeholder');
+
+  if (typeof initNav === 'function') initNav();
+  if (typeof CookieConsent !== 'undefined' && CookieConsent.init) CookieConsent.init();
+});
+
+// Reveal on scroll
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('in'), i * 60);
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: .12, rootMargin: '0px 0px -80px 0px' });
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el => io.observe(el));
+</script>
+<script src="/assets/js/nav.js" defer></script>
+<script src="/assets/js/cookies.js" defer></script>
 </body>
 </html>
