@@ -1,287 +1,363 @@
-@import url("tokens.css");
-
 /* ============================================
-   CONFERENCES.CSS — Page Conférences inspirantes
+   CONFERENCES.CSS — Styles page Conférences
    Fichier : assets/css/conferences.css
-
-   ⚠️ CHARGEMENT REQUIS : tokens.css doit être chargé
-   AVANT ce fichier dans le <head> HTML.
    ============================================ */
 
-/* :root supprimé — variables dans tokens.css */
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* ============================================
+   VARIABLES LOCALES
+   ============================================ */
+:root {
+  --cream: #FAF4EF;
+  --white: #FFFFFF;
+  --terra: #B72D2B;
+  --terra-d: #951F1E;
+  --brown-d: #573D38;
+  --brown-m: #775038;
+  --quote-bg: #AFA098;
 }
 
-html {
-  scroll-behavior: smooth;
-  font-size: 16px;
-}
+/* ============================================
+   BASE
+   ============================================ */
+html { scroll-behavior: smooth; }
 
 body {
-  font-family: var(--font-body);
-  color: var(--text-dark);
-  line-height: 1.6;
-  overflow-x: hidden;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: var(--brown-d);
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a { text-decoration: none; color: inherit; }
-img { max-width: 100%; height: auto; }
-
-::selection {
-  background: var(--accent);
-  color: var(--white);
+  background: var(--white);
 }
 
 /* ============================================
-   HERO — IMAGE DE FOND + VOILE
+   REVEAL ANIMATIONS
    ============================================ */
-.conf-hero {
-  min-height: 75vh;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 160px 40px 100px;
-  background-image: url('/assets/img/laura.png');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-}
-
-.conf-hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(26, 26, 26, 0.55);
-}
-
-.conf-hero h1 {
-  font-family: var(--font-heading);
-  font-size: clamp(36px, 5.5vw, 64px);
-  font-weight: 400;
-  color: var(--white);
-  line-height: 1.2;
-  max-width: 850px;
-  margin-bottom: 48px;
-  position: relative;
-  z-index: 1;
+.reveal {
   opacity: 0;
-  animation: fadeInUp 0.8s ease forwards 0.3s;
+  transform: translateY(24px);
+  transition: opacity .8s ease-out, transform .8s ease-out;
 }
+.reveal.in { opacity: 1; transform: translateY(0); }
 
-.btn-accent {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 18px 40px;
-  background: var(--accent);
-  color: var(--white);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  font-family: var(--font-body);
-  border-radius: 2px;
-  border: none;
-  cursor: pointer;
-  transition: all var(--transition-base);
-  position: relative;
-  z-index: 1;
+.reveal-left {
   opacity: 0;
-  animation: fadeInUp 0.8s ease forwards 0.6s;
+  transform: translateX(-30px);
+  transition: opacity .8s ease-out, transform .8s ease-out;
+}
+.reveal-left.in { opacity: 1; transform: translateX(0); }
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity .8s ease-out, transform .8s ease-out;
+}
+.reveal-right.in { opacity: 1; transform: translateX(0); }
+
+/* Réduire les animations si préférence utilisateur */
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal-left, .reveal-right {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .hero-animate > * {
+    opacity: 1;
+    animation: none;
+  }
+  .blob { animation: none; }
 }
 
-.btn-accent:hover {
-  background: var(--text-dark);
+/* ============================================
+   BUTTONS
+   ============================================ */
+.btn-primary {
+  background: var(--terra);
+  color: #fff;
+  transition: all .25s ease;
+}
+.btn-primary:hover {
+  background: var(--terra-d);
+  box-shadow: 0 10px 25px -10px rgba(183, 45, 43, .5);
   transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
 }
 
-@keyframes fadeInUp {
+.btn-dark {
+  background: #1a1a1a;
+  color: #fff;
+  transition: all .25s ease;
+}
+.btn-dark:hover {
+  background: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -10px rgba(0, 0, 0, .4);
+}
+
+.btn-outline {
+  color: var(--brown-d);
+  border: 1.5px solid var(--brown-d);
+  background: transparent;
+  transition: all .25s ease;
+}
+.btn-outline:hover {
+  background: var(--brown-d);
+  color: #fff;
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+.title-abhaya {
+  font-family: 'Abhaya Libre', Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+}
+.title-playfair {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+.parisienne {
+  font-family: 'Parisienne', cursive;
+}
+
+/* ============================================
+   HERO PARALLAX
+   ============================================ */
+.hero-parallax {
+  background-image: url('/assets/img/conference-hero.jpg');
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* Fix iOS : parallax fixed broken */
+@media (max-width: 768px) {
+  .hero-parallax { background-attachment: scroll; }
+}
+
+.hero-overlay {
+  background: linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.65) 100%);
+}
+
+/* Hero text entry animation */
+@keyframes hero-fade-up {
   from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
 }
+.hero-animate > * {
+  opacity: 0;
+  animation: hero-fade-up .9s ease-out forwards;
+}
+.hero-animate > *:nth-child(1) { animation-delay: .15s; }
+.hero-animate > *:nth-child(2) { animation-delay: .35s; }
+.hero-animate > *:nth-child(3) { animation-delay: .55s; }
+.hero-animate > *:nth-child(4) { animation-delay: .75s; }
 
 /* ============================================
-   INTRO — FOND BLANC, TEXTE CENTRÉ
+   QUOTE BANNER
    ============================================ */
-.conf-intro {
-  background: var(--white);
-  padding: 100px 40px;
-  text-align: center;
-}
-
-.conf-intro p {
-  font-family: var(--font-light);
-  font-size: clamp(19px, 2.2vw, 23px);
-  color: var(--warm-gray);
-  line-height: 1.8;
-  max-width: 760px;
-  margin: 0 auto;
-}
-
-/* ============================================
-   CONFÉRENCES — ALTERNANCE GAUCHE/DROITE
-   ============================================ */
-.conf-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  background: var(--white);
-}
-
-.conf-row:nth-child(even) .conf-row-image { order: 2; }
-.conf-row:nth-child(even) .conf-row-content { order: 1; }
-
-.conf-row-image {
+.quote-banner {
+  background: var(--quote-bg);
   position: relative;
   overflow: hidden;
-  min-height: 520px;
+}
+.quote-banner::before {
+  content: '\201C';
+  position: absolute;
+  top: -40px;
+  left: 5%;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 20rem;
+  color: rgba(255, 255, 255, .06);
+  line-height: 1;
+  pointer-events: none;
 }
 
-.conf-row-image img {
+/* ============================================
+   IMAGE CARDS
+   ============================================ */
+.img-card {
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 25px 50px -15px rgba(87, 61, 56, .25);
+}
+.img-card img {
+  transition: transform .8s ease;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.8s ease;
+  display: block;
+}
+.img-card:hover img { transform: scale(1.04); }
+
+/* ============================================
+   LOGOS CLIENTS
+   ============================================ */
+.logo-client {
+  height: 42px;
+  width: auto;
+  max-width: 140px;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: .55;
+  transition: all .3s ease;
+}
+.logo-client:hover {
+  filter: grayscale(0%);
+  opacity: 1;
 }
 
-.conf-row:hover .conf-row-image img {
-  transform: scale(1.03);
+/* ============================================
+   CRÉATIVITÉ ÉDITORIALE
+   ============================================ */
+
+/* Numéros watermark */
+.big-number {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  line-height: .85;
+  color: rgba(183, 45, 43, .08);
+  letter-spacing: -.05em;
+  pointer-events: none;
+  user-select: none;
 }
 
-.conf-row-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 80px clamp(40px, 7vw, 100px);
-  background: var(--white);
+/* Cadre artistique avec bande peinture */
+.img-with-block { position: relative; }
+.img-with-block::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  bottom: -40px;
+  right: -32px;
+  width: 28%;
+  background: url('/assets/img/paint-texture.jpg') center/cover;
+  z-index: 0;
+  transition: transform .5s ease;
+  filter: saturate(1.05);
+}
+.img-with-block:hover::before { transform: translateX(8px); }
+.img-with-block .img-card { position: relative; z-index: 1; }
+
+/* Variante bande à gauche */
+.img-with-block-cream::before {
+  right: auto;
+  left: -32px;
+}
+.img-with-block-cream:hover::before { transform: translateX(-8px); }
+
+/* ============================================
+   ORGANIC BLOB
+   ============================================ */
+.blob {
+  position: absolute;
+  border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
+  pointer-events: none;
+  animation: blob-float 14s ease-in-out infinite;
+}
+@keyframes blob-float {
+  0%, 100% {
+    border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
+    transform: translate(0, 0) rotate(0);
+  }
+  50% {
+    border-radius: 45% 55% 38% 62% / 48% 52% 48% 52%;
+    transform: translate(15px, -10px) rotate(8deg);
+  }
 }
 
-.conf-row-content h2 {
-  font-family: var(--font-heading);
-  font-size: clamp(26px, 2.8vw, 36px);
-  font-weight: 500;
-  color: var(--text-dark);
-  line-height: 1.25;
-  margin-bottom: 24px;
+/* ============================================
+   STICKY TAG
+   ============================================ */
+.sticky-tag {
+  display: inline-block;
+  padding: .4rem 1rem;
+  background: #FAE5D0;
+  color: var(--brown-d);
+  font-family: 'Parisienne', cursive;
+  font-size: 1.375rem;
+  transform: rotate(-3deg);
+  box-shadow: 2px 3px 0 rgba(87, 61, 56, .12);
+  border-radius: 2px;
 }
 
-.conf-row-content p {
-  font-family: var(--font-light);
-  font-size: 19px;
-  color: var(--warm-gray);
-  line-height: 1.8;
-  max-width: 480px;
-  margin-bottom: 32px;
+/* ============================================
+   DOODLE ARROW
+   ============================================ */
+.doodle-arrow {
+  position: absolute;
+  width: 120px;
+  height: auto;
+  pointer-events: none;
+  opacity: .8;
 }
 
-.conf-row-tags {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 40px;
+/* ============================================
+   STAT PILLS
+   ============================================ */
+.stat-pill {
+  background: var(--cream);
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: transform .3s ease, box-shadow .3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.stat-pill:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -20px rgba(183, 45, 43, .3);
+}
+.stat-pill::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 100px;
+  height: 100px;
+  background: var(--terra);
+  border-radius: 50%;
+  opacity: .08;
 }
 
-.conf-row-tag {
-  font-size: 11px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--warm-gray);
-  padding: 6px 16px;
-  border: 1px solid var(--warm-beige);
-  border-radius: 20px;
-}
-
-.conf-link {
+/* ============================================
+   SECTION LABEL
+   ============================================ */
+.section-label {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--accent);
-  transition: gap var(--transition-base);
+  gap: .75rem;
 }
-
-.conf-link::after {
-  content: '→';
-  transition: transform var(--transition-base);
+.section-label::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--terra);
 }
-
-.conf-link:hover { gap: 16px; }
 
 /* ============================================
-   CTA — FOND BEIGE
+   CONFERENCE CARDS (hover via CSS, pas JS inline)
    ============================================ */
-.conf-cta {
-  background: var(--light-beige);
-  padding: 120px 40px;
-  text-align: center;
+.conference-card {
+  background: var(--white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px -20px rgba(87, 61, 56, .15);
+  transition: transform .3s ease, box-shadow .3s ease;
 }
-
-.conf-cta h2 {
-  font-family: var(--font-heading);
-  font-size: clamp(28px, 4vw, 48px);
-  font-weight: 400;
-  color: var(--text-dark);
-  margin-bottom: 20px;
-}
-
-.conf-cta p {
-  font-family: var(--font-light);
-  font-size: 20px;
-  color: var(--warm-gray);
-  margin-bottom: 48px;
-  max-width: 560px;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.7;
-}
-
-.conf-cta .btn-accent {
-  opacity: 1;
-  animation: none;
+.conference-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 60px -20px rgba(87, 61, 56, .25);
 }
 
 /* ============================================
-   RESPONSIVE — TABLET (1024px)
-   ============================================ */
-@media (max-width: 1024px) {
-  .conf-row { grid-template-columns: 1fr; }
-  .conf-row-image { min-height: 380px; }
-  .conf-row:nth-child(even) .conf-row-image { order: 0; }
-  .conf-row:nth-child(even) .conf-row-content { order: 0; }
-  .conf-row-content { padding: 60px 32px; }
-}
-
-/* ============================================
-   RESPONSIVE — MOBILE (768px)
+   RESPONSIVE MOBILE
    ============================================ */
 @media (max-width: 768px) {
-  .conf-hero { padding: 120px 20px 60px; min-height: 60vh; background-attachment: scroll; }
-  .conf-intro { padding: 60px 20px; }
-  .conf-row-image { min-height: 300px; }
-  .conf-row-content { padding: 48px 24px; }
-  .conf-row-content h2 { font-size: clamp(22px, 6vw, 30px); }
-  .conf-cta { padding: 80px 20px; }
-}
-
-/* ============================================
-   RESPONSIVE — MOBILE SMALL (480px)
-   ============================================ */
-@media (max-width: 480px) {
-  .conf-hero h1 { font-size: clamp(28px, 8vw, 36px); }
-  .btn-accent { width: 100%; justify-content: center; padding: 16px 24px; font-size: 12px; }
-  .conf-row-image { min-height: 240px; }
-  .conf-row-content p { font-size: 17px; }
-  .conf-row-tags { gap: 8px; }
+  /* Masquer décorations sur mobile */
+  .img-with-block::before,
+  .img-with-block-cream::before {
+    display: none;
+  }
+  
+  /* Réduire le padding des stat pills */
+  .stat-pill { padding: 1rem; }
 }
