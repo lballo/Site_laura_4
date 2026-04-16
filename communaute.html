@@ -8,13 +8,9 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Parisienne&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Parisienne&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/tokens.css">
 <style>
-:root{
-  --cream:#F8F0EC; --peach:#EDD1BF; --sand:#C48F72;
-  --terra:#C8554A; --terra-d:#AA564C; --rust:#9B594A;
-  --brown-d:#573D38; --brown-m:#775038; --taupe:#98675B;
-}
 html{scroll-behavior:smooth}
 body{font-family:'Inter',system-ui,sans-serif;color:var(--brown-d);-webkit-font-smoothing:antialiased;background:var(--cream);}
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease-out,transform .8s ease-out;}
@@ -26,19 +22,63 @@ body{font-family:'Inter',system-ui,sans-serif;color:var(--brown-d);-webkit-font-
 .reveal-right{opacity:0;transform:translateX(30px);transition:opacity .8s ease-out,transform .8s ease-out;}
 .reveal-right.in{opacity:1;transform:translateX(0);}
 .btn-primary{background:var(--terra);color:#fff;transition:all .25s ease;}
-.btn-primary:hover{background:var(--terra-d);box-shadow:0 10px 25px -10px rgba(200,85,74,.5);}
+.btn-primary:hover{background:var(--terra-d);box-shadow:0 10px 25px -10px rgba(183,45,43,.5);}
 .btn-outline{background:#fff;color:var(--brown-d);border:2px solid var(--terra);transition:all .25s ease;}
 .btn-outline:hover{border-color:var(--terra-d);}
 .btn-white{background:#fff;color:var(--terra);transition:transform .2s,box-shadow .2s;box-shadow:0 25px 50px -12px rgba(0,0,0,.25);}
 .btn-white:hover{transform:translateY(-2px) scale(1.03);}
-.gradient-text{background:linear-gradient(90deg,var(--rust),var(--taupe),var(--terra));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.gradient-text{background:linear-gradient(90deg,var(--rust),var(--taupe-warm),var(--terra));-webkit-background-clip:text;background-clip:text;color:transparent;}
 .divider{width:64px;height:4px;background:linear-gradient(90deg,transparent,var(--terra),transparent);margin:0 auto 1.5rem;border-radius:2px;}
-.card-testi{border:2px solid rgba(196,143,114,.1);transition:all .3s ease;}
-.card-testi:hover{border-color:rgba(200,85,74,.3);box-shadow:0 20px 40px -15px rgba(0,0,0,.15);}
+.card-testi{border:2px solid rgba(183,45,43,.1);transition:all .3s ease;}
+.card-testi:hover{border-color:rgba(183,45,43,.3);box-shadow:0 20px 40px -15px rgba(0,0,0,.15);}
 .pill-check{background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border:2px solid rgba(255,255,255,.3);}
 .glass{background:rgba(255,255,255,.2);backdrop-filter:blur(18px);border:2px solid rgba(255,255,255,.4);}
 .parisienne{font-family:'Parisienne',cursive;}
 .title-abhaya{font-family:'Abhaya Libre',Georgia,serif;font-weight:500;letter-spacing:-0.005em;}
+.title-playfair{font-family:'Playfair Display',Georgia,serif;}
+
+/* =========== IDENTITÉ VISUELLE PARTAGÉE =========== */
+
+/* Cadre artistique avec texture peinture : bande verticale qui dépasse en haut et en bas */
+.img-with-block{position:relative;}
+.img-with-block::before{
+  content:'';
+  position:absolute;
+  top:-40px;
+  bottom:-40px;
+  right:-32px;
+  width:28%;
+  background:url('assets/img/paint-texture.jpg') center/cover;
+  z-index:0;
+  transition:transform .5s ease;
+  filter:saturate(1.05);
+}
+.img-with-block:hover::before{
+  transform:translateX(8px);
+}
+.img-with-block .photo-wrap{position:relative;z-index:1;}
+
+/* Variante : bande à gauche au lieu d'à droite */
+.img-with-block-left::before{
+  right:auto;
+  left:-32px;
+}
+.img-with-block-left:hover::before{
+  transform:translateX(-8px);
+}
+
+/* Blobs organiques qui flottent en arrière-plan */
+.blob{
+  position:absolute;
+  border-radius:63% 37% 54% 46% / 55% 48% 52% 45%;
+  pointer-events:none;
+  animation:blob-float 14s ease-in-out infinite;
+}
+@keyframes blob-float{
+  0%,100%{border-radius:63% 37% 54% 46% / 55% 48% 52% 45%;transform:translate(0,0) rotate(0)}
+  50%{border-radius:45% 55% 38% 62% / 48% 52% 48% 52%;transform:translate(15px,-10px) rotate(8deg)}
+}
+
 details summary::-webkit-details-marker{display:none;}
 details summary::marker{display:none;}
 details[open] .faq-icon{transform:rotate(45deg);}
@@ -77,10 +117,10 @@ details[open] .faq-icon{transform:rotate(45deg);}
 
       <!-- Colonne droite : image -->
       <div class="relative reveal-scale">
-        <div class="overflow-hidden shadow-2xl" style="aspect-ratio:4/5;">
-          <img src="/assets/img/laura-portrait.jpg" alt="Laura Ballo" class="w-full h-full object-cover"/>
+        <div class="photo-wrap overflow-hidden shadow-2xl" style="aspect-ratio:4/5;">
+          <img src="assets/img/laura-portrait.jpg" alt="Laura Ballo" class="w-full h-full object-cover"/>
         </div>
-        <div class="absolute -bottom-5 -left-5 bg-white p-4 rounded-2xl shadow-xl hidden md:block">
+        <div class="absolute -bottom-5 -left-5 bg-white p-4 rounded-2xl shadow-xl hidden md:block" style="z-index:2;">
           <p style="color:var(--terra);font-size:.875rem;font-weight:700;letter-spacing:.05em;margin:0;">+ de 2500 dirigeants accompagnés</p>
         </div>
       </div>
@@ -90,8 +130,10 @@ details[open] .faq-icon{transform:rotate(45deg);}
 </section>
 
 <!-- PROBLÉMATIQUE -->
-<section class="py-24 bg-white">
-  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+<section class="py-24 bg-white relative overflow-hidden">
+  <div class="blob hidden lg:block" style="width:380px;height:380px;background:var(--cream);top:5%;right:-5%;opacity:.85;z-index:0;"></div>
+  <div class="blob hidden lg:block" style="width:280px;height:280px;background:rgba(183,45,43,.06);bottom:10%;left:-4%;z-index:0;animation-delay:-6s;"></div>
+  <div class="relative max-w-7xl mx-auto px-6 lg:px-12">
     <div class="text-center mb-6 reveal">
       <h2 class="mb-6" style="font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--brown-d);">Ce que tu ressens actuellement...</h2>
       <p class="max-w-3xl mx-auto mb-16" style="color:var(--brown-m);font-size:1.5rem;line-height:1.7;">
@@ -100,8 +142,8 @@ details[open] .faq-icon{transform:rotate(45deg);}
     </div>
     <div class="grid lg:grid-cols-[450px_1fr] gap-12 lg:gap-24 items-start">
       <div class="reveal-left">
-        <div class="overflow-hidden shadow-xl" style="aspect-ratio:3/4;">
-          <img src="/assets/img/entrepreneur-sensible.jpg" alt="Entrepreneur sensible" class="w-full h-full object-cover" />
+        <div class="photo-wrap overflow-hidden shadow-xl" style="aspect-ratio:3/4;">
+          <img src="assets/img/entrepreneur-sensible.jpg" alt="Entrepreneur sensible" class="w-full h-full object-cover" />
         </div>
       </div>
       <div class="reveal-right">
@@ -111,6 +153,48 @@ details[open] .faq-icon{transform:rotate(45deg);}
           <a href="#paiement" class="btn-primary px-8 py-4 rounded-full inline-block" style="font-size:1rem;font-weight:600;">Découvrir la communauté</a>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- SAUF QUE -->
+<section class="py-12 lg:py-14" style="background:var(--warm-beige);">
+  <div class="max-w-3xl mx-auto px-6 lg:px-12 reveal">
+    <p class="mb-4" style="color:var(--brown-d);font-size:1.1875rem;line-height:1.7;font-weight:700;">
+      Sauf que
+    </p>
+    <div class="space-y-2 mb-5" style="color:var(--brown-d);font-size:1.1875rem;line-height:1.7;">
+      <div class="flex gap-3 items-start">
+        <svg class="flex-shrink-0 mt-1.5" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--terra)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        <p>Tu ne veux plus te cacher derrière une version diminuée de toi-même</p>
+      </div>
+      <div class="flex gap-3 items-start">
+        <svg class="flex-shrink-0 mt-1.5" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--terra)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        <p>Tu ne veux plus essayer de coller à des standards qui ne sont pas les tiens</p>
+      </div>
+    </div>
+    <div class="space-y-2" style="color:var(--brown-d);font-size:1.1875rem;line-height:1.7;">
+      <div class="flex gap-3 items-start">
+        <svg class="flex-shrink-0 mt-1.5" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        <p>Tu veux prendre ta place sans demander la permission</p>
+      </div>
+      <div class="flex gap-3 items-start">
+        <svg class="flex-shrink-0 mt-1.5" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        <p>Tu veux affirmer ta valeur et t'autoriser à la montrer</p>
+      </div>
+      <div class="flex gap-3 items-start">
+        <svg class="flex-shrink-0 mt-1.5" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        <p>Tu veux revenir à une présence authentique qui allie sensibilité et autorité</p>
+      </div>
+      <div class="flex gap-3 items-start">
+        <svg class="flex-shrink-0 mt-1.5" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        <p>Tu veux pouvoir t'exprimer librement</p>
+      </div>
+      <ul class="list-disc space-y-0.5" style="padding-left:56px;margin-top:.25rem;">
+        <li>Sans masque</li>
+        <li>Sans retenue</li>
+        <li>Avec ta singularité</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -125,7 +209,7 @@ details[open] .faq-icon{transform:rotate(45deg);}
 </section>
 
 <!-- MA SINGULARITÉ -->
-<section class="py-24 relative overflow-hidden" style="background:#786C63;">
+<section class="py-24 relative overflow-hidden" style="background:var(--warm-gray-2);">
   <div class="absolute inset-0">
     <div class="absolute top-10 left-1/4 w-[500px] h-[500px] rounded-full" style="background:rgba(74,59,55,.3);filter:blur(140px);"></div>
     <div class="absolute bottom-10 right-1/4 w-[500px] h-[500px] rounded-full" style="background:rgba(74,59,55,.22);filter:blur(140px);"></div>
@@ -177,7 +261,7 @@ Il n’y a rien à chercher à être, tu es assez comme tu es. Tu n’as pas bes
 <!-- POUR QUI -->
 <section class="py-24 relative overflow-hidden">
   <div class="absolute inset-0">
-    <img src="/assets/img/pour-qui-bg.jpg" alt="" class="w-full h-full object-cover" style="opacity:.38;"/>
+    <img src="assets/img/pour-qui-bg.jpg" alt="" class="w-full h-full object-cover" style="opacity:.38;"/>
     <div class="absolute inset-0" style="background:linear-gradient(180deg,rgba(248,240,236,.78),rgba(248,240,236,.88));"></div>
   </div>
   <div class="max-w-5xl mx-auto px-6 lg:px-12 text-center relative z-10">
@@ -191,7 +275,7 @@ Il n’y a rien à chercher à être, tu es assez comme tu es. Tu n’as pas bes
 
 <!-- SOLUTION -->
 <section class="py-24 bg-white relative overflow-hidden">
-  <div class="max-w-6xl mx-auto px-6 lg:px-12">
+  <div class="relative max-w-6xl mx-auto px-6 lg:px-12">
     <div class="text-center mb-16 reveal">
       <div class="divider"></div>
       <h2 class="mb-6" style="font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--brown-d);">Comment on t'accompagne ? 🌟</h2>
@@ -199,7 +283,7 @@ Il n’y a rien à chercher à être, tu es assez comme tu es. Tu n’as pas bes
     </div>
     <div class="grid lg:grid-cols-3 gap-8 mb-20" id="pillars"></div>
 
-    <div class="p-12 rounded-3xl text-white relative overflow-hidden shadow-2xl reveal" style="background:#6D6659;">
+    <div class="p-12 rounded-3xl text-white relative overflow-hidden shadow-2xl reveal" style="background:var(--warm-gray);">
       <div class="relative z-10">
         <div class="divider" style="background:linear-gradient(90deg,var(--terra),var(--sand));"></div>
         <h3 class="mb-4 text-center" style="font-size:2rem;font-weight:700;">Ce que tu reçois chaque mois 🔥</h3>
@@ -253,7 +337,7 @@ Il n’y a rien à chercher à être, tu es assez comme tu es. Tu n’as pas bes
       <div class="reveal-left space-y-6" id="benefits"></div>
       <div class="reveal-right">
         <div class="overflow-hidden" style="aspect-ratio:3/4;">
-          <img src="/assets/img/transformation.jpg" alt="Transformation" class="w-full h-full object-cover"/>
+          <img src="assets/img/transformation.jpg" alt="Transformation" class="w-full h-full object-cover"/>
         </div>
       </div>
     </div>
@@ -269,8 +353,10 @@ Il n’y a rien à chercher à être, tu es assez comme tu es. Tu n’as pas bes
 </section>
 
 <!-- TÉMOIGNAGES -->
-<section class="py-24 bg-white">
-  <div class="max-w-6xl mx-auto px-6 lg:px-12">
+<section class="py-24 bg-white relative overflow-hidden">
+  <div class="blob hidden lg:block" style="width:340px;height:340px;background:var(--cream);top:10%;left:-6%;opacity:.75;z-index:0;animation-delay:-5s;"></div>
+  <div class="blob hidden lg:block" style="width:280px;height:280px;background:rgba(183,45,43,.05);bottom:5%;right:-4%;z-index:0;animation-delay:-11s;"></div>
+  <div class="relative max-w-6xl mx-auto px-6 lg:px-12">
     <div class="text-center mb-16 reveal">
       <div class="divider"></div>
       <h2 class="mb-6" style="font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--brown-d);">Ils ont sauté le pas 💬</h2>
@@ -281,8 +367,8 @@ Il n’y a rien à chercher à être, tu es assez comme tu es. Tu n’as pas bes
 </section>
 
 <!-- QUI SUIS-JE -->
-<section class="py-24" style="background:#ffffff;">
-  <div class="max-w-6xl mx-auto px-6 lg:px-12">
+<section class="py-24 relative overflow-hidden" style="background:#ffffff;">
+  <div class="relative max-w-6xl mx-auto px-6 lg:px-12">
     <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
       <div class="reveal-left text-center lg:px-4">
         <h2 class="mb-10" style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(2rem,3.5vw,2.75rem);font-weight:700;color:#1a1a1a;line-height:1.15;">Bonjour,<br/>je m'appelle Laura !</h2>
@@ -294,8 +380,8 @@ Il n’y a rien à chercher à être, tu es assez comme tu es. Tu n’as pas bes
         <div class="parisienne" style="color:#1a1a1a;font-size:3.5rem;line-height:1;">Laura B.</div>
       </div>
       <div class="reveal-scale">
-        <div class="overflow-hidden" style="aspect-ratio:4/5;">
-          <img src="/assets/img/laura-portrait.jpg" alt="Laura" class="w-full h-full object-cover"/>
+        <div class="photo-wrap overflow-hidden" style="aspect-ratio:4/5;">
+          <img src="assets/img/laura-portrait.jpg" alt="Laura" class="w-full h-full object-cover"/>
         </div>
       </div>
     </div>
@@ -340,7 +426,7 @@ Il n’y a rien à chercher à être, tu es assez comme tu es. Tu n’as pas bes
 
       <!-- Colonne gauche : logo -->
       <div class="flex justify-center lg:justify-end">
-        <img src="/assets/img/logo-presence.png" alt="Logo Réseau Présence Vibratoire" style="max-width:340px;width:100%;height:auto;" />
+        <img src="assets/img/logo-presence.png" alt="Logo Réseau Présence Vibratoire" style="max-width:340px;width:100%;height:auto;" />
       </div>
 
       <!-- Colonne droite : promesse (centrée) -->
@@ -357,7 +443,7 @@ Il n’y a rien à chercher à être, tu es assez comme tu es. Tu n’as pas bes
 <!-- 3 RAISONS -->
 <section class="py-24 relative overflow-hidden">
   <div class="absolute inset-0">
-    <img src="/assets/img/cta-bg.jpg" alt="" class="w-full h-full object-cover" style="opacity:.12;"/>
+    <img src="assets/img/cta-bg.jpg" alt="" class="w-full h-full object-cover" style="opacity:.12;"/>
     <div class="absolute inset-0" style="background:linear-gradient(180deg,rgba(255,255,255,.93),rgba(248,240,236,.95));"></div>
   </div>
   <div class="max-w-6xl mx-auto px-6 lg:px-12 relative z-10">
@@ -373,8 +459,8 @@ Il n’y a rien à chercher à être, tu es assez comme tu es. Tu n’as pas bes
 </section>
 
 <!-- FAQ -->
-<section class="py-24 bg-white">
-  <div class="max-w-4xl mx-auto px-6 lg:px-12">
+<section class="py-24 bg-white relative overflow-hidden">
+  <div class="relative max-w-4xl mx-auto px-6 lg:px-12">
     <div class="text-center mb-16 reveal">
       <div class="divider"></div>
       <h2 class="mb-6" style="font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--brown-d);">Tu te poses peut-être ces questions</h2>
@@ -385,8 +471,10 @@ Il n’y a rien à chercher à être, tu es assez comme tu es. Tu n’as pas bes
 </section>
 
 <!-- FORMULES -->
-<section id="formules" class="py-24" style="background:#FAF4EF;">
-    <div class="max-w-6xl mx-auto px-6 lg:px-12">
+<section id="formules" class="py-24 relative overflow-hidden" style="background:var(--light-beige);">
+    <div class="blob hidden lg:block" style="width:500px;height:500px;background:rgba(183,45,43,.05);top:-10%;left:-8%;z-index:0;animation-delay:-4s;"></div>
+    <div class="blob hidden lg:block" style="width:400px;height:400px;background:rgba(255,255,255,.6);bottom:-10%;right:-6%;z-index:0;animation-delay:-10s;"></div>
+    <div class="relative max-w-6xl mx-auto px-6 lg:px-12">
     <div class="text-center mb-16 reveal">
       <div class="divider"></div>
       <h2 class="mb-6" style="font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--brown-d);">Mes différentes formules ☀️</h2>
@@ -398,7 +486,7 @@ Il n’y a rien à chercher à être, tu es assez comme tu es. Tu n’as pas bes
     <div class="grid md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
 
       <!-- Formule 1 : Réseau -->
-      <div class="p-8 rounded-2xl reveal flex flex-col" style="background:#ffffff;border:1.5px solid rgba(196,143,114,.25);box-shadow:0 10px 30px -15px rgba(87,61,56,.1);">
+      <div class="p-8 rounded-2xl reveal flex flex-col" style="background:#ffffff;border:1.5px solid rgba(183,45,43,.25);box-shadow:0 10px 30px -15px rgba(87,61,56,.1);">
         <div class="mb-6">
           <h3 class="title-abhaya mb-2" style="color:var(--brown-d);font-size:1.625rem;font-weight:600;">Réseau Only</h3>
           <p style="color:var(--brown-m);font-size:.9375rem;line-height:1.5;">La communauté pour avancer à ton rythme.</p>
@@ -419,7 +507,7 @@ Il n’y a rien à chercher à être, tu es assez comme tu es. Tu n’as pas bes
         <a href="https://calendly.com/laura-ballo1993/rendez-vous-reseau-presence" target="_blank" class="btn-primary w-full px-6 py-3 rounded-full text-center inline-block" style="font-size:.9375rem;font-weight:600;">Je prends rendez-vous</a>      </div>
 
       <!-- Formule 2 : Essentielle (mise en avant) -->
-      <div class="p-8 rounded-2xl reveal flex flex-col relative" style="background:linear-gradient(160deg,#fff 0%,#FAEDE7 50%,#F5DCD1 100%);border:2.5px solid var(--terra);box-shadow:0 25px 50px -15px rgba(200,85,74,.3);">
+      <div class="p-8 rounded-2xl reveal flex flex-col relative" style="background:linear-gradient(160deg,#fff 0%,#FAEDE7 50%,#F5DCD1 100%);border:2.5px solid var(--terra);box-shadow:0 25px 50px -15px rgba(183,45,43,.3);">
         <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full" style="background:var(--terra);color:#fff;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;">Le plus choisi</div>
         <div class="mb-6">
           <h3 class="title-abhaya mb-2" style="color:var(--brown-d);font-size:1.625rem;font-weight:600;">Essentielle</h3>
@@ -441,7 +529,7 @@ Il n’y a rien à chercher à être, tu es assez comme tu es. Tu n’as pas bes
         <a href="https://calendly.com/laura-ballo1993/echangecoaching" target="_blank" class="btn-primary w-full px-6 py-3 rounded-full text-center inline-block" style="font-size:.9375rem;font-weight:600;">Je prends rendez-vous</a>      </div>
 
       <!-- Formule 3 : Présence -->
-      <div class="p-8 rounded-2xl reveal flex flex-col" style="background:#ffffff;border:1.5px solid rgba(196,143,114,.25);box-shadow:0 10px 30px -15px rgba(87,61,56,.1);">
+      <div class="p-8 rounded-2xl reveal flex flex-col" style="background:#ffffff;border:1.5px solid rgba(183,45,43,.25);box-shadow:0 10px 30px -15px rgba(87,61,56,.1);">
         <div class="mb-6">
           <h3 class="title-abhaya mb-2" style="color:var(--brown-d);font-size:1.625rem;font-weight:600;">Présence</h3>
           <p style="color:var(--brown-m);font-size:.9375rem;line-height:1.5;">L'accompagnement intensif pour accélérer ta transformation.</p>
@@ -472,7 +560,7 @@ Il n’y a rien à chercher à être, tu es assez comme tu es. Tu n’as pas bes
 </section>
 
 <!-- CTA FINAL -->
-<section class="py-24 relative overflow-hidden" style="background:#afa098;">
+<section class="py-24 relative overflow-hidden" style="background:var(--taupe);">
   <div class="relative z-10 max-w-4xl mx-auto px-6 lg:px-12 text-center">
     <div class="reveal">
       <div class="w-20 h-1 mx-auto mb-8 rounded-full" style="background:rgba(255,255,255,.8);"></div>
@@ -498,7 +586,7 @@ Il n’y a rien à chercher à être, tu es assez comme tu es. Tu n’as pas bes
 </section>
 
 <!-- FOOTER -->
-<footer class="py-10 border-t" style="background:#ffffff;border-color:rgba(196,143,114,.3);">
+<footer class="py-10 border-t" style="background:#ffffff;border-color:rgba(183,45,43,.3);">
   <div class="max-w-6xl mx-auto px-6 lg:px-12">
     <nav class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 mb-4" style="font-size:.875rem;">
       <a href="/legal/mentions-legales" style="color:var(--brown-m);" class="hover:text-[color:var(--terra)] transition-colors">Mentions légales</a>
@@ -506,26 +594,25 @@ Il n’y a rien à chercher à être, tu es assez comme tu es. Tu n’as pas bes
       <a href="/legal/cgv" style="color:var(--brown-m);" class="hover:text-[color:var(--terra)] transition-colors">CGV</a>
       <a href="/legal/cookies" style="color:var(--brown-m);" class="hover:text-[color:var(--terra)] transition-colors">Cookies</a>
     </nav>
-    <p class="text-center" style="color:var(--taupe);font-size:.8125rem;">© <span id="year"></span> Laura Ballo — Tous droits réservés</p>
+    <p class="text-center" style="color:var(--taupe-warm);font-size:.8125rem;">© <span id="year"></span> Laura Ballo — Tous droits réservés</p>
   </div>
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // Data injection
-const X_ICON = '<svg class="flex-shrink-0 mt-1" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C8554A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>';
+const X_ICON = '<svg class="flex-shrink-0 mt-1" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>';
 const CHK_G = '<svg class="flex-shrink-0 mt-1" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
-const CHK_S = '<svg class="flex-shrink-0 mt-1" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C48F72" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+const CHK_S = '<svg class="flex-shrink-0 mt-1" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--sand)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
 
 const probs = [
-  ["Tu ne rentres pas dans les cases","Au travail, en société, dans ton couple, tu as toujours eu ce sentiment d'être à côté. Trop, ou pas assez. Tu ne te sens pas accepté·e comme tu es."],
-  ["Tu te censures dans ton expression","Tu as appris à lisser tes émotions, à arrondir les angles, à ne surtout pas exprimer ce qui pourrait déranger. Tu n'oses pas affirmer un point de vue différent des autres."],
-  ["Tu n'oses pas prendre ta place","Tu as une vision, un projet, une voix — mais quelque chose te retient de la porter pleinement. La peur du jugement, le syndrome de l'imposteur, l'habitude de t'effacer."],
-  ["Tu ne te sens pas à la hauteur","Face aux responsabilités que tu portes, tu as l'impression de ne pas être assez pour les assumer pleinement."],
-  ["Tu as peur du jugement de l'autre","Oser prendre la parole de manière authentique est compliqué, tu as l'impression de porter un masque et de te cacher face à la critique."],
-  ["Tu as du mal à accepter tes émotions et ta singularité","Tu n'arrives pas à te montrer pleinement comme tu es, dans toute ta vulnérabilité. Tu gardes toujours une part de toi en retrait."],
-  ["Tu as du mal à dire non","T'affirmer est compliqué, même quand il s'agit de poser des limites qui te protègent. Tu cèdes, tu t'arranges, tu finis par accepter ce qui ne te convient pas."]
+  ["Tu n'oses pas habiter ta place.","Tu sais que tu as une vision singulière et forte à incarner et pourtant tu ne te l'autorises pas encore vraiment."],
+  ["Malgré ton niveau et tes responsabilités tu doutes de ta légitimité.","Il y a toujours cette sensation de ne pas être assez, de ne pas te sentir à la hauteur. Tu as du mal à reconnaitre ton talent."],
+  ["Tu ne te positionnes pas clairement.","Ton message est large mais trop dilué, au final tu as l'impression de ne pas te différencier."],
+  ["Tu n'oses pas te montrer et devenir visible.","Tu restes dans l'ombre, en coulisse alors que clairement ton rôle est sur le devant de la scène. Le plus frustrant pour toi… c'est de voir d'autres profils parfois moins compétents prendre une place qui est la tienne."],
+  ["Tu as peur du jugement de l'autre","Oser prendre la parole de manière authentique est compliqué, tu as l'impression de porter un masque et de te cacher face à la critique. Tu diminues la puissance et l'importance de ton message"],
+  ["Tu te censures dans ton expression.","Tu as appris à lisser tes émotions, à arrondir les angles, à ne surtout pas exprimer ce qui pourrait déranger. Tu n'oses pas affirmer un point de vue différent des autres, alors que là est précisément ta valeur."]
 ];
-document.getElementById('probList').innerHTML = probs.map(([t,x])=>`<div class="flex gap-3 items-start">${X_ICON}<p style="color:var(--brown-d);font-size:1.1875rem;line-height:1.7;"><b>${t}</b> : ${x}</p></div>`).join('');
+document.getElementById('probList').innerHTML = probs.map(([t,x])=>`<div class="flex gap-3 items-start">${X_ICON}<p style="color:var(--brown-d);font-size:1.1875rem;line-height:1.7;"><b>${t}</b> ${x}</p></div>`).join('');
 
 const SPARK = '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>';
 const HEART = '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>';
@@ -564,9 +651,9 @@ document.getElementById('benefits').innerHTML = benefits.map(([t,x])=>`<div clas
 const testis = [
   ["Samuel P.","Chef de chœur et coach","Hyper énergique, très impliquée, pro et knowledgeable sur son sujet ! Merci Laura, grâce à toi, je suis davantage connecté aux publics auxquels je parle, que ça soit en réunion, conférence, Zoom… Je recommande chaudement Laura pour améliorer votre confiance en vous et votre aisance à l'oral !","/assets/img/temoignage-samuel.jpg"],
   ["Sandrine","Thérapeute","Je me suis retrouvée, je me suis éveillée, j'ai repris confiance en moi, ça a été juste magique pour moi. Je ne remercierais jamais assez Laura pour ça, pour ce coaching. Pour moi c'est un tout qui a fait que je me suis révélée, qu'à l'intérieur de moi tout a changé.","/assets/img/temoignage-sandrine.jpg"],
-  ["Romain B.","Créateur de site web","Laura est une coach versée dans l'empathie. Elle est très à l'écoute de ses clients. Soucieuse de leur succès, elle fournit un accompagnement en profondeur de qualité. Je recommande !","/assets/img/temoignage-romain.jpg"]
+  ["Romain B.","Créateur de site web","Laura est une coach versée dans l'empathie. Elle est très à l'écoute de ses clients. Soucieuse de leur succès, elle fournit un accompagnement en profondeur de qualité. Je recommande !","assets/img/temoignage-romain.jpg"]
 ];
-document.getElementById('testi').innerHTML = testis.map(([n,r,t,img])=>`<div class="card-testi bg-white p-8 rounded-3xl reveal"><div class="flex items-center gap-4 mb-6"><div class="w-16 h-16 rounded-full overflow-hidden" style="box-shadow:0 0 0 4px rgba(196,143,114,.2);"><img src="${img}" alt="${n}" class="w-full h-full object-cover"/></div><div><p style="color:var(--brown-d);font-size:1.125rem;font-weight:600;margin:0;">${n}</p><p style="color:var(--terra);font-size:.875rem;font-weight:500;margin:0;">${r}</p></div></div><div class="relative"><div class="absolute -left-2 -top-2" style="color:rgba(196,143,114,.2);font-size:4rem;line-height:1;">"</div><p class="relative z-10 pl-6" style="color:var(--brown-d);font-size:1rem;line-height:1.7;">${t}</p></div></div>`).join('');
+document.getElementById('testi').innerHTML = testis.map(([n,r,t,img])=>`<div class="card-testi bg-white p-8 rounded-3xl reveal"><div class="flex items-center gap-4 mb-6"><div class="w-16 h-16 rounded-full overflow-hidden" style="box-shadow:0 0 0 4px rgba(183,45,43,.2);"><img src="${img}" alt="${n}" class="w-full h-full object-cover"/></div><div><p style="color:var(--brown-d);font-size:1.125rem;font-weight:600;margin:0;">${n}</p><p style="color:var(--terra);font-size:.875rem;font-weight:500;margin:0;">${r}</p></div></div><div class="relative"><div class="absolute -left-2 -top-2" style="color:rgba(183,45,43,.2);font-size:4rem;line-height:1;">"</div><p class="relative z-10 pl-6" style="color:var(--brown-d);font-size:1rem;line-height:1.7;">${t}</p></div></div>`).join('');
 
 const reasons = [
   ["01","Une approche incarnée et sensorielle","Pas de théorie hors-sol. Chaque session mêle ressenti corporel, exercices pratiques et transmission concrète pour des transformations qui s'ancrent vraiment."],
@@ -580,7 +667,7 @@ const faqs = [
   ["Et si je ne me sens pas à l'aise dans le groupe ?","Tout est fait pour que tu te sentes pleinement intégré et à ta place dans le groupe avec ta singularité et ta sensibilité. Si jamais tu ressens que ce n’est pas le bon endroit pour toi tu es bien entendu libre de partir à tout moment, ton abonnement est sans engagement"],  
   ["C'est encore un truc de développement personnel vague ?","Non. Le travail est concret : exercices somatiques pour t'ancrer, méthode de prise de parole en public, travail sur drivers (sois fort, sois parfait...), écoute active, questionnement, reformulation. Tu repars avec des outils concrets pour t'affirmer et oser être pleinement toi, pas juste des « bonnes vibrations »."],
   ["Qu'est-ce qui se passe si je rate un live ?","Tous les lives sont enregistrés et disponibles en replay dans ton espace membre, sans limite de temps. Tu peux aussi poser tes questions à l'avance si tu sais que tu ne pourras pas être présent·e."],
-  ["Je suis déjà accompagné·e par un thérapeute ou un coach. C'est compatible ?","Cela peut tout à fait être compatible. Mon objectif est de t'accompagner à prendre la meilleure décision adaptée à ton besoin. Je te propose de <a href=\"https://calendly.com/laura-ballo1993/echangecoaching\" target=\"_blank\" style=\"color:#C8554A;text-decoration:underline;font-weight:600;\">prendre rendez-vous</a> pour en discuter directement. Parfois, je peux demander l'aval du professionnel de santé concerné pour être sûre que l'accompagnement soit adapté et corresponde au mieux à ton besoin."],
+  ["Je suis déjà accompagné·e par un thérapeute ou un coach. C'est compatible ?","Cela peut tout à fait être compatible. Mon objectif est de t'accompagner à prendre la meilleure décision adaptée à ton besoin. Je te propose de <a href=\"https://calendly.com/laura-ballo1993/echangecoaching\" target=\"_blank\" style=\"color:var(--accent);text-decoration:underline;font-weight:600;\">prendre rendez-vous</a> pour en discuter directement. Parfois, je peux demander l'aval du professionnel de santé concerné pour être sûre que l'accompagnement soit adapté et corresponde au mieux à ton besoin."],
   ["Quelle formule choisir ?","La formule Réseau Only (79€) est idéale si tu veux avancer à ton rythme au sein du collectif. Essentielle (199€) ajoute une session de coaching individuelle par mois — c'est la plus choisie parce qu'elle combine l'énergie du groupe et un suivi personnalisé sur tes enjeux propres. Présence (299€) est pensée pour celles et ceux qui veulent accélérer leur transformation, avec 2 sessions par mois et un accompagnement complet sur l'affirmation de leur singularité (interview, communication, shorts)."],
   ["Est-ce que je peux changer de formule en cours de route ?","Oui, à tout moment. Tu peux monter en gamme si tu ressens le besoin d'un accompagnement plus soutenu, ou au contraire revenir à une formule plus légère. Aucune pénalité, aucun engagement de durée."],
   ["Je ne suis pas entrepreneur·e, c'est quand même pour moi ?","Oui. La communauté est ouverte à tout leader créatif et sensible, qui s'adapte trop aux autres, ou qui veut reprendre sa place — que ce soit dans un contexte professionnel, associatif, personnel ou créatif. Ce qui compte, c'est l'envie de travailler ton affirmation et ta présence."],
@@ -602,3 +689,4 @@ document.querySelectorAll('.reveal,.reveal-scale,.reveal-left,.reveal-right').fo
 </script>
 </body>
 </html>
+
