@@ -22,7 +22,7 @@
 
   /* ---------- FONDS CLAIRS ---------- */
   --light-beige: #FAF4EF;   /* fond clair principal */
-  --cream:       #F6F0EC;   /* fond clair alternatif (alternance sections) */
+  --cream:       #F8F0EC;   /* fond clair alternatif (alternance sections) */
   --warm-beige:  #E8DDD6;   /* cartes, bordures douces, placeholders */
 
   /* ---------- GRIS & BRUNS CHAUDS ---------- */
@@ -33,6 +33,17 @@
   /* ---------- TAUPE / NEUTRES HABILLÉS ---------- */
   --taupe-light: #BEA695;   /* intermédiaire chaud clair (séparateurs, fonds subtils) */
   --taupe:       #AFA098;   /* intermédiaire neutre (labels, textes tertiaires) */
+
+  /* ---------- PALETTE CHAUDE (communauté, conférences) ---------- */
+  --brown-d:     #573D38;   /* brun profond (titres, texte fort) */
+  --brown-m:     #775038;   /* brun moyen (corps de texte) */
+  --taupe-warm:  #98675B;   /* taupe chaud (accents textuels, légendes) */
+  --terra:       #B72D2B;   /* terracotta principal (= accent-deep) */
+  --terra-d:     #951F1E;   /* terracotta sombre (hover) */
+  --rust:        #9B594A;   /* rouille (gradients, accents doux) */
+  --peach:       #EDD1BF;   /* pêche clair (fonds tintés) */
+  --sand:        #C48F72;   /* sable chaud (coches, accents secondaires) */
+  --quote-bg:    #AFA098;   /* fond bandeau citation (= taupe) */
 
   /* ---------- ACCENT TERRACOTTA ---------- */
   --accent:       #C8554A;  /* couleur principale (boutons, liens, titres forts) */
@@ -84,3 +95,4 @@
   --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
   --shadow-xl: 0 24px 64px rgba(0,0,0,0.16);
 }
+
