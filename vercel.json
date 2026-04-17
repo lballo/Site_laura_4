@@ -6,12 +6,17 @@
       "source": "/blog/articles/:slug.html",
       "destination": "/:slug",
       "statusCode": 301
+    },
+    {
+      "source": "/blog/articles/:slug",
+      "destination": "/:slug",
+      "statusCode": 301
     }
   ],
   "rewrites": [
     {
       "source": "/:slug",
-      "destination": "/blog/articles/:slug.html"
+      "destination": "/blog/articles/:slug"
     }
   ],
   "headers": [
