@@ -37,14 +37,6 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- Replays -->
-  <url>
-    <loc>https://lauraballo.com/replays/replay-conference</loc>
-    <lastmod>2026-04-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
   <!-- Blog -->
   <url>
     <loc>https://lauraballo.com/blog/</loc>
