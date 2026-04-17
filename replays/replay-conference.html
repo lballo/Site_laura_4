@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Replay conférence — Les 8 conseils clés pour expanser en tant qu'entrepreneur atypique | Laura Ballo</title>
+  <meta name="description" content="Retrouvez le replay de la conférence-live : 8 conseils clés pour expanser en tant qu'entrepreneur atypique. Conciliez art, créativité, leadership et business.">
+
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================
+       RESET & BASE
+       ============================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text-dark);
+      background: #FFFFFF; /* ⚪ fond blanc strict */
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img, video { max-width: 100%; display: block; }
+    a { color: var(--accent); text-decoration: none; transition: color var(--transition-base); }
+    a:hover { color: var(--accent-dark); }
+
+    /* ============================================
+       HERO — TITRE & INTRO
+       ============================================ */
+    .replay-hero {
+      padding: var(--space-xxl) var(--space-md) var(--space-xxl);
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .replay-title {
+      font-family: var(--font-heading);
+      font-weight: 400;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.2;
+      color: var(--text-dark);
+      margin-bottom: var(--space-xl); /* ⬆️ plus d'espace entre titre et texte */
+      letter-spacing: -0.01em;
+    }
+
+    .replay-title .subtitle {
+      display: block;
+      margin-top: var(--space-sm);
+    }
+
+    .replay-intro {
+      font-family: var(--font-light);
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      font-weight: 400;
+      color: var(--warm-gray);
+      line-height: 1.7;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .replay-intro p { margin-bottom: 0.4em; }
+    .replay-intro p:first-of-type { margin-bottom: var(--space-sm); }
+
+    /* ============================================
+       VIDEO SECTION — réduite
+       ============================================ */
+    .video-section {
+      max-width: 640px; /* ⬇️ vidéo plus petite (était 900px) */
+      margin: 0 auto;
+      padding: var(--space-md) var(--space-md) var(--space-xxl); /* ⬆️ plus d'espace sous la vidéo */
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      background: var(--warm-beige);
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: var(--shadow-md);
+    }
+
+    .video-thumbnail {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .video-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #7BB5D6 0%, #9BCBDC 50%, #B8D8E0 100%);
+    }
+
+    .play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px;
+      height: 80px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      cursor: pointer;
+      transition: transform var(--transition-base), background var(--transition-base);
+      box-shadow: 0 8px 24px rgba(200, 85, 74, 0.4);
+    }
+
+    .play-button:hover {
+      transform: translate(-50%, -50%) scale(1.08);
+      background: var(--accent-dark);
+    }
+
+    .play-button svg {
+      width: 28px;
+      height: 28px;
+      fill: var(--white);
+      margin-left: 4px;
+    }
+
+    .video-embed { display: none; width: 100%; height: 100%; }
+    .video-embed.active { display: block; }
+    .video-embed iframe { width: 100%; height: 100%; border: 0; }
+
+    /* ============================================
+       CTA SECTION
+       ============================================ */
+    .cta-section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: var(--space-md) var(--space-md) var(--space-xxl);
+    }
+
+    .cta-text {
+      font-family: var(--font-article);
+      font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+      color: var(--text-dark);
+      line-height: 1.8;
+      margin-bottom: var(--space-md);
+    }
+
+    .cta-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 var(--space-xxl) 0; /* ⬆️ plus d'espace entre le texte et le CTA */
+    }
+
+    .cta-list li {
+      font-family: var(--font-article);
+      font-size: clamp(1rem, 1.4vw, 1.15rem);
+      color: var(--text-dark);
+      line-height: 1.7;
+      padding-left: var(--space-md);
+      position: relative;
+      margin-bottom: var(--space-xs);
+    }
+
+    .cta-list li::before {
+      content: "•";
+      position: absolute;
+      left: 4px;
+      color: var(--accent);
+      font-size: 1.3em;
+      line-height: 1;
+      top: 0.15em;
+    }
+
+    .cta-button {
+      display: block;
+      width: 100%;
+      padding: var(--space-md) var(--space-lg);
+      background: var(--accent);
+      color: var(--white);
+      font-family: var(--font-light);
+      font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+      font-weight: 400;
+      text-align: center;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(200, 85, 74, 0.25);
+      letter-spacing: 0.01em;
+    }
+
+    .cta-button:hover {
+      background: var(--accent-dark);
+      color: var(--white);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(200, 85, 74, 0.35);
+    }
+
+    .cta-button .arrow {
+      display: inline-block;
+      margin-left: var(--space-xs);
+      transition: transform var(--transition-base);
+    }
+
+    .cta-button:hover .arrow { transform: translateX(4px); }
+
+    /* ============================================
+       SOCIAL ROW
+       ============================================ */
+    .social-row {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-md);
+      padding: var(--space-lg) var(--space-md);
+      border-top: 1px dashed var(--warm-beige);
+      border-bottom: 1px dashed var(--warm-beige);
+      max-width: 900px;
+      margin: 0 auto var(--space-xxl);
+    }
+
+    .social-row a {
+      width: 44px;
+      height: 44px;
+      border-radius: 6px;
+      background: var(--trust-blue);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform var(--transition-base), background var(--transition-base);
+    }
+
+    .social-row a:hover {
+      transform: translateY(-2px);
+      background: var(--accent);
+    }
+
+    .social-row svg { width: 22px; height: 22px; fill: currentColor; }
+
+    /* ============================================
+       FOOTER (styles pour le HTML injecté depuis /assets/components/footer.html)
+       ============================================ */
+    .footer {
+      background: var(--black);
+      color: var(--white);
+      padding: var(--space-xl) var(--space-md) var(--space-md);
+    }
+
+    .footer-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: var(--space-xl);
+      padding-bottom: var(--space-lg);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-brand h3 {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 400;
+      margin-bottom: var(--space-sm);
+      color: var(--white);
+    }
+
+    .footer-brand p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: var(--space-md);
+      max-width: 420px;
+    }
+
+    .footer-social { display: flex; gap: var(--space-sm); }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition-base), transform var(--transition-base);
+    }
+
+    .social-link:hover {
+      background: var(--accent);
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    .footer-column h4 {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: var(--space-md);
+      color: var(--white);
+    }
+
+    .footer-column a {
+      display: block;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.95rem;
+      padding: 6px 0;
+      transition: color var(--transition-base);
+    }
+
+    .footer-column a:hover { color: var(--accent-light); }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: var(--space-md);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+
+    .footer-bottom p { color: rgba(255, 255, 255, 0.5); font-size: 0.85rem; }
+
+    .footer-legal { display: flex; gap: var(--space-md); flex-wrap: wrap; align-items: center; }
+
+    .footer-legal a,
+    .footer-cookie-btn {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.85rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      padding: 0;
+      transition: color var(--transition-base);
+    }
+
+    .footer-legal a:hover,
+    .footer-cookie-btn:hover { color: var(--accent-light); }
+
+    /* ============================================
+       COOKIES (styles pour le HTML injecté depuis /assets/components/cookies.html)
+       ============================================ */
+    .cc-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 9998;
+    }
+    .cc-overlay.active { display: block; }
+
+    .cc-banner {
+      display: none;
+      position: fixed;
+      bottom: var(--space-md);
+      left: var(--space-md);
+      right: var(--space-md);
+      max-width: 640px;
+      margin: 0 auto;
+      background: var(--white);
+      border-radius: 8px;
+      box-shadow: var(--shadow-lg);
+      padding: var(--space-lg);
+      z-index: 9999;
+      max-height: calc(100vh - 40px);
+      overflow-y: auto;
+    }
+    .cc-banner.active { display: block; }
+
+    .cc-wrapper { /* wrapper interne du composant cookies */ }
+
+    .cc-title {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-bottom: var(--space-sm);
+      color: var(--text-dark);
+    }
+
+    .cc-text {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--warm-gray);
+      margin-bottom: var(--space-md);
+    }
+
+    .cc-buttons { display: flex; gap: var(--space-xs); flex-wrap: wrap; }
+
+    .cc-btn {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all var(--transition-base);
+      flex: 1;
+      min-width: 140px;
+    }
+
+    .cc-btn-accept { background: var(--accent); color: var(--white); }
+    .cc-btn-accept:hover { background: var(--accent-dark); }
+    .cc-btn-reject { background: var(--warm-beige); color: var(--text-dark); }
+    .cc-btn-reject:hover { background: var(--taupe-light); }
+    .cc-btn-settings {
+      background: transparent;
+      color: var(--warm-gray);
+      border: 1px solid var(--warm-beige);
+    }
+    .cc-btn-settings:hover { background: var(--light-beige); }
+
+    .cc-settings-panel {
+      display: none;
+      margin-top: var(--space-md);
+      padding-top: var(--space-md);
+      border-top: 1px solid var(--warm-beige);
+    }
+    .cc-settings-panel.active { display: block; }
+
+    .cc-settings-title {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: var(--space-md);
+      color: var(--text-dark);
+    }
+
+    .cc-option {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: var(--space-sm);
+      padding: var(--space-sm) 0;
+      border-bottom: 1px solid var(--warm-beige);
+    }
+    .cc-option:last-of-type { border-bottom: none; }
+
+    .cc-option-label { font-weight: 600; font-size: 0.95rem; color: var(--text-dark); margin-bottom: 4px; }
+    .cc-option-desc { font-size: 0.85rem; color: var(--warm-gray); line-height: 1.5; }
+
+    .cc-toggle { position: relative; display: inline-block; width: 46px; height: 26px; flex-shrink: 0; }
+    .cc-toggle input { opacity: 0; width: 0; height: 0; }
+
+    .cc-toggle-slider {
+      position: absolute; cursor: pointer; inset: 0;
+      background: var(--warm-beige);
+      border-radius: 26px;
+      transition: var(--transition-base);
+    }
+
+    .cc-toggle-slider::before {
+      content: ""; position: absolute;
+      height: 20px; width: 20px;
+      left: 3px; bottom: 3px;
+      background: var(--white);
+      border-radius: 50%;
+      transition: var(--transition-base);
+    }
+
+    .cc-toggle input:checked + .cc-toggle-slider { background: var(--accent); }
+    .cc-toggle input:checked + .cc-toggle-slider::before { transform: translateX(20px); }
+    .cc-toggle input:disabled + .cc-toggle-slider { background: var(--success); cursor: not-allowed; }
+
+    .cc-settings-buttons { margin-top: var(--space-md); }
+
+    .cc-reopen-link {
+      display: none;
+      position: fixed;
+      bottom: 20px; left: 20px;
+      background: var(--white);
+      border: 1px solid var(--warm-beige);
+      color: var(--warm-gray);
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      z-index: 100;
+      font-family: inherit;
+      transition: all var(--transition-base);
+    }
+    .cc-reopen-link:hover { background: var(--light-beige); color: var(--accent); }
+    .cc-reopen-link.visible { display: block; }
+
+    /* ============================================
+       RESPONSIVE
+       ============================================ */
+    @media (max-width: 768px) {
+      .replay-hero { padding: var(--space-xl) var(--space-sm) var(--space-xl); }
+      .video-section { padding: var(--space-sm) var(--space-sm) var(--space-xl); }
+      .cta-section { padding: var(--space-sm) var(--space-sm) var(--space-xl); }
+
+      .play-button { width: 70px; height: 70px; }
+      .play-button svg { width: 26px; height: 26px; }
+
+      .footer-grid { grid-template-columns: 1fr; gap: var(--space-lg); }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .cc-buttons { flex-direction: column; }
+      .cc-btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="replay-hero">
+    <h1 class="replay-title">
+      Retrouvez le replay de votre conférence-live&nbsp;:
+      <span class="subtitle">Les 8 conseils clés pour expanser en tant qu'entrepreneur atypique&nbsp;!</span>
+    </h1>
+
+    <div class="replay-intro">
+      <p>Cette conférence 100% va vous aider à comprendre comment&nbsp;:</p>
+      <p>Concilier art&nbsp;/ créativité, leadership et business</p>
+      <p>Vous reconnecter à votre singularité et à votre puissance intuitive et créative</p>
+      <p>Gagner en focus et en puissance d'action, équilibrer votre yin et votre yang</p>
+      <p>Dépasser le syndrome de l'imposteur</p>
+    </div>
+  </section>
+
+  <!-- VIDÉO -->
+  <section class="video-section">
+    <div class="video-wrapper" id="videoWrapper" onclick="playVideo()">
+      <div class="video-placeholder" id="videoPlaceholder"></div>
+
+      <button class="play-button" aria-label="Lancer la vidéo">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+      </button>
+
+      <div class="video-embed" id="videoEmbed">
+        <iframe
+          id="videoIframe"
+          src=""
+          data-src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1"
+          title="Replay conférence"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <p class="cta-text">
+      Même si cette conférence contient énormément de pépites, je vous propose un premier rdv 100% offert et sans engagement au cours duquel nous ferons&nbsp;:
+    </p>
+
+    <ul class="cta-list">
+      <li>Une analyse 360° de votre business pour identifier ensemble vos leviers d'amélioration</li>
+      <li>Une analyse énergétique pour aller plus en profondeur sur vos points de blocages.</li>
+    </ul>
+
+    <a href="/#contact" class="cta-button">
+      Je réserve ma place pour un diagnostic business &amp; énergétique 100% offert <span class="arrow">→</span>
+    </a>
+  </section>
+
+  <!-- SOCIAL ROW -->
+  <div class="social-row">
+    <a href="https://www.instagram.com/laura_ballo_coaching/" aria-label="Instagram" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+    </a>
+    <a href="https://www.linkedin.com/in/lauraballo-coach-leadership/" aria-label="LinkedIn" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+    </a>
+    <a href="#" aria-label="Facebook" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+    </a>
+  </div>
+
+  <!-- FOOTER : injecté depuis /assets/components/footer.html -->
+  <div id="footer-placeholder"></div>
+
+  <!-- COOKIES : injecté depuis /assets/components/cookies.html -->
+  <div id="cookies-placeholder"></div>
+
+  <script>
+    // Charge un composant HTML externe dans un conteneur
+    async function loadComponent(url, targetId) {
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const html = await res.text();
+        document.getElementById(targetId).innerHTML = html;
+      } catch (err) {
+        console.warn(`Impossible de charger ${url}:`, err);
+      }
+    }
+
+    // Vidéo : lazy-load de l'iframe au clic
+    function playVideo() {
+      const placeholder = document.getElementById('videoPlaceholder');
+      const playBtn = document.querySelector('.play-button');
+      const embed = document.getElementById('videoEmbed');
+      const iframe = document.getElementById('videoIframe');
+
+      const realSrc = iframe.getAttribute('data-src');
+      if (realSrc.includes('VIDEO_ID')) {
+        alert('⚠️ Remplacez "VIDEO_ID" dans le code par l\'ID de votre vidéo YouTube/Vimeo.');
+        return;
+      }
+
+      iframe.setAttribute('src', realSrc);
+      placeholder.style.display = 'none';
+      playBtn.style.display = 'none';
+      embed.classList.add('active');
+    }
+
+    // Gestion cookies (s'attache au HTML injecté depuis cookies.html)
+    const CookieConsent = (function () {
+      const STORAGE_KEY = 'cookie_consent_v1';
+
+      const getConsent = () => {
+        try { return JSON.parse(localStorage.getItem(STORAGE_KEY)); }
+        catch { return null; }
+      };
+
+      const setConsent = (data) => {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...data, date: new Date().toISOString() }));
+      };
+
+      const $ = (id) => document.getElementById(id);
+
+      function showBanner() {
+        $('ccBanner')?.classList.add('active');
+        $('ccOverlay')?.classList.add('active');
+        $('ccSettingsPanel')?.classList.remove('active');
+        $('ccReopenLink')?.classList.remove('visible');
+      }
+
+      function hideBanner() {
+        $('ccBanner')?.classList.remove('active');
+        $('ccOverlay')?.classList.remove('active');
+        $('ccReopenLink')?.classList.add('visible');
+      }
+
+      function init() {
+        const consent = getConsent();
+        if (!consent) {
+          showBanner();
+        } else {
+          $('ccReopenLink')?.classList.add('visible');
+          if ($('ccAnalytics')) $('ccAnalytics').checked = consent.analytics || false;
+          if ($('ccMarketing')) $('ccMarketing').checked = consent.marketing || false;
+        }
+
+        $('ccAcceptAll')?.addEventListener('click', () => {
+          setConsent({ necessary: true, analytics: true, marketing: true });
+          hideBanner();
+        });
+
+        $('ccRejectAll')?.addEventListener('click', () => {
+          setConsent({ necessary: true, analytics: false, marketing: false });
+          hideBanner();
+        });
+
+        $('ccShowSettings')?.addEventListener('click', () => {
+          $('ccSettingsPanel')?.classList.toggle('active');
+        });
+
+        $('ccSaveSettings')?.addEventListener('click', () => {
+          setConsent({
+            necessary: true,
+            analytics: $('ccAnalytics')?.checked || false,
+            marketing: $('ccMarketing')?.checked || false
+          });
+          hideBanner();
+        });
+
+        $('ccReopenLink')?.addEventListener('click', showBanner);
+      }
+
+      return { init, showBanner, getConsent };
+    })();
+
+    // Expose global pour que le bouton "Cookies" du footer puisse l'appeler
+    window.CookieConsent = CookieConsent;
+
+    // BOOT
+    document.addEventListener('DOMContentLoaded', async () => {
+      await Promise.all([
+        loadComponent('/assets/components/footer.html', 'footer-placeholder'),
+        loadComponent('/assets/components/cookies.html', 'cookies-placeholder')
+      ]);
+      CookieConsent.init();
+    });
+  </script>
+
+</body>
+</html>
