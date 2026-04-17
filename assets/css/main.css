@@ -387,7 +387,7 @@ img {
 
 .citation-banner blockquote {
   font-family: var(--font-light);
-  font-size: clamp(18px, 2.5vw, 28px);
+  font-size: clamp(16px, 2.5vw, 25px);
   font-style: italic;
   font-weight: 300;
   color: var(--light-beige);
