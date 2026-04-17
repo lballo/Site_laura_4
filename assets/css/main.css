@@ -220,7 +220,7 @@ img {
 
 .hero h1 {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(36px, 6vw, 72px);
+  font-size: clamp(30px, 6vw, 60px);
   color: var(--white);
   font-weight: 500;
   line-height: 1.15;
@@ -358,7 +358,7 @@ img {
 
 .laura-intro-text p {
   font-family: var(--font-body);
-  font-size: 20px;
+  font-size: 18px;
   color: var(--warm-gray);
   line-height: 1.9;
   letter-spacing: 0;
@@ -387,7 +387,7 @@ img {
 
 .citation-banner blockquote {
   font-family: var(--font-light);
-  font-size: clamp(20px, 2.5vw, 30px);
+  font-size: clamp(18px, 2.5vw, 28px);
   font-style: italic;
   font-weight: 300;
   color: var(--light-beige);
@@ -443,7 +443,7 @@ img {
 }
 
 .section-description {
-  font-size: 17px;
+  font-size: 19px;
   color: var(--warm-gray);
   line-height: 1.7;
   max-width: 660px;
