@@ -219,7 +219,7 @@ img {
 }
 
 .hero h1 {
-  font-family: var(--font-heading);
+  font-family: 'Playfair Display', Georgia, serif;
   font-size: clamp(36px, 6vw, 72px);
   color: var(--white);
   font-weight: 500;
@@ -230,7 +230,7 @@ img {
 }
 
 .hero-subtitle {
-  font-family: var(--font-heading);
+  font-family: 'Playfair Display', Georgia, serif;
   font-size: clamp(1rem, 2vw, 1.25rem);
   color: var(--white);
   line-height: 1.7;
@@ -357,7 +357,7 @@ img {
 }
 
 .laura-intro-text p {
-  font-family: var(--font-light);
+  font-family: var(--font-body);
   font-size: 20px;
   color: var(--warm-gray);
   line-height: 1.9;
@@ -1154,3 +1154,4 @@ img {
   .projects-header h2 { font-size: clamp(24px, 7vw, 36px); }
   .blog-card-image { height: 200px; }
 }
+
