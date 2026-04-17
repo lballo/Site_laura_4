@@ -128,7 +128,7 @@ body {
   background-repeat: no-repeat;
   background-color: #1a1a1a;
 }
-}
+
 /* Fix iOS : parallax fixed broken */
 @media (max-width: 768px) {
   .hero-parallax { background-attachment: scroll; }
