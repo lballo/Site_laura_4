@@ -27,6 +27,7 @@ from PIL import Image
 # ─────────────────────────────────────────────────────────
 NOTION_API_KEY = os.environ.get("NOTION_API_KEY", "")
 DATABASE_ID = os.environ.get("NOTION_DATABASE_ID", "300075e127d2809eaac2e85bba8280ef")
+TAGS_REF_DATABASE_ID = os.environ.get("NOTION_TAGS_REF_DATABASE_ID", "82e832b39f8b43a0adc0eff93135a961")
 
 ARTICLES_JSON_PATH = os.environ.get("ARTICLES_JSON_PATH", "blog/articles.json")
 TEMPLATE_PATH = os.environ.get("TEMPLATE_PATH", "_templates/article.html")
@@ -43,7 +44,10 @@ WEBP_QUALITY = 85
 # ─────────────────────────────────────────────────────────
 # MAPPING TAGS → SLUGS
 # ─────────────────────────────────────────────────────────
-TAG_SLUG_MAP = {
+# Source de vérité : BDD Notion "Système de Tags — Référentiel"
+# Ce mapping sert de fallback si la BDD référentielle est inaccessible.
+# Il est chargé dynamiquement dans main() via load_tags_reference().
+TAG_SLUG_MAP_FALLBACK = {
     "Leadership": "leadership",
     "Management": "management",
     "Stratégie": "strategie",
@@ -62,6 +66,9 @@ TAG_SLUG_MAP = {
     "Intelligence émotionnelle": "intelligence-emotionnelle",
     "Développement personnel": "developpement-personnel",
 }
+
+# Rempli dynamiquement par load_tags_reference() au démarrage
+TAG_SLUG_MAP = dict(TAG_SLUG_MAP_FALLBACK)
 
 MOIS_FR = {
     1: "janvier", 2: "février", 3: "mars", 4: "avril",
@@ -383,6 +390,35 @@ def tag_to_slug(tag_name):
     return TAG_SLUG_MAP.get(tag_name, slugify(tag_name))
 
 
+def load_tags_reference(client):
+    """
+    Charge dynamiquement le mapping Tag → Slug depuis la BDD Notion référentielle
+    "Système de Tags — Référentiel". Met à jour TAG_SLUG_MAP in-place.
+
+    En cas d'échec (BDD inaccessible, schéma inattendu, etc.), garde
+    le mapping fallback défini statiquement en haut du fichier.
+    """
+    global TAG_SLUG_MAP
+    try:
+        pages = client.query_database(TAGS_REF_DATABASE_ID)
+        mapping = {}
+        for page in pages:
+            tag_label = extract_property(page, "Tag", "title")
+            tag_slug = extract_property(page, "Slug", "rich_text")
+            if tag_label and tag_slug:
+                mapping[tag_label] = tag_slug
+
+        if not mapping:
+            print("   ⚠️  Référentiel Tags vide — fallback sur mapping statique")
+            return
+
+        TAG_SLUG_MAP = mapping
+        print(f"   ✅ Référentiel Tags chargé : {len(mapping)} tags")
+    except Exception as e:
+        print(f"   ⚠️  Erreur lecture référentiel Tags : {e}")
+        print(f"   → Fallback sur mapping statique ({len(TAG_SLUG_MAP_FALLBACK)} tags)")
+
+
 def format_date_fr(iso_date):
     try:
         dt = datetime.fromisoformat(iso_date)
@@ -479,11 +515,20 @@ def load_articles_json(path):
 
 def save_articles_json(path, articles):
     articles.sort(key=lambda a: a.get("date", ""), reverse=True)
-    # Générer les collections (tags) pour le blog dynamique
+
+    # Collecter les slugs de tags réellement utilisés par au moins 1 article
+    used_slugs = set()
+    for article in articles:
+        used_slugs.update(article.get("tags", []))
+
+    # Générer les collections : uniquement les tags utilisés
+    # On préserve l'ordre d'apparition dans TAG_SLUG_MAP (ordre du référentiel Notion)
     collections = [
         {"slug": slug, "label": label}
         for label, slug in TAG_SLUG_MAP.items()
+        if slug in used_slugs
     ]
+
     with open(path, "w", encoding="utf-8") as f:
         json.dump({"collections": collections, "articles": articles}, f, ensure_ascii=False, indent=2)
 
@@ -564,6 +609,9 @@ def main():
     print("═" * 55)
 
     client = NotionClient(NOTION_API_KEY)
+
+    print("\n🏷️  Chargement du référentiel Tags...")
+    load_tags_reference(client)
 
     template_path = Path(TEMPLATE_PATH)
     if not template_path.exists():
