@@ -35,9 +35,20 @@ function setupEventListeners() {
   }
   
   // Collections
-  const collectionBtns = document.querySelectorAll('.collection-btn');
-  collectionBtns.forEach(btn => {
-    btn.addEventListener('click', () => handleCollectionClick(btn));
+  // Le script inline de blog/index.html gère les clics via event delegation sur
+  // #collections-grid et dispatche un CustomEvent 'collection-changed' sur window.
+  // Ça résout le problème de timing : les boutons sont générés dynamiquement après
+  // un fetch() async, donc un listener direct au chargement ne les trouverait pas.
+  window.addEventListener('collection-changed', (e) => {
+    const tag = e.detail && e.detail.tag;
+    if (!tag) return;
+    if (tag === 'all') {
+      renderArticles(allArticles);
+      return;
+    }
+    const filtered = allArticles.filter(article => article.tags.includes(tag));
+    renderArticles(filtered);
+    scrollToArticles();
   });
   
   // Situations
