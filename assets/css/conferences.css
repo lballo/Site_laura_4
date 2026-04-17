@@ -123,10 +123,11 @@ body {
 .hero-parallax {
   background-image: url('/assets/img/conference-hero.jpg');
   background-attachment: fixed;
-  background-position: center 70%;
+  background-position: center top;
   background-size: 100%;
   background-repeat: no-repeat;
   background-color: #1a1a1a;
+}
 }
 /* Fix iOS : parallax fixed broken */
 @media (max-width: 768px) {
