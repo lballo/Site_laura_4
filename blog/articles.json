@@ -344,7 +344,7 @@
         "définition"
       ],
       "category": "Prise de parole en public",
-      "image": "",
+      "image": "/assets/img/blog/charisme-definition-main.webp",
       "featured": false
     },
     {
@@ -402,7 +402,7 @@
         "parole"
       ],
       "category": "Prise de parole en public",
-      "image": "",
+      "image": "/assets/img/blog/voix-dans-la-prise-de-parole-main.webp",
       "featured": false
     },
     {
@@ -483,7 +483,7 @@
         "inné"
       ],
       "category": "Prise de parole en public",
-      "image": "",
+      "image": "/assets/img/blog/charisme-inne-main.webp",
       "featured": false
     },
     {
@@ -509,7 +509,7 @@
         "votre"
       ],
       "category": "Communication",
-      "image": "",
+      "image": "/assets/img/blog/reussir-votre-storytelling-main.webp",
       "featured": false
     },
     {
@@ -538,7 +538,7 @@
         "public"
       ],
       "category": "Prise de parole en public",
-      "image": "https://lauraballo.com/sentrainer-a-la-prise-de-parole",
+      "image": "/assets/img/blog/sentrainer-a-la-prise-de-parole-main.webp",
       "featured": false
     },
     {
@@ -597,7 +597,7 @@
         "émotions"
       ],
       "category": "Prise de parole en public",
-      "image": "",
+      "image": "/assets/img/blog/prise-de-parole-et-emotions-main.webp",
       "featured": false
     },
     {
@@ -628,7 +628,34 @@
         "comprendre"
       ],
       "category": "Culture",
-      "image": "",
+      "image": "/assets/img/blog/gourou-quand-le-cinema-francais-effleure-lemprise-sans-vraiment-la-comprendre-main.webp",
+      "featured": false
+    },
+    {
+      "id": "intelligence-emotionnelle",
+      "title": "Développer son intelligence émotionnelle : le guide complet",
+      "slug": "intelligence-emotionnelle",
+      "url": "/intelligence-emotionnelle",
+      "date": "2026-05-05",
+      "readingTime": "4 min",
+      "excerpt": "Les 4 piliers essentiels pour comprendre, accueillir et transformer vos émotions en force de leadership.",
+      "tags": [
+        "gestion-des-emotions",
+        "leadership",
+        "comprehension-de-soi"
+      ],
+      "situations": [
+        "sensible"
+      ],
+      "searchKeywords": [
+        "intelligence",
+        "émotionnelle",
+        "développer",
+        "guide",
+        "complet"
+      ],
+      "category": "Gestion des émotions",
+      "image": "/assets/img/blog/intelligence-emotionnelle-main.webp",
       "featured": false
     },
     {
@@ -669,40 +696,6 @@
       "category": "Hypersensibilité",
       "image": "/assets/img/blog/limites.png",
       "featured": false
-    },
-    {
-      "id": "intelligence-emotionnelle",
-      "title": "Développer son intelligence émotionnelle : le guide complet",
-      "slug": "intelligence-emotionnelle",
-      "url": "/blog/articles/intelligence-emotionnelle.html",
-      "date": "2026-01-20",
-      "readingTime": "10 min",
-      "excerpt": "Les 4 piliers essentiels pour comprendre, accueillir et transformer vos émotions en force de leadership.",
-      "tags": [
-        "gestion-des-emotions",
-        "leadership",
-        "comprehension-de-soi"
-      ],
-      "situations": [
-        "sensible"
-      ],
-      "searchKeywords": [
-        "intelligence emotionnelle",
-        "gestion emotions",
-        "conscience emotionnelle",
-        "comprendre emotions",
-        "leadership emotionnel",
-        "4 piliers",
-        "communication emotionnelle",
-        "ressentir",
-        "exprimer",
-        "accueillir",
-        "journal emotionnel",
-        "vocabulaire emotionnel"
-      ],
-      "category": "Intelligence émotionnelle",
-      "image": "/assets/img/blog/prise-de-parole.png",
-      "featured": true
     },
     {
       "id": "douceur",
