@@ -659,12 +659,12 @@
       "featured": false
     },
     {
-      "id": "poser-limites",
+      "id": "poser-limites-hypersensible",
       "title": "Hypersensible : comment poser ses limites sans culpabiliser",
       "slug": "poser-limites-hypersensible",
-      "url": "/blog/articles/poser-limites-hypersensible.html",
-      "date": "2026-01-28",
-      "readingTime": "8 min",
+      "url": "/poser-limites-hypersensible",
+      "date": "2026-05-05",
+      "readingTime": "4 min",
       "excerpt": "Dire non est difficile pour les hypersensibles. Découvrez pourquoi la colère est votre alliée et comment poser des limites claires avec bienveillance.",
       "tags": [
         "hypersensibilite",
@@ -677,33 +677,25 @@
         "sensible"
       ],
       "searchKeywords": [
-        "hypersensible",
+        "poser",
+        "des",
         "limites",
-        "dire non",
-        "culpabilite",
-        "assertivite",
-        "colere",
-        "communication",
-        "autorité",
-        "dire non",
-        "valeurs",
-        "respect de soi",
-        "refuser",
-        "proteger",
-        "CNV",
-        "colere saine"
+        "hypersensible",
+        "comment",
+        "sans",
+        "culpabiliser"
       ],
       "category": "Hypersensibilité",
-      "image": "/assets/img/blog/limites.png",
+      "image": "/assets/img/blog/poser-limites-hypersensible-main.webp",
       "featured": false
     },
     {
-      "id": "douceur",
+      "id": "pouvoir-de-la-douceur",
       "title": "Le pouvoir de la douceur en leadership",
       "slug": "pouvoir-de-la-douceur",
-      "url": "/blog/articles/pouvoir-de-la-douceur.html",
-      "date": "2026-01-15",
-      "readingTime": "7 min",
+      "url": "/pouvoir-de-la-douceur",
+      "date": "2026-05-05",
+      "readingTime": "4 min",
       "excerpt": "Pourquoi la douceur n'est pas une faiblesse mais une force stratégique qui transforme votre impact et crée une autorité durable.",
       "tags": [
         "leadership",
@@ -715,17 +707,14 @@
         "leadership"
       ],
       "searchKeywords": [
+        "pouvoir",
+        "de",
+        "la",
         "douceur",
-        "sensible",
-        "gentil",
-        "faiblesse",
-        "trop gentil",
-        "empathie",
-        "bienveillance",
-        "vulnerable"
+        "leadership"
       ],
-      "category": "Hypersensibilité",
-      "image": "/assets/img/blog/douceur.png",
+      "category": "Leadership",
+      "image": "/assets/img/blog/pouvoir-de-la-douceur-main.webp",
       "featured": false
     }
   ]
