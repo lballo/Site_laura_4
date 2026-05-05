@@ -1,11 +1,53 @@
 {
+  "collections": [
+    {
+      "slug": "leadership",
+      "label": "Leadership"
+    },
+    {
+      "slug": "strategie",
+      "label": "Stratégie"
+    },
+    {
+      "slug": "prise-de-parole",
+      "label": "Prise de parole en public"
+    },
+    {
+      "slug": "communication",
+      "label": "Communication"
+    },
+    {
+      "slug": "gestion-des-conflits",
+      "label": "Gestion des conflits"
+    },
+    {
+      "slug": "gestion-des-emotions",
+      "label": "Gestion des émotions"
+    },
+    {
+      "slug": "hypersensibilite",
+      "label": "Hypersensibilité"
+    },
+    {
+      "slug": "comprehension-de-soi",
+      "label": "Compréhension de soi"
+    },
+    {
+      "slug": "affirmation-de-soi",
+      "label": "Affirmation de soi"
+    },
+    {
+      "slug": "culture",
+      "label": "Culture"
+    }
+  ],
   "articles": [
     {
       "id": "empathie-hypersensible",
       "title": "Comment gérer son hyper-empathie en tant qu’hypersensible?",
       "slug": "empathie-hypersensible",
       "url": "/empathie-hypersensible",
-      "date": "2026-03-04",
+      "date": "2026-05-05",
       "readingTime": "7 min",
       "excerpt": "Pourquoi les hypersensibles sont-ils souvent hyperempathes ? Découvrez la différence entre empathie et compassion et comment éviter la contamination émotionnelle",
       "tags": [
@@ -31,11 +73,11 @@
     },
     {
       "id": "prise-de-parole-stress",
-      "title": "Prise de parole stress et émotions: l’art de la mise en résonance",
+      "title": "Prise de parole & gestion du stress: Comment j’ai lâché prise?",
       "slug": "prise-de-parole-stress",
       "url": "/prise-de-parole-stress",
-      "date": "2026-03-01",
-      "readingTime": "5 min",
+      "date": "2026-05-05",
+      "readingTime": "4 min",
       "excerpt": "Prise de parole stress: souvent nous avons le sentiment que nos émotions nous bloquent, qu'en est-il réellement?",
       "tags": [
         "prise-de-parole",
@@ -46,26 +88,25 @@
         "stress"
       ],
       "searchKeywords": [
+        "stress",
         "prise",
         "parole",
-        "stress",
-        "émotions",
-        "art",
-        "mise",
-        "résonance"
+        "gestion",
+        "comment",
+        "lâché"
       ],
       "category": "Prise de parole en public",
-      "image": "https://lauraballo.com/wp-content/uploads/2023/11/personne_sur_une_scne_face__un_public_en_robe_.jpg",
+      "image": "/assets/img/blog/prise-de-parole-stress-main.webp",
       "featured": false
     },
     {
-      "id": "st-psycho",
+      "id": "stranger-things-lecture-psychologique",
       "title": "Stranger Things : une lecture psychologique et thérapeutique",
       "slug": "stranger-things-lecture-psychologique",
-      "url": "/blog/articles/stranger-things-lecture-psychologique.html",
-      "date": "2026-01-29",
-      "readingTime": "8 min",
-      "excerpt": "Pourquoi cette série fascine bien au-delà de l'horreur et comment elle explore avec finesse les mécanismes profonds du trauma, de la mémoire et de la reconstruction identitaire.",
+      "url": "/stranger-things-lecture-psychologique",
+      "date": "2026-05-05",
+      "readingTime": "4 min",
+      "excerpt": "Pourquoi cette série fascine bien au-delà de l'horreur et comment elle explore les mécanismes profonds du trauma, de la mémoire et de la reconstruction identitaire.",
       "tags": [
         "comprehension-de-soi",
         "culture"
@@ -74,26 +115,521 @@
         "comprehension"
       ],
       "searchKeywords": [
-        "trauma",
-        "memoire",
-        "inconscient",
-        "stranger things",
-        "psychologie",
-        "sensible",
-        "jugement",
-        "emotion",
-        "refoulement",
-        "therapie",
-        "guerir",
-        "relation",
-        "eleven",
-        "upside down",
-        "monstrueux",
-        "peur"
+        "stranger",
+        "things",
+        "lecture",
+        "psychologique",
+        "thérapeutique"
       ],
-      "category": "Psychologie & Culture",
-      "image": "/assets/img/blog/stranger-things.jpg",
-      "featured": true
+      "category": "Compréhension de soi",
+      "image": "/assets/img/blog/stranger-things-lecture-psychologique-main.webp",
+      "featured": false
+    },
+    {
+      "id": "strategies-hypersensibles",
+      "title": "Les 3 stratégies d'adaptation des hypersensibles (et comment en sortir)",
+      "slug": "strategies-hypersensibles",
+      "url": "/strategies-hypersensibles",
+      "date": "2026-05-05",
+      "readingTime": "5 min",
+      "excerpt": "Carapace, caméléon ou fuite : découvrez les mécanismes inconscients des hypersensibles et comment transformer ces stratégies en forces authentiques.",
+      "tags": [
+        "hypersensibilite",
+        "comprehension-de-soi"
+      ],
+      "situations": [
+        "comprehension",
+        "sensible"
+      ],
+      "searchKeywords": [
+        "stratégies",
+        "adaptation",
+        "hypersensible",
+        "hypersensibles",
+        "comment",
+        "sortir"
+      ],
+      "category": "Hypersensibilité",
+      "image": "/assets/img/blog/strategies-hypersensibles-main.webp",
+      "featured": false
+    },
+    {
+      "id": "art-du-positionnement",
+      "title": "L'art du positionnement : trouver sa place unique",
+      "slug": "art-du-positionnement",
+      "url": "/art-du-positionnement",
+      "date": "2026-05-05",
+      "readingTime": "4 min",
+      "excerpt": "Comment clarifier votre identité professionnelle et construire un positionnement qui résonne avec vos valeurs profondes et votre singularité.",
+      "tags": [
+        "leadership",
+        "strategie"
+      ],
+      "situations": [
+        "positionnement"
+      ],
+      "searchKeywords": [
+        "savoir",
+        "se",
+        "positionner",
+        "art",
+        "positionnement",
+        "trouver",
+        "place",
+        "unique"
+      ],
+      "category": "Leadership",
+      "image": "/assets/img/blog/art-du-positionnement-main.webp",
+      "featured": false
+    },
+    {
+      "id": "lintelligence-corporelle-la-grande-oubliee-du-leadership",
+      "title": "Leadership : l'intelligence corporelle, la grande oubliée !",
+      "slug": "lintelligence-corporelle-la-grande-oubliee-du-leadership",
+      "url": "/lintelligence-corporelle-la-grande-oubliee-du-leadership",
+      "date": "2026-05-05",
+      "readingTime": "3 min",
+      "excerpt": "On entend souvent parler du management par les émotions. Mais nos sociétés occidentales ont beaucoup moins démocratisé la notion d'intelligence corporelle lorsqu'on parle de leadership.",
+      "tags": [
+        "leadership",
+        "gestion-des-emotions",
+        "comprehension-de-soi"
+      ],
+      "situations": [
+        "leadership",
+        "comprehension"
+      ],
+      "searchKeywords": [
+        "intelligence",
+        "corporelle",
+        "leadership",
+        "grande",
+        "oubliée"
+      ],
+      "category": "Leadership",
+      "image": "/assets/img/blog/lintelligence-corporelle-la-grande-oubliee-du-leadership-main.webp",
+      "featured": false
+    },
+    {
+      "id": "definition-prise-de-parole",
+      "title": "La définition de la prise de parole en public: un art?",
+      "slug": "definition-prise-de-parole",
+      "url": "/definition-prise-de-parole",
+      "date": "2026-05-05",
+      "readingTime": "2 min",
+      "excerpt": "Oscillant entre technique et art, donner une définition de la prise de parole en public peut s'avérer relativement complexe. La prise de parole est souvent la grande oubliée de l'école.",
+      "tags": [
+        "prise-de-parole",
+        "communication",
+        "comprehension-de-soi"
+      ],
+      "situations": [
+        "comprehension"
+      ],
+      "searchKeywords": [
+        "définition",
+        "prise",
+        "de",
+        "parole",
+        "public",
+        "art"
+      ],
+      "category": "Prise de parole en public",
+      "image": "/assets/img/blog/definition-prise-de-parole-main.webp",
+      "featured": false
+    },
+    {
+      "id": "prise-de-parole-hypersensibles",
+      "title": "Prise de parole hypersensibles",
+      "slug": "prise-de-parole-hypersensibles",
+      "url": "/prise-de-parole-hypersensibles",
+      "date": "2026-05-05",
+      "readingTime": "4 min",
+      "excerpt": "Prise de parole hypersensibles. Découvrez en quoi votre hypersensibilité peut être un vrai atout pour vos prises de parole en public.",
+      "tags": [
+        "prise-de-parole",
+        "hypersensibilite",
+        "gestion-des-emotions"
+      ],
+      "situations": [
+        "sensible",
+        "stress",
+        "comprehension"
+      ],
+      "searchKeywords": [
+        "prise",
+        "de",
+        "parole",
+        "hypersensibles"
+      ],
+      "category": "Prise de parole en public",
+      "image": "/assets/img/blog/prise-de-parole-hypersensibles-main.webp",
+      "featured": false
+    },
+    {
+      "id": "3-cles-pour-mettre-les-neurosciences-au-service-de-votre-pitch",
+      "title": "Le pitch : 3 clés en neurosciences à mettre à son service !",
+      "slug": "3-cles-pour-mettre-les-neurosciences-au-service-de-votre-pitch",
+      "url": "/3-cles-pour-mettre-les-neurosciences-au-service-de-votre-pitch",
+      "date": "2026-05-05",
+      "readingTime": "3 min",
+      "excerpt": "Savoir présenter de manière efficace et rapide son idée au travers du pitch est essentielle. Les sciences cognitives regorgent de conseils précieux pour convaincre votre audience.",
+      "tags": [
+        "prise-de-parole",
+        "communication"
+      ],
+      "situations": [
+        "leadership",
+        "positionnement"
+      ],
+      "searchKeywords": [
+        "pitch",
+        "neurosciences",
+        "clés",
+        "mettre",
+        "service"
+      ],
+      "category": "Prise de parole en public",
+      "image": "/assets/img/blog/3-cles-pour-mettre-les-neurosciences-au-service-de-votre-pitch-main.webp",
+      "featured": false
+    },
+    {
+      "id": "3-conseils-originaux-pour-rendre-votre-intervention-orale-impactante",
+      "title": "4 conseils originaux pour rendre votre intervention orale impactante",
+      "slug": "3-conseils-originaux-pour-rendre-votre-intervention-orale-impactante",
+      "url": "/3-conseils-originaux-pour-rendre-votre-intervention-orale-impactante",
+      "date": "2026-05-05",
+      "readingTime": "4 min",
+      "excerpt": "Vous souhaitez rendre votre intervention orale plus impactante pour votre public? Trois astuces pour vous permettre de briller lors de vos présentations.",
+      "tags": [
+        "prise-de-parole",
+        "communication"
+      ],
+      "situations": [
+        "positionnement",
+        "leadership"
+      ],
+      "searchKeywords": [
+        "intervention",
+        "orale",
+        "impactante",
+        "conseils",
+        "originaux",
+        "rendre",
+        "votre"
+      ],
+      "category": "Prise de parole en public",
+      "image": "/assets/img/blog/3-conseils-originaux-pour-rendre-votre-intervention-orale-impactante-main.webp",
+      "featured": false
+    },
+    {
+      "id": "charisme-definition",
+      "title": "Le charisme: qu'est-ce que c'est?",
+      "slug": "charisme-definition",
+      "url": "/charisme-definition",
+      "date": "2026-05-05",
+      "readingTime": "3 min",
+      "excerpt": "Le charisme: qu'est-ce que c'est? Dans cet article, nous vous donnons la définition du charisme, loin d'être une compétence innée.",
+      "tags": [
+        "prise-de-parole",
+        "communication",
+        "comprehension-de-soi"
+      ],
+      "situations": [
+        "comprehension",
+        "positionnement"
+      ],
+      "searchKeywords": [
+        "charisme",
+        "définition"
+      ],
+      "category": "Prise de parole en public",
+      "image": "",
+      "featured": false
+    },
+    {
+      "id": "peur-regard-autre",
+      "title": "Comment dépasser la peur du jugement de l’autre",
+      "slug": "peur-regard-autre",
+      "url": "/peur-regard-autre",
+      "date": "2026-05-05",
+      "readingTime": "4 min",
+      "excerpt": "Pourquoi ai-je peur du regard de l'autre ? Découvrez les mécanismes de la peur du jugement et comment retrouver votre authenticité.",
+      "tags": [
+        "affirmation-de-soi",
+        "comprehension-de-soi"
+      ],
+      "situations": [
+        "jugement",
+        "limites"
+      ],
+      "searchKeywords": [
+        "peur",
+        "du",
+        "regard",
+        "de",
+        "l'autre",
+        "comment",
+        "dépasser",
+        "jugement",
+        "autre"
+      ],
+      "category": "Affirmation de soi",
+      "image": "/assets/img/blog/peur-regard-autre-main.webp",
+      "featured": false
+    },
+    {
+      "id": "voix-dans-la-prise-de-parole",
+      "title": "La voix dans la prise de parole",
+      "slug": "voix-dans-la-prise-de-parole",
+      "url": "/voix-dans-la-prise-de-parole",
+      "date": "2026-05-05",
+      "readingTime": "3 min",
+      "excerpt": "Découvrez notre article sur l'importance de la voix dans la prise de parole en public et comment l'améliorer.",
+      "tags": [
+        "prise-de-parole",
+        "communication",
+        "comprehension-de-soi"
+      ],
+      "situations": [
+        "comprehension",
+        "positionnement"
+      ],
+      "searchKeywords": [
+        "voix",
+        "prise",
+        "de",
+        "parole"
+      ],
+      "category": "Prise de parole en public",
+      "image": "",
+      "featured": false
+    },
+    {
+      "id": "comprendre-le-trac-au-travers-des-neurosciences",
+      "title": "Le trac dans la prise de parole: réussir à le gérer",
+      "slug": "comprendre-le-trac-au-travers-des-neurosciences",
+      "url": "/comprendre-le-trac-au-travers-des-neurosciences",
+      "date": "2026-05-05",
+      "readingTime": "5 min",
+      "excerpt": "Le trac et son appréhension constitue en soi un phénomène redouté en prise de parole en public. S'il est possible d'abaisser le niveau de trac, s'en débarrasser totalement est en revanche beaucoup plus compliqué.",
+      "tags": [
+        "prise-de-parole",
+        "gestion-des-emotions"
+      ],
+      "situations": [
+        "stress"
+      ],
+      "searchKeywords": [
+        "trac",
+        "prise",
+        "de",
+        "parole",
+        "réussir",
+        "gérer"
+      ],
+      "category": "Prise de parole en public",
+      "image": "/assets/img/blog/comprendre-le-trac-au-travers-des-neurosciences-main.webp",
+      "featured": false
+    },
+    {
+      "id": "depasser_croyances_limitantes",
+      "title": "Croyances limitantes : les dépasser en prise de parole",
+      "slug": "depasser_croyances_limitantes",
+      "url": "/depasser_croyances_limitantes",
+      "date": "2026-05-05",
+      "readingTime": "5 min",
+      "excerpt": "Les croyances limitantes... 'Je n'y arriverai jamais', 'je ne suis pas assez bon'... elles ont le pouvoir de limiter considérablement notre capacité d'action.",
+      "tags": [
+        "prise-de-parole",
+        "affirmation-de-soi",
+        "gestion-des-emotions"
+      ],
+      "situations": [
+        "jugement",
+        "stress",
+        "comprehension"
+      ],
+      "searchKeywords": [
+        "croyances",
+        "limitantes",
+        "dépasser",
+        "prise",
+        "parole"
+      ],
+      "category": "Prise de parole en public",
+      "image": "/assets/img/blog/depasser_croyances_limitantes-main.webp",
+      "featured": false
+    },
+    {
+      "id": "charisme-inne",
+      "title": "Le charisme est-il inné?",
+      "slug": "charisme-inne",
+      "url": "/charisme-inne",
+      "date": "2026-05-05",
+      "readingTime": "3 min",
+      "excerpt": "Le charisme est-il inné ou est-il possible de le devenir? Dans cet article nous vous donnons des conseils clés pour le développer!",
+      "tags": [
+        "prise-de-parole",
+        "communication",
+        "comprehension-de-soi"
+      ],
+      "situations": [
+        "positionnement",
+        "comprehension"
+      ],
+      "searchKeywords": [
+        "charisme",
+        "inné"
+      ],
+      "category": "Prise de parole en public",
+      "image": "",
+      "featured": false
+    },
+    {
+      "id": "reussir-votre-storytelling",
+      "title": "Comment réussir votre storytelling?",
+      "slug": "reussir-votre-storytelling",
+      "url": "/reussir-votre-storytelling",
+      "date": "2026-05-05",
+      "readingTime": "3 min",
+      "excerpt": "Comment réussir votre storytelling? Découvrez les clés pour raconter des histoires captivantes et impactantes.",
+      "tags": [
+        "communication",
+        "prise-de-parole"
+      ],
+      "situations": [
+        "positionnement",
+        "leadership"
+      ],
+      "searchKeywords": [
+        "réussir",
+        "storytelling",
+        "comment",
+        "votre"
+      ],
+      "category": "Communication",
+      "image": "",
+      "featured": false
+    },
+    {
+      "id": "sentrainer-a-la-prise-de-parole",
+      "title": "Comment s'entrainer à la prise de parole en public?",
+      "slug": "sentrainer-a-la-prise-de-parole",
+      "url": "/sentrainer-a-la-prise-de-parole",
+      "date": "2026-05-05",
+      "readingTime": "4 min",
+      "excerpt": "Comment s'entrainer à la prise de parole en public? Mes conseils clés pour préparer un discours oral efficacement.",
+      "tags": [
+        "prise-de-parole",
+        "communication"
+      ],
+      "situations": [
+        "positionnement",
+        "comprehension"
+      ],
+      "searchKeywords": [
+        "s'entrainer",
+        "prise",
+        "de",
+        "parole",
+        "comment",
+        "entrainer",
+        "public"
+      ],
+      "category": "Prise de parole en public",
+      "image": "https://lauraballo.com/sentrainer-a-la-prise-de-parole",
+      "featured": false
+    },
+    {
+      "id": "entrepreneuriat-et-marketing-dans-lindustrie-du-coaching-linterview-exclusive-de-jeremy-kohlmann",
+      "title": "Entrepreneuriat et marketing dans l'industrie du coaching : l'interview exclusive de Jeremy Kohlmann",
+      "slug": "entrepreneuriat-et-marketing-dans-lindustrie-du-coaching-linterview-exclusive-de-jeremy-kohlmann",
+      "url": "/entrepreneuriat-et-marketing-dans-lindustrie-du-coaching-linterview-exclusive-de-jeremy-kohlmann",
+      "date": "2026-05-05",
+      "readingTime": "15 min",
+      "excerpt": "Interview exclusive de Jeremy Kohlmann, expert en marketing pour coachs et entrepreneurs. Découvrez ses conseils clés pour devenir leader de votre marché.",
+      "tags": [
+        "strategie",
+        "communication",
+        "leadership"
+      ],
+      "situations": [
+        "positionnement",
+        "leadership"
+      ],
+      "searchKeywords": [
+        "entrepreneuriat",
+        "marketing",
+        "coaching",
+        "industrie",
+        "interview",
+        "exclusive",
+        "jeremy",
+        "kohlmann"
+      ],
+      "category": "Stratégie",
+      "image": "/assets/img/blog/entrepreneuriat-et-marketing-dans-lindustrie-du-coaching-linterview-exclusive-de-jeremy-kohlmann-main.webp",
+      "featured": false
+    },
+    {
+      "id": "prise-de-parole-et-emotions",
+      "title": "Prise de parole et émotions",
+      "slug": "prise-de-parole-et-emotions",
+      "url": "/prise-de-parole-et-emotions",
+      "date": "2026-05-05",
+      "readingTime": "3 min",
+      "excerpt": "",
+      "tags": [
+        "prise-de-parole",
+        "communication",
+        "hypersensibilite"
+      ],
+      "situations": [
+        "leadership",
+        "sensible"
+      ],
+      "searchKeywords": [
+        "prise",
+        "de",
+        "parole",
+        "et",
+        "émotions"
+      ],
+      "category": "Prise de parole en public",
+      "image": "",
+      "featured": false
+    },
+    {
+      "id": "gourou-quand-le-cinema-francais-effleure-lemprise-sans-vraiment-la-comprendre",
+      "title": "Gourou : quand le cinéma français effleure l'emprise sans vraiment la comprendre",
+      "slug": "gourou-quand-le-cinema-francais-effleure-lemprise-sans-vraiment-la-comprendre",
+      "url": "/gourou-quand-le-cinema-francais-effleure-lemprise-sans-vraiment-la-comprendre",
+      "date": "2026-05-05",
+      "readingTime": "6 min",
+      "excerpt": "",
+      "tags": [
+        "culture"
+      ],
+      "situations": [
+        "leadership",
+        "comprehension"
+      ],
+      "searchKeywords": [
+        "film",
+        "gourou",
+        "quand",
+        "cinéma",
+        "français",
+        "effleure",
+        "emprise",
+        "sans",
+        "vraiment",
+        "comprendre"
+      ],
+      "category": "Culture",
+      "image": "",
+      "featured": false
     },
     {
       "id": "poser-limites",
@@ -132,83 +668,6 @@
       ],
       "category": "Hypersensibilité",
       "image": "/assets/img/blog/limites.png",
-      "featured": false
-    },
-    {
-      "id": "strategies-hypersensibles",
-      "title": "Les 3 stratégies d'adaptation des hypersensibles (et comment en sortir)",
-      "slug": "strategies-hypersensibles",
-      "url": "/blog/articles/strategies-hypersensibles.html",
-      "date": "2026-01-25",
-      "readingTime": "9 min",
-      "excerpt": "Carapace, caméléon ou fuite : découvrez les mécanismes inconscients des hypersensibles et comment transformer ces stratégies en forces authentiques.",
-      "tags": [
-        "hypersensibilite",
-        "comprehension-de-soi"
-      ],
-      "situations": [
-        "comprehension",
-        "sensible"
-      ],
-      "searchKeywords": [
-        "hypersensible",
-        "hypersensibilite",
-        "sensibilité",
-        "carapace",
-        "cameleon",
-        "fuite",
-        "adaptation",
-        "mecanismes",
-        "protection",
-        "non-soi",
-        "masque",
-        "rejet",
-        "acceptation",
-        "vulnerabilite",
-        "authenticite",
-        "sois fort",
-        "fais plaisir"
-      ],
-      "category": "Hypersensibilité",
-      "image": "/assets/img/blog/strategies-hypersensibles.jpg",
-      "featured": false
-    },
-    {
-      "id": "positionnement",
-      "title": "L'art du positionnement : trouver sa place unique",
-      "slug": "art-du-positionnement",
-      "url": "/blog/articles/art-du-positionnement.html",
-      "date": "2026-01-22",
-      "readingTime": "6 min",
-      "excerpt": "Comment clarifier votre identité professionnelle et construire un positionnement qui résonne avec vos valeurs profondes et votre singularité.",
-      "tags": [
-        "leadership",
-        "strategie"
-      ],
-      "situations": [
-        "positionnement"
-      ],
-      "searchKeywords": [
-        "positionnement",
-        "identite",
-        "clarte",
-        "direction",
-        "flou",
-        "perdu",
-        "carriere",
-        "voie",
-        "mission",
-        "valeurs",
-        "vision",
-        "qui je suis",
-        "ma place",
-        "unique",
-        "singularite",
-        "different",
-        "bilans de compétences"
-      ],
-      "category": "Leadership",
-      "image": "/assets/img/blog/positionnement.jpg",
       "featured": false
     },
     {
