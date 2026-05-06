@@ -537,34 +537,6 @@
 
 <!-- ============ SCRIPTS ============ -->
 <script>
-// Chargement des composants partagés
-async function loadComponent(url, placeholderId) {
-  try {
-    const res = await fetch(url);
-    if (!res.ok) return;
-    const html = await res.text();
-    const el = document.getElementById(placeholderId);
-    if (el) {
-      el.innerHTML = html;
-      el.querySelectorAll('script').forEach(old => {
-        const s = document.createElement('script');
-        if (old.src) s.src = old.src;
-        else s.textContent = old.textContent;
-        old.replaceWith(s);
-      });
-    }
-  } catch (e) { console.warn('Composant non chargé :', url, e); }
-}
-
-document.addEventListener('DOMContentLoaded', async () => {
-  await loadComponent('/assets/components/header.html', 'header-placeholder');
-  await loadComponent('/assets/components/footer.html', 'footer-placeholder');
-  await loadComponent('/assets/components/cookies.html', 'cookies-placeholder');
-
-  if (typeof initNav === 'function') initNav();
-  if (typeof CookieConsent !== 'undefined' && CookieConsent.init) CookieConsent.init();
-});
-
 // Reveal on scroll
 const io = new IntersectionObserver((entries) => {
   entries.forEach((e, i) => {
@@ -576,9 +548,11 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: .12, rootMargin: '0px 0px -80px 0px' });
 document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el => io.observe(el));
 </script>
-<script src="/assets/js/nav.js" defer></script>
-<script src="/assets/js/cookies.js" defer></script>
+<script src="/assets/js/includes.js"></script>
 </body>
 </html>
+
+
+
 
 
