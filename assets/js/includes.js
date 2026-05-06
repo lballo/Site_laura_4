@@ -88,6 +88,7 @@
     
     // Initialise après chargement
     initNavigation();
+    if (typeof initNav === 'function') initNav(); // ← nav.js source unique
     initCookieConsent();
     initSmoothScroll();
     initAnimations();
