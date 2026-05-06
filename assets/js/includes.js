@@ -36,6 +36,28 @@
     }
   };
 
+  // ===== GOOGLE ANALYTICS 4 =====
+  // Chargé immédiatement, en mode refusé par défaut (RGPD / Consent Mode v2)
+  // L'activation se fait dans applyConsent() après acceptation de l'utilisateur
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  window.gtag = gtag;
+
+  gtag('consent', 'default', {
+    analytics_storage: 'denied',
+    ad_storage:        'denied',
+    wait_for_update:   500
+  });
+
+  gtag('js', new Date());
+  gtag('config', 'G-Y67YCB9LT5', { send_page_view: true });
+
+  var gaScript = document.createElement('script');
+  gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-Y67YCB9LT5';
+  gaScript.async = true;
+  document.head.appendChild(gaScript);
+
   // ===== CHARGEUR DE COMPOSANTS =====
   
   async function loadComponent(name, config) {
@@ -177,14 +199,14 @@
     const CONSENT_DURATION_DAYS = 365;
 
     const elements = {
-      overlay: document.getElementById('ccOverlay'),
-      banner: document.getElementById('ccBanner'),
-      settingsPanel: document.getElementById('ccSettingsPanel'),
-      acceptBtn: document.getElementById('ccAcceptAll'),
-      rejectBtn: document.getElementById('ccRejectAll'),
-      settingsBtn: document.getElementById('ccShowSettings'),
-      saveBtn: document.getElementById('ccSaveSettings'),
-      reopenLink: document.getElementById('ccReopenLink'),
+      overlay:         document.getElementById('ccOverlay'),
+      banner:          document.getElementById('ccBanner'),
+      settingsPanel:   document.getElementById('ccSettingsPanel'),
+      acceptBtn:       document.getElementById('ccAcceptAll'),
+      rejectBtn:       document.getElementById('ccRejectAll'),
+      settingsBtn:     document.getElementById('ccShowSettings'),
+      saveBtn:         document.getElementById('ccSaveSettings'),
+      reopenLink:      document.getElementById('ccReopenLink'),
       analyticsToggle: document.getElementById('ccAnalytics'),
       marketingToggle: document.getElementById('ccMarketing')
     };
@@ -218,7 +240,7 @@
         analytics: preferences.analytics || false,
         marketing: preferences.marketing || false,
         timestamp: new Date().toISOString(),
-        expires: expirationDate.toISOString()
+        expires:   expirationDate.toISOString()
       };
       
       try {
@@ -249,20 +271,19 @@
     }
 
     function applyConsent(consent) {
-      // ===== ACTIVEZ VOS SCRIPTS ICI =====
-      
+
       if (consent.analytics) {
-        // Google Analytics, Plausible, etc.
-        // Exemple :
-        // if (typeof gtag === 'function') {
-        //   gtag('consent', 'update', { analytics_storage: 'granted' });
-        // }
+        gtag('consent', 'update', { analytics_storage: 'granted' });
         console.log('✓ Cookies analytiques activés');
+      } else {
+        gtag('consent', 'update', { analytics_storage: 'denied' });
       }
-      
+
       if (consent.marketing) {
-        // Facebook Pixel, LinkedIn Insight, etc.
+        gtag('consent', 'update', { ad_storage: 'granted' });
         console.log('✓ Cookies marketing activés');
+      } else {
+        gtag('consent', 'update', { ad_storage: 'denied' });
       }
       
       window.dispatchEvent(new CustomEvent('cookieConsentUpdated', { detail: consent }));
@@ -298,7 +319,7 @@
       showBanner();
     }
 
-    // Initialisation
+    // Initialisation : si consentement déjà stocké, l'appliquer immédiatement
     const existingConsent = getStoredConsent();
     
     if (existingConsent) {
