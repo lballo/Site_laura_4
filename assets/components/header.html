@@ -1,77 +1,114 @@
 <!-- ============================================
      HEADER / NAVIGATION
      Fichier : assets/components/header.html
+
+     ✏️  POUR MODIFIER LE NAV : éditez uniquement NAV_ITEMS ci-dessous.
+     Desktop ET mobile se mettent à jour automatiquement.
      ============================================ -->
 
-<!-- NAVIGATION -->
+<!-- ============================================
+     SOURCE DE VÉRITÉ UNIQUE — MODIFIER ICI SEULEMENT
+     ============================================ -->
+<script>
+  const NAV_ITEMS = [
+    { label: "Accueil", href: "/" },
+    {
+      label: "Accompagnements",
+      dropdown: [
+        { label: "Présence oratoire signature", href: "/accompagnements/mentorat.html" },
+        { label: "SOS Prise de parole",         href: "/accompagnements/preparation-flash.html" }
+      ]
+    },
+    {
+      label: "Quiz",
+      dropdown: [
+        { label: "Hypersensibilité", href: "/quizz/hypersensibilite.html" }
+      ]
+    },
+    { label: "Conférences", href: "/conferences-inspirantes" },
+    { label: "Blog",        href: "/blog/index.html" },
+    {
+      label: "À propos",
+      dropdown: [
+        { label: "Méthodologie", href: "/#process" },
+        { label: "Témoignages",  href: "/#temoignages" },
+        { label: "FAQ",          href: "/#faq" },
+        { label: "Qui suis-je",  href: "/#a-propos" }
+      ]
+    }
+  ];
+
+  const NAV_CTA = { label: "Réserver un appel", href: "/#contact" };
+</script>
+
+<!-- ============================================
+     STRUCTURE HTML (ne pas modifier)
+     ============================================ -->
 <nav class="nav" id="nav">
   <div class="nav-progress" id="navProgress"></div>
   <a href="/" class="nav-logo">
     <img src="/assets/img/Laura-Ballo-black-low-res.png" alt="Laura Ballo - Coaching Leadership Premium">
   </a>
-  <div class="nav-links">
-    <a href="/">Accueil</a>
-    <!-- <a href="/communaute.html">Communauté</a> -->
-    <div class="nav-dropdown">
-      <a href="#">Accompagnements</a>
-      <div class="nav-dropdown-menu">
-        <a href="/accompagnements/mentorat.html">Présence oratoire signature</a>
-        <a href="/accompagnements/preparation-flash.html">SOS Prise de parole</a>
-      </div>
-    </div>
-    <div class="nav-dropdown">
-      <a href="#">Quiz</a>
-      <div class="nav-dropdown-menu">
-        <a href="/quizz/hypersensibilite.html">Hypersensibilité</a>
-      </div>
-    </div>
-    <a href="/conferences-inspirantes">Conférences</a>
-    <a href="/blog/index.html">Blog</a>
-    <div class="nav-dropdown">
-      <a href="#">À propos</a>
-      <div class="nav-dropdown-menu">
-        <a href="/#process">Méthodologie</a>
-        <a href="/#temoignages">Témoignages</a>
-        <a href="/#faq">FAQ</a>
-        <a href="/#a-propos">Qui suis-je</a>
-      </div>
-    </div>
-    <a href="/#contact" class="btn btn-secondary">Réserver un appel <span class="btn-arrow">→</span></a>
-  </div>
+  <!-- Desktop nav : généré par buildDesktopNav() -->
+  <div class="nav-links" id="navLinks"></div>
   <button class="nav-burger" id="navBurger" onclick="toggleMobileMenu()" aria-label="Menu">
-    <span></span>
-    <span></span>
-    <span></span>
+    <span></span><span></span><span></span>
   </button>
 </nav>
 
-<!-- MOBILE MENU -->
-<div class="nav-mobile" id="navMobile">
-  <a href="/" onclick="closeMobileMenu()">Accueil</a>
-  <a href="/communaute.html" onclick="closeMobileMenu()">Communauté</a>
-  <details class="nav-mobile-dropdown">
-    <summary>Accompagnements</summary>
-    <div class="nav-mobile-dropdown__items">
-      <a href="/accompagnements/parole-signature.html" onclick="closeMobileMenu()">Présence oratoire &amp; Storytelling</a>
-      <a href="/accompagnements/storytelling-signature.html" onclick="closeMobileMenu()">Storytelling signature</a>
-    </div>
-  </details>
-  <details class="nav-mobile-dropdown">
-    <summary>Quiz</summary>
-    <div class="nav-mobile-dropdown__items">
-      <a href="/quizz/hypersensibilite.html" onclick="closeMobileMenu()">Hypersensibilité</a>
-    </div>
-  </details>
-  <a href="/conferences-inspirantes" onclick="closeMobileMenu()">Conférences</a>
-  <a href="/blog/index.html" onclick="closeMobileMenu()">Blog</a>
-  <details class="nav-mobile-dropdown">
-    <summary>À propos</summary>
-    <div class="nav-mobile-dropdown__items">
-      <a href="/#process" onclick="closeMobileMenu()">Méthodologie</a>
-      <a href="/#temoignages" onclick="closeMobileMenu()">Témoignages</a>
-      <a href="/#faq" onclick="closeMobileMenu()">FAQ</a>
-      <a href="/#a-propos" onclick="closeMobileMenu()">Qui suis-je</a>
-    </div>
-  </details>
-  <a href="/#contact" class="btn btn-primary" onclick="closeMobileMenu()">Réserver un appel →</a>
-</div>
+<!-- Mobile nav : généré par buildMobileNav() -->
+<div class="nav-mobile" id="navMobile"></div>
+
+<!-- ============================================
+     GÉNÉRATION AUTOMATIQUE DES DEUX NAVS
+     ============================================ -->
+<script>
+  /* --- Desktop --- */
+  function buildDesktopNav() {
+    const container = document.getElementById("navLinks");
+    let html = "";
+
+    NAV_ITEMS.forEach(item => {
+      if (item.dropdown) {
+        html += `
+          <div class="nav-dropdown">
+            <a href="#">${item.label}</a>
+            <div class="nav-dropdown-menu">
+              ${item.dropdown.map(sub => `<a href="${sub.href}">${sub.label}</a>`).join("")}
+            </div>
+          </div>`;
+      } else {
+        html += `<a href="${item.href}">${item.label}</a>`;
+      }
+    });
+
+    html += `<a href="${NAV_CTA.href}" class="btn btn-secondary">${NAV_CTA.label} <span class="btn-arrow">→</span></a>`;
+    container.innerHTML = html;
+  }
+
+  /* --- Mobile --- */
+  function buildMobileNav() {
+    const container = document.getElementById("navMobile");
+    let html = "";
+
+    NAV_ITEMS.forEach(item => {
+      if (item.dropdown) {
+        html += `
+          <details class="nav-mobile-dropdown">
+            <summary>${item.label}</summary>
+            <div class="nav-mobile-dropdown__items">
+              ${item.dropdown.map(sub => `<a href="${sub.href}" onclick="closeMobileMenu()">${sub.label}</a>`).join("")}
+            </div>
+          </details>`;
+      } else {
+        html += `<a href="${item.href}" onclick="closeMobileMenu()">${item.label}</a>`;
+      }
+    });
+
+    html += `<a href="${NAV_CTA.href}" class="btn btn-primary" onclick="closeMobileMenu()">${NAV_CTA.label} →</a>`;
+    container.innerHTML = html;
+  }
+
+  buildDesktopNav();
+  buildMobileNav();
+</script>
