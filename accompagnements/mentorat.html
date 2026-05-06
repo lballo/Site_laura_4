@@ -38,6 +38,7 @@
 
 <!-- TOKENS EN PREMIER (charte globale du site) -->
 <link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/cookies.css">
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -616,5 +617,9 @@ const io = new IntersectionObserver((entries)=>{
 },{threshold:.12,rootMargin:'0px 0px -80px 0px'});
 document.querySelectorAll('.reveal,.reveal-scale,.reveal-left,.reveal-right').forEach(el=>io.observe(el));
 </script>
+<!-- COOKIES (chargé automatiquement) -->
+<div id="cookies-placeholder"></div>
+<script src="/assets/js/includes.js"></script>
 </body>
 </html>
+
