@@ -1,21 +1,76 @@
 <!-- ============================================
      HEADER / NAVIGATION
      Fichier : assets/components/header.html
-
-     Les liens sont gérés dans assets/js/nav.js
      ============================================ -->
 
+<!-- NAVIGATION -->
 <nav class="nav" id="nav">
   <div class="nav-progress" id="navProgress"></div>
   <a href="/" class="nav-logo">
     <img src="/assets/img/Laura-Ballo-black-low-res.png" alt="Laura Ballo - Coaching Leadership Premium">
   </a>
-  <!-- Rempli automatiquement par nav.js -->
-  <div class="nav-links" id="navLinks"></div>
+  <div class="nav-links">
+    <a href="/">Accueil</a>
+    <!-- <a href="/communaute.html">Communauté</a> -->
+    <div class="nav-dropdown">
+      <a href="#">Accompagnements</a>
+      <div class="nav-dropdown-menu">
+        <a href="/accompagnements/mentorat.html">Présence oratoire signature</a>
+        <a href="/accompagnements/preparation-flash.html">SOS Prise de parole</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <a href="#">Quiz</a>
+      <div class="nav-dropdown-menu">
+        <a href="/quizz/hypersensibilite.html">Hypersensibilité</a>
+      </div>
+    </div>
+    <a href="/conferences-inspirantes">Conférences</a>
+    <a href="/blog/index.html">Blog</a>
+    <div class="nav-dropdown">
+      <a href="#">À propos</a>
+      <div class="nav-dropdown-menu">
+        <a href="/#process">Méthodologie</a>
+        <a href="/#temoignages">Témoignages</a>
+        <a href="/#faq">FAQ</a>
+        <a href="/#a-propos">Qui suis-je</a>
+      </div>
+    </div>
+    <a href="/#contact" class="btn btn-secondary">Réserver un appel <span class="btn-arrow">→</span></a>
+  </div>
   <button class="nav-burger" id="navBurger" onclick="toggleMobileMenu()" aria-label="Menu">
-    <span></span><span></span><span></span>
+    <span></span>
+    <span></span>
+    <span></span>
   </button>
 </nav>
 
-<!-- Rempli automatiquement par nav.js -->
-<div class="nav-mobile" id="navMobile"></div>
+<!-- MOBILE MENU -->
+<div class="nav-mobile" id="navMobile">
+  <a href="/" onclick="closeMobileMenu()">Accueil</a>
+  <details class="nav-mobile-dropdown">
+    <summary>Accompagnements</summary>
+    <div class="nav-mobile-dropdown__items">
+      <a href="/accompagnements/mentorat.html" onclick="closeMobileMenu()">Présence oratoire signature</a>
+      <a href="/accompagnements/preparation-flash.html" onclick="closeMobileMenu()">SOS Prise de parole</a>
+    </div>
+  </details>
+  <details class="nav-mobile-dropdown">
+    <summary>Quiz</summary>
+    <div class="nav-mobile-dropdown__items">
+      <a href="/quizz/hypersensibilite.html" onclick="closeMobileMenu()">Hypersensibilité</a>
+    </div>
+  </details>
+  <a href="/conferences-inspirantes" onclick="closeMobileMenu()">Conférences</a>
+  <a href="/blog/index.html" onclick="closeMobileMenu()">Blog</a>
+  <details class="nav-mobile-dropdown">
+    <summary>À propos</summary>
+    <div class="nav-mobile-dropdown__items">
+      <a href="/#process" onclick="closeMobileMenu()">Méthodologie</a>
+      <a href="/#temoignages" onclick="closeMobileMenu()">Témoignages</a>
+      <a href="/#faq" onclick="closeMobileMenu()">FAQ</a>
+      <a href="/#a-propos" onclick="closeMobileMenu()">Qui suis-je</a>
+    </div>
+  </details>
+  <a href="/#contact" class="btn btn-primary" onclick="closeMobileMenu()">Réserver un appel →</a>
+</div>
