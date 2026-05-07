@@ -15,7 +15,7 @@
   ],
   "rewrites": [
     {
-      "source": "/:slug",
+      "source": "/:slug((?!api/).*)",
       "destination": "/blog/articles/:slug"
     }
   ],
