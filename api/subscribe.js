@@ -37,3 +37,6 @@ export default async function handler(req, res) {
         return res.status(500).json({ error: 'Erreur serveur' });
     }
 }
+
+console.log('API KEY present:', !!process.env.CONVERTKIT_API_KEY);
+console.log('FORM ID present:', !!process.env.CONVERTKIT_FORM_ID);
