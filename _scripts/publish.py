@@ -28,6 +28,7 @@ from PIL import Image
 NOTION_API_KEY = os.environ.get("NOTION_API_KEY", "")
 DATABASE_ID = os.environ.get("NOTION_DATABASE_ID", "300075e127d2809eaac2e85bba8280ef")
 TAGS_REF_DATABASE_ID = os.environ.get("NOTION_TAGS_REF_DATABASE_ID", "82e832b39f8b43a0adc0eff93135a961")
+CHATBOT_DATABASE_ID = "313075e127d2805097a0e81b0e4efc86"
 
 ARTICLES_JSON_PATH = os.environ.get("ARTICLES_JSON_PATH", "blog/articles.json")
 TEMPLATE_PATH = os.environ.get("TEMPLATE_PATH", "_templates/article.html")
@@ -44,9 +45,6 @@ WEBP_QUALITY = 85
 # ─────────────────────────────────────────────────────────
 # MAPPING TAGS → SLUGS
 # ─────────────────────────────────────────────────────────
-# Source de vérité : BDD Notion "Système de Tags — Référentiel"
-# Ce mapping sert de fallback si la BDD référentielle est inaccessible.
-# Il est chargé dynamiquement dans main() via load_tags_reference().
 TAG_SLUG_MAP_FALLBACK = {
     "Leadership": "leadership",
     "Management": "management",
@@ -67,7 +65,6 @@ TAG_SLUG_MAP_FALLBACK = {
     "Développement personnel": "developpement-personnel",
 }
 
-# Rempli dynamiquement par load_tags_reference() au démarrage
 TAG_SLUG_MAP = dict(TAG_SLUG_MAP_FALLBACK)
 
 MOIS_FR = {
@@ -137,23 +134,15 @@ class NotionClient:
 # GESTION DES IMAGES
 # ═════════════════════════════════════════════════════════
 def download_and_compress(url, filename):
-    """
-    Télécharge une image depuis n'importe quelle URL (Notion ou WordPress),
-    la convertit en WebP sans modifier les dimensions,
-    et la sauvegarde dans IMAGES_DIR.
-    Retourne le chemin local /assets/img/blog/filename.webp
-    """
     try:
         resp = requests.get(url, timeout=20)
         resp.raise_for_status()
 
         img = Image.open(BytesIO(resp.content))
 
-        # Conversion en RGB si nécessaire (PNG avec transparence, etc.)
         if img.mode in ("RGBA", "P"):
             img = img.convert("RGB")
 
-        # Sauvegarde WebP — dimensions originales conservées
         output_dir = Path(IMAGES_DIR)
         output_dir.mkdir(parents=True, exist_ok=True)
         output_path = output_dir / f"{filename}.webp"
@@ -164,19 +153,12 @@ def download_and_compress(url, filename):
 
     except Exception as e:
         print(f"   ⚠️  Échec téléchargement image : {e}")
-        return url  # Fallback sur l'URL originale
+        return url
 
 
 def get_main_image(page, slug):
-    """
-    Récupère l'image principale :
-    1. Champ "Image" (Files & Media) — upload Notion
-    2. Champ "Image URL" (URL) — URL WordPress ou externe
-    Dans les deux cas, télécharge et compresse.
-    """
     props = page.get("properties", {})
 
-    # 1. Champ "Image" (Files & Media)
     files = props.get("Image", {}).get("files", [])
     if files:
         file_obj = files[0]
@@ -186,7 +168,6 @@ def get_main_image(page, slug):
             url = file_obj["external"]["url"]
         return download_and_compress(url, f"{slug}-main")
 
-    # 2. Champ "Image URL" (fallback WordPress)
     image_url = props.get("Image URL", {}).get("url", "") or ""
     if image_url:
         return download_and_compress(image_url, f"{slug}-main")
@@ -344,7 +325,6 @@ def blocks_to_html(blocks, client=None, slug="article", img_counter=None):
                 alt_text = raw_caption or "illustration"
                 caption_text = raw_caption
 
-            # Téléchargement et compression
             if url:
                 img_counter[0] += 1
                 filename = f"{slug}-{img_counter[0]}"
@@ -391,13 +371,6 @@ def tag_to_slug(tag_name):
 
 
 def load_tags_reference(client):
-    """
-    Charge dynamiquement le mapping Tag → Slug depuis la BDD Notion référentielle
-    "Système de Tags — Référentiel". Met à jour TAG_SLUG_MAP in-place.
-
-    En cas d'échec (BDD inaccessible, schéma inattendu, etc.), garde
-    le mapping fallback défini statiquement en haut du fichier.
-    """
     global TAG_SLUG_MAP
     try:
         pages = client.query_database(TAGS_REF_DATABASE_ID)
@@ -516,13 +489,10 @@ def load_articles_json(path):
 def save_articles_json(path, articles):
     articles.sort(key=lambda a: a.get("date", ""), reverse=True)
 
-    # Collecter les slugs de tags réellement utilisés par au moins 1 article
     used_slugs = set()
     for article in articles:
         used_slugs.update(article.get("tags", []))
 
-    # Générer les collections : uniquement les tags utilisés
-    # On préserve l'ordre d'apparition dans TAG_SLUG_MAP (ordre du référentiel Notion)
     collections = [
         {"slug": slug, "label": label}
         for label, slug in TAG_SLUG_MAP.items()
@@ -571,6 +541,85 @@ def build_json_entry(data):
         "image": data["image"],
         "featured": False,
     }
+
+
+# ═════════════════════════════════════════════════════════
+# GÉNÉRATION knowledge.txt POUR LE CHATBOT
+# ═════════════════════════════════════════════════════════
+def generate_chatbot_knowledge(client):
+    """
+    Génère knowledge.txt à partir des offres avec
+    'Disponible à la vente' coché dans Notion.
+    """
+    print("\n🤖 Génération knowledge.txt pour le chatbot...")
+    try:
+        pages = client.query_database(
+            CHATBOT_DATABASE_ID,
+            filter_obj={
+                "property": "Disponible à la vente",
+                "checkbox": {"equals": True}
+            }
+        )
+
+        if not pages:
+            print("   ⚠️  Aucune offre disponible à la vente trouvée.")
+            return
+
+        lines = []
+
+        for page in pages:
+            props = page.get("properties", {})
+
+            titre = ""
+            titre_data = props.get("Titre", {}).get("title", [])
+            if titre_data:
+                titre = "".join(r.get("plain_text", "") for r in titre_data)
+
+            public = ""
+            public_data = props.get("Public cible", {}).get("rich_text", [])
+            if public_data:
+                public = "".join(r.get("plain_text", "") for r in public_data)
+
+            sessions = props.get("Nombre de sessions", {}).get("number") or ""
+            duree = props.get("Durée (heures)", {}).get("number") or ""
+
+            lieu = ", ".join(
+                o.get("name", "") for o in props.get("Lieu", {}).get("multi_select", [])
+            )
+            format_ = ", ".join(
+                o.get("name", "") for o in props.get("format", {}).get("multi_select", [])
+            )
+            tags = ", ".join(
+                o.get("name", "") for o in props.get("Tags", {}).get("multi_select", [])
+            )
+            financement = ", ".join(
+                o.get("name", "") for o in props.get("Financement", {}).get("multi_select", [])
+            )
+
+            lines.append(f"Offre : {titre}")
+            if public:
+                lines.append(f"  Public cible : {public}")
+            if format_:
+                lines.append(f"  Format : {format_}")
+            if sessions:
+                lines.append(f"  Nombre de sessions : {sessions}")
+            if duree:
+                lines.append(f"  Durée totale : {duree}h")
+            if lieu:
+                lines.append(f"  Lieu : {lieu}")
+            if tags:
+                lines.append(f"  Thèmes : {tags}")
+            if financement:
+                lines.append(f"  Financement possible : {financement}")
+            lines.append("")
+
+        with open("knowledge.txt", "w", encoding="utf-8") as f:
+            f.write("\n".join(lines))
+
+        print(f"   ✅ knowledge.txt généré ({len(pages)} offre(s))")
+
+    except Exception as e:
+        print(f"   ❌ Erreur génération knowledge.txt : {e}")
 
 
 # ═════════════════════════════════════════════════════════
@@ -639,6 +688,7 @@ def main():
 
     if not pages and not pages_to_delete:
         print("ℹ️  Rien à faire. Fin.")
+        generate_chatbot_knowledge(client)
         return
 
     modified_files = []
@@ -737,6 +787,10 @@ def main():
     modified_files.append(ARTICLES_JSON_PATH)
     print(f"\n💾 {ARTICLES_JSON_PATH} ({len(articles_list)} articles)")
 
+    # ── GÉNÉRATION knowledge.txt ──
+    generate_chatbot_knowledge(client)
+    modified_files.append("knowledge.txt")
+
     parts = []
     if published_page_ids:
         parts.append(f"📝 Publié : {', '.join(t for _, t in published_page_ids)}")
@@ -777,3 +831,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
