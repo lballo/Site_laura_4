@@ -1,364 +1,433 @@
-/* ============================================
-   CONFERENCES.CSS — Styles page Conférences
-   Fichier : assets/css/conferences.css
-   ============================================ */
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conférences inspirantes • Prise de parole, Storytelling & Leadership sensible | Laura Ballo</title>
+  <meta name="description" content="Conférences inspirantes sur la prise de parole, le storytelling et le leadership sensible. Des interventions transformationnelles basées sur la méthode de mise en résonance. Réservez Laura Ballo pour votre événement.">
+  <meta name="author" content="Laura Ballo">
+  <link rel="canonical" href="https://lauraballo.com/conferences-inspirantes">
+  <meta property="og:title" content="Conférences inspirantes • Prise de parole, Storytelling & Leadership | Laura Ballo">
+  <meta property="og:description" content="Des conférences transformationnelles qui mêlent neurosciences, arts vivants et leadership. Réservez Laura Ballo pour votre événement.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lauraballo.com/conferences-inspirantes">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="Laura Ballo">
+  <meta property="og:image" content="https://lauraballo.com/assets/img/conference-hero.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Laura Ballo – Conférences inspirantes sur le leadership et la prise de parole">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Conférences inspirantes | Laura Ballo">
+  <meta name="twitter:description" content="Conférences transformationnelles : prise de parole, storytelling, leadership sensible.">
+  <meta name="twitter:image" content="https://lauraballo.com/assets/img/conference-hero.jpg">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Parisienne&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/nav.css">
+  <link rel="stylesheet" href="/assets/css/footer.css">
+  <link rel="stylesheet" href="/assets/css/cookies.css">
+  <link rel="stylesheet" href="/assets/css/conferences.css">
 
-/* ============================================
-   VARIABLES LOCALES
-   ============================================ */
-:root {
-  --cream: #FAF4EF;
-  --white: #FFFFFF;
-  --terra: #B72D2B;
-  --terra-d: #951F1E;
-  --brown-d: #573D38;
-  --brown-m: #775038;
-  --quote-bg: #AFA098;
-}
 
-/* ============================================
-   BASE
-   ============================================ */
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: 'Inter', system-ui, sans-serif;
-  color: var(--brown-d);
-  -webkit-font-smoothing: antialiased;
-  background: var(--white);
-}
-
-/* ============================================
-   REVEAL ANIMATIONS
-   ============================================ */
-.reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity .8s ease-out, transform .8s ease-out;
-}
-.reveal.in { opacity: 1; transform: translateY(0); }
-
-.reveal-left {
-  opacity: 0;
-  transform: translateX(-30px);
-  transition: opacity .8s ease-out, transform .8s ease-out;
-}
-.reveal-left.in { opacity: 1; transform: translateX(0); }
-
-.reveal-right {
-  opacity: 0;
-  transform: translateX(30px);
-  transition: opacity .8s ease-out, transform .8s ease-out;
-}
-.reveal-right.in { opacity: 1; transform: translateX(0); }
-
-/* Réduire les animations si préférence utilisateur */
-@media (prefers-reduced-motion: reduce) {
-  .reveal, .reveal-left, .reveal-right {
-    opacity: 1;
-    transform: none;
-    transition: none;
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Conférences inspirantes — Laura Ballo",
+    "description": "Conférences inspirantes sur la prise de parole, le storytelling et le leadership sensible.",
+    "url": "https://lauraballo.com/conferences-inspirantes",
+    "provider": { "@type": "Person", "name": "Laura Ballo", "url": "https://lauraballo.com/" }
   }
-  .hero-animate > * {
-    opacity: 1;
-    animation: none;
-  }
-  .blob { animation: none; }
-}
+  </script>
+</head>
+<body>
 
-/* ============================================
-   BUTTONS
-   ============================================ */
-.btn-primary {
-  background: var(--terra);
-  color: #fff;
-  transition: all .25s ease;
-}
-.btn-primary:hover {
-  background: var(--terra-d);
-  box-shadow: 0 10px 25px -10px rgba(183, 45, 43, .5);
-  transform: translateY(-2px);
-}
+<div id="header-placeholder"></div>
 
-.btn-dark {
-  background: #1a1a1a;
-  color: #fff;
-  transition: all .25s ease;
-}
-.btn-dark:hover {
-  background: #000;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px -10px rgba(0, 0, 0, .4);
-}
+<!-- HERO PARALLAX -->
+<header class="hero-parallax relative" style="min-height:620px;background-position:center 25%;" role="banner">
+  <div class="absolute inset-0" style="background:rgba(0,0,0,.55);"></div>
+  <div class="relative z-10 max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-16 flex flex-col justify-center" style="min-height:620px;padding-top:180px;padding-bottom:90px;">
+    <div class="max-w-2xl hero-animate">
+      <h1 class="text-white mb-8 sm:mb-10" style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(2rem,5vw,4rem);line-height:1.15;font-weight:400;">
+        "Transformez votre parole<br>en <em style="font-style:italic;color:var(--ocre);">signature artistique</em>"
+      </h1>
+      <p class="text-white mb-8 sm:mb-10" style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(1rem,2vw,1.25rem);line-height:1.7;font-weight:400;opacity:.95;max-width:560px;">
+        Conférences inspirantes en présence émotionnelle&nbsp;: une expérience transformationnelle pour révéler la puissance de votre voix singulière.
+      </p>
+      <a href="#parlons-en" class="inline-flex items-center gap-3 text-white btn-dark px-6 sm:px-8 py-4 rounded-sm" style="font-size:1rem;font-weight:500;min-height:48px;">
+        Je prends rendez-vous
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+    <div class="absolute bottom-12 right-12 hidden lg:block">
+      <img src="/assets/img/Laura-Ballo-white-signature.png" alt="" width="200" height="60" style="opacity:.95;" aria-hidden="true">
+    </div>
+  </div>
+</header>
 
-.btn-outline {
-  color: var(--brown-d);
-  border: 1.5px solid var(--brown-d);
-  background: transparent;
-  transition: all .25s ease;
-}
-.btn-outline:hover {
-  background: var(--brown-d);
-  color: #fff;
-}
+<!-- BANDE LOGOS -->
+<section class="bg-white" style="padding:3rem 0;border-bottom:1px solid rgba(44,44,44,.08);" aria-label="Entreprises clientes">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    <div class="flex flex-wrap items-center justify-center lg:justify-between gap-x-8 sm:gap-x-12 gap-y-6 sm:gap-y-8">
+      <img src="/assets/img/freewheel.png"             alt="FreeWheel"             class="logo-client" width="140" height="42" loading="lazy">
+      <img src="/assets/img/airliquide.png"            alt="Air Liquide"           class="logo-client" width="140" height="42" loading="lazy">
+      <img src="/assets/img/icn.png"                   alt="ICN Business School"   class="logo-client" width="140" height="42" loading="lazy">
+      <img src="/assets/img/cci.png"                   alt="Client partenaire"     class="logo-client" width="140" height="42" loading="lazy">
+      <img src="/assets/img/commission-europeenne.png" alt="Commission européenne" class="logo-client" width="140" height="42" loading="lazy">
+      <img src="/assets/img/esic.png"                  alt="ESIC"                  class="logo-client" width="140" height="42" loading="lazy">
+    </div>
+  </div>
+</section>
 
-/* ============================================
-   TYPOGRAPHY
-   ============================================ */
-.title-abhaya {
-  font-family: 'Abhaya Libre', Georgia, serif;
-  font-weight: 500;
-  letter-spacing: -0.005em;
-}
-.title-playfair {
-  font-family: 'Playfair Display', Georgia, serif;
-}
-.parisienne {
-  font-family: 'Parisienne', cursive;
-}
+<!-- INTRO -->
+<section class="py-20 sm:py-24 lg:py-28 relative overflow-hidden" style="background:var(--white);">
+  <div class="relative max-w-3xl mx-auto px-6 lg:px-12 text-center reveal">
+    <p class="mb-4 title-playfair" style="color:var(--rouge);font-size:1.25rem;line-height:1;font-style:italic;letter-spacing:.02em;">au commencement…</p>
+    <p style="color:var(--text-dark);font-size:clamp(1.0625rem,2vw,1.3125rem);line-height:1.85;font-weight:400;">
+      Une conférence est bien plus que de la prise de parole, il s'agit d'une <b>expérience transformationnelle</b>, motivationnelle. Depuis plusieurs années je donne des conférences et j'accompagne des leaders à le faire. Mes conférences sont basées sur la <b>méthode de mise en résonance</b> que j'ai développée et que je transmets.
+    </p>
+  </div>
+</section>
 
-/* ============================================
-   HERO PARALLAX
-   ============================================ */
-.hero-parallax {
-  background-image: url('/assets/img/conference-hero.jpg');
-  background-attachment: fixed;
-  background-position: center top;
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-color: #1a1a1a;
-}
+<!-- MON APPROCHE -->
+<section class="py-20 sm:py-24 lg:py-28 relative overflow-hidden" style="background:var(--light-beige);">
+  <div class="relative max-w-7xl mx-auto px-6 lg:px-12">
+    <div class="grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-24 items-center">
+      <div class="reveal-left">
+        <div class="section-label mb-5" style="color:var(--brun-gris);font-size:.8125rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;">Mon approche</div>
+        <h2 class="title-abhaya mb-6" style="color:var(--text-dark);font-size:clamp(1.75rem,3.8vw,2.875rem);line-height:1.2;">
+          Une <span style="color:var(--rouge);">présence qui résonne</span>,<br>une parole qui transforme
+        </h2>
+        <p class="mb-6" style="color:var(--brun-gris);font-size:1.0625rem;line-height:1.8;">
+          Mes conférences ne sont pas des monologues d'expertise — ce sont des <b>expériences vivantes</b>, où chaque participant repart avec quelque chose qui s'est mis en mouvement à l'intérieur.
+        </p>
+        <p class="mb-8 sm:mb-10" style="color:var(--brun-gris);font-size:1.0625rem;line-height:1.8;">
+          Je travaille sur l'incarnation, le ressenti, la connexion authentique au public. Mon approche mêle prise de parole, intelligence émotionnelle et présence scénique pour créer un impact durable, bien au-delà du simple discours.
+        </p>
+        <div class="flex flex-wrap gap-3 mb-8 sm:mb-10">
+          <div class="flex items-center gap-2 px-4 py-2 rounded-full" style="background:var(--white);border:1px solid rgba(168,57,50,.15);">
+            <span style="color:var(--rouge);" aria-hidden="true">⏱</span>
+            <span style="color:var(--text-dark);font-size:.9rem;font-weight:500;">30 min — 2h</span>
+          </div>
+          <div class="flex items-center gap-2 px-4 py-2 rounded-full" style="background:var(--white);border:1px solid rgba(168,57,50,.15);">
+            <span style="color:var(--rouge);" aria-hidden="true">📍</span>
+            <span style="color:var(--text-dark);font-size:.9rem;font-weight:500;">Présentiel ou distanciel</span>
+          </div>
+          <div class="flex items-center gap-2 px-4 py-2 rounded-full" style="background:var(--white);border:1px solid rgba(168,57,50,.15);">
+            <span style="color:var(--rouge);" aria-hidden="true">✦</span>
+            <span style="color:var(--text-dark);font-size:.9rem;font-weight:500;">100% personnalisée</span>
+          </div>
+        </div>
+        <a href="#parlons-en" class="btn-primary inline-flex items-center gap-2 px-8 py-4 rounded-md" style="font-size:1rem;font-weight:600;min-height:48px;">
+          En savoir plus
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+      <div class="reveal-right img-with-block">
+        <div class="img-card" style="aspect-ratio:4/5;">
+          <img src="/assets/img/conference-1.jpg" alt="Laura Ballo donnant une conférence sur la présence émotionnelle" loading="lazy" width="600" height="750">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-/* Fix iOS : parallax fixed broken */
-@media (max-width: 768px) {
-  .hero-parallax { background-attachment: scroll; }
-}
+<!-- BANNIÈRE CITATION -->
+<section class="quote-banner py-14 sm:py-16 lg:py-20" aria-label="Citation">
+  <div class="relative z-10 max-w-3xl mx-auto px-6 lg:px-12 text-center reveal">
+    <div class="mb-6 inline-flex items-center justify-center" style="width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);" aria-hidden="true">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.571-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z"/></svg>
+    </div>
+    <blockquote>
+      <p class="title-playfair text-white mb-6" style="font-size:clamp(1rem,2vw,1.5rem);line-height:1.5;font-weight:400;font-style:italic;">
+        « Une parole vraiment incarnée ne convainc pas — elle <span style="color:var(--ocre);">éveille</span>. Elle invite l'autre à se reconnaître, à se redresser, à oser sa propre voix. »
+      </p>
+      <footer class="flex items-center justify-center gap-3">
+        <div style="width:32px;height:1px;background:rgba(255,255,255,.4);" aria-hidden="true"></div>
+        <cite class="text-white not-italic" style="font-size:.8125rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;opacity:.9;">Laura Ballo</cite>
+        <div style="width:32px;height:1px;background:rgba(255,255,255,.4);" aria-hidden="true"></div>
+      </footer>
+    </blockquote>
+  </div>
+</section>
 
-.hero-overlay {
-  background: linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.65) 100%);
-}
+<!-- POUR QUI — sans blob -->
+<section class="py-20 sm:py-24 lg:py-28 relative overflow-hidden" style="background:var(--white);">
+  <div class="relative max-w-7xl mx-auto px-6 lg:px-12">
+    <div class="grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-24 items-center">
+      <div class="reveal-left img-with-block img-with-block-cream lg:order-1 order-2">
+        <div class="img-card" style="aspect-ratio:4/5;">
+          <img src="/assets/img/blog/charisme-definition-main.webp" alt="Public engagé lors d'une conférence Laura Ballo" loading="lazy" width="600" height="750">
+        </div>
+      </div>
+      <div class="reveal-right lg:order-2 order-1">
+        <div class="section-label mb-5" style="color:var(--brun-gris);font-size:.8125rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;">Pour qui</div>
+        <h2 class="title-abhaya mb-6" style="color:var(--text-dark);font-size:clamp(1.75rem,3.8vw,2.875rem);line-height:1.2;">
+          Pour les organisations qui veulent <span style="color:var(--rouge);">inspirer et transformer</span> leurs équipes
+        </h2>
+        <p class="mb-6" style="color:var(--brun-gris);font-size:1.0625rem;line-height:1.8;">
+          J'interviens auprès d'<b>entreprises, organisations, associations et événements professionnels</b> qui osent remettre <b>l'humain au cœur de la performance</b>.
+        </p>
+        <p class="mb-6" style="color:var(--brun-gris);font-size:1.0625rem;line-height:1.8;">
+          Mon approche cultive un équilibre rare&nbsp;: celui où l'empathie et la sensibilité ne s'opposent pas à l'exigence, mais la nourrissent.
+        </p>
+        <p class="mb-8 sm:mb-10" style="color:var(--brun-gris);font-size:1.0625rem;line-height:1.8;">
+          Mes thématiques de prédilection&nbsp;: <b>l'affirmation de soi</b>, <b>la prise de parole en public</b>, <b>l'intelligence émotionnelle</b>, <b>le leadership sensible</b> et <b>la singularité comme moteur d'impact</b>.
+        </p>
+        <!-- KPI — style sobre, sans bulle décorative -->
+        <div class="grid grid-cols-2 gap-4 mb-8 sm:mb-10">
+          <div class="stat-pill">
+            <p class="title-playfair" style="color:var(--rouge);font-size:clamp(2rem,4vw,2.5rem);font-weight:700;line-height:1;">+150</p>
+            <p class="mt-2" style="color:var(--brun-gris);font-size:.95rem;line-height:1.4;">conférences<br>délivrées</p>
+          </div>
+          <div class="stat-pill">
+            <p class="title-playfair" style="color:var(--rouge);font-size:clamp(2rem,4vw,2.5rem);font-weight:700;line-height:1;">2500+</p>
+            <p class="mt-2" style="color:var(--brun-gris);font-size:.95rem;line-height:1.4;">personnes<br>touchées</p>
+          </div>
+        </div>
+        <a href="#parlons-en" class="btn-primary inline-flex items-center gap-2 px-8 py-4 rounded-md" style="font-size:1rem;font-weight:600;min-height:48px;">
+          Voir mes thématiques
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
-/* Hero text entry animation */
-@keyframes hero-fade-up {
-  from { opacity: 0; transform: translateY(30px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.hero-animate > * {
-  opacity: 0;
-  animation: hero-fade-up .9s ease-out forwards;
-}
-.hero-animate > *:nth-child(1) { animation-delay: .15s; }
-.hero-animate > *:nth-child(2) { animation-delay: .35s; }
-.hero-animate > *:nth-child(3) { animation-delay: .55s; }
-.hero-animate > *:nth-child(4) { animation-delay: .75s; }
+<!-- TRANSITION — fond sombre -->
+<section class="py-16" style="background:var(--black);">
+  <div class="max-w-3xl mx-auto px-6 lg:px-12 text-center reveal">
+    <p style="color:#fff;font-size:1.375rem;line-height:1.7;">
+      <b>Oser prendre la parole, oser prendre votre place et expanser</b>
+    </p>
+  </div>
+</section>
 
-/* ============================================
-   QUOTE BANNER
-   ============================================ */
-.quote-banner {
-  background: var(--quote-bg);
-  position: relative;
-  overflow: hidden;
-}
-.quote-banner::before {
-  content: '\201C';
-  position: absolute;
-  top: -40px;
-  left: 5%;
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 20rem;
-  color: rgba(255, 255, 255, .06);
-  line-height: 1;
-  pointer-events: none;
-}
+<!-- CONFÉRENCE SIGNATURE -->
+<section class="py-20 sm:py-24 lg:py-28" style="background:var(--white);">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
 
-/* ============================================
-   IMAGE CARDS
-   ============================================ */
-.img-card {
-  overflow: hidden;
-  border-radius: 8px;
-  box-shadow: 0 25px 50px -15px rgba(87, 61, 56, .25);
-}
-.img-card img {
-  transition: transform .8s ease;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.img-card:hover img { transform: scale(1.04); }
+    <div class="text-center mb-12 sm:mb-16 reveal">
+      <p class="mb-4" style="color:var(--rouge);font-size:.875rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;">Conférence Signature</p>
+      <div class="inline-block" style="width:60px;height:3px;background:var(--rouge);" aria-hidden="true"></div>
+    </div>
 
-/* ============================================
-   LOGOS CLIENTS
-   ============================================ */
-.logo-client {
-  height: 42px;
-  width: auto;
-  max-width: 140px;
-  object-fit: contain;
-  filter: grayscale(100%);
-  opacity: .55;
-  transition: all .3s ease;
-}
-.logo-client:hover {
-  filter: grayscale(0%);
-  opacity: 1;
-}
+    <div class="grid lg:grid-cols-[480px_1fr] gap-12 lg:gap-20 items-center">
 
-/* ============================================
-   CRÉATIVITÉ ÉDITORIALE
-   ============================================ */
+      <!-- Image -->
+      <div class="reveal-left">
+        <div class="overflow-hidden shadow-xl" style="aspect-ratio:4/5;">
+          <img src="/assets/img/blog/prise-de-parole-et-emotions-main.webp"
+               alt="Conférence signature de Laura Ballo sur la présence émotionnelle"
+               class="w-full h-full object-cover"
+               loading="lazy" width="480" height="600">
+        </div>
+      </div>
 
-/* Numéros watermark */
-.big-number {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-style: italic;
-  font-weight: 400;
-  line-height: .85;
-  color: rgba(183, 45, 43, .08);
-  letter-spacing: -.05em;
-  pointer-events: none;
-  user-select: none;
-}
+      <!-- Texte -->
+      <div class="reveal-right">
+        <p class="mb-3" style="color:var(--brun-gris);font-size:.8125rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;">Thématique · 60 à 90 min</p>
+        <h3 class="title-abhaya mb-6" style="color:var(--text-dark);font-size:clamp(1.75rem,3vw,2.75rem);line-height:1.15;">
+          Prendre la parole <span style="color:var(--rouge);font-style:italic;">avec présence émotionnelle</span>
+        </h3>
+        <p class="mb-8" style="color:var(--brun-gris);font-size:1.0625rem;line-height:1.8;">
+          Une conférence-expérience pour celles et ceux qui veulent transformer leur manière de s'exprimer en public. Au-delà des techniques de rhétorique, j'invite à une prise de parole <b>incarnée</b>, où l'émotion n'est plus un obstacle à maîtriser mais le cœur même du message.
+        </p>
 
-/* Cadre artistique avec bande peinture */
-.img-with-block { position: relative; }
-.img-with-block::before {
-  content: '';
-  position: absolute;
-  top: -40px;
-  bottom: -40px;
-  right: -32px;
-  width: 28%;
-  background: url('/assets/img/paint-texture.jpg') center/cover;
-  z-index: 0;
-  transition: transform .5s ease;
-  filter: saturate(1.05);
-}
-.img-with-block:hover::before { transform: translateX(8px); }
-.img-with-block .img-card { position: relative; z-index: 1; }
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start gap-3">
+            <span style="color:var(--rouge);font-weight:700;flex-shrink:0;font-size:1.1rem;" aria-hidden="true">→</span>
+            <p style="color:var(--brun-gris);font-size:1rem;line-height:1.65;">Des outils concrets pour dépasser le trac et habiter pleinement la scène</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <span style="color:var(--rouge);font-weight:700;flex-shrink:0;font-size:1.1rem;" aria-hidden="true">→</span>
+            <p style="color:var(--brun-gris);font-size:1rem;line-height:1.65;">Une expérience corporelle de sa propre présence émotionnelle</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <span style="color:var(--rouge);font-weight:700;flex-shrink:0;font-size:1.1rem;" aria-hidden="true">→</span>
+            <p style="color:var(--brun-gris);font-size:1rem;line-height:1.65;">Une parole plus juste, plus vivante, plus en lien avec soi et avec l'autre</p>
+          </div>
+        </div>
 
-/* Variante bande à gauche */
-.img-with-block-cream::before {
-  right: auto;
-  left: -32px;
-}
-.img-with-block-cream:hover::before { transform: translateX(-8px); }
+        <div class="flex flex-wrap gap-2 mb-8">
+          <span class="px-3 py-1 rounded-full" style="background:rgba(168,57,50,.06);border:1px solid rgba(168,57,50,.2);color:var(--rouge);font-size:.8125rem;font-weight:500;">Prise de parole</span>
+          <span class="px-3 py-1 rounded-full" style="background:rgba(168,57,50,.06);border:1px solid rgba(168,57,50,.2);color:var(--rouge);font-size:.8125rem;font-weight:500;">Présence émotionnelle</span>
+          <span class="px-3 py-1 rounded-full" style="background:rgba(168,57,50,.06);border:1px solid rgba(168,57,50,.2);color:var(--rouge);font-size:.8125rem;font-weight:500;">Incarnation</span>
+          <span class="px-3 py-1 rounded-full" style="background:rgba(168,57,50,.06);border:1px solid rgba(168,57,50,.2);color:var(--rouge);font-size:.8125rem;font-weight:500;">Oralité</span>
+        </div>
 
-/* ============================================
-   ORGANIC BLOB
-   ============================================ */
-.blob {
-  position: absolute;
-  border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
-  pointer-events: none;
-  animation: blob-float 14s ease-in-out infinite;
-}
-@keyframes blob-float {
-  0%, 100% {
-    border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
-    transform: translate(0, 0) rotate(0);
-  }
-  50% {
-    border-radius: 45% 55% 38% 62% / 48% 52% 48% 52%;
-    transform: translate(15px, -10px) rotate(8deg);
-  }
-}
+        <a href="#parlons-en" class="btn-primary inline-flex items-center gap-2 px-7 py-4 rounded-md" style="font-size:.95rem;font-weight:600;min-height:48px;">
+          Réserver cette conférence
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
 
-/* ============================================
-   STICKY TAG
-   ============================================ */
-.sticky-tag {
-  display: inline-block;
-  padding: .4rem 1rem;
-  background: #FAE5D0;
-  color: var(--brown-d);
-  font-family: 'Parisienne', cursive;
-  font-size: 1.375rem;
-  transform: rotate(-3deg);
-  box-shadow: 2px 3px 0 rgba(87, 61, 56, .12);
-  border-radius: 2px;
-}
+    </div>
 
-/* ============================================
-   DOODLE ARROW
-   ============================================ */
-.doodle-arrow {
-  position: absolute;
-  width: 120px;
-  height: auto;
-  pointer-events: none;
-  opacity: .8;
-}
+    <p class="text-center mt-12" style="color:var(--brun-gris);font-size:.95rem;">
+      D'autres thématiques disponibles sur demande&nbsp;: intelligence émotionnelle, leadership sensible, storytelling incarné…
+    </p>
+  </div>
+</section>
 
-/* ============================================
-   STAT PILLS
-   ============================================ */
-.stat-pill {
-  background: var(--cream);
-  border-radius: 16px;
-  padding: 1.5rem;
-  transition: transform .3s ease, box-shadow .3s ease;
-  position: relative;
-  overflow: hidden;
-}
-.stat-pill:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px -20px rgba(183, 45, 43, .3);
-}
-.stat-pill::before {
-  content: '';
-  position: absolute;
-  top: -40px;
-  right: -40px;
-  width: 100px;
-  height: 100px;
-  background: var(--terra);
-  border-radius: 50%;
-  opacity: .08;
-}
+<!-- AUTRES CONFÉRENCES -->
+<section class="py-20 sm:py-24 lg:py-28" style="background:var(--light-beige);">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    <div class="text-center mb-12 sm:mb-16 reveal">
+      <p class="mb-4" style="color:var(--rouge);font-size:.875rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;">Autres conférences</p>
+      <h2 class="title-abhaya" style="color:var(--text-dark);font-size:clamp(1.75rem,3.8vw,2.875rem);line-height:1.2;">
+        Explorez mes autres <span style="color:var(--rouge);font-style:italic;">thématiques</span>
+      </h2>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-6 sm:gap-8 lg:gap-10">
+      <article class="conference-card reveal">
+        <div style="aspect-ratio:16/9;overflow:hidden;">
+          <img src="/assets/img/blog/reussir-votre-storytelling-main.webp" alt="Conférence storytelling incarné" loading="lazy" width="640" height="360" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+        <div class="p-6 sm:p-8">
+          <p class="mb-3" style="color:var(--brun-gris);font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;">Storytelling · Présence</p>
+          <h3 class="title-abhaya mb-4" style="color:var(--text-dark);font-size:clamp(1.375rem,2vw,1.625rem);line-height:1.2;">
+            Faire vivre une expérience à votre public&nbsp;: <span style="color:var(--rouge);font-style:italic;">le storytelling incarné</span>
+          </h3>
+          <p class="mb-6" style="color:var(--brun-gris);font-size:.9375rem;line-height:1.7;">
+            Comment transformer une prise de parole en expérience marquante&nbsp;? Récit, corps, émotion, silence — pour que votre message cesse d'être entendu et commence à être ressenti.
+          </p>
+          <div class="flex items-center gap-2 pt-4" style="border-top:1px solid rgba(44,44,44,.1);color:var(--text-dark);font-size:.875rem;font-weight:500;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--rouge);" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>45 à 60 min · Présentiel ou distanciel</span>
+          </div>
+        </div>
+      </article>
+      <article class="conference-card reveal">
+        <div style="aspect-ratio:16/9;overflow:hidden;">
+          <img src="/assets/img/blog/charisme-inne-main.webp" alt="Conférence leadership sensible" loading="lazy" width="640" height="360" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+        <div class="p-6 sm:p-8">
+          <p class="mb-3" style="color:var(--brun-gris);font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;">Leadership · Intelligence émotionnelle</p>
+          <h3 class="title-abhaya mb-4" style="color:var(--text-dark);font-size:clamp(1.375rem,2vw,1.625rem);line-height:1.2;">
+            Leadership sensible et <span style="color:var(--rouge);font-style:italic;">intelligence émotionnelle</span>
+          </h3>
+          <p class="mb-6" style="color:var(--brun-gris);font-size:.9375rem;line-height:1.7;">
+            Et si la sensibilité était le matériau même d'un leadership d'impact&nbsp;? Une conférence pour repenser le management à partir de l'écoute et de la compréhension de soi.
+          </p>
+          <div class="flex items-center gap-2 pt-4" style="border-top:1px solid rgba(44,44,44,.1);color:var(--text-dark);font-size:.875rem;font-weight:500;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--rouge);" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>60 min · Conférence inspirante</span>
+          </div>
+        </div>
+      </article>
+      <article class="conference-card reveal">
+        <div style="aspect-ratio:16/9;overflow:hidden;">
+          <img src="/assets/img/blog/depasser_croyances_limitantes-main.webp" alt="Conférence gestion des conflits" loading="lazy" width="640" height="360" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+        <div class="p-6 sm:p-8">
+          <p class="mb-3" style="color:var(--brun-gris);font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;">Conflits · Négociation</p>
+          <h3 class="title-abhaya mb-4" style="color:var(--text-dark);font-size:clamp(1.375rem,2vw,1.625rem);line-height:1.2;">
+            Gestion des conflits et <span style="color:var(--rouge);font-style:italic;">assertivité</span>
+          </h3>
+          <p class="mb-6" style="color:var(--brun-gris);font-size:.9375rem;line-height:1.7;">
+            Désamorcer l'escalade émotionnelle, poser des limites claires et négocier sans perdre la relation — une approche qui allie ancrage corporel et communication consciente.
+          </p>
+          <div class="flex items-center gap-2 pt-4" style="border-top:1px solid rgba(44,44,44,.1);color:var(--text-dark);font-size:.875rem;font-weight:500;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--rouge);" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>60 à 90 min · Atelier interactif</span>
+          </div>
+        </div>
+      </article>
+      <article class="conference-card reveal">
+        <div style="aspect-ratio:16/9;overflow:hidden;">
+          <img src="/assets/img/blog/empathie-hypersensible-main.webp" alt="Conférence communication assertive" loading="lazy" width="640" height="360" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+        <div class="p-6 sm:p-8">
+          <p class="mb-3" style="color:var(--brun-gris);font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;">Assertivité · Affirmation de soi</p>
+          <h3 class="title-abhaya mb-4" style="color:var(--text-dark);font-size:clamp(1.375rem,2vw,1.625rem);line-height:1.2;">
+            La communication assertive et <span style="color:var(--rouge);font-style:italic;">affirmation de soi</span>
+          </h3>
+          <p class="mb-6" style="color:var(--brun-gris);font-size:.9375rem;line-height:1.7;">
+            Dire non sans culpabiliser, trancher sans dominer, exprimer un désaccord sans dureté — des clés concrètes pour s'affirmer au quotidien tout en restant en lien.
+          </p>
+          <div class="flex items-center gap-2 pt-4" style="border-top:1px solid rgba(44,44,44,.1);color:var(--text-dark);font-size:.875rem;font-weight:500;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--rouge);" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>60 à 90 min · Atelier interactif</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
 
-/* ============================================
-   SECTION LABEL
-   ============================================ */
-.section-label {
-  display: inline-flex;
-  align-items: center;
-  gap: .75rem;
-}
-.section-label::before {
-  content: '';
-  width: 32px;
-  height: 1px;
-  background: var(--terra);
-}
+<!-- CTA FINAL -->
+<section id="parlons-en" class="py-20 sm:py-24 lg:py-32 relative overflow-hidden" style="background:var(--white);">
+  <div class="relative max-w-3xl mx-auto px-6 lg:px-12 text-center reveal">
+    <h2 class="title-abhaya mb-6" style="color:var(--text-dark);font-size:clamp(2rem,5vw,4rem);line-height:1.1;">
+      Envie d'inviter <span style="font-style:italic;color:var(--rouge);">Laura</span> ?
+    </h2>
+    <p class="mb-8 sm:mb-10 mx-auto" style="color:var(--brun-gris);font-size:clamp(1rem,2vw,1.1875rem);line-height:1.75;max-width:600px;">
+      Chaque conférence est <b>personnalisable</b> selon votre contexte, votre public et vos enjeux. Discutons ensemble de ce qui ferait sens pour votre événement.
+    </p>
+    <div class="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4">
+      <a href="https://calendly.com/laura-ballo1993/echangecoaching" target="_blank" rel="noopener"
+         class="btn-dark inline-flex items-center gap-2 px-9 py-4 rounded-md w-full sm:w-auto justify-center" style="font-size:1rem;font-weight:600;min-height:48px;">
+        Prendre rendez-vous
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="mailto:contact@lauraballo.com"
+         class="btn-outline inline-flex items-center gap-2 px-8 py-4 rounded-md w-full sm:w-auto justify-center" style="font-size:1rem;font-weight:600;min-height:48px;">
+        Écrire un email
+      </a>
+    </div>
+    <div class="mt-10 sm:mt-12 flex items-center justify-center gap-3">
+      <span style="color:var(--rouge);font-size:.875rem;" aria-hidden="true">✦</span>
+      <p class="title-playfair" style="color:var(--brun-gris);font-size:.9375rem;font-style:italic;letter-spacing:.02em;">
+        Réponse sous 48h · Échange offert et sans engagement
+      </p>
+      <span style="color:var(--rouge);font-size:.875rem;" aria-hidden="true">✦</span>
+    </div>
+  </div>
+</section>
 
-/* ============================================
-   CONFERENCE CARDS (hover via CSS, pas JS inline)
-   ============================================ */
-.conference-card {
-  background: var(--white);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 20px 40px -20px rgba(87, 61, 56, .15);
-  transition: transform .3s ease, box-shadow .3s ease;
-}
-.conference-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 30px 60px -20px rgba(87, 61, 56, .25);
-}
+<div id="footer-placeholder"></div>
+<div id="cookies-placeholder"></div>
 
-/* ============================================
-   RESPONSIVE MOBILE
-   ============================================ */
-@media (max-width: 768px) {
-  /* Masquer décorations sur mobile */
-  .img-with-block::before,
-  .img-with-block-cream::before {
-    display: none;
-  }
-  
-  /* Réduire le padding des stat pills */
-  .stat-pill { padding: 1rem; }
-}
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('in'), i * 60);
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: .12, rootMargin: '0px 0px -80px 0px' });
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el => io.observe(el));
+</script>
+<script src="/assets/js/includes.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
