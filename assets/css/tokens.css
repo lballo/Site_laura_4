@@ -39,12 +39,23 @@
 
   /* ============================================
      ALIASES — compatibilité pages existantes
-     Pointent vers les nouvelles variables.
-     Ne pas supprimer sans audit des pages.
+     Redirigés vers les nouvelles variables.
      ============================================ */
-  --warm-gray:    var(--brun-gris);    /* anciennement #6D6659 — texte corps */
-  --warm-gray-2:  var(--brun-gris);    /* anciennement #786C63 — fond newsletter */
+
+  /* Accents (main.css, nav.css, footer.css, cookies.css...) */
+  --accent:       var(--rouge);        /* anciennement #C8554A → #A83932 */
+  --accent-dark:  var(--rouge-hover);  /* anciennement #A8453B → #8C2E28 */
+  --accent-deep:  var(--rouge-hover);  /* anciennement #B72D2B → #8C2E28 */
+  --accent-light: var(--terracotta);   /* anciennement #D97063 → #AA564C */
+  --pop-red:      var(--rouge);        /* anciennement #C8554A → #A83932 */
+
+  /* Neutres chauds */
+  --warm-gray:    var(--brun-gris);    /* anciennement #6D6659 → #6C6059 */
+  --warm-gray-2:  var(--brun-gris);    /* anciennement #786C63 → #6C6059 */
+  --taupe-light:  var(--ocre);         /* anciennement #BEA695 → #C4A574 */
   --quote-bg:     var(--taupe);        /* fond bandeau citation */
+
+  /* Validation */
   --success:      #7BA05B;             /* coches validation (hors palette) */
 
   /* ============================================
@@ -84,4 +95,5 @@
   --shadow-xl: 0 24px 64px rgba(0,0,0,0.16);
 
 }
+
 
