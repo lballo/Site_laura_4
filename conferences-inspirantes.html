@@ -34,19 +34,6 @@
   <link rel="stylesheet" href="/assets/css/cookies.css">
   <link rel="stylesheet" href="/assets/css/conferences.css">
 
-  <!-- CHARTE GRAPHIQUE — override conferences.css local palette -->
-  <style>
-    :root {
-      --terra:   #A83932;
-      --terra-d: #8C2E28;
-      --brown-d: #2C2C2C;
-      --brown-m: #6C6059;
-      --cream:   #FAF4EF;
-    }
-    /* Supprime la bulle décorative sur les stat-pills */
-    .stat-pill::before { display: none; }
-    .stat-pill { overflow: visible; }
-  </style>
 
   <script type="application/ld+json">
   {
@@ -197,11 +184,11 @@
         <!-- KPI — style sobre, sans bulle décorative -->
         <div class="grid grid-cols-2 gap-4 mb-8 sm:mb-10">
           <div class="stat-pill">
-            <p class="title-playfair" style="color:var(--rouge);font-size:clamp(2rem,4vw,2.5rem);font-weight:700;line-height:1;font-style:italic;">+150</p>
+            <p class="title-playfair" style="color:var(--rouge);font-size:clamp(2rem,4vw,2.5rem);font-weight:700;line-height:1;">+150</p>
             <p class="mt-2" style="color:var(--brun-gris);font-size:.95rem;line-height:1.4;">conférences<br>délivrées</p>
           </div>
           <div class="stat-pill">
-            <p class="title-playfair" style="color:var(--rouge);font-size:clamp(2rem,4vw,2.5rem);font-weight:700;line-height:1;font-style:italic;">2500+</p>
+            <p class="title-playfair" style="color:var(--rouge);font-size:clamp(2rem,4vw,2.5rem);font-weight:700;line-height:1;">2500+</p>
             <p class="mt-2" style="color:var(--brun-gris);font-size:.95rem;line-height:1.4;">personnes<br>touchées</p>
           </div>
         </div>
@@ -224,65 +211,67 @@
 </section>
 
 <!-- CONFÉRENCE SIGNATURE -->
-<section class="py-20 sm:py-24 lg:py-28 relative overflow-hidden" style="background:var(--white);">
-  <div class="absolute top-0 right-0 w-1/3 h-full pointer-events-none hidden lg:block" style="background:var(--light-beige);"></div>
-  <div class="relative max-w-7xl mx-auto px-6 lg:px-12">
+<section class="py-20 sm:py-24 lg:py-28" style="background:var(--white);">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+
     <div class="text-center mb-12 sm:mb-16 reveal">
       <p class="mb-4" style="color:var(--rouge);font-size:.875rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;">Conférence Signature</p>
       <div class="inline-block" style="width:60px;height:3px;background:var(--rouge);" aria-hidden="true"></div>
     </div>
-    <div class="grid lg:grid-cols-[1.1fr_1fr] gap-0 items-stretch" style="background:var(--white);box-shadow:0 40px 80px -30px rgba(44,44,44,.2);border-radius:12px;overflow:hidden;">
-      <div class="relative reveal-left" style="min-height:480px;">
-        <img src="/assets/img/blog/prise-de-parole-et-emotions-main.webp" alt="Conférence signature de Laura Ballo sur la présence émotionnelle" class="w-full h-full object-cover" style="position:absolute;inset:0;object-position:right center;" loading="lazy" width="700" height="525">
-        <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(0,0,0,.2) 0%,rgba(0,0,0,.55) 100%);"></div>
-        <div class="absolute top-6 left-6 sm:top-8 sm:left-8 flex items-center gap-2 px-4 py-2 rounded-full" style="background:rgba(255,255,255,.95);backdrop-filter:blur(10px);">
-          <span style="width:8px;height:8px;border-radius:50%;background:var(--rouge);display:inline-block;" aria-hidden="true"></span>
-          <span style="color:var(--text-dark);font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;">La plus demandée</span>
-        </div>
-        <div class="absolute bottom-0 left-0 right-0 p-6 sm:p-8 lg:p-10">
-          <p class="text-white title-playfair" style="font-size:clamp(1rem,2vw,1.25rem);line-height:1.5;font-style:italic;font-weight:400;">
-            "Une prise de parole qui touche, parce qu'elle vient vraiment de l'intérieur."
-          </p>
+
+    <div class="grid lg:grid-cols-[480px_1fr] gap-12 lg:gap-20 items-center">
+
+      <!-- Image -->
+      <div class="reveal-left">
+        <div class="overflow-hidden shadow-xl" style="aspect-ratio:4/5;">
+          <img src="/assets/img/blog/prise-de-parole-et-emotions-main.webp"
+               alt="Conférence signature de Laura Ballo sur la présence émotionnelle"
+               class="w-full h-full object-cover"
+               loading="lazy" width="480" height="600">
         </div>
       </div>
-      <div class="reveal-right p-6 sm:p-10 lg:p-14 flex flex-col justify-center">
+
+      <!-- Texte -->
+      <div class="reveal-right">
         <p class="mb-3" style="color:var(--brun-gris);font-size:.8125rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;">Thématique · 60 à 90 min</p>
-        <h3 class="title-abhaya mb-5" style="color:var(--text-dark);font-size:clamp(1.5rem,3vw,2.5rem);line-height:1.15;">
+        <h3 class="title-abhaya mb-6" style="color:var(--text-dark);font-size:clamp(1.75rem,3vw,2.75rem);line-height:1.15;">
           Prendre la parole <span style="color:var(--rouge);font-style:italic;">avec présence émotionnelle</span>
         </h3>
-        <p class="mb-6" style="color:var(--brun-gris);font-size:1.0625rem;line-height:1.75;">
+        <p class="mb-8" style="color:var(--brun-gris);font-size:1.0625rem;line-height:1.8;">
           Une conférence-expérience pour celles et ceux qui veulent transformer leur manière de s'exprimer en public. Au-delà des techniques de rhétorique, j'invite à une prise de parole <b>incarnée</b>, où l'émotion n'est plus un obstacle à maîtriser mais le cœur même du message.
         </p>
-        <div class="mb-6 sm:mb-8 p-5 rounded-lg" style="background:var(--light-beige);">
-          <p class="mb-3" style="color:var(--text-dark);font-size:.875rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;">Ce que votre public repart avec</p>
-          <ul class="space-y-2" role="list">
-            <li class="flex items-start gap-2" style="color:var(--brun-gris);font-size:.95rem;line-height:1.6;">
-              <span style="color:var(--rouge);font-weight:700;flex-shrink:0;" aria-hidden="true">→</span>
-              Des outils concrets pour dépasser le trac et habiter pleinement la scène
-            </li>
-            <li class="flex items-start gap-2" style="color:var(--brun-gris);font-size:.95rem;line-height:1.6;">
-              <span style="color:var(--rouge);font-weight:700;flex-shrink:0;" aria-hidden="true">→</span>
-              Une expérience corporelle de sa propre présence émotionnelle
-            </li>
-            <li class="flex items-start gap-2" style="color:var(--brun-gris);font-size:.95rem;line-height:1.6;">
-              <span style="color:var(--rouge);font-weight:700;flex-shrink:0;" aria-hidden="true">→</span>
-              Une parole plus juste, plus vivante, plus en lien avec soi et avec l'autre
-            </li>
-          </ul>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start gap-3">
+            <span style="color:var(--rouge);font-weight:700;flex-shrink:0;font-size:1.1rem;" aria-hidden="true">→</span>
+            <p style="color:var(--brun-gris);font-size:1rem;line-height:1.65;">Des outils concrets pour dépasser le trac et habiter pleinement la scène</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <span style="color:var(--rouge);font-weight:700;flex-shrink:0;font-size:1.1rem;" aria-hidden="true">→</span>
+            <p style="color:var(--brun-gris);font-size:1rem;line-height:1.65;">Une expérience corporelle de sa propre présence émotionnelle</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <span style="color:var(--rouge);font-weight:700;flex-shrink:0;font-size:1.1rem;" aria-hidden="true">→</span>
+            <p style="color:var(--brun-gris);font-size:1rem;line-height:1.65;">Une parole plus juste, plus vivante, plus en lien avec soi et avec l'autre</p>
+          </div>
         </div>
-        <div class="flex flex-wrap gap-2 mb-6 sm:mb-8">
-          <span class="px-3 py-1 rounded-full" style="background:var(--white);border:1px solid rgba(168,57,50,.3);color:var(--rouge);font-size:.8125rem;font-weight:500;">Prise de parole</span>
-          <span class="px-3 py-1 rounded-full" style="background:var(--white);border:1px solid rgba(168,57,50,.3);color:var(--rouge);font-size:.8125rem;font-weight:500;">Présence émotionnelle</span>
-          <span class="px-3 py-1 rounded-full" style="background:var(--white);border:1px solid rgba(168,57,50,.3);color:var(--rouge);font-size:.8125rem;font-weight:500;">Incarnation</span>
-          <span class="px-3 py-1 rounded-full" style="background:var(--white);border:1px solid rgba(168,57,50,.3);color:var(--rouge);font-size:.8125rem;font-weight:500;">Oralité</span>
+
+        <div class="flex flex-wrap gap-2 mb-8">
+          <span class="px-3 py-1 rounded-full" style="background:rgba(168,57,50,.06);border:1px solid rgba(168,57,50,.2);color:var(--rouge);font-size:.8125rem;font-weight:500;">Prise de parole</span>
+          <span class="px-3 py-1 rounded-full" style="background:rgba(168,57,50,.06);border:1px solid rgba(168,57,50,.2);color:var(--rouge);font-size:.8125rem;font-weight:500;">Présence émotionnelle</span>
+          <span class="px-3 py-1 rounded-full" style="background:rgba(168,57,50,.06);border:1px solid rgba(168,57,50,.2);color:var(--rouge);font-size:.8125rem;font-weight:500;">Incarnation</span>
+          <span class="px-3 py-1 rounded-full" style="background:rgba(168,57,50,.06);border:1px solid rgba(168,57,50,.2);color:var(--rouge);font-size:.8125rem;font-weight:500;">Oralité</span>
         </div>
-        <a href="#parlons-en" class="btn-primary inline-flex items-center gap-2 self-start px-7 py-3.5 rounded-md" style="font-size:.95rem;font-weight:600;min-height:48px;">
+
+        <a href="#parlons-en" class="btn-primary inline-flex items-center gap-2 px-7 py-4 rounded-md" style="font-size:.95rem;font-weight:600;min-height:48px;">
           Réserver cette conférence
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
       </div>
+
     </div>
-    <p class="text-center mt-10" style="color:var(--brun-gris);font-size:.95rem;">
+
+    <p class="text-center mt-12" style="color:var(--brun-gris);font-size:.95rem;">
       D'autres thématiques disponibles sur demande&nbsp;: intelligence émotionnelle, leadership sensible, storytelling incarné…
     </p>
   </div>
