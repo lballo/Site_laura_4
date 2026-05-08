@@ -15,14 +15,6 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Messages requis' });
   }
 
-  // Lecture de la base de connaissance générée par publish.py
-  let knowledge = '';
-  try {
-    knowledge = fs.readFileSync(path.join(process.cwd(), 'knowledge.txt'), 'utf-8');
-  } catch (e) {
-    console.warn('knowledge.txt introuvable, le bot fonctionnera sans base de connaissance.');
-  }
-
   const SYSTEM_PROMPT = `Tu es Aura, l'assistante de Laura Ballo. Tu réponds aux visiteurs de son site lauraballo.com.
 
 Laura Ballo est coach en présence émotionnelle, leadership et prise de parole. Elle accompagne dirigeants, artistes et entrepreneurs. +2500 leaders formés.
