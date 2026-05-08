@@ -32,7 +32,7 @@
   bottom: 0;
   left: 0;
   height: 3px;
-  background: var(--rouge);
+  background: var(--terracotta);
   width: 0%;
   transition: width 0.1s linear;
 }
