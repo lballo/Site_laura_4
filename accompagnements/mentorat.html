@@ -326,28 +326,6 @@ details[open] .faq-icon{transform:rotate(45deg);}
   </div>
 </section>
 
-<!-- SOLUTION -->
-<section class="py-24 bg-white relative overflow-hidden">
-  <div class="relative max-w-6xl mx-auto px-6 lg:px-12">
-    <div class="text-center mb-16 reveal">
-      <div class="divider"></div>
-      <h2 class="mb-6" style="font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--brown-d);">Ce que l'on travaille ensemble 🌟</h2>
-      <p class="max-w-3xl mx-auto" style="color:var(--brown-m);font-size:1.125rem;line-height:1.7;">
-        J'accompagne la prise de parole stratégique, du storytelling à l'exposition. Définition claire de votre univers au travers d'une parole authentique et incarnée.
-      </p>
-    </div>
-    <div class="grid lg:grid-cols-3 gap-8 mb-20" id="pillars"></div>
-    <div class="p-12 rounded-3xl text-white relative overflow-hidden shadow-2xl reveal" style="background:var(--warm-gray);">
-      <div class="relative z-10">
-        <div class="divider" style="background:linear-gradient(90deg,#A83932,var(--sand));"></div>
-        <h3 class="mb-4 text-center" style="font-size:2rem;font-weight:700;">Ce que l'accompagnement inclut 🔥</h3>
-        <p class="text-center mb-12 max-w-2xl mx-auto" style="color:rgba(255,255,255,.8);font-size:1rem;line-height:1.6;">Une approche complète, pensée pour s'adapter à votre agenda et à vos enjeux de dirigeant.</p>
-        <div class="grid md:grid-cols-2 gap-8" id="inclusions"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- BÉNÉFICES -->
 <section class="py-24 bg-white relative overflow-hidden">
   <div class="max-w-7xl mx-auto px-6 lg:px-12">
@@ -369,8 +347,34 @@ details[open] .faq-icon{transform:rotate(45deg);}
   </div>
 </section>
 
+<!-- SOLUTION -->
+<section class="py-24 relative overflow-hidden">
+  <div class="absolute inset-0">
+    <img src="/assets/img/pour-qui-bg.jpg" alt="" class="w-full h-full object-cover" style="opacity:.35;" width="1920" height="1080" loading="lazy" aria-hidden="true"/>
+    <div class="absolute inset-0" style="background:linear-gradient(180deg,rgba(248,240,236,.82),rgba(248,240,236,.92));"></div>
+  </div>
+  <div class="max-w-5xl mx-auto px-6 lg:px-12 text-center relative z-10">
+    <div class="reveal mb-16">
+      <h2 class="mb-6 title-playfair" style="font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--brown-d);">Ce que l'on travaille ensemble</h2>
+      <p class="max-w-3xl mx-auto" style="color:var(--brown-m);font-size:1.125rem;line-height:1.7;">
+        J'accompagne la prise de parole stratégique, du storytelling à l'exposition. Définition claire de votre univers au travers d'une parole authentique et incarnée.
+      </p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8" id="pillars"></div>
+  </div>
+</section>
+
+<!-- BANNIÈRE PRÉSENCE -->
+<section class="py-16" style="background:#1A1A1A;">
+  <div class="max-w-3xl mx-auto px-6 lg:px-12 text-center reveal">
+    <p style="color:#fff;font-size:1.375rem;line-height:1.7;font-weight:500;">
+      Vous n'avez pas besoin de chercher à être, tout est déjà présent.
+    </p>
+  </div>
+</section>
+
 <!-- ACCENT CITATION -->
-<section class="py-20" style="background:var(--warm-gray);">
+<section class="py-20" style="background:var(--warm-gray-2);">
   <div class="max-w-3xl mx-auto px-6 lg:px-12 text-center reveal">
     <p class="text-white" style="font-size:1.5rem;line-height:1.6;font-weight:500;">
       Lorsque vous incarnez pleinement votre parole, vous n'avez plus besoin de convaincre. Votre présence devient la preuve.
@@ -544,21 +548,15 @@ const who = [
 document.getElementById('whoFor').innerHTML = who.map(([ic,t,d])=>`<div class="bg-white p-8 rounded-3xl shadow-lg reveal"><div class="w-24 h-24 flex items-center justify-center mx-auto mb-6" style="color:#A83932;">${ic}</div><h3 class="mb-4" style="color:var(--brown-d);font-size:1.25rem;font-weight:700;">${t}</h3><p style="color:var(--brown-m);font-size:1rem;line-height:1.6;">${d}</p></div>`).join('');
 
 // PILIERS
+const TARGET_IC = '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>';
+const FLAME_IC = '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>';
+const STORY_IC = '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>';
 const pillars = [
-  ["🎯","Clarté & structure","Un message structuré, un fil conducteur solide, une <b>parole signature</b> qui vous ressemble."],
-  ["🔥","Incarnation & ancrage","Des techniques concrètes pour vous ancrer. Utiliser votre non-verbal — gestes, regard, silence — pour captiver."],
-  ["📖","Storytelling & exposition","Le design d'un storytelling personnel ou de marque impactant, stratégique, qui touche."]
+  [TARGET_IC,"Clarté & structure","Un message structuré, un fil conducteur solide, une <b>parole signature</b> qui vous ressemble."],
+  [FLAME_IC,"Incarnation & ancrage","Des techniques concrètes pour vous ancrer. Utiliser votre non-verbal — gestes, regard, silence — pour captiver."],
+  [STORY_IC,"Storytelling & exposition","Le design d'un storytelling personnel ou de marque impactant, stratégique, qui touche."]
 ];
-document.getElementById('pillars').innerHTML = pillars.map(([ic,t,d])=>`<div class="bg-white p-8 rounded-3xl shadow-lg reveal border" style="border-color:rgba(168,57,50,.1);"><div class="text-4xl mb-4">${ic}</div><h3 class="mb-4" style="color:var(--brown-d);font-size:1.375rem;font-weight:700;">${t}</h3><p style="color:var(--brown-m);font-size:1rem;line-height:1.7;">${d}</p></div>`).join('');
-
-// INCLUSIONS
-const inclusions = [
-  ["🔍","Diagnostic complet en amont","Analyse fine de votre posture actuelle, de vos prises de parole existantes, de votre univers et de vos enjeux stratégiques."],
-  ["🎬","Travail sur vos prises de parole réelles","Analyse et retour précis sur vos vraies interventions pour un progrès mesurable."],
-  ["📝","Questionnaire d'élaboration du récit","Un travail en profondeur pour clarifier et construire votre récit de marque et votre positionnement signature."],
-  ["📸","Pont branding & photographe","Possibilité d'un pont avec photographe et branding pour que votre image publique soit pleinement alignée."]
-];
-document.getElementById('inclusions').innerHTML = inclusions.map(([ic,t,d])=>`<div class="p-8 rounded-2xl" style="background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);"><div class="flex items-center gap-3 mb-4"><div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#A83932,var(--sand));font-size:1.5rem;">${ic}</div><h4 style="font-size:1.25rem;font-weight:700;">${t}</h4></div><p style="color:rgba(255,255,255,.9);font-size:1rem;line-height:1.6;">${d}</p></div>`).join('');
+document.getElementById('pillars').innerHTML = pillars.map(([ic,t,d])=>`<div class="bg-white p-8 rounded-3xl shadow-lg reveal"><div class="w-24 h-24 flex items-center justify-center mx-auto mb-6" style="color:#A83932;">${ic}</div><h3 class="mb-4" style="color:var(--brown-d);font-size:1.25rem;font-weight:700;">${t}</h3><p style="color:var(--brown-m);font-size:1rem;line-height:1.6;">${d}</p></div>`).join('');
 
 // BÉNÉFICES
 const benefits = [
@@ -575,12 +573,12 @@ document.getElementById('benefits').innerHTML = benefits.map(([t,x])=>`<div clas
 
 // MODALITÉS
 const modalites = [
-  ["🔍","Diagnostic complet","Évaluation fine de votre présence actuelle, de vos prises de parole existantes et de vos enjeux stratégiques."],
-  ["🎯","Travail sur cas réels","Analyse et retours précis sur vos vraies interventions pour des progrès mesurables."],
-  ["📝","Élaboration du récit","Questionnaire approfondi pour clarifier votre récit de marque et votre parole signature."],
-  ["🤝","Sessions individuelles sur-mesure","Rythme et durée calés sur votre agenda et vos échéances."],
-  ["📸","Pont branding & image","Possibilité d'un pont avec photographe et branding pour aligner image publique et parole."],
-  ["🔒","Cadre confidentiel","Confidentialité absolue sur le contenu des sessions, les sujets abordés et l'existence même de l'accompagnement."]
+  ["🔍","Diagnostic oratoire complet","Évaluation fine de votre présence actuelle, de vos prises de parole existantes et de vos enjeux stratégiques."],
+  ["🎬","Travail sur vos prises de parole réelles","Analyse et retours précis sur vos vraies interventions orales pour des progrès mesurables."],
+  ["📝","Questionnaire storytelling","Questionnaire approfondi pour clarifier votre histoire et votre branding personnel ou de marque."],
+  ["🤝","Sessions individuelles sur mesure","Rythme et durée calés sur votre agenda et vos échéances."],
+  ["🔒","Cadre confidentiel","Confidentialité absolue sur le contenu des sessions, les sujets abordés et l'existence même de l'accompagnement."],
+  ["🌿","Approche intégrative","Une méthode qui associe techniques thérapeutiques — hypnose, PNL, travail somatique — et profondeur émotionnelle pour ancrer durablement votre présence de l'intérieur."]
 ];
 document.getElementById('modalites').innerHTML = modalites.map(([ic,t,d])=>`<div class="p-8 rounded-2xl reveal" style="background:var(--white);border:1.5px solid rgba(168,57,50,.15);box-shadow:var(--shadow-sm);"><div class="text-3xl mb-4">${ic}</div><h3 class="mb-3" style="color:var(--brown-d);font-size:1.125rem;font-weight:700;">${t}</h3><p style="color:var(--brown-m);font-size:.9375rem;line-height:1.65;">${d}</p></div>`).join('');
 
@@ -622,4 +620,6 @@ document.querySelectorAll('.reveal,.reveal-scale,.reveal-left,.reveal-right').fo
 <script src="/assets/js/includes.js"></script>
 </body>
 </html>
+
+
 
