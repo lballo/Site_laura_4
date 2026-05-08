@@ -79,8 +79,8 @@ COMPORTEMENT :
     reply = reply.replace(/\*\*([^*]+)\*\*/g, '$1');
     reply = reply.replace(/\*([^*]+)\*/g, '$1');
     // Supprime les emojis sauf en début de message
-    reply = reply.replace(/(?<!^[\s\S]{0,5})[^\x00-\x7F]{1,2}/g, '').trim();
-
+    reply = reply.replace(/[\u{1F000}-\u{1FFFF}]|[\u{2600}-\u{27FF}]|[\u{1F300}-\u{1F9FF}]/gu, '').trim();
+    
     return res.status(200).json({ reply });
 
   } catch (error) {
