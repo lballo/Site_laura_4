@@ -110,7 +110,7 @@ img {
 }
 
 .btn-secondary {
-  background: var(--rouge);
+  background: #C8554A;
   color: var(--white);
   border-color: var(--rouge);
 }
