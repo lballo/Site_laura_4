@@ -48,7 +48,7 @@ img {
 }
 
 ::selection {
-  background: var(--accent);
+  background: var(--rouge);
   color: var(--white);
 }
 
@@ -110,13 +110,13 @@ img {
 }
 
 .btn-secondary {
-  background: var(--accent);
+  background: var(--terracotta);
   color: var(--white);
-  border-color: var(--accent);
+  border-color: var(--terracotta);
 }
 
 .btn-secondary:hover {
-  background: var(--accent-dark);
+  background: var(--rouge);
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
 }
@@ -292,7 +292,7 @@ img {
   background: var(--white);
   padding: 32px 60px;
   position: relative;
-  border-top: 1px solid rgba(200, 85, 74, 0.15);
+  border-top: 1px solid rgba(168, 57, 50, 0.15);
 }
 
 .trust-grid {
@@ -311,7 +311,7 @@ img {
 .trust-number {
   font-family: var(--font-heading);
   font-size: 42px;
-  color: var(--accent);
+  color: var(--rouge);
   font-weight: 600;
   display: block;
   margin-bottom: 8px;
@@ -359,7 +359,7 @@ img {
 .laura-intro-text p {
   font-family: var(--font-body);
   font-size: 18px;
-  color: var(--warm-gray);
+  color: var(--brun-gris);
   line-height: 1.9;
   letter-spacing: 0;
   margin-bottom: 36px;
@@ -380,7 +380,7 @@ img {
    CITATION BANNER
    ============================================ */
 .citation-banner {
-  background-color: var(--warm-gray-2);
+  background-color: var(--brun-gris);
   padding: clamp(40px, 5vw, 56px) clamp(24px, 5vw, 80px);
   text-align: center;
 }
@@ -402,7 +402,7 @@ img {
   font-size: 12px;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: var(--taupe-light);
+  color: var(--ocre);
 }
 
 /* ============================================
@@ -425,11 +425,11 @@ img {
   font-size: 11px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--rouge);
   font-weight: 600;
   margin-bottom: 16px;
   padding: 6px 16px;
-  background: rgba(200, 85, 74, 0.08);
+  background: rgba(168, 57, 50, 0.08);
   border-radius: 20px;
 }
 
@@ -444,7 +444,7 @@ img {
 
 .section-description {
   font-size: 19px;
-  color: var(--warm-gray);
+  color: var(--brun-gris);
   line-height: 1.7;
   max-width: 660px;
   margin: 0 auto;
@@ -454,7 +454,7 @@ img {
   font-size: 12px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--rouge);
   display: inline-block;
 }
 
@@ -499,7 +499,7 @@ img {
 
 .process-card p {
   font-size: 16px;
-  color: var(--warm-gray);
+  color: var(--brun-gris);
   line-height: 1.7;
 }
 
@@ -522,7 +522,7 @@ img {
   font-size: 12px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--rouge);
   display: block;
   margin-bottom: 12px;
   font-weight: 600;
@@ -538,7 +538,7 @@ img {
 
 .storytelling-content p {
   font-size: clamp(14px, 1.5vw, 17px);
-  color: var(--warm-gray);
+  color: var(--brun-gris);
   line-height: 1.7;
   max-width: 540px;
   margin-bottom: 28px;
@@ -558,7 +558,7 @@ img {
 
 .storytelling-price .duration {
   font-size: 14px;
-  color: var(--warm-gray);
+  color: var(--brun-gris);
   margin-top: 8px;
 }
 
@@ -579,7 +579,7 @@ img {
   font-size: 13px;
   letter-spacing: 4px;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--rouge);
   margin-bottom: 16px;
   display: block;
 }
@@ -600,7 +600,7 @@ img {
 .projects-intro p {
   font-size: 17px;
   line-height: 1.8;
-  color: var(--warm-gray);
+  color: var(--brun-gris);
 }
 
 .projects-intro .highlight {
@@ -625,7 +625,7 @@ img {
 }
 
 .project-card:hover {
-  border-color: var(--accent);
+  border-color: var(--rouge);
   transform: translateY(-4px);
   box-shadow: 0 8px 24px rgba(0,0,0,0.08);
 }
@@ -635,7 +635,7 @@ img {
   position: absolute;
   width: 20px;
   height: 20px;
-  border: 1px solid var(--accent);
+  border: 1px solid var(--rouge);
 }
 
 .corner-tl {
@@ -656,7 +656,7 @@ img {
   font-size: 12px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--pop-red);
+  color: var(--rouge);
   margin-bottom: 16px;
   display: block;
 }
@@ -670,7 +670,7 @@ img {
 }
 
 .project-card .desc {
-  color: var(--warm-gray);
+  color: var(--brun-gris);
   font-size: 15px;
   line-height: 1.6;
 }
@@ -711,7 +711,7 @@ img {
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--accent);
+  color: var(--rouge);
   font-size: 30px;
   width: 52px;
   height: 52px;
@@ -770,7 +770,7 @@ img {
   font-family: var(--font-light);
   font-size: 56px;
   line-height: 0.75;
-  color: var(--accent);
+  color: var(--rouge);
   display: block;
   margin-bottom: 10px;
   opacity: 0.45;
@@ -817,7 +817,7 @@ img {
 }
 
 .testi-dot.active {
-  background: var(--accent);
+  background: var(--rouge);
 }
 
 /* ============================================
@@ -875,7 +875,7 @@ img {
   align-items: center;
   justify-content: center;
   font-size: 24px;
-  color: var(--accent);
+  color: var(--rouge);
   transition: transform var(--transition-base);
 }
 
@@ -896,7 +896,7 @@ img {
 .faq-answer p {
   padding: 0 32px 28px;
   font-size: 16px;
-  color: var(--warm-gray);
+  color: var(--brun-gris);
   line-height: 1.8;
 }
 
@@ -918,7 +918,7 @@ img {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(200, 85, 74, 0.08) 0%, transparent 50%);
+  background: radial-gradient(circle, rgba(168, 57, 50, 0.08) 0%, transparent 50%);
   animation: rotate 30s linear infinite;
 }
 
@@ -935,8 +935,8 @@ img {
 }
 
 .cta-section .section-label {
-  background: rgba(200, 85, 74, 0.15);
-  color: var(--accent-light);
+  background: rgba(168, 57, 50, 0.15);
+  color: var(--terracotta);
 }
 
 .cta-section .section-title {
@@ -1041,7 +1041,7 @@ img {
   font-size: 11px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--rouge);
   font-weight: 600;
   margin-bottom: 14px;
   display: block;
@@ -1058,7 +1058,7 @@ img {
 
 .blog-card-excerpt {
   font-size: 15px;
-  color: var(--warm-gray);
+  color: var(--brun-gris);
   line-height: 1.7;
   margin-bottom: 24px;
   flex-grow: 1;
@@ -1071,7 +1071,7 @@ img {
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.5px;
-  color: var(--accent);
+  color: var(--rouge);
   transition: gap var(--transition-base);
 }
 
@@ -1154,4 +1154,6 @@ img {
   .projects-header h2 { font-size: clamp(24px, 7vw, 36px); }
   .blog-card-image { height: 200px; }
 }
+
+
 
