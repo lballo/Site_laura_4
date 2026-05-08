@@ -32,7 +32,7 @@
   bottom: 0;
   left: 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--accent-deep) 0%, var(--accent-light) 100%);
+  background: linear-gradient(90deg, var(--rouge-hover) 0%, var(--terracotta) 100%);
   width: 0%;
   transition: width 0.1s linear;
 }
@@ -85,7 +85,7 @@
   transform: translateX(-50%);
   width: 0;
   height: 2px;
-  background: var(--accent-deep);
+  background: var(--rouge-hover);
   transition: width var(--transition-base);
 }
 
@@ -94,7 +94,7 @@
 }
 
 .nav-links a:hover {
-  color: var(--accent-deep);
+  color: var(--rouge-hover);
 }
 
 /* ============================================
@@ -153,13 +153,13 @@
   font-family: var(--font-nav);
   font-size: 1rem;
   font-weight: 500;
-  color: var(--warm-gray) !important;
+  color: var(--brun-gris) !important;
   transition: all var(--transition-base);
 }
 
 .nav-dropdown-menu a:hover {
   background: var(--light-beige);
-  color: var(--accent-deep) !important;
+  color: var(--rouge-hover) !important;
   padding-left: 30px;
 }
 
@@ -219,13 +219,13 @@
 }
 
 .nav-links .btn.btn-secondary {
-  background: var(--accent-deep);
+  background: var(--rouge);
   color: var(--white);
   opacity: 1;
 }
 
 .nav-links .btn.btn-secondary:hover {
-  background: var(--accent);
+  background: var(--rouge-hover);
   transform: translateY(-1px);
   box-shadow: var(--shadow-md);
 }
@@ -309,7 +309,7 @@
 }
 
 .nav-mobile a:hover {
-  color: var(--accent-deep);
+  color: var(--rouge-hover);
   transform: translateX(10px);
 }
 
@@ -354,11 +354,11 @@
 }
 
 .nav-mobile .nav-mobile-dropdown summary:hover {
-  color: var(--accent-deep);
+  color: var(--rouge-hover);
 }
 
 .nav-mobile .nav-mobile-dropdown summary:hover::after {
-  border-color: var(--accent-deep);
+  border-color: var(--rouge-hover);
 }
 
 .nav-mobile .nav-mobile-dropdown__items {
@@ -371,18 +371,18 @@
 .nav-mobile .nav-mobile-dropdown__items a {
   font-family: var(--font-nav);
   font-size: 18px;
-  color: var(--warm-gray);
+  color: var(--brun-gris);
   padding-left: 20px;
 }
 
 .nav-mobile .nav-mobile-dropdown__items a:hover {
-  color: var(--accent-deep);
+  color: var(--rouge-hover);
   transform: translateX(10px);
 }
 
 /* Bouton CTA mobile */
 .nav-mobile .btn.btn-primary {
-  background: var(--accent-deep);
+  background: var(--rouge-hover);
   color: var(--white);
   border: none;
   font-family: var(--font-nav);
@@ -397,7 +397,7 @@
 
 .nav-mobile .btn.btn-primary:hover,
 .nav-mobile .btn.btn-primary:active {
-  background: var(--accent);
+  background: var(--rouge);
   opacity: 0.95;
   transform: none;
 }
@@ -432,3 +432,4 @@
     height: 65px;
   }
 }
+
