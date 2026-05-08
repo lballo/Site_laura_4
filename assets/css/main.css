@@ -110,13 +110,13 @@ img {
 }
 
 .btn-secondary {
-  background: var(--terracotta);
+  background: var(--rouge);
   color: var(--white);
-  border-color: var(--terracotta);
+  border-color: var(--rouge);
 }
 
 .btn-secondary:hover {
-  background: var(--rouge);
+  background: var(--rouge-hover);
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
 }
@@ -1154,6 +1154,10 @@ img {
   .projects-header h2 { font-size: clamp(24px, 7vw, 36px); }
   .blog-card-image { height: 200px; }
 }
+
+
+
+
 
 
 
