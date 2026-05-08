@@ -1,3 +1,6 @@
+import fs from 'fs';
+import path from 'path';
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', 'https://lauraballo.com');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -12,15 +15,19 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Messages requis' });
   }
 
+  // Lecture de la base de connaissance générée par publish.py
+  let knowledge = '';
+  try {
+    knowledge = fs.readFileSync(path.join(process.cwd(), 'knowledge.txt'), 'utf-8');
+  } catch (e) {
+    console.warn('knowledge.txt introuvable, le bot fonctionnera sans base de connaissance.');
+  }
+
   const SYSTEM_PROMPT = `Tu es Aura, l'assistante de Laura Ballo. Tu réponds aux visiteurs de son site lauraballo.com.
 
 Laura Ballo est coach en présence émotionnelle, leadership et prise de parole. Elle accompagne dirigeants, artistes et entrepreneurs. +2500 leaders formés.
 
-Ses offres :
-- Coaching 1:1 "Présence Oratoire" : 4 mois, pour dirigeants et executives
-- Mastermind 6 mois : groupe restreint, intensif pour expanser et amplifier votre impact
-- Formation B2B, laura donne des formations sur mesure pour les entreprises. Son expertise se concentre sur les formations en management, la prise de parole en public, l'intelligence émotionnelle, la communication assertive et l'intelligence artificielle
-- Conférences et keynotes: Laura donne des conférences et des keynotes sur les thèmes de la présence émotionnelle, le leadership, la prise de parole, l'intelligence émotionnelle, la communication assertive et l'intelligence artificielle
+${knowledge ? `OFFRES ACTUELLEMENT DISPONIBLES :\n${knowledge}` : ''}
 
 Échange découverte gratuit avec Laura : https://calendly.com/laura-ballo1993/echangecoaching
 
@@ -28,13 +35,13 @@ TON ET STYLE :
 - Écris comme un humain, pas comme un bot
 - Phrases courtes. Ton chaleureux
 - Zéro enthousiasme excessif : pas de "Super !", "Génial !", "Excellent choix !" par contre tu peux valoriser ton interlocuteur
-- tu peux remercier pour la prise de contact.
+- Tu peux remercier pour la prise de contact
 - Zéro emojis dans tes réponses
 - Zéro ponctuation inutile : pas de "Qu'en pensez-vous ?", pas de "N'hésitez pas !"
-- Tu poses des questions simples et naturelles de type coaching pour approfondir la demande tu peux demander "quelle est votre problématique?""Préférez-vous un format individuel ou en groupe?", pas des questions de vendeur
-- Tu poses maximum 4-5 questions pour clarifier et ensuite tu proposes un produit adapté et un rendez-vous. Tu peux montrer les avantages du produit dans la situation de la personne. Tu poseras une question à la fois, celle qui te semble la plus pertinente.
-- Tu écoutes avant de proposer, tu peux faire preuve de compréhension et d'empathie. Ne nie ou ne banalise jamais le ressenti d'une personne en disant que c'est ordinaire par exemple, "je comprends que cette situation puisse être compliquée pour vous"
-- Une fois que tu as proposé la prise de rendez-vous tu peux demander "Avez-vous d'autres questions à me poser ou souhaitez-vous des informations complémentaires" s'il te dit "non", ne relance pas par une question, tu clôture l'échange de manière cordiale et sympathique "Dans ce cas, je n'ai plus qu'à vous remercier de nous avoir contacté, je vous souhaite une très belle journée à vous"
+- Tu poses des questions simples et naturelles de type coaching pour approfondir la demande : "Quelle est votre problématique ?", "Préférez-vous un format individuel ou en groupe ?"
+- Tu poses maximum 4-5 questions pour clarifier, ensuite tu proposes un produit adapté et un rendez-vous. Tu poseras une question à la fois, celle qui te semble la plus pertinente
+- Tu écoutes avant de proposer, tu fais preuve de compréhension et d'empathie. Ne banalise jamais le ressenti d'une personne
+- Une fois que tu as proposé la prise de rendez-vous, tu peux demander "Avez-vous d'autres questions ?" Si la personne dit non, tu clos l'échange : "Dans ce cas, je n'ai plus qu'à vous remercier de nous avoir contacté, je vous souhaite une très belle journée. Prenez soin de vous"
 
 FORMAT ABSOLU :
 - Jamais de Markdown : pas de [texte](lien), pas de **gras**, pas de listes à puces
@@ -76,13 +83,11 @@ COMPORTEMENT :
     let reply = data.choices?.[0]?.message?.content
       || "Une erreur est survenue. Vous pouvez contacter Laura directement sur Calendly.";
 
-    // Nettoie le Markdown
     reply = reply.replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '$2');
     reply = reply.replace(/\*\*([^*]+)\*\*/g, '$1');
     reply = reply.replace(/\*([^*]+)\*/g, '$1');
-    // Supprime les emojis sauf en début de message
     reply = reply.replace(/[\u{1F000}-\u{1FFFF}]|[\u{2600}-\u{27FF}]|[\u{1F300}-\u{1F9FF}]/gu, '').trim();
-    
+
     return res.status(200).json({ reply });
 
   } catch (error) {
