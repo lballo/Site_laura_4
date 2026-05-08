@@ -112,7 +112,7 @@ img {
 .btn-secondary {
   background: #C8554A;
   color: var(--white);
-  border-color: var(--rouge);
+  border-color: #C8554A;
 }
 
 .btn-secondary:hover {
