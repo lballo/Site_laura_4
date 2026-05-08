@@ -32,7 +32,7 @@
   bottom: 0;
   left: 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--rouge-hover) 0%, var(--terracotta) 100%);
+  background: var(--rouge);
   width: 0%;
   transition: width 0.1s linear;
 }
@@ -432,4 +432,5 @@
     height: 65px;
   }
 }
+
 
