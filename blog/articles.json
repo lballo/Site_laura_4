@@ -39,9 +39,42 @@
     {
       "slug": "culture",
       "label": "Culture"
+    },
+    {
+      "slug": "intelligence-emotionnelle",
+      "label": "Intelligence émotionnelle"
     }
   ],
   "articles": [
+    {
+      "id": "coach-en-leadership",
+      "title": "Coach leadership: comment développer une vraie présence incarnée?",
+      "slug": "coach-en-leadership",
+      "url": "/coach-en-leadership",
+      "date": "2026-05-11",
+      "readingTime": "6 min",
+      "excerpt": "Découvrez comment développer un leadership incarné grâce à la présence, l’intelligence émotionnelle et la prise de parole. Coaching leadership premium pour dirigeants, entrepreneurs et managers.\n",
+      "tags": [
+        "intelligence-emotionnelle",
+        "affirmation-de-soi",
+        "leadership"
+      ],
+      "situations": [
+        "leadership"
+      ],
+      "searchKeywords": [
+        "coach",
+        "leadership",
+        "comment",
+        "développer",
+        "vraie",
+        "présence",
+        "incarnée"
+      ],
+      "category": "Intelligence émotionnelle",
+      "image": "/assets/img/blog/coach-en-leadership-main.webp",
+      "featured": false
+    },
     {
       "id": "empathie-hypersensible",
       "title": "Comment gérer son hyper-empathie en tant qu’hypersensible?",
