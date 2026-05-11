@@ -76,6 +76,32 @@
       "featured": false
     },
     {
+      "id": "hypersensibilite-mythe-ou-realite",
+      "title": "L'hypersensibilité : mythe ou réalité ?",
+      "slug": "hypersensibilite-mythe-ou-realite",
+      "url": "/hypersensibilite-mythe-ou-realite",
+      "date": "2026-05-11",
+      "readingTime": "3 min",
+      "excerpt": "L'hypersensibilité est-elle un mythe ou une réalité ? Découvrez pourquoi reconnaître son hypersensibilité peut être un vrai déclic et comment s'en libérer.",
+      "tags": [
+        "hypersensibilite",
+        "comprehension-de-soi"
+      ],
+      "situations": [
+        "comprehension",
+        "sensible"
+      ],
+      "searchKeywords": [
+        "hypersensibilité",
+        "mythe",
+        "ou",
+        "réalité"
+      ],
+      "category": "Hypersensibilité",
+      "image": "/assets/img/blog/hypersensibilite-mythe-ou-realite-main.webp",
+      "featured": false
+    },
+    {
       "id": "empathie-hypersensible",
       "title": "Comment gérer son hyper-empathie en tant qu’hypersensible?",
       "slug": "empathie-hypersensible",
