@@ -133,6 +133,33 @@
       "featured": false
     },
     {
+      "id": "metier-hypersensible",
+      "title": "Quel métier pour un hypersensible ?",
+      "slug": "metier-hypersensible",
+      "url": "/metier-hypersensible",
+      "date": "2026-05-22",
+      "readingTime": "4 min",
+      "excerpt": "Quel métier exercer pour un hypersensible? Nous vous dévoilons le palmares des métiers exercés par les hypersensibles.",
+      "tags": [
+        "hypersensibilite",
+        "comprehension-de-soi",
+        "gestion-des-emotions"
+      ],
+      "situations": [
+        "sensible",
+        "comprehension",
+        "positionnement"
+      ],
+      "searchKeywords": [
+        "métier",
+        "hypersensible",
+        "quel"
+      ],
+      "category": "Hypersensibilité",
+      "image": "/assets/img/blog/metier-hypersensible-main.webp",
+      "featured": false
+    },
+    {
       "id": "coach-en-leadership",
       "title": "Coach leadership: comment développer une vraie présence incarnée?",
       "slug": "coach-en-leadership",
