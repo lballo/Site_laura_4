@@ -62,8 +62,8 @@
       "uploadDate": "2024-01-01",
       "author": { "@id": "https://www.lauraballo.com/#laura" },
       "inLanguage": "fr",
-      "contentUrl": "https://www.youtube.com/watch?v=VOTRE_ID_VIDEO",
-      "embedUrl": "https://www.youtube.com/embed/VOTRE_ID_VIDEO"
+      "contentUrl": "https://www.youtube.com/watch?v=AsEQ_WYIhFA",
+      "embedUrl": "https://www.youtube.com/embed/AsEQ_WYIhFA"
     },
     {
       "@type": "Event",
@@ -153,31 +153,6 @@ a { color: inherit; text-decoration: none; }
   pointer-events: none;
 }
 
-/* Ligne décorative rouge */
-.hero-rule {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 32px;
-}
-.hero-rule span {
-  display: inline-block;
-  width: 48px;
-  height: 2px;
-  background: var(--rouge);
-  border-radius: 99px;
-}
-.hero-rule em {
-  font-style: normal;
-  font-size: .75rem;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--rouge);
-  font-family: var(--font-body);
-  font-weight: 600;
-}
-
 /* Badge "REPLAY" */
 .badge {
   display: inline-flex;
@@ -217,7 +192,7 @@ a { color: inherit; text-decoration: none; }
 }
 .hero-title em {
   font-style: italic;
-  color: #e07a74;
+  color: #A83932;
   font-family: var(--font-light);
 }
 
@@ -416,13 +391,7 @@ footer {
         <span class="badge"><span class="badge-dot"></span>Replay disponible</span>
       </div>
 
-      <div class="hero-rule reveal reveal-delay-1">
-        <span></span>
-        <em>Conférence-live</em>
-        <span></span>
-      </div>
-
-      <h1 class="hero-title reveal reveal-delay-2">
+      <h1 class="hero-title reveal reveal-delay-1">
         Retrouvez le replay de votre conférence-live :<br />
         <em>Les 8 conseils clés pour expanser<br />en tant qu'entrepreneur atypique !</em>
       </h1>
@@ -446,9 +415,10 @@ footer {
       <!-- ⚠️ Remplacez VOTRE_ID_VIDEO par l'identifiant YouTube de votre vidéo -->
       <div class="video-wrapper">
         <iframe
-          src="https://www.youtube.com/embed/VOTRE_ID_VIDEO?rel=0&modestbranding=1&color=white"
+          src="https://www.youtube.com/embed/AsEQ_WYIhFA?si=c_OaHly7_XZIZ60F&rel=0&modestbranding=1&color=white"
           title="Les 8 conseils clés pour expanser en tant qu'entrepreneur atypique — Replay conférence Laura Ballo"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
           allowfullscreen
           loading="lazy"
         ></iframe>
