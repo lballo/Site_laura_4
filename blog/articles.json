@@ -47,6 +47,92 @@
   ],
   "articles": [
     {
+      "id": "prise-de-parole-et-emotions",
+      "title": "Prise de parole et émotions",
+      "slug": "prise-de-parole-et-emotions",
+      "url": "/prise-de-parole-et-emotions",
+      "date": "2026-05-22",
+      "readingTime": "3 min",
+      "excerpt": "Comment transmettre des émotions dans vos prises de parole. Découvrez mes astuces clés",
+      "tags": [
+        "prise-de-parole",
+        "communication",
+        "hypersensibilite"
+      ],
+      "situations": [
+        "leadership",
+        "sensible"
+      ],
+      "searchKeywords": [
+        "prise",
+        "de",
+        "parole",
+        "et",
+        "émotions"
+      ],
+      "category": "Prise de parole en public",
+      "image": "/assets/img/blog/prise-de-parole-et-emotions-main.webp",
+      "featured": false
+    },
+    {
+      "id": "gourou-quand-le-cinema-francais-effleure-lemprise-sans-vraiment-la-comprendre",
+      "title": "Gourou : quand le cinéma français effleure l'emprise sans vraiment la comprendre",
+      "slug": "gourou-quand-le-cinema-francais-effleure-lemprise-sans-vraiment-la-comprendre",
+      "url": "/gourou-quand-le-cinema-francais-effleure-lemprise-sans-vraiment-la-comprendre",
+      "date": "2026-05-22",
+      "readingTime": "6 min",
+      "excerpt": "L’emprise sectaire et le cinéma. Un article psychologique du film gourou, découvrez notre analyse",
+      "tags": [
+        "culture"
+      ],
+      "situations": [
+        "leadership",
+        "comprehension"
+      ],
+      "searchKeywords": [
+        "film",
+        "gourou",
+        "quand",
+        "cinéma",
+        "français",
+        "effleure",
+        "emprise",
+        "sans",
+        "vraiment",
+        "comprendre"
+      ],
+      "category": "Culture",
+      "image": "/assets/img/blog/gourou-quand-le-cinema-francais-effleure-lemprise-sans-vraiment-la-comprendre-main.webp",
+      "featured": false
+    },
+    {
+      "id": "bilan-de-competences",
+      "title": "Bilan de compétences hypersensibles",
+      "slug": "bilan-de-competences",
+      "url": "/bilan-de-competences",
+      "date": "2026-05-22",
+      "readingTime": "8 min",
+      "excerpt": "Pourquoi le bilan de compétences est un outil puissant pour les hypersensibles. Comprendre son mode de fonctionnement émotionnel, identifier ses besoins réels, sortir de la suradaptation et trouver un travail vraiment aligné.",
+      "tags": [
+        "leadership",
+        "comprehension-de-soi",
+        "hypersensibilite"
+      ],
+      "situations": [
+        "positionnement",
+        "comprehension"
+      ],
+      "searchKeywords": [
+        "bilan",
+        "compétences",
+        "hypersensible",
+        "hypersensibles"
+      ],
+      "category": "Leadership",
+      "image": "/assets/img/blog/bilan-de-competences-main.webp",
+      "featured": false
+    },
+    {
       "id": "coach-en-leadership",
       "title": "Coach leadership: comment développer une vraie présence incarnée?",
       "slug": "coach-en-leadership",
@@ -629,65 +715,6 @@
       ],
       "category": "Stratégie",
       "image": "/assets/img/blog/entrepreneuriat-et-marketing-dans-lindustrie-du-coaching-linterview-exclusive-de-jeremy-kohlmann-main.webp",
-      "featured": false
-    },
-    {
-      "id": "prise-de-parole-et-emotions",
-      "title": "Prise de parole et émotions",
-      "slug": "prise-de-parole-et-emotions",
-      "url": "/prise-de-parole-et-emotions",
-      "date": "2026-05-05",
-      "readingTime": "3 min",
-      "excerpt": "",
-      "tags": [
-        "prise-de-parole",
-        "communication",
-        "hypersensibilite"
-      ],
-      "situations": [
-        "leadership",
-        "sensible"
-      ],
-      "searchKeywords": [
-        "prise",
-        "de",
-        "parole",
-        "et",
-        "émotions"
-      ],
-      "category": "Prise de parole en public",
-      "image": "/assets/img/blog/prise-de-parole-et-emotions-main.webp",
-      "featured": false
-    },
-    {
-      "id": "gourou-quand-le-cinema-francais-effleure-lemprise-sans-vraiment-la-comprendre",
-      "title": "Gourou : quand le cinéma français effleure l'emprise sans vraiment la comprendre",
-      "slug": "gourou-quand-le-cinema-francais-effleure-lemprise-sans-vraiment-la-comprendre",
-      "url": "/gourou-quand-le-cinema-francais-effleure-lemprise-sans-vraiment-la-comprendre",
-      "date": "2026-05-05",
-      "readingTime": "6 min",
-      "excerpt": "",
-      "tags": [
-        "culture"
-      ],
-      "situations": [
-        "leadership",
-        "comprehension"
-      ],
-      "searchKeywords": [
-        "film",
-        "gourou",
-        "quand",
-        "cinéma",
-        "français",
-        "effleure",
-        "emprise",
-        "sans",
-        "vraiment",
-        "comprendre"
-      ],
-      "category": "Culture",
-      "image": "/assets/img/blog/gourou-quand-le-cinema-francais-effleure-lemprise-sans-vraiment-la-comprendre-main.webp",
       "featured": false
     },
     {
