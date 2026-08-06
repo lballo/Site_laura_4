@@ -1,0 +1,39 @@
+name: 📚 Publier formations Notion
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Tous les jours à 6h UTC — détecte les statuts « À publier / À modifier / À supprimer »
+    - cron: '0 6 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🐍 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 📦 Dépendances
+        run: pip install -r _scripts/requirements.txt
+
+      - name: 🚀 Générer les pages formation
+        env:
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+          NOTION_FORMATIONS_DB_ID: ${{ secrets.NOTION_FORMATIONS_DB_ID }}
+          NOTION_SATISFACTION_DB_ID: ${{ secrets.NOTION_SATISFACTION_DB_ID }}
+          FORMATION_TEMPLATE_PATH: _templates/formation.html
+          FORMATIONS_OUTPUT_DIR: formations
+        run: python _scripts/publish_formations.py
+
+      - name: 🗺️ Régénérer le sitemap
+        run: python _scripts/generate_sitemap.py
