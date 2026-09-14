@@ -60,6 +60,11 @@ SITE_URL = "https://lauraballo.com"
 NOTION_API = "https://api.notion.com/v1"
 NOTION_VERSION = "2022-06-28"
 
+ACCESSIBILITE_DEFAUT = (
+    "Nos formations sont accessibles aux personnes en situation de handicap. "
+    "Contactez-nous pour étudier ensemble les adaptations possibles selon vos besoins."
+)
+
 STATUT_PROP = "Statut publication"
 A_PUBLIER, A_MODIFIER, A_SUPPRIMER = "À publier", "À modifier", "À supprimer"
 PUBLIE, NON_PUBLIE = "Publié", "Non publié"
@@ -269,24 +274,11 @@ def render_presentation(blocks):
     return "\n".join(f"                        <p>{p}</p>" for p in paras)
 
 
-def render_programme(blocks):
+def programme_html(phases):
     """
-    heading_3 → une phase (Avant / Jour 1 / Jour 2 / Après)
-    paragraphe en gras à l'intérieur → un sous-module (demi-journée)
-    puces → les items
+    phases : [{"titre": str, "elements": [("module"|"item", html)]}]
+    Rend les bandeaux numerotes, les sous-titres et les puces.
     """
-    phases, current = [], None
-    for b in blocks:
-        t = b.get("type")
-        if t == "heading_3":
-            current = {
-                "titre": rich_to_html(b["heading_3"]["rich_text"]),
-                "blocs": [],
-            }
-            phases.append(current)
-        elif current is not None:
-            current["blocs"].append(b)
-
     out = []
     for n, phase in enumerate(phases, start=1):
         out.append('                <div class="programme-phase">')
@@ -326,16 +318,12 @@ def render_programme(blocks):
                 out.append("                        </ul>")
             buffer.clear()
 
-        for b in phase["blocs"]:
-            t = b.get("type")
-            if t == "paragraph":
-                txt = rich_to_html(b["paragraph"]["rich_text"]).strip()
-                if not txt:
-                    continue
+        for kind, texte in phase["elements"]:
+            if kind == "module":
                 flush()
-                module = re.sub(r"</?strong>", "", txt)
-            elif t == "bulleted_list_item":
-                buffer.append(rich_to_html(b["bulleted_list_item"]["rich_text"]))
+                module = texte
+            else:
+                buffer.append(texte)
         flush()
 
         out.append("                    </div>")
@@ -343,37 +331,47 @@ def render_programme(blocks):
     return "\n".join(out)
 
 
+def render_programme(blocks):
+    """
+    Repli corps de page.
+    heading_3 → une phase, paragraphe en gras → un sous-titre, puces → les items.
+    """
+    phases, current = [], None
+    for b in blocks:
+        t = b.get("type")
+        if t == "heading_3":
+            current = {"titre": rich_to_html(b["heading_3"]["rich_text"]), "elements": []}
+            phases.append(current)
+        elif current is None:
+            continue
+        elif t == "paragraph":
+            txt = rich_to_html(b["paragraph"]["rich_text"]).strip()
+            if txt:
+                current["elements"].append(("module", re.sub(r"</?strong>", "", txt)))
+        elif t == "bulleted_list_item":
+            current["elements"].append(
+                ("item", rich_to_html(b["bulleted_list_item"]["rich_text"]))
+            )
+    return programme_html(phases)
+
+
 def render_pedagogie(blocks):
     return " ".join(paragraphs_of(blocks))
 
 
-EVAL_KEYS = [
-    ("EVAL_AVANT", ("avant", "positionnement")),
-    ("EVAL_PENDANT", ("pendant", "en cours")),
-    ("EVAL_FIN", ("fin de formation", "en fin")),
-    ("EVAL_APRES", ("après", "froid", "satisfaction")),
-]
+def puces_evaluation(elements):
+    """Une puce de la section Évaluation, déjà échappée en amont."""
+    return "\n".join(
+        '                        <li><span class="bullet"></span>'
+        f"<span>{e}</span></li>"
+        for e in elements
+        if e
+    )
 
 
 def render_evaluation(blocks):
-    """
-    Attend 4 puces préfixées (Avant / Pendant / En fin de formation / Après).
-    Repli : si les préfixes ne sont pas trouvés, tout est regroupé dans EVAL_PENDANT.
-    """
-    items = bullets_of(blocks) or paragraphs_of(blocks)
-    result = {k: "" for k, _ in EVAL_KEYS}
-    matched = False
-    for item in items:
-        plain = re.sub(r"<[^>]+>", "", item).lower()
-        for key, needles in EVAL_KEYS:
-            if any(plain.startswith(n) or plain[:40].find(n) >= 0 for n in needles):
-                if not result[key]:
-                    result[key] = re.sub(r"^[^:]{0,45}:\s*", "", item).strip()
-                    matched = True
-                    break
-    if not matched:
-        result["EVAL_PENDANT"] = " ".join(items)
-    return result
+    """Repli corps de page : chaque puce ou paragraphe devient une puce."""
+    return puces_evaluation(bullets_of(blocks) or paragraphs_of(blocks))
 
 
 def render_liste_simple(texte, wrapper):
@@ -384,6 +382,76 @@ def render_liste_simple(texte, wrapper):
         if l.strip()
     ]
     return "\n".join(wrapper(esc(l)) for l in lignes)
+
+
+# ═════════════════════════════════════════════════════════
+# RENDU DEPUIS LES PROPRIÉTÉS NOTION (source de vérité)
+#
+# Le corps des fiches n'est plus qu'un repli, le temps de la bascule :
+# si la propriété est vide, on retombe sur l'ancienne section du corps.
+# Conventions de saisie :
+#   Contenu de formation   ligne nue = bandeau, « — » = sous-titre, « • » = puce
+#   Objectifs opérationnels  une ligne = un objectif
+#   Modalités d évaluation   une ligne, éléments séparés par « • »
+# ═════════════════════════════════════════════════════════
+PUCES = "•●*"
+TIRETS = "—–"
+
+
+def lignes_de(texte):
+    return [l.strip() for l in re.split(r"[\n\r]+", texte or "") if l.strip()]
+
+
+def sans_puce(ligne):
+    """Retire la puce ou la numérotation de tête."""
+    ligne = ligne.lstrip(PUCES + TIRETS + "-").strip()
+    return re.sub(r"^\d+[.)]\s*", "", ligne)
+
+
+def prop_objectifs(texte):
+    return "\n".join(
+        f'                        <li><span class="check">✓</span>'
+        f"<span>{esc(sans_puce(l))}</span></li>"
+        for l in lignes_de(texte)
+    )
+
+
+def prop_programme(texte):
+    """Ligne nue = bandeau, ligne « — … » = sous-titre, ligne « • … » = puce."""
+    phases, current = [], None
+    for ligne in lignes_de(texte):
+        tete = ligne[0]
+        if tete in PUCES or ligne.startswith("- "):
+            if current is None:
+                current = {"titre": "Programme", "elements": []}
+                phases.append(current)
+            current["elements"].append(("item", esc(sans_puce(ligne))))
+        elif tete in TIRETS:
+            if current is None:
+                current = {"titre": "Programme", "elements": []}
+                phases.append(current)
+            current["elements"].append(("module", esc(sans_puce(ligne))))
+        else:
+            current = {"titre": esc(ligne), "elements": []}
+            phases.append(current)
+    return programme_html(phases)
+
+
+def prop_evaluation(texte):
+    """Une ou plusieurs lignes, éléments séparés par « • » → une puce chacun."""
+    elements = []
+    for ligne in lignes_de(texte):
+        for part in re.split(r"\s*[•●]\s*", ligne):
+            part = part.strip()
+            if part:
+                elements.append(esc(part))
+    return puces_evaluation(elements)
+
+
+def prop_paragraphes(texte):
+    return "\n".join(
+        f"                        <p>{esc(l)}</p>" for l in lignes_de(texte)
+    )
 
 
 # ═════════════════════════════════════════════════════════
@@ -595,12 +663,37 @@ def build_data(client, page, avis):
     else:
         duree = f"{int(jours or 1)} jour ({int(heures or 0)} heures)"
 
+    # Propriété d'abord, corps de page en repli tant que la bascule n'est pas finie.
     sections = split_sections(client.get_blocks(page["id"]))
-    evaluation = render_evaluation(find_section(sections, SEC_EVALUATION))
 
-    presentation = render_presentation(find_section(sections, SEC_APPROCHE))
-    if not presentation:
-        presentation = f'                        <p>{esc(prop(page, "Méta-description"))}</p>'
+    evaluation = prop_evaluation(prop(page, "Modalités d évaluation")) or render_evaluation(
+        find_section(sections, SEC_EVALUATION)
+    )
+
+    presentation = (
+        prop_paragraphes(prop(page, "Présentation"))
+        or render_presentation(find_section(sections, SEC_APPROCHE))
+        or f'                        <p>{esc(prop(page, "Méta-description"))}</p>'
+    )
+
+    objectifs = prop_objectifs(prop(page, "Objectifs opérationnels")) or render_objectifs(
+        find_section(sections, SEC_OBJECTIFS)
+    )
+
+    programme = prop_programme(prop(page, "Contenu de formation")) or render_programme(
+        find_section(sections, SEC_PROGRAMME)
+    )
+
+    pedagogie = " ".join(
+        esc(t)
+        for t in (
+            prop(page, "Modalités pédagogiques"),
+            prop(page, "Méthodes pédagogiques"),
+        )
+        if t
+    ) or render_pedagogie(find_section(sections, SEC_PEDAGOGIE))
+
+    accessibilite = esc(prop(page, "Accessibilité handicap")) or ACCESSIBILITE_DEFAUT
 
     niveau = prop(page, "niveau", "select")
     niveau_label = {"1": "Niveau 1 — Fondamentaux", "2": "Niveau 2 — Perfectionnement"}.get(
@@ -632,9 +725,11 @@ def build_data(client, page, avis):
             lambda l: f'<li><span class="bullet">●</span> {l}</li>',
         ),
         "PREREQUIS": esc(prop(page, "Prérequis")),
-        "OBJECTIFS_HTML": render_objectifs(find_section(sections, SEC_OBJECTIFS)),
-        "PROGRAMME_HTML": render_programme(find_section(sections, SEC_PROGRAMME)),
-        "PEDAGOGIE": render_pedagogie(find_section(sections, SEC_PEDAGOGIE)),
+        "OBJECTIFS_HTML": objectifs,
+        "PROGRAMME_HTML": programme,
+        "PEDAGOGIE": pedagogie,
+        "EVALUATION_HTML": evaluation,
+        "ACCESSIBILITE": accessibilite,
         "POINTS_FORTS_HTML": render_liste_simple(
             prop(page, "Points forts"),
             lambda l: f'<li><span class="chevron">›</span><span>{l}</span></li>',
@@ -647,7 +742,6 @@ def build_data(client, page, avis):
         "_tarif_inter": prop(page, "Tarif HT inter", "number"),
         "_heures": heures,
     }
-    data.update(evaluation)
     data["SCHEMA_JSON"] = build_schema(data, avis)
     return data
 
