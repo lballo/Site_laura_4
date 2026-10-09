@@ -555,9 +555,33 @@ def date_maj_formation(page):
 # ═════════════════════════════════════════════════════════
 # AVIS : Satisfaction → Participant → Sessions → Formation
 # ═════════════════════════════════════════════════════════
+def session_comptee(session, debut, fin):
+    """Même périmètre que le calcul mensuel des indicateurs (n8n) : session
+    organisée par Laura Ballo Coaching, non annulée, terminée dans les 12
+    derniers mois. Une session sans valeur « Organisateur » (créée avant le
+    champ) est réputée organisée par Laura Ballo Coaching."""
+    org = prop(session, "Organisateur", "select")
+    if org and org != "Laura Ballo Coaching":
+        return False
+    if prop(session, "Annulée", "checkbox"):
+        return False
+    r = session.get("properties", {}).get("Dernière demi-journée", {}).get("rollup", {})
+    d = (r.get("date") or {}).get("start") or ""
+    if not d:
+        return False
+    return debut <= d[:10] <= fin
+
+
 def collect_avis(client):
-    """Retourne {formation_page_id: [avis, ...]}."""
+    """Retourne ({formation_page_id: [avis, ...]}, periode).
+
+    Seuls les avis complets (note calculée) reliés à un participant d'une
+    session comptée (cf. session_comptee) sont retenus. La note est publiée
+    dès le premier avis ; le verbatim seulement si « Accepte témoignage »."""
     par_formation = {}
+    fin = datetime.now(timezone.utc).date()
+    debut = fin.replace(year=fin.year - 1)
+    periode = (debut.strftime("%d/%m/%Y"), fin.strftime("%d/%m/%Y"))
     entrees = client.query_database(SATISFACTION_DB)
     print(f"  {len(entrees)} entrée(s) de satisfaction")
 
@@ -570,7 +594,7 @@ def collect_avis(client):
         if not participants:
             continue
 
-        # Remonter jusqu'aux formations
+        # Remonter jusqu'aux formations, via les sessions comptées
         formations = []
         prenom, initiale = "", ""
         for pid in participants:
@@ -588,7 +612,8 @@ def collect_avis(client):
                     session = client.get_page(sid)
                 except requests.HTTPError:
                     continue
-                formations.extend(prop(session, "Formation", "relation"))
+                if session_comptee(session, debut.isoformat(), fin.isoformat()):
+                    formations.extend(prop(session, "Formation", "relation"))
 
         if not formations:
             continue
@@ -605,7 +630,7 @@ def collect_avis(client):
         for fid in set(formations):
             par_formation.setdefault(fid.replace("-", ""), []).append(avis)
 
-    return par_formation
+    return par_formation, periode
 
 
 def etoiles_html(note):
@@ -667,7 +692,7 @@ def bloc_avis(avis_list):
             f'                        <span class="avis-date">{d}</span>\n'
             '                        <div class="avis-rating">\n'
             f'                            <div class="stars">{etoiles_html(a["note"])}</div>\n'
-            f'                            <span class="avis-rating-score">{a["note"]}/5</span>\n'
+            f'                            <span class="avis-rating-score">{str(a["note"]).replace(".", ",")}/5</span>\n'
             "                        </div>\n"
             "                    </div>\n"
             f'                    <p class="avis-comment">{esc(a["verbatim"])}</p>\n'
@@ -682,6 +707,52 @@ def bloc_avis(avis_list):
         "liste": "\n".join(items),
         "nb_publiables": len(publiables),
     }
+
+
+CRITERES_A_CHAUD = (
+    "respect du programme, utilité professionnelle, qualité de la pédagogie, "
+    "moyens pédagogiques et professionnalisme de la formatrice"
+)
+
+
+def onglet_avis_html(avis, periode):
+    """Onglet « Avis et résultats » : note à chaud dès le premier avis,
+    verbatims uniquement avec l'accord du participant."""
+    if not avis:
+        return (
+            '                <section class="section">\n'
+            '                    <h2 class="section-title">Les avis sur la formation</h2>\n'
+            '                    <div class="avis-box"><p class="avis-vide">Pas encore d\'avis sur les 12 derniers mois : '
+            "les premiers questionnaires de satisfaction à chaud seront publiés ici dès la prochaine session terminée.</p></div>\n"
+            "                </section>\n"
+        )
+    du, au = periode
+    n = avis["total"]
+    verbatims = (
+        f'                        <div class="avis-list">\n{avis["liste"]}\n                        </div>'
+        if avis["nb_publiables"]
+        else '                        <p class="avis-vide">Les participants n\'ont pas souhaité que leur commentaire soit publié ; seules leurs notes sont prises en compte.</p>'
+    )
+    return (
+        '                <section class="section">\n'
+        '                    <h2 class="section-title">Les avis sur la formation</h2>\n'
+        '                    <div class="avis-box">\n'
+        '                        <div class="avis-header">\n'
+        '                            <div class="avis-score">\n'
+        f'                                <div class="avis-number">{str(avis["moyenne"]).replace(".", ",")}</div>\n'
+        f'                                <div class="avis-stars">{avis["stars"]}</div>\n'
+        f'                                <div class="avis-source">{n} avis à chaud</div>\n'
+        "                            </div>\n"
+        f'                            <div class="avis-distribution">\n{avis["distribution"]}\n                            </div>\n'
+        "                        </div>\n"
+        f'                        <p class="avis-periode">Note moyenne des questionnaires de satisfaction remplis à chaud, en fin de formation, '
+        f"par les stagiaires des sessions organisées par Laura Ballo Coaching entre le {du} et le {au}. "
+        f"Chaque note est la moyenne de cinq critères sur 10 ({CRITERES_A_CHAUD}), ramenée sur 5. "
+        "Toutes les notes sont comptées ; seuls les commentaires dont la publication a été autorisée par leur auteur sont affichés.</p>\n"
+        f"{verbatims}\n"
+        "                    </div>\n"
+        "                </section>\n"
+    )
 
 
 # ═════════════════════════════════════════════════════════
@@ -736,10 +807,9 @@ BLOC_AVIS_SECTION = re.compile(
 
 def render(template, data, avis):
     out = template
-    if not avis or avis["nb_publiables"] == 0:
-        # Pas d'avis publiable : on retire le bloc note du hero et la section avis
+    if not avis:
+        # Aucun avis sur la période : on retire le bloc note du hero
         out = BLOC_AVIS_HERO.sub("", out)
-        out = BLOC_AVIS_SECTION.sub("", out)
     for key, value in data.items():
         if key.startswith("_"):
             continue
@@ -752,7 +822,7 @@ def render(template, data, avis):
     return out
 
 
-def build_data(client, page, avis, org=None, lignes_indicateurs=None):
+def build_data(client, page, avis, org=None, lignes_indicateurs=None, periode=("", "")):
     org = org or {}
     slug = prop(page, "slug") or "formation"
     heures = prop(page, "Durée (heures)", "number")
@@ -797,8 +867,11 @@ def build_data(client, page, avis, org=None, lignes_indicateurs=None):
 
     sanction = prop(page, "Sanction de la formation").strip()
     lignes_formation = indicateurs.par_formation(lignes_indicateurs or [], page["id"])
+    # Sur la fiche, l'encart se limite aux stagiaires formés : la satisfaction
+    # est déjà dans l'onglet Avis, le reste est sur la page « Nos résultats ».
     resultats_html = indicateurs.encart_formation_html(
-        lignes_formation, indicateurs.date_calcul(lignes_indicateurs or [])
+        [l for l in lignes_formation if l["indicateur"] == "Stagiaires formés"],
+        indicateurs.date_calcul(lignes_indicateurs or []),
     )
 
     niveau = prop(page, "niveau", "select")
@@ -844,12 +917,13 @@ def build_data(client, page, avis, org=None, lignes_indicateurs=None):
         "SANCTION": esc(sanction),
         "RESULTATS_FORMATION_HTML": resultats_html,
         "RESULTATS_CSS": indicateurs.ENCART_CSS,
+        "AVIS_TAB_HTML": onglet_avis_html(avis, periode),
         "ACCESSIBILITE_HTML": accessibilite,
         "POINTS_FORTS_HTML": render_liste_simple(
             prop(page, "Points forts"),
             lambda l: f'<li><span class="chevron">›</span><span>{l}</span></li>',
         ),
-        "NOTE_MOYENNE": avis["moyenne"] if avis else "",
+        "NOTE_MOYENNE": str(avis["moyenne"]).replace(".", ",") if avis else "",
         "NB_AVIS": avis["total"] if avis else 0,
         "STARS_HTML": avis["stars"] if avis else "",
         "AVIS_DISTRIBUTION_HTML": avis["distribution"] if avis else "",
@@ -1121,7 +1195,7 @@ def main():
 
     print(f"  {len(a_traiter)} formation(s) en attente")
     print("→ Collecte des avis")
-    avis_par_formation = collect_avis(client)
+    avis_par_formation, periode = collect_avis(client)
     print("→ Lecture de 🏛️ Mon organisme")
     org = charger_organisme(client)
     print("→ Lecture des indicateurs de résultats")
@@ -1168,9 +1242,9 @@ def main():
                 f"{avis['nb_publiables']} verbatim(s) publiable(s)"
             )
         else:
-            print("    aucun avis — blocs avis retirés de la page")
+            print("    aucun avis sur la période — note retirée de l'en-tête")
 
-        data = build_data(client, page, avis, org, lignes_indicateurs)
+        data = build_data(client, page, avis, org, lignes_indicateurs, periode)
         cible.write_text(render(template, data, avis), encoding="utf-8")
         print(f"    ✓ {cible}")
         touches.append(str(cible))
