@@ -29,6 +29,7 @@ import indicateurs
 from indicateurs import date_fr, effectif, esc, libelle, valeur_affichee
 from publish_formations import (
     FORMATIONS_DB,
+    git_push,
     NOTION_API_KEY,
     PUBLIE,
     STATUT_PROP,
@@ -198,7 +199,7 @@ def main():
         subprocess.run(["git", "add", str(cible)], check=True)
         if subprocess.run(["git", "status", "--porcelain", str(cible)], capture_output=True, text=True).stdout.strip():
             subprocess.run(["git", "commit", "-m", f"📈 Page résultats mise à jour — {date_fr(date_maj)}"], check=True)
-            subprocess.run(["git", "push"], check=True)
+            git_push()
             print("  ✓ poussé")
     except subprocess.CalledProcessError as e:
         print(f"  ❌ Erreur git : {e}")

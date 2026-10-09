@@ -1048,6 +1048,14 @@ def regenerer_index(client):
 # ═════════════════════════════════════════════════════════
 # GIT
 # ═════════════════════════════════════════════════════════
+def git_push():
+    """Pousse en rebasant d'abord : si main a bougé pendant la génération
+    (un autre commit, un autre workflow), le push serait refusé et le
+    travail perdu silencieusement."""
+    subprocess.run(["git", "pull", "--rebase", "--autostash", "--quiet"], check=True)
+    subprocess.run(["git", "push"], check=True)
+
+
 def git_commit(fichiers, message):
     if not fichiers:
         return
@@ -1063,7 +1071,7 @@ def git_commit(fichiers, message):
             print("  Rien à committer")
             return
         subprocess.run(["git", "commit", "-m", message], check=True)
-        subprocess.run(["git", "push"], check=True)
+        git_push()
         print(f"  ✓ {len(fichiers)} fichier(s) poussé(s)")
     except subprocess.CalledProcessError as e:
         print(f"  ❌ Erreur git : {e}")
