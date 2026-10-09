@@ -25,9 +25,9 @@
   },
   "offers": {
     "@type": "Offer",
-    "price": "1900",
+    "price": "4500",
     "priceCurrency": "EUR",
-    "category": "Inter-entreprise"
+    "category": "Intra-entreprise"
   },
   "hasCourseInstance": {
     "@type": "CourseInstance",
@@ -1548,11 +1548,13 @@
                 <section class="section">
                     <h2 class="section-title">Tarifs</h2>
                     <div class="tarifs-grid">
+                        <!-- INTER (désactivé) — carte tarif inter-entreprises, à réactiver avec l'offre inter
                         <div class="tarif-card">
                             <div class="tarif-label">Inter-entreprise</div>
                             <div class="tarif-value">1 900 € <small>HT / participant</small></div>
                             <p>Inscription individuelle à une session programmée. 2 jours (14 heures).</p>
                         </div>
+                        FIN INTER -->
                         <div class="tarif-card">
                             <div class="tarif-label">Intra-entreprise</div>
                             <div class="tarif-value">4 500 € <small>HT / groupe</small></div>
@@ -1602,14 +1604,16 @@
             <div class="sidebar-inner">
                 <div class="sidebar-card">
 
-                    <!-- Tabs Inter/Intra -->
+<!-- INTER (désactivé) — offre inter-entreprises à venir : réactiver les onglets et ce bloc, puis retirer la classe active du bloc intra
+                    <!~~ Tabs Inter/Intra ~~>
                     <div class="tarif-tabs">
                         <button class="tarif-tab active" onclick="switchTarif('inter')">Inter</button>
                         <button class="tarif-tab" onclick="switchTarif('intra')">Intra</button>
                     </div>
 
-                    <!-- Inter content -->
+                    <!~~ Inter content ~~>
                     <div class="tarif-content active" id="tarif-inter">
+
                         <div class="tarif-format">Présentiel ou classe à distance</div>
                         <div class="sidebar-content">
                             <div class="sidebar-row">
@@ -1645,9 +1649,10 @@
                             </div>
                         </div>
                     </div>
+     FIN INTER -->
 
                     <!-- Intra content -->
-                    <div class="tarif-content" id="tarif-intra">
+                    <div class="tarif-content active" id="tarif-intra">
                         <div class="tarif-format">Formation dans vos locaux</div>
                         <p style="font-size:.8rem; margin:14px 0 10px; color:var(--warm-gray);">Forfait pour un groupe — <a href="#" onclick="openModalIntra(); return false;" style="color:var(--accent-dark); font-weight:600; text-decoration:underline;">En savoir plus</a></p>
                         <div class="sidebar-content">
@@ -1688,13 +1693,14 @@
                         </div>
                     </div>
 
-                    <!-- CTAs Inter -->
+                    <!-- INTER (désactivé) — bouton d'inscription inter-entreprises
                     <div class="sidebar-ctas sidebar-ctas-inter">
                         <a class="btn-primary" id="btn-inscription-inter" href="#">Demande d'inscription</a>
                     </div>
+                    FIN INTER -->
 
                     <!-- CTAs Intra -->
-                    <div class="sidebar-ctas sidebar-ctas-intra" style="display:none;">
+                    <div class="sidebar-ctas sidebar-ctas-intra">
                         <button class="btn-primary" onclick="openModalDevis()">Faire une demande de devis</button>
                     </div>
 
@@ -2166,14 +2172,16 @@
             });
             document.getElementById('tarif-' + type).classList.add('active');
 
-            // Update CTA buttons
-            document.querySelector('.sidebar-ctas-inter').style.display = (type === 'inter') ? 'block' : 'none';
+            // Update CTA buttons (le bloc inter est désactivé tant que l'offre n'existe pas)
+            var ctaInter = document.querySelector('.sidebar-ctas-inter');
+            if (ctaInter) ctaInter.style.display = (type === 'inter') ? 'block' : 'none';
             document.querySelector('.sidebar-ctas-intra').style.display = (type === 'intra') ? 'block' : 'none';
         }
 
-        /* ============================================
+        /* INTER (désactivé) — lien d'inscription inter-entreprises, à réactiver avec l'offre inter
+        /~ ============================================
            INTER — MAILTO INSCRIPTION
-           ============================================ */
+           ============================================ ~/
         (function() {
             // Récupérer l'intitulé de la formation depuis le <h1>
             var formationTitle = document.querySelector('.hero-title') 
@@ -2196,6 +2204,7 @@
             var mailtoLink = 'mailto:contact@lauraballo.com?subject=' + subject + '&body=' + body;
             document.getElementById('btn-inscription-inter').setAttribute('href', mailtoLink);
         })();
+        FIN INTER */
 
         /* ============================================
            INTRA — MODALE PÉRIMÈTRE DU FORFAIT
