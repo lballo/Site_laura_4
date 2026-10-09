@@ -687,6 +687,69 @@
             color: var(--text-dark);
         }
 
+        .pedagogy-bloc + .pedagogy-bloc {
+            margin-top: var(--space-md);
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--warm-beige);
+        }
+
+        .pedagogy-bloc .pedagogy-title { margin-bottom: var(--space-xs); }
+
+        .evaluation-sanction {
+            margin-top: var(--space-md);
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--warm-beige);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--text-dark);
+        }
+
+        /* Modalités et délais d'accès (ind. 1) */
+        .acces-box {
+            background: var(--light-beige);
+            border-radius: 12px;
+            padding: var(--space-lg);
+            border: 1px solid var(--warm-beige);
+        }
+
+        .acces-bloc + .acces-bloc {
+            margin-top: var(--space-md);
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--warm-beige);
+        }
+
+        .acces-bloc .pedagogy-title { margin-bottom: var(--space-xs); }
+
+        .acces-bloc p {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+        }
+
+        .acces-bloc p + p { margin-top: var(--space-xs); }
+
+        .acces-box a, .accessibilite-content a {
+            color: var(--accent-dark);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .acces-contact {
+            margin-top: var(--space-md);
+            font-size: 0.9rem;
+            color: var(--warm-gray);
+        }
+
+        .accessibilite-content p + p { margin-top: var(--space-xs); }
+
+        .mentions-organisme {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-top: var(--space-lg);
+        }
+{{RESULTATS_CSS}}
+
         /* Evaluation */
         .evaluation-box {
             background: var(--light-beige);
@@ -1111,6 +1174,12 @@
                     </svg>
                     <span>{{PARTICIPANTS_MAX}} participants maximum</span>
                 </div>
+                <div class="hero-meta-item">
+                    <svg class="hero-meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    <span>Programme mis à jour le {{DATE_MAJ}}</span>
+                </div>
             </div>
         </div>
     </header>
@@ -1175,25 +1244,26 @@
                 </div>
             </section>
 
-            <!-- Pédagogie -->
+            <!-- Pédagogie : modalités, méthodes mobilisées, moyens et outils, intervenante (ind. 1) -->
             <section class="section">
                 <h2 class="section-title">Pédagogie</h2>
                 <div class="pedagogy-box">
-                    <h3 class="pedagogy-title">Dispositif pédagogique</h3>
-                    <p class="pedagogy-text">{{PEDAGOGIE}}</p>
+{{PEDAGOGIE_HTML}}
                 </div>
             </section>
 
-            <!-- Évaluation -->
+            <!-- Évaluation : modalités d'évaluation et sanction (ind. 1 et 11) -->
             <section class="section">
                 <h2 class="section-title">Évaluation</h2>
                 <div class="evaluation-box">
                     <ul class="evaluation-list">
 {{EVALUATION_HTML}}
                     </ul>
+                    <p class="evaluation-sanction"><strong>Sanction de la formation :</strong> {{SANCTION}}</p>
                 </div>
             </section>
 
+{{RESULTATS_FORMATION_HTML}}
             <!-- Points forts -->
             <section class="section">
                 <h2 class="section-title">Les points forts de la formation</h2>
@@ -1209,7 +1279,7 @@
                     <div class="quality-content">
                         <h4>Qualité des formations</h4>
                         <p>Formation certifiée Qualiopi</p>
-                        <a href="#">En savoir plus</a>
+                        <a href="/resultats/">Nos résultats et notre méthode de calcul</a>
                     </div>
                 </div>
             </section>
@@ -1230,17 +1300,35 @@
                 </div>
             </section>
 
-            <!-- Accessibilité -->
-            <section class="section">
+            <!-- Modalités et délais d'accès (ind. 1) -->
+            <section class="section" id="acces">
+                <h2 class="section-title">Modalités et délais d'accès</h2>
+                <div class="acces-box">
+                    <div class="acces-bloc">
+                        <h3 class="pedagogy-title">Comment s'inscrire</h3>
+{{MODALITES_ACCES_HTML}}
+                    </div>
+                    <div class="acces-bloc">
+                        <h3 class="pedagogy-title">Délais d'accès</h3>
+                        <p>{{DELAIS_ACCES}}</p>
+                    </div>
+                    <p class="acces-contact">Contact : <a href="mailto:{{ORGANISME_EMAIL}}">{{ORGANISME_EMAIL}}</a> · <a href="tel:{{ORGANISME_TEL}}">{{ORGANISME_TEL}}</a></p>
+                </div>
+            </section>
+
+            <!-- Accessibilité (ind. 26) — texte géré dans 🏛️ Mon organisme, référente handicap nommée -->
+            <section class="section" id="accessibilite">
                 <h2 class="section-title">Accessibilité</h2>
                 <div class="accessibilite-box">
                     <span class="accessibilite-icon">♿</span>
                     <div class="accessibilite-content">
                         <h4>Formation accessible aux personnes en situation de handicap</h4>
-                        <p>{{ACCESSIBILITE}}</p>
+{{ACCESSIBILITE_HTML}}
                     </div>
                 </div>
             </section>
+
+            <p class="mentions-organisme">Laura Ballo Coaching — organisme de formation enregistré sous le numéro de déclaration d'activité {{ORGANISME_NDA}} auprès du Préfet de la région {{ORGANISME_NDA_PREFET}}. Cet enregistrement ne vaut pas agrément de l'État.</p>
 
         </main>
 

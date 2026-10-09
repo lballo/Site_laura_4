@@ -2,12 +2,32 @@ name: 📚 Publier formations Notion
 
 on:
   workflow_dispatch:
+    inputs:
+      tout:
+        description: "Régénérer toutes les fiches publiées (après un changement de gabarit)"
+        type: boolean
+        default: false
   schedule:
     # Tous les jours à 6h UTC — détecte les statuts « À publier / À modifier / À supprimer »
+    # et rafraîchit la page « Nos résultats » (indicateurs recalculés le 1er du mois par n8n)
     - cron: '0 6 * * *'
+  push:
+    branches: [main]
+    paths:
+      # Un changement de gabarit ou de script régénère toutes les fiches
+      - '_templates/formation.html'
+      - '_templates/formations-index.html'
+      - '_templates/resultats.html'
+      - '_scripts/publish_formations.py'
+      - '_scripts/publish_resultats.py'
+      - '_scripts/indicateurs.py'
 
 permissions:
   contents: write
+
+concurrency:
+  group: notion-publish
+  cancel-in-progress: false
 
 jobs:
   publish:
@@ -33,7 +53,14 @@ jobs:
           NOTION_SATISFACTION_DB_ID: ${{ secrets.NOTION_SATISFACTION_DB_ID }}
           FORMATION_TEMPLATE_PATH: _templates/formation.html
           FORMATIONS_OUTPUT_DIR: formations
+          FORMATIONS_REGENERER_TOUT: ${{ (github.event_name == 'push' || inputs.tout) && '1' || '' }}
         run: python _scripts/publish_formations.py
+
+      - name: 📈 Générer la page « Nos résultats »
+        env:
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+          NOTION_FORMATIONS_DB_ID: ${{ secrets.NOTION_FORMATIONS_DB_ID }}
+        run: python _scripts/publish_resultats.py
 
       - name: 🗺️ Régénérer le sitemap
         run: python _scripts/generate_sitemap.py

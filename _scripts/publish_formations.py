@@ -36,6 +36,8 @@ from pathlib import Path
 
 import requests
 
+import indicateurs
+
 # ─────────────────────────────────────────────────────────
 # CONFIG
 # ─────────────────────────────────────────────────────────
@@ -48,6 +50,13 @@ def env(nom, defaut=""):
 NOTION_API_KEY = env("NOTION_API_KEY")
 FORMATIONS_DB = env("NOTION_FORMATIONS_DB_ID", "2fd075e127d2817c9efdf1339b79a765")
 SATISFACTION_DB = env("NOTION_SATISFACTION_DB_ID", "2fd075e127d28173b179cfb3a4c0fc95")
+# 🏛️ Mon organisme : modalités d'accès, délais, accessibilité, référente handicap.
+# Ces informations sont gérées une seule fois pour tout l'organisme (ind. 1 et 26).
+ORGANISME_DB = env("NOTION_ORGANISME_DB_ID", "90761e357af84a75aed2e5da8dbe1b63")
+
+# « 1 » : régénère TOUTES les fiches en statut Publié, quel que soit leur
+# statut de publication. À utiliser quand le gabarit ou le script change.
+REGENERER_TOUT = env("FORMATIONS_REGENERER_TOUT") in ("1", "true", "oui")
 
 TEMPLATE_PATH = env("FORMATION_TEMPLATE_PATH", "_templates/formation.html")
 INDEX_TEMPLATE_PATH = env(
@@ -105,7 +114,8 @@ class NotionClient:
                 "   → Ouvre la base dans Notion, menu ··· en haut à droite, "
                 "Connexions, et ajoute ton intégration.\n"
                 "   Les bases nécessaires : 📚 Formations, 😊 Satisfaction, "
-                "👥 Participants et 📅 Sessions."
+                "👥 Participants, 📅 Sessions, 🏛️ Mon organisme "
+                "et 📈 Indicateurs publiés."
             )
         resp.raise_for_status()
 
@@ -454,6 +464,94 @@ def prop_paragraphes(texte):
     )
 
 
+LIEN_MD = re.compile(r"\[([^\]]+)\]\((mailto:[^)\s]+|https?://[^)\s]+|tel:[^)\s]+)\)")
+
+
+def texte_avec_liens(texte):
+    """Échappe le texte puis convertit les liens [libellé](url) saisis dans Notion."""
+    parts, pos = [], 0
+    for m in LIEN_MD.finditer(texte or ""):
+        parts.append(esc(texte[pos:m.start()]))
+        parts.append(f'<a href="{esc(m.group(2))}">{esc(m.group(1))}</a>')
+        pos = m.end()
+    parts.append(esc((texte or "")[pos:]))
+    return "".join(parts)
+
+
+def paragraphes_avec_liens(texte):
+    return "\n".join(
+        f"                        <p>{texte_avec_liens(l)}</p>" for l in lignes_de(texte)
+    )
+
+
+# ═════════════════════════════════════════════════════════
+# PÉDAGOGIE (ind. 1 : méthodes mobilisées, moyens et outils, intervenante)
+# ═════════════════════════════════════════════════════════
+def bloc_pedagogie(titre, texte):
+    if not (texte or "").strip():
+        return ""
+    return (
+        '                    <div class="pedagogy-bloc">\n'
+        f'                        <h3 class="pedagogy-title">{esc(titre)}</h3>\n'
+        f'                        <p class="pedagogy-text">{esc(texte.strip())}</p>\n'
+        "                    </div>"
+    )
+
+
+def render_pedagogie_html(page, sections):
+    """Quatre blocs, chacun depuis sa propriété Notion ; corps de page en repli."""
+    modalites = prop(page, "Modalités pédagogiques").strip() or render_pedagogie(
+        find_section(sections, SEC_PEDAGOGIE)
+    )
+    blocs = [
+        bloc_pedagogie("Modalités pédagogiques", modalites),
+        bloc_pedagogie("Méthodes mobilisées", prop(page, "Méthodes pédagogiques")),
+        bloc_pedagogie("Moyens et outils", prop(page, "Ressources pédagogiques (texte)")),
+        bloc_pedagogie("Intervenante", prop(page, "Profil de l intervenant")),
+    ]
+    return "\n".join(b for b in blocs if b)
+
+
+# ═════════════════════════════════════════════════════════
+# 🏛️ MON ORGANISME (ind. 1 et 26 : accès, délais, accessibilité)
+# ═════════════════════════════════════════════════════════
+def charger_organisme(client):
+    """Première (et seule) ligne de la base 🏛️ Mon organisme."""
+    lignes = client.query_database(ORGANISME_DB)
+    if not lignes:
+        raise SystemExit(
+            "\n❌ La base 🏛️ Mon organisme est vide : impossible de publier "
+            "les modalités d'accès et l'accessibilité (indicateur 1)."
+        )
+    o = lignes[0]
+    org = {
+        "nom": prop(o, "Nom de l organisme", "title"),
+        "modalites_acces": prop(o, "Modalités d accès"),
+        "delais_acces": prop(o, "Délais d accès"),
+        "accessibilite": prop(o, "Accessibilité handicap"),
+        "email": prop(o, "Email de contact"),
+        "telephone": prop(o, "Téléphone"),
+        "nda": prop(o, "NDA - numéro de déclaration d activité"),
+        "nda_prefet": prop(o, "NDA délivré par le Préfet de Région"),
+    }
+    manquants = [k for k in ("modalites_acces", "delais_acces", "accessibilite") if not org[k].strip()]
+    if manquants:
+        print(f"    ⚠️  🏛️ Mon organisme : champ(s) vide(s) : {', '.join(manquants)}")
+    return org
+
+
+def date_maj_formation(page):
+    """Date affichée « Programme mis à jour le … » : la propriété Notion,
+    sinon la date de génération."""
+    d = prop(page, "Dernière mise à jour", "date")
+    if not d:
+        d = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    try:
+        return datetime.fromisoformat(d[:10]).strftime("%d/%m/%Y")
+    except ValueError:
+        return d
+
+
 # ═════════════════════════════════════════════════════════
 # AVIS : Satisfaction → Participant → Sessions → Formation
 # ═════════════════════════════════════════════════════════
@@ -654,7 +752,8 @@ def render(template, data, avis):
     return out
 
 
-def build_data(client, page, avis):
+def build_data(client, page, avis, org=None, lignes_indicateurs=None):
+    org = org or {}
     slug = prop(page, "slug") or "formation"
     heures = prop(page, "Durée (heures)", "number")
     jours = prop(page, "Durée (jours)", "number")
@@ -684,16 +783,23 @@ def build_data(client, page, avis):
         find_section(sections, SEC_PROGRAMME)
     )
 
-    pedagogie = " ".join(
-        esc(t)
-        for t in (
-            prop(page, "Modalités pédagogiques"),
-            prop(page, "Méthodes pédagogiques"),
-        )
-        if t
-    ) or render_pedagogie(find_section(sections, SEC_PEDAGOGIE))
+    pedagogie_html = render_pedagogie_html(page, sections)
 
-    accessibilite = esc(prop(page, "Accessibilité handicap")) or ACCESSIBILITE_DEFAUT
+    # Accessibilité, modalités et délais d'accès : gérés à l'échelle de
+    # l'organisme (🏛️ Mon organisme). Une précision propre à la formation,
+    # si elle existe encore dans Notion, vient s'ajouter à la suite.
+    accessibilite = paragraphes_avec_liens(org.get("accessibilite", "")) or (
+        f"                        <p>{ACCESSIBILITE_DEFAUT}</p>"
+    )
+    precision = prop(page, "Accessibilité handicap").strip()
+    if precision:
+        accessibilite += "\n" + paragraphes_avec_liens(precision)
+
+    sanction = prop(page, "Sanction de la formation").strip()
+    lignes_formation = indicateurs.par_formation(lignes_indicateurs or [], page["id"])
+    resultats_html = indicateurs.encart_formation_html(
+        lignes_formation, indicateurs.date_calcul(lignes_indicateurs or [])
+    )
 
     niveau = prop(page, "niveau", "select")
     niveau_label = {"1": "Niveau 1 — Fondamentaux", "2": "Niveau 2 — Perfectionnement"}.get(
@@ -715,7 +821,13 @@ def build_data(client, page, avis):
         "PARTICIPANTS_MAX": int(prop(page, "Nbre participants max", "number") or 0),
         "CODE_FORMATION": esc(prop(page, "Code formation")),
         "IMAGE_URL": image_url(page),
-        "DELAIS_ACCES": esc(prop(page, "Délais d'accès")),
+        "DATE_MAJ": date_maj_formation(page),
+        "DELAIS_ACCES": texte_avec_liens(org.get("delais_acces", "")),
+        "MODALITES_ACCES_HTML": paragraphes_avec_liens(org.get("modalites_acces", "")),
+        "ORGANISME_EMAIL": esc(org.get("email", "")),
+        "ORGANISME_TEL": esc(org.get("telephone", "")),
+        "ORGANISME_NDA": esc(org.get("nda", "")),
+        "ORGANISME_NDA_PREFET": esc(org.get("nda_prefet", "")),
         "PERIMETRE_INTRA_HTML": render_liste_simple(
             prop(page, "Périmètre forfait intra"), lambda l: f"<p>{l}</p>"
         ),
@@ -727,9 +839,12 @@ def build_data(client, page, avis):
         "PREREQUIS": esc(prop(page, "Prérequis")),
         "OBJECTIFS_HTML": objectifs,
         "PROGRAMME_HTML": programme,
-        "PEDAGOGIE": pedagogie,
+        "PEDAGOGIE_HTML": pedagogie_html,
         "EVALUATION_HTML": evaluation,
-        "ACCESSIBILITE": accessibilite,
+        "SANCTION": esc(sanction),
+        "RESULTATS_FORMATION_HTML": resultats_html,
+        "RESULTATS_CSS": indicateurs.ENCART_CSS,
+        "ACCESSIBILITE_HTML": accessibilite,
         "POINTS_FORTS_HTML": render_liste_simple(
             prop(page, "Points forts"),
             lambda l: f'<li><span class="chevron">›</span><span>{l}</span></li>',
@@ -979,15 +1094,13 @@ def main():
     Path(OUTPUT_DIR).mkdir(parents=True, exist_ok=True)
 
     print("→ Lecture des formations à traiter")
+    statuts = [A_PUBLIER, A_MODIFIER, A_SUPPRIMER]
+    if REGENERER_TOUT:
+        print("  Mode « tout régénérer » : les fiches Publié sont régénérées aussi")
+        statuts.append(PUBLIE)
     a_traiter = client.query_database(
         FORMATIONS_DB,
-        {
-            "or": [
-                {"property": STATUT_PROP, "select": {"equals": A_PUBLIER}},
-                {"property": STATUT_PROP, "select": {"equals": A_MODIFIER}},
-                {"property": STATUT_PROP, "select": {"equals": A_SUPPRIMER}},
-            ]
-        },
+        {"or": [{"property": STATUT_PROP, "select": {"equals": s}} for s in statuts]},
     )
     if not a_traiter:
         # Le catalogue est régénéré même sans changement de statut : il doit
@@ -1001,6 +1114,16 @@ def main():
     print(f"  {len(a_traiter)} formation(s) en attente")
     print("→ Collecte des avis")
     avis_par_formation = collect_avis(client)
+    print("→ Lecture de 🏛️ Mon organisme")
+    org = charger_organisme(client)
+    print("→ Lecture des indicateurs de résultats")
+    try:
+        lignes_indicateurs = indicateurs.charger(client)
+        print(f"  {len(lignes_indicateurs)} indicateur(s) actuel(s)")
+    except (requests.HTTPError, SystemExit) as e:
+        # La page reste publiable sans l'encart ; on le signale seulement.
+        print(f"  ⚠️  indicateurs non chargés, encart « Résultats » omis : {e}")
+        lignes_indicateurs = []
 
     touches, publiees, supprimees = [], 0, 0
 
@@ -1039,7 +1162,7 @@ def main():
         else:
             print("    aucun avis — blocs avis retirés de la page")
 
-        data = build_data(client, page, avis)
+        data = build_data(client, page, avis, org, lignes_indicateurs)
         cible.write_text(render(template, data, avis), encoding="utf-8")
         print(f"    ✓ {cible}")
         touches.append(str(cible))

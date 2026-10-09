@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos résultats • Formations Laura Ballo</title>
+    <meta name="description" content="Indicateurs de résultats des formations Laura Ballo Coaching : stagiaires formés, satisfaction, objectifs atteints, abandons, mise en pratique à trois mois — avec la méthode de calcul de chaque indicateur.">
+    <link rel="canonical" href="https://lauraballo.com/resultats/">
+    <meta property="og:title" content="Nos résultats • Formations Laura Ballo">
+    <meta property="og:description" content="Indicateurs de résultats de nos formations, mis à jour chaque mois, avec leur méthode de calcul.">
+    <meta property="og:url" content="https://lauraballo.com/resultats/">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #1A1A1A;
+            --white: #FFFFFF;
+            --light-beige: #FBF4EE;
+            --warm-beige: #E8DDD6;
+            --warm-gray: #6B6560;
+            --text-dark: #2C2C2C;
+            --text-muted: #8A8A8A;
+            --accent: #C4A574;
+            --accent-dark: #A68B5B;
+            --font-heading: 'DM Serif Display', Georgia, serif;
+            --font-body: 'DM Sans', system-ui, sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-body); background: var(--white); color: var(--text-dark); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        a { color: var(--accent-dark); }
+
+        .header { background: var(--black); color: var(--white); padding: 60px 40px 50px; }
+        .inner { max-width: 1100px; margin: 0 auto; }
+        .header .retour { display: inline-block; color: var(--accent); font-size: 0.9rem; text-decoration: none; margin-bottom: 24px; }
+        .header .retour:hover { color: var(--white); }
+        .header h1 { font-family: var(--font-heading); font-size: clamp(2.2rem, 5vw, 3.2rem); font-weight: 400; letter-spacing: -0.02em; margin-bottom: 16px; }
+        .header p { font-size: 1.05rem; color: rgba(255,255,255,0.8); max-width: 720px; line-height: 1.7; }
+        .header .maj { display: inline-block; margin-top: 20px; padding: 8px 14px; border: 1px solid rgba(255,255,255,0.25); border-radius: 6px; font-size: 0.85rem; color: rgba(255,255,255,0.85); }
+
+        main { padding: 50px 40px 80px; }
+        .section { margin-bottom: 60px; }
+        .section-title { font-family: var(--font-heading); font-size: 1.8rem; font-weight: 400; margin-bottom: 8px; color: var(--black); }
+        .section-intro { color: var(--warm-gray); margin-bottom: 24px; max-width: 720px; }
+
+        .grille { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; }
+        .carte { background: var(--light-beige); border: 1px solid var(--warm-beige); border-radius: 12px; padding: 24px; }
+        .carte .libelle { font-weight: 600; font-size: 0.95rem; color: var(--black); }
+        .carte .sous { font-size: 0.8rem; color: var(--warm-gray); margin-bottom: 14px; }
+        .carte .valeur { font-family: var(--font-heading); font-size: 2.8rem; line-height: 1; color: var(--black); }
+        .carte .valeur small { font-size: 1.2rem; color: var(--warm-gray); margin-left: 3px; }
+        .carte .valeur.attente { color: var(--text-muted); }
+        .carte .detail { font-size: 0.82rem; color: var(--text-muted); margin-top: 10px; line-height: 1.5; }
+
+        table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        th, td { padding: 12px 10px; text-align: left; border-bottom: 1px solid var(--warm-beige); vertical-align: top; }
+        th { font-weight: 600; color: var(--black); background: var(--light-beige); font-size: 0.8rem; }
+        td.num { white-space: nowrap; font-weight: 500; }
+        td .n { display: block; font-size: 0.75rem; color: var(--text-muted); font-weight: 400; }
+        td.attente { color: var(--text-muted); }
+        .table-wrap { overflow-x: auto; border: 1px solid var(--warm-beige); border-radius: 12px; }
+
+        .methode { display: grid; gap: 16px; }
+        .methode-item { background: var(--light-beige); border: 1px solid var(--warm-beige); border-radius: 12px; padding: 20px 24px; }
+        .methode-item h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; color: var(--black); }
+        .methode-item p { font-size: 0.92rem; line-height: 1.7; color: var(--text-dark); }
+
+        .etapes { list-style: none; display: grid; gap: 12px; counter-reset: etape; }
+        .etapes li { display: flex; gap: 16px; align-items: flex-start; background: var(--white); border: 1px solid var(--warm-beige); border-radius: 12px; padding: 18px 20px; }
+        .etapes li::before { counter-increment: etape; content: counter(etape); flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; background: var(--black); color: var(--accent); display: flex; align-items: center; justify-content: center; font-family: var(--font-heading); }
+        .etapes strong { display: block; color: var(--black); margin-bottom: 2px; }
+        .etapes span { font-size: 0.92rem; color: var(--text-dark); line-height: 1.6; }
+
+        .note { font-size: 0.85rem; color: var(--warm-gray); line-height: 1.7; border-top: 1px solid var(--warm-beige); padding-top: 24px; }
+        .vide { background: var(--light-beige); border: 1px solid var(--warm-beige); border-radius: 12px; padding: 32px; color: var(--warm-gray); }
+
+        @media (max-width: 640px) {
+            .header { padding: 40px 20px 36px; }
+            main { padding: 32px 20px 60px; }
+            .carte .valeur { font-size: 2.3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="inner">
+            <a class="retour" href="/formations/">← Catalogue des formations</a>
+            <h1>Nos résultats</h1>
+            <p>Les indicateurs de résultats de nos formations, publiés avec leur méthode de calcul.
+               Ils sont recalculés automatiquement le 1er de chaque mois à partir de nos registres
+               d'inscriptions, d'émargements, d'évaluations et de questionnaires.</p>
+            <span class="maj">Indicateurs mis à jour le {{DATE_MAJ}} · période du {{PERIODE_DU}} au {{PERIODE_AU}}</span>
+        </div>
+    </header>
+
+    <main>
+        <div class="inner">
+
+            <section class="section" id="global">
+                <h2 class="section-title">Toutes formations confondues</h2>
+                <p class="section-intro">Chaque chiffre indique le nombre de réponses ou de stagiaires sur lequel il repose.
+                   Tant qu'un indicateur n'atteint pas le nombre minimal de réponses, nous affichons l'état de la collecte plutôt qu'un chiffre.</p>
+{{CARTES_HTML}}
+            </section>
+
+            <section class="section" id="formations">
+                <h2 class="section-title">Par formation</h2>
+                <p class="section-intro">Les mêmes indicateurs, formation par formation. Une formation n'apparaît qu'à partir du moment où au moins une session organisée par Laura Ballo Coaching est terminée.</p>
+{{TABLE_FORMATIONS_HTML}}
+            </section>
+
+            <section class="section" id="mesure">
+                <h2 class="section-title">Comment nous mesurons</h2>
+                <p class="section-intro">Le même dispositif d'évaluation s'applique à toutes nos formations, du positionnement à l'évaluation à froid.</p>
+                <ol class="etapes">
+                    <li><div><strong>Avant la formation — positionnement</strong><span>Chaque stagiaire reçoit un questionnaire de positionnement avec sa convocation. Ses réponses servent à adapter le contenu et à mesurer la progression.</span></div></li>
+                    <li><div><strong>Pendant — évaluations formatives</strong><span>Mises en situation, exercices et quiz jalonnent la formation ; la formatrice ajuste le déroulé en fonction des acquis constatés.</span></div></li>
+                    <li><div><strong>En fin de formation — évaluation des acquis</strong><span>Une évaluation écrite (70 % du résultat) et l'appréciation de la formatrice (30 %) établissent le résultat de chaque stagiaire. Les objectifs sont considérés atteints à partir de 80 %, partiellement atteints de 50 à 79 %. Une attestation de fin de formation reprend ce résultat.</span></div></li>
+                    <li><div><strong>À chaud — questionnaire de satisfaction</strong><span>Le dernier jour, chaque stagiaire note sur 10 le respect du programme, la pédagogie, la formatrice, les moyens pédagogiques et l'utilité professionnelle, et peut autoriser la publication de son avis.</span></div></li>
+                    <li><div><strong>Trois mois après — évaluation à froid</strong><span>Un questionnaire à J+90 mesure la mise en pratique des acquis dans la situation de travail.</span></div></li>
+                    <li><div><strong>Abandons et interruptions</strong><span>Toute interruption de parcours est enregistrée avec son motif, contactée et suivie ; elle alimente le taux d'abandon et notre démarche d'amélioration continue.</span></div></li>
+                </ol>
+            </section>
+
+            <section class="section" id="methode">
+                <h2 class="section-title">Méthode de calcul de chaque indicateur</h2>
+                <p class="section-intro">Les définitions ci-dessous sont celles utilisées par le calcul automatique ; elles sont archivées avec chaque valeur publiée.</p>
+                <div class="methode">
+{{METHODES_HTML}}
+                </div>
+            </section>
+
+            <p class="note">Période de référence : 12 mois glissants. Ne sont comptées que les sessions organisées par Laura Ballo Coaching et terminées dans la période ; les sessions animées pour le compte d'un autre organisme de formation, qui en publie lui-même les résultats, et les sessions annulées sont exclues.
+               Les valeurs précédentes sont archivées à chaque mise à jour et consultables sur demande à <a href="mailto:{{ORGANISME_EMAIL}}">{{ORGANISME_EMAIL}}</a>.<br>
+               Laura Ballo Coaching — organisme de formation enregistré sous le numéro de déclaration d'activité {{ORGANISME_NDA}} auprès du Préfet de la région {{ORGANISME_NDA_PREFET}}. Cet enregistrement ne vaut pas agrément de l'État.</p>
+
+        </div>
+    </main>
+
+</body>
+</html>
