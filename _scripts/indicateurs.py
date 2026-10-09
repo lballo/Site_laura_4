@@ -109,8 +109,19 @@ def charger(client):
                 "calcul": _prop(p, "Date de calcul", "date"),
             }
         )
-    lignes.sort(key=lambda l: RANG.get(l["indicateur"], 99))
-    return lignes
+    # Si la génération tombe pendant le recalcul n8n (nouvelles lignes écrites,
+    # anciennes pas encore archivées), on ne garde que la plus récente par
+    # indicateur × périmètre × formation.
+    lignes.sort(key=lambda l: l["calcul"] or "", reverse=True)
+    vues, uniques = set(), []
+    for l in lignes:
+        cle = (l["indicateur"], l["perimetre"], l["formation"])
+        if cle in vues:
+            continue
+        vues.add(cle)
+        uniques.append(l)
+    uniques.sort(key=lambda l: RANG.get(l["indicateur"], 99))
+    return uniques
 
 
 def globaux(lignes):
