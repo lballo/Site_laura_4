@@ -21,6 +21,8 @@ on:
       - '_scripts/publish_formations.py'
       - '_scripts/publish_resultats.py'
       - '_scripts/indicateurs.py'
+      # Modifier ce fichier force une republication immédiate (voir son contenu)
+      - '_scripts/REPUBLIER.md'
 
 permissions:
   contents: write
