@@ -1005,7 +1005,8 @@ def render_carte(page):
     tags = tags_of(page)
     jours = int(prop(page, "Durée (jours)", "number") or 1)
     maxi = int(prop(page, "Nbre participants max", "number") or 0)
-    tarif = f"{int(prop(page, 'Tarif HT inter', 'number') or 0):,}".replace(",", " ")
+    # Offre intra uniquement pour l'instant : la carte affiche le forfait groupe.
+    tarif = f"{int(prop(page, 'Tarif HT intra', 'number') or 0):,}".replace(",", " ")
 
     categorie = prop(page, "Catégorie", "select") or "communication"
     data_tags = mots_cles(page)
@@ -1033,7 +1034,7 @@ def render_carte(page):
         f'                            <div class="card-meta-item">{ICONE_GROUPE}{maxi} pers. max</div>\n'
         "                        </div>\n"
         f'                        <div class="card-price"><span class="amount">{tarif}€</span>'
-        '<span class="suffix">HT / pers.</span></div>\n'
+        f'<span class="suffix">HT / groupe de {maxi} max.</span></div>\n'
         f'                        <a href="/{OUTPUT_DIR}/{slug}.html" class="card-cta">\n'
         f"                            Voir le programme{ICONE_FLECHE}\n"
         "                        </a>\n"
@@ -1082,7 +1083,8 @@ def build_index_schema(pages):
                 },
                 "offers": {
                     "@type": "Offer",
-                    "price": str(int(prop(page, "Tarif HT inter", "number") or 0)),
+                    "price": str(int(prop(page, "Tarif HT intra", "number") or 0)),
+                    "category": "Intra-entreprise",
                     "priceCurrency": "EUR",
                 },
             }
