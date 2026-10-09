@@ -33,6 +33,13 @@
     "@type": "CourseInstance",
     "courseMode": "Hybride",
     "courseWorkload": "PT14H"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "1",
+    "bestRating": "5",
+    "worstRating": "1"
   }
 }</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -710,6 +717,115 @@
             color: var(--text-dark);
         }
 
+        .pedagogy-bloc + .pedagogy-bloc {
+            margin-top: var(--space-md);
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--warm-beige);
+        }
+
+        .pedagogy-bloc .pedagogy-title { margin-bottom: var(--space-xs); }
+
+        .evaluation-sanction {
+            margin-top: var(--space-md);
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--warm-beige);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--text-dark);
+        }
+
+        /* Modalités et délais d'accès (ind. 1) */
+        .acces-box {
+            background: var(--light-beige);
+            border-radius: 12px;
+            padding: var(--space-lg);
+            border: 1px solid var(--warm-beige);
+        }
+
+        .acces-bloc + .acces-bloc {
+            margin-top: var(--space-md);
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--warm-beige);
+        }
+
+        .acces-bloc .pedagogy-title { margin-bottom: var(--space-xs); }
+
+        .acces-bloc p {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+        }
+
+        .acces-bloc p + p { margin-top: var(--space-xs); }
+
+        .acces-box a, .accessibilite-content a {
+            color: var(--accent-dark);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .acces-contact {
+            margin-top: var(--space-md);
+            font-size: 0.9rem;
+            color: var(--warm-gray);
+        }
+
+        .accessibilite-content p + p { margin-top: var(--space-xs); }
+
+        .mentions-organisme {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-top: var(--space-lg);
+        }
+
+        /* Résultats (indicateur 2) */
+        .resultats-box {
+            background: var(--light-beige);
+            border-radius: 12px;
+            padding: var(--space-lg);
+            border: 1px solid var(--warm-beige);
+        }
+        .resultats-grille {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-sm);
+        }
+        .resultat-carte {
+            background: var(--white);
+            border-radius: 10px;
+            padding: var(--space-sm);
+            border: 1px solid var(--warm-beige);
+        }
+        .resultat-libelle {
+            font-size: 0.8rem;
+            color: var(--warm-gray);
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+        .resultat-valeur {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            line-height: 1;
+            color: var(--black);
+        }
+        .resultat-valeur small { font-size: 1rem; color: var(--warm-gray); margin-left: 2px; }
+        .resultat-attente { color: var(--text-muted); }
+        .resultat-detail {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+            line-height: 1.4;
+        }
+        .resultats-note {
+            font-size: 0.85rem;
+            color: var(--warm-gray);
+            margin-top: var(--space-md);
+            line-height: 1.6;
+        }
+        .resultats-note a { color: var(--accent-dark); text-decoration: underline; text-underline-offset: 3px; }
+
+
         /* Evaluation */
         .evaluation-box {
             background: var(--light-beige);
@@ -1107,7 +1223,13 @@
             <h1 class="hero-title">Intelligence émotionnelle</h1>
             <p class="hero-subtitle">Faire de ses émotions un levier relationnel</p>
             
-            
+            <!-- BLOC-AVIS-DEBUT : le script retire ce bloc si la formation n'a aucun avis publiable -->
+            <div class="hero-rating">
+                <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+                <span class="rating-score">5.0/5</span>
+                <span class="rating-count">(1 avis)</span>
+            </div>
+            <!-- BLOC-AVIS-FIN -->
 
             <div class="hero-meta">
                 <div class="hero-meta-item">
@@ -1127,6 +1249,12 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
                     </svg>
                     <span>8 participants maximum</span>
+                </div>
+                <div class="hero-meta-item">
+                    <svg class="hero-meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    <span>Programme mis à jour le 06/07/2026</span>
                 </div>
             </div>
         </div>
@@ -1204,7 +1332,7 @@
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Les fondamentaux : émotions primaires, mécanismes neurobiologiques, rôle adaptatif</span></div></li>
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Conscience de soi : reconnaître ses émotions, ses déclencheurs et ses schémas</span></div></li>
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Techniques de régulation : respiration, ancrage, recadrage cognitif</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span><strong>Mise en situation</strong> : gérer une situation émotionnellement chargée</span></div></li>
+                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Mise en situation : gérer une situation émotionnellement chargée</span></div></li>
                         </ul>
                     </div>
                 </div>
@@ -1218,7 +1346,7 @@
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Empathie et écoute active : capter les signaux émotionnels de l&#x27;autre</span></div></li>
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Communication émotionnellement intelligente : exprimer sans agresser, entendre sans se laisser déborder</span></div></li>
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Assertivité : poser ses limites avec respect</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span><strong>Mise en situation</strong> : conversations difficiles rejouées avec feedback individualisé</span></div></li>
+                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Mise en situation : conversations difficiles rejouées avec feedback individualisé</span></div></li>
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Plan de développement émotionnel personnel</span></div></li>
                         </ul>
                     </div>
@@ -1250,37 +1378,86 @@
                 </div>
             </section>
 
-            <!-- Pédagogie -->
+            <!-- Pédagogie : modalités, méthodes mobilisées, moyens et outils, intervenante (ind. 1) -->
             <section class="section">
                 <h2 class="section-title">Pédagogie</h2>
                 <div class="pedagogy-box">
-                    <h3 class="pedagogy-title">Dispositif pédagogique</h3>
-                    <p class="pedagogy-text">À l&#x27;issue de la formation, le participant sera capable de :</p>
+                    <div class="pedagogy-bloc">
+                        <h3 class="pedagogy-title">Modalités pédagogiques</h3>
+                        <p class="pedagogy-text">Formation hybride (présentiel ou distanciel synchrone), groupe limité à 8 participants. Approche expérientielle : les mises en situation s&#x27;appuient sur les situations réelles apportées par les participants.</p>
+                    </div>
+                    <div class="pedagogy-bloc">
+                        <h3 class="pedagogy-title">Méthodes mobilisées</h3>
+                        <p class="pedagogy-text">Mises en situation, exercices corporels d&#x27;ancrage, auto-diagnostic, feedbacks bienveillants et précis. Apports issus des neurosciences et de la psychologie des émotions.</p>
+                    </div>
+                    <div class="pedagogy-bloc">
+                        <h3 class="pedagogy-title">Moyens et outils</h3>
+                        <p class="pedagogy-text">Support de cours remis à chaque participant, grille d&#x27;auto-diagnostic des compétences émotionnelles, fiches techniques de régulation, plan de développement personnel, questionnaires de positionnement et d&#x27;évaluation en ligne.</p>
+                    </div>
+                    <div class="pedagogy-bloc">
+                        <h3 class="pedagogy-title">Intervenante</h3>
+                        <p class="pedagogy-text">Formatrice et coach professionnelle certifiée, spécialiste de l&#x27;intelligence émotionnelle et de l&#x27;hypersensibilité, expérience confirmée en formation continue d&#x27;adultes.</p>
+                    </div>
                 </div>
             </section>
 
-            <!-- Évaluation -->
+            <!-- Évaluation : modalités d'évaluation et sanction (ind. 1 et 11) -->
             <section class="section">
                 <h2 class="section-title">Évaluation</h2>
                 <div class="evaluation-box">
                     <ul class="evaluation-list">
-                        <li>
-                            <span class="bullet"></span>
-                            <span><strong>Avant — positionnement :</strong> Test de positionnement à l&#x27;entrée • Évaluations formatives et mises en situation • QCM en fin de formation • Satisfaction à chaud • Évaluation à froid à J+90</span>
-                        </li>
-                        <li>
-                            <span class="bullet"></span>
-                            <span><strong>Pendant — évaluation des acquis :</strong> </span>
-                        </li>
-                        <li>
-                            <span class="bullet"></span>
-                            <span><strong>En fin de formation — évaluation des acquis :</strong> </span>
-                        </li>
-                        <li>
-                            <span class="bullet"></span>
-                            <span><strong>Après — transfert et satisfaction :</strong> </span>
-                        </li>
+                        <li><span class="bullet"></span><span>Test de positionnement à l&#x27;entrée</span></li>
+                        <li><span class="bullet"></span><span>évaluations formatives et mises en situation</span></li>
+                        <li><span class="bullet"></span><span>QCM en fin de formation</span></li>
+                        <li><span class="bullet"></span><span>satisfaction à chaud</span></li>
+                        <li><span class="bullet"></span><span>évaluation à froid à J+90</span></li>
                     </ul>
+                    <p class="evaluation-sanction"><strong>Sanction de la formation :</strong> Attestation de fin de formation mentionnant les objectifs, la nature, la durée de l&#x27;action et les résultats de l&#x27;évaluation des acquis.</p>
+                </div>
+            </section>
+
+            <!-- Résultats (indicateur 2) -->
+            <section class="section" id="resultats">
+                <h2 class="section-title">Résultats de cette formation</h2>
+                <div class="resultats-box">
+                    <div class="resultats-grille">
+                        <div class="resultat-carte">
+                            <div class="resultat-libelle">Stagiaires formés</div>
+                            <div class="resultat-valeur">1</div>
+                            
+                        </div>
+                        <div class="resultat-carte">
+                            <div class="resultat-libelle">Satisfaction à chaud</div>
+                            <div class="resultat-valeur resultat-attente">—</div>
+                            <div class="resultat-detail">Résultat publié à partir de 10 avis (1 à ce jour).</div>
+                        </div>
+                        <div class="resultat-carte">
+                            <div class="resultat-libelle">Taux de réponse</div>
+                            <div class="resultat-valeur resultat-attente">—</div>
+                            <div class="resultat-detail">100 % des stagiaires ont répondu (1 sur 1)</div>
+                        </div>
+                        <div class="resultat-carte">
+                            <div class="resultat-libelle">Objectifs atteints</div>
+                            <div class="resultat-valeur resultat-attente">—</div>
+                            <div class="resultat-detail">Pas encore d’évaluation sur la période.</div>
+                        </div>
+                        <div class="resultat-carte">
+                            <div class="resultat-libelle">Objectifs partiellement atteints</div>
+                            <div class="resultat-valeur resultat-attente">—</div>
+                            <div class="resultat-detail">Pas encore d’évaluation sur la période.</div>
+                        </div>
+                        <div class="resultat-carte">
+                            <div class="resultat-libelle">Taux d&#x27;abandon</div>
+                            <div class="resultat-valeur">0<small>%</small></div>
+                            <div class="resultat-detail">1 stagiaire</div>
+                        </div>
+                        <div class="resultat-carte">
+                            <div class="resultat-libelle">Mise en pratique à J+90</div>
+                            <div class="resultat-valeur resultat-attente">—</div>
+                            <div class="resultat-detail">Premières réponses attendues 3 mois après les premières sessions.</div>
+                        </div>
+                    </div>
+                    <p class="resultats-note">Indicateurs calculés sur les 12 derniers mois, mis à jour le 9 octobre 2026. Méthode de calcul et résultats de l'ensemble des formations : <a href="/resultats/">nos résultats</a>.</p>
                 </div>
             </section>
 
@@ -1303,7 +1480,7 @@
                     <div class="quality-content">
                         <h4>Qualité des formations</h4>
                         <p>Formation certifiée Qualiopi</p>
-                        <a href="#">En savoir plus</a>
+                        <a href="/resultats/">Nos résultats et notre méthode de calcul</a>
                     </div>
                 </div>
             </section>
@@ -1324,17 +1501,35 @@
                 </div>
             </section>
 
-            <!-- Accessibilité -->
-            <section class="section">
+            <!-- Modalités et délais d'accès (ind. 1) -->
+            <section class="section" id="acces">
+                <h2 class="section-title">Modalités et délais d'accès</h2>
+                <div class="acces-box">
+                    <div class="acces-bloc">
+                        <h3 class="pedagogy-title">Comment s'inscrire</h3>
+                        <p>Inscription sur demande par email à contact@lauraballo.com ou par téléphone. Un échange préalable permet d&#x27;analyser vos besoins et, en intra, d&#x27;adapter la formation à votre contexte. L&#x27;inscription est confirmée par la signature d&#x27;un devis et d&#x27;une convention de formation (entreprise) ou d&#x27;un contrat de formation (particulier). Chaque participant reçoit ensuite sa convocation et un questionnaire de positionnement à compléter avant la formation.</p>
+                    </div>
+                    <div class="acces-bloc">
+                        <h3 class="pedagogy-title">Délais d'accès</h3>
+                        <p>En inter-entreprises, inscription possible jusqu&#x27;à 15 jours avant le démarrage, sous réserve de places disponibles. En intra-entreprise, comptez 3 à 6 semaines entre la validation du devis et la première journée, le temps d&#x27;adapter la formation à votre contexte.</p>
+                    </div>
+                    <p class="acces-contact">Contact : <a href="mailto:"></a> · <a href="tel:"></a></p>
+                </div>
+            </section>
+
+            <!-- Accessibilité (ind. 26) — texte géré dans 🏛️ Mon organisme, référente handicap nommée -->
+            <section class="section" id="accessibilite">
                 <h2 class="section-title">Accessibilité</h2>
                 <div class="accessibilite-box">
                     <span class="accessibilite-icon">♿</span>
                     <div class="accessibilite-content">
                         <h4>Formation accessible aux personnes en situation de handicap</h4>
-                        <p>Nos formations sont accessibles aux personnes en situation de handicap. Contactez-nous pour étudier ensemble les adaptations possibles selon vos besoins.</p>
+                        <p>Nos formations sont accessibles aux personnes en situation de handicap. Contactez notre référente handicap, Laura Ballo (contact@lauraballo.com), avant votre inscription pour étudier ensemble les adaptations possibles : supports adaptés, aménagement des temps de travail et de passage, accessibilité des locaux. Si besoin, nous vous orientons vers les partenaires spécialisés (Agefiph, Cap emploi).</p>
                     </div>
                 </div>
             </section>
+
+            <p class="mentions-organisme">Laura Ballo Coaching — organisme de formation enregistré sous le numéro de déclaration d'activité  auprès du Préfet de la région Auvergne-Rhône-Alpes. Cet enregistrement ne vaut pas agrément de l'État.</p>
 
         </main>
 
@@ -1472,7 +1667,64 @@
     <!-- ============================================
          AVIS CLIENTS
          ============================================ -->
-    
+    <!-- BLOC-AVIS-SECTION-DEBUT -->
+    <section class="avis-section">
+        <div class="avis-container">
+            <h2 class="section-title" style="text-align: center; margin-bottom: var(--space-lg);">Les avis de nos clients sur la formation</h2>
+            
+            <div class="avis-header">
+                <div class="avis-score">
+                    <div class="avis-number">5.0</div>
+                    <div class="avis-stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <div class="avis-source">1 avis</div>
+                </div>
+                <div class="avis-distribution">                        <div class="avis-bar-row">
+                            <span class="avis-bar-stars">5 ★</span>
+                            <div class="avis-bar"><div class="avis-bar-fill" style="width:100%"></div></div>
+                            <span class="avis-bar-percent">100%</span>
+                        </div>
+                        <div class="avis-bar-row">
+                            <span class="avis-bar-stars">4 ★</span>
+                            <div class="avis-bar"><div class="avis-bar-fill" style="width:0%"></div></div>
+                            <span class="avis-bar-percent">0%</span>
+                        </div>
+                        <div class="avis-bar-row">
+                            <span class="avis-bar-stars">3 ★</span>
+                            <div class="avis-bar"><div class="avis-bar-fill" style="width:0%"></div></div>
+                            <span class="avis-bar-percent">0%</span>
+                        </div>
+                        <div class="avis-bar-row">
+                            <span class="avis-bar-stars">2 ★</span>
+                            <div class="avis-bar"><div class="avis-bar-fill" style="width:0%"></div></div>
+                            <span class="avis-bar-percent">0%</span>
+                        </div>
+                        <div class="avis-bar-row">
+                            <span class="avis-bar-stars">1 ★</span>
+                            <div class="avis-bar"><div class="avis-bar-fill" style="width:0%"></div></div>
+                            <span class="avis-bar-percent">0%</span>
+                        </div></div>
+                </div>
+                <div class="avis-list">                <div class="avis-item">
+                    <div class="avis-item-header">
+                        <span class="avis-author">Laura T.</span>
+                        <span class="avis-date">01/10/2026</span>
+                        <div class="avis-rating">
+                            <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+                            <span class="avis-rating-score">5.0/5</span>
+                        </div>
+                    </div>
+                    <p class="avis-comment">Très bien</p>
+                </div></div>
+            </div>
+        </section>
+
+    <!-- BLOC-AVIS-SECTION-FIN -->
 
     <!-- ============================================
          MODALE PÉRIMÈTRE DU FORFAIT INTRA
@@ -1489,7 +1741,7 @@
 <p>Non compris : les frais de déplacement et d&#x27;hébergement de la formatrice, la location d&#x27;une salle extérieure et le matériel audiovisuel spécifique.</p>
                 <div style="margin-top:var(--space-md); padding-top:var(--space-md); border-top:1px solid var(--warm-beige);">
                     <strong style="display:block; margin-bottom:6px;">Délais d'accès</strong>
-                    <p style="color:var(--warm-gray); font-size:.9rem;">Inscription possible jusqu&#x27;à 15 jours avant le démarrage, sous réserve de places disponibles. En intra, comptez 3 à 6 semaines entre la validation du devis et la première journée, le temps d&#x27;adapter les mises en situation à votre contexte.</p>
+                    <p style="color:var(--warm-gray); font-size:.9rem;">En inter-entreprises, inscription possible jusqu&#x27;à 15 jours avant le démarrage, sous réserve de places disponibles. En intra-entreprise, comptez 3 à 6 semaines entre la validation du devis et la première journée, le temps d&#x27;adapter la formation à votre contexte.</p>
                 </div>
                 <button class="btn-primary" style="margin-top:var(--space-md); width:100%;"
                         onclick="closeModalIntra(); openModalDevis();">Faire une demande de devis</button>

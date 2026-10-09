@@ -710,6 +710,115 @@
             color: var(--text-dark);
         }
 
+        .pedagogy-bloc + .pedagogy-bloc {
+            margin-top: var(--space-md);
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--warm-beige);
+        }
+
+        .pedagogy-bloc .pedagogy-title { margin-bottom: var(--space-xs); }
+
+        .evaluation-sanction {
+            margin-top: var(--space-md);
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--warm-beige);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--text-dark);
+        }
+
+        /* Modalités et délais d'accès (ind. 1) */
+        .acces-box {
+            background: var(--light-beige);
+            border-radius: 12px;
+            padding: var(--space-lg);
+            border: 1px solid var(--warm-beige);
+        }
+
+        .acces-bloc + .acces-bloc {
+            margin-top: var(--space-md);
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--warm-beige);
+        }
+
+        .acces-bloc .pedagogy-title { margin-bottom: var(--space-xs); }
+
+        .acces-bloc p {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+        }
+
+        .acces-bloc p + p { margin-top: var(--space-xs); }
+
+        .acces-box a, .accessibilite-content a {
+            color: var(--accent-dark);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .acces-contact {
+            margin-top: var(--space-md);
+            font-size: 0.9rem;
+            color: var(--warm-gray);
+        }
+
+        .accessibilite-content p + p { margin-top: var(--space-xs); }
+
+        .mentions-organisme {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-top: var(--space-lg);
+        }
+
+        /* Résultats (indicateur 2) */
+        .resultats-box {
+            background: var(--light-beige);
+            border-radius: 12px;
+            padding: var(--space-lg);
+            border: 1px solid var(--warm-beige);
+        }
+        .resultats-grille {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-sm);
+        }
+        .resultat-carte {
+            background: var(--white);
+            border-radius: 10px;
+            padding: var(--space-sm);
+            border: 1px solid var(--warm-beige);
+        }
+        .resultat-libelle {
+            font-size: 0.8rem;
+            color: var(--warm-gray);
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+        .resultat-valeur {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            line-height: 1;
+            color: var(--black);
+        }
+        .resultat-valeur small { font-size: 1rem; color: var(--warm-gray); margin-left: 2px; }
+        .resultat-attente { color: var(--text-muted); }
+        .resultat-detail {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+            line-height: 1.4;
+        }
+        .resultats-note {
+            font-size: 0.85rem;
+            color: var(--warm-gray);
+            margin-top: var(--space-md);
+            line-height: 1.6;
+        }
+        .resultats-note a { color: var(--accent-dark); text-decoration: underline; text-underline-offset: 3px; }
+
+
         /* Evaluation */
         .evaluation-box {
             background: var(--light-beige);
@@ -1128,6 +1237,12 @@
                     </svg>
                     <span>12 participants maximum</span>
                 </div>
+                <div class="hero-meta-item">
+                    <svg class="hero-meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    <span>Programme mis à jour le 06/07/2026</span>
+                </div>
             </div>
         </div>
     </header>
@@ -1203,7 +1318,7 @@
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Retour d&#x27;expérience : audit des usages actuels des participants</span></div></li>
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Prompting avancé : chaînage, rôles experts, formats de sortie structurés</span></div></li>
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Construction de sa bibliothèque de prompts métier (8 familles de tâches)</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span><strong>Atelier</strong> : refonte complète d&#x27;un processus réel choisi par chaque participant</span></div></li>
+                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Atelier : refonte complète d&#x27;un processus réel choisi par chaque participant</span></div></li>
                         </ul>
                     </div>
                 </div>
@@ -1217,7 +1332,7 @@
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Automatisation : connecter l&#x27;IA à ses outils (suite bureautique, agents, assistants personnalisés)</span></div></li>
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Les projets et instructions personnalisées : créer ses assistants spécialisés</span></div></li>
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Cadre responsable : charte d&#x27;usage, données confidentielles, vérification des sorties</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span><strong>Mise en situation</strong> : chaque participant repart avec un workflow opérationnel et mesuré</span></div></li>
+                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Mise en situation : chaque participant repart avec un workflow opérationnel et mesuré</span></div></li>
                         </ul>
                     </div>
                 </div>
@@ -1242,46 +1357,51 @@
                 <div class="objectifs-box">
                     <p class="objectifs-intro">À l'issue de cette formation, vous serez capable de :</p>
                     <ul class="objectifs-list">                        <li><span class="check">✓</span><span>Construire une bibliothèque de prompts réutilisables adaptée à son métier</span></li>
-                        <li><span class="check">✓</span><span>Concevoir un workflow assisté par IA de bout en bout sur un processus réel de son activité</span></li>
-                        <li><span class="check">✓</span><span>Automatiser au moins une tâche récurrente (compte-rendu, veille, reporting, emails)</span></li>
+                        <li><span class="check">✓</span><span>Concevoir un workflow assisté par IA de bout en bout sur un processus réel</span></li>
+                        <li><span class="check">✓</span><span>Automatiser au moins une tâche récurrente (compte rendu, veille, reporting, emails)</span></li>
                         <li><span class="check">✓</span><span>Structurer un cadre d&#x27;usage responsable : données sensibles, vérification, traçabilité</span></li>
                         <li><span class="check">✓</span><span>Mesurer les gains de temps et de qualité obtenus</span></li></ul>
                 </div>
             </section>
 
-            <!-- Pédagogie -->
+            <!-- Pédagogie : modalités, méthodes mobilisées, moyens et outils, intervenante (ind. 1) -->
             <section class="section">
                 <h2 class="section-title">Pédagogie</h2>
                 <div class="pedagogy-box">
-                    <h3 class="pedagogy-title">Dispositif pédagogique</h3>
-                    <p class="pedagogy-text">À l&#x27;issue de la formation, le participant sera capable de :</p>
+                    <div class="pedagogy-bloc">
+                        <h3 class="pedagogy-title">Modalités pédagogiques</h3>
+                        <p class="pedagogy-text">Formation hybride (présentiel ou distanciel synchrone), groupe limité à 12 participants. Pédagogie par projet : chaque participant travaille sur ses propres processus tout au long des deux jours.</p>
+                    </div>
+                    <div class="pedagogy-bloc">
+                        <h3 class="pedagogy-title">Méthodes mobilisées</h3>
+                        <p class="pedagogy-text">Alternance de démonstrations, d&#x27;ateliers guidés et de production autonome avec feedback individualisé. Audit des usages en ouverture, production d&#x27;un livrable réutilisable en clôture.</p>
+                    </div>
+                    <div class="pedagogy-bloc">
+                        <h3 class="pedagogy-title">Moyens et outils</h3>
+                        <p class="pedagogy-text">Support de cours numérique, bibliothèque de prompts métier remise à chaque participant, modèles de charte d&#x27;usage, grille de mesure des gains, accès aux outils utilisés en atelier, questionnaires de positionnement et d&#x27;évaluation en ligne.</p>
+                    </div>
+                    <div class="pedagogy-bloc">
+                        <h3 class="pedagogy-title">Intervenante</h3>
+                        <p class="pedagogy-text">Formatrice spécialiste de l&#x27;IA appliquée aux métiers et de l&#x27;automatisation sans code, expérience confirmée en conduite du changement et en formation continue d&#x27;adultes.</p>
+                    </div>
                 </div>
             </section>
 
-            <!-- Évaluation -->
+            <!-- Évaluation : modalités d'évaluation et sanction (ind. 1 et 11) -->
             <section class="section">
                 <h2 class="section-title">Évaluation</h2>
                 <div class="evaluation-box">
                     <ul class="evaluation-list">
-                        <li>
-                            <span class="bullet"></span>
-                            <span><strong>Avant — positionnement :</strong> Test de positionnement à l&#x27;entrée • Évaluations formatives continues • Cas pratique évalué et QCM en fin de formation • Satisfaction à chaud • Évaluation à froid à J+90</span>
-                        </li>
-                        <li>
-                            <span class="bullet"></span>
-                            <span><strong>Pendant — évaluation des acquis :</strong> </span>
-                        </li>
-                        <li>
-                            <span class="bullet"></span>
-                            <span><strong>En fin de formation — évaluation des acquis :</strong> </span>
-                        </li>
-                        <li>
-                            <span class="bullet"></span>
-                            <span><strong>Après — transfert et satisfaction :</strong> </span>
-                        </li>
+                        <li><span class="bullet"></span><span>Test de positionnement à l&#x27;entrée</span></li>
+                        <li><span class="bullet"></span><span>évaluations formatives continues</span></li>
+                        <li><span class="bullet"></span><span>cas pratique évalué et QCM en fin de formation</span></li>
+                        <li><span class="bullet"></span><span>satisfaction à chaud</span></li>
+                        <li><span class="bullet"></span><span>évaluation à froid à J+90</span></li>
                     </ul>
+                    <p class="evaluation-sanction"><strong>Sanction de la formation :</strong> Attestation de fin de formation mentionnant les objectifs, la nature, la durée de l&#x27;action et les résultats de l&#x27;évaluation des acquis.</p>
                 </div>
             </section>
+
 
             <!-- Points forts -->
             <section class="section">
@@ -1302,7 +1422,7 @@
                     <div class="quality-content">
                         <h4>Qualité des formations</h4>
                         <p>Formation certifiée Qualiopi</p>
-                        <a href="#">En savoir plus</a>
+                        <a href="/resultats/">Nos résultats et notre méthode de calcul</a>
                     </div>
                 </div>
             </section>
@@ -1323,17 +1443,35 @@
                 </div>
             </section>
 
-            <!-- Accessibilité -->
-            <section class="section">
+            <!-- Modalités et délais d'accès (ind. 1) -->
+            <section class="section" id="acces">
+                <h2 class="section-title">Modalités et délais d'accès</h2>
+                <div class="acces-box">
+                    <div class="acces-bloc">
+                        <h3 class="pedagogy-title">Comment s'inscrire</h3>
+                        <p>Inscription sur demande par email à contact@lauraballo.com ou par téléphone. Un échange préalable permet d&#x27;analyser vos besoins et, en intra, d&#x27;adapter la formation à votre contexte. L&#x27;inscription est confirmée par la signature d&#x27;un devis et d&#x27;une convention de formation (entreprise) ou d&#x27;un contrat de formation (particulier). Chaque participant reçoit ensuite sa convocation et un questionnaire de positionnement à compléter avant la formation.</p>
+                    </div>
+                    <div class="acces-bloc">
+                        <h3 class="pedagogy-title">Délais d'accès</h3>
+                        <p>En inter-entreprises, inscription possible jusqu&#x27;à 15 jours avant le démarrage, sous réserve de places disponibles. En intra-entreprise, comptez 3 à 6 semaines entre la validation du devis et la première journée, le temps d&#x27;adapter la formation à votre contexte.</p>
+                    </div>
+                    <p class="acces-contact">Contact : <a href="mailto:"></a> · <a href="tel:"></a></p>
+                </div>
+            </section>
+
+            <!-- Accessibilité (ind. 26) — texte géré dans 🏛️ Mon organisme, référente handicap nommée -->
+            <section class="section" id="accessibilite">
                 <h2 class="section-title">Accessibilité</h2>
                 <div class="accessibilite-box">
                     <span class="accessibilite-icon">♿</span>
                     <div class="accessibilite-content">
                         <h4>Formation accessible aux personnes en situation de handicap</h4>
-                        <p>Nos formations sont accessibles aux personnes en situation de handicap. Contactez-nous pour étudier ensemble les adaptations possibles selon vos besoins.</p>
+                        <p>Nos formations sont accessibles aux personnes en situation de handicap. Contactez notre référente handicap, Laura Ballo (contact@lauraballo.com), avant votre inscription pour étudier ensemble les adaptations possibles : supports adaptés, aménagement des temps de travail et de passage, accessibilité des locaux. Si besoin, nous vous orientons vers les partenaires spécialisés (Agefiph, Cap emploi).</p>
                     </div>
                 </div>
             </section>
+
+            <p class="mentions-organisme">Laura Ballo Coaching — organisme de formation enregistré sous le numéro de déclaration d'activité  auprès du Préfet de la région Auvergne-Rhône-Alpes. Cet enregistrement ne vaut pas agrément de l'État.</p>
 
         </main>
 
@@ -1488,7 +1626,7 @@
 <p>Non compris : les frais de déplacement et d&#x27;hébergement de la formatrice, la location d&#x27;une salle extérieure, et les licences des outils utilisés en atelier.</p>
                 <div style="margin-top:var(--space-md); padding-top:var(--space-md); border-top:1px solid var(--warm-beige);">
                     <strong style="display:block; margin-bottom:6px;">Délais d'accès</strong>
-                    <p style="color:var(--warm-gray); font-size:.9rem;">Inscription possible jusqu&#x27;à 15 jours avant le démarrage, sous réserve de places disponibles. En intra, comptez 3 à 6 semaines entre la validation du devis et la première journée, le temps d&#x27;adapter les cas d&#x27;usage à vos métiers.</p>
+                    <p style="color:var(--warm-gray); font-size:.9rem;">En inter-entreprises, inscription possible jusqu&#x27;à 15 jours avant le démarrage, sous réserve de places disponibles. En intra-entreprise, comptez 3 à 6 semaines entre la validation du devis et la première journée, le temps d&#x27;adapter la formation à votre contexte.</p>
                 </div>
                 <button class="btn-primary" style="margin-top:var(--space-md); width:100%;"
                         onclick="closeModalIntra(); openModalDevis();">Faire une demande de devis</button>

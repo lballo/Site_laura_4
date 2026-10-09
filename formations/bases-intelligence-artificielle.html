@@ -710,6 +710,115 @@
             color: var(--text-dark);
         }
 
+        .pedagogy-bloc + .pedagogy-bloc {
+            margin-top: var(--space-md);
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--warm-beige);
+        }
+
+        .pedagogy-bloc .pedagogy-title { margin-bottom: var(--space-xs); }
+
+        .evaluation-sanction {
+            margin-top: var(--space-md);
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--warm-beige);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--text-dark);
+        }
+
+        /* Modalités et délais d'accès (ind. 1) */
+        .acces-box {
+            background: var(--light-beige);
+            border-radius: 12px;
+            padding: var(--space-lg);
+            border: 1px solid var(--warm-beige);
+        }
+
+        .acces-bloc + .acces-bloc {
+            margin-top: var(--space-md);
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--warm-beige);
+        }
+
+        .acces-bloc .pedagogy-title { margin-bottom: var(--space-xs); }
+
+        .acces-bloc p {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+        }
+
+        .acces-bloc p + p { margin-top: var(--space-xs); }
+
+        .acces-box a, .accessibilite-content a {
+            color: var(--accent-dark);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .acces-contact {
+            margin-top: var(--space-md);
+            font-size: 0.9rem;
+            color: var(--warm-gray);
+        }
+
+        .accessibilite-content p + p { margin-top: var(--space-xs); }
+
+        .mentions-organisme {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-top: var(--space-lg);
+        }
+
+        /* Résultats (indicateur 2) */
+        .resultats-box {
+            background: var(--light-beige);
+            border-radius: 12px;
+            padding: var(--space-lg);
+            border: 1px solid var(--warm-beige);
+        }
+        .resultats-grille {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-sm);
+        }
+        .resultat-carte {
+            background: var(--white);
+            border-radius: 10px;
+            padding: var(--space-sm);
+            border: 1px solid var(--warm-beige);
+        }
+        .resultat-libelle {
+            font-size: 0.8rem;
+            color: var(--warm-gray);
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+        .resultat-valeur {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            line-height: 1;
+            color: var(--black);
+        }
+        .resultat-valeur small { font-size: 1rem; color: var(--warm-gray); margin-left: 2px; }
+        .resultat-attente { color: var(--text-muted); }
+        .resultat-detail {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+            line-height: 1.4;
+        }
+        .resultats-note {
+            font-size: 0.85rem;
+            color: var(--warm-gray);
+            margin-top: var(--space-md);
+            line-height: 1.6;
+        }
+        .resultats-note a { color: var(--accent-dark); text-decoration: underline; text-underline-offset: 3px; }
+
+
         /* Evaluation */
         .evaluation-box {
             background: var(--light-beige);
@@ -1128,6 +1237,12 @@
                     </svg>
                     <span>12 participants maximum</span>
                 </div>
+                <div class="hero-meta-item">
+                    <svg class="hero-meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    <span>Programme mis à jour le 06/08/2026</span>
+                </div>
             </div>
         </div>
     </header>
@@ -1190,7 +1305,7 @@
                     </div>
                     <div class="phase-content">
                         <ul class="phase-items">
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Questionnaire de positionnement : niveau de familiarité avec l&#x27;IA, outils déjà utilisés, cas d&#x27;usage métier prioritaires</span></div></li>
+                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Questionnaire de positionnement : familiarité avec l&#x27;IA, outils déjà utilisés, cas d&#x27;usage prioritaires</span></div></li>
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Adaptation des ateliers au profil et au secteur des participants</span></div></li>
                         </ul>
                     </div>
@@ -1210,82 +1325,73 @@
                 <div class="programme-phase">
                     <div class="phase-header">
                         <span class="phase-number">03</span>
-                        <span class="phase-title">09h15 — Partie 1 · Définition et genèse de l&#x27;IA</span>
+                        <span class="phase-title">09h15 — Partie 1 : définition et genèse de l&#x27;IA</span>
                     </div>
                     <div class="phase-content">
                         <ul class="phase-items">
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Quiz d&#x27;ouverture</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Qu&#x27;est-ce que l&#x27;IA : définition, capacité d&#x27;apprentissage, décision autonome</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>70 ans d&#x27;histoire : test de Turing, IA symbolique et hivers de l&#x27;IA, machine learning, deep learning, architecture Transformer</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Les trois niveaux : IA étroite, IA générale, super-intelligence — démêler le réel du fantasme</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Comment fonctionne réellement un modèle de langage : prédiction statistique, hallucinations, absence de compréhension</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>IA générative, IA analytique, système expert, automatisation — <strong>exercice de classification</strong></span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Panorama des outils et de leurs logiques économiques : ChatGPT, Claude, Gemini, Mistral, DeepSeek, Grok, outils image / voix / musique / vidéo</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Confidentialité comparée des principaux outils et localisation des serveurs</span></div></li>
+                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Quiz d&#x27;ouverture ; définition, capacité d&#x27;apprentissage, décision autonome</span></div></li>
+                            <li><div class="phase-item-text"><span class="chevron">›</span><span>70 ans d&#x27;histoire : test de Turing, IA symbolique, machine learning, deep learning, Transformer</span></div></li>
+                            <li><div class="phase-item-text"><span class="chevron">›</span><span>IA étroite, IA générale, super-intelligence : démêler le réel du fantasme</span></div></li>
+                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Fonctionnement d&#x27;un modèle de langage : prédiction statistique, hallucinations</span></div></li>
+                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Exercice de classification : IA générative, analytique, système expert, automatisation</span></div></li>
+                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Panorama des outils et confidentialité comparée</span></div></li>
                         </ul>
                     </div>
                 </div>
                 <div class="programme-phase">
                     <div class="phase-header">
                         <span class="phase-number">04</span>
-                        <span class="phase-title">10h30 — Partie 2 · Atelier de prompting</span>
+                        <span class="phase-title">10h30 — Partie 2 : atelier de prompting</span>
                     </div>
                     <div class="phase-content">
                         <ul class="phase-items">
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Prompt vague contre prompt précis : mesurer l&#x27;écart de qualité</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>La méthode <strong>C.R.A.F.T.</strong> : Contexte, Rôle, Action, Format, Ton</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span><strong>Exercice 1</strong> — Le prompt brut : tous les groupes posent la même demande sans instruction, puis comparent les écarts</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span><strong>Exercice 2</strong> — Le prompt contextualisé : même demande avec contexte, public, ton et contraintes</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span><strong>Exercice 3</strong> — Le cas métier : chaque participant traite un cas réel de son quotidien, avec contrainte de format, puis de ton, puis de sécurité RGPD</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Cas types détaillés : compte rendu de réunion, recrutement et RH, argumentaire commercial</span></div></li>
+                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Prompt vague contre prompt précis ; méthode C.R.A.F.T. (Contexte, Rôle, Action, Format, Ton)</span></div></li>
+                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Exercice 1 : le prompt brut, comparaison des écarts entre groupes</span></div></li>
+                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Exercice 2 : le prompt contextualisé (contexte, public, ton, contraintes)</span></div></li>
+                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Exercice 3 : le cas métier réel de chaque participant, avec contraintes de format, de ton et de sécurité RGPD</span></div></li>
+                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Cas types : compte rendu de réunion, recrutement et RH, argumentaire commercial</span></div></li>
                         </ul>
                     </div>
                 </div>
                 <div class="programme-phase">
                     <div class="phase-header">
                         <span class="phase-number">05</span>
-                        <span class="phase-title">13h00 — Partie 3 · Copilot dans les applications Microsoft 365</span>
+                        <span class="phase-title">13h00 — Partie 3 : Copilot dans Microsoft 365</span>
                     </div>
                     <div class="phase-content">
                         <ul class="phase-items">
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Qu&#x27;est-ce que Copilot et ce que le périmètre contractuel Microsoft change en matière de données</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span><strong>Word</strong> : rédiger depuis zéro, résumer et extraire, réécrire</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span><strong>Excel</strong> : générer des formules, analyser, visualiser — et le prérequis de structuration des données</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span><strong>Outlook</strong> : rédiger et répondre, résumer un fil long, coaching de ton</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span><strong>Teams</strong> : résumé de réunion, interrogation de la transcription, plan d&#x27;action automatique</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span><strong>PowerPoint</strong> : créer une présentation, condenser une slide, générer depuis un document Word</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span><strong>Atelier live</strong> : chaque binôme teste deux outils sur ses propres fichiers</span></div></li>
+                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Périmètre contractuel Microsoft et traitement des données</span></div></li>
+                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Word, Excel, Outlook, Teams, PowerPoint : usages concrets application par application</span></div></li>
+                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Atelier live : chaque binôme teste deux outils sur ses propres fichiers</span></div></li>
                         </ul>
                     </div>
                 </div>
                 <div class="programme-phase">
                     <div class="phase-header">
                         <span class="phase-number">06</span>
-                        <span class="phase-title">14h30 — Partie 4 · Limites de l&#x27;IA et régulation</span>
+                        <span class="phase-title">14h30 — Partie 4 : limites de l&#x27;IA et régulation</span>
                     </div>
                     <div class="phase-content">
                         <ul class="phase-items">
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Les limites qu&#x27;aucune mise à jour ne corrigera : probabilité n&#x27;est pas vérité, absence de création ex nihilo, absence de jugement esthétique, incompréhension de la nuance, biais en trois couches, méconnaissance du contexte interne</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>L&#x27;<strong>AI Act</strong> européen : les quatre niveaux de risque et ce qu&#x27;ils impliquent concrètement</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>RGPD et données personnelles : ce qu&#x27;on ne saisit jamais dans un outil grand public</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span><strong>Choisir le bon outil selon la donnée</strong> : du moins au plus sécurisé, des offres grand public aux solutions auto-hébergées</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span><strong>Cas pratiques</strong> : les questions à se poser par métier — commercial, juridique, RH, IT</span></div></li>
+                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Les limites structurelles : probabilité n&#x27;est pas vérité, absence de jugement, biais, méconnaissance du contexte interne</span></div></li>
+                            <li><div class="phase-item-text"><span class="chevron">›</span><span>AI Act européen : les quatre niveaux de risque</span></div></li>
+                            <li><div class="phase-item-text"><span class="chevron">›</span><span>RGPD : ce qu&#x27;on ne saisit jamais dans un outil grand public</span></div></li>
+                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Choisir le bon outil selon la sensibilité de la donnée</span></div></li>
+                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Cas pratiques par métier : commercial, juridique, RH, IT</span></div></li>
                         </ul>
                     </div>
                 </div>
                 <div class="programme-phase">
                     <div class="phase-header">
                         <span class="phase-number">07</span>
-                        <span class="phase-title">15h45 — Partie 5 · Automatiser sans coder</span>
+                        <span class="phase-title">15h45 — Partie 5 : automatiser sans coder</span>
                     </div>
                     <div class="phase-content">
                         <ul class="phase-items">
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>La logique d&#x27;un flux en trois blocs : déclencheur, condition, action</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Le vocabulaire des automatisations : trigger, filter, switch, merge, webhook, loop, mapping</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Panorama des outils : Power Automate, n8n, Zapier, Make — et leurs implications en matière d&#x27;hébergement des données</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span><strong>Tutoriel live</strong> : construire un premier flux de bout en bout</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Cas d&#x27;automatisation débutants et intermédiaires, prêts à reproduire</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>De Copilot aux agents IA : ce que change un agent, et pourquoi la supervision humaine reste indispensable</span></div></li>
+                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Logique d&#x27;un flux : déclencheur, condition, action ; vocabulaire des automatisations</span></div></li>
+                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Panorama des outils : Power Automate, n8n, Zapier, Make</span></div></li>
+                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Tutoriel live : construire un premier flux de bout en bout</span></div></li>
+                            <li><div class="phase-item-text"><span class="chevron">›</span><span>De Copilot aux agents IA : ce que change un agent, supervision humaine</span></div></li>
                         </ul>
                     </div>
                 </div>
@@ -1296,9 +1402,9 @@
                     </div>
                     <div class="phase-content">
                         <ul class="phase-items">
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span><strong>Atelier « Ce que je confie ou non à l&#x27;IA »</strong> : cartographie des tâches entre ce qui reste humain, ce qui peut être délégué, et où se situe la complémentarité</span></div></li>
+                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Atelier « Ce que je confie ou non à l&#x27;IA » : cartographie des tâches</span></div></li>
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Feuille de route à 12 mois : cadrer, tester, diffuser, ancrer</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Tour de table final : une chose à faire différemment dès demain, une question qui reste ouverte</span></div></li>
+                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Tour de table final</span></div></li>
                         </ul>
                     </div>
                 </div>
@@ -1309,9 +1415,9 @@
                     </div>
                     <div class="phase-content">
                         <ul class="phase-items">
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Évaluation des acquis par QCM et questionnaire de satisfaction à chaud</span></div></li>
+                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Évaluation des acquis par QCM et satisfaction à chaud</span></div></li>
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Bibliothèque de prompts remise aux participants</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Évaluation à froid à J+90 : mesure du transfert en situation de travail</span></div></li>
+                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Évaluation à froid à J+90</span></div></li>
                         </ul>
                     </div>
                 </div>
@@ -1322,46 +1428,96 @@
                 <h2 class="section-title">Les objectifs de la formation</h2>
                 <div class="objectifs-box">
                     <p class="objectifs-intro">À l'issue de cette formation, vous serez capable de :</p>
-                    <ul class="objectifs-list">                        <li><span class="check">✓</span><span>Distinguer IA symbolique, machine learning, deep learning et IA générative, et situer les principaux outils du marché (ChatGPT, Claude, Gemini, Mistral, Copilot)</span></li>
-                        <li><span class="check">✓</span><span>Rédiger des prompts structurés et efficaces avec la méthode C.R.A.F.T. (Contexte, Rôle, Action, Format, Ton)</span></li>
-                        <li><span class="check">✓</span><span>Utiliser Copilot dans les applications Microsoft 365 (Word, Excel, Outlook, Teams, PowerPoint) sur des cas métier concrets</span></li>
-                        <li><span class="check">✓</span><span>Identifier les limites et risques de l&#x27;IA — hallucinations, biais, absence de jugement — et choisir l&#x27;outil adapté au niveau de sensibilité des données (RGPD, AI Act)</span></li>
-                        <li><span class="check">✓</span><span>Construire un premier automatisme sans coder (déclencheur → condition → action) et distinguer flux automatisé et agent IA</span></li>
+                    <ul class="objectifs-list">                        <li><span class="check">✓</span><span>Distinguer IA symbolique, machine learning, deep learning et IA générative, et situer les principaux outils du marché</span></li>
+                        <li><span class="check">✓</span><span>Rédiger des prompts structurés et efficaces avec la méthode C.R.A.F.T.</span></li>
+                        <li><span class="check">✓</span><span>Utiliser Copilot dans les applications Microsoft 365 sur des cas métier concrets</span></li>
+                        <li><span class="check">✓</span><span>Identifier les limites et risques de l&#x27;IA et choisir l&#x27;outil adapté à la sensibilité des données (RGPD, AI Act)</span></li>
+                        <li><span class="check">✓</span><span>Construire un premier automatisme sans coder et distinguer flux automatisé et agent IA</span></li>
                         <li><span class="check">✓</span><span>Appliquer l&#x27;IA générative à au moins 3 tâches concrètes de son quotidien professionnel</span></li></ul>
                 </div>
             </section>
 
-            <!-- Pédagogie -->
+            <!-- Pédagogie : modalités, méthodes mobilisées, moyens et outils, intervenante (ind. 1) -->
             <section class="section">
                 <h2 class="section-title">Pédagogie</h2>
                 <div class="pedagogy-box">
-                    <h3 class="pedagogy-title">Dispositif pédagogique</h3>
-                    <p class="pedagogy-text">À l&#x27;issue de la formation, le participant sera capable de :</p>
+                    <div class="pedagogy-bloc">
+                        <h3 class="pedagogy-title">Modalités pédagogiques</h3>
+                        <p class="pedagogy-text">Formation hybride (présentiel ou distanciel synchrone), groupe limité à 12 participants. Journée résolument pratique : chaque notion théorique est suivie d&#x27;un atelier sur les outils réels. Les cas d&#x27;usage sont construits à partir des métiers représentés dans la salle.</p>
+                    </div>
+                    <div class="pedagogy-bloc">
+                        <h3 class="pedagogy-title">Méthodes mobilisées</h3>
+                        <p class="pedagogy-text">Alternance systématique entre apport théorique et atelier pratique sur les outils réels. Travail en binômes et en groupes mixtes, restitutions collectives, quiz et exercices de classification. Feedback individualisé sur les prompts produits.</p>
+                    </div>
+                    <div class="pedagogy-bloc">
+                        <h3 class="pedagogy-title">Moyens et outils</h3>
+                        <p class="pedagogy-text">Support de cours numérique remis à chaque participant, bibliothèque de prompts métier, fiches méthodologiques C.R.A.F.T., accès aux outils utilisés en atelier, questionnaires de positionnement et d&#x27;évaluation en ligne.</p>
+                    </div>
+                    <div class="pedagogy-bloc">
+                        <h3 class="pedagogy-title">Intervenante</h3>
+                        <p class="pedagogy-text">Formatrice spécialiste de l&#x27;IA appliquée aux métiers, expérience confirmée en conduite du changement et en formation continue d&#x27;adultes.</p>
+                    </div>
                 </div>
             </section>
 
-            <!-- Évaluation -->
+            <!-- Évaluation : modalités d'évaluation et sanction (ind. 1 et 11) -->
             <section class="section">
                 <h2 class="section-title">Évaluation</h2>
                 <div class="evaluation-box">
                     <ul class="evaluation-list">
-                        <li>
-                            <span class="bullet"></span>
-                            <span><strong>Avant — positionnement :</strong> Questionnaire de positionnement à l&#x27;entrée • Quiz et exercices de classification en cours de journée • Évaluations formatives sur les prompts produits en atelier • QCM d&#x27;évaluation des acquis en fin de formation • Questionnaire de satisfaction à chaud • Évaluation à froid à J+90</span>
-                        </li>
-                        <li>
-                            <span class="bullet"></span>
-                            <span><strong>Pendant — évaluation des acquis :</strong> </span>
-                        </li>
-                        <li>
-                            <span class="bullet"></span>
-                            <span><strong>En fin de formation — évaluation des acquis :</strong> </span>
-                        </li>
-                        <li>
-                            <span class="bullet"></span>
-                            <span><strong>Après — transfert et satisfaction :</strong> </span>
-                        </li>
+                        <li><span class="bullet"></span><span>Questionnaire de positionnement à l&#x27;entrée</span></li>
+                        <li><span class="bullet"></span><span>quiz et exercices de classification en cours de journée</span></li>
+                        <li><span class="bullet"></span><span>évaluations formatives sur les prompts produits en atelier</span></li>
+                        <li><span class="bullet"></span><span>QCM d&#x27;évaluation des acquis en fin de formation</span></li>
+                        <li><span class="bullet"></span><span>questionnaire de satisfaction à chaud</span></li>
+                        <li><span class="bullet"></span><span>évaluation à froid à J+90</span></li>
                     </ul>
+                    <p class="evaluation-sanction"><strong>Sanction de la formation :</strong> Attestation de fin de formation mentionnant les objectifs, la nature, la durée de l&#x27;action et les résultats de l&#x27;évaluation des acquis.</p>
+                </div>
+            </section>
+
+            <!-- Résultats (indicateur 2) -->
+            <section class="section" id="resultats">
+                <h2 class="section-title">Résultats de cette formation</h2>
+                <div class="resultats-box">
+                    <div class="resultats-grille">
+                        <div class="resultat-carte">
+                            <div class="resultat-libelle">Stagiaires formés</div>
+                            <div class="resultat-valeur">2</div>
+                            
+                        </div>
+                        <div class="resultat-carte">
+                            <div class="resultat-libelle">Satisfaction à chaud</div>
+                            <div class="resultat-valeur resultat-attente">—</div>
+                            <div class="resultat-detail">Pas encore d’avis sur la période.</div>
+                        </div>
+                        <div class="resultat-carte">
+                            <div class="resultat-libelle">Taux de réponse</div>
+                            <div class="resultat-valeur resultat-attente">—</div>
+                            <div class="resultat-detail">0 % des stagiaires ont répondu (0 sur 2)</div>
+                        </div>
+                        <div class="resultat-carte">
+                            <div class="resultat-libelle">Objectifs atteints</div>
+                            <div class="resultat-valeur resultat-attente">—</div>
+                            <div class="resultat-detail">Résultat publié à partir de 10 évaluations (2 à ce jour).</div>
+                        </div>
+                        <div class="resultat-carte">
+                            <div class="resultat-libelle">Objectifs partiellement atteints</div>
+                            <div class="resultat-valeur resultat-attente">—</div>
+                            <div class="resultat-detail">Résultat publié à partir de 10 évaluations (2 à ce jour).</div>
+                        </div>
+                        <div class="resultat-carte">
+                            <div class="resultat-libelle">Taux d&#x27;abandon</div>
+                            <div class="resultat-valeur">0<small>%</small></div>
+                            <div class="resultat-detail">2 stagiaires</div>
+                        </div>
+                        <div class="resultat-carte">
+                            <div class="resultat-libelle">Mise en pratique à J+90</div>
+                            <div class="resultat-valeur resultat-attente">—</div>
+                            <div class="resultat-detail">Premières réponses attendues 3 mois après les premières sessions.</div>
+                        </div>
+                    </div>
+                    <p class="resultats-note">Indicateurs calculés sur les 12 derniers mois, mis à jour le 9 octobre 2026. Méthode de calcul et résultats de l'ensemble des formations : <a href="/resultats/">nos résultats</a>.</p>
                 </div>
             </section>
 
@@ -1384,7 +1540,7 @@
                     <div class="quality-content">
                         <h4>Qualité des formations</h4>
                         <p>Formation certifiée Qualiopi</p>
-                        <a href="#">En savoir plus</a>
+                        <a href="/resultats/">Nos résultats et notre méthode de calcul</a>
                     </div>
                 </div>
             </section>
@@ -1405,17 +1561,35 @@
                 </div>
             </section>
 
-            <!-- Accessibilité -->
-            <section class="section">
+            <!-- Modalités et délais d'accès (ind. 1) -->
+            <section class="section" id="acces">
+                <h2 class="section-title">Modalités et délais d'accès</h2>
+                <div class="acces-box">
+                    <div class="acces-bloc">
+                        <h3 class="pedagogy-title">Comment s'inscrire</h3>
+                        <p>Inscription sur demande par email à contact@lauraballo.com ou par téléphone. Un échange préalable permet d&#x27;analyser vos besoins et, en intra, d&#x27;adapter la formation à votre contexte. L&#x27;inscription est confirmée par la signature d&#x27;un devis et d&#x27;une convention de formation (entreprise) ou d&#x27;un contrat de formation (particulier). Chaque participant reçoit ensuite sa convocation et un questionnaire de positionnement à compléter avant la formation.</p>
+                    </div>
+                    <div class="acces-bloc">
+                        <h3 class="pedagogy-title">Délais d'accès</h3>
+                        <p>En inter-entreprises, inscription possible jusqu&#x27;à 15 jours avant le démarrage, sous réserve de places disponibles. En intra-entreprise, comptez 3 à 6 semaines entre la validation du devis et la première journée, le temps d&#x27;adapter la formation à votre contexte.</p>
+                    </div>
+                    <p class="acces-contact">Contact : <a href="mailto:"></a> · <a href="tel:"></a></p>
+                </div>
+            </section>
+
+            <!-- Accessibilité (ind. 26) — texte géré dans 🏛️ Mon organisme, référente handicap nommée -->
+            <section class="section" id="accessibilite">
                 <h2 class="section-title">Accessibilité</h2>
                 <div class="accessibilite-box">
                     <span class="accessibilite-icon">♿</span>
                     <div class="accessibilite-content">
                         <h4>Formation accessible aux personnes en situation de handicap</h4>
-                        <p>Nos formations sont accessibles aux personnes en situation de handicap. Contactez-nous pour étudier ensemble les adaptations possibles selon vos besoins.</p>
+                        <p>Nos formations sont accessibles aux personnes en situation de handicap. Contactez notre référente handicap, Laura Ballo (contact@lauraballo.com), avant votre inscription pour étudier ensemble les adaptations possibles : supports adaptés, aménagement des temps de travail et de passage, accessibilité des locaux. Si besoin, nous vous orientons vers les partenaires spécialisés (Agefiph, Cap emploi).</p>
                     </div>
                 </div>
             </section>
+
+            <p class="mentions-organisme">Laura Ballo Coaching — organisme de formation enregistré sous le numéro de déclaration d'activité  auprès du Préfet de la région Auvergne-Rhône-Alpes. Cet enregistrement ne vaut pas agrément de l'État.</p>
 
         </main>
 
@@ -1570,7 +1744,7 @@
 <p>Non compris : les frais de déplacement et d&#x27;hébergement de la formatrice, la location d&#x27;une salle extérieure, et les licences des outils utilisés en atelier (Microsoft 365 Copilot notamment).</p>
                 <div style="margin-top:var(--space-md); padding-top:var(--space-md); border-top:1px solid var(--warm-beige);">
                     <strong style="display:block; margin-bottom:6px;">Délais d'accès</strong>
-                    <p style="color:var(--warm-gray); font-size:.9rem;">Inscription possible jusqu&#x27;à 15 jours avant le démarrage, sous réserve de places disponibles. En intra, comptez 3 à 6 semaines entre la validation du devis et la journée de formation, le temps d&#x27;adapter les cas d&#x27;usage à vos métiers.</p>
+                    <p style="color:var(--warm-gray); font-size:.9rem;">En inter-entreprises, inscription possible jusqu&#x27;à 15 jours avant le démarrage, sous réserve de places disponibles. En intra-entreprise, comptez 3 à 6 semaines entre la validation du devis et la première journée, le temps d&#x27;adapter la formation à votre contexte.</p>
                 </div>
                 <button class="btn-primary" style="margin-top:var(--space-md); width:100%;"
                         onclick="closeModalIntra(); openModalDevis();">Faire une demande de devis</button>
