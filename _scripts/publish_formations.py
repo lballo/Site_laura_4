@@ -771,11 +771,13 @@ def build_schema(d, avis):
             "name": "Laura Ballo Coaching",
             "url": SITE_URL,
         },
+        # Offre intra uniquement pour l'instant (l'inter viendra plus tard :
+        # repasser sur _tarif_inter / « Inter-entreprise » à ce moment-là).
         "offers": {
             "@type": "Offer",
-            "price": str(d["_tarif_inter"] or ""),
+            "price": str(d["_tarif_intra"] or ""),
             "priceCurrency": "EUR",
-            "category": "Inter-entreprise",
+            "category": "Intra-entreprise",
         },
         "hasCourseInstance": {
             "@type": "CourseInstance",
@@ -929,6 +931,7 @@ def build_data(client, page, avis, org=None, lignes_indicateurs=None, periode=("
         "AVIS_DISTRIBUTION_HTML": avis["distribution"] if avis else "",
         "AVIS_LIST_HTML": avis["liste"] if avis else "",
         "_tarif_inter": prop(page, "Tarif HT inter", "number"),
+        "_tarif_intra": prop(page, "Tarif HT intra", "number"),
         "_heures": heures,
     }
     data["SCHEMA_JSON"] = build_schema(data, avis)
