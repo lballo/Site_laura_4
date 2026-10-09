@@ -33,13 +33,6 @@
     "@type": "CourseInstance",
     "courseMode": "Hybride",
     "courseWorkload": "PT14H"
-  },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "5.0",
-    "reviewCount": "1",
-    "bestRating": "5",
-    "worstRating": "1"
   }
 }</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -786,7 +779,6 @@
         .tabs {
             display: flex;
             gap: 4px;
-            border-bottom: 2px solid var(--warm-beige);
             margin-bottom: var(--space-lg);
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
@@ -798,7 +790,6 @@
             background: none;
             border: none;
             border-bottom: 2px solid transparent;
-            margin-bottom: -2px;
             padding: 12px 18px;
             font-family: var(--font-body);
             font-size: 0.95rem;
@@ -1293,13 +1284,7 @@
             <h1 class="hero-title">Intelligence émotionnelle</h1>
             <p class="hero-subtitle">Faire de ses émotions un levier relationnel</p>
             
-            <!-- BLOC-AVIS-DEBUT : le script retire ce bloc si la formation n'a aucun avis publiable -->
-            <a class="hero-rating" href="#avis" data-open-tab="avis" title="Voir les avis et résultats">
-                <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
-                <span class="rating-score">5,0/5</span>
-                <span class="rating-count">(1 avis à chaud)</span>
-            </a>
-            <!-- BLOC-AVIS-FIN -->
+            
 
             <div class="hero-meta">
                 <div class="hero-meta-item">
@@ -1601,72 +1586,9 @@
             <div class="tab-panel" id="avis" role="tabpanel">
                 <section class="section">
                     <h2 class="section-title">Les avis sur la formation</h2>
-                    <div class="avis-box">
-                        <div class="avis-header">
-                            <div class="avis-score">
-                                <div class="avis-number">5,0</div>
-                                <div class="avis-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
-                                <div class="avis-source">1 avis à chaud</div>
-                            </div>
-                            <div class="avis-distribution">
-                        <div class="avis-bar-row">
-                            <span class="avis-bar-stars">5 ★</span>
-                            <div class="avis-bar"><div class="avis-bar-fill" style="width:100%"></div></div>
-                            <span class="avis-bar-percent">100%</span>
-                        </div>
-                        <div class="avis-bar-row">
-                            <span class="avis-bar-stars">4 ★</span>
-                            <div class="avis-bar"><div class="avis-bar-fill" style="width:0%"></div></div>
-                            <span class="avis-bar-percent">0%</span>
-                        </div>
-                        <div class="avis-bar-row">
-                            <span class="avis-bar-stars">3 ★</span>
-                            <div class="avis-bar"><div class="avis-bar-fill" style="width:0%"></div></div>
-                            <span class="avis-bar-percent">0%</span>
-                        </div>
-                        <div class="avis-bar-row">
-                            <span class="avis-bar-stars">2 ★</span>
-                            <div class="avis-bar"><div class="avis-bar-fill" style="width:0%"></div></div>
-                            <span class="avis-bar-percent">0%</span>
-                        </div>
-                        <div class="avis-bar-row">
-                            <span class="avis-bar-stars">1 ★</span>
-                            <div class="avis-bar"><div class="avis-bar-fill" style="width:0%"></div></div>
-                            <span class="avis-bar-percent">0%</span>
-                        </div>
-                            </div>
-                        </div>
-                        <p class="avis-periode">Note moyenne des questionnaires de satisfaction remplis à chaud, en fin de formation, par les stagiaires des sessions organisées par Laura Ballo Coaching entre le 09/10/2025 et le 09/10/2026. Chaque note est la moyenne de cinq critères sur 10 (respect du programme, utilité professionnelle, qualité de la pédagogie, moyens pédagogiques et professionnalisme de la formatrice), ramenée sur 5. Toutes les notes sont comptées ; seuls les commentaires dont la publication a été autorisée par leur auteur sont affichés.</p>
-                        <div class="avis-list">
-                <div class="avis-item">
-                    <div class="avis-item-header">
-                        <span class="avis-author">Laura T.</span>
-                        <span class="avis-date">01/10/2026</span>
-                        <div class="avis-rating">
-                            <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
-                            <span class="avis-rating-score">5,0/5</span>
-                        </div>
-                    </div>
-                    <p class="avis-comment">Très bien</p>
-                </div>
-                        </div>
-                    </div>
+                    <div class="avis-box"><p class="avis-vide">Pas encore d'avis sur les 12 derniers mois : les premiers questionnaires de satisfaction à chaud seront publiés ici dès la prochaine session terminée.</p></div>
                 </section>
 
-            <!-- Résultats (indicateur 2) -->
-            <section class="section" id="resultats">
-                <h2 class="section-title">Résultats de cette formation</h2>
-                <div class="resultats-box">
-                    <div class="resultats-grille">
-                        <div class="resultat-carte">
-                            <div class="resultat-libelle">Stagiaires formés</div>
-                            <div class="resultat-valeur">1</div>
-                            
-                        </div>
-                    </div>
-                    <p class="resultats-note">Indicateurs calculés sur les 12 derniers mois, mis à jour le 9 octobre 2026. Méthode de calcul et résultats de l'ensemble des formations : <a href="/resultats/">nos résultats</a>.</p>
-                </div>
-            </section>
 
             </div>
 
