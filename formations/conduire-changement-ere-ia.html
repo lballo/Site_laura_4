@@ -144,11 +144,14 @@
         }
 
         .hero-rating {
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: var(--space-sm);
             margin-bottom: var(--space-lg);
+            color: inherit;
+            text-decoration: none;
         }
+        .hero-rating:hover .rating-score { text-decoration: underline; text-underline-offset: 3px; }
 
         .stars {
             display: flex;
@@ -772,6 +775,73 @@
             margin-top: var(--space-lg);
         }
 
+        /* Onglets */
+        .tabs {
+            display: flex;
+            gap: 4px;
+            border-bottom: 2px solid var(--warm-beige);
+            margin-bottom: var(--space-lg);
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .tabs::-webkit-scrollbar { display: none; }
+        .tab {
+            flex-shrink: 0;
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            padding: 12px 18px;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--warm-gray);
+            cursor: pointer;
+            transition: color var(--transition-base), border-color var(--transition-base);
+            white-space: nowrap;
+        }
+        .tab:hover { color: var(--black); }
+        .tab.active { color: var(--black); border-bottom-color: var(--accent); }
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+        .section-meta {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin: calc(-1 * var(--space-sm)) 0 var(--space-md);
+        }
+
+        /* Tarifs (onglet Financement) */
+        .tarifs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-sm); }
+        .tarif-card {
+            background: var(--light-beige);
+            border: 1px solid var(--warm-beige);
+            border-radius: 12px;
+            padding: var(--space-md);
+        }
+        .tarif-label { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: var(--warm-gray); margin-bottom: 6px; }
+        .tarif-value { font-family: var(--font-heading); font-size: 1.8rem; color: var(--black); line-height: 1.1; margin-bottom: 8px; }
+        .tarif-value small { font-family: var(--font-body); font-size: 0.8rem; color: var(--warm-gray); }
+        .tarif-card p { font-size: 0.9rem; color: var(--text-dark); line-height: 1.6; }
+        .tarif-perimetre { margin-top: var(--space-md); background: var(--light-beige); border: 1px solid var(--warm-beige); border-radius: 12px; padding: var(--space-md); }
+        .tarif-perimetre .pedagogy-title { margin-bottom: var(--space-xs); }
+        .tarif-perimetre p { font-size: 0.92rem; line-height: 1.7; color: var(--text-dark); }
+        .tarif-perimetre p + p { margin-top: 6px; }
+        .tarif-delais { margin-top: var(--space-sm); padding-top: var(--space-sm); border-top: 1px solid var(--warm-beige); }
+        @media (max-width: 640px) { .tarifs-grid { grid-template-columns: 1fr; } }
+
+        /* Avis à chaud (onglet Avis et résultats) */
+        .avis-box {
+            background: var(--light-beige);
+            border: 1px solid var(--warm-beige);
+            border-radius: 12px;
+            padding: var(--space-lg);
+        }
+        .avis-box .avis-header { margin-bottom: var(--space-md); }
+        .avis-periode { font-size: 0.85rem; color: var(--warm-gray); line-height: 1.6; margin-bottom: var(--space-md); }
+        .avis-box .avis-list { margin-top: var(--space-md); }
+        .avis-vide { font-size: 0.9rem; color: var(--warm-gray); }
+
         /* Résultats (indicateur 2) */
         .resultats-box {
             background: var(--light-beige);
@@ -781,7 +851,7 @@
         }
         .resultats-grille {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(150px, 220px));
             gap: var(--space-sm);
         }
         .resultat-carte {
@@ -1264,40 +1334,24 @@
                 </div>
             </section>
 
-            <!-- A qui s'adresse cette formation -->
-            <section class="section">
-                <h2 class="section-title">À qui s'adresse cette formation ?</h2>
-                <div class="audience-grid">
-                    <div class="audience-column">
-                        <h4>
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                            </svg>
-                            Pour qui
-                        </h4>
-                        <ul class="audience-list"><li><span class="bullet">●</span> Dirigeants et membres de CODIR/COMEX</li>
-<li><span class="bullet">●</span> Managers et chefs de projet transformation</li>
-<li><span class="bullet">●</span> RH et responsables conduite du changement</li>
-<li><span class="bullet">●</span> Consultants accompagnant des transformations</li></ul>
-                    </div>
-                    <div class="audience-column">
-                        <h4>
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
-                            </svg>
-                            Prérequis
-                        </h4>
-                        <p class="prerequis-text">
-                            <span class="bullet">●</span>
-                            Être en situation de piloter ou d&#x27;accompagner une transformation (projet, équipe, organisation). Aucun prérequis technique en IA.
-                        </p>
-                    </div>
-                </div>
-            </section>
+            <!-- ============================================
+                 ONGLETS — tout le contenu reste dans la page
+                 (les onglets masquent, ils ne retirent rien) :
+                 moteurs de recherche et auditeur voient tout.
+                 ============================================ -->
+            <nav class="tabs" role="tablist" aria-label="Sections de la fiche formation">
+                <button class="tab active" role="tab" data-tab="programme" aria-selected="true">Programme</button>
+                <button class="tab" role="tab" data-tab="pour-qui" aria-selected="false">Pour qui ?</button>
+                <button class="tab" role="tab" data-tab="pedagogie" aria-selected="false">Pédagogie et évaluation</button>
+                <button class="tab" role="tab" data-tab="financement" aria-selected="false">Financement</button>
+                <button class="tab" role="tab" data-tab="avis" aria-selected="false">Avis et résultats</button>
+            </nav>
 
-            <!-- Programme de la formation -->
-            <section class="section">
-                <h2 class="section-title">Le programme de la formation</h2>
+            <!-- ───────── Onglet 1 : Programme ───────── -->
+            <div class="tab-panel active" id="programme" role="tabpanel">
+                <section class="section">
+                    <h2 class="section-title">Le programme de la formation</h2>
+                    <p class="section-meta">2 jours (14 heures) · programme mis à jour le 06/07/2026</p>
                 <div class="programme-phase">
                     <div class="phase-header">
                         <span class="phase-number">01</span>
@@ -1350,25 +1404,111 @@
                         </ul>
                     </div>
                 </div>
-            </section>
+                </section>
 
-            <!-- Objectifs -->
-            <section class="section">
-                <h2 class="section-title">Les objectifs de la formation</h2>
-                <div class="objectifs-box">
-                    <p class="objectifs-intro">À l'issue de cette formation, vous serez capable de :</p>
-                    <ul class="objectifs-list">                        <li><span class="check">✓</span><span>Analyser les impacts d&#x27;une transformation IA sur les métiers, les compétences et les équilibres d&#x27;équipe</span></li>
+                <section class="section">
+                    <h2 class="section-title">Les points forts de la formation</h2>
+                    <ul class="points-forts-list"><li><span class="chevron">›</span><span>Chaque participant travaille sur sa transformation réelle, diagnostic à l&#x27;appui</span></li>
+<li><span class="chevron">›</span><span>Apports croisés des neurosciences du changement et des méthodes de conduite de projet</span></li>
+<li><span class="chevron">›</span><span>Une réponse construite aux peurs spécifiques liées à l&#x27;IA : remplacement, surveillance, déqualification</span></li>
+<li><span class="chevron">›</span><span>Une feuille de route séquencée avec quick wins et indicateurs, utilisable dès le retour</span></li>
+<li><span class="chevron">›</span><span>Groupe limité à 10 participants</span></li></ul>
+
+                    <!-- Qualité Qualiopi -->
+                    <div class="quality-box">
+                        <div class="quality-icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                            </svg>
+                        </div>
+                        <div class="quality-content">
+                            <h4>Qualité des formations</h4>
+                            <p>Formation certifiée Qualiopi</p>
+                            <a href="#avis" data-open-tab="avis">Nos résultats et notre méthode de calcul</a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- ───────── Onglet 2 : Pour qui ? ───────── -->
+            <div class="tab-panel" id="pour-qui" role="tabpanel">
+                <section class="section">
+                    <h2 class="section-title">À qui s'adresse cette formation ?</h2>
+                    <div class="audience-grid">
+                        <div class="audience-column">
+                            <h4>
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                </svg>
+                                Pour qui
+                            </h4>
+                            <ul class="audience-list"><li><span class="bullet">●</span> Dirigeants et membres de CODIR/COMEX</li>
+<li><span class="bullet">●</span> Managers et chefs de projet transformation</li>
+<li><span class="bullet">●</span> RH et responsables conduite du changement</li>
+<li><span class="bullet">●</span> Consultants accompagnant des transformations</li></ul>
+                        </div>
+                        <div class="audience-column">
+                            <h4>
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                                </svg>
+                                Prérequis
+                            </h4>
+                            <p class="prerequis-text">
+                                <span class="bullet">●</span>
+                                Être en situation de piloter ou d&#x27;accompagner une transformation (projet, équipe, organisation). Aucun prérequis technique en IA.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">Les objectifs de la formation</h2>
+                    <div class="objectifs-box">
+                        <p class="objectifs-intro">À l'issue de cette formation, vous serez capable de :</p>
+                        <ul class="objectifs-list">                        <li><span class="check">✓</span><span>Analyser les impacts d&#x27;une transformation IA sur les métiers, les compétences et les équilibres d&#x27;équipe</span></li>
                         <li><span class="check">✓</span><span>Identifier les mécanismes de résistance au changement (apports neurosciences) et y répondre avec justesse</span></li>
                         <li><span class="check">✓</span><span>Construire un récit de transformation mobilisateur et une communication adaptée à chaque public</span></li>
                         <li><span class="check">✓</span><span>Bâtir une feuille de route de conduite du changement : acteurs, étapes, quick wins, indicateurs</span></li>
                         <li><span class="check">✓</span><span>Animer les rituels d&#x27;accompagnement : ateliers d&#x27;embarquement, gestion des irritants, célébration des progrès</span></li></ul>
-                </div>
-            </section>
+                    </div>
+                </section>
 
-            <!-- Pédagogie : modalités, méthodes mobilisées, moyens et outils, intervenante (ind. 1) -->
-            <section class="section">
-                <h2 class="section-title">Pédagogie</h2>
-                <div class="pedagogy-box">
+                <!-- Modalités et délais d'accès (ind. 1) -->
+                <section class="section" id="acces">
+                    <h2 class="section-title">Modalités et délais d'accès</h2>
+                    <div class="acces-box">
+                        <div class="acces-bloc">
+                            <h3 class="pedagogy-title">Comment s'inscrire</h3>
+                        <p>Inscription sur demande par email à contact@lauraballo.com ou par téléphone. Un échange préalable permet d&#x27;analyser vos besoins et, en intra, d&#x27;adapter la formation à votre contexte. L&#x27;inscription est confirmée par la signature d&#x27;un devis et d&#x27;une convention de formation (entreprise) ou d&#x27;un contrat de formation (particulier). Chaque participant reçoit ensuite sa convocation et un questionnaire de positionnement à compléter avant la formation.</p>
+                        </div>
+                        <div class="acces-bloc">
+                            <h3 class="pedagogy-title">Délais d'accès</h3>
+                            <p>En inter-entreprises, inscription possible jusqu&#x27;à 15 jours avant le démarrage, sous réserve de places disponibles. En intra-entreprise, comptez 3 à 6 semaines entre la validation du devis et la première journée, le temps d&#x27;adapter la formation à votre contexte.</p>
+                        </div>
+                        <p class="acces-contact">Contact : <a href="mailto:"></a> · <a href="tel:"></a></p>
+                    </div>
+                </section>
+
+                <!-- Accessibilité (ind. 26) — texte géré dans 🏛️ Mon organisme, référente handicap nommée -->
+                <section class="section" id="accessibilite">
+                    <h2 class="section-title">Accessibilité</h2>
+                    <div class="accessibilite-box">
+                        <span class="accessibilite-icon">♿</span>
+                        <div class="accessibilite-content">
+                            <h4>Formation accessible aux personnes en situation de handicap</h4>
+                        <p>Nos formations sont accessibles aux personnes en situation de handicap. Contactez notre référente handicap, Laura Ballo (contact@lauraballo.com), avant votre inscription pour étudier ensemble les adaptations possibles : supports adaptés, aménagement des temps de travail et de passage, accessibilité des locaux. Si besoin, nous vous orientons vers les partenaires spécialisés (Agefiph, Cap emploi).</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- ───────── Onglet 3 : Pédagogie et évaluation ───────── -->
+            <div class="tab-panel" id="pedagogie" role="tabpanel">
+                <!-- Pédagogie : modalités, méthodes mobilisées, moyens et outils, intervenante (ind. 1) -->
+                <section class="section">
+                    <h2 class="section-title">Pédagogie</h2>
+                    <div class="pedagogy-box">
                     <div class="pedagogy-bloc">
                         <h3 class="pedagogy-title">Modalités pédagogiques</h3>
                         <p class="pedagogy-text">Formation hybride (présentiel ou distanciel synchrone), groupe limité à 10 participants. Pédagogie ancrée dans les projets réels : chaque participant travaille sur sa propre transformation en cours.</p>
@@ -1385,92 +1525,74 @@
                         <h3 class="pedagogy-title">Intervenante</h3>
                         <p class="pedagogy-text">Formatrice et coach en conduite du changement, expérience confirmée en accompagnement de dirigeants et d&#x27;équipes sur les transformations liées à l&#x27;IA.</p>
                     </div>
-                </div>
-            </section>
+                    </div>
+                </section>
 
-            <!-- Évaluation : modalités d'évaluation et sanction (ind. 1 et 11) -->
-            <section class="section">
-                <h2 class="section-title">Évaluation</h2>
-                <div class="evaluation-box">
-                    <ul class="evaluation-list">
+                <!-- Évaluation : modalités d'évaluation et sanction (ind. 1 et 11) -->
+                <section class="section">
+                    <h2 class="section-title">Évaluation</h2>
+                    <div class="evaluation-box">
+                        <ul class="evaluation-list">
                         <li><span class="bullet"></span><span>Test de positionnement à l&#x27;entrée</span></li>
                         <li><span class="bullet"></span><span>évaluations formatives continues</span></li>
                         <li><span class="bullet"></span><span>étude de cas et QCM en fin de formation</span></li>
                         <li><span class="bullet"></span><span>satisfaction à chaud</span></li>
                         <li><span class="bullet"></span><span>évaluation à froid à J+90</span></li>
-                    </ul>
-                    <p class="evaluation-sanction"><strong>Sanction de la formation :</strong> Attestation de fin de formation mentionnant les objectifs, la nature, la durée de l&#x27;action et les résultats de l&#x27;évaluation des acquis.</p>
-                </div>
-            </section>
-
-
-            <!-- Points forts -->
-            <section class="section">
-                <h2 class="section-title">Les points forts de la formation</h2>
-                <ul class="points-forts-list"><li><span class="chevron">›</span><span>Chaque participant travaille sur sa transformation réelle, diagnostic à l&#x27;appui</span></li>
-<li><span class="chevron">›</span><span>Apports croisés des neurosciences du changement et des méthodes de conduite de projet</span></li>
-<li><span class="chevron">›</span><span>Une réponse construite aux peurs spécifiques liées à l&#x27;IA : remplacement, surveillance, déqualification</span></li>
-<li><span class="chevron">›</span><span>Une feuille de route séquencée avec quick wins et indicateurs, utilisable dès le retour</span></li>
-<li><span class="chevron">›</span><span>Groupe limité à 10 participants</span></li></ul>
-
-                <!-- Qualité Qualiopi -->
-                <div class="quality-box">
-                    <div class="quality-icon">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
-                        </svg>
+                        </ul>
+                        <p class="evaluation-sanction"><strong>Sanction de la formation :</strong> Attestation de fin de formation mentionnant les objectifs, la nature, la durée de l&#x27;action et les résultats de l&#x27;évaluation des acquis.</p>
                     </div>
-                    <div class="quality-content">
-                        <h4>Qualité des formations</h4>
-                        <p>Formation certifiée Qualiopi</p>
-                        <a href="/resultats/">Nos résultats et notre méthode de calcul</a>
-                    </div>
-                </div>
-            </section>
+                </section>
+            </div>
 
-            <!-- Solutions de financement -->
-            <section class="section">
-                <h2 class="section-title">Les solutions de financement</h2>
-                <div class="financement-box">
-                    <h3 class="financement-title">OPCO et financement de la formation</h3>
-                    <p class="financement-text">
-                        Cette formation peut être prise en charge par votre OPCO (Opérateur de Compétences). 
-                        Les dispositifs de financement sont accessibles selon les critères de prise en charge de chaque OPCO.
-                    </p>
-                    <p class="financement-text">
-                        Pour plus d'information, nous vous accompagnons dans le choix de vos formations et la gestion administrative.
-                        <a href="#">En savoir plus sur les OPCO</a>
-                    </p>
-                </div>
-            </section>
+            <!-- ───────── Onglet 4 : Financement ───────── -->
+            <div class="tab-panel" id="financement" role="tabpanel">
+                <section class="section">
+                    <h2 class="section-title">Tarifs</h2>
+                    <div class="tarifs-grid">
+                        <div class="tarif-card">
+                            <div class="tarif-label">Inter-entreprise</div>
+                            <div class="tarif-value">1 900 € <small>HT / participant</small></div>
+                            <p>Inscription individuelle à une session programmée. 2 jours (14 heures).</p>
+                        </div>
+                        <div class="tarif-card">
+                            <div class="tarif-label">Intra-entreprise</div>
+                            <div class="tarif-value">4 500 € <small>HT / groupe</small></div>
+                            <p>Forfait pour un groupe de 10 personnes maximum, dans vos locaux ou à distance.</p>
+                        </div>
+                    </div>
+                    <div class="tarif-perimetre">
+                        <h3 class="pedagogy-title">Ce que comprend le forfait intra</h3>
+<p>Compris : l&#x27;animation dans vos locaux pour un groupe de 10 personnes maximum, l&#x27;adaptation des mises en situation à votre contexte de transformation, les supports pédagogiques remis à chaque participant, les questionnaires de positionnement, d&#x27;évaluation et de satisfaction, ainsi que la convention, les convocations et les attestations de fin de formation.</p>
+<p>Non compris : les frais de déplacement et d&#x27;hébergement de la formatrice, la location d&#x27;une salle extérieure et le matériel audiovisuel spécifique.</p>
+                        <p class="tarif-delais"><strong>Délais d'accès :</strong> En inter-entreprises, inscription possible jusqu&#x27;à 15 jours avant le démarrage, sous réserve de places disponibles. En intra-entreprise, comptez 3 à 6 semaines entre la validation du devis et la première journée, le temps d&#x27;adapter la formation à votre contexte.</p>
+                    </div>
+                </section>
 
-            <!-- Modalités et délais d'accès (ind. 1) -->
-            <section class="section" id="acces">
-                <h2 class="section-title">Modalités et délais d'accès</h2>
-                <div class="acces-box">
-                    <div class="acces-bloc">
-                        <h3 class="pedagogy-title">Comment s'inscrire</h3>
-                        <p>Inscription sur demande par email à contact@lauraballo.com ou par téléphone. Un échange préalable permet d&#x27;analyser vos besoins et, en intra, d&#x27;adapter la formation à votre contexte. L&#x27;inscription est confirmée par la signature d&#x27;un devis et d&#x27;une convention de formation (entreprise) ou d&#x27;un contrat de formation (particulier). Chaque participant reçoit ensuite sa convocation et un questionnaire de positionnement à compléter avant la formation.</p>
+                <section class="section">
+                    <h2 class="section-title">Les solutions de financement</h2>
+                    <div class="financement-box">
+                        <h3 class="financement-title">OPCO et financement de la formation</h3>
+                        <p class="financement-text">
+                            Cette formation peut être prise en charge par votre OPCO (Opérateur de Compétences).
+                            Les dispositifs de financement sont accessibles selon les critères de prise en charge de chaque OPCO.
+                        </p>
+                        <p class="financement-text">
+                            Nous vous accompagnons dans le montage du dossier de prise en charge et la gestion administrative.
+                            <a href="#" onclick="openModalDevis(); return false;">Demander un devis et un accompagnement OPCO</a>
+                        </p>
                     </div>
-                    <div class="acces-bloc">
-                        <h3 class="pedagogy-title">Délais d'accès</h3>
-                        <p>En inter-entreprises, inscription possible jusqu&#x27;à 15 jours avant le démarrage, sous réserve de places disponibles. En intra-entreprise, comptez 3 à 6 semaines entre la validation du devis et la première journée, le temps d&#x27;adapter la formation à votre contexte.</p>
-                    </div>
-                    <p class="acces-contact">Contact : <a href="mailto:"></a> · <a href="tel:"></a></p>
-                </div>
-            </section>
+                </section>
+            </div>
 
-            <!-- Accessibilité (ind. 26) — texte géré dans 🏛️ Mon organisme, référente handicap nommée -->
-            <section class="section" id="accessibilite">
-                <h2 class="section-title">Accessibilité</h2>
-                <div class="accessibilite-box">
-                    <span class="accessibilite-icon">♿</span>
-                    <div class="accessibilite-content">
-                        <h4>Formation accessible aux personnes en situation de handicap</h4>
-                        <p>Nos formations sont accessibles aux personnes en situation de handicap. Contactez notre référente handicap, Laura Ballo (contact@lauraballo.com), avant votre inscription pour étudier ensemble les adaptations possibles : supports adaptés, aménagement des temps de travail et de passage, accessibilité des locaux. Si besoin, nous vous orientons vers les partenaires spécialisés (Agefiph, Cap emploi).</p>
-                    </div>
-                </div>
-            </section>
+            <!-- ───────── Onglet 5 : Avis et résultats ───────── -->
+            <div class="tab-panel" id="avis" role="tabpanel">
+                <section class="section">
+                    <h2 class="section-title">Les avis sur la formation</h2>
+                    <div class="avis-box"><p class="avis-vide">Pas encore d'avis sur les 12 derniers mois : les premiers questionnaires de satisfaction à chaud seront publiés ici dès la prochaine session terminée.</p></div>
+                </section>
+
+
+            </div>
 
             <p class="mentions-organisme">Laura Ballo Coaching — organisme de formation enregistré sous le numéro de déclaration d'activité  auprès du Préfet de la région Auvergne-Rhône-Alpes. Cet enregistrement ne vaut pas agrément de l'État.</p>
 
@@ -1607,10 +1729,6 @@
 
     </div>
 
-    <!-- ============================================
-         AVIS CLIENTS
-         ============================================ -->
-    
 
     <!-- ============================================
          MODALE PÉRIMÈTRE DU FORFAIT INTRA
@@ -1991,6 +2109,51 @@
         /* ============================================
            TABS INTER / INTRA
            ============================================ */
+        // ── Onglets : activation, ancre dans l'URL, liens internes (#avis…) ──
+        (function () {
+            var tabs = document.querySelectorAll('.tab');
+            var panels = document.querySelectorAll('.tab-panel');
+            function openTab(id, scroll) {
+                var found = false;
+                panels.forEach(function (p) { p.classList.toggle('active', p.id === id); if (p.id === id) found = true; });
+                if (!found) return false;
+                tabs.forEach(function (t) {
+                    var on = t.dataset.tab === id;
+                    t.classList.toggle('active', on);
+                    t.setAttribute('aria-selected', on ? 'true' : 'false');
+                });
+                if (scroll) {
+                    var nav = document.querySelector('.tabs');
+                    if (nav) nav.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                return true;
+            }
+            tabs.forEach(function (t) {
+                t.addEventListener('click', function () {
+                    openTab(t.dataset.tab, false);
+                    history.replaceState(null, '', '#' + t.dataset.tab);
+                });
+            });
+            document.querySelectorAll('[data-open-tab]').forEach(function (a) {
+                a.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    openTab(a.dataset.openTab, true);
+                    history.replaceState(null, '', '#' + a.dataset.openTab);
+                });
+            });
+            // Une ancre vers un élément situé dans un onglet ouvre cet onglet (#acces, #accessibilite…)
+            function fromHash() {
+                var id = (location.hash || '').slice(1);
+                if (!id) return;
+                if (openTab(id, false)) return;
+                var el = document.getElementById(id);
+                var panel = el && el.closest('.tab-panel');
+                if (panel && openTab(panel.id, false)) el.scrollIntoView();
+            }
+            fromHash();
+            window.addEventListener('hashchange', fromHash);
+        })();
+
         function switchTarif(type) {
             // Update tabs
             document.querySelectorAll('.tarif-tab').forEach(tab => {
