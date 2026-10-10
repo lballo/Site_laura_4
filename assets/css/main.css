@@ -220,7 +220,7 @@ img {
 
 .hero h1 {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(30px, 6vw, 60px);
+  font-size: clamp(28px, 5vw, 50px);
   color: var(--white);
   font-weight: 500;
   line-height: 1.15;
@@ -1117,7 +1117,7 @@ img {
 @media (max-width: 768px) {
   .hero { padding: 60px 20px 50px; min-height: 520px; background-attachment: scroll; }
   .hero-content { margin-left: 0; padding-top: 30px; }
-  .hero h1 { font-size: clamp(28px, 8vw, 42px); }
+  .hero h1 { font-size: clamp(26px, 7vw, 38px); }
   .hero-subtitle { font-size: 16px; }
   .hero-cta { flex-direction: column; align-items: flex-start; }
   .trust-bar { padding: 24px 20px; }
