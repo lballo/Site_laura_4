@@ -407,6 +407,33 @@ def extract_property(page, prop_name, prop_type="rich_text"):
 # ═════════════════════════════════════════════════════════
 # GÉNÉRATION HTML + JSON
 # ═════════════════════════════════════════════════════════
+# Encart quiz hypersensibilité : affiché en fin d'article quand l'article porte
+# le tag « hypersensibilite » ET parle explicitement d'hypersensibilité dans son
+# titre ou son slug (évite de l'afficher sur des articles leadership simplement tagués).
+QUIZ_CTA_HTML = """  <!-- Quiz hypersensibilité (ajouté aux articles sur l'hypersensibilité) -->
+  <section class="cta-quiz">
+    <div class="cta-quiz-inner">
+      <span class="cta-accompagnement-label">Quiz gratuit</span>
+      <h3 class="cta-accompagnement-title">Et vous, êtes-vous hypersensible&nbsp;?</h3>
+      <p class="cta-accompagnement-text">30 questions pour découvrir votre profil de sensibilité et explorer vos 5 dimensions émotionnelles. Vous recevez ensuite vos résultats détaillés et des ressources personnalisées.</p>
+      <a href="/quizz/hypersensibilite" class="cta-accompagnement-link">
+        Faire le quiz
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+"""
+
+
+def quiz_cta_html(data):
+    tags = data.get("tags_slugs") or []
+    sujet = f"{data.get('slug', '')} {data.get('title', '')}".lower()
+    if "hypersensibilite" in tags and "hypersens" in sujet:
+        return QUIZ_CTA_HTML
+    return ""
+
+
 def generate_html(template, data):
     output = template
     replacements = {
@@ -423,6 +450,7 @@ def generate_html(template, data):
         "{{DATE_FORMATTED}}": data["date_formatted"],
         "{{READING_TIME}}": data["reading_time"],
         "{{CONTENT}}": data["content_html"],
+        "{{QUIZ_CTA}}": quiz_cta_html(data),
         "{{IMAGE_URL}}": data["image"],
         "{{SLUG}}": data["slug"],
         "{{SEARCH_KEYWORDS_JS}}": json.dumps(data["tags_slugs"], ensure_ascii=False),

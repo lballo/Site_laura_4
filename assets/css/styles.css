@@ -818,6 +818,29 @@ a {
 
 /* Footer: voir footer.css */
 
+/* ==================== CTA QUIZ HYPERSENSIBILITÉ (articles sur l'hypersensibilité) ==================== */
+.cta-quiz {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 0 60px;
+}
+
+.cta-quiz-inner {
+  background: var(--beige-almost-white);
+  border-radius: 12px;
+  padding: 52px 48px;
+  text-align: center;
+}
+
+.cta-quiz .cta-accompagnement-text { margin-bottom: 28px; }
+.cta-quiz .cta-accompagnement-link:hover { color: var(--accent); }
+.cta-quiz .cta-accompagnement-link:hover svg { transform: translateX(4px); }
+
+@media (max-width: 768px) {
+  .cta-quiz { padding: 0 20px; margin: 40px auto; }
+  .cta-quiz-inner { padding: 40px 24px; }
+}
+
 /* ==================== CTA ACCOMPAGNEMENT (linking interne) ==================== */
 .cta-accompagnement {
   max-width: 900px;
