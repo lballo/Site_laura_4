@@ -220,24 +220,6 @@ details[open] .faq-icon{transform:rotate(45deg);}
 }
 @media (prefers-reduced-motion:reduce){.eq-mark{transition:none !important;} .eq:not(.in) .eq-mark{left:50%;}}
 
-/* ===== Parcours 6 mois ===== */
-.pres-path-list{list-style:none;margin:3rem 0 0;padding:0;display:grid;gap:2rem;position:relative;}
-.pres-path-item{display:grid;grid-template-columns:64px minmax(0,1fr);column-gap:1.25rem;align-items:start;}
-.pres-path-marker{width:64px;height:64px;border-radius:1rem;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:800;background:#A83932;color:#fff;box-shadow:0 0 0 8px rgba(168,57,50,.08);}
-.pres-path-card{padding:1.75rem;border-radius:1.5rem;background:var(--light-beige);}
-.pres-path-kicker{display:block;margin-bottom:.4rem;font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#A83932;}
-.pres-path-title{font-family:'Abhaya Libre',Georgia,serif;font-weight:700;font-size:1.75rem;line-height:1.15;color:var(--brown-d);}
-.pres-path-text{margin:.75rem 0 0;font-size:1.0625rem;line-height:1.7;color:var(--brown-m);}
-.pres-path-ia{margin-top:1rem;padding:.85rem 1rem;border-radius:.75rem;background:#fff;border:1px dashed rgba(168,57,50,.35);font-size:.9375rem;line-height:1.6;color:var(--brown-d);}
-.pres-path-ia b{color:#A83932;}
-@media (min-width:768px){
-  .pres-path-item{grid-template-columns:minmax(0,1fr) 64px minmax(0,1fr);column-gap:2.5rem;}
-  .pres-path-marker{grid-column:2;}
-  .pres-path-item:nth-child(odd) .pres-path-card{grid-column:1;}
-  .pres-path-item:nth-child(even) .pres-path-card{grid-column:3;}
-  .pres-path-card{padding:2rem;}
-  .pres-path-title{font-size:2rem;}
-}
 
 @media (max-width: 767px){
   section{padding-left:1rem !important;padding-right:1rem !important;}
@@ -249,7 +231,9 @@ details[open] .faq-icon{transform:rotate(45deg);}
   h2{font-size:1.75rem !important;line-height:1.3 !important;}
   h3{font-size:1.125rem !important;}
   p{font-size:1rem !important;line-height:1.65 !important;}
-  .pres-path-title{font-size:1.5rem !important;}
+  .pth .pth-name{font-size:1.625rem !important;line-height:1.1 !important;}
+  .pth .pth-eyebrow, .pth .pth-period{font-size:12px !important;line-height:1.3 !important;}
+  .pth .pth-ia{font-size:14px !important;line-height:1.6 !important;}
   details summary{gap:1rem !important;padding:1.25rem 0 !important;}
   details summary > span:first-child{font-size:1.0625rem !important;flex:0 1 85% !important;}
   details > div{max-width:100% !important;font-size:1rem !important;line-height:1.65 !important;padding-bottom:1.5rem !important;}
@@ -259,6 +243,110 @@ details[open] .faq-icon{transform:rotate(45deg);}
 @media (min-width: 768px) and (max-width: 1023px){
   .py-24{padding-top:4rem;padding-bottom:4rem;}
 }
+</style>
+<style>
+/* ===== Parcours 6 mois : l'ascension (classes pth-) ===== */
+/* ---------- Socle commun (préfixe pth-) ---------- */
+.pth{
+  /* Réglage : hauteur de l'en-tête fixe du site + un peu d'air */
+  --pth-sticky-top:100px;
+
+  --pth-red:#A83932; --pth-red-hover:#8C2E28;
+  --pth-ocre:#C4A574; --pth-ocre-soft:#E0D3BD; --pth-ocre-pale:#F3ECE1;
+  --pth-cream:#FAF4EF; --pth-line:#E8DDD6;
+  --pth-ink:#2C2C2C; --pth-muted:#6C6059; --pth-brown:#3D3128;
+  --pth-white:#FFFFFF; --pth-bg:#FFFFFF;
+  --pth-display:'Playfair Display', Georgia, 'Times New Roman', serif;
+  --pth-step:'Abhaya Libre', Georgia, 'Times New Roman', serif;
+  --pth-body:'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  container-type:inline-size; container-name:pth;
+  position:relative;
+  background:var(--pth-bg); color:var(--pth-ink); font-family:var(--pth-body);
+  padding-left:max(20px, env(safe-area-inset-left, 0px));
+  padding-right:max(20px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased;
+}
+.pth *, .pth *::before, .pth *::after{box-sizing:border-box}
+.pth [hidden]{display:none !important}
+.pth-inner{max-width:1120px; margin-inline:auto; padding-block:96px; display:flex; flex-direction:column; gap:56px}
+
+.pth-head{display:flex; flex-direction:column; gap:16px; max-width:680px}
+.pth-eyebrow{margin:0; font:600 12px/1.2 var(--pth-body); letter-spacing:.16em; text-transform:uppercase; color:var(--pth-red)}
+.pth-title{margin:0; font-family:var(--pth-display); font-weight:700; font-size:clamp(2rem, 1.3rem + 2.6vw, 3rem); font-size:clamp(2rem, 1.2rem + 3.2cqi, 3rem); line-height:1.1; letter-spacing:-.01em; color:var(--pth-ink); text-wrap:balance}
+.pth-title-accent{color:var(--pth-red)}
+.pth-intro{margin:0; font-size:17px; line-height:1.7; color:var(--pth-muted); max-width:60ch; text-wrap:pretty}
+
+.pth-period{margin:0; font:600 12px/1.3 var(--pth-body); letter-spacing:.14em; text-transform:uppercase; color:var(--pth-muted); font-variant-numeric:tabular-nums}
+.pth-name{margin:0; font-family:var(--pth-step); font-weight:600; font-size:clamp(1.625rem, 1.2rem + 1.4vw, 2.25rem); font-size:clamp(1.625rem, 1.2rem + 1.4cqi, 2.25rem); line-height:1.1; color:var(--pth-ink); text-wrap:balance}
+.pth-text{margin:0; font-size:16.5px; line-height:1.75; color:var(--pth-ink); text-wrap:pretty}
+
+/* Appui IA : présent, mais en retrait */
+.pth-ia{margin:0; padding-top:14px; border-top:1px dashed var(--pth-ocre-soft); font-size:14px; line-height:1.65; color:var(--pth-muted)}
+.pth-ia-label{display:inline-flex; align-items:center; gap:6px; margin-right:4px; font-weight:600; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--pth-brown); vertical-align:1px; white-space:nowrap}
+.pth-ia-label svg{display:block; flex:none; width:14px; height:14px; fill:none; stroke:var(--pth-ocre); stroke-width:1.6; stroke-linejoin:round}
+
+/* Bouton pilule */
+.pth-cta-wrap{display:flex}
+.pth-cta{display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:52px; padding:0 30px; border-radius:999px; background:var(--pth-red); color:var(--pth-white); font:600 15px/1.2 var(--pth-body); text-align:center; text-decoration:none; transition:background-color .2s ease}
+.pth-cta svg{display:block; flex:none; width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; transition:transform .2s ease}
+.pth-cta:hover{background:var(--pth-red-hover); color:var(--pth-white)}
+.pth-cta:hover svg{transform:translateX(3px)}
+.pth-cta:focus-visible{outline:3px solid var(--pth-ocre); outline-offset:3px}
+
+@container pth (max-width: 600px){
+  .pth-inner{padding-block:64px; gap:40px}
+  .pth-intro, .pth-text{font-size:16px}
+  .pth-cta{width:100%; padding:0 22px}
+}
+
+/* Animations désactivées : version statique, tout reste visible */
+.pth.pth-static *, .pth.pth-static *::before, .pth.pth-static *::after{transition:none !important; animation:none !important}
+@media (prefers-reduced-motion: reduce){
+  .pth *, .pth *::before, .pth *::after{transition:none !important; animation:none !important}
+}
+
+/* ---------- Direction C : l'ascension, de l'ocre au rouge ---------- */
+.pth.pth--c{--pth-bg:#FFFFFF}
+.pth-c-steps{--pth-c-out:16px; --pth-c-rise:0px; list-style:none; margin:0; padding:0; display:flex; flex-direction:column}
+.pth-c-step{position:relative; display:flex; flex-direction:column; gap:16px; min-width:0; margin-right:calc((3 - var(--pth-c-i)) * var(--pth-c-out)); padding:30px 22px 34px; background:var(--pth-c-tint)}
+.pth-c-step--1{--pth-c-i:0; --pth-c:#C4A574; --pth-c-prev:#C4A574; --pth-c-tint:#F8F2EA; --pth-c-w:2px}
+.pth-c-step--2{--pth-c-i:1; --pth-c:#BB815E; --pth-c-prev:#C4A574; --pth-c-tint:#F6ECE6; --pth-c-w:3px}
+.pth-c-step--3{--pth-c-i:2; --pth-c:#B15D48; --pth-c-prev:#BB815E; --pth-c-tint:#F4E5E1; --pth-c-w:4px}
+.pth-c-step--4{--pth-c-i:3; --pth-c:#A83932; --pth-c-prev:#B15D48; --pth-c-tint:#F1DDDB; --pth-c-w:5px}
+/* le palier : une ligne qui s'épaissit d'étape en étape */
+.pth-c-step::before{content:""; position:absolute; left:0; right:0; top:0; height:var(--pth-c-w); background:var(--pth-c); transform-origin:left center}
+.pth-c-head{display:flex; flex-direction:column; gap:8px}
+.pth-c-num{display:block; margin-bottom:6px; font:600 56px/.85 var(--pth-step); color:var(--pth-c); font-variant-numeric:tabular-nums}
+.pth-c-step .pth-ia{border-top-color:rgba(61,49,40,.18)}
+.pth-c-peak{position:absolute; top:calc(var(--pth-c-w) / 2 - 7px); right:-7px; width:14px; height:14px; border-radius:50%; background:var(--pth-red); box-shadow:0 0 0 5px rgba(168,57,50,.16)}
+
+/* Tablette : marches horizontales, qui s'élargissent */
+@container pth (min-width: 600px) and (max-width: 959.98px){
+  .pth--c .pth-c-steps{--pth-c-out:40px}
+  .pth--c .pth-c-step{display:grid; grid-template-columns:190px minmax(0,1fr); column-gap:36px; row-gap:16px; padding:34px 36px 36px}
+  .pth--c .pth-c-head{grid-row:1 / span 2}
+  .pth--c .pth-c-step > .pth-text, .pth--c .pth-c-step > .pth-ia{grid-column:2}
+}
+/* Grand écran : l'escalier monte de gauche à droite */
+@container pth (min-width: 960px){
+  .pth--c .pth-c-steps{display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); align-items:stretch; --pth-c-rise:56px}
+  .pth--c .pth-c-step{margin-right:0; margin-top:calc((3 - var(--pth-c-i)) * var(--pth-c-rise)); padding:30px 24px 36px; --pth-c-delay:calc(var(--pth-c-i) * .5s)}
+  .pth--c .pth-c-step:not(.pth-c-step--1)::after{content:""; position:absolute; left:0; top:0; width:var(--pth-c-w); height:calc(var(--pth-c-rise) + 2px); background:linear-gradient(to top, var(--pth-c-prev), var(--pth-c)); transform-origin:center bottom}
+  .pth--c .pth-c-num{font-size:64px}
+  .pth--c .pth-name{font-size:26px}
+  .pth--c .pth-text{font-size:15px; line-height:1.7}
+  .pth--c .pth-ia{font-size:13.5px}
+}
+
+/* La montée se dessine quand la section arrive à l'écran (JS actif) */
+.pth--c .pth-c-step{transition:opacity .7s ease, transform .8s cubic-bezier(.2,.7,.2,1); transition-delay:var(--pth-c-delay, 0s)}
+.pth--c .pth-c-step::before{transition:transform .8s cubic-bezier(.6,0,.2,1); transition-delay:calc(var(--pth-c-delay, 0s) + .2s)}
+.pth--c .pth-c-step::after{transition:transform .4s ease-in; transition-delay:var(--pth-c-delay, 0s)}
+.pth--c .pth-c-peak{transition:transform .5s cubic-bezier(.3,1.6,.5,1), opacity .3s ease; transition-delay:calc(var(--pth-c-delay, 0s) + .9s)}
+.pth--c.pth-js:not(.pth-static) .pth-c-step:not(.pth-is-in){opacity:0; transform:translateY(32px)}
+.pth--c.pth-js:not(.pth-static) .pth-c-step:not(.pth-is-in)::before{transform:scaleX(0)}
+.pth--c.pth-js:not(.pth-static) .pth-c-step:not(.pth-is-in)::after{transform:scaleY(0)}
+.pth--c.pth-js:not(.pth-static) .pth-c-step:not(.pth-is-in) .pth-c-peak{opacity:0; transform:scale(0)}
 </style>
 </head>
 <body>
@@ -520,53 +608,56 @@ details[open] .faq-icon{transform:rotate(45deg);}
 </section>
 
 <!-- PARCOURS 6 MOIS -->
-<section id="parcours" class="py-24 bg-white relative overflow-hidden">
-  <div class="max-w-5xl mx-auto px-6 lg:px-12">
-    <div class="text-center max-w-3xl mx-auto reveal">
-      <span class="block mb-4" style="font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#A83932;">Le parcours</span>
-      <h2 class="title-playfair mb-6" style="font-weight:700;font-size:clamp(2rem,4vw,3rem);line-height:1.2;color:var(--brown-d);">Six mois, <span style="color:#A83932;">quatre étapes</span></h2>
-      <p style="color:var(--brown-m);font-size:1.25rem;line-height:1.7;">À chaque étape, deux fils travaillés ensemble : votre pouvoir personnel et vos compétences de direction. L'IA vient en appui, là où elle vous fait gagner du temps ou de la clarté.</p>
-    </div>
-    <ol class="pres-path-list">
-      <li class="pres-path-item reveal">
-        <span class="pres-path-marker" aria-hidden="true">01</span>
-        <div class="pres-path-card">
-          <span class="pres-path-kicker">Mois 1 à 2</span>
-          <h3 class="pres-path-title">Libération</h3>
-          <p class="pres-path-text">Repérer les schémas automatiques et les fonctionnements inconscients qui vous poussent à toujours faire plus, plaire ou contrôler. Les dénouer, pour retrouver votre liberté d'être. Sortir des jeux de pouvoir pour incarner le vôtre. Faire le tri dans votre agenda.</p>
-          <p class="pres-path-ia"><b>Appui IA :</b> diagnostic de votre temps. Une analyse assistée de votre agenda et de vos sollicitations pour voir où part réellement votre énergie.</p>
-        </div>
-      </li>
-      <li class="pres-path-item reveal">
-        <span class="pres-path-marker" aria-hidden="true">02</span>
-        <div class="pres-path-card">
-          <span class="pres-path-kicker">Mois 2 à 3</span>
-          <h3 class="pres-path-title">Cap et vision</h3>
-          <p class="pres-path-text">Vous relier à vos émotions pour entendre vos besoins et ceux de l'organisation. Clarifier votre rôle et votre essentiel. Formuler votre vision : une ambition claire, que vous portez sans notes. Poser vos premières habitudes : énergie, sommeil, temps de recul.</p>
-          <p class="pres-path-ia"><b>Appui IA :</b> l'IA comme partenaire de décision. Analyser des données, construire des scénarios, et vous faire contredire avant un arbitrage important.</p>
-        </div>
-      </li>
-      <li class="pres-path-item reveal">
-        <span class="pres-path-marker" aria-hidden="true">03</span>
-        <div class="pres-path-card">
-          <span class="pres-path-kicker">Mois 3 à 5</span>
-          <h3 class="pres-path-title">Présence et expression</h3>
-          <p class="pres-path-text">Dire non, poser des limites, vous positionner. Courage managérial : mener les conversations difficiles, trancher, annoncer sans dureté. Non-verbal, voix, charisme. Entraînement sur vos vraies prises de parole.</p>
-          <p class="pres-path-ia"><b>Appui IA :</b> simuler un échange délicat avant de le vivre ; analyser vos prises de parole avec Présence AI.</p>
-        </div>
-      </li>
-      <li class="pres-path-item reveal">
-        <span class="pres-path-marker" aria-hidden="true">04</span>
-        <div class="pres-path-card">
-          <span class="pres-path-kicker">Mois 5 à 6</span>
-          <h3 class="pres-path-title">Expansion</h3>
-          <p class="pres-path-text">Performer autrement : pas sur le mode du soi parfait ou du besoin de plaire, mais en orientant votre énergie, avec plaisir et discipline. Ancrer les habitudes qui soutiennent votre performance (décision, feedback, récupération), déléguer et faire grandir vos équipes. Tenir l'équilibre dans la durée.</p>
-          <p class="pres-path-ia"><b>Appui IA :</b> automatiser ce qui n'a pas besoin de vous (synthèses, comptes rendus, relances, veille) pour vous resituer sur ce qui vous revient.</p>
-        </div>
-      </li>
+<section id="parcours" class="pth pth--c" aria-labelledby="pth-title">
+  <div class="pth-inner">
+    <header class="pth-head">
+      <p class="pth-eyebrow">Le parcours</p>
+      <h2 class="pth-title" id="pth-title">Six mois, <span class="pth-title-accent">quatre étapes</span></h2>
+      <p class="pth-intro">À chaque étape, deux fils travaillés ensemble&nbsp;: votre pouvoir personnel et vos compétences de direction. L'IA vient en appui, là où elle vous fait gagner du temps ou de la clarté.</p>
+    </header>
+
+    <ol class="pth-c-steps">
+        <li class="pth-c-step pth-c-step--1">
+          <div class="pth-c-head">
+            <span class="pth-c-num" aria-hidden="true">01</span>
+            <p class="pth-period">Mois 1 à 2</p>
+            <h3 class="pth-name">Libération</h3>
+          </div>
+          <p class="pth-text">Repérer les schémas automatiques et les fonctionnements inconscients qui vous poussent à toujours faire plus, plaire ou contrôler. Les dénouer, pour retrouver votre liberté d'être. Sortir des jeux de pouvoir pour incarner le vôtre. Faire le tri dans votre agenda.</p>
+          <p class="pth-ia"><span class="pth-ia-label"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3c.6 4.2 2.8 6.4 7 7-4.2.6-6.4 2.8-7 7-.6-4.2-2.8-6.4-7-7 4.2-.6 6.4-2.8 7-7z"/></svg>Appui IA&nbsp;:</span> diagnostic de votre temps. Une analyse assistée de votre agenda et de vos sollicitations pour voir où part réellement votre énergie.</p>
+        </li>
+        <li class="pth-c-step pth-c-step--2">
+          <div class="pth-c-head">
+            <span class="pth-c-num" aria-hidden="true">02</span>
+            <p class="pth-period">Mois 2 à 3</p>
+            <h3 class="pth-name">Cap et vision</h3>
+          </div>
+          <p class="pth-text">Vous relier à vos émotions pour entendre vos besoins et ceux de l'organisation. Clarifier votre rôle et votre essentiel. Formuler votre vision&nbsp;: une ambition claire, que vous portez sans notes. Poser vos premières habitudes&nbsp;: énergie, sommeil, temps de recul.</p>
+          <p class="pth-ia"><span class="pth-ia-label"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3c.6 4.2 2.8 6.4 7 7-4.2.6-6.4 2.8-7 7-.6-4.2-2.8-6.4-7-7 4.2-.6 6.4-2.8 7-7z"/></svg>Appui IA&nbsp;:</span> l'IA comme partenaire de décision. Analyser des données, construire des scénarios, et vous faire contredire avant un arbitrage important.</p>
+        </li>
+        <li class="pth-c-step pth-c-step--3">
+          <div class="pth-c-head">
+            <span class="pth-c-num" aria-hidden="true">03</span>
+            <p class="pth-period">Mois 3 à 5</p>
+            <h3 class="pth-name">Présence et expression</h3>
+          </div>
+          <p class="pth-text">Dire non, poser des limites, vous positionner. Courage managérial&nbsp;: mener les conversations difficiles, trancher, annoncer sans dureté. Non-verbal, voix, charisme. Entraînement sur vos vraies prises de parole.</p>
+          <p class="pth-ia"><span class="pth-ia-label"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3c.6 4.2 2.8 6.4 7 7-4.2.6-6.4 2.8-7 7-.6-4.2-2.8-6.4-7-7 4.2-.6 6.4-2.8 7-7z"/></svg>Appui IA&nbsp;:</span> simuler un échange délicat avant de le vivre&nbsp;; analyser vos prises de parole avec Présence AI.</p>
+        </li>
+        <li class="pth-c-step pth-c-step--4">
+          <span class="pth-c-peak" aria-hidden="true"></span>
+          <div class="pth-c-head">
+            <span class="pth-c-num" aria-hidden="true">04</span>
+            <p class="pth-period">Mois 5 à 6</p>
+            <h3 class="pth-name">Expansion</h3>
+          </div>
+          <p class="pth-text">Performer autrement&nbsp;: pas sur le mode du soi parfait ou du besoin de plaire, mais en orientant votre énergie, avec plaisir et discipline. Ancrer les habitudes qui soutiennent votre performance (décision, feedback, récupération), déléguer et faire grandir vos équipes. Tenir l'équilibre dans la durée.</p>
+          <p class="pth-ia"><span class="pth-ia-label"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3c.6 4.2 2.8 6.4 7 7-4.2.6-6.4 2.8-7 7-.6-4.2-2.8-6.4-7-7 4.2-.6 6.4-2.8 7-7z"/></svg>Appui IA&nbsp;:</span> automatiser ce qui n'a pas besoin de vous (synthèses, comptes rendus, relances, veille) pour vous resituer sur ce qui vous revient.</p>
+        </li>
     </ol>
-    <div class="mt-16 text-center reveal">
-      <a href="#contact" class="btn-primary px-8 py-4 rounded-full inline-block" style="font-size:1rem;font-weight:600;">Parlons de votre prise de poste</a>
+
+    <div class="pth-cta-wrap">
+      <a class="pth-cta" href="#contact">Parlons de votre prise de poste<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
   </div>
 </section>
@@ -817,6 +908,35 @@ document.querySelectorAll('.reveal,.reveal-scale,.reveal-left,.reveal-right').fo
 </script>
 <!-- COOKIES (chargé automatiquement) -->
 <div id="cookies-placeholder"></div>
+<script>
+/* Parcours 6 mois : la montée se dessine à l'arrivée à l'écran */
+(function () {
+  var root = document.querySelector('#parcours.pth--c');
+  if (!root) return;
+  var reduce = root.classList.contains('pth-static') ||
+    (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  if (reduce) root.classList.add('pth-static');
+  root.classList.add('pth-js');
+
+  var list = root.querySelector('.pth-c-steps');
+  var steps = [].slice.call(root.querySelectorAll('.pth-c-step'));
+  function showAll() { steps.forEach(function (s) { s.classList.add('pth-is-in'); }); }
+
+  if (reduce || !('IntersectionObserver' in window)) { showAll(); return; }
+
+  var io = new IntersectionObserver(function (entries) {
+    // Grand écran : tout l'escalier se dessine d'un trait, marche après marche.
+    // Mobile et tablette : chaque marche apparaît quand on l'atteint.
+    var wide = window.getComputedStyle(list).display === 'grid';
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      if (wide) { showAll(); io.disconnect(); }
+      else { e.target.classList.add('pth-is-in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+  steps.forEach(function (s) { io.observe(s); });
+})();
+</script>
 <script src="/assets/js/includes.js"></script>
 </body>
 </html>
