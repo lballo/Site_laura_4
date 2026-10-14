@@ -246,6 +246,320 @@ details[open] .faq-icon{transform:rotate(45deg);}
   </div>
 </section>
 
+<!-- =====================================================================
+     SECTION « De la résistance à l'adoption » — courbe du changement
+     À placer juste après le bloc « L'outil est là. Les usages, pas encore. »
+     Repose sur ce que la page charge déjà : tokens.css, Tailwind CDN et
+     les polices Abhaya Libre / Inter / Playfair Display (400, 700).
+     Tout est préfixé « chg- ». Aucune police supplémentaire.
+     ===================================================================== -->
+<section id="chg-curve" class="chg-curve py-24 relative" aria-labelledby="chg-curve-title">
+<style>
+.chg-curve{
+  --chg-accent:#A83932;
+  --chg-bg:var(--light-beige,#FAF4EF);
+  --chg-ink:var(--text-dark,#2C2C2C);
+  --chg-text:var(--brun-gris,#6C6059);
+  --chg-line:var(--warm-beige,#E8DDD6);
+  background:var(--chg-bg);color:var(--chg-ink);
+  overflow-x:clip; /* pas overflow:hidden : cela casserait position:sticky */
+}
+.chg-curve-track{position:relative}
+.chg-curve-inner{max-width:80rem;margin:0 auto;padding:0 1.5rem}
+@media (min-width:1024px){.chg-curve-inner{padding:0 3rem}}
+
+/* En-tête — mêmes réglages que les autres titres de la page */
+.chg-curve-head{text-align:center}
+.chg-curve-eyebrow{display:block;margin:0 0 1rem;font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--chg-accent)}
+.chg-curve-h2{margin:0 0 1.5rem;font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:clamp(2rem,4vw,3rem);line-height:1.2;color:var(--chg-ink)}
+.chg-curve-h2 span{color:var(--chg-accent);white-space:nowrap;transition:color .2s linear}
+.chg-curve-intro{max-width:48rem;margin:0 auto;color:var(--chg-text);font-size:1.25rem;line-height:1.7}
+
+/* Courbe */
+.chg-curve-chart,.chg-curve-nav{max-width:56rem;margin-left:auto;margin-right:auto}
+.chg-curve-chart{margin-top:2.5rem}
+.chg-curve-chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chg-curve-ghost{fill:none;stroke:var(--chg-line);stroke-width:4;stroke-linecap:round;stroke-dasharray:1 14}
+.chg-curve-draw{fill:none;stroke:var(--chg-accent);stroke-width:9;stroke-linecap:round;stroke-linejoin:round}
+@media (min-width:768px){.chg-curve-draw{stroke-width:5}.chg-curve-ghost{stroke-width:3;stroke-dasharray:1 10}}
+.chg-curve-pt{fill:var(--chg-bg);stroke:var(--chg-line);stroke-width:4;transition:fill .35s ease,stroke .35s ease}
+.chg-curve-pt.is-lit,.chg-curve:not(.chg-anim) .chg-curve-pt{fill:var(--chg-accent);stroke:var(--chg-accent)}
+.chg-curve-cursor,.chg-curve-halo{display:none}
+.chg-anim .chg-curve-cursor{display:block;fill:var(--chg-accent)}
+.chg-anim .chg-curve-halo{display:block;fill:var(--chg-accent);opacity:.14}
+
+/* Repères (boutons) */
+.chg-curve-nav{list-style:none;margin-top:.5rem;margin-bottom:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}
+.chg-curve-go{width:100%;min-height:44px;padding:.5rem 0;border:0;background:none;cursor:pointer;
+  font-family:inherit;font-size:.6875rem;font-weight:500;letter-spacing:-.01em;white-space:nowrap;line-height:1.2;color:var(--chg-text);border-radius:6px;transition:color .3s ease}
+@media (max-width:639px){.chg-curve-nav{grid-template-columns:repeat(5,auto);justify-content:space-between;column-gap:.25rem;padding:0 .25rem}.chg-curve-go{width:auto;padding-left:.15rem;padding-right:.15rem}}
+@media (min-width:640px){.chg-curve-go{font-size:1rem}}
+.chg-curve-go::after{content:"";display:block;width:20px;height:2px;margin:.4rem auto 0;border-radius:2px;background:transparent;transition:background .3s ease}
+.chg-curve-go[aria-current="step"]{color:var(--chg-ink);font-weight:700}
+.chg-curve-go[aria-current="step"]::after{background:var(--chg-accent)}
+.chg-curve-go:hover{color:var(--chg-ink)}
+
+/* Étapes */
+.chg-curve-steps{margin-top:2.5rem;display:grid;gap:3rem}
+.chg-curve-step-title{margin:0 0 1.25rem;display:flex;align-items:baseline;justify-content:center;gap:.75rem;
+  font-family:'Abhaya Libre',Georgia,serif;font-weight:700;font-size:2.25rem;line-height:1.1;color:var(--chg-ink)}
+.chg-curve-num{font-family:'Inter',system-ui,sans-serif;font-size:.875rem;font-weight:700;letter-spacing:.15em;color:var(--chg-accent)}
+.chg-curve-cols{display:grid;gap:1rem;max-width:58rem;margin:0 auto}
+.chg-curve-col{padding:1.5rem;border-radius:1.5rem}
+.chg-curve-col--team{background:rgba(255,255,255,.5)}
+.chg-curve-col--leader{background:#fff;box-shadow:var(--shadow-md,0 8px 24px rgba(0,0,0,.08))}
+.chg-curve-label{display:block;margin:0 0 .5rem;font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--chg-text)}
+.chg-curve-col--leader .chg-curve-label{color:var(--chg-accent)}
+.chg-curve-txt{margin:0;font-size:1.125rem;line-height:1.7;color:var(--chg-text)}
+.chg-curve-col--leader .chg-curve-txt{color:var(--chg-ink)}
+@media (min-width:768px){
+  .chg-curve-cols{grid-template-columns:1fr 1fr;gap:1.5rem}
+  .chg-curve-col--team{text-align:right}
+  .chg-curve-col{padding:2rem}
+}
+
+/* ---------- Mode animé (activé par le script, jamais en mouvement réduit) ---------- */
+.chg-curve.chg-anim{padding-top:0 !important;padding-bottom:0 !important;transition:background-color .2s linear}
+.chg-anim .chg-curve-track{height:380vh;height:380svh}
+.chg-anim .chg-curve-stage{position:sticky;top:0;min-height:100vh;min-height:100svh;display:flex;align-items:center;padding:1.75rem 0}
+.chg-anim .chg-curve-steps{gap:0;margin-top:1.5rem}
+.chg-anim .chg-curve-step{grid-area:1/1;opacity:0;transform:translateY(14px);transition:opacity .45s ease,transform .45s ease;pointer-events:none}
+.chg-anim .chg-curve-step.is-active{opacity:1;transform:none;pointer-events:auto}
+.chg-anim .chg-curve-chart{margin-top:1.5rem}
+@media (max-width:767px){
+  .chg-curve-step-title{font-size:1.75rem !important}
+  .chg-anim .chg-curve-h2{margin-bottom:.75rem}
+  .chg-anim .chg-curve-step-title{font-size:1.75rem;margin-bottom:.75rem}
+  .chg-anim .chg-curve-col{padding:.9rem 1.1rem}
+  .chg-anim .chg-curve-txt{font-size:1rem !important;line-height:1.55 !important}
+}
+@media (max-height:860px){
+  .chg-anim .chg-curve-intro{display:none}
+  .chg-anim .chg-curve-chart{margin-top:1rem}
+}
+</style>
+
+  <div class="chg-curve-track">
+    <div class="chg-curve-stage">
+      <div class="chg-curve-inner">
+
+        <header class="chg-curve-head">
+          <span class="chg-curve-eyebrow">Ce que traversent vos équipes</span>
+          <h2 id="chg-curve-title" class="chg-curve-h2">De la résistance <span>à l'adoption</span></h2>
+          <p class="chg-curve-intro">Le changement ne se décrète pas. Il se traverse, étape par étape. Votre rôle&nbsp;: tenir le cap à chacune d'elles.</p>
+        </header>
+
+        <div class="chg-curve-chart" aria-hidden="true">
+          <svg viewBox="0 30 1000 290" focusable="false">
+            <path class="chg-curve-ghost" d="M0,110 C40,110 60,222 100,220 C160,217 240,160 300,165 C380,172 430,296 500,295 C570,294 640,215 700,190 C770,160 840,85 900,70 C940,60 970,56 1000,54"/>
+            <path class="chg-curve-draw" d="M0,110 C40,110 60,222 100,220 C160,217 240,160 300,165 C380,172 430,296 500,295 C570,294 640,215 700,190 C770,160 840,85 900,70 C940,60 970,56 1000,54"/>
+            <circle class="chg-curve-pt" cx="100" cy="220" r="11"/>
+            <circle class="chg-curve-pt" cx="300" cy="165" r="11"/>
+            <circle class="chg-curve-pt" cx="500" cy="295" r="11"/>
+            <circle class="chg-curve-pt" cx="700" cy="190" r="11"/>
+            <circle class="chg-curve-pt" cx="900" cy="70"  r="11"/>
+            <circle class="chg-curve-halo" cx="0" cy="110" r="26"/>
+            <circle class="chg-curve-cursor" cx="0" cy="110" r="9"/>
+          </svg>
+        </div>
+
+        <nav aria-label="Étapes de la courbe du changement">
+          <ol class="chg-curve-nav">
+            <li><button type="button" class="chg-curve-go" data-chg-go="0">Choc</button></li>
+            <li><button type="button" class="chg-curve-go" data-chg-go="1">Déni</button></li>
+            <li><button type="button" class="chg-curve-go" data-chg-go="2">Résistance</button></li>
+            <li><button type="button" class="chg-curve-go" data-chg-go="3">Exploration</button></li>
+            <li><button type="button" class="chg-curve-go" data-chg-go="4">Engagement</button></li>
+          </ol>
+        </nav>
+
+        <div class="chg-curve-steps">
+          <article class="chg-curve-step" id="chg-curve-step-0">
+            <h3 class="chg-curve-step-title"><span class="chg-curve-num">01</span>Le choc</h3>
+            <div class="chg-curve-cols">
+              <div class="chg-curve-col chg-curve-col--team">
+                <span class="chg-curve-label">Ce que vit l'équipe</span>
+                <p class="chg-curve-txt">«&nbsp;Est-ce que je vais être remplacé&nbsp;?&nbsp;» La question n'est pas posée. Elle est là.</p>
+              </div>
+              <div class="chg-curve-col chg-curve-col--leader">
+                <span class="chg-curve-label">Ce que fait le leader</span>
+                <p class="chg-curve-txt">Vous nommez ce qui change, et ce qui ne change pas. Vous donnez un cap avant de donner des outils.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="chg-curve-step" id="chg-curve-step-1">
+            <h3 class="chg-curve-step-title"><span class="chg-curve-num">02</span>Le déni</h3>
+            <div class="chg-curve-cols">
+              <div class="chg-curve-col chg-curve-col--team">
+                <span class="chg-curve-label">Ce que vit l'équipe</span>
+                <p class="chg-curve-txt">«&nbsp;Ça ne nous concerne pas vraiment.&nbsp;» Les outils sont installés. Personne ne les ouvre.</p>
+              </div>
+              <div class="chg-curve-col chg-curve-col--leader">
+                <span class="chg-curve-label">Ce que fait le leader</span>
+                <p class="chg-curve-txt">Vous montrez des usages concrets, dans leur métier. Le changement devient réel, sans pression.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="chg-curve-step" id="chg-curve-step-2">
+            <h3 class="chg-curve-step-title"><span class="chg-curve-num">03</span>La résistance</h3>
+            <div class="chg-curve-cols">
+              <div class="chg-curve-col chg-curve-col--team">
+                <span class="chg-curve-label">Ce que vit l'équipe</span>
+                <p class="chg-curve-txt">Les objections montent. Ou pire&nbsp;: le silence. La peur prend le visage du scepticisme.</p>
+              </div>
+              <div class="chg-curve-col chg-curve-col--leader">
+                <span class="chg-curve-label">Ce que fait le leader</span>
+                <p class="chg-curve-txt">Vous écoutez avant de convaincre. Vous ouvrez un espace où les peurs peuvent se dire, sans être minimisées.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="chg-curve-step" id="chg-curve-step-3">
+            <h3 class="chg-curve-step-title"><span class="chg-curve-num">04</span>L'exploration</h3>
+            <div class="chg-curve-cols">
+              <div class="chg-curve-col chg-curve-col--team">
+                <span class="chg-curve-label">Ce que vit l'équipe</span>
+                <p class="chg-curve-txt">Quelques-uns essaient. Les premiers gains apparaissent. La curiosité remplace la méfiance.</p>
+              </div>
+              <div class="chg-curve-col chg-curve-col--leader">
+                <span class="chg-curve-label">Ce que fait le leader</span>
+                <p class="chg-curve-txt">Vous encouragez les essais. Vous valorisez les premiers pas. Vous laissez le droit à l'erreur.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="chg-curve-step" id="chg-curve-step-4">
+            <h3 class="chg-curve-step-title"><span class="chg-curve-num">05</span>L'engagement</h3>
+            <div class="chg-curve-cols">
+              <div class="chg-curve-col chg-curve-col--team">
+                <span class="chg-curve-label">Ce que vit l'équipe</span>
+                <p class="chg-curve-txt">Les usages s'ancrent. Des ambassadeurs émergent. L'IA devient un appui, plus une menace.</p>
+              </div>
+              <div class="chg-curve-col chg-curve-col--leader">
+                <span class="chg-curve-label">Ce que fait le leader</span>
+                <p class="chg-curve-txt">Vous posez un cadre clair, une charte partagée, des ambassadeurs. Vous pilotez dans la durée.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+<script>
+(function () {
+  var root = document.getElementById('chg-curve');
+  if (!root) return;
+  var track  = root.querySelector('.chg-curve-track');
+  var path   = root.querySelector('.chg-curve-draw');
+  var cursor = root.querySelector('.chg-curve-cursor');
+  var halo   = root.querySelector('.chg-curve-halo');
+  var pts    = Array.prototype.slice.call(root.querySelectorAll('.chg-curve-pt'));
+  var steps  = Array.prototype.slice.call(root.querySelectorAll('.chg-curve-step'));
+  var btns   = Array.prototype.slice.call(root.querySelectorAll('[data-chg-go]'));
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (!path.getTotalLength) return;
+
+  var L = path.getTotalLength();
+  // Longueur de tracé à laquelle la courbe atteint chaque étape (x = 100, 300, 500, 700, 900)
+  var T = [100, 300, 500, 700, 900].map(function (x) {
+    var lo = 0, hi = L;
+    for (var i = 0; i < 24; i++) { var m = (lo + hi) / 2; if (path.getPointAtLength(m).x < x) lo = m; else hi = m; }
+    return (lo + hi) / 2;
+  });
+  var KS = [0, .1, .3, .5, .7, .9, 1];           // progression du défilement
+  var KL = [0].concat(T, [L]);                    // longueur dessinée correspondante
+  var COLD = [108, 96, 89],  WARM = [168, 57, 50]; // brun-gris #6C6059 → rouge #A83932
+  var BG0  = [238, 232, 227], BG1 = [250, 244, 239]; // beige froid → light-beige #FAF4EF
+
+  function mix(a, b, t) { return 'rgb(' + a.map(function (v, i) { return Math.round(v + (b[i] - v) * t); }).join(',') + ')'; }
+  function lenAt(s) {
+    for (var i = 1; i < KS.length; i++) if (s <= KS[i]) return KL[i - 1] + (KL[i] - KL[i - 1]) * ((s - KS[i - 1]) / (KS[i] - KS[i - 1]));
+    return L;
+  }
+  function progress() {
+    var total = track.offsetHeight - window.innerHeight;
+    if (total <= 0) return 1;
+    return Math.min(1, Math.max(0, -track.getBoundingClientRect().top / total));
+  }
+
+  var active = -1, ticking = false, enabled = false, listening = false;
+  function setActive(k) {
+    if (k === active) return;
+    active = k;
+    steps.forEach(function (s, i) { s.classList.toggle('is-active', i === k); });
+    btns.forEach(function (b, i) { if (i === k) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current'); });
+  }
+  function render() {
+    ticking = false;
+    if (!enabled) return;
+    var s = progress(), l = lenAt(s), p = path.getPointAtLength(l), t = Math.min(1, s / .85);
+    path.style.strokeDashoffset = (L - l).toFixed(1);
+    cursor.setAttribute('cx', p.x); cursor.setAttribute('cy', p.y);
+    halo.setAttribute('cx', p.x);   halo.setAttribute('cy', p.y);
+    root.style.setProperty('--chg-accent', mix(COLD, WARM, t));
+    root.style.setProperty('--chg-bg', mix(BG0, BG1, t));
+    pts.forEach(function (c, i) { c.classList.toggle('is-lit', l >= T[i] - 1); });
+    setActive(Math.min(4, Math.floor(s * 5)));
+  }
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(render); } }
+  function listen(on) {
+    if (on === listening) return;
+    listening = on;
+    window[on ? 'addEventListener' : 'removeEventListener']('scroll', onScroll, { passive: true });
+    window[on ? 'addEventListener' : 'removeEventListener']('resize', onScroll);
+    if (on) onScroll();
+  }
+  // N'écoute le défilement que lorsque la section est proche de l'écran
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (e) { if (enabled) listen(e[0].isIntersecting); }, { rootMargin: '200px 0px' }) : null;
+
+  function enable() {
+    // Sur lauraballo.com, html ET body ont overflow-x:hidden : body devient alors
+    // le conteneur de défilement et position:sticky ne suit plus la fenêtre.
+    // overflow-x:clip garde l'effet (pas de défilement horizontal) sans casser sticky.
+    if (!(window.CSS && CSS.supports && CSS.supports('overflow', 'clip'))) { disable(); return; }
+    if (getComputedStyle(document.body).overflowX === 'hidden') document.body.style.overflowX = 'clip';
+    enabled = true;
+    root.classList.add('chg-anim');
+    path.style.strokeDasharray = L.toFixed(1);
+    if (io) io.observe(track); else listen(true);
+    render();
+  }
+  function disable() {
+    enabled = false;
+    listen(false);
+    if (io) io.unobserve(track);
+    root.classList.remove('chg-anim');
+    path.style.strokeDasharray = ''; path.style.strokeDashoffset = '';
+    root.style.removeProperty('--chg-accent'); root.style.removeProperty('--chg-bg');
+    steps.forEach(function (s) { s.classList.remove('is-active'); });
+    btns.forEach(function (b) { b.removeAttribute('aria-current'); });
+    active = -1;
+  }
+
+  btns.forEach(function (b, i) {
+    b.addEventListener('click', function () {
+      if (enabled) {
+        var total = track.offsetHeight - window.innerHeight;
+        var top = window.pageYOffset + track.getBoundingClientRect().top + total * ((i + .55) / 5);
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      } else {
+        steps[i].scrollIntoView({ block: 'center' });
+      }
+    });
+  });
+
+  if (reduce.matches) disable(); else enable();
+  var onPref = function (e) { if (e.matches) disable(); else enable(); };
+  if (reduce.addEventListener) reduce.addEventListener('change', onPref); else if (reduce.addListener) reduce.addListener(onPref);
+})();
+</script>
+</section>
+<!-- ===================== FIN SECTION chg-curve ===================== -->
+
 <!-- TRANSITION — fond sombre -->
 <section class="py-16" style="background:#1A1A1A;">
   <div class="max-w-3xl mx-auto px-6 lg:px-12 text-center reveal">
@@ -356,22 +670,193 @@ details[open] .faq-icon{transform:rotate(45deg);}
   </div>
 </section>
 
-<!-- SOLUTION -->
-<section class="py-24 relative overflow-hidden">
-  <div class="absolute inset-0">
-    <img src="/assets/img/pour-qui-bg.jpg" alt="" class="w-full h-full object-cover" style="opacity:.35;" width="1920" height="1080" loading="lazy" aria-hidden="true"/>
-    <div class="absolute inset-0" style="background:linear-gradient(180deg,rgba(248,240,236,.82),rgba(248,240,236,.92));"></div>
-  </div>
-  <div class="max-w-6xl mx-auto px-6 lg:px-12 text-center relative z-10">
-    <div class="reveal mb-16">
-      <h2 class="mb-6 title-playfair" style="font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--brown-d);">Le parcours en 4 étapes</h2>
-      <p class="max-w-3xl mx-auto" style="color:var(--brown-m);font-size:1.125rem;line-height:1.7;">
-        De la compréhension de l'IA à l'ancrage des nouveaux usages : un chemin structuré, calé sur les jalons de votre projet.
-      </p>
+<!-- =====================================================================
+     SECTION « Parcours en 4 étapes » — chemin qui s'allume au défilement
+     Remplace le bloc « Parcours en 4 étapes » actuel.
+     Repose sur ce que la page charge déjà : tokens.css, Tailwind CDN,
+     la classe .btn-primary et les polices Abhaya Libre / Inter /
+     Playfair Display (400, 700). Tout est préfixé « chg- ».
+     ===================================================================== -->
+<section id="chg-path" class="chg-path py-24 bg-white relative overflow-hidden" aria-labelledby="chg-path-title">
+<style>
+.chg-path{
+  --chg-accent:#A83932;
+  --chg-ink:var(--text-dark,#2C2C2C);
+  --chg-text:var(--brun-gris,#6C6059);
+  --chg-muted:var(--taupe,#AFA098);
+  --chg-line:var(--warm-beige,#E8DDD6);
+  --chg-cream:var(--light-beige,#FAF4EF);
+  color:var(--chg-ink);
+}
+.chg-path-inner{max-width:64rem;margin:0 auto;padding:0 1.5rem}
+@media (min-width:1024px){.chg-path-inner{padding:0 3rem}}
+
+/* En-tête — mêmes réglages que les autres titres de la page */
+.chg-path-head{max-width:48rem;margin:0 auto;text-align:center}
+.chg-path-eyebrow{display:block;margin:0 0 1rem;font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--chg-accent)}
+.chg-path-h2{margin:0 0 1.5rem;font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:clamp(2rem,4vw,3rem);line-height:1.2;color:var(--chg-ink)}
+.chg-path-h2 span{color:var(--chg-accent)}
+.chg-path-intro{margin:0;color:var(--chg-text);font-size:1.25rem;line-height:1.7}
+
+/* Chemin */
+.chg-path-wrap{position:relative;margin-top:4rem}
+.chg-path-rail{position:absolute;left:32px;top:32px;bottom:32px;width:2px;transform:translateX(-50%);background:var(--chg-line);border-radius:2px;overflow:hidden}
+.chg-path-fill{position:absolute;inset:0;background:var(--chg-accent);transform-origin:top center;transform:scaleY(1)}
+.chg-path-list{list-style:none;margin:0;padding:0;display:grid;gap:2.5rem;position:relative}
+.chg-path-item{display:grid;grid-template-columns:64px minmax(0,1fr);column-gap:1.25rem;align-items:start}
+.chg-path-marker{grid-column:1;grid-row:1;width:64px;height:64px;border-radius:1rem;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;font-weight:800;
+  background:var(--chg-accent);color:#fff;border:2px solid var(--chg-accent);
+  box-shadow:0 0 0 8px rgba(168,57,50,.08);position:relative;z-index:1;
+  transition:background-color .5s ease,color .5s ease,border-color .5s ease,box-shadow .5s ease}
+.chg-path-card{grid-column:2;grid-row:1;padding:1.5rem;border-radius:1.5rem;background:var(--chg-cream);
+  transition:background-color .6s ease,transform .6s ease}
+.chg-path-kicker{display:block;margin:0 0 .5rem;font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--chg-accent);transition:color .5s ease}
+.chg-path-title{margin:0;font-family:'Abhaya Libre',Georgia,serif;font-weight:700;font-size:1.75rem;line-height:1.15;color:var(--chg-ink);transition:color .5s ease}
+.chg-path-text{margin:.75rem 0 0;font-size:1.0625rem;line-height:1.7;color:var(--chg-text)}
+
+@media (min-width:768px){
+  .chg-path-rail{left:50%;top:32px;bottom:32px}
+  .chg-path-list{gap:3.5rem}
+  .chg-path-item{grid-template-columns:minmax(0,1fr) 64px minmax(0,1fr);column-gap:2.5rem}
+  .chg-path-marker{grid-column:2}
+  .chg-path-item:nth-child(odd) .chg-path-card{grid-column:1;text-align:right}
+  .chg-path-item:nth-child(even) .chg-path-card{grid-column:3}
+  .chg-path-card{padding:2rem}
+  .chg-path-title{font-size:2rem}
+}
+
+@media (max-width:767px){.chg-path-title{font-size:1.5rem !important}}
+
+/* Appel à l'action — reprend .btn-primary de la page */
+.chg-path-cta-wrap{margin-top:4rem;text-align:center}
+
+/* ---------- Mode animé (activé par le script, jamais en mouvement réduit) ---------- */
+.chg-path.chg-anim .chg-path-fill{transform:scaleY(0)}
+.chg-path.chg-anim .chg-path-item:not(.is-lit) .chg-path-marker{background:#fff;color:var(--chg-text);border-color:var(--chg-line);box-shadow:0 0 0 8px rgba(168,57,50,0)}
+.chg-path.chg-anim .chg-path-item:not(.is-lit) .chg-path-card{background:transparent;transform:translateY(10px)}
+.chg-path.chg-anim .chg-path-item:not(.is-lit) .chg-path-kicker,
+.chg-path.chg-anim .chg-path-item:not(.is-lit) .chg-path-title{color:var(--chg-text)}
+</style>
+
+  <div class="chg-path-inner">
+    <header class="chg-path-head">
+      <span class="chg-path-eyebrow">Le parcours</span>
+      <h2 id="chg-path-title" class="chg-path-h2">Quatre étapes pour <span>porter le changement</span></h2>
+      <p class="chg-path-intro">De la clarté à l'ancrage. À chaque étape, vous travaillez votre posture de leader, pas seulement l'outil.</p>
+    </header>
+
+    <div class="chg-path-wrap">
+      <span class="chg-path-rail" aria-hidden="true"><span class="chg-path-fill"></span></span>
+      <ol class="chg-path-list">
+        <li class="chg-path-item">
+          <span class="chg-path-marker" aria-hidden="true">01</span>
+          <div class="chg-path-card">
+            <span class="chg-path-kicker">Étape 1</span>
+            <h3 class="chg-path-title">Comprendre et clarifier</h3>
+            <p class="chg-path-text">Ce que l'IA change vraiment pour votre organisation et dans votre rôle. Où la positionner : complémentarité, augmentation ou substitution. Vos premiers quick wins.</p>
+          </div>
+        </li>
+        <li class="chg-path-item">
+          <span class="chg-path-marker" aria-hidden="true">02</span>
+          <div class="chg-path-card">
+            <span class="chg-path-kicker">Étape 2</span>
+            <h3 class="chg-path-title">Lire le terrain humain</h3>
+            <p class="chg-path-text">La carte des acteurs et la courbe du deuil pour situer vos équipes. Accueillir les peurs avec l'intelligence émotionnelle, préparer les échanges délicats.</p>
+          </div>
+        </li>
+        <li class="chg-path-item">
+          <span class="chg-path-marker" aria-hidden="true">03</span>
+          <div class="chg-path-card">
+            <span class="chg-path-kicker">Étape 3</span>
+            <h3 class="chg-path-title">Incarner et porter le message</h3>
+            <p class="chg-path-text">Le récit de la transformation : le pourquoi, la vision, ce qui change et ce qui ne change pas. Une parole sans jargon, entraînée sur vos vraies prises de parole.</p>
+          </div>
+        </li>
+        <li class="chg-path-item">
+          <span class="chg-path-marker" aria-hidden="true">04</span>
+          <div class="chg-path-card">
+            <span class="chg-path-kicker">Étape 4</span>
+            <h3 class="chg-path-title">Piloter et ancrer</h3>
+            <p class="chg-path-text">La feuille de route, la charte IA (éthique, données, AI Act, RGPD), un réseau d'ambassadeurs et des rituels qui font vivre le changement.</p>
+          </div>
+        </li>
+      </ol>
     </div>
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 text-left" id="pillars"></div>
+
+    <div class="chg-path-cta-wrap">
+      <a href="#contact" class="btn-primary px-8 py-4 rounded-full inline-block" style="font-size:1rem;font-weight:600;">Parlons de votre projet</a>
+    </div>
   </div>
+
+<script>
+(function () {
+  var root = document.getElementById('chg-path');
+  if (!root) return;
+  var wrap    = root.querySelector('.chg-path-wrap');
+  var rail    = root.querySelector('.chg-path-rail');
+  var fill    = root.querySelector('.chg-path-fill');
+  var items   = Array.prototype.slice.call(root.querySelectorAll('.chg-path-item'));
+  var markers = items.map(function (it) { return it.querySelector('.chg-path-marker'); });
+  var reduce  = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var enabled = false, listening = false, ticking = false;
+
+  // Le rail relie exactement le centre du 1er repère au centre du dernier
+  function measure() {
+    var w = wrap.getBoundingClientRect();
+    var a = markers[0].getBoundingClientRect(), b = markers[markers.length - 1].getBoundingClientRect();
+    var top = a.top + a.height / 2 - w.top, end = b.top + b.height / 2 - w.top;
+    rail.style.top = top + 'px'; rail.style.bottom = 'auto'; rail.style.height = Math.max(0, end - top) + 'px';
+  }
+  function render() {
+    ticking = false;
+    if (!enabled) return;
+    var anchor = window.innerHeight * 0.62;
+    var r = rail.getBoundingClientRect();
+    var f = r.height > 0 ? Math.min(1, Math.max(0, (anchor - r.top) / r.height)) : 1;
+    fill.style.transform = 'scaleY(' + f.toFixed(4) + ')';
+    items.forEach(function (it, i) {
+      var m = markers[i].getBoundingClientRect();
+      it.classList.toggle('is-lit', m.top + m.height / 2 <= anchor + 1);
+    });
+  }
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(render); } }
+  function onResize() { measure(); onScroll(); }
+  function listen(on) {
+    if (on === listening) return;
+    listening = on;
+    window[on ? 'addEventListener' : 'removeEventListener']('scroll', onScroll, { passive: true });
+    if (on) onScroll();
+  }
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (e) { if (enabled) listen(e[0].isIntersecting); }, { rootMargin: '200px 0px' }) : null;
+
+  function enable() {
+    enabled = true;
+    root.classList.add('chg-anim');
+    if (io) io.observe(wrap); else listen(true);
+    render();
+  }
+  function disable() {
+    enabled = false;
+    listen(false);
+    if (io) io.unobserve(wrap);
+    root.classList.remove('chg-anim');
+    fill.style.transform = '';
+    items.forEach(function (it) { it.classList.remove('is-lit'); });
+  }
+
+  measure();
+  window.addEventListener('resize', onResize);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(onResize);
+  if (reduce.matches) disable(); else enable();
+  var onPref = function (e) { if (e.matches) disable(); else enable(); };
+  if (reduce.addEventListener) reduce.addEventListener('change', onPref); else if (reduce.addListener) reduce.addListener(onPref);
+})();
+</script>
 </section>
+<!-- ===================== FIN SECTION chg-path ===================== -->
+
 
 <!-- BANNIÈRE PRÉSENCE -->
 <section class="py-16" style="background:#6C6059;">
@@ -545,18 +1030,6 @@ const who = [
 ];
 document.getElementById('whoFor').innerHTML = who.map(([ic,t,d])=>`<div class="bg-white p-8 rounded-3xl shadow-lg reveal"><div class="w-24 h-24 flex items-center justify-center mx-auto mb-6" style="color:#A83932;">${ic}</div><h3 class="mb-4" style="color:var(--brown-d);font-size:1.25rem;font-weight:700;">${t}</h3><p style="color:var(--brown-m);font-size:1rem;line-height:1.6;">${d}</p></div>`).join('');
 
-// PILIERS
-const TARGET_IC = '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>';
-const FLAME_IC = '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>';
-const EYE_IC = EYE;
-const STORY_IC = '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>';
-const pillars = [
-  [TARGET_IC,"01 · Comprendre et clarifier","Ce que l'IA change dans votre organisation et dans votre rôle. Où la positionner : <b>complémentarité, augmentation ou substitution</b>. Votre propre posture face à l'IA, et les premiers quick wins."],
-  [EYE_IC,"02 · Lire le terrain humain","La <b>carte des acteurs</b> et la <b>courbe du deuil</b> pour situer vos équipes. Accueillir les peurs avec l'intelligence émotionnelle, préparer les échanges délicats."],
-  [STORY_IC,"03 · Incarner et porter le message","Le <b>récit de la transformation</b> : le pourquoi, la vision, ce qui change et ce qui ne change pas. Une parole sans jargon, entraînée sur vos vraies prises de parole."],
-  [FLAME_IC,"04 · Piloter et ancrer","La <b>feuille de route</b>, la <b>charte IA</b> (éthique, données, AI Act, RGPD), un réseau d'ambassadeurs et des rituels qui font vivre le changement."]
-];
-document.getElementById('pillars').innerHTML = pillars.map(([ic,t,d])=>`<div class="bg-white p-8 rounded-3xl shadow-lg reveal"><div class="w-24 h-24 flex items-center justify-center mx-auto mb-6" style="color:#A83932;">${ic}</div><h3 class="mb-4" style="color:var(--brown-d);font-size:1.25rem;font-weight:700;">${t}</h3><p style="color:var(--brown-m);font-size:1rem;line-height:1.6;">${d}</p></div>`).join('');
 
 // BÉNÉFICES
 const benefits = [
