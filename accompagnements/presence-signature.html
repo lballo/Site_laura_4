@@ -184,7 +184,16 @@ details[open] .faq-icon{transform:rotate(45deg);}
 .lib-step--core .lib-step-k{color:var(--ocre);}
 .lib-arrow{display:flex;align-items:center;justify-content:center;color:var(--ocre);font-size:1.5rem;}
 .lib-quote{text-align:center;margin:3.5rem auto 0;max-width:42rem;font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:clamp(1.2rem,2vw,1.45rem);line-height:1.6;color:var(--ocre);}
+/* Le battement : une ligne relie vos émotions à votre rationalité et dessine un cœur */
+.lib-heart{max-width:52rem;margin:2rem auto 0;}
+.lib-heart svg{display:block;width:100%;height:auto;}
+.lib-heart + .lib-trio{margin-top:.25rem;}
+.lib-trio .lib-item:first-child .lib-word::after{background:#D98C80;opacity:1;}
+.lib-trio .lib-item:last-child .lib-word::after{background:#EADFCF;opacity:1;}
 @media (max-width:860px){
+  .lib-heart{margin:1.5rem auto 0;max-width:30rem;}
+  .lib-heart svg{width:150%;margin-left:-25%;}
+  .lib-heart + .lib-trio{margin-top:1.5rem;}
   .lib-trio{grid-template-columns:1fr;gap:2.25rem;}
   .lib-path{grid-template-columns:1fr;}
   .lib-arrow{transform:rotate(90deg);height:1.5rem;}
@@ -446,6 +455,28 @@ details[open] .faq-icon{transform:rotate(45deg);}
     <div class="reveal">
       <span class="lib-eyebrow">Le cœur de Présence</span>
       <h2 class="lib-h2">Vous avez le droit d'être leader <em>avec tout ce que vous êtes.</em></h2>
+    </div>
+    <div class="lib-heart" aria-hidden="true">
+      <svg viewBox="0 0 832 330" focusable="false">
+        <defs>
+          <linearGradient id="lh-line" gradientUnits="userSpaceOnUse" x1="150" y1="0" x2="682" y2="0"><stop offset="0" stop-color="#D98C80" stop-opacity="0"/><stop offset=".09" stop-color="#D98C80"/><stop offset=".5" stop-color="#C4A574"/><stop offset=".91" stop-color="#EADFCF"/><stop offset="1" stop-color="#EADFCF" stop-opacity="0"/></linearGradient>
+          <radialGradient id="lh-glow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#C4A574" stop-opacity=".75"/><stop offset=".5" stop-color="#A83932" stop-opacity=".22"/><stop offset="1" stop-color="#A83932" stop-opacity="0"/></radialGradient>
+        </defs>
+        <circle class="lh-glow" cx="416" cy="168" r="100" fill="url(#lh-glow)" opacity=".4">
+          <animate attributeName="opacity" from="0" to=".4" dur="1.2s" begin="lhdraw.begin+2s" fill="freeze"/>
+          <animate attributeName="r" values="100;122;108;100" keyTimes="0;.12;.3;1" dur="4.2s" begin="lhdraw.begin+3s" repeatCount="indefinite"/>
+        </circle>
+        <path class="lh-path" d="M150 300 L 196 300 L 300 300 C 350 300 386 296 416 276 C 366 242 312 198 312 140 C 312 92 348 68 380 72 C 400 75 413 90 416 110 C 419 90 432 75 452 72 C 484 68 520 92 520 140 C 520 198 466 242 416 276 C 446 296 482 300 532 300 L 636 300 L 682 300" fill="none" stroke="url(#lh-line)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="0">
+          <animate id="lhdraw" attributeName="stroke-dashoffset" from="1" to="0" dur="3s" begin="indefinite" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines=".45 0 .2 1"/>
+        </path>
+        <circle class="lh-dot" cx="196" cy="300" r="5" fill="#D98C80"><animate attributeName="opacity" from="0" to="1" dur=".4s" begin="lhdraw.begin+.2s" fill="freeze"/></circle>
+        <circle class="lh-dot" cx="416" cy="276" r="4.5" fill="#C4A574"><animate attributeName="opacity" from="0" to="1" dur=".4s" begin="lhdraw.begin+1.5s" fill="freeze"/></circle>
+        <circle class="lh-dot" cx="636" cy="300" r="5" fill="#EADFCF"><animate attributeName="opacity" from="0" to="1" dur=".4s" begin="lhdraw.begin+2.7s" fill="freeze"/></circle>
+        <circle r="3.5" fill="#F3ECE4" opacity="0">
+          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.08;.9;1" dur="4.6s" begin="lhdraw.begin+3.2s" repeatCount="indefinite"/>
+          <animateMotion dur="4.6s" begin="lhdraw.begin+3.2s" repeatCount="indefinite" path="M150 300 L 196 300 L 300 300 C 350 300 386 296 416 276 C 366 242 312 198 312 140 C 312 92 348 68 380 72 C 400 75 413 90 416 110 C 419 90 432 75 452 72 C 484 68 520 92 520 140 C 520 198 466 242 416 276 C 446 296 482 300 532 300 L 636 300 L 682 300"/>
+        </circle>
+      </svg>
     </div>
     <div class="lib-trio">
       <div class="lib-item reveal">
@@ -998,6 +1029,25 @@ document.querySelectorAll('.reveal,.reveal-scale,.reveal-left,.reveal-right').fo
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll);
   update();
+})();
+</script>
+<script>
+/* Le cœur de Présence : le battement se dessine quand il arrive à l'écran.
+   Sans JavaScript ou avec « réduire les animations » : le dessin reste fixe, complet. */
+(function () {
+  var wrap = document.querySelector('.lib-heart');
+  var draw = document.getElementById('lhdraw');
+  if (!wrap || !draw || typeof draw.beginElement !== 'function' || !('IntersectionObserver' in window)) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  wrap.querySelector('.lh-path').setAttribute('stroke-dashoffset', '1');
+  wrap.querySelector('.lh-glow').setAttribute('opacity', '0');
+  [].forEach.call(wrap.querySelectorAll('.lh-dot'), function (d) { d.setAttribute('opacity', '0'); });
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { draw.beginElement(); io.disconnect(); }
+    });
+  }, { threshold: 0.4 });
+  io.observe(wrap);
 })();
 </script>
 <script src="/assets/js/includes.js"></script>
