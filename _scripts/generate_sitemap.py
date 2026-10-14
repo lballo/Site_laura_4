@@ -29,6 +29,7 @@ ARTICLES_JSON_PATH = "blog/articles.json"
 EXCLUDED_PATHS = {
     "blog/articles",       # gérés via articles.json
     "_templates",          # templates internes
+    "_archives",           # pages archivées, non publiées
     "satisfaction",        # page technique interne
     "node_modules",
     ".git",
