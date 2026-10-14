@@ -281,7 +281,7 @@ details[open] .faq-icon{transform:rotate(45deg);}
           de dirigeant.
         </h1>
         <p class="mb-8 max-w-xl" style="color:var(--brown-m);font-size:1.125rem;line-height:1.75;font-weight:400;">
-          Présence est un coaching de 6 mois pour hauts dirigeants à fort potentiel. On y apprend à performer autrement : entier, pleinement présent. Pas en visant un soi parfait, ni en cherchant à faire plaisir, mais en retrouvant une vraie liberté d'être.
+          Présence est un coaching de 6 mois pour hauts dirigeants à fort potentiel. On y apprend à performer autrement : entier, pleinement présent. Pas en visant un soi parfait, ni en cherchant à plaire, mais en retrouvant une vraie liberté d'être.
         </p>
         <ul class="pres-hero-pillars mb-8">
           <li><span class="pres-dot" style="background:var(--ocre);"></span><span><b>Sortir des automatismes</b> qui vous limitent</span></li>
@@ -557,7 +557,7 @@ details[open] .faq-icon{transform:rotate(45deg);}
         <div class="pres-path-card">
           <span class="pres-path-kicker">Mois 5 à 6</span>
           <h3 class="pres-path-title">Expansion</h3>
-          <p class="pres-path-text">Performer autrement : pas sur le mode du soi parfait ou du « faire plaisir », mais en orientant votre énergie. Ancrer les habitudes qui soutiennent votre performance (décision, feedback, récupération), déléguer et faire grandir vos équipes. Tenir l'équilibre dans la durée.</p>
+          <p class="pres-path-text">Performer autrement : pas sur le mode du soi parfait ou du besoin de plaire, mais en orientant votre énergie, avec plaisir et discipline. Ancrer les habitudes qui soutiennent votre performance (décision, feedback, récupération), déléguer et faire grandir vos équipes. Tenir l'équilibre dans la durée.</p>
           <p class="pres-path-ia"><b>Appui IA :</b> automatiser ce qui n'a pas besoin de vous (synthèses, comptes rendus, relances, veille) pour vous resituer sur ce qui vous revient.</p>
         </div>
       </li>
@@ -640,10 +640,10 @@ details[open] .faq-icon{transform:rotate(45deg);}
   <div class="max-w-6xl mx-auto px-6 lg:px-12 relative z-10">
     <div class="text-center mb-16 reveal">
       <div class="divider"></div>
-      <h2 class="mb-6" style="font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--brown-d);">Pourquoi cet accompagnement ? 💎</h2>
-      <p class="max-w-2xl mx-auto" style="color:var(--brown-m);font-size:1.125rem;line-height:1.7;">Trois raisons qui font la différence sur la durée.</p>
+      <h2 class="mb-6" style="font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--brown-d);">La singularité de cet accompagnement 💎</h2>
+      <p class="max-w-2xl mx-auto" style="color:var(--brown-m);font-size:1.125rem;line-height:1.7;">Ce qui fait de Présence autre chose qu'un coaching de dirigeant classique.</p>
     </div>
-    <div class="grid md:grid-cols-3 gap-8" id="reasons"></div>
+    <div class="grid md:grid-cols-2 gap-6 lg:gap-8" id="reasons"></div>
   </div>
 </section>
 
@@ -779,9 +779,10 @@ document.getElementById('modalites').innerHTML = modalites.map(([ic,t,d])=>`<div
 
 // 3 RAISONS
 const reasons = [
-  ["01","L'être et le faire, ensemble","Un travail en profondeur sur votre pouvoir personnel, et des compétences concrètes de direction. L'un sans l'autre ne tient pas."],
-  ["02","Sur vos situations réelles","Chaque séance part d'une décision, d'une réunion ou d'une prise de parole de votre agenda. Vous repartez avec un geste à poser avant la séance suivante."],
-  ["03","Un cadre pour tenir dans la durée","Six mois, deux bilans, des rituels que vous gardez. Et la possibilité de prolonger par <a href=\"/accompagnements/mentorat\" style=\"color:#A83932;text-decoration:underline;\">Présence Oratoire</a> pour aller plus loin sur la parole publique."]
+  ["01","La liberté d'être","Sortir des schémas automatiques et des fonctionnements inconscients qui décident à votre place, pour retrouver une vraie autonomie de décision et d'action. Ici, la responsabilité naît de la liberté, pas de la contrainte."],
+  ["02","Performer sans vous nier","Le « soi parfait » pose un plafond de verre au-dessus de vous : on vise l'irréprochable, on se surcontrôle, et l'on plafonne. Nous apprenons à performer autrement, à partir de ce que vous êtes, pour casser ce plafond."],
+  ["03","Plaisir et discipline, comme les athlètes","Les athlètes de haut niveau ne performent pas dans la crispation. Ils prennent plaisir, suivent leur énergie et tiennent une discipline exigeante. C'est cet alliage que nous construisons : plaisir et discipline, énergie et rigueur."],
+  ["04","L'être et le faire, ensemble","Un travail en profondeur sur votre pouvoir personnel, et des compétences concrètes de direction, toujours sur vos situations réelles. Six mois, deux bilans, des habitudes que vous gardez. Et la possibilité de prolonger par <a href=\"/accompagnements/mentorat\" style=\"color:#A83932;text-decoration:underline;\">Présence Oratoire</a> pour la parole publique."]
 ];
 document.getElementById('reasons').innerHTML = reasons.map(([n,t,d])=>`<div class="p-8 rounded-3xl reveal" style="background:var(--cream);"><div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6" style="background:#A83932;color:#fff;font-size:1.5rem;font-weight:800;">${n}</div><h3 class="mb-4" style="color:var(--brown-d);font-size:1.375rem;font-weight:700;">${t}</h3><p style="color:var(--brown-m);font-size:1rem;line-height:1.7;">${d}</p></div>`).join('');
 
