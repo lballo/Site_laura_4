@@ -146,14 +146,14 @@ details[open] .faq-icon{transform:rotate(45deg);}
 .faq-icon{transition:transform .25s ease;display:inline-block;}
 
 /* En-tête : nom de marque + citation */
-.pres-brand{display:flex;align-items:baseline;flex-wrap:wrap;gap:.35rem 1rem;}
-.pres-brand-word{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:clamp(2.4rem,4.4vw,3.4rem);line-height:1;color:#A83932;}
-.pres-brand-sub{font-size:.75rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--brown-m);}
+.pres-brand{display:flex;flex-direction:column;align-items:flex-start;gap:.35rem;}
+.pres-brand-word{font-family:'Playfair Display',Georgia,serif;font-style:normal;font-weight:400;font-size:clamp(3.2rem,6vw,4.75rem);line-height:1;letter-spacing:-.01em;color:#A83932;}
+.pres-brand-sub{font-size:.8125rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--brown-m);}
 .pres-quote{max-width:36rem;padding:.25rem 0 .25rem 1.25rem;border-left:3px solid var(--ocre);}
 .pres-quote blockquote{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:1.0625rem;line-height:1.7;color:var(--brown-d);}
 .pres-quote figcaption{margin-top:.6rem;font-size:.8125rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#A83932;}
 .pres-quote figcaption::before{content:'— ';}
-@media (max-width:767px){.pres-brand-word{font-size:2.4rem !important;}}
+@media (max-width:767px){.pres-brand-word{font-size:3.2rem !important;}}
 
 /* ===== Le cœur de Présence : la liberté d'être ===== */
 .lib{background:radial-gradient(ellipse at 20% 0%,rgba(196,165,116,.16),transparent 55%),linear-gradient(160deg,#3D3128 0%,#2C2C2C 100%);color:#F3ECE4;}
@@ -726,12 +726,12 @@ const CHK_G = '<svg class="flex-shrink-0 mt-1" width="18" height="18" viewBox="0
 const probs = [
   ["Vous avez du mal à vous sentir à la hauteur.","Des freins invisibles vous retiennent, vous avez parfois l'impression de vous auto-limiter."],
   ["Vous vous suradaptez aux autres.","Vous avez perdu le contact avec vos vraies envies, vos besoins, votre motivation."],
-  ["Vos heures n'en finissent plus.","Et pourtant la performance n'est pas au rendez-vous. Vous portez trop, vous déléguez peu."],
-  ["Décider et vous positionner est compliqué.","Les arbitrages difficiles attendent, les conversations courageuses sont repoussées."],
+  ["Vous travaillez beaucoup, vos heures s'allongent","et vous avez le sentiment de sacrifier votre vie personnelle et familiale."],
+  ["Vous avez des difficultés à vous positionner clairement, vous doutez beaucoup.","Vous avez tendance à repousser les prises de décision courageuses ou les conversations compliquées."],
   ["Dire « non » vous coûte.","Poser des limites claires, à vos équipes comme à vos pairs, reste difficile."],
-  ["Votre vision ne passe pas.","Elle est là, mais votre parole ne porte pas encore votre ambition, en CODIR comme face aux équipes."],
+  ["Vous avez des difficultés à avoir une parole qui porte","et qui engage les équipes."],
   ["L'IA arrive, et vous voulez en faire un levier.","Pour décider et vous libérer du temps, sans y perdre la dimension humaine."],
-  ["Vous refusez le burn-out comme prix du poste.","Vous ne voulez sacrifier ni votre santé, ni votre vie personnelle."]
+  ["Vous ne voulez plus sacrifier votre santé pour faire de la performance.",""]
 ];
 document.getElementById('probList').innerHTML = probs.map(([t,x])=>`<div class="flex gap-3 items-start">${X_ICON}<p style="color:var(--brown-d);font-size:.9375rem;line-height:1.65;"><b>${t}</b> ${x}</p></div>`).join('');
 
