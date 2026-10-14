@@ -145,23 +145,37 @@ details summary::marker{display:none;}
 details[open] .faq-icon{transform:rotate(45deg);}
 .faq-icon{transition:transform .25s ease;display:inline-block;}
 
-/* ===== Les deux pôles : empathie / autorité ===== */
-.pres-poles{display:grid;gap:1.5rem;}
-@media (min-width:900px){.pres-poles{grid-template-columns:1fr auto 1fr;align-items:stretch;}}
-.pres-pole{background:var(--white);border-radius:1.5rem;padding:2.25rem;box-shadow:0 20px 40px -24px rgba(44,44,44,.25);}
-.pres-pole-kicker{display:block;font-size:.75rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.75rem;}
-.pres-pole-title{font-family:'Playfair Display',Georgia,serif;font-size:1.75rem;line-height:1.2;color:var(--brown-d);margin-bottom:1.25rem;}
-.pres-pole ul{display:grid;gap:.6rem;}
-.pres-pole li{position:relative;padding-left:1.5rem;color:var(--brown-m);line-height:1.6;font-size:1rem;}
-.pres-pole li::before{content:'';position:absolute;left:0;top:.6rem;width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.55;}
-.pres-pole--emp{border-top:4px solid var(--ocre);}
-.pres-pole--emp .pres-pole-kicker,.pres-pole--emp li::before{color:var(--ocre);}
-.pres-pole--aut{border-top:4px solid #A83932;}
-.pres-pole--aut .pres-pole-kicker,.pres-pole--aut li::before{color:#A83932;}
-.pres-axis{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem;padding:1rem 0;}
-.pres-axis-dot{width:84px;height:84px;border-radius:50%;background:var(--brown-d);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:1.05rem;box-shadow:0 0 0 10px rgba(168,57,50,.08);}
-.pres-axis-line{width:2px;flex:1;min-height:28px;background:linear-gradient(180deg,var(--ocre),#A83932);}
-@media (max-width:899px){.pres-axis{flex-direction:row;}.pres-axis-line{width:auto;height:2px;flex:1;background:linear-gradient(90deg,var(--ocre),#A83932);}}
+/* ===== L'équilibre du leader : le juste milieu ===== */
+.eq{max-width:56rem;margin:0 auto;}
+.eq-top{text-align:center;margin-bottom:1.4rem;}
+.eq-top b{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:400;font-size:1.75rem;color:#3D3128;}
+.eq-band{position:relative;height:14px;border-radius:999px;background:linear-gradient(90deg,var(--ocre) 0%,var(--creme-chaude) 38%,#F3ECE4 50%,#E9C9C3 62%,#A83932 100%);}
+.eq-zone{position:absolute;left:38%;right:38%;top:-10px;bottom:-10px;border-radius:999px;border:1.5px dashed rgba(61,49,40,.35);}
+.eq-mark{position:absolute;top:50%;left:50%;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;background:var(--brown-d);box-shadow:0 0 0 8px rgba(255,255,255,.9),0 10px 24px -6px rgba(0,0,0,.35);transition:left 2.2s cubic-bezier(.3,1.3,.4,1) .35s;}
+.eq:not(.in) .eq-mark{left:8%;}
+.eq-mark::after{content:'';position:absolute;inset:11px;border-radius:50%;background:#fff;}
+.eq-ends{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:1.25rem;margin-top:1.9rem;align-items:start;}
+.eq-end .eq-end-t{font-size:.75rem !important;font-weight:700;font-style:normal;letter-spacing:.16em;text-transform:uppercase;margin-bottom:.5rem;}
+.eq-end.l .eq-end-t{color:#9C7F4E;} .eq-end.r{text-align:right;} .eq-end.r .eq-end-t{color:#A83932;}
+.eq-end p{color:#8F8178;font-style:italic;font-size:.94rem;line-height:1.6;}
+.eq-center{text-align:center;color:#3D3128;font-size:1.0625rem;line-height:1.6;}
+.eq-center strong{display:block;font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:1.35rem;color:var(--brown-d);margin-bottom:.25rem;}
+.eq-cols{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3rem;}
+.eq-card{background:#fff;border-radius:1.25rem;padding:1.9rem 1.9rem 1.5rem;box-shadow:0 20px 40px -26px rgba(44,44,44,.3);}
+.eq-card.l{border-left:4px solid var(--ocre);} .eq-card.r{border-right:4px solid #A83932;text-align:right;}
+.eq-card-k{display:block;font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:.5rem;}
+.eq-card.l .eq-card-k{color:#9C7F4E;} .eq-card.r .eq-card-k{color:#A83932;}
+.eq-card h3{font-family:'Playfair Display',Georgia,serif;font-weight:400;font-size:1.45rem;line-height:1.25;color:var(--brown-d);margin-bottom:.9rem;}
+.eq-card li{color:var(--brown-m);line-height:1.6;font-size:1rem;margin-bottom:.45rem;}
+@media (max-width:700px){
+  .eq-ends{grid-template-columns:1fr 1fr;}
+  .eq-center{grid-column:1/-1;order:-1;}
+  .eq-cols{grid-template-columns:1fr;}
+  .eq-card.r{text-align:left;border-right:0;border-left:4px solid #A83932;}
+  .eq-card h3{font-size:1.3rem !important;}
+  .eq-end p:not(.eq-end-t){font-size:.92rem !important;}
+}
+@media (prefers-reduced-motion:reduce){.eq-mark{transition:none !important;} .eq:not(.in) .eq-mark{left:50%;}}
 
 /* ===== Parcours 6 mois ===== */
 .pres-path-list{list-style:none;margin:3rem 0 0;padding:0;display:grid;gap:2rem;position:relative;}
@@ -278,7 +292,7 @@ details[open] .faq-icon{transform:rotate(45deg);}
   </div>
 </section>
 
-<!-- LES DEUX PÔLES -->
+<!-- L'ÉQUILIBRE DU LEADER — le juste milieu -->
 <section class="py-24 relative overflow-hidden" style="background:var(--light-beige);">
   <div class="max-w-6xl mx-auto px-6 lg:px-12">
     <div class="text-center mb-14 reveal">
@@ -286,31 +300,38 @@ details[open] .faq-icon{transform:rotate(45deg);}
       <h2 class="mb-6 title-playfair" style="font-size:clamp(2rem,4vw,2.75rem);font-weight:700;color:var(--brown-d);">Leader empathique <span style="color:#A83932;font-style:italic;">et</span> leader d'autorité</h2>
       <p class="max-w-2xl mx-auto" style="color:var(--brown-m);font-size:1.125rem;line-height:1.7;">On vous a souvent demandé de choisir. Les dirigeants qui marquent tiennent les deux. C'est précisément ce que nous travaillons.</p>
     </div>
-    <div class="pres-poles reveal">
-      <div class="pres-pole pres-pole--emp">
-        <span class="pres-pole-kicker">Le pôle empathie</span>
-        <h3 class="pres-pole-title">Écouter, relier, faire grandir</h3>
-        <ul>
-          <li>Intelligence émotionnelle : lire ce qui se joue, chez vous et dans l'équipe</li>
-          <li>Écoute et valorisation des collaborateurs</li>
-          <li>Sensibilité assumée comme un atout de direction</li>
-          <li>Déléguer et laisser grandir en responsabilité</li>
-        </ul>
+    <div class="eq reveal">
+      <div class="eq-top"><b>Présence</b></div>
+      <div class="eq-band" role="img" aria-label="Un curseur placé au centre, entre trop d'empathie et trop d'autorité">
+        <span class="eq-zone"></span>
+        <span class="eq-mark"></span>
       </div>
-      <div class="pres-axis" aria-hidden="true">
-        <span class="pres-axis-line"></span>
-        <span class="pres-axis-dot">Présence</span>
-        <span class="pres-axis-line"></span>
+      <div class="eq-ends">
+        <div class="eq-end l"><p class="eq-end-t">Trop d'empathie</p><p>Suradaptation · se diluer · éviter le conflit · tout porter seul</p></div>
+        <div class="eq-center"><strong>Le juste équilibre</strong>Écouter sans se diluer. Trancher sans se fermer.</div>
+        <div class="eq-end r"><p class="eq-end-t">Trop d'autorité</p><p>Rigidité · dureté · contrôle · isolement</p></div>
       </div>
-      <div class="pres-pole pres-pole--aut">
-        <span class="pres-pole-kicker">Le pôle autorité</span>
-        <h3 class="pres-pole-title">Décider, trancher, porter</h3>
-        <ul>
-          <li>Une vision forte, formulée et incarnée</li>
-          <li>Courage managérial : conversations difficiles, recadrages, arbitrages</li>
-          <li>Dire non, poser des limites, se positionner</li>
-          <li>Processus, optimisation et IA au service de la performance</li>
-        </ul>
+      <div class="eq-cols">
+        <div class="eq-card l">
+          <span class="eq-card-k">Le pôle empathie</span>
+          <h3>Écouter, relier, faire grandir</h3>
+          <ul>
+            <li>Intelligence émotionnelle : lire ce qui se joue, chez vous et dans l'équipe</li>
+            <li>Écoute et valorisation des collaborateurs</li>
+            <li>Sensibilité assumée comme un atout de direction</li>
+            <li>Déléguer et laisser grandir en responsabilité</li>
+          </ul>
+        </div>
+        <div class="eq-card r">
+          <span class="eq-card-k">Le pôle autorité</span>
+          <h3>Décider, trancher, porter</h3>
+          <ul>
+            <li>Une vision forte, formulée et incarnée</li>
+            <li>Courage managérial : conversations difficiles, recadrages, arbitrages</li>
+            <li>Dire non, poser des limites, se positionner</li>
+            <li>Processus, optimisation et IA au service de la performance</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
