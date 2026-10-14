@@ -869,16 +869,15 @@ document.getElementById('whoFor').innerHTML = who.map(([ic,t,d])=>`<div class="b
 
 // BÉNÉFICES
 const benefits = [
-  ["Une place prise, pas demandée","Vous occupez votre poste pleinement, sans vous excuser d'exister ni écraser les autres."],
-  ["Une vision formulée et portée","Vous savez où vous allez, vous le dites en quelques phrases, et vos équipes l'entendent."],
-  ["Du courage managérial","Les conversations difficiles ont lieu, les décisions se prennent, les limites se posent, sans dureté."],
-  ["Une parole qui porte","En CODIR, en plénière, en interview : votre présence et votre voix servent votre propos."],
-  ["Une énergie orientée, une charge qui redescend","Vous mettez votre énergie là où elle compte, vous déléguez davantage, et votre agenda reflète enfin votre valeur ajoutée."],
-  ["L'IA à votre service","Pour décider, vous préparer et vous libérer du temps, avec des règles claires sur ce que vous ne lui confiez jamais."],
-  ["Des habitudes qui portent votre performance","Sommeil, énergie, rituels de décision et de recul : votre performance repose sur ce que vous répétez, pas sur l'effort de trop."],
-  ["Une autorité qui vient de l'intérieur","Elle ne vacille pas quand l'enjeu monte, parce qu'elle ne dépend plus de la technique."]
+  ["Vous ne mendiez plus votre place, vous l'incarnez","Vous occupez votre poste pleinement, sans vous excuser d'exister et sans écraser les autres. Vous vous sentez pleinement légitime."],
+  ["Vous développez un positionnement clair","Vous savez où vous allez, vous avez confiance dans vos choix et vos décisions. Vous retrouvez votre pouvoir."],
+  ["Vous savez faire preuve de courage managérial","Que ce soit pour gérer les conversations difficiles ou pour trancher et faire preuve d'autorité."],
+  ["Vous performez différemment","Non plus sur le mode du « soi parfait », mais en repartant de vos besoins et de ce qui vous anime vraiment."],
+  ["Vous vous appuyez sur des habitudes pérennes qui portent votre performance","Sommeil, énergie, rituels de décision et de recul. Vous mettez en place une discipline sans vous nier."],
+  ["Vous structurez votre temps différemment","Vous savez déléguer et faire confiance de manière éclairée pour vous décharger. Votre agenda reflète votre valeur ajoutée."],
+  ["Vous développez votre autorité","Vous savez trancher et maintenir un cadre au sein duquel vos équipes peuvent évoluer."]
 ];
-document.getElementById('benefits').innerHTML = benefits.map(([t,x])=>`<div class="flex gap-3 items-start">${CHK_G}<p style="color:var(--brown-d);font-size:.9375rem;line-height:1.65;"><b>${t}</b> : ${x}</p></div>`).join('');
+document.getElementById('benefits').innerHTML = benefits.map(([t,x])=>`<div class="flex gap-3 items-start">${CHK_G}<p style="color:var(--brown-d);font-size:.9375rem;line-height:1.65;"><b>${t}</b>&nbsp;: ${x}</p></div>`).join('');
 
 // LIVRABLES
 const livrables = [
