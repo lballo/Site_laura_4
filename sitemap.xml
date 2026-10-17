@@ -167,6 +167,12 @@
 
   <!-- Articles de blog -->
   <url>
+    <loc>https://lauraballo.com/singularite-questionner-les-codes-leadership</loc>
+    <lastmod>2026-10-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://lauraballo.com/prise-de-parole-et-emotions</loc>
     <lastmod>2026-05-22</lastmod>
     <changefreq>monthly</changefreq>
@@ -282,12 +288,6 @@
   </url>
   <url>
     <loc>https://lauraballo.com/comprendre-le-trac-au-travers-des-neurosciences</loc>
-    <lastmod>2026-05-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://lauraballo.com/depasser_croyances_limitantes</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
