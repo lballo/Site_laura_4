@@ -21,6 +21,10 @@
       "label": "Gestion des conflits"
     },
     {
+      "slug": "gestion-du-changement",
+      "label": "Gestion du changement"
+    },
+    {
       "slug": "gestion-des-emotions",
       "label": "Gestion des émotions"
     },
@@ -46,6 +50,36 @@
     }
   ],
   "articles": [
+    {
+      "id": "singularite-questionner-les-codes-leadership",
+      "title": "Et si la clé du changement était la singularité?",
+      "slug": "singularite-questionner-les-codes-leadership",
+      "url": "/singularite-questionner-les-codes-leadership",
+      "date": "2026-10-17",
+      "readingTime": "6 min",
+      "excerpt": "« C'est comme ça, ça a toujours été comme ça » ? La singularité permet de questionner les codes de la société et des organisations, jusqu'à la place des émotions dans le leadership.",
+      "tags": [
+        "leadership",
+        "intelligence-emotionnelle",
+        "gestion-du-changement",
+        "culture"
+      ],
+      "situations": [
+        "leadership",
+        "positionnement"
+      ],
+      "searchKeywords": [
+        "singularité",
+        "et",
+        "leadership",
+        "clé",
+        "changement",
+        "était"
+      ],
+      "category": "Leadership",
+      "image": "",
+      "featured": false
+    },
     {
       "id": "prise-de-parole-et-emotions",
       "title": "Prise de parole et émotions",
@@ -602,35 +636,6 @@
       ],
       "category": "Prise de parole en public",
       "image": "/assets/img/blog/comprendre-le-trac-au-travers-des-neurosciences-main.webp",
-      "featured": false
-    },
-    {
-      "id": "depasser_croyances_limitantes",
-      "title": "Croyances limitantes : les dépasser en prise de parole",
-      "slug": "depasser_croyances_limitantes",
-      "url": "/depasser_croyances_limitantes",
-      "date": "2026-05-05",
-      "readingTime": "5 min",
-      "excerpt": "Les croyances limitantes... 'Je n'y arriverai jamais', 'je ne suis pas assez bon'... elles ont le pouvoir de limiter considérablement notre capacité d'action.",
-      "tags": [
-        "prise-de-parole",
-        "affirmation-de-soi",
-        "gestion-des-emotions"
-      ],
-      "situations": [
-        "jugement",
-        "stress",
-        "comprehension"
-      ],
-      "searchKeywords": [
-        "croyances",
-        "limitantes",
-        "dépasser",
-        "prise",
-        "parole"
-      ],
-      "category": "Prise de parole en public",
-      "image": "/assets/img/blog/depasser_croyances_limitantes-main.webp",
       "featured": false
     },
     {
