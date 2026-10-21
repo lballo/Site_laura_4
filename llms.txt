@@ -11,11 +11,10 @@ Son approche centrale est la **méthode de mise en résonance** : lier autorité
 ## Pages principales
 
 - [Accueil](https://lauraballo.com/) : présentation de l'approche coaching leadership premium, programmes disponibles, témoignages clients, FAQ
-- [Coaching présence oratoire — Accompagnement confidentiel](https://lauraballo.com/accompagnements/mentorat.html) : accompagnement 1:1 sur-mesure pour dirigeants et personnalités publiques. Storytelling, incarnation, autorité oratoire. Confidentialité absolue.
-- [Préparation flash prise de parole](https://lauraballo.com/accompagnements/preparation-flash) : 3 à 4 sessions intensives pour une prise de parole en public réussie
+- [Présence oratoire signature — Accompagnement confidentiel](https://lauraballo.com/accompagnements/presence-oratoire-signature) : accompagnement 1:1 sur-mesure pour dirigeants et personnalités publiques. Storytelling, incarnation, autorité oratoire. Confidentialité absolue.
 - [Conférences inspirantes](https://lauraballo.com/conferences-inspirantes) : conférences en entreprise sur la prise de parole, le storytelling incarné, le leadership sensible, la gestion des conflits, l'affirmation de soi
-- [Quiz hypersensibilité](https://lauraballo.com/quizz/hypersensibilite.html) : test de personnalité en 30 questions pour découvrir son profil de sensibilité émotionnelle
-- [Blog](https://lauraballo.com/blog/) : articles sur le leadership, l'intelligence émotionnelle, la prise de parole, la psychologie cognitive, la gestion des émotions
+- [Quiz hypersensibilité](https://lauraballo.com/quizz/hypersensibilite) : test de personnalité en 30 questions pour découvrir son profil de sensibilité émotionnelle
+- [Blog](https://lauraballo.com/blog) : articles sur le leadership, l'intelligence émotionnelle, la prise de parole, la psychologie cognitive, la gestion des émotions
 
 ## Thématiques de contenu
 
@@ -30,7 +29,6 @@ Son approche centrale est la **méthode de mise en résonance** : lier autorité
 ## Formats d'accompagnement
 
 - Coaching individuel 1:1 confidentiel (4 à 8 mois)
-- Préparation flash prise de parole (3-4 sessions)
 - Conférences d'entreprise (30 min à 2h, présentiel ou distanciel)
 - Formations B2B (équipes, comités de direction)
 

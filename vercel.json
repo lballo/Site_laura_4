@@ -2,6 +2,13 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
+    { "source": "/accompagnements/mentorat", "destination": "/accompagnements/presence-oratoire-signature", "statusCode": 301 },
+    { "source": "/accompagnements/mentorat.html", "destination": "/accompagnements/presence-oratoire-signature", "statusCode": 301 },
+    { "source": "/mentorat", "destination": "/accompagnements/presence-oratoire-signature", "statusCode": 301 },
+    { "source": "/presence-oratoire-confidentiel", "destination": "/accompagnements/presence-oratoire-signature", "statusCode": 301 },
+    { "source": "/accompagnements/preparation-flash", "destination": "/accompagnements/presence-oratoire-signature", "statusCode": 301 },
+    { "source": "/accompagnements/preparation-flash.html", "destination": "/accompagnements/presence-oratoire-signature", "statusCode": 301 },
+    { "source": "/preparation-prise-de-parole-flash", "destination": "/accompagnements/presence-oratoire-signature", "statusCode": 301 },
     {
       "source": "/blog/articles/:slug.html",
       "destination": "/:slug",

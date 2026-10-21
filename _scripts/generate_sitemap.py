@@ -41,6 +41,13 @@ EXCLUDED_FILES = {
     "template-accompagnement.html",
 }
 
+# Dossiers exclus dès la racine : assets/ ne contient que des fragments
+# (menu, pied de page, bannière cookies) injectés par includes.js
+EXCLUDED_ROOT_DIRS = {"assets"}
+
+# Fichier de validation Google Search Console (google<code>.html)
+GOOGLE_VERIFICATION_PREFIX = "google"
+
 # Priorités et fréquences par dossier (ordre : du plus spécifique au plus général)
 PRIORITIES = [
     ("index.html",      "weekly",  "1.0"),   # racine
@@ -56,27 +63,37 @@ DEFAULT_PRIORITY = ("monthly", "0.6")
 # ─────────────────────────────────────────────────────────
 # SCAN DES PAGES STATIQUES
 # ─────────────────────────────────────────────────────────
+def clean_url(path_str):
+    """Adresse servie par Vercel (cleanUrls + trailingSlash: false) :
+    index.html → /, blog/index.html → /blog, legal/cgv.html → /legal/cgv."""
+    if path_str == "index.html":
+        return "/"
+    if path_str.endswith("/index.html"):
+        return "/" + path_str[: -len("/index.html")]
+    return "/" + path_str[: -len(".html")]
+
+
 def discover_static_pages():
     pages = []
     root = Path(".")
 
     for html_file in sorted(root.rglob("*.html")):
-        path_str = str(html_file).replace("\\", "/").lstrip("./")
+        path_str = html_file.as_posix()
 
         # Exclure dossiers/fichiers blacklistés
         if any(excl in path_str for excl in EXCLUDED_PATHS):
             continue
         if any(part.startswith((".", "_")) for part in html_file.parts):
             continue
+        if html_file.parts[0] in EXCLUDED_ROOT_DIRS:
+            continue
         if html_file.name in EXCLUDED_FILES:
             continue
+        if len(html_file.parts) == 1 and html_file.name.startswith(GOOGLE_VERIFICATION_PREFIX):
+            continue
 
-        # Construire l'URL propre
-        loc = "/" + path_str
-        if loc.endswith("/index.html"):
-            loc = loc[: -len("index.html")]   # /blog/index.html → /blog/
-        elif loc == "/index.html":
-            loc = "/"
+        # Construire l'URL propre (sans .html ni barre finale)
+        loc = clean_url(path_str)
 
         # Déterminer changefreq et priority
         changefreq, priority = DEFAULT_PRIORITY
@@ -85,9 +102,43 @@ def discover_static_pages():
                 changefreq, priority = cf, prio
                 break
 
-        pages.append({"loc": loc, "changefreq": changefreq, "priority": priority})
+        pages.append({
+            "loc": loc,
+            "file": path_str,
+            "changefreq": changefreq,
+            "priority": priority,
+        })
 
     return pages
+
+
+# ─────────────────────────────────────────────────────────
+# DATE DE DERNIÈRE MODIFICATION (lastmod)
+# ─────────────────────────────────────────────────────────
+def ensure_git_history():
+    """Le checkout de GitHub Actions est superficiel (1 commit) : sans historique,
+    toutes les pages auraient la date du dernier commit. On le complète si besoin."""
+    try:
+        shallow = subprocess.run(
+            ["git", "rev-parse", "--is-shallow-repository"],
+            capture_output=True, text=True,
+        ).stdout.strip()
+        if shallow == "true":
+            subprocess.run(["git", "fetch", "--unshallow", "--quiet"], check=False)
+    except FileNotFoundError:
+        pass
+
+
+def git_lastmod(path):
+    """Date (AAAA-MM-JJ) du dernier commit qui a modifié ce fichier, ou None."""
+    try:
+        out = subprocess.run(
+            ["git", "log", "-1", "--format=%cs", "--", path],
+            capture_output=True, text=True,
+        ).stdout.strip()
+        return out or None
+    except FileNotFoundError:
+        return None
 
 
 # ─────────────────────────────────────────────────────────
@@ -117,10 +168,11 @@ def generate_sitemap(static_pages, articles):
     lines.append("")
     lines.append("  <!-- Pages statiques -->")
     for page in static_pages:
+        lastmod = git_lastmod(page["file"]) or today
         lines += [
             "  <url>",
             f"    <loc>{SITE_URL}{page['loc']}</loc>",
-            f"    <lastmod>{today}</lastmod>",
+            f"    <lastmod>{lastmod}</lastmod>",
             f"    <changefreq>{page['changefreq']}</changefreq>",
             f"    <priority>{page['priority']}</priority>",
             "  </url>",
@@ -131,9 +183,10 @@ def generate_sitemap(static_pages, articles):
     lines.append("  <!-- Articles de blog -->")
     for article in sorted(articles, key=lambda a: a.get("date", ""), reverse=True):
         slug = article.get("slug", "")
-        date = article.get("date", today)
         if not slug:
             continue
+        # Date de la dernière modification du fichier publié, à défaut date de publication
+        date = git_lastmod(f"blog/articles/{slug}.html") or article.get("date", today)
         lines += [
             "  <url>",
             f"    <loc>{SITE_URL}/{slug}</loc>",
@@ -173,6 +226,8 @@ def main():
     print("═" * 55)
     print("  Sitemap Generator")
     print("═" * 55)
+
+    ensure_git_history()
 
     static_pages = discover_static_pages()
     print(f"📄 {len(static_pages)} pages statiques trouvées")
