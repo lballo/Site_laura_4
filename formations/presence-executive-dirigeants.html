@@ -1,7 +1,16 @@
 <!DOCTYPE html>
 <!-- Page générée depuis Notion par _scripts/publish_formations.py : ne pas modifier à la main.
-     Pour changer le contenu : éditer la fiche Notion et passer son statut à « À modifier » (régénération chaque matin à 8h).
-     Pour changer la mise en page : éditer le gabarit _templates/formation.html (régénération de toutes les fiches au push). -->
+     Gabarit « Premium », utilisé par les fiches dont la propriété Notion « Gabarit » vaut « Premium »
+     (aujourd'hui : PE-01 Présence exécutive). Les autres fiches gardent _templates/formation.html.
+
+     Ce qui vient de la fiche Notion (régénéré à chaque publication) :
+       titre et sous-titre (« Nom de la formation », coupé au tiret long), Accroche, déclinaisons,
+       socle commun, modules complémentaires et configurations (propriété « Contenu de formation »),
+       objectifs, public, prérequis, modalités, méthodes, évaluation, sanction, périmètre du forfait,
+       durée, nombre de participants, code, niveau, date de mise à jour, programme PDF, avis.
+     Ce qui vient de 🏛️ Mon organisme : modalités et délais d'accès, accessibilité, contact, NDA.
+     Ce qui est écrit ici : le texte éditorial (conviction, méthode Présence, cinq étapes, cycle
+     d'apprentissage, cadre et confidentialité, présentation de Laura Ballo, logos clients). -->
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -13,7 +22,11 @@
     <meta property="og:title" content="Présence exécutive : programme leadership dirigeants et CODIR">
     <meta property="og:description" content="Programme de leadership sur plusieurs mois pour dirigeants, CODIR et hauts potentiels : décider, incarner, mobiliser. Modules choisis selon vos enjeux, en intra.">
     <meta property="og:url" content="https://lauraballo.com/formations/presence-executive-dirigeants">
+    <meta property="og:image" content="https://lauraballo.com/assets/img/conference-hero.webp">
     <meta property="og:locale" content="fr_FR">
+    <meta name="theme-color" content="#1F1A16">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "Course",
@@ -28,9 +41,9 @@
   },
   "offers": {
     "@type": "Offer",
-    "price": "4500",
     "priceCurrency": "EUR",
-    "category": "Intra-entreprise"
+    "category": "Intra-entreprise",
+    "description": "Sur devis, après l'entretien de cadrage"
   },
   "hasCourseInstance": {
     "@type": "CourseInstance",
@@ -38,821 +51,710 @@
     "courseWorkload": "PT42H"
   }
 }</script>
+    <link rel="preload" as="image" href="/assets/img/conference-hero.webp" fetchpriority="high">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/footer.css">
+    <link rel="stylesheet" href="/assets/css/cookies.css">
     <style>
         /* ============================================
-           VARIABLES (Charte Laura Ballo adaptée)
+           PRÉSENCE EXÉCUTIVE — gabarit premium
+           Valeurs reprises de la maquette Claude Design
            ============================================ */
         :root {
-            --black: #1A1A1A;
+            --pe-ink: #1F1A16;
+            --pe-cream: #FAF4EF;
+            --pe-sand: #F2EAE2;
+            --pe-linen: #EFE6DC;
+            --pe-paper: #FFFDFB;
+            --pe-white: #FFFFFF;
+            --pe-gold: #C4A574;
+            --pe-gold-deep: #7D6233;
+            --pe-accent: #A83932;
+            --pe-accent-hover: #8C2E28;
+
+            --pe-text: #2C2C2C;
+            --pe-body: #4A423C;
+            --pe-list: #3F3A36;
+            --pe-muted: #6C6059;
+            --pe-on-dark: #FAF4EF;
+            --pe-on-dark-2: #E8DDD6;
+            --pe-on-dark-italic: #E0D3BD;
+            --pe-on-dark-body: #CDBFAF;
+            --pe-on-dark-muted: #AFA098;
+
+            --pe-line: #E0D3BD;
+            --pe-line-soft: #E8DDD6;
+            --pe-line-sand: #D9CBBC;
+
+            --pe-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+            --pe-sans: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
+            --pe-gutter: clamp(20px, 4vw, 40px);
+
+            /* Variables attendues par le pied de page, la bannière cookies
+               et l'encart « Résultats » partagés avec le reste du site */
+            --black: #171310;
             --white: #FFFFFF;
-            --light-beige: #FBF4EE;
-            --warm-beige: #E8DDD6;
-            --warm-gray: #6B6560;
-            --text-dark: #2C2C2C;
-            --text-muted: #8A8A8A;
             --accent: #C4A574;
-            --accent-light: #D4B894;
-            --accent-dark: #A68B5B;
-            --pop-red: #B8534A;
-            --success: #7BA05B;
-
-            --font-heading: 'DM Serif Display', Georgia, serif;
-            --font-body: 'DM Sans', system-ui, sans-serif;
-
+            --accent-dark: #7D6233;
+            --light-beige: #FAF4EF;
+            --warm-beige: #E8DDD6;
+            --warm-gray: #6C6059;
+            --text-muted: #8A8079;
+            --font-heading: var(--pe-serif);
+            --font-body: var(--pe-sans);
+            --transition-base: 0.3s ease;
             --space-xs: 8px;
             --space-sm: 16px;
             --space-md: 24px;
-            --space-lg: 40px;
-            --space-xl: 60px;
-            --space-xxl: 100px;
-
-            --transition-base: 0.3s ease;
-            --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
-            --shadow-md: 0 8px 24px rgba(0,0,0,0.08);
-            --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
-
-            --sidebar-width: 520px;
+            --space-lg: 32px;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
-            font-family: var(--font-body);
-            background: var(--white);
-            color: var(--text-dark);
-            line-height: 1.6;
+            margin: 0;
+            background: var(--pe-ink);
+            font-family: var(--pe-sans);
+            color: var(--pe-text);
             -webkit-font-smoothing: antialiased;
+            text-wrap: pretty;
         }
+        img { max-width: 100%; }
+        h1, h2, h3, h4, p, ul, ol, dl, dd, blockquote, figure { margin: 0; }
+        .pe-page a { color: var(--pe-accent); }
+        .pe-page a:hover { color: var(--pe-accent-hover); }
+        .footer a { text-decoration: none; }
+        :focus-visible { outline: 2px solid var(--pe-gold); outline-offset: 3px; }
 
-        /* ============================================
-           HERO SECTION
-           ============================================ */
-        .hero {
-            background: linear-gradient(135deg, var(--black) 0%, #2a2a2a 100%);
-            padding: var(--space-xl) var(--space-xl) var(--space-lg);
-            color: var(--white);
-            position: relative;
-            overflow: hidden;
+        .pe-page { background: var(--pe-cream); }
+        .pe-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: var(--pe-gutter);
+            padding-right: var(--pe-gutter);
         }
+        .pe-pad { padding-top: 88px; padding-bottom: 88px; }
+        .pe-dark { background: var(--pe-ink); color: var(--pe-on-dark); }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 50%;
-            height: 100%;
-            background: radial-gradient(ellipse at top right, rgba(196, 165, 116, 0.15) 0%, transparent 60%);
-        }
-
-        .hero-container {
-            max-width: 900px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            background: var(--accent);
-            color: var(--black);
-            font-size: 0.7rem;
-            font-weight: 600;
+        /* ---------- Typographie commune ---------- */
+        .pe-eyebrow {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 6px 14px;
-            border-radius: 4px;
-            margin-bottom: var(--space-md);
+            color: var(--pe-gold-deep);
         }
-
-        .hero-title {
-            font-family: var(--font-heading);
-            font-size: 2.8rem;
+        .pe-dark .pe-eyebrow, .pe-hero .pe-eyebrow { color: var(--pe-gold); }
+        .pe-label {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--pe-text);
+        }
+        .pe-dark .pe-label { color: var(--pe-on-dark); }
+        .pe-h2 {
+            margin-top: 16px;
+            font-family: var(--pe-serif);
             font-weight: 400;
+            font-size: clamp(30px, 3.2vw, 44px);
             line-height: 1.15;
-            margin-bottom: var(--space-sm);
+            color: var(--pe-text);
         }
-
-        .hero-subtitle {
-            font-size: 1.1rem;
-            font-weight: 400;
-            color: var(--accent-light);
-            margin-bottom: var(--space-md);
-        }
-
-        .hero-rating {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-sm);
-            margin-bottom: var(--space-lg);
-            color: inherit;
-            text-decoration: none;
-        }
-        .hero-rating:hover .rating-score { text-decoration: underline; text-underline-offset: 3px; }
-
-        .stars {
-            display: flex;
-            gap: 2px;
-        }
-
-        .star {
-            color: #F5A623;
-            font-size: 1rem;
-        }
-
-        .rating-score {
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-
-        .rating-count {
-            color: rgba(255,255,255,0.6);
-            font-size: 0.85rem;
-        }
-
-        .hero-meta {
+        .pe-dark .pe-h2 { color: var(--pe-on-dark); }
+        .pe-section-head {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--space-lg);
-            padding-top: var(--space-md);
-            border-top: 1px solid rgba(255,255,255,0.1);
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 20px 48px;
         }
+        .pe-section-head > div { flex: 1 1 520px; min-width: 0; }
+        .pe-section-intro {
+            flex: 1 1 360px;
+            max-width: 460px;
+            font-size: 16px;
+            line-height: 1.65;
+            color: var(--pe-muted);
+        }
+        .pe-dark .pe-section-intro { color: var(--pe-on-dark-body); }
 
-        .hero-meta-item {
+        .pe-dash-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+        .pe-dash-list li {
             display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.8);
+            gap: 12px;
+            font-size: 15px;
+            line-height: 1.55;
+            color: var(--pe-list);
         }
-
-        .hero-meta-icon {
-            width: 20px;
-            height: 20px;
-            opacity: 0.6;
+        .pe-dash-list li::before {
+            content: "";
+            flex: none;
+            width: 12px;
+            height: 1px;
+            margin-top: 11px;
+            background: var(--pe-gold);
         }
+        .pe-dash-list.pe-dash-deep li::before { background: var(--pe-gold-deep); }
 
-        /* ============================================
-           MAIN LAYOUT
-           ============================================ */
-        .main-layout {
-            display: grid;
-            grid-template-columns: 1fr var(--sidebar-width);
-            gap: 0;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .content-area {
-            padding: var(--space-xl);
-        }
-
-        /* ============================================
-           SIDEBAR
-           ============================================ */
-        .sidebar {
-            background: #FFFFFF;
-        }
-
-        .sidebar-inner {
-            position: sticky;
-            top: 40px;
-            padding: var(--space-lg);
-        }
-
-        .sidebar-card {
-            background: var(--white);
-            border-radius: 12px;
-            box-shadow: var(--shadow-lg);
-            overflow: hidden;
-            border: 1px solid var(--warm-beige);
-        }
-
-        /* Tabs Inter/Intra */
-        .tarif-tabs {
-            display: flex;
-            background: var(--black);
-        }
-
-        .tarif-tab {
-            flex: 1;
-            padding: var(--space-sm) var(--space-md);
-            text-align: center;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            cursor: pointer;
-            transition: all var(--transition-base);
-            color: rgba(255,255,255,0.5);
-            background: transparent;
-            border: none;
-        }
-
-        .tarif-tab.active {
-            color: var(--white);
-            background: rgba(255,255,255,0.1);
-        }
-
-        .tarif-tab:hover:not(.active) {
-            color: rgba(255,255,255,0.8);
-        }
-
-        .tarif-format {
-            background: var(--black);
-            color: var(--white);
-            text-align: center;
-            padding: var(--space-sm);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .sidebar-content {
-            padding: var(--space-md);
-        }
-
-        .sidebar-row {
-            display: flex;
-            align-items: flex-start;
-            padding: var(--space-sm) 0;
-            border-bottom: 1px solid var(--warm-beige);
-        }
-
-        .sidebar-row:last-child {
-            border-bottom: none;
-        }
-
-        .sidebar-icon {
-            width: 20px;
-            margin-right: 12px;
-            color: var(--warm-gray);
-            flex-shrink: 0;
-        }
-
-        .sidebar-label {
-            font-size: 0.85rem;
-            color: var(--warm-gray);
-            min-width: 80px;
-        }
-
-        .sidebar-value {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--black);
-            margin-left: auto;
-            text-align: right;
-        }
-
-        .sidebar-value.price {
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        .sidebar-value small {
-            font-size: 0.85rem;
-            font-weight: 400;
-            color: var(--warm-gray);
-        }
-
-        .sidebar-subinfo {
-            font-size: 0.8rem;
-            color: var(--warm-gray);
-            text-align: right;
-            margin-top: 2px;
-        }
-
-        /* Tarif content for tabs */
-        .tarif-content {
-            display: none;
-        }
-
-        .tarif-content.active {
-            display: block;
-        }
-
-        /* CTAs */
-        .sidebar-ctas {
-            padding: var(--space-md);
-            padding-top: 0;
-        }
-
-        .btn-primary {
-            display: block;
-            width: 100%;
-            padding: 14px var(--space-md);
-            background: var(--accent);
-            color: var(--black);
-            text-align: center;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all var(--transition-base);
-            margin-bottom: var(--space-sm);
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn-primary:hover {
-            background: var(--accent-dark);
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            display: block;
-            width: 100%;
-            padding: 12px var(--space-md);
-            background: transparent;
-            color: var(--text-dark);
-            text-align: center;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            text-decoration: none;
-            transition: all var(--transition-base);
-            border: 1px solid var(--warm-beige);
-            cursor: pointer;
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--black);
-            background: var(--light-beige);
-        }
-
-        .btn-link {
-            display: block;
-            text-align: center;
-            padding: var(--space-sm);
-            font-size: 0.85rem;
-            color: var(--text-dark);
-            text-decoration: underline;
-            text-underline-offset: 3px;
-        }
-
-        .btn-link:hover {
-            color: var(--accent-dark);
-        }
-
-        /* Share icons */
-        .sidebar-share {
-            display: flex;
-            justify-content: center;
-            gap: var(--space-sm);
-            padding: var(--space-md);
-            border-top: 1px solid var(--warm-beige);
-        }
-
-        .share-btn {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            border: 1px solid var(--warm-beige);
-            display: flex;
+        /* ---------- Boutons ---------- */
+        .pe-btn {
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            color: var(--text-dark);
-            transition: all var(--transition-base);
-            background: transparent;
-            cursor: pointer;
+            min-height: 54px;
+            padding: 0 28px;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
         }
-
-        .share-btn:hover {
-            background: var(--black);
-            color: var(--white);
-            border-color: var(--black);
-        }
+        .pe-page a.pe-btn-accent, .pe-page a.pe-btn-accent:hover { color: var(--pe-white); }
+        .pe-btn-accent { background: var(--pe-accent); }
+        .pe-btn-accent:hover { background: var(--pe-accent-hover); }
+        .pe-page a.pe-btn-ghost, .pe-page a.pe-btn-ghost:hover { color: var(--pe-on-dark); }
+        .pe-btn-ghost { border: 1px solid rgba(250, 244, 239, 0.55); }
+        .pe-btn-ghost:hover { border-color: var(--pe-gold); background: rgba(250, 244, 239, 0.06); }
+        .pe-actions { display: flex; flex-wrap: wrap; gap: 14px; }
 
         /* ============================================
-           CONTENT SECTIONS
+           HERO
            ============================================ */
-        .section {
-            margin-bottom: var(--space-xl);
-        }
-
-        .section-title {
-            font-family: var(--font-heading);
-            font-size: 1.6rem;
-            font-weight: 400;
-            color: var(--black);
-            margin-bottom: var(--space-md);
-        }
-
-        /* Présentation */
-        .presentation-box {
-            background: var(--light-beige);
-            border-radius: 12px;
-            padding: var(--space-lg);
-            border: 1px solid var(--warm-beige);
-        }
-
-        .presentation-text {
-            font-size: 1rem;
-            line-height: 1.8;
-            color: var(--text-dark);
-        }
-
-        .presentation-text p {
-            margin-bottom: var(--space-md);
-        }
-
-        .presentation-text p:last-child {
-            margin-bottom: 0;
-        }
-
-        /* A qui s'adresse */
-        .audience-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--space-lg);
-            background: var(--light-beige);
-            border-radius: 12px;
-            padding: var(--space-lg);
-        }
-
-        .audience-column h4 {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: var(--space-md);
-            color: var(--black);
-        }
-
-        .audience-column h4 svg {
-            width: 20px;
-            height: 20px;
-            color: var(--warm-gray);
-        }
-
-        .audience-list {
-            list-style: none;
-        }
-
-        .audience-list li {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            padding: 8px 0;
-            font-size: 0.95rem;
-            color: var(--text-dark);
-        }
-
-        .audience-list .bullet {
-            color: var(--accent);
-            font-weight: bold;
-        }
-
-        .prerequis-text {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.95rem;
-            color: var(--text-dark);
-        }
-
-        .prerequis-text .bullet {
-            color: var(--success);
-        }
-
-        /* Programme */
-        .programme-phase {
-            margin-bottom: var(--space-lg);
-        }
-
-        .phase-header {
-            display: flex;
-            align-items: center;
-            background: var(--black);
-            border-radius: 8px;
-            overflow: hidden;
-            margin-bottom: var(--space-md);
-        }
-
-        .phase-number {
-            background: var(--accent);
-            color: var(--black);
-            font-size: 1.1rem;
-            font-weight: 700;
-            padding: 14px 20px;
-            min-width: 60px;
-            text-align: center;
-        }
-
-        .phase-title {
-            color: var(--white);
-            font-size: 1rem;
-            font-weight: 500;
-            padding: 14px 20px;
-        }
-
-        .phase-content {
-            padding-left: var(--space-md);
-        }
-
-        .phase-items {
-            list-style: none;
-        }
-
-        .phase-items > li {
-            padding: var(--space-sm) 0;
-            border-bottom: 1px solid var(--warm-beige);
-        }
-
-        .phase-items > li:last-child {
-            border-bottom: none;
-        }
-
-        .phase-item-text {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            font-size: 0.95rem;
-            color: var(--text-dark);
-        }
-
-        .phase-item-text .chevron {
-            color: var(--accent);
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-
-        /* Module dans le programme */
-        .module-block {
-            background: var(--light-beige);
-            border-radius: 8px;
-            padding: var(--space-md);
-            margin-bottom: var(--space-md);
-        }
-
-        .module-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: var(--space-sm);
-            padding-bottom: var(--space-sm);
-            border-bottom: 1px solid var(--warm-beige);
-        }
-
-        .module-number {
-            background: var(--warm-gray);
-            color: var(--white);
-            font-size: 0.75rem;
-            font-weight: 600;
-            padding: 4px 10px;
-            border-radius: 4px;
-        }
-
-        .module-title {
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: var(--black);
-        }
-
-        .module-items {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .module-items li {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            padding: 6px 0;
-            font-size: 0.9rem;
-            color: var(--warm-gray);
-        }
-
-        .module-items .chevron {
-            color: var(--accent);
-            flex-shrink: 0;
-            font-size: 0.8rem;
-            margin-top: 3px;
-        }
-
-        .mise-en-situation {
-            margin-top: var(--space-sm);
-            padding-top: var(--space-sm);
-            border-top: 1px dashed var(--warm-beige);
-            font-size: 0.85rem;
-            color: var(--warm-gray);
-        }
-
-        .mise-en-situation strong {
-            color: var(--text-dark);
-        }
-
-        /* Objectifs */
-        .objectifs-box {
-            background: var(--black);
-            border-radius: 12px;
-            padding: var(--space-lg);
-            color: var(--white);
+        .pe-hero {
             position: relative;
             overflow: hidden;
+            color: var(--pe-on-dark);
+            background: var(--pe-ink);
         }
-
-        .objectifs-box::after {
-            content: '';
+        .pe-hero-bg {
             position: absolute;
-            bottom: -50px;
-            right: -50px;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(196, 165, 116, 0.2) 0%, transparent 70%);
+            inset: 0;
+            background-color: var(--pe-ink);
+            background-image:
+                linear-gradient(90deg, rgba(31,26,22,.96) 0%, rgba(31,26,22,.9) 36%, rgba(31,26,22,.5) 68%, rgba(31,26,22,.32) 100%),
+                linear-gradient(180deg, rgba(31,26,22,0) 58%, rgba(31,26,22,.94) 100%),
+                url(/assets/img/conference-hero.webp);
+            background-size: cover;
+            background-position: 72% 30%;
+            background-repeat: no-repeat;
         }
-
-        .objectifs-intro {
-            font-size: 0.95rem;
-            margin-bottom: var(--space-md);
-            color: rgba(255,255,255,0.8);
-        }
-
-        .objectifs-list {
-            list-style: none;
+        .pe-nav {
             position: relative;
-            z-index: 1;
-        }
-
-        .objectifs-list li {
+            padding-top: 20px;
+            padding-bottom: 20px;
             display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            padding: 10px 0;
-            font-size: 0.95rem;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px 32px;
         }
-
-        .objectifs-list .check {
-            color: var(--accent);
-            flex-shrink: 0;
-            margin-top: 2px;
+        .pe-nav-logo { display: flex; align-items: center; min-height: 44px; }
+        .pe-nav-logo img { display: block; height: 52px; width: auto; }
+        .pe-nav-links { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 28px; }
+        .pe-page .pe-nav-links a.pe-nav-anchor {
+            color: var(--pe-on-dark-2);
+            text-decoration: none;
+            font-size: 14px;
+            padding: 12px 0;
         }
-
-        /* Pédagogie */
-        .pedagogy-box {
-            background: var(--light-beige);
-            border-radius: 12px;
-            padding: var(--space-lg);
-            border: 1px solid var(--warm-beige);
-        }
-
-        .pedagogy-title {
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: var(--space-md);
-            color: var(--black);
-        }
-
-        .pedagogy-text {
-            font-size: 0.95rem;
-            line-height: 1.8;
-            color: var(--text-dark);
-        }
-
-        .pedagogy-bloc + .pedagogy-bloc {
-            margin-top: var(--space-md);
-            padding-top: var(--space-md);
-            border-top: 1px solid var(--warm-beige);
-        }
-
-        .pedagogy-bloc .pedagogy-title { margin-bottom: var(--space-xs); }
-
-        .evaluation-sanction {
-            margin-top: var(--space-md);
-            padding-top: var(--space-md);
-            border-top: 1px solid var(--warm-beige);
-            font-size: 0.9rem;
-            line-height: 1.7;
-            color: var(--text-dark);
-        }
-
-        /* Modalités et délais d'accès (ind. 1) */
-        .acces-box {
-            background: var(--light-beige);
-            border-radius: 12px;
-            padding: var(--space-lg);
-            border: 1px solid var(--warm-beige);
-        }
-
-        .acces-bloc + .acces-bloc {
-            margin-top: var(--space-md);
-            padding-top: var(--space-md);
-            border-top: 1px solid var(--warm-beige);
-        }
-
-        .acces-bloc .pedagogy-title { margin-bottom: var(--space-xs); }
-
-        .acces-bloc p {
-            font-size: 0.95rem;
-            line-height: 1.8;
-            color: var(--text-dark);
-        }
-
-        .acces-bloc p + p { margin-top: var(--space-xs); }
-
-        .acces-box a, .accessibilite-content a {
-            color: var(--accent-dark);
-            text-decoration: underline;
-            text-underline-offset: 3px;
-        }
-
-        .acces-contact {
-            margin-top: var(--space-md);
-            font-size: 0.9rem;
-            color: var(--warm-gray);
-        }
-
-        .accessibilite-content p + p { margin-top: var(--space-xs); }
-
-        .mentions-organisme {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-            margin-top: var(--space-lg);
-        }
-
-        .liens-legaux {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-top: var(--space-xs);
-        }
-
-        .liens-legaux a {
-            color: var(--text-muted);
-            text-decoration: underline;
-        }
-
-        /* Onglets */
-        .tabs {
-            display: flex;
-            gap: 4px;
-            margin-bottom: var(--space-lg);
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-        }
-        .tabs::-webkit-scrollbar { display: none; }
-        .tab {
-            flex-shrink: 0;
-            background: none;
-            border: none;
-            border-bottom: 2px solid transparent;
-            padding: 12px 18px;
-            font-family: var(--font-body);
-            font-size: 0.95rem;
+        .pe-page .pe-nav-links a.pe-nav-anchor:hover { color: var(--pe-white); }
+        .pe-nav-cta {
+            display: inline-flex;
+            align-items: center;
+            min-height: 44px;
+            padding: 0 20px;
+            border: 1px solid rgba(250, 244, 239, 0.5);
+            font-size: 14px;
             font-weight: 500;
-            color: var(--warm-gray);
+            text-decoration: none;
+            transition: border-color 0.2s ease;
+        }
+        .pe-page a.pe-nav-cta, .pe-page a.pe-nav-cta:hover { color: var(--pe-on-dark); }
+        .pe-nav-cta:hover { border-color: var(--pe-gold); }
+
+        .pe-hero-body { position: relative; padding-top: 64px; padding-bottom: 80px; }
+        .pe-hero-text { max-width: 700px; }
+        .pe-hero-title {
+            margin-top: 28px;
+            font-family: var(--pe-serif);
+            font-weight: 400;
+            font-size: clamp(56px, 7.6vw, 100px);
+            line-height: 0.98;
+            letter-spacing: -0.01em;
+            color: var(--pe-on-dark);
+        }
+        .pe-hero-sub {
+            margin-top: 22px;
+            font-family: var(--pe-serif);
+            font-style: italic;
+            font-size: clamp(22px, 2.2vw, 28px);
+            line-height: 1.3;
+            color: var(--pe-on-dark-italic);
+        }
+        .pe-hero-rating {
+            margin-top: 18px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: var(--pe-on-dark-body);
+            text-decoration: none;
+        }
+        .pe-page a.pe-hero-rating { color: var(--pe-on-dark-body); }
+        .pe-hero-rating .stars { display: inline-flex; gap: 2px; color: var(--pe-gold); letter-spacing: 0; }
+        .pe-hero-rating strong { color: var(--pe-on-dark); font-weight: 500; }
+        .star.empty { opacity: 0.35; }
+        .star.half { opacity: 0.7; }
+        .pe-hero-lead {
+            margin-top: 28px;
+            max-width: 540px;
+            font-size: 18px;
+            line-height: 1.65;
+            color: var(--pe-on-dark-2);
+        }
+        .pe-hero .pe-actions { margin-top: 40px; }
+
+        .pe-facts { position: relative; border-top: 1px solid rgba(250, 244, 239, 0.16); }
+        .pe-facts-grid {
+            padding-top: 28px;
+            padding-bottom: 36px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            gap: 20px 40px;
+        }
+        .pe-fact-value { font-family: var(--pe-serif); font-size: 22px; color: var(--pe-on-dark); }
+        .pe-fact-label { margin-top: 6px; font-size: 14px; line-height: 1.5; color: var(--pe-on-dark-body); }
+
+        /* ============================================
+           CONVICTION
+           ============================================ */
+        .pe-statement {
+            margin-top: 24px;
+            max-width: 1000px;
+            font-family: var(--pe-serif);
+            font-size: clamp(27px, 3vw, 40px);
+            line-height: 1.28;
+            color: var(--pe-text);
+        }
+        .pe-statement-accent {
+            margin-top: 18px;
+            font-family: var(--pe-serif);
+            font-style: italic;
+            font-size: clamp(21px, 2vw, 26px);
+            line-height: 1.35;
+            color: var(--pe-accent);
+        }
+        .pe-conviction-grid {
+            margin-top: 56px;
+            padding-top: 40px;
+            border-top: 1px solid var(--pe-line);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px 64px;
+        }
+        .pe-conviction-grid > :first-child { flex: 1 1 300px; min-width: 0; }
+        .pe-conviction-grid > :last-child { flex: 2 1 560px; min-width: 0; }
+        .pe-h-small {
+            font-family: var(--pe-serif);
+            font-weight: 400;
+            font-size: 22px;
+            line-height: 1.3;
+            color: var(--pe-text);
+        }
+        .pe-body-text { margin-top: 14px; font-size: 16px; line-height: 1.7; color: var(--pe-body); }
+        .pe-gains {
+            margin-top: 18px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+            gap: 14px 40px;
+        }
+        .pe-gains li { gap: 14px; font-size: 15.5px; }
+        .pe-gains li::before { width: 16px; margin-top: 12px; }
+
+        /* ============================================
+           MÉTHODE + CINQ ÉTAPES
+           ============================================ */
+        .pe-method { display: flex; flex-wrap: wrap; align-items: center; gap: 48px 72px; }
+        .pe-method-text { flex: 1 1 440px; min-width: 0; }
+        .pe-method-text .pe-h2 { margin-top: 18px; }
+        .pe-quote-dark {
+            margin-top: 26px;
+            font-family: var(--pe-serif);
+            font-style: italic;
+            font-size: clamp(18px, 1.6vw, 21px);
+            line-height: 1.55;
+            color: var(--pe-on-dark-italic);
+        }
+        .pe-quote-mark { color: var(--pe-gold); }
+        .pe-quote-caption { margin-top: 14px; font-size: 13px; letter-spacing: 0.06em; color: var(--pe-on-dark-muted); }
+        .pe-method-figure-wrap { flex: 1 1 360px; min-width: 0; display: flex; justify-content: center; }
+        .pe-triangle { position: relative; width: 100%; max-width: 420px; aspect-ratio: 1 / 1; }
+        .pe-triangle > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+        .pe-pillar-title { font-family: var(--pe-serif); font-size: 22px; line-height: 1.25; color: var(--pe-on-dark); }
+        .pe-pillar-text { margin-top: 6px; font-size: 13px; line-height: 1.45; color: var(--pe-on-dark-body); }
+        .pe-pillar-top { position: absolute; left: 50%; top: 0; width: 72%; transform: translateX(-50%); text-align: center; }
+        .pe-pillar-top .pe-pillar-title { font-size: 21px; }
+        .pe-pillar-left { position: absolute; left: 0; top: 79%; width: 46%; text-align: left; }
+        .pe-pillar-right { position: absolute; right: 0; top: 79%; width: 46%; text-align: right; }
+        .pe-triangle-center {
+            position: absolute;
+            left: 50%;
+            top: 61%;
+            transform: translate(-50%, -50%);
+            font-family: var(--pe-serif);
+            font-style: italic;
+            font-size: 26px;
+            color: var(--pe-gold);
+        }
+
+        .pe-steps-block { margin-top: 88px; }
+        .pe-steps-head .pe-h3 {
+            margin-top: 14px;
+            font-family: var(--pe-serif);
+            font-weight: 400;
+            font-size: clamp(28px, 2.6vw, 36px);
+            line-height: 1.2;
+            color: var(--pe-on-dark);
+        }
+        .pe-steps-head > div { flex: 0 1 auto; }
+        .pe-steps-tagline {
+            max-width: 480px;
+            font-family: var(--pe-serif);
+            font-style: italic;
+            font-size: clamp(19px, 1.7vw, 22px);
+            line-height: 1.45;
+            color: var(--pe-on-dark-italic);
+        }
+        .pe-axis { margin-top: 52px; display: flex; align-items: center; gap: 16px; }
+        .pe-axis-label { flex: none; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pe-gold); }
+        .pe-axis-label:last-child { color: var(--pe-on-dark); }
+        .pe-axis-line { flex: 1; height: 1px; background: linear-gradient(90deg, rgba(196,165,116,.2), var(--pe-gold)); }
+        .pe-axis svg { flex: none; margin-left: -14px; }
+        .pe-steps {
+            list-style: none;
+            padding: 0;
+            margin-top: 32px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+            gap: 44px 0;
+        }
+        .pe-step-top { display: flex; align-items: center; }
+        .pe-step-icon {
+            flex: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 1px solid var(--pe-gold);
+            color: var(--pe-gold);
+        }
+        .pe-step-line { flex: 1; height: 1px; margin-left: 14px; }
+        .pe-step-body { padding-right: 28px; }
+        .pe-step-title { margin-top: 22px; font-family: var(--pe-serif); font-weight: 400; font-size: 26px; color: var(--pe-on-dark); }
+        .pe-step-text { margin-top: 10px; font-size: 15px; line-height: 1.6; color: var(--pe-on-dark-body); }
+        .pe-step-question { margin-top: 10px; font-family: var(--pe-serif); font-style: italic; font-size: 17px; line-height: 1.5; color: var(--pe-on-dark-italic); }
+
+        /* ============================================
+           DÉCLINAISONS
+           ============================================ */
+        .pe-cards {
+            margin-top: 48px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+            gap: 24px;
+        }
+        .pe-card {
+            display: flex;
+            flex-direction: column;
+            padding: 36px 32px;
+            background: var(--pe-white);
+            border: 1px solid var(--pe-line-soft);
+        }
+        .pe-card-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--pe-sand);
+            color: var(--pe-gold-deep);
+        }
+        .pe-card-title { margin-top: 18px; font-family: var(--pe-serif); font-weight: 400; font-size: 26px; line-height: 1.22; color: var(--pe-text); }
+        .pe-card-text { margin-top: 10px; font-size: 15.5px; line-height: 1.6; color: var(--pe-body); }
+        .pe-card-foot { margin-top: auto; padding-top: 24px; }
+        .pe-card-foot p {
+            padding-top: 16px;
+            border-top: 1px solid var(--pe-line-soft);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.5;
+            color: var(--pe-text);
+        }
+        .pe-card-foot svg { flex: none; }
+
+        /* ============================================
+           ARCHITECTURE
+           ============================================ */
+        .pe-sand { background: var(--pe-sand); }
+        .pe-archi { display: flex; flex-wrap: wrap; gap: 48px 56px; }
+        .pe-archi > div { flex: 1 1 320px; min-width: 0; }
+        .pe-archi > div:first-child { flex-basis: 300px; }
+        .pe-archi .pe-h2 { font-size: clamp(28px, 2.7vw, 38px); line-height: 1.18; }
+        .pe-archi .pe-body-text { margin-top: 20px; }
+        .pe-archi .pe-label { margin-bottom: 16px; }
+        .pe-socle { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+        .pe-socle li { display: flex; gap: 18px; padding: 20px 22px; background: var(--pe-ink); }
+        .pe-num { font-family: var(--pe-serif); font-size: 18px; color: var(--pe-gold); }
+        .pe-socle-title { font-family: var(--pe-serif); font-size: 19px; line-height: 1.3; color: var(--pe-on-dark); }
+        .pe-socle-text { margin-top: 6px; font-size: 14px; line-height: 1.5; color: var(--pe-on-dark-body); }
+        .pe-extras { list-style: none; padding: 0; display: flex; flex-direction: column; border-top: 1px solid var(--pe-line-sand); }
+        .pe-extras li { display: flex; gap: 18px; padding: 20px 4px; border-bottom: 1px solid var(--pe-line-sand); }
+        .pe-extras .pe-num { color: var(--pe-gold-deep); }
+        .pe-extras-title { font-family: var(--pe-serif); font-size: 19px; line-height: 1.3; color: var(--pe-text); }
+        .pe-extras-text { margin-top: 6px; font-size: 14px; line-height: 1.5; color: var(--pe-muted); }
+
+        /* ============================================
+           PÉDAGOGIE ET FORMATS
+           ============================================ */
+        .pe-cycle { margin-top: 56px; display: flex; flex-wrap: wrap; align-items: center; gap: 48px 80px; }
+        .pe-cycle-figure-wrap { flex: 1 1 300px; min-width: 0; display: flex; justify-content: center; }
+        .pe-cycle-figure { position: relative; width: 100%; max-width: 340px; aspect-ratio: 1 / 1; }
+        .pe-cycle-figure > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+        .pe-cycle-node {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            border: 1px solid var(--pe-gold);
+            background: var(--pe-ink);
+            color: var(--pe-gold);
+        }
+        .pe-cycle-center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); text-align: center; }
+        .pe-cycle-center strong { display: block; font-family: var(--pe-serif); font-weight: 400; font-size: 42px; line-height: 1; color: var(--pe-on-dark); }
+        .pe-cycle-center span { display: block; margin-top: 10px; font-size: 11px; font-weight: 500; line-height: 1.5; letter-spacing: 0.16em; text-transform: uppercase; color: var(--pe-on-dark-muted); }
+        .pe-cycle-list-wrap { flex: 1.4 1 420px; min-width: 0; }
+        .pe-cycle-list { list-style: none; padding: 0; margin-top: 24px; display: flex; flex-direction: column; gap: 24px; }
+        .pe-cycle-list li { display: flex; align-items: flex-start; gap: 20px; }
+        .pe-cycle-icon {
+            flex: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(196, 165, 116, 0.14);
+            color: var(--pe-gold);
+        }
+        .pe-cycle-title { margin-top: 2px; font-family: var(--pe-serif); font-size: 21px; color: var(--pe-on-dark); }
+        .pe-cycle-text { margin-top: 6px; font-size: 14.5px; line-height: 1.6; color: var(--pe-on-dark-body); }
+        .pe-cycle-list li.pe-cycle-loop { align-items: center; padding-top: 24px; border-top: 1px solid rgba(250, 244, 239, 0.12); }
+        .pe-cycle-loop .pe-cycle-icon { background: var(--pe-gold); color: var(--pe-ink); }
+        .pe-cycle-loop p { font-family: var(--pe-serif); font-style: italic; font-size: 18px; line-height: 1.5; color: var(--pe-on-dark-italic); }
+
+        .pe-configs-head { margin-top: 64px; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; }
+        .pe-configs-note { font-size: 13px; color: var(--pe-on-dark-muted); }
+        .pe-configs {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: 16px;
+        }
+        .pe-config { padding: 30px 28px; border: 1px solid rgba(250, 244, 239, 0.14); }
+        .pe-config.is-featured { border-color: var(--pe-gold); background: rgba(196, 165, 116, 0.09); }
+        .pe-config-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--pe-on-dark-muted); }
+        .pe-config.is-featured .pe-config-tag { color: var(--pe-gold); }
+        .pe-config-duration { margin-top: 20px; font-family: var(--pe-serif); font-size: 44px; line-height: 1; color: var(--pe-on-dark); }
+        .pe-config-bar { margin-top: 20px; height: 3px; background: rgba(250, 244, 239, 0.1); }
+        .pe-config-bar span { display: block; height: 3px; background: var(--pe-gold); }
+        .pe-config-name { margin-top: 20px; font-size: 17px; font-weight: 600; color: var(--pe-on-dark); }
+        .pe-config-text { margin-top: 10px; font-size: 14.5px; line-height: 1.6; color: var(--pe-on-dark-body); }
+
+        /* ============================================
+           CADRE ET CONFIDENTIALITÉ / INTERVENANTE
+           ============================================ */
+        .pe-linen { background: var(--pe-linen); }
+        .pe-split { display: flex; flex-wrap: wrap; align-items: center; gap: 48px 72px; }
+        .pe-split-media { flex: 1 1 340px; min-width: 0; }
+        .pe-split-media img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
+        .pe-split-text { flex: 1.35 1 460px; min-width: 0; }
+        .pe-split-text .pe-h2 { font-size: clamp(27px, 2.6vw, 36px); line-height: 1.22; }
+        .pe-split-text .pe-body-text { margin-top: 20px; }
+        .pe-rules { margin-top: 36px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 32px 40px; }
+        .pe-rules .pe-label { padding-bottom: 12px; border-bottom: 1px solid var(--pe-line-sand); }
+        .pe-rules .pe-dash-list { margin-top: 16px; }
+
+        .pe-person { flex-wrap: wrap-reverse; }
+        .pe-person .pe-h2 { font-size: clamp(36px, 3.6vw, 50px); line-height: 1.1; }
+        .pe-person-role { margin-top: 10px; font-size: 15px; color: var(--pe-muted); }
+        .pe-quote-light {
+            margin-top: 32px;
+            font-family: var(--pe-serif);
+            font-style: italic;
+            font-size: clamp(19px, 1.8vw, 23px);
+            line-height: 1.5;
+            color: var(--pe-text);
+        }
+        .pe-quote-light .pe-quote-mark { color: var(--pe-accent); }
+        .pe-person .pe-body-text { margin-top: 28px; }
+        .pe-stats { margin-top: 32px; padding-top: 28px; border-top: 1px solid var(--pe-line); display: flex; flex-wrap: wrap; gap: 24px 56px; }
+        .pe-stat-value { font-family: var(--pe-serif); font-size: 36px; line-height: 1; color: var(--pe-text); }
+        .pe-stat-label { margin-top: 8px; font-size: 13.5px; line-height: 1.45; color: var(--pe-muted); }
+        .pe-logos-row {
+            margin-top: 64px;
+            padding-top: 32px;
+            border-top: 1px solid var(--pe-line);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px 40px;
+        }
+        .pe-logos-row .pe-label { color: var(--pe-muted); }
+        .pe-logos { display: flex; flex-wrap: wrap; align-items: center; gap: 20px 44px; }
+        .pe-logos img { display: block; width: auto; filter: grayscale(1) contrast(1.1); mix-blend-mode: multiply; opacity: 0.75; }
+
+        /* ============================================
+           INFORMATIONS PRATIQUES
+           ============================================ */
+        .pe-infos { background: var(--pe-paper); border-top: 1px solid #EDE3DA; }
+        .pe-infos .pe-label { color: var(--pe-gold-deep); }
+        .pe-infos .pe-h2 { margin-top: 14px; font-size: clamp(30px, 3vw, 42px); }
+        .pe-infos-layout { margin-top: 40px; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 40px 56px; }
+        .pe-aside { flex: 1 1 320px; min-width: 0; padding: 32px 30px; background: var(--pe-ink); color: var(--pe-on-dark); }
+        .pe-aside dl { display: flex; flex-direction: column; }
+        .pe-aside dl > div { padding: 16px 0; border-bottom: 1px solid rgba(250, 244, 239, 0.12); }
+        .pe-aside dl > div:first-child { padding-top: 0; }
+        .pe-aside dl > div:last-child { padding-bottom: 0; border-bottom: 0; }
+        .pe-aside dt { font-size: 12px; color: var(--pe-on-dark-muted); }
+        .pe-aside dd { margin-top: 4px; font-size: 15.5px; line-height: 1.5; }
+        .pe-aside-actions { margin-top: 28px; display: flex; flex-direction: column; gap: 10px; }
+        .pe-aside-actions .pe-btn { min-height: 50px; padding: 0 20px; text-align: center; }
+        .pe-aside-actions .pe-btn-ghost { border-color: rgba(196, 165, 116, 0.7); }
+
+        .pe-tabs-wrap { flex: 2 1 520px; min-width: 0; }
+        .pe-tablist {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0 30px;
+            border-bottom: 1px solid var(--pe-line);
+        }
+        .pe-tab {
+            position: relative;
+            flex: none;
+            appearance: none;
+            background: none;
+            border: 0;
+            padding: 14px 0;
+            min-height: 48px;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--pe-text);
             cursor: pointer;
-            transition: color var(--transition-base), border-color var(--transition-base);
-            white-space: nowrap;
         }
-        .tab:hover { color: var(--black); }
-        .tab.active { color: var(--black); border-bottom-color: var(--accent); }
-        .tab-panel { display: none; }
-        .tab-panel.active { display: block; }
-        .section-meta {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin: calc(-1 * var(--space-sm)) 0 var(--space-md);
+        .pe-tab::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 2px;
+            background: transparent;
         }
+        .pe-tab[aria-selected="true"]::after { background: var(--pe-text); }
+        .pe-tab:hover::after { background: var(--pe-line-sand); }
+        .pe-tab[aria-selected="true"]:hover::after { background: var(--pe-text); }
+        .pe-panel { padding-top: 28px; }
+        .pe-panel[hidden] { display: none; }
+        .pe-panel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 28px 40px; }
+        .pe-panel h3 { font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--pe-gold-deep); }
+        .pe-panel h3 + * { margin-top: 14px; }
+        .pe-panel * + h3 { margin-top: 24px; }
+        .pe-panel p { font-size: 15px; line-height: 1.6; color: var(--pe-list); }
+        .pe-panel p + p { margin-top: 8px; }
+        .pe-panel .pe-dash-list { gap: 10px; }
+        .pe-objectifs { list-style: none; padding: 0; counter-reset: obj; display: flex; flex-direction: column; gap: 10px; }
+        .pe-objectifs li { counter-increment: obj; display: flex; gap: 14px; font-size: 15px; line-height: 1.55; color: var(--pe-list); }
+        .pe-objectifs li::before { content: counter(obj); flex: none; width: 18px; font-family: var(--pe-serif); font-size: 16px; color: var(--pe-gold-deep); }
+        .pe-panel .pe-note { font-size: 14px; color: var(--pe-muted); }
+        .pe-objectifs + .pe-note { margin-top: 16px; }
+        .pe-avis-lead { font-family: var(--pe-serif); font-size: 22px; line-height: 1.4; color: var(--pe-text); }
+        .pe-panel .pe-avis-lead { font-size: 22px; color: var(--pe-text); }
+        .pe-avis-score { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 16px; }
+        .pe-avis-score strong { font-family: var(--pe-serif); font-weight: 400; font-size: 48px; line-height: 1; color: var(--pe-text); }
+        .pe-avis-score .stars { color: var(--pe-gold-deep); font-size: 18px; letter-spacing: 2px; }
+        .pe-avis-list { margin-top: 28px; display: flex; flex-direction: column; gap: 24px; }
+        .pe-avis-item { padding-left: 20px; border-left: 1px solid var(--pe-gold); }
+        .pe-avis-item blockquote { font-family: var(--pe-serif); font-style: italic; font-size: 18px; line-height: 1.55; color: var(--pe-text); }
+        .pe-panel .pe-avis-item p { margin-top: 8px; font-size: 13.5px; color: var(--pe-muted); }
+        .pe-panel .section { margin-top: 32px; }
+        .pe-panel .section-title { font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--pe-gold-deep); margin-bottom: 14px; }
+        .pe-panel .resultats-box, .pe-panel .resultat-carte { border-radius: 0; }
+        .pe-mentions { margin-top: 48px; font-size: 12.5px; line-height: 1.6; color: var(--pe-muted); }
+        .pe-legal { margin-top: 8px; font-size: 12.5px; color: var(--pe-muted); }
+        .pe-page .pe-legal a { color: var(--pe-muted); }
+        .pe-page .pe-legal a:hover { color: var(--pe-text); }
 
-        /* Tarifs (onglet Financement) */
-        .tarifs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-sm); }
-        .tarif-card {
-            background: var(--light-beige);
-            border: 1px solid var(--warm-beige);
-            border-radius: 12px;
-            padding: var(--space-md);
+        /* ============================================
+           APPEL À L'ACTION
+           ============================================ */
+        .pe-cta { max-width: 920px; margin: 0 auto; padding: 96px var(--pe-gutter); text-align: center; }
+        .pe-cta h2 {
+            margin-top: 22px;
+            font-family: var(--pe-serif);
+            font-weight: 400;
+            font-style: italic;
+            font-size: clamp(30px, 3.6vw, 48px);
+            line-height: 1.2;
+            color: var(--pe-on-dark);
         }
-        .tarif-label { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: var(--warm-gray); margin-bottom: 6px; }
-        .tarif-value { font-family: var(--font-heading); font-size: 1.8rem; color: var(--black); line-height: 1.1; margin-bottom: 8px; }
-        .tarif-value small { font-family: var(--font-body); font-size: 0.8rem; color: var(--warm-gray); }
-        .tarif-card p { font-size: 0.9rem; color: var(--text-dark); line-height: 1.6; }
-        .tarif-perimetre { margin-top: var(--space-md); background: var(--light-beige); border: 1px solid var(--warm-beige); border-radius: 12px; padding: var(--space-md); }
-        .tarif-perimetre .pedagogy-title { margin-bottom: var(--space-xs); }
-        .tarif-perimetre p { font-size: 0.92rem; line-height: 1.7; color: var(--text-dark); }
-        .tarif-perimetre p + p { margin-top: 6px; }
-        .tarif-delais { margin-top: var(--space-sm); padding-top: var(--space-sm); border-top: 1px solid var(--warm-beige); }
-        @media (max-width: 640px) { .tarifs-grid { grid-template-columns: 1fr; } }
+        .pe-cta-text { margin: 24px auto 0; max-width: 620px; font-size: 17px; line-height: 1.7; color: var(--pe-on-dark-body); }
+        .pe-cta .pe-actions { margin-top: 36px; justify-content: center; }
+        .pe-cta-contact { margin-top: 28px; font-size: 14px; color: var(--pe-on-dark-muted); }
+        .pe-page .pe-cta-contact a { color: var(--pe-on-dark-italic); }
+        .pe-page .pe-cta-contact a:hover { color: var(--pe-white); }
 
-        /* Avis à chaud (onglet Avis et résultats) */
-        .avis-box {
-            background: var(--light-beige);
-            border: 1px solid var(--warm-beige);
-            border-radius: 12px;
-            padding: var(--space-lg);
+        /* Pied de page partagé, accordé au fond sombre */
+        .footer { border-top: 1px solid rgba(250, 244, 239, 0.08); }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 900px) {
+            .pe-nav-anchor { display: none; }
         }
-        .avis-box .avis-header { margin-bottom: var(--space-md); }
-        .avis-periode { font-size: 0.85rem; color: var(--warm-gray); line-height: 1.6; margin-bottom: var(--space-md); }
-        .avis-box .avis-list { margin-top: var(--space-md); }
-        .avis-vide { font-size: 0.9rem; color: var(--warm-gray); }
+        @media (max-width: 600px) {
+            .pe-pad { padding-top: 64px; padding-bottom: 64px; }
+            .pe-nav-logo img { height: 44px; }
+            .pe-hero-body { padding-top: 40px; padding-bottom: 56px; }
+            .pe-hero .pe-actions .pe-btn { width: 100%; }
+            .pe-triangle { margin-bottom: 64px; }
+            .pe-steps-block { margin-top: 64px; }
+            .pe-axis { margin-top: 36px; }
+            .pe-card { padding: 30px 24px; }
+            .pe-cta { padding-top: 72px; padding-bottom: 72px; }
+            .pe-cta .pe-btn { width: 100%; }
+            .pe-aside { padding: 28px 22px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            * { transition: none !important; }
+        }
 
         /* Résultats (indicateur 2) */
         .resultats-box {
@@ -900,1466 +802,614 @@
         }
         .resultats-note a { color: var(--accent-dark); text-decoration: underline; text-underline-offset: 3px; }
 
-
-        /* Evaluation */
-        .evaluation-box {
-            background: var(--light-beige);
-            border-radius: 12px;
-            padding: var(--space-lg);
-            border: 1px solid var(--warm-beige);
-        }
-
-        .evaluation-list {
-            list-style: none;
-        }
-
-        .evaluation-list li {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            padding: 8px 0;
-            font-size: 0.95rem;
-            color: var(--text-dark);
-        }
-
-        .evaluation-list .bullet {
-            width: 6px;
-            height: 6px;
-            background: var(--accent);
-            border-radius: 50%;
-            flex-shrink: 0;
-            margin-top: 8px;
-        }
-
-        /* Points forts */
-        .points-forts-list {
-            list-style: none;
-        }
-
-        .points-forts-list li {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            padding: var(--space-sm) 0;
-            border-bottom: 1px solid var(--warm-beige);
-            font-size: 0.95rem;
-            color: var(--text-dark);
-        }
-
-        .points-forts-list li:last-child {
-            border-bottom: none;
-        }
-
-        .points-forts-list .chevron {
-            color: var(--accent);
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-
-        /* Qualité / Qualiopi */
-        .quality-box {
-            display: flex;
-            align-items: center;
-            gap: var(--space-md);
-            background: var(--light-beige);
-            border-radius: 12px;
-            padding: var(--space-md);
-            margin-top: var(--space-lg);
-            border: 1px solid var(--warm-beige);
-        }
-
-        .quality-icon {
-            width: 70px;
-            height: 70px;
-            background: var(--black);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .quality-icon svg {
-            width: 36px;
-            height: 36px;
-            color: var(--accent);
-        }
-
-        .quality-content h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 4px;
-            color: var(--black);
-        }
-
-        .quality-content p {
-            font-size: 0.85rem;
-            color: var(--warm-gray);
-            margin-bottom: 4px;
-        }
-
-        .quality-content a {
-            font-size: 0.85rem;
-            color: var(--accent-dark);
-            text-decoration: underline;
-            text-underline-offset: 3px;
-        }
-
-        /* Financement */
-        .financement-box {
-            background: var(--light-beige);
-            border-radius: 12px;
-            padding: var(--space-lg);
-            border: 1px solid var(--warm-beige);
-        }
-
-        .financement-title {
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: var(--space-sm);
-            color: var(--black);
-        }
-
-        .financement-text {
-            font-size: 0.95rem;
-            line-height: 1.8;
-            color: var(--text-dark);
-            margin-bottom: var(--space-sm);
-        }
-
-        .financement-text a {
-            color: var(--accent-dark);
-            text-decoration: underline;
-            text-underline-offset: 3px;
-        }
-
-        /* Accessibilité */
-        .accessibilite-box {
-            background: var(--light-beige);
-            border-radius: 12px;
-            padding: var(--space-lg);
-            border: 1px solid var(--warm-beige);
-            display: flex;
-            align-items: flex-start;
-            gap: var(--space-md);
-        }
-
-        .accessibilite-icon {
-            font-size: 2rem;
-            flex-shrink: 0;
-        }
-
-        .accessibilite-content h4 {
-            font-weight: 600;
-            font-size: 1rem;
-            margin-bottom: var(--space-xs);
-            color: var(--black);
-        }
-
-        .accessibilite-content p {
-            font-size: 0.9rem;
-            color: var(--warm-gray);
-            line-height: 1.7;
-        }
-
-        /* Avis clients */
-        .avis-section {
-            background: var(--light-beige);
-            padding: var(--space-xl);
-            margin-top: var(--space-xl);
-        }
-
-        .avis-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .avis-header {
-            display: flex;
-            align-items: flex-start;
-            gap: var(--space-xl);
-            margin-bottom: var(--space-lg);
-        }
-
-        .avis-score {
-            text-align: center;
-        }
-
-        .avis-number {
-            font-family: var(--font-heading);
-            font-size: 3.5rem;
-            font-weight: 400;
-            color: var(--black);
-            line-height: 1;
-        }
-
-        .avis-stars {
-            display: flex;
-            justify-content: center;
-            gap: 3px;
-            margin: var(--space-xs) 0;
-        }
-
-        .avis-stars .star {
-            color: #F5A623;
-            font-size: 1.2rem;
-        }
-
-        .avis-source {
-            font-size: 0.8rem;
-            color: var(--warm-gray);
-        }
-
-        .avis-distribution {
-            flex: 1;
-        }
-
-        /* Demi-étoiles et étoiles vides générées par publish_formations.py */
-        .star.empty { color: var(--warm-beige); }
-        .star.half {
-            background: linear-gradient(90deg, var(--accent) 50%, var(--warm-beige) 50%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        .avis-fonction { font-weight: 400; color: var(--warm-gray); }
-
-        .avis-bar-row {
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-            margin-bottom: 8px;
-        }
-
-        .avis-bar-stars {
-            display: flex;
-            gap: 2px;
-            min-width: 90px;
-        }
-
-        .avis-bar-stars .star {
-            color: #F5A623;
-            font-size: 0.8rem;
-        }
-
-        .avis-bar-stars .star.empty {
-            color: #ddd;
-        }
-
-        .avis-bar {
-            flex: 1;
-            height: 8px;
-            background: var(--warm-beige);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .avis-bar-fill {
-            height: 100%;
-            background: var(--accent);
-            border-radius: 4px;
-        }
-
-        .avis-bar-percent {
-            font-size: 0.8rem;
-            color: var(--warm-gray);
-            min-width: 40px;
-            text-align: right;
-        }
-
-        /* Liste avis */
-        .avis-list {
-            border-top: 1px solid var(--warm-beige);
-            padding-top: var(--space-lg);
-        }
-
-        .avis-item {
-            padding: var(--space-md) 0;
-            border-bottom: 1px solid var(--warm-beige);
-        }
-
-        .avis-item:last-child {
-            border-bottom: none;
-        }
-
-        .avis-item-header {
-            display: flex;
-            align-items: center;
-            gap: var(--space-md);
-            margin-bottom: var(--space-sm);
-        }
-
-        .avis-author {
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: var(--black);
-        }
-
-        .avis-date {
-            font-size: 0.85rem;
-            color: var(--warm-gray);
-        }
-
-        .avis-rating {
-            margin-left: auto;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .avis-rating .stars {
-            display: flex;
-            gap: 2px;
-        }
-
-        .avis-rating .star {
-            color: #F5A623;
-            font-size: 0.9rem;
-        }
-
-        .avis-rating-score {
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .avis-comment {
-            font-size: 0.95rem;
-            color: var(--text-dark);
-            line-height: 1.7;
-        }
-
-        /* ============================================
-           RESPONSIVE
-           ============================================ */
-        @media (max-width: 1100px) {
-            .main-layout {
-                grid-template-columns: 1fr;
-            }
-
-            .sidebar {
-                order: -1;
-                border-bottom: 1px solid var(--warm-beige);
-            }
-
-            .sidebar-inner {
-                position: relative;
-                top: 0;
-                padding: var(--space-lg);
-            }
-
-            .sidebar-card {
-                max-width: 500px;
-                margin: 0 auto;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero {
-                padding: var(--space-lg);
-            }
-
-            .hero-title {
-                font-size: 2rem;
-            }
-
-            .hero-meta {
-                flex-direction: column;
-                gap: var(--space-sm);
-            }
-
-            .content-area {
-                padding: var(--space-lg);
-            }
-
-            .audience-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .avis-header {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-
-            .avis-distribution {
-                width: 100%;
-            }
-        }
     </style>
 </head>
 <body>
+<div class="pe-page" id="top">
 
-    <!-- ============================================
-         HERO
-         ============================================ -->
-    <header class="hero">
-        <div class="hero-container">
-            <span class="hero-badge">Formation certifiée Qualiopi</span>
-            <h1 class="hero-title">Présence exécutive — Programme pour dirigeants à fort potentiel</h1>
-            <p class="hero-subtitle">Prendre de la hauteur, décider avec discernement, mobiliser les collectifs</p>
-            
-            
+    <!-- ============ HERO ============ -->
+    <header class="pe-hero">
+        <div class="pe-hero-bg" aria-hidden="true"></div>
 
-            <div class="hero-meta">
-                <div class="hero-meta-item">
-                    <svg class="hero-meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
-                    </svg>
-                    <span>Hybride</span>
+        <nav class="pe-wrap pe-nav" aria-label="Navigation de la page">
+            <a href="/" class="pe-nav-logo"><img src="/assets/img/Laura-Ballo-coaching-white.webp" alt="Laura Ballo Coaching, retour à l'accueil" width="98" height="52"></a>
+            <div class="pe-nav-links">
+                <a class="pe-nav-anchor" href="#programme">Le programme</a>
+                <a class="pe-nav-anchor" href="#methode">Méthode</a>
+                <a class="pe-nav-anchor" href="#declinaisons">Déclinaisons</a>
+                <a class="pe-nav-anchor" href="#formats">Formats</a>
+                <a class="pe-nav-anchor" href="#informations">Informations</a>
+                <a class="pe-nav-cta" href="https://calendly.com/laura-ballo1993/echangecoaching" target="_blank" rel="noopener">Réserver un appel</a>
+            </div>
+        </nav>
+
+        <div class="pe-wrap pe-hero-body">
+            <div class="pe-hero-text">
+                <p class="pe-eyebrow">Programme de leadership · Intra-entreprise</p>
+                <h1 class="pe-hero-title">Présence exécutive</h1>
+                <p class="pe-hero-sub">Programme pour dirigeants à fort potentiel</p>
+                
+                <p class="pe-hero-lead">Incarner votre leadership, savoir vous positionner et prendre des décisions, mobiliser le collectif. Un parcours sur mesure, construit pour donner à vos dirigeants les moyens d'agir.</p>
+                <div class="pe-actions">
+                    <a class="pe-btn pe-btn-accent" href="#contact">Demander un entretien de cadrage</a>
+                    <a class="pe-btn pe-btn-ghost" href="mailto:contact@lauraballo.com?subject=Programme%20d%C3%A9taill%C3%A9%20%E2%80%93%20Pr%C3%A9sence%20ex%C3%A9cutive">Recevoir le programme</a>
                 </div>
-                <div class="hero-meta-item">
-                    <svg class="hero-meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-                    </svg>
-                    <span>Niveau 2 — Perfectionnement</span>
+            </div>
+        </div>
+
+        <div class="pe-facts">
+            <div class="pe-wrap pe-facts-grid">
+                <div>
+                    <p class="pe-fact-value">3 à 12 mois</p>
+                    <p class="pe-fact-label">selon la configuration retenue</p>
                 </div>
-                <div class="hero-meta-item">
-                    <svg class="hero-meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
-                    </svg>
-                    <span>12 participants maximum</span>
+                <div>
+                    <p class="pe-fact-value">6 à 12 participants</p>
+                    <p class="pe-fact-label">ou l'équipe de direction au complet</p>
                 </div>
-                <div class="hero-meta-item">
-                    <svg class="hero-meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                    </svg>
-                    <span>Programme mis à jour le 21/10/2026</span>
+                <div>
+                    <p class="pe-fact-value">Formats adaptés à vos enjeux</p>
+                    <p class="pe-fact-label">séminaires, codéveloppement, coaching individuel</p>
+                </div>
+                <div>
+                    <p class="pe-fact-value">Construit sur mesure</p>
+                    <p class="pe-fact-label">objectifs et modules fixés au cadrage</p>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- ============================================
-         MAIN LAYOUT
-         ============================================ -->
-    <div class="main-layout">
+    <main>
 
-        <!-- CONTENT AREA -->
-        <main class="content-area">
+    <!-- ============ CONVICTION ============ -->
+    <section id="programme" class="pe-cream">
+        <div class="pe-wrap pe-pad">
+            <p class="pe-eyebrow">Notre conviction</p>
+            <p class="pe-statement">Diriger, c'est savoir trancher, se positionner clairement, tenir un cap pour mieux mobiliser les équipes et devenir l'incarnation du changement.</p>
+            <p class="pe-statement-accent">Cela ne s'apprend pas en une journée de formation.</p>
 
-            <!-- Présentation -->
-            <section class="section">
-                <div class="presentation-box">
-                    <div class="presentation-text">
-                                                <p>Diriger, c&#x27;est décider avec des informations incomplètes, arbitrer entre des priorités qui se contredisent, tenir un cap quand l&#x27;organisation bouge et embarquer des équipes qui doutent. Ces situations ne s&#x27;apprennent pas en une journée de formation.</p>
-                        <p>Présence exécutive est un programme de développement du leadership mené sur plusieurs mois au sein de votre entreprise. Il alterne séminaires collectifs, codéveloppement, coaching individuel et mises en pratique sur le terrain, à partir des situations réelles des participants : décisions difficiles, relations de pouvoir, coopération entre directions, conduite des transformations, place de l&#x27;IA dans le travail du dirigeant.</p>
-                        <p>Le programme se décline selon trois axes : préparer de futurs dirigeants, accompagner un CODIR ou une équipe de direction, soutenir des dirigeants en pleine transformation. Tous les parcours partagent un socle commun : performer sans s&#x27;oublier en sortant de ses mécanismes inconscients, décider et tenir un cap, exercer une autorité juste, prendre la parole avec impact. Viennent s&#x27;y ajouter, selon vos enjeux, des modules sur la conduite du changement, la gestion des conflits, les usages professionnels de l&#x27;IA et leurs risques, ou la coopération en équipe de direction.</p>
-                        <p>Il s&#x27;appuie sur la méthode Présence, qui apprend à tenir ensemble l&#x27;empathie et l&#x27;autorité à partir de sa singularité, pour un leadership lucide et durable.</p>
-                    </div>
+            <div class="pe-conviction-grid">
+                <div>
+                    <h2 class="pe-h-small">Notre conception de la réussite</h2>
+                    <p class="pe-body-text">Le programme mesure la réussite d'un dirigeant à la qualité de ses décisions, à la durabilité des résultats et à sa capacité à faire grandir ses équipes. Il repose sur un modèle de performance soutenable et responsable, basé sur les techniques du sport de haut niveau.</p>
                 </div>
-            </section>
+                <div>
+                    <h2 class="pe-h-small">Ce que l'organisation y gagne</h2>
+                    <ul class="pe-dash-list pe-gains">
+                        <li>Des dirigeants capables d'assumer de véritables responsabilités et aptes à se positionner, même dans l'incertitude.</li>
+                        <li>Une présence qui trouve le juste équilibre entre relation, empathie et exigence.</li>
+                        <li>Une parole qui donne un cap et engage les équipes.</li>
+                        <li>Des équipes de direction qui coopèrent sur les sujets transverses.</li>
+                        <li>Des transformations, y compris celles liées à l'IA, conduites en tenant compte de leurs effets humains.</li>
+                        <li>Des talents préparés à prendre des responsabilités élargies.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <!-- ============================================
-                 ONGLETS — tout le contenu reste dans la page
-                 (les onglets masquent, ils ne retirent rien) :
-                 moteurs de recherche et auditeur voient tout.
-                 ============================================ -->
-            <nav class="tabs" role="tablist" aria-label="Sections de la fiche formation">
-                <button class="tab active" role="tab" data-tab="programme" aria-selected="true">Programme</button>
-                <button class="tab" role="tab" data-tab="pour-qui" aria-selected="false">Pour qui ?</button>
-                <button class="tab" role="tab" data-tab="pedagogie" aria-selected="false">Pédagogie et évaluation</button>
-                <button class="tab" role="tab" data-tab="financement" aria-selected="false">Financement</button>
-                <button class="tab" role="tab" data-tab="avis" aria-selected="false">Avis et résultats</button>
-            </nav>
-
-            <!-- ───────── Onglet 1 : Programme ───────── -->
-            <div class="tab-panel active" id="programme" role="tabpanel">
-                <section class="section">
-                    <h2 class="section-title">Le programme de la formation</h2>
-                    <p class="section-meta">6 jours (42 heures) · programme mis à jour le 21/10/2026</p>
-                <div class="programme-phase">
-                    <div class="phase-header">
-                        <span class="phase-number">01</span>
-                        <span class="phase-title">Avant le programme</span>
-                    </div>
-                    <div class="phase-content">
-                        <ul class="phase-items">
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Entretien de cadrage avec le sponsor et les RH, entretiens individuels avec les participants</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Questionnaire de positionnement, 360° en option</span></div></li>
-                        </ul>
-                    </div>
+    <!-- ============ MÉTHODE + CINQ ÉTAPES ============ -->
+    <section id="methode" class="pe-dark">
+        <div class="pe-wrap pe-pad">
+            <div class="pe-method">
+                <div class="pe-method-text">
+                    <p class="pe-eyebrow">La méthode Présence</p>
+                    <h2 class="pe-h2">Incarnez votre pouvoir naturel de leader</h2>
+                    <blockquote class="pe-quote-dark"><span class="pe-quote-mark">«&nbsp;</span>Je porte la conviction qu'être leader, ce n'est pas uniquement endosser une fonction à haute responsabilité : c'est être en capacité d'incarner son leadership, de développer son potentiel pour mieux engager les équipes à l'action.<span class="pe-quote-mark">&nbsp;»</span></blockquote>
+                    <p class="pe-quote-caption">Laura Ballo, créatrice de la méthode Présence</p>
                 </div>
-                <div class="programme-phase">
-                    <div class="phase-header">
-                        <span class="phase-number">02</span>
-                        <span class="phase-title">Trois axes, selon votre besoin</span>
-                    </div>
-                    <div class="phase-content">
-                        <ul class="phase-items">
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Futurs dirigeants et hauts potentiels : passer de l&#x27;expertise au leadership, asseoir sa légitimité, prendre des décisions plus lourdes</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Accompagnement de CODIR et d&#x27;équipes de direction : arbitrer ensemble, faire coopérer les directions, porter un cap commun</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Dirigeants en transformation : tenir le cap dans la durée, préserver l&#x27;engagement des équipes, intégrer l&#x27;IA en gardant l&#x27;humain au centre</span></div></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="programme-phase">
-                    <div class="phase-header">
-                        <span class="phase-number">03</span>
-                        <span class="phase-title">Socle commun — 4 modules, dans toutes les configurations</span>
-                    </div>
-                    <div class="phase-content">
-                        <ul class="phase-items">
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Performer sans s&#x27;oublier : sortir de ses mécanismes inconscients sous pression</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Cap et capacité de décision : clarifier sa vision, arbitrer dans l&#x27;incertitude, assumer ses choix</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Autorité juste et présence relationnelle</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Prise de parole et influence de dirigeant</span></div></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="programme-phase">
-                    <div class="phase-header">
-                        <span class="phase-number">04</span>
-                        <span class="phase-title">Modules complémentaires — choisis lors du cadrage selon vos enjeux</span>
-                    </div>
-                    <div class="phase-content">
-                        <ul class="phase-items">
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Conduire le changement et mobiliser les collectifs</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Gestion des conflits et relations de pouvoir</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>IA et cas d&#x27;usage professionnels, enjeux et risques</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Coopérer en équipe de direction</span></div></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="programme-phase">
-                    <div class="phase-header">
-                        <span class="phase-number">05</span>
-                        <span class="phase-title">Formats possibles</span>
-                    </div>
-                    <div class="phase-content">
-                        <ul class="phase-items">
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Séminaire d&#x27;ouverture : 1 à 2 jours</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Essentiel : 3 à 4 mois, 2 séminaires de 2 jours</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Parcours : 6 mois, 3 séminaires de 2 jours (configuration de référence)</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Programme approfondi : 9 à 12 mois, 4 à 5 séminaires</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Équipe de direction : 6 à 9 mois, séminaires et coaching d&#x27;équipe</span></div></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="programme-phase">
-                    <div class="phase-header">
-                        <span class="phase-number">06</span>
-                        <span class="phase-title">Après le programme</span>
-                    </div>
-                    <div class="phase-content">
-                        <ul class="phase-items">
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Bilan individuel et synthèse collective restituée au sponsor</span></div></li>
-                            <li><div class="phase-item-text"><span class="chevron">›</span><span>Évaluation à froid à J+90</span></div></li>
-                        </ul>
-                    </div>
-                </div>
-                </section>
-
-                <section class="section">
-                    <h2 class="section-title">Les points forts de la formation</h2>
-                    <ul class="points-forts-list"><li><span class="chevron">›</span><span>Trois axes au choix : futurs dirigeants, équipes de direction, dirigeants en transformation</span></li>
-<li><span class="chevron">›</span><span>Un socle commun de quatre modules (performer sans s&#x27;oublier, décision, autorité, prise de parole), enrichi de modules choisis selon vos enjeux</span></li>
-<li><span class="chevron">›</span><span>Un parcours sur plusieurs mois qui alterne séminaires, codéveloppement, coaching individuel et mises en pratique sur le terrain</span></li>
-<li><span class="chevron">›</span><span>Un travail sur les situations réelles des participants, avec le vocabulaire de votre entreprise</span></li>
-<li><span class="chevron">›</span><span>Un cadre de confidentialité clair : le programme ne produit aucune évaluation des personnes</span></li>
-<li><span class="chevron">›</span><span>Des groupes de 6 à 12 participants, ou l&#x27;équipe de direction au complet</span></li></ul>
-
-                    <!-- Qualité Qualiopi -->
-                    <div class="quality-box">
-                        <div class="quality-icon">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
-                            </svg>
+                <div class="pe-method-figure-wrap">
+                    <figure class="pe-triangle" role="img" aria-label="Les trois piliers de la méthode Présence : engagement à l'action et prise de parole, empathie, autorité">
+                        <svg aria-hidden="true" viewBox="0 0 420 420" preserveAspectRatio="none">
+                            <polygon points="210,132 46,318 374,318" fill="none" stroke="#C4A574" stroke-opacity="0.6" stroke-width="1"/>
+                            <polygon points="210,174 92,302 328,302" fill="none" stroke="#C4A574" stroke-opacity="0.18" stroke-width="1"/>
+                            <circle cx="210" cy="132" r="5" fill="#C4A574"/>
+                            <circle cx="46" cy="318" r="5" fill="#C4A574"/>
+                            <circle cx="374" cy="318" r="5" fill="#C4A574"/>
+                        </svg>
+                        <div class="pe-pillar-top">
+                            <p class="pe-pillar-title">Engagement à l'action &amp; prise de parole</p>
+                            <p class="pe-pillar-text">porter une parole qui engage les équipes</p>
                         </div>
-                        <div class="quality-content">
-                            <h4>Qualité des formations</h4>
-                            <p>Formation certifiée Qualiopi</p>
-                            <a href="#avis" data-open-tab="avis">Nos résultats et notre méthode de calcul</a>
+                        <p class="pe-triangle-center">Présence</p>
+                        <div class="pe-pillar-left">
+                            <p class="pe-pillar-title">Empathie</p>
+                            <p class="pe-pillar-text">ouverture, intelligence émotionnelle, écoute active</p>
                         </div>
-                    </div>
-                </section>
+                        <div class="pe-pillar-right">
+                            <p class="pe-pillar-title">Autorité</p>
+                            <p class="pe-pillar-text">savoir dire non, décider, trancher</p>
+                        </div>
+                    </figure>
+                </div>
             </div>
 
-            <!-- ───────── Onglet 2 : Pour qui ? ───────── -->
-            <div class="tab-panel" id="pour-qui" role="tabpanel">
-                <section class="section">
-                    <h2 class="section-title">À qui s'adresse cette formation ?</h2>
-                    <div class="audience-grid">
-                        <div class="audience-column">
-                            <h4>
-                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                                </svg>
-                                Pour qui
-                            </h4>
-                            <ul class="audience-list"><li><span class="bullet">●</span> Dirigeants : CEO, DG, directeurs de filiale ou de business unit, dirigeants de PME et d&#x27;ETI</li>
-<li><span class="bullet">●</span> Membres de CODIR, de COMEX et de comités de direction de site ou d&#x27;entité</li>
-<li><span class="bullet">●</span> Talents à fort potentiel appelés à des responsabilités élargies dans les 12 à 36 mois</li></ul>
+            <div class="pe-steps-block">
+                <div class="pe-section-head pe-steps-head">
+                    <div>
+                        <p class="pe-eyebrow">Cinq étapes clés</p>
+                        <h3 class="pe-h3">De soi au collectif</h3>
+                    </div>
+                    <p class="pe-steps-tagline">Reprendre son pouvoir intérieur pour exercer un pouvoir juste et équilibré.</p>
+                </div>
+
+                <div class="pe-axis" aria-hidden="true">
+                    <span class="pe-axis-label">Pouvoir intérieur</span>
+                    <span class="pe-axis-line"></span>
+                    <svg width="10" height="12" viewBox="0 0 10 12"><path d="M2 1l6 5-6 5" fill="none" stroke="#C4A574" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <span class="pe-axis-label">Pouvoir extérieur</span>
+                </div>
+                <ol class="pe-steps">
+                    <li>
+                        <div class="pe-step-top">
+                            <span class="pe-step-icon" style="background: transparent"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span>
+                            <span class="pe-step-line" style="background: rgba(196, 165, 116, 0.3)" aria-hidden="true"></span>
                         </div>
-                        <div class="audience-column">
-                            <h4>
-                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
-                                </svg>
-                                Prérequis
-                            </h4>
-                            <p class="prerequis-text">
-                                <span class="bullet">●</span>
-                                Exercer ou s&#x27;apprêter à exercer une fonction de direction. Participation volontaire recommandée. Un entretien de cadrage avec l&#x27;entreprise précède tout démarrage.
-                            </p>
+                        <div class="pe-step-body">
+                            <h4 class="pe-step-title">Se connaître</h4>
+                            <p class="pe-step-text">Sortir des schémas inconscients, prendre conscience de ses valeurs et motivations essentielles.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="pe-step-top">
+                            <span class="pe-step-icon" style="background: rgba(196, 165, 116, 0.12)"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12V3"/><path d="M12 7.5L8.5 5M12 9.5l3.5-2.5"/><path d="M3 12h18"/><path d="M12 12v9"/><path d="M12 15.5l-4 4.5M12 15.5l4 4.5"/></svg></span>
+                            <span class="pe-step-line" style="background: rgba(196, 165, 116, 0.45)" aria-hidden="true"></span>
+                        </div>
+                        <div class="pe-step-body">
+                            <h4 class="pe-step-title">S'enraciner</h4>
+                            <p class="pe-step-text">Développer un enracinement : savoir être à l'écoute et incarner une figure d'autorité.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="pe-step-top">
+                            <span class="pe-step-icon" style="background: rgba(196, 165, 116, 0.24); color: #E0D3BD"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></span>
+                            <span class="pe-step-line" style="background: rgba(196, 165, 116, 0.6)" aria-hidden="true"></span>
+                        </div>
+                        <div class="pe-step-body">
+                            <h4 class="pe-step-title">Décider</h4>
+                            <p class="pe-step-text">Savoir se positionner, clarifier sa sphère de responsabilité.</p>
+                            <p class="pe-step-question">De quoi suis-je responsable ? Où allons-nous ?</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="pe-step-top">
+                            <span class="pe-step-icon" style="background: rgba(196, 165, 116, 0.42); color: #FAF4EF"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0"/><path d="M12 17.5V21"/><path d="M8.5 21h7"/></svg></span>
+                            <span class="pe-step-line" style="background: rgba(196, 165, 116, 0.8)" aria-hidden="true"></span>
+                        </div>
+                        <div class="pe-step-body">
+                            <h4 class="pe-step-title">Incarner</h4>
+                            <p class="pe-step-text">Prendre la parole avec charisme et dynamisme. Développer sa capacité d'impact.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="pe-step-top">
+                            <span class="pe-step-icon" style="background: #C4A574; color: #1F1A16"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 21V4"/><path d="M6 4h11l-2.5 4 2.5 4H6"/></svg></span>
+                            <span class="pe-step-line" style="background: #C4A574" aria-hidden="true"></span>
+                            <svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" style="flex: none; margin-left: -6px"><path d="M3 1l6 5-6 5" fill="none" stroke="#C4A574" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                        <div class="pe-step-body">
+                            <h4 class="pe-step-title">Mobiliser</h4>
+                            <p class="pe-step-text">Engager un collectif et mobiliser autour du changement.</p>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ DÉCLINAISONS (Notion : Contenu de formation) ============ -->
+    <section id="declinaisons" class="pe-cream">
+        <div class="pe-wrap pe-pad">
+            <div class="pe-section-head">
+                <div>
+                    <p class="pe-eyebrow">Trois déclinaisons</p>
+                    <h2 class="pe-h2">Un même programme, trois manières de le déployer</h2>
+                </div>
+                <p class="pe-section-intro">Le cadrage détermine la déclinaison qui correspond à votre situation.</p>
+            </div>
+            <div class="pe-cards">
+                <article class="pe-card">
+                    <span class="pe-card-icon"><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span>
+                    <h3 class="pe-card-title">Futurs dirigeants et hauts potentiels</h3>
+                    <p class="pe-card-text">Passer de l&#x27;expertise au leadership et prendre des responsabilités élargies.</p>
+                    <div class="pe-card-foot"><p><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7D6233" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Le parcours haut potentiel · 6 mois</p></div>
+                </article>
+                <article class="pe-card">
+                    <span class="pe-card-icon"><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3"/><circle cx="5.5" cy="10.5" r="2.2"/><circle cx="18.5" cy="10.5" r="2.2"/><path d="M7.5 20c.8-3 2.4-4.6 4.5-4.6s3.7 1.6 4.5 4.6"/><path d="M2 19c.5-2.1 1.6-3.3 3.3-3.3"/><path d="M22 19c-.5-2.1-1.6-3.3-3.3-3.3"/></svg></span>
+                    <h3 class="pe-card-title">CODIR et équipes de direction</h3>
+                    <p class="pe-card-text">Arbitrer ensemble et porter un cap commun, d&#x27;une même voix.</p>
+                    <div class="pe-card-foot"><p><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7D6233" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>3 à 12 mois, selon vos enjeux</p></div>
+                </article>
+                <article class="pe-card">
+                    <span class="pe-card-icon"><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 0 1-14.3 4.9"/><path d="M4 12a8 8 0 0 1 14.3-4.9"/><path d="M18.5 3.5v3.6h-3.6"/><path d="M5.5 20.5v-3.6h3.6"/></svg></span>
+                    <h3 class="pe-card-title">Leaders de transformation</h3>
+                    <p class="pe-card-text">Tenir le cap dans la durée et intégrer l&#x27;IA en gardant l&#x27;humain au centre.</p>
+                    <div class="pe-card-foot"><p><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7D6233" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>6 ou 12 mois, selon le calendrier de la transformation</p></div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ ARCHITECTURE (Notion : Contenu de formation) ============ -->
+    <section id="architecture" class="pe-sand">
+        <div class="pe-wrap pe-pad pe-archi">
+            <div>
+                <p class="pe-eyebrow">Architecture</p>
+                <h2 class="pe-h2">Un socle commun, des modules choisis avec vous</h2>
+                <p class="pe-body-text">Le socle fonde le langage commun du groupe et figure dans toutes les configurations. Les modules complémentaires s'y ajoutent, choisis lors du cadrage selon vos enjeux et le diagnostic des participants.</p>
+            </div>
+            <div>
+                <h3 class="pe-label">Socle commun · 5 modules</h3>
+                <ol class="pe-socle">
+                    <li><span class="pe-num" aria-hidden="true">1</span><div><p class="pe-socle-title">Identité du leader et valeurs clés</p><p class="pe-socle-text">Clarifier ses valeurs, sa singularité et ce qui guide ses décisions</p></div></li>
+                    <li><span class="pe-num" aria-hidden="true">2</span><div><p class="pe-socle-title">Autorité juste et présence relationnelle</p><p class="pe-socle-text">Poser un cadre, dire non, recadrer, déléguer</p></div></li>
+                    <li><span class="pe-num" aria-hidden="true">3</span><div><p class="pe-socle-title">Capacité de décision et positionnement</p><p class="pe-socle-text">Arbitrer dans l&#x27;incertitude, se positionner et assumer ses choix</p></div></li>
+                    <li><span class="pe-num" aria-hidden="true">4</span><div><p class="pe-socle-title">Performer sans s&#x27;oublier</p><p class="pe-socle-text">Sortir de ses mécanismes inconscients sous pression</p></div></li>
+                    <li><span class="pe-num" aria-hidden="true">5</span><div><p class="pe-socle-title">Prise de parole et influence du dirigeant</p><p class="pe-socle-text">Porter une parole qui engage, en comité comme en crise</p></div></li>
+                </ol>
+            </div>
+            <div>
+                <h3 class="pe-label">Modules complémentaires · au choix</h3>
+                <ul class="pe-extras">
+                    <li><span class="pe-num" aria-hidden="true">+</span><div><p class="pe-extras-title">Conduire le changement et mobiliser les collectifs</p></div></li>
+                    <li><span class="pe-num" aria-hidden="true">+</span><div><p class="pe-extras-title">Gestion des conflits et relations de pouvoir</p></div></li>
+                    <li><span class="pe-num" aria-hidden="true">+</span><div><p class="pe-extras-title">IA et cas d&#x27;usage professionnels, enjeux et risques</p></div></li>
+                    <li><span class="pe-num" aria-hidden="true">+</span><div><p class="pe-extras-title">Coopérer en équipe de direction</p></div></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ PÉDAGOGIE ET FORMATS ============ -->
+    <section id="formats" class="pe-dark">
+        <div class="pe-wrap pe-pad">
+            <div class="pe-section-head">
+                <div>
+                    <p class="pe-eyebrow">Pédagogie et formats</p>
+                    <h2 class="pe-h2">Un parcours qui alterne temps collectifs et mise en pratique</h2>
+                </div>
+                <p class="pe-section-intro">Le programme part de la matière que les participants apportent : décisions difficiles, relations de pouvoir, coopération entre directions, transformations en cours, avec le vocabulaire de votre entreprise.</p>
+            </div>
+
+            <div class="pe-cycle">
+                <div class="pe-cycle-figure-wrap">
+                    <figure class="pe-cycle-figure" role="img" aria-label="Le cycle d'apprentissage : séminaire, expérimentation terrain, codéveloppement ou coaching, puis retour au séminaire suivant">
+                        <svg aria-hidden="true" viewBox="0 0 360 360">
+                            <circle cx="180" cy="180" r="150" fill="none" stroke="#C4A574" stroke-opacity="0.45" stroke-width="1"/>
+                            <path d="M-5 -6 L4 0 L-5 6" fill="none" stroke="#C4A574" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" transform="translate(309.9 105) rotate(60)"/>
+                            <path d="M-5 -6 L4 0 L-5 6" fill="none" stroke="#C4A574" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" transform="translate(180 330) rotate(180)"/>
+                            <path d="M-5 -6 L4 0 L-5 6" fill="none" stroke="#C4A574" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" transform="translate(50.1 105) rotate(-60)"/>
+                        </svg>
+                        <span class="pe-cycle-node" style="left: 50%; top: 8.33%"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3.5" width="18" height="12" rx="1"/><path d="M8.5 21l3.5-5.5 3.5 5.5"/></svg></span>
+                        <span class="pe-cycle-node" style="left: 86.08%; top: 70.83%"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg></span>
+                        <span class="pe-cycle-node" style="left: 13.92%; top: 70.83%"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5h10a1 1 0 0 1 1 1V11a1 1 0 0 1-1 1H8.5L5 15v-3H4a1 1 0 0 1-1-1V5.5a1 1 0 0 1 1-1z"/><path d="M18 8.5h2a1 1 0 0 1 1 1V15a1 1 0 0 1-1 1h-1v3l-3.5-3H11a1 1 0 0 1-1-1v-1"/></svg></span>
+                        <div class="pe-cycle-center">
+                            <strong>4 à 8</strong>
+                            <span>semaines<br>par cycle</span>
+                        </div>
+                    </figure>
+                </div>
+                <div class="pe-cycle-list-wrap">
+                    <h3 class="pe-label">Le cycle d'apprentissage</h3>
+                    <ol class="pe-cycle-list">
+                        <li><span class="pe-cycle-icon"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3.5" width="18" height="12" rx="1"/><path d="M8.5 21l3.5-5.5 3.5 5.5"/></svg></span><div><p class="pe-cycle-title">Séminaire</p><p class="pe-cycle-text">Apports, mises en situation et choix d'un engagement personnel.</p></div></li>
+                        <li><span class="pe-cycle-icon"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg></span><div><p class="pe-cycle-title">Expérimentation terrain</p><p class="pe-cycle-text">L'engagement est mis en pratique dans le quotidien du participant.</p></div></li>
+                        <li><span class="pe-cycle-icon"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5h10a1 1 0 0 1 1 1V11a1 1 0 0 1-1 1H8.5L5 15v-3H4a1 1 0 0 1-1-1V5.5a1 1 0 0 1 1-1z"/><path d="M18 8.5h2a1 1 0 0 1 1 1V15a1 1 0 0 1-1 1h-1v3l-3.5-3H11a1 1 0 0 1-1-1v-1"/></svg></span><div><p class="pe-cycle-title">Codéveloppement ou coaching</p><p class="pe-cycle-text">Analyse de ce qui s'est passé et ajustements, entre pairs ou en individuel.</p></div></li>
+                        <li class="pe-cycle-loop"><span class="pe-cycle-icon"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 0 1-14.3 4.9"/><path d="M4 12a8 8 0 0 1 14.3-4.9"/><path d="M18.5 3.5v3.6h-3.6"/><path d="M5.5 20.5v-3.6h3.6"/></svg></span><p>Le séminaire suivant s'ouvre sur le retour d'expérience de chacun, et le cycle recommence.</p></li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="pe-configs-head">
+                <h3 class="pe-label">Trois configurations</h3>
+                <p class="pe-configs-note">Durées indicatives, ajustées lors du cadrage</p>
+            </div>
+            <ul class="pe-configs">
+                <li class="pe-config">
+                    <p class="pe-config-tag">Première promotion</p>
+                    <p class="pe-config-duration">3 mois</p>
+                    <div class="pe-config-bar" aria-hidden="true"><span style="width: 25%"></span></div>
+                    <p class="pe-config-name">Essentiel</p>
+                    <p class="pe-config-text">2 séminaires de 2 jours, 2 séances de codéveloppement, 2 séances de coaching individuel.</p>
+                </li>
+                <li class="pe-config is-featured">
+                    <p class="pe-config-tag">Configuration de référence</p>
+                    <p class="pe-config-duration">6 mois</p>
+                    <div class="pe-config-bar" aria-hidden="true"><span style="width: 50%"></span></div>
+                    <p class="pe-config-name">Le parcours haut potentiel</p>
+                    <p class="pe-config-text">3 séminaires de 2 jours, 3 séances de codéveloppement, 3 à 4 séances de coaching individuel.</p>
+                </li>
+                <li class="pe-config">
+                    <p class="pe-config-tag">Transformations longues</p>
+                    <p class="pe-config-duration">12 mois</p>
+                    <div class="pe-config-bar" aria-hidden="true"><span style="width: 100%"></span></div>
+                    <p class="pe-config-name">Le programme approfondi</p>
+                    <p class="pe-config-text">4 à 5 séminaires, ateliers à la carte, jusqu&#x27;à 6 séances de coaching, clôture avec le sponsor.</p>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ============ CADRE ET CONFIDENTIALITÉ ============ -->
+    <section id="cadre" class="pe-linen">
+        <div class="pe-wrap pe-pad pe-split">
+            <div class="pe-split-media">
+                <img src="/assets/img/laura-atelier-groupe.webp" alt="Laura Ballo animant un atelier avec un petit groupe de participants autour d'une table" width="1100" height="1467" loading="lazy" style="object-position: center 35%">
+            </div>
+            <div class="pe-split-text">
+                <p class="pe-eyebrow">Cadre et confidentialité</p>
+                <h2 class="pe-h2">Le programme ne produit aucun avis sur le potentiel ou la performance d'un participant.</h2>
+                <p class="pe-body-text">Les règles sont posées avant le démarrage, rappelées à chaque session et partagées par tous les intervenants. Pour une équipe de direction, elles sont convenues avec le dirigeant avant le premier séminaire.</p>
+                <div class="pe-rules">
+                    <div>
+                        <h3 class="pe-label">Pour chaque participant</h3>
+                        <ul class="pe-dash-list pe-dash-deep">
+                            <li>Le contenu du coaching individuel reste strictement confidentiel.</li>
+                            <li>Ses objectifs ne sont partagés avec le sponsor que s'il le souhaite.</li>
+                            <li>Questionnaires et 360° restent accessibles au seul participant et à l'équipe pédagogique.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="pe-label">Pour le sponsor</h3>
+                        <ul class="pe-dash-list pe-dash-deep">
+                            <li>Il précise le contexte, valide les objectifs, ouvre et clôt le parcours.</li>
+                            <li>Il fait le point avec Laura Ballo à mi-parcours et en fin de parcours.</li>
+                            <li>Il reçoit l'assiduité et les thèmes collectifs anonymisés, jamais de contenu individuel.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ INTERVENANTE ============ -->
+    <section id="intervenante" class="pe-cream">
+        <div class="pe-wrap pe-pad">
+            <div class="pe-split pe-person">
+                <div class="pe-split-text">
+                    <p class="pe-eyebrow">Qui porte le programme</p>
+                    <h2 class="pe-h2">Laura Ballo</h2>
+                    <p class="pe-person-role">Coach, formatrice et conférencière, diplômée de l'EDHEC Business School</p>
+                    <blockquote class="pe-quote-light"><span class="pe-quote-mark">«&nbsp;</span>Je porte la conviction que les dirigeants de demain sont ceux qui sauront allier une intelligence émotionnelle forte, qui amène du lien, une intelligence artificielle qui optimise, et une parole qui impacte et qui transforme.<span class="pe-quote-mark">&nbsp;»</span></blockquote>
+                    <p class="pe-body-text">Elle conçoit et pilote le programme, dont elle porte la cohérence de bout en bout. Selon vos besoins, un ou deux intervenants aux expertises complémentaires la rejoignent, en coaching d'équipe de direction ou issus de fonctions de direction, engagés sur les mêmes règles.</p>
+                    <div class="pe-stats">
+                        <div><p class="pe-stat-value">+ 10 ans</p><p class="pe-stat-label">auprès de dirigeants<br>et de managers</p></div>
+                        <div><p class="pe-stat-value">+ 2 500</p><p class="pe-stat-label">personnes<br>accompagnées</p></div>
+                    </div>
+                </div>
+                <div class="pe-split-media">
+                    <img src="/assets/img/laurab.webp" alt="Portrait de Laura Ballo assise à son bureau" width="1024" height="1536" loading="lazy" style="object-position: center 25%">
+                </div>
+            </div>
+
+            <div class="pe-logos-row">
+                <p class="pe-label">Elles ont fait appel à Laura Ballo</p>
+                <div class="pe-logos">
+                    <img src="/assets/img/airliquide.webp" alt="Air Liquide" height="30" style="height: 30px" loading="lazy">
+                    <img src="/assets/img/mercedes.webp" alt="Mercedes-Benz" height="44" style="height: 44px" loading="lazy">
+                    <img src="/assets/img/commission-europeenne.webp" alt="Commission européenne" height="46" style="height: 46px" loading="lazy">
+                    <img src="/assets/img/icn.webp" alt="ICN Business School" height="38" style="height: 38px" loading="lazy">
+                    <img src="/assets/img/freewheel.webp" alt="FreeWheel" height="46" style="height: 46px" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ INFORMATIONS PRATIQUES (Notion + 🏛️ Mon organisme) ============ -->
+    <section id="informations" class="pe-infos">
+        <div class="pe-wrap pe-pad">
+            <p class="pe-label">Réf. PE-01 · Niveau 2, perfectionnement · Mise à jour le 23/10/2026</p>
+            <h2 class="pe-h2">Informations pratiques</h2>
+
+            <div class="pe-infos-layout">
+                <aside class="pe-aside" aria-label="En bref">
+                    <dl>
+                        <div><dt>Format</dt><dd>Intra-entreprise, hybride</dd></div>
+                        <div><dt>Durée</dt><dd>3 à 12 mois · 6 jours de séminaire (42 h) en configuration de référence</dd></div>
+                        <div><dt>Groupe</dt><dd>6 à 12 participants, ou l'équipe de direction</dd></div>
+                        <div><dt>Tarif</dt><dd>Sur devis, après l'entretien de cadrage</dd></div>
+                        <div><dt>Délai d'accès</dt><dd>En intra-entreprise, comptez 3 à 6 semaines entre la validation du devis et la première journée, le temps d&#x27;adapter la formation à votre contexte.</dd></div>
+                    </dl>
+                    <div class="pe-aside-actions">
+                        <a class="pe-btn pe-btn-accent" href="mailto:contact@lauraballo.com?subject=Demande%20de%20devis%20%E2%80%93%20Pr%C3%A9sence%20ex%C3%A9cutive">Demander un devis</a>
+                        <a class="pe-btn pe-btn-ghost" href="mailto:contact@lauraballo.com?subject=Programme%20d%C3%A9taill%C3%A9%20%E2%80%93%20Pr%C3%A9sence%20ex%C3%A9cutive">Recevoir le programme détaillé</a>
+                    </div>
+                </aside>
+
+                <div class="pe-tabs-wrap">
+                    <div class="pe-tablist" role="tablist" aria-label="Informations détaillées">
+                        <button type="button" class="pe-tab" role="tab" id="tab-objectifs" aria-controls="objectifs" aria-selected="true">Objectifs</button>
+                        <button type="button" class="pe-tab" role="tab" id="tab-public" aria-controls="public" aria-selected="false" tabindex="-1">Pour qui ?</button>
+                        <button type="button" class="pe-tab" role="tab" id="tab-pedagogie" aria-controls="pedagogie" aria-selected="false" tabindex="-1">Pédagogie et évaluation</button>
+                        <button type="button" class="pe-tab" role="tab" id="tab-financement" aria-controls="financement" aria-selected="false" tabindex="-1">Financement</button>
+                        <button type="button" class="pe-tab" role="tab" id="tab-avis" aria-controls="avis" aria-selected="false" tabindex="-1">Avis et résultats</button>
+                    </div>
+
+                    <!-- Objectifs (ind. 1) -->
+                    <div class="pe-panel" role="tabpanel" id="objectifs" aria-labelledby="tab-objectifs" tabindex="0">
+                        <div class="pe-panel-grid">
+                            <div>
+                                <h3>Objectif professionnel</h3>
+                                <p>À l&#x27;issue du programme, le participant sera capable d&#x27;exercer ses responsabilités de dirigeant avec discernement et en accord avec ses valeurs : se positionner et décider dans l&#x27;incertitude, exercer une autorité juste, porter une parole qui engage et mobiliser les collectifs, y compris dans les transformations liées à l&#x27;IA.</p>
+                                <h3>Avant le programme</h3>
+                                <ul class="pe-dash-list">
+                                    <li>Entretien de cadrage avec le sponsor et les RH, entretiens individuels avec les participants.</li>
+                                    <li>Questionnaire de positionnement, 360° en option.</li>
+                                </ul>
+                                <h3>Après le programme</h3>
+                                <ul class="pe-dash-list">
+                                    <li>Bilan individuel et synthèse collective restituée au sponsor.</li>
+                                    <li>Évaluation à froid à J+90.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3>Objectifs opérationnels</h3>
+                                <ol class="pe-objectifs">
+                                    <li>Clarifier son identité de leader : ses valeurs, sa singularité et ce qui guide ses décisions</li>
+                                    <li>Exercer une autorité juste : poser un cadre, dire non, recadrer, déléguer</li>
+                                    <li>Se positionner et décider dans l&#x27;incertitude en explicitant ses critères d&#x27;arbitrage, puis assumer ses choix</li>
+                                    <li>Performer sans s&#x27;oublier : repérer ses mécanismes inconscients sous pression et en sortir pour choisir une réponse adaptée</li>
+                                    <li>Porter une parole qui engage, en comité, en plénière comme en situation de crise</li>
+                                    <li>Conduire une transformation en mobilisant les équipes et en anticipant ses effets humains</li>
+                                    <li>Traverser les conflits et les relations de pouvoir sans s&#x27;y laisser enfermer</li>
+                                    <li>Identifier des cas d&#x27;usage professionnels de l&#x27;IA et en mesurer les enjeux et les risques</li>
+                                    <li>Coopérer avec les autres directions et contribuer à des décisions collectives qui tiennent</li>
+                                </ol>
+                                <p class="pe-note">Les objectifs 1 à 5 relèvent du socle commun, les objectifs 6 à 9 des modules complémentaires. Les objectifs retenus sont sélectionnés et précisés pour chaque entreprise lors du cadrage.</p>
+                            </div>
                         </div>
                     </div>
-                </section>
 
-                <section class="section">
-                    <h2 class="section-title">Les objectifs de la formation</h2>
-                    <div class="objectifs-box">
-                        <p class="objectifs-intro">À l'issue de cette formation, vous serez capable de :</p>
-                        <ul class="objectifs-list">                        <li><span class="check">✓</span><span>Performer sans s&#x27;oublier : repérer ses mécanismes inconscients sous pression et en sortir pour choisir une réponse adaptée</span></li>
-                        <li><span class="check">✓</span><span>Formuler un cap partageable et prendre des décisions dans l&#x27;incertitude en explicitant ses critères d&#x27;arbitrage</span></li>
-                        <li><span class="check">✓</span><span>Exercer une autorité assertive : poser un cadre, dire non, recadrer, déléguer</span></li>
-                        <li><span class="check">✓</span><span>Porter une parole qui engage, en comité, en plénière comme en situation de crise</span></li>
-                        <li><span class="check">✓</span><span>Conduire une transformation en mobilisant les équipes et en anticipant ses effets humains</span></li>
-                        <li><span class="check">✓</span><span>Traverser les conflits et les relations de pouvoir sans s&#x27;y laisser enfermer</span></li>
-                        <li><span class="check">✓</span><span>Identifier des cas d&#x27;usage professionnels de l&#x27;IA et en mesurer les enjeux et les risques</span></li>
-                        <li><span class="check">✓</span><span>Coopérer avec les autres directions et contribuer à des décisions collectives qui tiennent</span></li>
-                        <li><span class="check">✓</span><span>Les objectifs retenus sont sélectionnés et précisés pour chaque entreprise lors du cadrage.</span></li></ul>
-                    </div>
-                </section>
-
-                <!-- Modalités et délais d'accès (ind. 1) -->
-                <section class="section" id="acces">
-                    <h2 class="section-title">Modalités et délais d'accès</h2>
-                    <div class="acces-box">
-                        <div class="acces-bloc">
-                            <h3 class="pedagogy-title">Comment s'inscrire</h3>
+                    <!-- Pour qui ? (public, prérequis, accès, accessibilité) -->
+                    <div class="pe-panel" role="tabpanel" id="public" aria-labelledby="tab-public" tabindex="0" hidden>
+                        <div class="pe-panel-grid">
+                            <div>
+                                <h3>Public</h3>
+                                <ul class="pe-dash-list">
+                                    <li>Dirigeants : CEO, DG, directeurs de filiale ou de business unit, dirigeants de PME et d&#x27;ETI</li>
+                                    <li>Membres de CODIR, de COMEX et de comités de direction de site ou d&#x27;entité</li>
+                                    <li>Talents à fort potentiel appelés à des responsabilités élargies dans les 12 à 36 mois</li>
+                                </ul>
+                                <h3>Modalités d'accès</h3>
                         <p>Inscription sur demande par email à contact@lauraballo.com ou par téléphone. Un échange préalable permet d&#x27;analyser vos besoins et, en intra, d&#x27;adapter la formation à votre contexte. L&#x27;inscription est confirmée par la signature d&#x27;un devis et d&#x27;une convention de formation (entreprise) ou d&#x27;un contrat de formation (particulier). Chaque participant reçoit ensuite sa convocation et un questionnaire de positionnement à compléter avant la formation.</p>
-                        </div>
-                        <div class="acces-bloc">
-                            <h3 class="pedagogy-title">Délais d'accès</h3>
-                            <p>En intra-entreprise, comptez 3 à 6 semaines entre la validation du devis et la première journée, le temps d&#x27;adapter la formation à votre contexte.</p>
-                        </div>
-                        <p class="acces-contact">Contact : <a href="mailto:"></a> · <a href="tel:"></a></p>
-                    </div>
-                </section>
-
-                <!-- Accessibilité (ind. 26) — texte géré dans 🏛️ Mon organisme, référente handicap nommée -->
-                <section class="section" id="accessibilite">
-                    <h2 class="section-title">Accessibilité</h2>
-                    <div class="accessibilite-box">
-                        <span class="accessibilite-icon">♿</span>
-                        <div class="accessibilite-content">
-                            <h4>Formation accessible aux personnes en situation de handicap</h4>
+                            </div>
+                            <div>
+                                <h3>Prérequis</h3>
+                                <p>Exercer ou s&#x27;apprêter à exercer une fonction de direction. Participation volontaire recommandée. Un entretien de cadrage avec l&#x27;entreprise précède tout démarrage.</p>
+                                <h3>Accessibilité</h3>
                         <p>Nos formations sont accessibles aux personnes en situation de handicap. Contactez notre référente handicap, Laura Ballo (contact@lauraballo.com), avant votre inscription pour étudier ensemble les adaptations possibles : supports adaptés, aménagement des temps de travail et de passage, accessibilité des locaux. Si besoin, nous vous orientons vers les partenaires spécialisés (Agefiph, Cap emploi).</p>
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-            <!-- ───────── Onglet 3 : Pédagogie et évaluation ───────── -->
-            <div class="tab-panel" id="pedagogie" role="tabpanel">
-                <!-- Pédagogie : modalités, méthodes mobilisées, moyens et outils, intervenante (ind. 1) -->
-                <section class="section">
-                    <h2 class="section-title">Pédagogie</h2>
-                    <div class="pedagogy-box">
-                    <div class="pedagogy-bloc">
-                        <h3 class="pedagogy-title">Modalités pédagogiques</h3>
-                        <p class="pedagogy-text">Parcours intra-entreprise de 3 à 12 mois selon la configuration retenue. Séminaires collectifs en présentiel, idéalement hors site, complétés par des séances de codéveloppement et de coaching individuel en présentiel ou en visio, et par des mises en pratique sur le terrain entre deux séminaires. Groupes de 6 à 12 participants, ou l&#x27;équipe de direction au complet.</p>
-                    </div>
-                    <div class="pedagogy-bloc">
-                        <h3 class="pedagogy-title">Méthodes mobilisées</h3>
-                        <p class="pedagogy-text">Apports courts, mises en situation sur des cas apportés par les participants, prises de parole filmées avec retours, cas d&#x27;arbitrage, cartographies d&#x27;acteurs, codéveloppement entre pairs, coaching individuel, usages concrets de l&#x27;IA au service du dirigeant, carnet de bord tenu tout au long du parcours.</p>
-                    </div>
-                    <div class="pedagogy-bloc">
-                        <h3 class="pedagogy-title">Moyens et outils</h3>
-                        <p class="pedagogy-text">Supports de séminaire, carnet de bord du dirigeant, questionnaire de positionnement, questionnaire des drivers, grilles d&#x27;observation des mises en situation, trames de décision, de conversation difficile et de délégation, questionnaires d&#x27;évaluation en ligne.</p>
-                    </div>
-                    <div class="pedagogy-bloc">
-                        <h3 class="pedagogy-title">Intervenante</h3>
-                        <p class="pedagogy-text">Programme conçu et piloté par une formatrice et coach professionnelle, diplômée de l&#x27;EDHEC, forte de plus de dix ans d&#x27;expérience dans l&#x27;accompagnement de dirigeants et de managers. Selon les besoins, un ou deux intervenants aux expertises complémentaires (coaching d&#x27;équipe de direction, expérience de direction) peuvent la rejoindre, engagés sur les mêmes règles.</p>
-                    </div>
-                    </div>
-                </section>
-
-                <!-- Évaluation : modalités d'évaluation et sanction (ind. 1 et 11) -->
-                <section class="section">
-                    <h2 class="section-title">Évaluation</h2>
-                    <div class="evaluation-box">
-                        <ul class="evaluation-list">
-                        <li><span class="bullet"></span><span>Questionnaire de positionnement et entretien individuel à l&#x27;entrée, 360° en option</span></li>
-                        <li><span class="bullet"></span><span>Mises en situation observées avec grilles et carnet de bord tout au long du parcours</span></li>
-                        <li><span class="bullet"></span><span>Satisfaction à chaud à chaque séminaire</span></li>
-                        <li><span class="bullet"></span><span>Auto-évaluation comparée au positionnement et bilan individuel en fin de parcours</span></li>
-                        <li><span class="bullet"></span><span>Évaluation à froid à J+90</span></li>
-                        </ul>
-                        <p class="evaluation-sanction"><strong>Sanction de la formation :</strong> Attestation de fin de formation mentionnant les objectifs, la nature, la durée de l&#x27;action et les résultats de l&#x27;évaluation des acquis.</p>
-                    </div>
-                </section>
-            </div>
-
-            <!-- ───────── Onglet 4 : Financement ───────── -->
-            <div class="tab-panel" id="financement" role="tabpanel">
-                <section class="section">
-                    <h2 class="section-title">Tarifs</h2>
-                    <div class="tarifs-grid">
-                        <!-- INTER (désactivé) — carte tarif inter-entreprises, à réactiver avec l'offre inter
-                        <div class="tarif-card">
-                            <div class="tarif-label">Inter-entreprise</div>
-                            <div class="tarif-value">0 € <small>HT / participant</small></div>
-                            <p>Inscription individuelle à une session programmée. 6 jours (42 heures).</p>
-                        </div>
-                        FIN INTER -->
-                        <div class="tarif-card">
-                            <div class="tarif-label">Intra-entreprise</div>
-                            <div class="tarif-value">4 500 € <small>HT / groupe</small></div>
-                            <p>Forfait pour un groupe de 12 personnes maximum, dans vos locaux ou à distance.</p>
-                        </div>
-                    </div>
-                    <div class="tarif-perimetre">
-                        <h3 class="pedagogy-title">Ce que comprend le forfait intra</h3>
-<p>Compris : le cadrage et le diagnostic, l&#x27;animation des séminaires pour un groupe de 6 à 12 personnes, les séances de codéveloppement et de coaching individuel prévues dans la configuration retenue, l&#x27;adaptation des cas pratiques à votre contexte, les supports et le carnet de bord remis à chaque participant, les questionnaires de positionnement, d&#x27;évaluation et de satisfaction, ainsi que la convention, les convocations et les attestations de fin de formation.</p>
-<p>Non compris : les frais de déplacement et d&#x27;hébergement des intervenants, la location d&#x27;un lieu de séminaire hors site, l&#x27;hébergement et la restauration des participants, et un outil 360° sous licence le cas échéant.</p>
-                        <p class="tarif-delais"><strong>Délais d'accès :</strong> En intra-entreprise, comptez 3 à 6 semaines entre la validation du devis et la première journée, le temps d&#x27;adapter la formation à votre contexte.</p>
-                    </div>
-                </section>
-
-                <section class="section">
-                    <h2 class="section-title">Les solutions de financement</h2>
-                    <div class="financement-box">
-                        <h3 class="financement-title">OPCO et financement de la formation</h3>
-                        <p class="financement-text">
-                            Cette formation peut être prise en charge par votre OPCO (Opérateur de Compétences).
-                            Les dispositifs de financement sont accessibles selon les critères de prise en charge de chaque OPCO.
-                        </p>
-                        <p class="financement-text">
-                            Nous vous accompagnons dans le montage du dossier de prise en charge et la gestion administrative.
-                            <a href="#" onclick="openModalDevis(); return false;">Demander un devis et un accompagnement OPCO</a>
-                        </p>
-                    </div>
-                </section>
-            </div>
-
-            <!-- ───────── Onglet 5 : Avis et résultats ───────── -->
-            <div class="tab-panel" id="avis" role="tabpanel">
-                <section class="section">
-                    <h2 class="section-title">Les avis sur la formation</h2>
-                    <div class="avis-box"><p class="avis-vide">Pas encore d'avis sur les 12 derniers mois : les premiers questionnaires de satisfaction à chaud seront publiés ici dès la prochaine session terminée.</p></div>
-                </section>
-
-
-            </div>
-
-            <p class="mentions-organisme">Laura Ballo Coaching — organisme de formation enregistré sous le numéro de déclaration d'activité  auprès du Préfet de la région Auvergne-Rhône-Alpes. Cet enregistrement ne vaut pas agrément de l'État.</p>
-            <p class="liens-legaux"><a href="/legal/cgv-formation">CGV formation</a> · <a href="/legal/mentions-legales">Mentions légales</a> · <a href="/legal/politique-confidentialite">Confidentialité</a></p>
-
-        </main>
-
-        <!-- SIDEBAR -->
-        <aside class="sidebar">
-            <div class="sidebar-inner">
-                <div class="sidebar-card">
-
-<!-- INTER (désactivé) — offre inter-entreprises à venir : réactiver les onglets et ce bloc, puis retirer la classe active du bloc intra
-                    <!~~ Tabs Inter/Intra ~~>
-                    <div class="tarif-tabs">
-                        <button class="tarif-tab active" onclick="switchTarif('inter')">Inter</button>
-                        <button class="tarif-tab" onclick="switchTarif('intra')">Intra</button>
-                    </div>
-
-                    <!~~ Inter content ~~>
-                    <div class="tarif-content active" id="tarif-inter">
-
-                        <div class="tarif-format">Présentiel ou classe à distance</div>
-                        <div class="sidebar-content">
-                            <div class="sidebar-row">
-                                <svg class="sidebar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                </svg>
-                                <span class="sidebar-label">Durée</span>
-                                <div style="margin-left: auto; text-align: right;">
-                                    <div class="sidebar-value">6 jours (42 heures)</div>
-                                    <div class="sidebar-subinfo">+ activités à distance</div>
-                                </div>
-                            </div>
-                            <div class="sidebar-row">
-                                <svg class="sidebar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                </svg>
-                                <span class="sidebar-label">Prix</span>
-                                <div class="sidebar-value price">0 € <small>HT / participant</small></div>
-                            </div>
-                            <div class="sidebar-row">
-                                <svg class="sidebar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                </svg>
-                                <span class="sidebar-label">Groupe</span>
-                                <div class="sidebar-value">12 pers. max</div>
-                            </div>
-                            <div class="sidebar-row">
-                                <svg class="sidebar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
-                                </svg>
-                                <span class="sidebar-label">Référence</span>
-                                <div class="sidebar-value">PE-01</div>
-                            </div>
-                        </div>
-                    </div>
-     FIN INTER -->
-
-                    <!-- Intra content -->
-                    <div class="tarif-content active" id="tarif-intra">
-                        <div class="tarif-format">Formation intra</div>
-                        <p style="font-size:.8rem; margin:14px 0 0; padding:0 var(--space-md); color:var(--warm-gray);">Forfait pour un groupe — <a href="#" onclick="openModalIntra(); return false;" style="color:var(--accent-dark); font-weight:600; text-decoration:underline;">En savoir plus</a></p>
-                        <div class="sidebar-content">
-                            <div class="sidebar-row">
-                                <svg class="sidebar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                </svg>
-                                <span class="sidebar-label">Durée</span>
-                                <div style="margin-left: auto; text-align: right;">
-                                    <div class="sidebar-value">6 jours (42 heures)</div>
-                                    <div class="sidebar-subinfo">+ activités à distance</div>
-                                </div>
-                            </div>
-                            <div class="sidebar-row">
-                                <svg class="sidebar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                </svg>
-                                <span class="sidebar-label">Prix</span>
-                                <div style="margin-left:auto; text-align:right;">
-                                    <div class="sidebar-value price">4 500 € <small>HT</small></div>
-                                    <div class="sidebar-subinfo">forfait groupe</div>
-                                </div>
-                            </div>
-                            <div class="sidebar-row">
-                                <svg class="sidebar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                </svg>
-                                <span class="sidebar-label">Groupe</span>
-                                <div class="sidebar-value">12 pers. max</div>
-                            </div>
-                            <div class="sidebar-row">
-                                <svg class="sidebar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
-                                </svg>
-                                <span class="sidebar-label">Référence</span>
-                                <div class="sidebar-value">PE-01</div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- INTER (désactivé) — bouton d'inscription inter-entreprises
-                    <div class="sidebar-ctas sidebar-ctas-inter">
-                        <a class="btn-primary" id="btn-inscription-inter" href="#">Demande d'inscription</a>
-                    </div>
-                    FIN INTER -->
-
-                    <!-- CTAs Intra -->
-                    <div class="sidebar-ctas sidebar-ctas-intra">
-                        <button class="btn-primary" onclick="openModalDevis()">Faire une demande de devis</button>
-                    </div>
-
-                    <!-- Share -->
-                    <div class="sidebar-share">
-                        <button class="share-btn" title="Télécharger le programme">
-                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-                            </svg>
-                        </button>
-                        <button class="share-btn" title="Ajouter aux favoris">
-                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                            </svg>
-                        </button>
-                        <button class="share-btn" title="Partager">
-                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
-                            </svg>
-                        </button>
-                        <button class="share-btn" title="Envoyer par email">
-                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                            </svg>
-                        </button>
+                    <!-- Pédagogie et évaluation (ind. 1) -->
+                    <div class="pe-panel" role="tabpanel" id="pedagogie" aria-labelledby="tab-pedagogie" tabindex="0" hidden>
+                        <div class="pe-panel-grid">
+                            <div>
+                                <h3>Modalités</h3>
+                                <p>Parcours intra-entreprise de 3 à 12 mois selon la configuration retenue. Séminaires collectifs en présentiel, idéalement hors site, complétés par des séances de codéveloppement et de coaching individuel en présentiel ou en visio, et par des mises en pratique sur le terrain entre deux séminaires. Groupes de 6 à 12 participants, ou l&#x27;équipe de direction au complet.</p>
+                                <h3>Méthodes</h3>
+                                <p>Apports courts, mises en situation sur des cas apportés par les participants, prises de parole filmées avec retours, cas d&#x27;arbitrage, cartographies d&#x27;acteurs, codéveloppement entre pairs, coaching individuel, usages concrets de l&#x27;IA au service du dirigeant, carnet de bord tenu tout au long du parcours.</p>
+                                <h3>Sanction</h3>
+                                <p>Attestation de fin de formation mentionnant les objectifs, la nature, la durée de l&#x27;action et les résultats de l&#x27;évaluation des acquis.</p>
+                            </div>
+                            <div>
+                                <h3>Évaluation</h3>
+                                <ul class="pe-dash-list">
+                                    <li>Questionnaire de positionnement et entretien individuel à l&#x27;entrée, 360° en option</li>
+                                    <li>Mises en situation observées avec grilles et carnet de bord tout au long du parcours</li>
+                                    <li>Satisfaction à chaud à chaque séminaire</li>
+                                    <li>Auto-évaluation comparée au positionnement et bilan individuel en fin de parcours</li>
+                                    <li>Évaluation à froid à J+90</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
 
+                    <!-- Financement -->
+                    <div class="pe-panel" role="tabpanel" id="financement" aria-labelledby="tab-financement" tabindex="0" hidden>
+                        <div class="pe-panel-grid">
+                            <div>
+                                <h3>Prise en charge</h3>
+                                <p>Formation certifiée Qualiopi, éligible à une prise en charge par votre OPCO. Nous vous accompagnons dans la constitution du dossier.</p>
+                                <h3>Non compris</h3>
+                                <p>Les frais de déplacement et d&#x27;hébergement des intervenants, la location d&#x27;un lieu de séminaire hors site, l&#x27;hébergement et la restauration des participants, et un outil 360° sous licence le cas échéant.</p>
+                            </div>
+                            <div>
+                                <h3>Compris dans le forfait</h3>
+                                <p>Le cadrage et le diagnostic, l&#x27;animation des séminaires pour un groupe de 6 à 12 personnes, les séances de codéveloppement et de coaching individuel prévues dans la configuration retenue, l&#x27;adaptation des cas pratiques à votre contexte, les supports et le carnet de bord remis à chaque participant, les questionnaires de positionnement, d&#x27;évaluation et de satisfaction, ainsi que la convention, les convocations et les attestations de fin de formation.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Avis et résultats : satisfaction à chaud, verbatims consentis uniquement -->
+                    <div class="pe-panel" role="tabpanel" id="avis" aria-labelledby="tab-avis" tabindex="0" hidden>
+                        <div style="max-width: 640px">
+                            <p class="pe-avis-lead">Les résultats seront publiés à l'issue de la première promotion.</p>
+                            <p style="margin-top: 14px">Vous trouverez ici la note moyenne et le nombre d'avis issus des questionnaires de satisfaction à chaud, ainsi que le nombre de stagiaires formés. Un commentaire n'est publié qu'avec l'accord explicite du participant.</p>
+                        </div>
+
+                    </div>
                 </div>
             </div>
-        </aside>
 
-    </div>
-
-
-    <!-- ============================================
-         MODALE PÉRIMÈTRE DU FORFAIT INTRA
-         ============================================ -->
-    <div class="modal-overlay" id="modalIntra">
-        <div class="modal-container" style="max-width:620px;">
-            <button class="modal-close" onclick="closeModalIntra()" aria-label="Fermer">&times;</button>
-            <div class="modal-header">
-                <h2 class="modal-title">Le forfait intra-entreprise</h2>
-                <p class="modal-subtitle">Présence exécutive — Programme pour dirigeants à fort potentiel — 4 500 € HT pour un groupe de 12 personnes maximum</p>
-            </div>
-            <div style="padding:0 var(--space-lg) var(--space-lg); line-height:1.7;">
-                <p>Compris : le cadrage et le diagnostic, l&#x27;animation des séminaires pour un groupe de 6 à 12 personnes, les séances de codéveloppement et de coaching individuel prévues dans la configuration retenue, l&#x27;adaptation des cas pratiques à votre contexte, les supports et le carnet de bord remis à chaque participant, les questionnaires de positionnement, d&#x27;évaluation et de satisfaction, ainsi que la convention, les convocations et les attestations de fin de formation.</p>
-<p>Non compris : les frais de déplacement et d&#x27;hébergement des intervenants, la location d&#x27;un lieu de séminaire hors site, l&#x27;hébergement et la restauration des participants, et un outil 360° sous licence le cas échéant.</p>
-                <div style="margin-top:var(--space-md); padding-top:var(--space-md); border-top:1px solid var(--warm-beige);">
-                    <strong style="display:block; margin-bottom:6px;">Délais d'accès</strong>
-                    <p style="color:var(--warm-gray); font-size:.9rem;">En intra-entreprise, comptez 3 à 6 semaines entre la validation du devis et la première journée, le temps d&#x27;adapter la formation à votre contexte.</p>
-                </div>
-                <button class="btn-primary" style="margin-top:var(--space-md); width:100%;"
-                        onclick="closeModalIntra(); openModalDevis();">Faire une demande de devis</button>
-            </div>
+            <p class="pe-mentions">Laura Ballo Coaching, organisme de formation enregistré sous le numéro de déclaration d'activité 84692418069 auprès du Préfet de la région Auvergne-Rhône-Alpes. Cet enregistrement ne vaut pas agrément de l'État.</p>
+            <p class="pe-legal"><a href="/legal/cgv-formation">CGV formation</a> · <a href="/legal/mentions-legales">Mentions légales</a> · <a href="/legal/politique-confidentialite">Confidentialité</a></p>
         </div>
-    </div>
+    </section>
 
-    <!-- ============================================
-         MODALE DEMANDE DE DEVIS (INTRA)
-         ============================================ -->
-    <div class="modal-overlay" id="modalDevis">
-        <div class="modal-container">
-            <button class="modal-close" onclick="closeModalDevis()" aria-label="Fermer">&times;</button>
-            
-            <div class="modal-header">
-                <h2 class="modal-title">Demande de devis — Formation Intra-entreprise</h2>
-                <p class="modal-subtitle">Complétez ce formulaire, nous vous recontactons sous 48h.</p>
+    <!-- ============ APPEL À L'ACTION ============ -->
+    <section id="contact" class="pe-dark">
+        <div class="pe-cta">
+            <p class="pe-eyebrow">Entretien de cadrage</p>
+            <h2>À quoi verrez-vous, dans un an, que le programme a été utile ?</h2>
+            <p class="pe-cta-text">C'est l'une des questions que nous explorons ensemble lors du cadrage, avec le sponsor et les RH, pour construire le programme qui répond à vos enjeux.</p>
+            <div class="pe-actions">
+                <a class="pe-btn pe-btn-accent" href="mailto:contact@lauraballo.com?subject=Entretien%20de%20cadrage%20%E2%80%93%20Pr%C3%A9sence%20ex%C3%A9cutive">Demander un entretien de cadrage</a>
+                <a class="pe-btn pe-btn-ghost" href="https://calendly.com/laura-ballo1993/echangecoaching" target="_blank" rel="noopener">Réserver un appel</a>
             </div>
-
-            <form id="formDevis" class="modal-form">
-                
-                <!-- Personne en charge -->
-                <div class="form-section-title">Personne en charge</div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="devis-nom">Nom <span class="required">*</span></label>
-                        <input type="text" id="devis-nom" name="nom" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="devis-prenom">Prénom <span class="required">*</span></label>
-                        <input type="text" id="devis-prenom" name="prenom" required>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="devis-tel">Téléphone <span class="required">*</span></label>
-                        <input type="tel" id="devis-tel" name="telephone" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="devis-email">Email <span class="required">*</span></label>
-                        <input type="email" id="devis-email" name="email" required>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="devis-entreprise">Nom de l'entreprise <span class="required">*</span></label>
-                        <input type="text" id="devis-entreprise" name="entreprise" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="devis-type">Type d'entreprise <span class="required">*</span></label>
-                        <select id="devis-type" name="type_entreprise" required>
-                            <option value="" disabled selected>Sélectionner</option>
-                            <option value="PME">PME</option>
-                            <option value="ETI">ETI</option>
-                            <option value="Grand groupe">Grand groupe</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="devis-fonction">Fonction <span class="required">*</span></label>
-                    <select id="devis-fonction" name="fonction" required>
-                        <option value="" disabled selected>Sélectionner votre fonction</option>
-                        <option value="Ressources humaines">Ressources humaines</option>
-                        <option value="Direction / CEO / Fondateur">Direction / CEO / Fondateur</option>
-                        <option value="Manager / Responsable d'équipe">Manager / Responsable d'équipe</option>
-                        <option value="Formation / Développement des compétences">Formation / Développement des compétences</option>
-                        <option value="Autre">Autre</option>
-                    </select>
-                </div>
-
-                <!-- Formations concernées -->
-                <div class="form-section-title">Formation(s) concernée(s) <span class="required">*</span></div>
-
-                <div class="form-checkboxes">
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="formations" value="Niveau 1 : Gestion du stress et prise de parole en public">
-                        <span class="checkbox-custom"></span>
-                        <span>Niveau 1 : Gestion du stress et prise de parole en public</span>
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="formations" value="Niveau 2 : Approfondissement prise de parole & storytelling">
-                        <span class="checkbox-custom"></span>
-                        <span>Niveau 2 : Approfondissement prise de parole &amp; storytelling</span>
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="formations" value="Formation en prise de parole et média training">
-                        <span class="checkbox-custom"></span>
-                        <span>Formation en prise de parole et média training</span>
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="formations" value="Leadership authentique & Management d'équipe">
-                        <span class="checkbox-custom"></span>
-                        <span>Leadership authentique &amp; Management d'équipe</span>
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="formations" value="Gestion des Conflits & Conversations difficiles">
-                        <span class="checkbox-custom"></span>
-                        <span>Gestion des Conflits &amp; Conversations difficiles</span>
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="formations" value="Réussir à s'affirmer – Développer un charisme sensible et authentique">
-                        <span class="checkbox-custom"></span>
-                        <span>Réussir à s'affirmer – Développer un charisme sensible et authentique</span>
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="formations" value="Autre – Prestation sur mesure">
-                        <span class="checkbox-custom"></span>
-                        <span>Autre – Prestation sur mesure</span>
-                    </label>
-                </div>
-
-                <div class="form-group">
-                    <label for="devis-nb">Nombre de personnes concernées <span class="required">*</span></label>
-                    <input type="number" id="devis-nb" name="nb_personnes" min="1" max="200" required placeholder="Ex : 8">
-                </div>
-
-                <div class="form-group">
-                    <label for="devis-message">Nous en dire plus sur votre besoin</label>
-                    <textarea id="devis-message" name="message" rows="4" placeholder="Contexte, objectifs, contraintes de planning…"></textarea>
-                </div>
-
-                <button type="submit" class="btn-primary form-submit">Être recontacté</button>
-            </form>
-
-            <!-- Confirmation -->
-            <div class="modal-confirmation" id="modalConfirmation" style="display:none;">
-                <div class="confirmation-icon">✓</div>
-                <h3>Demande envoyée avec succès</h3>
-                <p>Merci ! Nous avons bien reçu votre demande de devis.<br>Nous vous recontacterons sous 48h.</p>
-                <button class="btn-primary" onclick="closeModalDevis()" style="margin-top: 24px;">Fermer</button>
-            </div>
+            <p class="pe-cta-contact"><a href="mailto:contact@lauraballo.com">contact@lauraballo.com</a> · <a href="tel:+33643037926">+33 6 43 03 79 26</a></p>
         </div>
-    </div>
+    </section>
 
-    <style>
-        /* ============================================
-           MODALE DEVIS
-           ============================================ */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(4px);
-            z-index: 1000;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 40px 20px;
-            overflow-y: auto;
-        }
+    </main>
+</div>
 
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal-container {
-            background: var(--white);
-            border-radius: 16px;
-            max-width: 640px;
-            width: 100%;
-            padding: 40px;
-            position: relative;
-            box-shadow: 0 24px 80px rgba(0,0,0,0.25);
-            animation: modalSlideIn 0.3s ease;
-        }
-
-        @keyframes modalSlideIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 16px;
-            right: 20px;
-            background: none;
-            border: none;
-            font-size: 1.8rem;
-            color: var(--warm-gray);
-            cursor: pointer;
-            line-height: 1;
-            transition: color 0.2s;
-        }
-
-        .modal-close:hover {
-            color: var(--black);
-        }
-
-        .modal-header {
-            margin-bottom: 32px;
-        }
-
-        .modal-title {
-            font-family: var(--font-heading);
-            font-size: 1.5rem;
-            font-weight: 400;
-            color: var(--black);
-            margin-bottom: 8px;
-        }
-
-        .modal-subtitle {
-            font-size: 0.9rem;
-            color: var(--warm-gray);
-        }
-
-        /* Form */
-        .modal-form .form-section-title {
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: var(--black);
-            margin-top: 24px;
-            margin-bottom: 16px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid var(--warm-beige);
-        }
-
-        .modal-form .form-section-title:first-child {
-            margin-top: 0;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--text-dark);
-            margin-bottom: 6px;
-        }
-
-        .form-group .required {
-            color: var(--pop-red);
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 10px 14px;
-            border: 1px solid var(--warm-beige);
-            border-radius: 8px;
-            font-family: var(--font-body);
-            font-size: 0.9rem;
-            color: var(--text-dark);
-            background: var(--white);
-            transition: border-color 0.2s;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(196,165,116,0.15);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-        }
-
-        /* Checkboxes */
-        .form-checkboxes {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            margin-bottom: 20px;
-        }
-
-        .checkbox-label {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            font-size: 0.9rem;
-            color: var(--text-dark);
-            cursor: pointer;
-            padding: 5px 12px;
-            border-radius: 8px;
-            border: 1px solid transparent;
-            transition: all 0.2s;
-        }
-
-        .checkbox-label:hover {
-            background: var(--light-beige);
-        }
-
-        .checkbox-label input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            margin-top: 1px;
-            accent-color: var(--accent);
-            flex-shrink: 0;
-        }
-
-        .form-submit {
-            margin-top: 8px;
-            width: 100%;
-            font-size: 1rem;
-            padding: 16px;
-        }
-
-        /* Confirmation */
-        .modal-confirmation {
-            text-align: center;
-            padding: 40px 20px;
-        }
-
-        .confirmation-icon {
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            background: var(--success);
-            color: white;
-            font-size: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 24px;
-        }
-
-        .modal-confirmation h3 {
-            font-family: var(--font-heading);
-            font-size: 1.4rem;
-            font-weight: 400;
-            margin-bottom: 12px;
-            color: var(--black);
-        }
-
-        .modal-confirmation p {
-            font-size: 0.95rem;
-            color: var(--warm-gray);
-            line-height: 1.7;
-        }
-
-        /* Responsive modal */
-        @media (max-width: 768px) {
-            .modal-container {
-                padding: 24px;
-            }
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-            .modal-title {
-                font-size: 1.2rem;
-            }
-        }
-    </style>
+    <!-- Pied de page, bannière cookies et mesure d'audience (consentement) partagés avec le site -->
+    <div id="footer-placeholder"></div>
+    <div id="cookies-placeholder"></div>
+    <script src="/assets/js/includes.js"></script>
 
     <script>
-        /* ============================================
-           TABS INTER / INTRA
-           ============================================ */
-        // ── Onglets : activation, ancre dans l'URL, liens internes (#avis…) ──
+        // Onglets « Informations pratiques » : clavier, ancre dans l'URL (#avis…), liens internes
         (function () {
-            var tabs = document.querySelectorAll('.tab');
-            var panels = document.querySelectorAll('.tab-panel');
-            function openTab(id, scroll) {
+            var tabs = Array.prototype.slice.call(document.querySelectorAll('.pe-tab'));
+            var panels = tabs.map(function (t) { return document.getElementById(t.getAttribute('aria-controls')); });
+
+            function select(id, focus) {
                 var found = false;
-                panels.forEach(function (p) { p.classList.toggle('active', p.id === id); if (p.id === id) found = true; });
-                if (!found) return false;
-                tabs.forEach(function (t) {
-                    var on = t.dataset.tab === id;
-                    t.classList.toggle('active', on);
+                tabs.forEach(function (t, i) {
+                    var on = t.getAttribute('aria-controls') === id;
+                    if (on) found = true;
                     t.setAttribute('aria-selected', on ? 'true' : 'false');
+                    t.tabIndex = on ? 0 : -1;
+                    panels[i].hidden = !on;
+                    if (on && focus) t.focus();
                 });
-                if (scroll) {
-                    var nav = document.querySelector('.tabs');
-                    if (nav) nav.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-                return true;
+                return found;
             }
-            tabs.forEach(function (t) {
-                t.addEventListener('click', function () {
-                    openTab(t.dataset.tab, false);
-                    history.replaceState(null, '', '#' + t.dataset.tab);
+
+            tabs.forEach(function (t, i) {
+                t.addEventListener('click', function () { select(t.getAttribute('aria-controls'), false); });
+                t.addEventListener('keydown', function (e) {
+                    var k = e.key, n = tabs.length, j = null;
+                    if (k === 'ArrowRight') j = (i + 1) % n;
+                    else if (k === 'ArrowLeft') j = (i - 1 + n) % n;
+                    else if (k === 'Home') j = 0;
+                    else if (k === 'End') j = n - 1;
+                    if (j === null) return;
+                    e.preventDefault();
+                    select(tabs[j].getAttribute('aria-controls'), true);
                 });
             });
-            document.querySelectorAll('[data-open-tab]').forEach(function (a) {
+
+            function openFromHash() {
+                var id = (location.hash || '').slice(1);
+                if (id && select(id, false)) {
+                    document.getElementById('informations').scrollIntoView({ block: 'start' });
+                }
+            }
+            document.querySelectorAll('[data-tab-link]').forEach(function (a) {
                 a.addEventListener('click', function (e) {
                     e.preventDefault();
-                    openTab(a.dataset.openTab, true);
-                    history.replaceState(null, '', '#' + a.dataset.openTab);
+                    e.stopPropagation();
+                    select(a.getAttribute('data-tab-link'), false);
+                    document.getElementById('informations').scrollIntoView({ behavior: 'smooth', block: 'start' });
                 });
             });
-            // Une ancre vers un élément situé dans un onglet ouvre cet onglet (#acces, #accessibilite…)
-            function fromHash() {
-                var id = (location.hash || '').slice(1);
-                if (!id) return;
-                if (openTab(id, false)) return;
-                var el = document.getElementById(id);
-                var panel = el && el.closest('.tab-panel');
-                if (panel && openTab(panel.id, false)) el.scrollIntoView();
-            }
-            fromHash();
-            window.addEventListener('hashchange', fromHash);
+            window.addEventListener('hashchange', openFromHash);
+            openFromHash();
         })();
-
-        function switchTarif(type) {
-            // Update tabs
-            document.querySelectorAll('.tarif-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            event.target.classList.add('active');
-
-            // Update tarif content
-            document.querySelectorAll('.tarif-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            document.getElementById('tarif-' + type).classList.add('active');
-
-            // Update CTA buttons (le bloc inter est désactivé tant que l'offre n'existe pas)
-            var ctaInter = document.querySelector('.sidebar-ctas-inter');
-            if (ctaInter) ctaInter.style.display = (type === 'inter') ? 'block' : 'none';
-            document.querySelector('.sidebar-ctas-intra').style.display = (type === 'intra') ? 'block' : 'none';
-        }
-
-        /* INTER (désactivé) — lien d'inscription inter-entreprises, à réactiver avec l'offre inter
-        /~ ============================================
-           INTER — MAILTO INSCRIPTION
-           ============================================ ~/
-        (function() {
-            // Récupérer l'intitulé de la formation depuis le <h1>
-            var formationTitle = document.querySelector('.hero-title') 
-                ? document.querySelector('.hero-title').textContent.trim() 
-                : '[Intitulé de la formation]';
-
-            var subject = encodeURIComponent('Inscription – Formation inter-entreprises');
-            var body = encodeURIComponent(
-                'Bonjour,\n\n' +
-                'Je souhaiterais m\'inscrire à une formation inter-entreprises.\n\n' +
-                'Formation :\n' +
-                formationTitle + '\n\n' +
-                'Pourriez-vous m\'indiquer les prochaines dates, le format et les modalités d\'inscription ?\n\n' +
-                'Merci par avance.\n\n' +
-                'Cordialement,\n\n' +
-                '[Nom / Prénom]\n' +
-                '[Téléphone]'
-            );
-
-            var mailtoLink = 'mailto:contact@lauraballo.com?subject=' + subject + '&body=' + body;
-            document.getElementById('btn-inscription-inter').setAttribute('href', mailtoLink);
-        })();
-        FIN INTER */
-
-        /* ============================================
-           INTRA — MODALE PÉRIMÈTRE DU FORFAIT
-           ============================================ */
-        function openModalIntra() {
-            document.getElementById('modalIntra').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModalIntra() {
-            document.getElementById('modalIntra').classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        document.getElementById('modalIntra').addEventListener('click', function(e) {
-            if (e.target === this) closeModalIntra();
-        });
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeModalIntra();
-        });
-
-        /* ============================================
-           INTRA — MODALE DEVIS
-           ============================================ */
-        function openModalDevis() {
-            document.getElementById('modalDevis').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModalDevis() {
-            document.getElementById('modalDevis').classList.remove('active');
-            document.body.style.overflow = '';
-            // Reset form si confirmation affichée
-            document.getElementById('formDevis').style.display = '';
-            document.getElementById('modalConfirmation').style.display = 'none';
-            document.getElementById('formDevis').reset();
-        }
-
-        // Fermer en cliquant hors de la modale
-        document.getElementById('modalDevis').addEventListener('click', function(e) {
-            if (e.target === this) closeModalDevis();
-        });
-
-        // Fermer avec Escape
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeModalDevis();
-        });
-
-        // Soumission du formulaire → mailto récapitulatif
-        document.getElementById('formDevis').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            // Validation checkboxes
-            var checked = document.querySelectorAll('input[name="formations"]:checked');
-            if (checked.length === 0) {
-                alert('Veuillez sélectionner au moins une formation.');
-                return;
-            }
-
-            // Collecter les données
-            var nom = document.getElementById('devis-nom').value;
-            var prenom = document.getElementById('devis-prenom').value;
-            var tel = document.getElementById('devis-tel').value;
-            var email = document.getElementById('devis-email').value;
-            var entreprise = document.getElementById('devis-entreprise').value;
-            var typeEntreprise = document.getElementById('devis-type').value;
-            var fonction = document.getElementById('devis-fonction').value;
-            var nbPersonnes = document.getElementById('devis-nb').value;
-            var message = document.getElementById('devis-message').value;
-
-            var formations = [];
-            checked.forEach(function(cb) { formations.push('• ' + cb.value); });
-
-            // Construire le corps du mail
-            var subject = encodeURIComponent('Demande de devis – Formation intra-entreprise');
-            var body = encodeURIComponent(
-                'DEMANDE DE DEVIS – FORMATION INTRA-ENTREPRISE\n' +
-                '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n' +
-                'PERSONNE EN CHARGE\n' +
-                'Nom : ' + nom + '\n' +
-                'Prénom : ' + prenom + '\n' +
-                'Téléphone : ' + tel + '\n' +
-                'Email : ' + email + '\n' +
-                'Entreprise : ' + entreprise + '\n' +
-                'Type : ' + typeEntreprise + '\n' +
-                'Fonction : ' + fonction + '\n\n' +
-                '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n' +
-                'FORMATION(S) CONCERNÉE(S)\n' +
-                formations.join('\n') + '\n\n' +
-                'Nombre de personnes : ' + nbPersonnes + '\n\n' +
-                '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n' +
-                'COMPLÉMENT\n' +
-                (message ? message : '(aucun complément)') + '\n\n' +
-                '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n' +
-                'Envoyé depuis le site lauraballo.com'
-            );
-
-            // Ouvrir le mailto
-            window.location.href = 'mailto:contact@lauraballo.com?subject=' + subject + '&body=' + body;
-
-            // Afficher la confirmation
-            document.getElementById('formDevis').style.display = 'none';
-            document.getElementById('modalConfirmation').style.display = 'block';
-        });
     </script>
-
 </body>
 </html>

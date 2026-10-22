@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<!-- Page générée depuis Notion par _scripts/publish_formations.py : ne pas modifier à la main.
+     Gabarit « Premium », utilisé par les fiches dont la propriété Notion « Gabarit » vaut « Premium »
+     (aujourd'hui : PE-01 Présence exécutive). Les autres fiches gardent _templates/formation.html.
+
+     Ce qui vient de la fiche Notion (régénéré à chaque publication) :
+       titre et sous-titre (« Nom de la formation », coupé au tiret long), Accroche, déclinaisons,
+       socle commun, modules complémentaires et configurations (propriété « Contenu de formation »),
+       objectifs, public, prérequis, modalités, méthodes, évaluation, sanction, périmètre du forfait,
+       durée, nombre de participants, code, niveau, date de mise à jour, programme PDF, avis.
+     Ce qui vient de 🏛️ Mon organisme : modalités et délais d'accès, accessibilité, contact, NDA.
+     Ce qui est écrit ici : le texte éditorial (conviction, méthode Présence, cinq étapes, cycle
+     d'apprentissage, cadre et confidentialité, présentation de Laura Ballo, logos clients). -->
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{TITLE_SEO}} • Laura Ballo</title>
+    <meta name="description" content="{{META_DESCRIPTION}}">
+    <link rel="canonical" href="https://lauraballo.com/formations/{{SLUG}}">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{TITLE_SEO}}">
+    <meta property="og:description" content="{{META_DESCRIPTION}}">
+    <meta property="og:url" content="https://lauraballo.com/formations/{{SLUG}}">
+    <meta property="og:image" content="https://lauraballo.com/assets/img/conference-hero.webp">
+    <meta property="og:locale" content="fr_FR">
+    <meta name="theme-color" content="#1F1A16">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <script type="application/ld+json">{{SCHEMA_JSON}}</script>
+    <link rel="preload" as="image" href="/assets/img/conference-hero.webp" fetchpriority="high">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/footer.css">
+    <link rel="stylesheet" href="/assets/css/cookies.css">
+    <style>
+        /* ============================================
+           PRÉSENCE EXÉCUTIVE — gabarit premium
+           Valeurs reprises de la maquette Claude Design
+           ============================================ */
+        :root {
+            --pe-ink: #1F1A16;
+            --pe-cream: #FAF4EF;
+            --pe-sand: #F2EAE2;
+            --pe-linen: #EFE6DC;
+            --pe-paper: #FFFDFB;
+            --pe-white: #FFFFFF;
+            --pe-gold: #C4A574;
+            --pe-gold-deep: #7D6233;
+            --pe-accent: #A83932;
+            --pe-accent-hover: #8C2E28;
+
+            --pe-text: #2C2C2C;
+            --pe-body: #4A423C;
+            --pe-list: #3F3A36;
+            --pe-muted: #6C6059;
+            --pe-on-dark: #FAF4EF;
+            --pe-on-dark-2: #E8DDD6;
+            --pe-on-dark-italic: #E0D3BD;
+            --pe-on-dark-body: #CDBFAF;
+            --pe-on-dark-muted: #AFA098;
+
+            --pe-line: #E0D3BD;
+            --pe-line-soft: #E8DDD6;
+            --pe-line-sand: #D9CBBC;
+
+            --pe-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+            --pe-sans: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
+            --pe-gutter: clamp(20px, 4vw, 40px);
+
+            /* Variables attendues par le pied de page, la bannière cookies
+               et l'encart « Résultats » partagés avec le reste du site */
+            --black: #171310;
+            --white: #FFFFFF;
+            --accent: #C4A574;
+            --accent-dark: #7D6233;
+            --light-beige: #FAF4EF;
+            --warm-beige: #E8DDD6;
+            --warm-gray: #6C6059;
+            --text-muted: #8A8079;
+            --font-heading: var(--pe-serif);
+            --font-body: var(--pe-sans);
+            --transition-base: 0.3s ease;
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            background: var(--pe-ink);
+            font-family: var(--pe-sans);
+            color: var(--pe-text);
+            -webkit-font-smoothing: antialiased;
+            text-wrap: pretty;
+        }
+        img { max-width: 100%; }
+        h1, h2, h3, h4, p, ul, ol, dl, dd, blockquote, figure { margin: 0; }
+        .pe-page a { color: var(--pe-accent); }
+        .pe-page a:hover { color: var(--pe-accent-hover); }
+        .footer a { text-decoration: none; }
+        :focus-visible { outline: 2px solid var(--pe-gold); outline-offset: 3px; }
+
+        .pe-page { background: var(--pe-cream); }
+        .pe-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: var(--pe-gutter);
+            padding-right: var(--pe-gutter);
+        }
+        .pe-pad { padding-top: 88px; padding-bottom: 88px; }
+        .pe-dark { background: var(--pe-ink); color: var(--pe-on-dark); }
+
+        /* ---------- Typographie commune ---------- */
+        .pe-eyebrow {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--pe-gold-deep);
+        }
+        .pe-dark .pe-eyebrow, .pe-hero .pe-eyebrow { color: var(--pe-gold); }
+        .pe-label {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--pe-text);
+        }
+        .pe-dark .pe-label { color: var(--pe-on-dark); }
+        .pe-h2 {
+            margin-top: 16px;
+            font-family: var(--pe-serif);
+            font-weight: 400;
+            font-size: clamp(30px, 3.2vw, 44px);
+            line-height: 1.15;
+            color: var(--pe-text);
+        }
+        .pe-dark .pe-h2 { color: var(--pe-on-dark); }
+        .pe-section-head {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 20px 48px;
+        }
+        .pe-section-head > div { flex: 1 1 520px; min-width: 0; }
+        .pe-section-intro {
+            flex: 1 1 360px;
+            max-width: 460px;
+            font-size: 16px;
+            line-height: 1.65;
+            color: var(--pe-muted);
+        }
+        .pe-dark .pe-section-intro { color: var(--pe-on-dark-body); }
+
+        .pe-dash-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+        .pe-dash-list li {
+            display: flex;
+            gap: 12px;
+            font-size: 15px;
+            line-height: 1.55;
+            color: var(--pe-list);
+        }
+        .pe-dash-list li::before {
+            content: "";
+            flex: none;
+            width: 12px;
+            height: 1px;
+            margin-top: 11px;
+            background: var(--pe-gold);
+        }
+        .pe-dash-list.pe-dash-deep li::before { background: var(--pe-gold-deep); }
+
+        /* ---------- Boutons ---------- */
+        .pe-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 54px;
+            padding: 0 28px;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+        .pe-page a.pe-btn-accent, .pe-page a.pe-btn-accent:hover { color: var(--pe-white); }
+        .pe-btn-accent { background: var(--pe-accent); }
+        .pe-btn-accent:hover { background: var(--pe-accent-hover); }
+        .pe-page a.pe-btn-ghost, .pe-page a.pe-btn-ghost:hover { color: var(--pe-on-dark); }
+        .pe-btn-ghost { border: 1px solid rgba(250, 244, 239, 0.55); }
+        .pe-btn-ghost:hover { border-color: var(--pe-gold); background: rgba(250, 244, 239, 0.06); }
+        .pe-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+
+        /* ============================================
+           HERO
+           ============================================ */
+        .pe-hero {
+            position: relative;
+            overflow: hidden;
+            color: var(--pe-on-dark);
+            background: var(--pe-ink);
+        }
+        .pe-hero-bg {
+            position: absolute;
+            inset: 0;
+            background-color: var(--pe-ink);
+            background-image:
+                linear-gradient(90deg, rgba(31,26,22,.96) 0%, rgba(31,26,22,.9) 36%, rgba(31,26,22,.5) 68%, rgba(31,26,22,.32) 100%),
+                linear-gradient(180deg, rgba(31,26,22,0) 58%, rgba(31,26,22,.94) 100%),
+                url(/assets/img/conference-hero.webp);
+            background-size: cover;
+            background-position: 72% 30%;
+            background-repeat: no-repeat;
+        }
+        .pe-nav {
+            position: relative;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px 32px;
+        }
+        .pe-nav-logo { display: flex; align-items: center; min-height: 44px; }
+        .pe-nav-logo img { display: block; height: 52px; width: auto; }
+        .pe-nav-links { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 28px; }
+        .pe-page .pe-nav-links a.pe-nav-anchor {
+            color: var(--pe-on-dark-2);
+            text-decoration: none;
+            font-size: 14px;
+            padding: 12px 0;
+        }
+        .pe-page .pe-nav-links a.pe-nav-anchor:hover { color: var(--pe-white); }
+        .pe-nav-cta {
+            display: inline-flex;
+            align-items: center;
+            min-height: 44px;
+            padding: 0 20px;
+            border: 1px solid rgba(250, 244, 239, 0.5);
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: border-color 0.2s ease;
+        }
+        .pe-page a.pe-nav-cta, .pe-page a.pe-nav-cta:hover { color: var(--pe-on-dark); }
+        .pe-nav-cta:hover { border-color: var(--pe-gold); }
+
+        .pe-hero-body { position: relative; padding-top: 64px; padding-bottom: 80px; }
+        .pe-hero-text { max-width: 700px; }
+        .pe-hero-title {
+            margin-top: 28px;
+            font-family: var(--pe-serif);
+            font-weight: 400;
+            font-size: clamp(56px, 7.6vw, 100px);
+            line-height: 0.98;
+            letter-spacing: -0.01em;
+            color: var(--pe-on-dark);
+        }
+        .pe-hero-sub {
+            margin-top: 22px;
+            font-family: var(--pe-serif);
+            font-style: italic;
+            font-size: clamp(22px, 2.2vw, 28px);
+            line-height: 1.3;
+            color: var(--pe-on-dark-italic);
+        }
+        .pe-hero-rating {
+            margin-top: 18px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: var(--pe-on-dark-body);
+            text-decoration: none;
+        }
+        .pe-page a.pe-hero-rating { color: var(--pe-on-dark-body); }
+        .pe-hero-rating .stars { display: inline-flex; gap: 2px; color: var(--pe-gold); letter-spacing: 0; }
+        .pe-hero-rating strong { color: var(--pe-on-dark); font-weight: 500; }
+        .star.empty { opacity: 0.35; }
+        .star.half { opacity: 0.7; }
+        .pe-hero-lead {
+            margin-top: 28px;
+            max-width: 540px;
+            font-size: 18px;
+            line-height: 1.65;
+            color: var(--pe-on-dark-2);
+        }
+        .pe-hero .pe-actions { margin-top: 40px; }
+
+        .pe-facts { position: relative; border-top: 1px solid rgba(250, 244, 239, 0.16); }
+        .pe-facts-grid {
+            padding-top: 28px;
+            padding-bottom: 36px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            gap: 20px 40px;
+        }
+        .pe-fact-value { font-family: var(--pe-serif); font-size: 22px; color: var(--pe-on-dark); }
+        .pe-fact-label { margin-top: 6px; font-size: 14px; line-height: 1.5; color: var(--pe-on-dark-body); }
+
+        /* ============================================
+           CONVICTION
+           ============================================ */
+        .pe-statement {
+            margin-top: 24px;
+            max-width: 1000px;
+            font-family: var(--pe-serif);
+            font-size: clamp(27px, 3vw, 40px);
+            line-height: 1.28;
+            color: var(--pe-text);
+        }
+        .pe-statement-accent {
+            margin-top: 18px;
+            font-family: var(--pe-serif);
+            font-style: italic;
+            font-size: clamp(21px, 2vw, 26px);
+            line-height: 1.35;
+            color: var(--pe-accent);
+        }
+        .pe-conviction-grid {
+            margin-top: 56px;
+            padding-top: 40px;
+            border-top: 1px solid var(--pe-line);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px 64px;
+        }
+        .pe-conviction-grid > :first-child { flex: 1 1 300px; min-width: 0; }
+        .pe-conviction-grid > :last-child { flex: 2 1 560px; min-width: 0; }
+        .pe-h-small {
+            font-family: var(--pe-serif);
+            font-weight: 400;
+            font-size: 22px;
+            line-height: 1.3;
+            color: var(--pe-text);
+        }
+        .pe-body-text { margin-top: 14px; font-size: 16px; line-height: 1.7; color: var(--pe-body); }
+        .pe-gains {
+            margin-top: 18px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+            gap: 14px 40px;
+        }
+        .pe-gains li { gap: 14px; font-size: 15.5px; }
+        .pe-gains li::before { width: 16px; margin-top: 12px; }
+
+        /* ============================================
+           MÉTHODE + CINQ ÉTAPES
+           ============================================ */
+        .pe-method { display: flex; flex-wrap: wrap; align-items: center; gap: 48px 72px; }
+        .pe-method-text { flex: 1 1 440px; min-width: 0; }
+        .pe-method-text .pe-h2 { margin-top: 18px; }
+        .pe-quote-dark {
+            margin-top: 26px;
+            font-family: var(--pe-serif);
+            font-style: italic;
+            font-size: clamp(18px, 1.6vw, 21px);
+            line-height: 1.55;
+            color: var(--pe-on-dark-italic);
+        }
+        .pe-quote-mark { color: var(--pe-gold); }
+        .pe-quote-caption { margin-top: 14px; font-size: 13px; letter-spacing: 0.06em; color: var(--pe-on-dark-muted); }
+        .pe-method-figure-wrap { flex: 1 1 360px; min-width: 0; display: flex; justify-content: center; }
+        .pe-triangle { position: relative; width: 100%; max-width: 420px; aspect-ratio: 1 / 1; }
+        .pe-triangle > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+        .pe-pillar-title { font-family: var(--pe-serif); font-size: 22px; line-height: 1.25; color: var(--pe-on-dark); }
+        .pe-pillar-text { margin-top: 6px; font-size: 13px; line-height: 1.45; color: var(--pe-on-dark-body); }
+        .pe-pillar-top { position: absolute; left: 50%; top: 0; width: 72%; transform: translateX(-50%); text-align: center; }
+        .pe-pillar-top .pe-pillar-title { font-size: 21px; }
+        .pe-pillar-left { position: absolute; left: 0; top: 79%; width: 46%; text-align: left; }
+        .pe-pillar-right { position: absolute; right: 0; top: 79%; width: 46%; text-align: right; }
+        .pe-triangle-center {
+            position: absolute;
+            left: 50%;
+            top: 61%;
+            transform: translate(-50%, -50%);
+            font-family: var(--pe-serif);
+            font-style: italic;
+            font-size: 26px;
+            color: var(--pe-gold);
+        }
+
+        .pe-steps-block { margin-top: 88px; }
+        .pe-steps-head .pe-h3 {
+            margin-top: 14px;
+            font-family: var(--pe-serif);
+            font-weight: 400;
+            font-size: clamp(28px, 2.6vw, 36px);
+            line-height: 1.2;
+            color: var(--pe-on-dark);
+        }
+        .pe-steps-head > div { flex: 0 1 auto; }
+        .pe-steps-tagline {
+            max-width: 480px;
+            font-family: var(--pe-serif);
+            font-style: italic;
+            font-size: clamp(19px, 1.7vw, 22px);
+            line-height: 1.45;
+            color: var(--pe-on-dark-italic);
+        }
+        .pe-axis { margin-top: 52px; display: flex; align-items: center; gap: 16px; }
+        .pe-axis-label { flex: none; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pe-gold); }
+        .pe-axis-label:last-child { color: var(--pe-on-dark); }
+        .pe-axis-line { flex: 1; height: 1px; background: linear-gradient(90deg, rgba(196,165,116,.2), var(--pe-gold)); }
+        .pe-axis svg { flex: none; margin-left: -14px; }
+        .pe-steps {
+            list-style: none;
+            padding: 0;
+            margin-top: 32px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+            gap: 44px 0;
+        }
+        .pe-step-top { display: flex; align-items: center; }
+        .pe-step-icon {
+            flex: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 1px solid var(--pe-gold);
+            color: var(--pe-gold);
+        }
+        .pe-step-line { flex: 1; height: 1px; margin-left: 14px; }
+        .pe-step-body { padding-right: 28px; }
+        .pe-step-title { margin-top: 22px; font-family: var(--pe-serif); font-weight: 400; font-size: 26px; color: var(--pe-on-dark); }
+        .pe-step-text { margin-top: 10px; font-size: 15px; line-height: 1.6; color: var(--pe-on-dark-body); }
+        .pe-step-question { margin-top: 10px; font-family: var(--pe-serif); font-style: italic; font-size: 17px; line-height: 1.5; color: var(--pe-on-dark-italic); }
+
+        /* ============================================
+           DÉCLINAISONS
+           ============================================ */
+        .pe-cards {
+            margin-top: 48px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+            gap: 24px;
+        }
+        .pe-card {
+            display: flex;
+            flex-direction: column;
+            padding: 36px 32px;
+            background: var(--pe-white);
+            border: 1px solid var(--pe-line-soft);
+        }
+        .pe-card-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--pe-sand);
+            color: var(--pe-gold-deep);
+        }
+        .pe-card-title { margin-top: 18px; font-family: var(--pe-serif); font-weight: 400; font-size: 26px; line-height: 1.22; color: var(--pe-text); }
+        .pe-card-text { margin-top: 10px; font-size: 15.5px; line-height: 1.6; color: var(--pe-body); }
+        .pe-card-foot { margin-top: auto; padding-top: 24px; }
+        .pe-card-foot p {
+            padding-top: 16px;
+            border-top: 1px solid var(--pe-line-soft);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.5;
+            color: var(--pe-text);
+        }
+        .pe-card-foot svg { flex: none; }
+
+        /* ============================================
+           ARCHITECTURE
+           ============================================ */
+        .pe-sand { background: var(--pe-sand); }
+        .pe-archi { display: flex; flex-wrap: wrap; gap: 48px 56px; }
+        .pe-archi > div { flex: 1 1 320px; min-width: 0; }
+        .pe-archi > div:first-child { flex-basis: 300px; }
+        .pe-archi .pe-h2 { font-size: clamp(28px, 2.7vw, 38px); line-height: 1.18; }
+        .pe-archi .pe-body-text { margin-top: 20px; }
+        .pe-archi .pe-label { margin-bottom: 16px; }
+        .pe-socle { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+        .pe-socle li { display: flex; gap: 18px; padding: 20px 22px; background: var(--pe-ink); }
+        .pe-num { font-family: var(--pe-serif); font-size: 18px; color: var(--pe-gold); }
+        .pe-socle-title { font-family: var(--pe-serif); font-size: 19px; line-height: 1.3; color: var(--pe-on-dark); }
+        .pe-socle-text { margin-top: 6px; font-size: 14px; line-height: 1.5; color: var(--pe-on-dark-body); }
+        .pe-extras { list-style: none; padding: 0; display: flex; flex-direction: column; border-top: 1px solid var(--pe-line-sand); }
+        .pe-extras li { display: flex; gap: 18px; padding: 20px 4px; border-bottom: 1px solid var(--pe-line-sand); }
+        .pe-extras .pe-num { color: var(--pe-gold-deep); }
+        .pe-extras-title { font-family: var(--pe-serif); font-size: 19px; line-height: 1.3; color: var(--pe-text); }
+        .pe-extras-text { margin-top: 6px; font-size: 14px; line-height: 1.5; color: var(--pe-muted); }
+
+        /* ============================================
+           PÉDAGOGIE ET FORMATS
+           ============================================ */
+        .pe-cycle { margin-top: 56px; display: flex; flex-wrap: wrap; align-items: center; gap: 48px 80px; }
+        .pe-cycle-figure-wrap { flex: 1 1 300px; min-width: 0; display: flex; justify-content: center; }
+        .pe-cycle-figure { position: relative; width: 100%; max-width: 340px; aspect-ratio: 1 / 1; }
+        .pe-cycle-figure > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+        .pe-cycle-node {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            border: 1px solid var(--pe-gold);
+            background: var(--pe-ink);
+            color: var(--pe-gold);
+        }
+        .pe-cycle-center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); text-align: center; }
+        .pe-cycle-center strong { display: block; font-family: var(--pe-serif); font-weight: 400; font-size: 42px; line-height: 1; color: var(--pe-on-dark); }
+        .pe-cycle-center span { display: block; margin-top: 10px; font-size: 11px; font-weight: 500; line-height: 1.5; letter-spacing: 0.16em; text-transform: uppercase; color: var(--pe-on-dark-muted); }
+        .pe-cycle-list-wrap { flex: 1.4 1 420px; min-width: 0; }
+        .pe-cycle-list { list-style: none; padding: 0; margin-top: 24px; display: flex; flex-direction: column; gap: 24px; }
+        .pe-cycle-list li { display: flex; align-items: flex-start; gap: 20px; }
+        .pe-cycle-icon {
+            flex: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(196, 165, 116, 0.14);
+            color: var(--pe-gold);
+        }
+        .pe-cycle-title { margin-top: 2px; font-family: var(--pe-serif); font-size: 21px; color: var(--pe-on-dark); }
+        .pe-cycle-text { margin-top: 6px; font-size: 14.5px; line-height: 1.6; color: var(--pe-on-dark-body); }
+        .pe-cycle-list li.pe-cycle-loop { align-items: center; padding-top: 24px; border-top: 1px solid rgba(250, 244, 239, 0.12); }
+        .pe-cycle-loop .pe-cycle-icon { background: var(--pe-gold); color: var(--pe-ink); }
+        .pe-cycle-loop p { font-family: var(--pe-serif); font-style: italic; font-size: 18px; line-height: 1.5; color: var(--pe-on-dark-italic); }
+
+        .pe-configs-head { margin-top: 64px; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; }
+        .pe-configs-note { font-size: 13px; color: var(--pe-on-dark-muted); }
+        .pe-configs {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: 16px;
+        }
+        .pe-config { padding: 30px 28px; border: 1px solid rgba(250, 244, 239, 0.14); }
+        .pe-config.is-featured { border-color: var(--pe-gold); background: rgba(196, 165, 116, 0.09); }
+        .pe-config-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--pe-on-dark-muted); }
+        .pe-config.is-featured .pe-config-tag { color: var(--pe-gold); }
+        .pe-config-duration { margin-top: 20px; font-family: var(--pe-serif); font-size: 44px; line-height: 1; color: var(--pe-on-dark); }
+        .pe-config-bar { margin-top: 20px; height: 3px; background: rgba(250, 244, 239, 0.1); }
+        .pe-config-bar span { display: block; height: 3px; background: var(--pe-gold); }
+        .pe-config-name { margin-top: 20px; font-size: 17px; font-weight: 600; color: var(--pe-on-dark); }
+        .pe-config-text { margin-top: 10px; font-size: 14.5px; line-height: 1.6; color: var(--pe-on-dark-body); }
+
+        /* ============================================
+           CADRE ET CONFIDENTIALITÉ / INTERVENANTE
+           ============================================ */
+        .pe-linen { background: var(--pe-linen); }
+        .pe-split { display: flex; flex-wrap: wrap; align-items: center; gap: 48px 72px; }
+        .pe-split-media { flex: 1 1 340px; min-width: 0; }
+        .pe-split-media img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
+        .pe-split-text { flex: 1.35 1 460px; min-width: 0; }
+        .pe-split-text .pe-h2 { font-size: clamp(27px, 2.6vw, 36px); line-height: 1.22; }
+        .pe-split-text .pe-body-text { margin-top: 20px; }
+        .pe-rules { margin-top: 36px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 32px 40px; }
+        .pe-rules .pe-label { padding-bottom: 12px; border-bottom: 1px solid var(--pe-line-sand); }
+        .pe-rules .pe-dash-list { margin-top: 16px; }
+
+        .pe-person { flex-wrap: wrap-reverse; }
+        .pe-person .pe-h2 { font-size: clamp(36px, 3.6vw, 50px); line-height: 1.1; }
+        .pe-person-role { margin-top: 10px; font-size: 15px; color: var(--pe-muted); }
+        .pe-quote-light {
+            margin-top: 32px;
+            font-family: var(--pe-serif);
+            font-style: italic;
+            font-size: clamp(19px, 1.8vw, 23px);
+            line-height: 1.5;
+            color: var(--pe-text);
+        }
+        .pe-quote-light .pe-quote-mark { color: var(--pe-accent); }
+        .pe-person .pe-body-text { margin-top: 28px; }
+        .pe-stats { margin-top: 32px; padding-top: 28px; border-top: 1px solid var(--pe-line); display: flex; flex-wrap: wrap; gap: 24px 56px; }
+        .pe-stat-value { font-family: var(--pe-serif); font-size: 36px; line-height: 1; color: var(--pe-text); }
+        .pe-stat-label { margin-top: 8px; font-size: 13.5px; line-height: 1.45; color: var(--pe-muted); }
+        .pe-logos-row {
+            margin-top: 64px;
+            padding-top: 32px;
+            border-top: 1px solid var(--pe-line);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px 40px;
+        }
+        .pe-logos-row .pe-label { color: var(--pe-muted); }
+        .pe-logos { display: flex; flex-wrap: wrap; align-items: center; gap: 20px 44px; }
+        .pe-logos img { display: block; width: auto; filter: grayscale(1) contrast(1.1); mix-blend-mode: multiply; opacity: 0.75; }
+
+        /* ============================================
+           INFORMATIONS PRATIQUES
+           ============================================ */
+        .pe-infos { background: var(--pe-paper); border-top: 1px solid #EDE3DA; }
+        .pe-infos .pe-label { color: var(--pe-gold-deep); }
+        .pe-infos .pe-h2 { margin-top: 14px; font-size: clamp(30px, 3vw, 42px); }
+        .pe-infos-layout { margin-top: 40px; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 40px 56px; }
+        .pe-aside { flex: 1 1 320px; min-width: 0; padding: 32px 30px; background: var(--pe-ink); color: var(--pe-on-dark); }
+        .pe-aside dl { display: flex; flex-direction: column; }
+        .pe-aside dl > div { padding: 16px 0; border-bottom: 1px solid rgba(250, 244, 239, 0.12); }
+        .pe-aside dl > div:first-child { padding-top: 0; }
+        .pe-aside dl > div:last-child { padding-bottom: 0; border-bottom: 0; }
+        .pe-aside dt { font-size: 12px; color: var(--pe-on-dark-muted); }
+        .pe-aside dd { margin-top: 4px; font-size: 15.5px; line-height: 1.5; }
+        .pe-aside-actions { margin-top: 28px; display: flex; flex-direction: column; gap: 10px; }
+        .pe-aside-actions .pe-btn { min-height: 50px; padding: 0 20px; text-align: center; }
+        .pe-aside-actions .pe-btn-ghost { border-color: rgba(196, 165, 116, 0.7); }
+
+        .pe-tabs-wrap { flex: 2 1 520px; min-width: 0; }
+        .pe-tablist {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0 30px;
+            border-bottom: 1px solid var(--pe-line);
+        }
+        .pe-tab {
+            position: relative;
+            flex: none;
+            appearance: none;
+            background: none;
+            border: 0;
+            padding: 14px 0;
+            min-height: 48px;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--pe-text);
+            cursor: pointer;
+        }
+        .pe-tab::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 2px;
+            background: transparent;
+        }
+        .pe-tab[aria-selected="true"]::after { background: var(--pe-text); }
+        .pe-tab:hover::after { background: var(--pe-line-sand); }
+        .pe-tab[aria-selected="true"]:hover::after { background: var(--pe-text); }
+        .pe-panel { padding-top: 28px; }
+        .pe-panel[hidden] { display: none; }
+        .pe-panel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 28px 40px; }
+        .pe-panel h3 { font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--pe-gold-deep); }
+        .pe-panel h3 + * { margin-top: 14px; }
+        .pe-panel * + h3 { margin-top: 24px; }
+        .pe-panel p { font-size: 15px; line-height: 1.6; color: var(--pe-list); }
+        .pe-panel p + p { margin-top: 8px; }
+        .pe-panel .pe-dash-list { gap: 10px; }
+        .pe-objectifs { list-style: none; padding: 0; counter-reset: obj; display: flex; flex-direction: column; gap: 10px; }
+        .pe-objectifs li { counter-increment: obj; display: flex; gap: 14px; font-size: 15px; line-height: 1.55; color: var(--pe-list); }
+        .pe-objectifs li::before { content: counter(obj); flex: none; width: 18px; font-family: var(--pe-serif); font-size: 16px; color: var(--pe-gold-deep); }
+        .pe-panel .pe-note { font-size: 14px; color: var(--pe-muted); }
+        .pe-objectifs + .pe-note { margin-top: 16px; }
+        .pe-avis-lead { font-family: var(--pe-serif); font-size: 22px; line-height: 1.4; color: var(--pe-text); }
+        .pe-panel .pe-avis-lead { font-size: 22px; color: var(--pe-text); }
+        .pe-avis-score { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 16px; }
+        .pe-avis-score strong { font-family: var(--pe-serif); font-weight: 400; font-size: 48px; line-height: 1; color: var(--pe-text); }
+        .pe-avis-score .stars { color: var(--pe-gold-deep); font-size: 18px; letter-spacing: 2px; }
+        .pe-avis-list { margin-top: 28px; display: flex; flex-direction: column; gap: 24px; }
+        .pe-avis-item { padding-left: 20px; border-left: 1px solid var(--pe-gold); }
+        .pe-avis-item blockquote { font-family: var(--pe-serif); font-style: italic; font-size: 18px; line-height: 1.55; color: var(--pe-text); }
+        .pe-panel .pe-avis-item p { margin-top: 8px; font-size: 13.5px; color: var(--pe-muted); }
+        .pe-panel .section { margin-top: 32px; }
+        .pe-panel .section-title { font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--pe-gold-deep); margin-bottom: 14px; }
+        .pe-panel .resultats-box, .pe-panel .resultat-carte { border-radius: 0; }
+        .pe-mentions { margin-top: 48px; font-size: 12.5px; line-height: 1.6; color: var(--pe-muted); }
+        .pe-legal { margin-top: 8px; font-size: 12.5px; color: var(--pe-muted); }
+        .pe-page .pe-legal a { color: var(--pe-muted); }
+        .pe-page .pe-legal a:hover { color: var(--pe-text); }
+
+        /* ============================================
+           APPEL À L'ACTION
+           ============================================ */
+        .pe-cta { max-width: 920px; margin: 0 auto; padding: 96px var(--pe-gutter); text-align: center; }
+        .pe-cta h2 {
+            margin-top: 22px;
+            font-family: var(--pe-serif);
+            font-weight: 400;
+            font-style: italic;
+            font-size: clamp(30px, 3.6vw, 48px);
+            line-height: 1.2;
+            color: var(--pe-on-dark);
+        }
+        .pe-cta-text { margin: 24px auto 0; max-width: 620px; font-size: 17px; line-height: 1.7; color: var(--pe-on-dark-body); }
+        .pe-cta .pe-actions { margin-top: 36px; justify-content: center; }
+        .pe-cta-contact { margin-top: 28px; font-size: 14px; color: var(--pe-on-dark-muted); }
+        .pe-page .pe-cta-contact a { color: var(--pe-on-dark-italic); }
+        .pe-page .pe-cta-contact a:hover { color: var(--pe-white); }
+
+        /* Pied de page partagé, accordé au fond sombre */
+        .footer { border-top: 1px solid rgba(250, 244, 239, 0.08); }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 900px) {
+            .pe-nav-anchor { display: none; }
+        }
+        @media (max-width: 600px) {
+            .pe-pad { padding-top: 64px; padding-bottom: 64px; }
+            .pe-nav-logo img { height: 44px; }
+            .pe-hero-body { padding-top: 40px; padding-bottom: 56px; }
+            .pe-hero .pe-actions .pe-btn { width: 100%; }
+            .pe-triangle { margin-bottom: 64px; }
+            .pe-steps-block { margin-top: 64px; }
+            .pe-axis { margin-top: 36px; }
+            .pe-card { padding: 30px 24px; }
+            .pe-cta { padding-top: 72px; padding-bottom: 72px; }
+            .pe-cta .pe-btn { width: 100%; }
+            .pe-aside { padding: 28px 22px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            * { transition: none !important; }
+        }
+{{RESULTATS_CSS}}
+    </style>
+</head>
+<body>
+<div class="pe-page" id="top">
+
+    <!-- ============ HERO ============ -->
+    <header class="pe-hero">
+        <div class="pe-hero-bg" aria-hidden="true"></div>
+
+        <nav class="pe-wrap pe-nav" aria-label="Navigation de la page">
+            <a href="/" class="pe-nav-logo"><img src="/assets/img/Laura-Ballo-coaching-white.webp" alt="Laura Ballo Coaching, retour à l'accueil" width="98" height="52"></a>
+            <div class="pe-nav-links">
+                <a class="pe-nav-anchor" href="#programme">Le programme</a>
+                <a class="pe-nav-anchor" href="#methode">Méthode</a>
+                <a class="pe-nav-anchor" href="#declinaisons">Déclinaisons</a>
+                <a class="pe-nav-anchor" href="#formats">Formats</a>
+                <a class="pe-nav-anchor" href="#informations">Informations</a>
+                <a class="pe-nav-cta" href="https://calendly.com/laura-ballo1993/echangecoaching" target="_blank" rel="noopener">Réserver un appel</a>
+            </div>
+        </nav>
+
+        <div class="pe-wrap pe-hero-body">
+            <div class="pe-hero-text">
+                <p class="pe-eyebrow">Programme de leadership · Intra-entreprise</p>
+                <h1 class="pe-hero-title">{{TITRE_PRINCIPAL}}</h1>
+                <p class="pe-hero-sub">{{SOUS_TITRE}}</p>
+                <!-- BLOC-AVIS-DEBUT : retiré par le script tant qu'il n'y a aucun avis -->
+                <a class="pe-hero-rating" href="#avis" data-tab-link="avis"><span class="stars" aria-hidden="true">{{STARS_HTML}}</span><span><strong>{{NOTE_MOYENNE}}/5</strong> · {{NB_AVIS}} avis à chaud</span></a>
+                <!-- BLOC-AVIS-FIN -->
+                <p class="pe-hero-lead">{{ACCROCHE}} Un parcours sur mesure, construit pour donner à vos dirigeants les moyens d'agir.</p>
+                <div class="pe-actions">
+                    <a class="pe-btn pe-btn-accent" href="#contact">Demander un entretien de cadrage</a>
+                    <a class="pe-btn pe-btn-ghost" href="{{PDF_HREF}}"{{PDF_ATTRS}}>{{PDF_LIBELLE_HERO}}</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="pe-facts">
+            <div class="pe-wrap pe-facts-grid">
+                <div>
+                    <p class="pe-fact-value">{{DUREE_PLAGE}}</p>
+                    <p class="pe-fact-label">selon la configuration retenue</p>
+                </div>
+                <div>
+                    <p class="pe-fact-value">{{GROUPE_PLAGE}}</p>
+                    <p class="pe-fact-label">ou l'équipe de direction au complet</p>
+                </div>
+                <div>
+                    <p class="pe-fact-value">Formats adaptés à vos enjeux</p>
+                    <p class="pe-fact-label">séminaires, codéveloppement, coaching individuel</p>
+                </div>
+                <div>
+                    <p class="pe-fact-value">Construit sur mesure</p>
+                    <p class="pe-fact-label">objectifs et modules fixés au cadrage</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+    <!-- ============ CONVICTION ============ -->
+    <section id="programme" class="pe-cream">
+        <div class="pe-wrap pe-pad">
+            <p class="pe-eyebrow">Notre conviction</p>
+            <p class="pe-statement">Diriger, c'est savoir trancher, se positionner clairement, tenir un cap pour mieux mobiliser les équipes et devenir l'incarnation du changement.</p>
+            <p class="pe-statement-accent">Cela ne s'apprend pas en une journée de formation.</p>
+
+            <div class="pe-conviction-grid">
+                <div>
+                    <h2 class="pe-h-small">Notre conception de la réussite</h2>
+                    <p class="pe-body-text">Le programme mesure la réussite d'un dirigeant à la qualité de ses décisions, à la durabilité des résultats et à sa capacité à faire grandir ses équipes. Il repose sur un modèle de performance soutenable et responsable, basé sur les techniques du sport de haut niveau.</p>
+                </div>
+                <div>
+                    <h2 class="pe-h-small">Ce que l'organisation y gagne</h2>
+                    <ul class="pe-dash-list pe-gains">
+                        <li>Des dirigeants capables d'assumer de véritables responsabilités et aptes à se positionner, même dans l'incertitude.</li>
+                        <li>Une présence qui trouve le juste équilibre entre relation, empathie et exigence.</li>
+                        <li>Une parole qui donne un cap et engage les équipes.</li>
+                        <li>Des équipes de direction qui coopèrent sur les sujets transverses.</li>
+                        <li>Des transformations, y compris celles liées à l'IA, conduites en tenant compte de leurs effets humains.</li>
+                        <li>Des talents préparés à prendre des responsabilités élargies.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ MÉTHODE + CINQ ÉTAPES ============ -->
+    <section id="methode" class="pe-dark">
+        <div class="pe-wrap pe-pad">
+            <div class="pe-method">
+                <div class="pe-method-text">
+                    <p class="pe-eyebrow">La méthode Présence</p>
+                    <h2 class="pe-h2">Incarnez votre pouvoir naturel de leader</h2>
+                    <blockquote class="pe-quote-dark"><span class="pe-quote-mark">«&nbsp;</span>Je porte la conviction qu'être leader, ce n'est pas uniquement endosser une fonction à haute responsabilité : c'est être en capacité d'incarner son leadership, de développer son potentiel pour mieux engager les équipes à l'action.<span class="pe-quote-mark">&nbsp;»</span></blockquote>
+                    <p class="pe-quote-caption">Laura Ballo, créatrice de la méthode Présence</p>
+                </div>
+                <div class="pe-method-figure-wrap">
+                    <figure class="pe-triangle" role="img" aria-label="Les trois piliers de la méthode Présence : engagement à l'action et prise de parole, empathie, autorité">
+                        <svg aria-hidden="true" viewBox="0 0 420 420" preserveAspectRatio="none">
+                            <polygon points="210,132 46,318 374,318" fill="none" stroke="#C4A574" stroke-opacity="0.6" stroke-width="1"/>
+                            <polygon points="210,174 92,302 328,302" fill="none" stroke="#C4A574" stroke-opacity="0.18" stroke-width="1"/>
+                            <circle cx="210" cy="132" r="5" fill="#C4A574"/>
+                            <circle cx="46" cy="318" r="5" fill="#C4A574"/>
+                            <circle cx="374" cy="318" r="5" fill="#C4A574"/>
+                        </svg>
+                        <div class="pe-pillar-top">
+                            <p class="pe-pillar-title">Engagement à l'action &amp; prise de parole</p>
+                            <p class="pe-pillar-text">porter une parole qui engage les équipes</p>
+                        </div>
+                        <p class="pe-triangle-center">Présence</p>
+                        <div class="pe-pillar-left">
+                            <p class="pe-pillar-title">Empathie</p>
+                            <p class="pe-pillar-text">ouverture, intelligence émotionnelle, écoute active</p>
+                        </div>
+                        <div class="pe-pillar-right">
+                            <p class="pe-pillar-title">Autorité</p>
+                            <p class="pe-pillar-text">savoir dire non, décider, trancher</p>
+                        </div>
+                    </figure>
+                </div>
+            </div>
+
+            <div class="pe-steps-block">
+                <div class="pe-section-head pe-steps-head">
+                    <div>
+                        <p class="pe-eyebrow">Cinq étapes clés</p>
+                        <h3 class="pe-h3">De soi au collectif</h3>
+                    </div>
+                    <p class="pe-steps-tagline">Reprendre son pouvoir intérieur pour exercer un pouvoir juste et équilibré.</p>
+                </div>
+
+                <div class="pe-axis" aria-hidden="true">
+                    <span class="pe-axis-label">Pouvoir intérieur</span>
+                    <span class="pe-axis-line"></span>
+                    <svg width="10" height="12" viewBox="0 0 10 12"><path d="M2 1l6 5-6 5" fill="none" stroke="#C4A574" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <span class="pe-axis-label">Pouvoir extérieur</span>
+                </div>
+                <ol class="pe-steps">
+                    <li>
+                        <div class="pe-step-top">
+                            <span class="pe-step-icon" style="background: transparent"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span>
+                            <span class="pe-step-line" style="background: rgba(196, 165, 116, 0.3)" aria-hidden="true"></span>
+                        </div>
+                        <div class="pe-step-body">
+                            <h4 class="pe-step-title">Se connaître</h4>
+                            <p class="pe-step-text">Sortir des schémas inconscients, prendre conscience de ses valeurs et motivations essentielles.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="pe-step-top">
+                            <span class="pe-step-icon" style="background: rgba(196, 165, 116, 0.12)"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12V3"/><path d="M12 7.5L8.5 5M12 9.5l3.5-2.5"/><path d="M3 12h18"/><path d="M12 12v9"/><path d="M12 15.5l-4 4.5M12 15.5l4 4.5"/></svg></span>
+                            <span class="pe-step-line" style="background: rgba(196, 165, 116, 0.45)" aria-hidden="true"></span>
+                        </div>
+                        <div class="pe-step-body">
+                            <h4 class="pe-step-title">S'enraciner</h4>
+                            <p class="pe-step-text">Développer un enracinement : savoir être à l'écoute et incarner une figure d'autorité.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="pe-step-top">
+                            <span class="pe-step-icon" style="background: rgba(196, 165, 116, 0.24); color: #E0D3BD"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></span>
+                            <span class="pe-step-line" style="background: rgba(196, 165, 116, 0.6)" aria-hidden="true"></span>
+                        </div>
+                        <div class="pe-step-body">
+                            <h4 class="pe-step-title">Décider</h4>
+                            <p class="pe-step-text">Savoir se positionner, clarifier sa sphère de responsabilité.</p>
+                            <p class="pe-step-question">De quoi suis-je responsable ? Où allons-nous ?</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="pe-step-top">
+                            <span class="pe-step-icon" style="background: rgba(196, 165, 116, 0.42); color: #FAF4EF"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0"/><path d="M12 17.5V21"/><path d="M8.5 21h7"/></svg></span>
+                            <span class="pe-step-line" style="background: rgba(196, 165, 116, 0.8)" aria-hidden="true"></span>
+                        </div>
+                        <div class="pe-step-body">
+                            <h4 class="pe-step-title">Incarner</h4>
+                            <p class="pe-step-text">Prendre la parole avec charisme et dynamisme. Développer sa capacité d'impact.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="pe-step-top">
+                            <span class="pe-step-icon" style="background: #C4A574; color: #1F1A16"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 21V4"/><path d="M6 4h11l-2.5 4 2.5 4H6"/></svg></span>
+                            <span class="pe-step-line" style="background: #C4A574" aria-hidden="true"></span>
+                            <svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" style="flex: none; margin-left: -6px"><path d="M3 1l6 5-6 5" fill="none" stroke="#C4A574" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                        <div class="pe-step-body">
+                            <h4 class="pe-step-title">Mobiliser</h4>
+                            <p class="pe-step-text">Engager un collectif et mobiliser autour du changement.</p>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ DÉCLINAISONS (Notion : Contenu de formation) ============ -->
+    <section id="declinaisons" class="pe-cream">
+        <div class="pe-wrap pe-pad">
+            <div class="pe-section-head">
+                <div>
+                    <p class="pe-eyebrow">{{DECLINAISONS_EYEBROW}}</p>
+                    <h2 class="pe-h2">Un même programme, {{DECLINAISONS_NOMBRE}} manières de le déployer</h2>
+                </div>
+                <p class="pe-section-intro">Le cadrage détermine la déclinaison qui correspond à votre situation.</p>
+            </div>
+            <div class="pe-cards">
+{{DECLINAISONS_HTML}}
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ ARCHITECTURE (Notion : Contenu de formation) ============ -->
+    <section id="architecture" class="pe-sand">
+        <div class="pe-wrap pe-pad pe-archi">
+            <div>
+                <p class="pe-eyebrow">Architecture</p>
+                <h2 class="pe-h2">Un socle commun, des modules choisis avec vous</h2>
+                <p class="pe-body-text">Le socle fonde le langage commun du groupe et figure dans toutes les configurations. Les modules complémentaires s'y ajoutent, choisis lors du cadrage selon vos enjeux et le diagnostic des participants.</p>
+            </div>
+            <div>
+                <h3 class="pe-label">Socle commun · {{SOCLE_NOMBRE}} modules</h3>
+                <ol class="pe-socle">
+{{SOCLE_HTML}}
+                </ol>
+            </div>
+            <div>
+                <h3 class="pe-label">Modules complémentaires · au choix</h3>
+                <ul class="pe-extras">
+{{COMPLEMENTAIRES_HTML}}
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ PÉDAGOGIE ET FORMATS ============ -->
+    <section id="formats" class="pe-dark">
+        <div class="pe-wrap pe-pad">
+            <div class="pe-section-head">
+                <div>
+                    <p class="pe-eyebrow">Pédagogie et formats</p>
+                    <h2 class="pe-h2">Un parcours qui alterne temps collectifs et mise en pratique</h2>
+                </div>
+                <p class="pe-section-intro">Le programme part de la matière que les participants apportent : décisions difficiles, relations de pouvoir, coopération entre directions, transformations en cours, avec le vocabulaire de votre entreprise.</p>
+            </div>
+
+            <div class="pe-cycle">
+                <div class="pe-cycle-figure-wrap">
+                    <figure class="pe-cycle-figure" role="img" aria-label="Le cycle d'apprentissage : séminaire, expérimentation terrain, codéveloppement ou coaching, puis retour au séminaire suivant">
+                        <svg aria-hidden="true" viewBox="0 0 360 360">
+                            <circle cx="180" cy="180" r="150" fill="none" stroke="#C4A574" stroke-opacity="0.45" stroke-width="1"/>
+                            <path d="M-5 -6 L4 0 L-5 6" fill="none" stroke="#C4A574" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" transform="translate(309.9 105) rotate(60)"/>
+                            <path d="M-5 -6 L4 0 L-5 6" fill="none" stroke="#C4A574" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" transform="translate(180 330) rotate(180)"/>
+                            <path d="M-5 -6 L4 0 L-5 6" fill="none" stroke="#C4A574" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" transform="translate(50.1 105) rotate(-60)"/>
+                        </svg>
+                        <span class="pe-cycle-node" style="left: 50%; top: 8.33%"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3.5" width="18" height="12" rx="1"/><path d="M8.5 21l3.5-5.5 3.5 5.5"/></svg></span>
+                        <span class="pe-cycle-node" style="left: 86.08%; top: 70.83%"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg></span>
+                        <span class="pe-cycle-node" style="left: 13.92%; top: 70.83%"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5h10a1 1 0 0 1 1 1V11a1 1 0 0 1-1 1H8.5L5 15v-3H4a1 1 0 0 1-1-1V5.5a1 1 0 0 1 1-1z"/><path d="M18 8.5h2a1 1 0 0 1 1 1V15a1 1 0 0 1-1 1h-1v3l-3.5-3H11a1 1 0 0 1-1-1v-1"/></svg></span>
+                        <div class="pe-cycle-center">
+                            <strong>4 à 8</strong>
+                            <span>semaines<br>par cycle</span>
+                        </div>
+                    </figure>
+                </div>
+                <div class="pe-cycle-list-wrap">
+                    <h3 class="pe-label">Le cycle d'apprentissage</h3>
+                    <ol class="pe-cycle-list">
+                        <li><span class="pe-cycle-icon"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3.5" width="18" height="12" rx="1"/><path d="M8.5 21l3.5-5.5 3.5 5.5"/></svg></span><div><p class="pe-cycle-title">Séminaire</p><p class="pe-cycle-text">Apports, mises en situation et choix d'un engagement personnel.</p></div></li>
+                        <li><span class="pe-cycle-icon"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg></span><div><p class="pe-cycle-title">Expérimentation terrain</p><p class="pe-cycle-text">L'engagement est mis en pratique dans le quotidien du participant.</p></div></li>
+                        <li><span class="pe-cycle-icon"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5h10a1 1 0 0 1 1 1V11a1 1 0 0 1-1 1H8.5L5 15v-3H4a1 1 0 0 1-1-1V5.5a1 1 0 0 1 1-1z"/><path d="M18 8.5h2a1 1 0 0 1 1 1V15a1 1 0 0 1-1 1h-1v3l-3.5-3H11a1 1 0 0 1-1-1v-1"/></svg></span><div><p class="pe-cycle-title">Codéveloppement ou coaching</p><p class="pe-cycle-text">Analyse de ce qui s'est passé et ajustements, entre pairs ou en individuel.</p></div></li>
+                        <li class="pe-cycle-loop"><span class="pe-cycle-icon"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 0 1-14.3 4.9"/><path d="M4 12a8 8 0 0 1 14.3-4.9"/><path d="M18.5 3.5v3.6h-3.6"/><path d="M5.5 20.5v-3.6h3.6"/></svg></span><p>Le séminaire suivant s'ouvre sur le retour d'expérience de chacun, et le cycle recommence.</p></li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="pe-configs-head">
+                <h3 class="pe-label">{{CONFIGURATIONS_TITRE}}</h3>
+                <p class="pe-configs-note">Durées indicatives, ajustées lors du cadrage</p>
+            </div>
+            <ul class="pe-configs">
+{{CONFIGURATIONS_HTML}}
+            </ul>
+        </div>
+    </section>
+
+    <!-- ============ CADRE ET CONFIDENTIALITÉ ============ -->
+    <section id="cadre" class="pe-linen">
+        <div class="pe-wrap pe-pad pe-split">
+            <div class="pe-split-media">
+                <img src="/assets/img/laura-atelier-groupe.webp" alt="Laura Ballo animant un atelier avec un petit groupe de participants autour d'une table" width="1100" height="1467" loading="lazy" style="object-position: center 35%">
+            </div>
+            <div class="pe-split-text">
+                <p class="pe-eyebrow">Cadre et confidentialité</p>
+                <h2 class="pe-h2">Le programme ne produit aucun avis sur le potentiel ou la performance d'un participant.</h2>
+                <p class="pe-body-text">Les règles sont posées avant le démarrage, rappelées à chaque session et partagées par tous les intervenants. Pour une équipe de direction, elles sont convenues avec le dirigeant avant le premier séminaire.</p>
+                <div class="pe-rules">
+                    <div>
+                        <h3 class="pe-label">Pour chaque participant</h3>
+                        <ul class="pe-dash-list pe-dash-deep">
+                            <li>Le contenu du coaching individuel reste strictement confidentiel.</li>
+                            <li>Ses objectifs ne sont partagés avec le sponsor que s'il le souhaite.</li>
+                            <li>Questionnaires et 360° restent accessibles au seul participant et à l'équipe pédagogique.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="pe-label">Pour le sponsor</h3>
+                        <ul class="pe-dash-list pe-dash-deep">
+                            <li>Il précise le contexte, valide les objectifs, ouvre et clôt le parcours.</li>
+                            <li>Il fait le point avec Laura Ballo à mi-parcours et en fin de parcours.</li>
+                            <li>Il reçoit l'assiduité et les thèmes collectifs anonymisés, jamais de contenu individuel.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ INTERVENANTE ============ -->
+    <section id="intervenante" class="pe-cream">
+        <div class="pe-wrap pe-pad">
+            <div class="pe-split pe-person">
+                <div class="pe-split-text">
+                    <p class="pe-eyebrow">Qui porte le programme</p>
+                    <h2 class="pe-h2">Laura Ballo</h2>
+                    <p class="pe-person-role">Coach, formatrice et conférencière, diplômée de l'EDHEC Business School</p>
+                    <blockquote class="pe-quote-light"><span class="pe-quote-mark">«&nbsp;</span>Je porte la conviction que les dirigeants de demain sont ceux qui sauront allier une intelligence émotionnelle forte, qui amène du lien, une intelligence artificielle qui optimise, et une parole qui impacte et qui transforme.<span class="pe-quote-mark">&nbsp;»</span></blockquote>
+                    <p class="pe-body-text">Elle conçoit et pilote le programme, dont elle porte la cohérence de bout en bout. Selon vos besoins, un ou deux intervenants aux expertises complémentaires la rejoignent, en coaching d'équipe de direction ou issus de fonctions de direction, engagés sur les mêmes règles.</p>
+                    <div class="pe-stats">
+                        <div><p class="pe-stat-value">+ 10 ans</p><p class="pe-stat-label">auprès de dirigeants<br>et de managers</p></div>
+                        <div><p class="pe-stat-value">+ 2 500</p><p class="pe-stat-label">personnes<br>accompagnées</p></div>
+                    </div>
+                </div>
+                <div class="pe-split-media">
+                    <img src="/assets/img/laurab.webp" alt="Portrait de Laura Ballo assise à son bureau" width="1024" height="1536" loading="lazy" style="object-position: center 25%">
+                </div>
+            </div>
+
+            <div class="pe-logos-row">
+                <p class="pe-label">Elles ont fait appel à Laura Ballo</p>
+                <div class="pe-logos">
+                    <img src="/assets/img/airliquide.webp" alt="Air Liquide" height="30" style="height: 30px" loading="lazy">
+                    <img src="/assets/img/mercedes.webp" alt="Mercedes-Benz" height="44" style="height: 44px" loading="lazy">
+                    <img src="/assets/img/commission-europeenne.webp" alt="Commission européenne" height="46" style="height: 46px" loading="lazy">
+                    <img src="/assets/img/icn.webp" alt="ICN Business School" height="38" style="height: 38px" loading="lazy">
+                    <img src="/assets/img/freewheel.webp" alt="FreeWheel" height="46" style="height: 46px" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ INFORMATIONS PRATIQUES (Notion + 🏛️ Mon organisme) ============ -->
+    <section id="informations" class="pe-infos">
+        <div class="pe-wrap pe-pad">
+            <p class="pe-label">Réf. {{CODE_FORMATION}} · {{NIVEAU_COURT}} · Mise à jour le {{DATE_MAJ}}</p>
+            <h2 class="pe-h2">Informations pratiques</h2>
+
+            <div class="pe-infos-layout">
+                <aside class="pe-aside" aria-label="En bref">
+                    <dl>
+                        <div><dt>Format</dt><dd>{{FORMAT}}</dd></div>
+                        <div><dt>Durée</dt><dd>{{DUREE_DETAIL}}</dd></div>
+                        <div><dt>Groupe</dt><dd>{{GROUPE_PLAGE}}, ou l'équipe de direction</dd></div>
+                        <div><dt>Tarif</dt><dd>Sur devis, après l'entretien de cadrage</dd></div>
+                        <div><dt>Délai d'accès</dt><dd>{{DELAIS_ACCES}}</dd></div>
+                    </dl>
+                    <div class="pe-aside-actions">
+                        <a class="pe-btn pe-btn-accent" href="{{MAILTO_DEVIS}}">Demander un devis</a>
+                        <a class="pe-btn pe-btn-ghost" href="{{PDF_HREF}}"{{PDF_ATTRS}}>{{PDF_LIBELLE_ASIDE}}</a>
+                    </div>
+                </aside>
+
+                <div class="pe-tabs-wrap">
+                    <div class="pe-tablist" role="tablist" aria-label="Informations détaillées">
+                        <button type="button" class="pe-tab" role="tab" id="tab-objectifs" aria-controls="objectifs" aria-selected="true">Objectifs</button>
+                        <button type="button" class="pe-tab" role="tab" id="tab-public" aria-controls="public" aria-selected="false" tabindex="-1">Pour qui ?</button>
+                        <button type="button" class="pe-tab" role="tab" id="tab-pedagogie" aria-controls="pedagogie" aria-selected="false" tabindex="-1">Pédagogie et évaluation</button>
+                        <button type="button" class="pe-tab" role="tab" id="tab-financement" aria-controls="financement" aria-selected="false" tabindex="-1">Financement</button>
+                        <button type="button" class="pe-tab" role="tab" id="tab-avis" aria-controls="avis" aria-selected="false" tabindex="-1">Avis et résultats</button>
+                    </div>
+
+                    <!-- Objectifs (ind. 1) -->
+                    <div class="pe-panel" role="tabpanel" id="objectifs" aria-labelledby="tab-objectifs" tabindex="0">
+                        <div class="pe-panel-grid">
+                            <div>
+                                <h3>Objectif professionnel</h3>
+                                <p>{{OBJECTIF_PRO}}</p>
+{{PROGRAMME_AUTRES_HTML}}
+                            </div>
+                            <div>
+                                <h3>Objectifs opérationnels</h3>
+                                <ol class="pe-objectifs">
+{{OBJECTIFS_HTML}}
+                                </ol>
+{{OBJECTIFS_NOTE_HTML}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pour qui ? (public, prérequis, accès, accessibilité) -->
+                    <div class="pe-panel" role="tabpanel" id="public" aria-labelledby="tab-public" tabindex="0" hidden>
+                        <div class="pe-panel-grid">
+                            <div>
+                                <h3>Public</h3>
+                                <ul class="pe-dash-list">
+{{PUBLIC_HTML}}
+                                </ul>
+                                <h3>Modalités d'accès</h3>
+{{MODALITES_ACCES_HTML}}
+                            </div>
+                            <div>
+                                <h3>Prérequis</h3>
+                                <p>{{PREREQUIS}}</p>
+                                <h3>Accessibilité</h3>
+{{ACCESSIBILITE_HTML}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pédagogie et évaluation (ind. 1) -->
+                    <div class="pe-panel" role="tabpanel" id="pedagogie" aria-labelledby="tab-pedagogie" tabindex="0" hidden>
+                        <div class="pe-panel-grid">
+                            <div>
+                                <h3>Modalités</h3>
+                                <p>{{MODALITES_PEDA}}</p>
+                                <h3>Méthodes</h3>
+                                <p>{{METHODES}}</p>
+                                <h3>Sanction</h3>
+                                <p>{{SANCTION}}</p>
+                            </div>
+                            <div>
+                                <h3>Évaluation</h3>
+                                <ul class="pe-dash-list">
+{{EVALUATION_HTML}}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Financement -->
+                    <div class="pe-panel" role="tabpanel" id="financement" aria-labelledby="tab-financement" tabindex="0" hidden>
+                        <div class="pe-panel-grid">
+                            <div>
+                                <h3>Prise en charge</h3>
+                                <p>Formation certifiée Qualiopi, éligible à une prise en charge par votre OPCO. Nous vous accompagnons dans la constitution du dossier.</p>
+                                <h3>Non compris</h3>
+                                <p>{{NON_COMPRIS}}</p>
+                            </div>
+                            <div>
+                                <h3>Compris dans le forfait</h3>
+                                <p>{{COMPRIS}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Avis et résultats : satisfaction à chaud, verbatims consentis uniquement -->
+                    <div class="pe-panel" role="tabpanel" id="avis" aria-labelledby="tab-avis" tabindex="0" hidden>
+{{AVIS_PREMIUM_HTML}}
+{{RESULTATS_FORMATION_HTML}}
+                    </div>
+                </div>
+            </div>
+
+            <p class="pe-mentions">Laura Ballo Coaching, organisme de formation enregistré sous le numéro de déclaration d'activité {{ORGANISME_NDA}} auprès du Préfet de la région {{ORGANISME_NDA_PREFET}}. Cet enregistrement ne vaut pas agrément de l'État.</p>
+            <p class="pe-legal"><a href="/legal/cgv-formation">CGV formation</a> · <a href="/legal/mentions-legales">Mentions légales</a> · <a href="/legal/politique-confidentialite">Confidentialité</a></p>
+        </div>
+    </section>
+
+    <!-- ============ APPEL À L'ACTION ============ -->
+    <section id="contact" class="pe-dark">
+        <div class="pe-cta">
+            <p class="pe-eyebrow">Entretien de cadrage</p>
+            <h2>À quoi verrez-vous, dans un an, que le programme a été utile ?</h2>
+            <p class="pe-cta-text">C'est l'une des questions que nous explorons ensemble lors du cadrage, avec le sponsor et les RH, pour construire le programme qui répond à vos enjeux.</p>
+            <div class="pe-actions">
+                <a class="pe-btn pe-btn-accent" href="{{MAILTO_CADRAGE}}">Demander un entretien de cadrage</a>
+                <a class="pe-btn pe-btn-ghost" href="https://calendly.com/laura-ballo1993/echangecoaching" target="_blank" rel="noopener">Réserver un appel</a>
+            </div>
+            <p class="pe-cta-contact"><a href="mailto:{{ORGANISME_EMAIL}}">{{ORGANISME_EMAIL}}</a> · <a href="tel:{{ORGANISME_TEL_HREF}}">{{ORGANISME_TEL}}</a></p>
+        </div>
+    </section>
+
+    </main>
+</div>
+
+    <!-- Pied de page, bannière cookies et mesure d'audience (consentement) partagés avec le site -->
+    <div id="footer-placeholder"></div>
+    <div id="cookies-placeholder"></div>
+    <script src="/assets/js/includes.js"></script>
+
+    <script>
+        // Onglets « Informations pratiques » : clavier, ancre dans l'URL (#avis…), liens internes
+        (function () {
+            var tabs = Array.prototype.slice.call(document.querySelectorAll('.pe-tab'));
+            var panels = tabs.map(function (t) { return document.getElementById(t.getAttribute('aria-controls')); });
+
+            function select(id, focus) {
+                var found = false;
+                tabs.forEach(function (t, i) {
+                    var on = t.getAttribute('aria-controls') === id;
+                    if (on) found = true;
+                    t.setAttribute('aria-selected', on ? 'true' : 'false');
+                    t.tabIndex = on ? 0 : -1;
+                    panels[i].hidden = !on;
+                    if (on && focus) t.focus();
+                });
+                return found;
+            }
+
+            tabs.forEach(function (t, i) {
+                t.addEventListener('click', function () { select(t.getAttribute('aria-controls'), false); });
+                t.addEventListener('keydown', function (e) {
+                    var k = e.key, n = tabs.length, j = null;
+                    if (k === 'ArrowRight') j = (i + 1) % n;
+                    else if (k === 'ArrowLeft') j = (i - 1 + n) % n;
+                    else if (k === 'Home') j = 0;
+                    else if (k === 'End') j = n - 1;
+                    if (j === null) return;
+                    e.preventDefault();
+                    select(tabs[j].getAttribute('aria-controls'), true);
+                });
+            });
+
+            function openFromHash() {
+                var id = (location.hash || '').slice(1);
+                if (id && select(id, false)) {
+                    document.getElementById('informations').scrollIntoView({ block: 'start' });
+                }
+            }
+            document.querySelectorAll('[data-tab-link]').forEach(function (a) {
+                a.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    select(a.getAttribute('data-tab-link'), false);
+                    document.getElementById('informations').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            });
+            window.addEventListener('hashchange', openFromHash);
+            openFromHash();
+        })();
+    </script>
+</body>
+</html>

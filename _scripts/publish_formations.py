@@ -17,6 +17,12 @@
                       de la formation, consentement ou non.
     Verbatims       : uniquement ceux dont « Accepte témoignage » est coché.
 
+  Gabarit : la propriété « Gabarit » choisit la mise en page.
+    (vide) / Standard → _templates/formation.html
+    Premium           → _templates/formation-premium.html (voir premium.py),
+                        programme PDF copié dans formations/programmes/,
+                        tarif affiché « Sur devis ».
+
   Le sitemap n'est pas modifié ici : generate_sitemap.py scanne les
   fichiers .html et doit être lancé juste après.
 
@@ -37,6 +43,7 @@ from pathlib import Path
 import requests
 
 import indicateurs
+import premium
 
 # ─────────────────────────────────────────────────────────
 # CONFIG
@@ -62,8 +69,13 @@ TEMPLATE_PATH = env("FORMATION_TEMPLATE_PATH", "_templates/formation.html")
 INDEX_TEMPLATE_PATH = env(
     "FORMATIONS_INDEX_TEMPLATE_PATH", "_templates/formations-index.html"
 )
+PREMIUM_TEMPLATE_PATH = env(
+    "FORMATION_PREMIUM_TEMPLATE_PATH", "_templates/formation-premium.html"
+)
 OUTPUT_DIR = env("FORMATIONS_OUTPUT_DIR", "formations")
 IMAGES_DIR = "assets/img/formations"
+# Programmes PDF des fiches premium, copiés depuis Notion (les liens Notion expirent)
+PROGRAMMES_DIR = "programmes"
 
 SITE_URL = "https://lauraballo.com"
 NOTION_API = "https://api.notion.com/v1"
@@ -77,6 +89,9 @@ ACCESSIBILITE_DEFAUT = (
 STATUT_PROP = "Statut publication"
 A_PUBLIER, A_MODIFIER, A_SUPPRIMER = "À publier", "À modifier", "À supprimer"
 PUBLIE, NON_PUBLIE = "Publié", "Non publié"
+
+GABARIT_PROP = "Gabarit"
+PREMIUM = "Premium"
 
 # Sections attendues dans le corps de la fiche Notion (heading_2)
 SEC_OBJECTIFS = "objectifs"
@@ -197,7 +212,18 @@ def prop(page, name, kind="rich_text"):
     if kind == "formula":
         f = p.get("formula", {})
         return f.get("number") if f.get("type") == "number" else f.get("string")
+    if kind in ("email", "phone_number", "url"):
+        return p.get(kind) or ""
+    if kind == "files":
+        return [
+            (f.get("name", ""), (f.get("file") or f.get("external") or {}).get("url", ""))
+            for f in p.get("files", [])
+        ]
     return ""
+
+
+def est_premium(page):
+    return prop(page, GABARIT_PROP, "select") == PREMIUM
 
 
 def esc(text):
@@ -529,9 +555,13 @@ def charger_organisme(client):
         "modalites_acces": prop(o, "Modalités d accès"),
         "delais_acces": prop(o, "Délais d accès"),
         "accessibilite": prop(o, "Accessibilité handicap"),
-        "email": prop(o, "Email de contact"),
-        "telephone": prop(o, "Téléphone"),
-        "nda": prop(o, "NDA - numéro de déclaration d activité"),
+        # « Email de contact » et « Téléphone » sont des propriétés de type
+        # email / téléphone, pas du texte : lues en rich_text, elles sortaient vides.
+        "email": prop(o, "Email de contact", "email") or prop(o, "Email de contact"),
+        "telephone": prop(o, "Téléphone", "phone_number") or prop(o, "Téléphone"),
+        # Le nom Notion utilise un tiret long ; l'ancien nom (tiret court) reste en repli.
+        "nda": prop(o, "NDA — numéro de déclaration d activité")
+        or prop(o, "NDA - numéro de déclaration d activité"),
         "nda_prefet": prop(o, "NDA délivré par le Préfet de Région"),
     }
     manquants = [k for k in ("modalites_acces", "delais_acces", "accessibilite") if not org[k].strip()]
@@ -676,12 +706,18 @@ def bloc_avis(avis_list):
     publiables = [a for a in avis_list if a["publiable"] and a["verbatim"]]
     publiables.sort(key=lambda a: a["date"] or "", reverse=True)
 
-    items = []
+    items, verbatims = [], []
     for a in publiables:
         try:
             d = datetime.fromisoformat(a["date"]).strftime("%d/%m/%Y")
         except (ValueError, TypeError):
             d = ""
+        # Version brute pour le gabarit premium (échappée par premium.py)
+        signature = " — ".join(x for x in (a["auteur"], a["fonction"]) if x)
+        verbatims.append({
+            "verbatim": a["verbatim"],
+            "signature": " · ".join(x for x in (signature, d) if x),
+        })
         auteur = esc(a["auteur"])
         if a["fonction"]:
             auteur += f' <span class="avis-fonction">— {esc(a["fonction"])}</span>'
@@ -706,6 +742,7 @@ def bloc_avis(avis_list):
         "distribution": "\n".join(distribution),
         "liste": "\n".join(items),
         "nb_publiables": len(publiables),
+        "verbatims": verbatims,
     }
 
 
@@ -758,7 +795,17 @@ def onglet_avis_html(avis, periode):
 # ═════════════════════════════════════════════════════════
 # SCHEMA.ORG
 # ═════════════════════════════════════════════════════════
-def build_schema(d, avis):
+def build_schema(d, avis, sur_devis=False):
+    offre = {
+        "@type": "Offer",
+        "price": str(d["_tarif_intra"] or ""),
+        "priceCurrency": "EUR",
+        "category": "Intra-entreprise",
+    }
+    if sur_devis:
+        # Parcours sur plusieurs mois : pas de prix public, devis après cadrage
+        offre = {"@type": "Offer", "priceCurrency": "EUR", "category": "Intra-entreprise",
+                 "description": "Sur devis, après l'entretien de cadrage"}
     schema = {
         "@context": "https://schema.org",
         "@type": "Course",
@@ -773,12 +820,7 @@ def build_schema(d, avis):
         },
         # Offre intra uniquement pour l'instant (l'inter viendra plus tard :
         # repasser sur _tarif_inter / « Inter-entreprise » à ce moment-là).
-        "offers": {
-            "@type": "Offer",
-            "price": str(d["_tarif_intra"] or ""),
-            "priceCurrency": "EUR",
-            "category": "Intra-entreprise",
-        },
+        "offers": offre,
         "hasCourseInstance": {
             "@type": "CourseInstance",
             "courseMode": d["MODALITES"],
@@ -900,7 +942,7 @@ def build_data(client, page, avis, org=None, lignes_indicateurs=None, periode=("
         "DELAIS_ACCES": texte_avec_liens(org.get("delais_acces", "")),
         "MODALITES_ACCES_HTML": paragraphes_avec_liens(org.get("modalites_acces", "")),
         "ORGANISME_EMAIL": esc(org.get("email", "")),
-        "ORGANISME_TEL": esc(org.get("telephone", "")),
+        "ORGANISME_TEL": esc(premium.telephone(org.get("telephone", ""))[0]),
         "ORGANISME_NDA": esc(org.get("nda", "")),
         "ORGANISME_NDA_PREFET": esc(org.get("nda_prefet", "")),
         "PERIMETRE_INTRA_HTML": render_liste_simple(
@@ -934,8 +976,73 @@ def build_data(client, page, avis, org=None, lignes_indicateurs=None, periode=("
         "_tarif_intra": prop(page, "Tarif HT intra", "number"),
         "_heures": heures,
     }
-    data["SCHEMA_JSON"] = build_schema(data, avis)
+    data["ORGANISME_TEL_HREF"] = esc(premium.telephone(org.get("telephone", ""))[1])
+
+    if est_premium(page):
+        data.update(
+            premium.slots(
+                champs_premium(page),
+                org,
+                avis,
+                periode,
+                CRITERES_A_CHAUD,
+                programme_pdf(page, slug),
+            )
+        )
+        data["SCHEMA_JSON"] = build_schema(data, avis, sur_devis=True)
+    else:
+        data["SCHEMA_JSON"] = build_schema(data, avis)
     return data
+
+
+def champs_premium(page):
+    """Textes bruts des propriétés Notion lues par le gabarit premium."""
+    return {
+        "nom": prop(page, "Nom de la formation", "title"),
+        "accroche": prop(page, "Accroche"),
+        "contenu": prop(page, "Contenu de formation"),
+        "objectif_pro": prop(page, "Objectif professionnel"),
+        "objectifs": prop(page, "Objectifs opérationnels"),
+        "public": prop(page, "Public cible"),
+        "prerequis": prop(page, "Prérequis"),
+        "modalites": prop(page, "Modalités", "select"),
+        "modalites_peda": prop(page, "Modalités pédagogiques"),
+        "methodes": prop(page, "Méthodes pédagogiques"),
+        "evaluation": prop(page, "Modalités d évaluation"),
+        "perimetre": prop(page, "Périmètre forfait intra"),
+        "jours": prop(page, "Durée (jours)", "number"),
+        "heures": prop(page, "Durée (heures)", "number"),
+        "max": int(prop(page, "Nbre participants max", "number") or 0),
+        "niveau": prop(page, "niveau", "select"),
+    }
+
+
+def programme_pdf(page, slug):
+    """Copie le « Programme PDF » de la fiche dans formations/programmes/<slug>.pdf.
+
+    Les liens de fichiers Notion expirent au bout d'une heure : on ne peut pas
+    les mettre tels quels sur le site. Renvoie l'URL publique du PDF, ou « »
+    si aucun PDF n'est disponible (le bouton propose alors de le demander)."""
+    cible = Path(OUTPUT_DIR) / PROGRAMMES_DIR / f"{slug}.pdf"
+    fichiers = [f for f in prop(page, "Programme PDF", "files") if f[1]]
+    if fichiers:
+        nom, url = sorted(fichiers)[-1]  # le plus récent : nom « … version du AAAA-MM-JJ »
+        try:
+            r = requests.get(url, timeout=60)
+            r.raise_for_status()
+            if r.content[:4] == b"%PDF":
+                cible.parent.mkdir(parents=True, exist_ok=True)
+                if not cible.exists() or cible.read_bytes() != r.content:
+                    cible.write_bytes(r.content)
+                    print(f"    ✓ programme PDF copié : {cible} ({nom})")
+            else:
+                print(f"    ⚠️  « {nom} » n'est pas un PDF, ignoré")
+        except requests.RequestException as e:
+            # Pas l'URL dans le journal : elle contient un jeton d'accès signé
+            print(f"    ⚠️  programme PDF non téléchargé ({type(e).__name__}) — on garde la copie existante")
+    elif cible.exists():
+        print("    ⚠️  plus de « Programme PDF » dans Notion — l'ancienne copie reste en ligne")
+    return f"/{OUTPUT_DIR}/{PROGRAMMES_DIR}/{slug}.pdf" if cible.exists() else ""
 
 
 # ═════════════════════════════════════════════════════════
@@ -1005,14 +1112,23 @@ def render_carte(page):
     tags = tags_of(page)
     jours = int(prop(page, "Durée (jours)", "number") or 1)
     maxi = int(prop(page, "Nbre participants max", "number") or 0)
-    # Offre intra uniquement pour l'instant : la carte affiche le forfait groupe.
-    tarif = f"{int(prop(page, 'Tarif HT intra', 'number') or 0):,}".replace(",", " ")
+    duree_carte = premium.resume_carte(prop(page, "Contenu de formation"), jours) if est_premium(page) \
+        else f"{jours} jour{'s' if jours > 1 else ''}"
+    # Offre intra uniquement pour l'instant : la carte affiche le forfait groupe,
+    # ou « Sur devis » pour un parcours premium ou une fiche sans tarif.
+    tarif_intra = prop(page, "Tarif HT intra", "number")
+    if est_premium(page) or not tarif_intra:
+        prix_html = ('<span class="amount">Sur devis</span>'
+                     '<span class="suffix">après l\'entretien de cadrage</span>')
+    else:
+        tarif = f"{int(tarif_intra):,}".replace(",", " ")
+        prix_html = (f'<span class="amount">{tarif}€</span>'
+                     f'<span class="suffix">HT / groupe de {maxi} max.</span>')
 
     categorie = prop(page, "Catégorie", "select") or "communication"
     data_tags = mots_cles(page)
     puces = "".join(f'<span class="card-tag">{esc(t)}</span>' for t in tags[1:3])
     tag_principal = esc(tags[0]) if tags else "Formation"
-    pluriel = "s" if jours > 1 else ""
 
     return (
         '                <article class="formation-card"\n'
@@ -1030,11 +1146,10 @@ def render_carte(page):
         f"                        <h3>{esc(nom)}</h3>\n"
         f'                        <p>{esc(prop(page, "Méta-description"))}</p>\n'
         '                        <div class="card-meta">\n'
-        f'                            <div class="card-meta-item">{ICONE_HORLOGE}{jours} jour{pluriel}</div>\n'
+        f'                            <div class="card-meta-item">{ICONE_HORLOGE}{duree_carte}</div>\n'
         f'                            <div class="card-meta-item">{ICONE_GROUPE}{maxi} pers. max</div>\n'
         "                        </div>\n"
-        f'                        <div class="card-price"><span class="amount">{tarif}€</span>'
-        f'<span class="suffix">HT / groupe de {maxi} max.</span></div>\n'
+        f'                        <div class="card-price">{prix_html}</div>\n'
         f'                        <a href="/{OUTPUT_DIR}/{slug}.html" class="card-cta">\n'
         f"                            Voir le programme{ICONE_FLECHE}\n"
         "                        </a>\n"
@@ -1048,7 +1163,8 @@ def render_chatbot_js(pages):
     entrees = []
     for i, page in enumerate(pages, start=1):
         jours = int(prop(page, "Durée (jours)", "number") or 1)
-        pluriel = "s" if jours > 1 else ""
+        format_js = premium.resume_carte(prop(page, "Contenu de formation"), jours) \
+            if est_premium(page) else f"{jours} jour{'s' if jours > 1 else ''}"
         tags_js = ", ".join(
             f"'{m}'" for m in mots_cles(page).split(",") if m
         )
@@ -1060,11 +1176,21 @@ def render_chatbot_js(pages):
             f"                name: {nom},\n"
             f"                subtitle: {accroche},\n"
             f"                url: '/{OUTPUT_DIR}/{prop(page, 'slug')}.html',\n"
-            f"                format: '{jours} jour{pluriel}',\n"
+            f"                format: {json.dumps(format_js, ensure_ascii=False)},\n"
             f"                tags: [{tags_js}]\n"
             "            }"
         )
     return ",\n".join(entrees)
+
+
+def offre_index(page):
+    tarif = prop(page, "Tarif HT intra", "number")
+    offre = {"@type": "Offer", "category": "Intra-entreprise", "priceCurrency": "EUR"}
+    if est_premium(page) or not tarif:
+        offre["description"] = "Sur devis, après l'entretien de cadrage"
+    else:
+        offre["price"] = str(int(tarif))
+    return offre
 
 
 def build_index_schema(pages):
@@ -1081,12 +1207,7 @@ def build_index_schema(pages):
                     "@type": "Organization",
                     "name": "Laura Ballo Coaching",
                 },
-                "offers": {
-                    "@type": "Offer",
-                    "price": str(int(prop(page, "Tarif HT intra", "number") or 0)),
-                    "category": "Intra-entreprise",
-                    "priceCurrency": "EUR",
-                },
+                "offers": offre_index(page),
             }
         )
     return json.dumps(
@@ -1168,6 +1289,7 @@ def main():
 
     for chemin, quoi in (
         (TEMPLATE_PATH, "le gabarit de fiche"),
+        (PREMIUM_TEMPLATE_PATH, "le gabarit de fiche premium"),
         (INDEX_TEMPLATE_PATH, "le gabarit de catalogue"),
     ):
         if not Path(chemin).exists():
@@ -1178,6 +1300,7 @@ def main():
 
     client = NotionClient(NOTION_API_KEY)
     template = Path(TEMPLATE_PATH).read_text(encoding="utf-8")
+    template_premium = Path(PREMIUM_TEMPLATE_PATH).read_text(encoding="utf-8")
     Path(OUTPUT_DIR).mkdir(parents=True, exist_ok=True)
 
     print("→ Lecture des formations à traiter")
@@ -1231,6 +1354,10 @@ def main():
                 if cible.exists():
                     cible.unlink()
                 print(f"  🗑️  {cible} supprimée")
+                pdf = Path(OUTPUT_DIR) / PROGRAMMES_DIR / f"{slug}.pdf"
+                if pdf.exists():
+                    pdf.unlink()
+                    touches.append(str(pdf))
                 touches.append(str(cible))
                 supprimees += 1
             else:
@@ -1250,8 +1377,9 @@ def main():
             print("    aucun avis sur la période — note retirée de l'en-tête")
 
         data = build_data(client, page, avis, org, lignes_indicateurs, periode)
-        cible.write_text(render(template, data, avis), encoding="utf-8")
-        print(f"    ✓ {cible}")
+        gabarit = template_premium if est_premium(page) else template
+        cible.write_text(render(gabarit, data, avis), encoding="utf-8")
+        print(f"    ✓ {cible}" + (" (gabarit premium)" if est_premium(page) else ""))
         touches.append(str(cible))
         publiees += 1
 
