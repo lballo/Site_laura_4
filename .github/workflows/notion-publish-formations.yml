@@ -16,9 +16,11 @@ on:
     paths:
       # Un changement de gabarit ou de script régénère toutes les fiches
       - '_templates/formation.html'
+      - '_templates/formation-premium.html'
       - '_templates/formations-index.html'
       - '_templates/resultats.html'
       - '_scripts/publish_formations.py'
+      - '_scripts/premium.py'
       - '_scripts/publish_resultats.py'
       - '_scripts/indicateurs.py'
       # Modifier ce fichier force une republication immédiate (voir son contenu)
