@@ -4,19 +4,19 @@
   <!-- Pages statiques -->
   <url>
     <loc>https://lauraballo.com/accompagnements/leader-changement-ia</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://lauraballo.com/accompagnements/presence-oratoire-signature</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://lauraballo.com/accompagnements/presence-signature</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -34,7 +34,7 @@
   </url>
   <url>
     <loc>https://lauraballo.com/formations/bases-intelligence-artificielle</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -46,13 +46,13 @@
   </url>
   <url>
     <loc>https://lauraballo.com/formations/developper-ia-pratique-professionnelle</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://lauraballo.com/formations/gestion-conflits-situations-complexes</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -64,13 +64,13 @@
   </url>
   <url>
     <loc>https://lauraballo.com/formations/intelligence-emotionnelle</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://lauraballo.com/formations/management-augmente-ie-ia</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -88,7 +88,7 @@
   </url>
   <url>
     <loc>https://lauraballo.com/formations/prise-parole-media-training</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -99,32 +99,32 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://lauraballo.com/legal/cgv</loc>
-    <lastmod>2026-10-21</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  <url>
     <loc>https://lauraballo.com/legal/cgv-formation</loc>
     <lastmod>2026-10-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
+    <loc>https://lauraballo.com/legal/cgv</loc>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  <url>
     <loc>https://lauraballo.com/legal/mentions-legales</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
     <loc>https://lauraballo.com/legal/politique-confidentialite</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
     <loc>https://lauraballo.com/legal/politique-cookies</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -142,7 +142,7 @@
   </url>
   <url>
     <loc>https://lauraballo.com/resultats</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
