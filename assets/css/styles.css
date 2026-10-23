@@ -583,6 +583,33 @@ a {
   font-weight: 300;
 }
 
+/* Listes à puces et numérotées : même corps de texte que les paragraphes */
+.section-content ul,
+.section-content ol {
+  margin: 0 0 30px;
+  padding-left: 1.3em;
+  font-size: 21px;
+  line-height: 1.9;
+  color: var(--slate);
+  font-weight: 300;
+}
+
+.section-content ul { list-style: disc; }
+.section-content ol { list-style: decimal; }
+
+.section-content li {
+  margin-bottom: 8px;
+  padding-left: 0.3em;
+}
+
+.section-content li:last-child { margin-bottom: 0; }
+
+/* Plus d'air entre une liste et l'intertitre qui la suit */
+.section-content ul + h2,
+.section-content ol + h2 {
+  margin-top: 60px;
+}
+
 .section-content p.lead {
   font-size: 25px;
   line-height: 1.75;
@@ -632,6 +659,11 @@ a {
   width: 100%;
   height: 65vh;
   object-fit: cover;
+}
+
+/* Photo verticale de l'article « singularité » : cadrage remonté sur le visage */
+.full-image img[src*="singularite-questionner-les-codes-leadership-1"] {
+  object-position: center 18%;
 }
 
 .image-caption {
