@@ -348,7 +348,9 @@ def html_liste(texte, separateur=None):
 
 
 def html_objectifs(texte):
-    """Lignes numérotées → objectifs ; lignes non numérotées → note sous la liste."""
+    """Lignes à puce « • » → objectifs ; lignes nues → note sous la liste.
+    Les objectifs s'affichent toujours en puces : un éventuel numéro
+    saisi en tête de ligne est retiré."""
     items, notes = [], []
     for ligne in lignes_de(texte):
         if re.match(r"^\d+\s*[.)\\]", ligne) or ligne[0] in PUCES:

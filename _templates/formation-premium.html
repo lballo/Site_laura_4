@@ -125,9 +125,9 @@
         .pe-dash, .pe-objectifs { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
         .pe-dash li { display: flex; gap: 12px; font-size: 15px; line-height: 1.55; color: #6C6059; }
         .pe-dash li::before { content: ""; flex: none; width: 12px; height: 1px; margin-top: 11px; background: #C4A574; }
-        .pe-objectifs { counter-reset: pe-obj; }
-        .pe-objectifs li { counter-increment: pe-obj; display: flex; gap: 12px; font-size: 15px; line-height: 1.55; color: #6C6059; }
-        .pe-objectifs li::before { content: counter(pe-obj); flex: none; width: 22px; font-family: 'Playfair Display', Georgia, serif; font-size: 16px; line-height: 1.4; color: #A83932; }
+        /* Objectifs opérationnels : puces, jamais de numéros */
+        .pe-objectifs li { display: flex; gap: 14px; font-size: 15px; line-height: 1.55; color: #6C6059; }
+        .pe-objectifs li::before { content: ""; flex: none; width: 6px; height: 6px; margin-top: 9px; border-radius: 50%; background: #A83932; }
         .pe-panel .pe-note { font-size: 14px; color: #6C6059; }
         .pe-avis-lead { font-family: 'Playfair Display', Georgia, serif; font-size: 22px; line-height: 1.4; color: #2C2C2C; }
         .pe-panel .pe-avis-lead { margin-top: 0; font-size: 22px; color: #2C2C2C; }
@@ -575,9 +575,9 @@
 </div>
 <div>
 <h3>Objectifs opérationnels</h3>
-<ol class="pe-objectifs">
+<ul class="pe-objectifs">
 {{OBJECTIFS_HTML}}
-</ol>
+</ul>
 {{OBJECTIFS_NOTE_HTML}}
 </div>
 </div>
