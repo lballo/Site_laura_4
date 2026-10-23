@@ -188,6 +188,11 @@
         .result-format { display: inline-block; font-size: 0.75rem; padding: 4px 10px; background: var(--white); border-radius: 4px; color: var(--warm-gray); }
         .result-link { display: block; margin-top: 12px; }
         .result-reset { text-align: center; margin-top: 20px; }
+        button.chatbot-option { width: 100%; font: inherit; color: inherit; text-align: left; }
+        .chatbot-option:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+        .result-call { font-size: 0.85rem; color: var(--text-muted); text-align: center; line-height: 1.5; margin-top: 4px; }
+        .result-call a { color: var(--accent); text-decoration: underline; }
+        .result-call.mise-en-avant { background: var(--light-beige); padding: 14px 16px; border-radius: 10px; color: var(--text-dark); }
         .result-reset button { background: none; border: none; color: var(--accent); font-size: 0.85rem; cursor: pointer; text-decoration: underline; }
 
         /* ============ RESPONSIVE ============ */
@@ -279,206 +284,102 @@
                     <div class="chatbot-avatar">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                     </div>
-                    <h3>Trouvez votre formation</h3>
-                    <p>Répondez à quelques questions pour une recommandation personnalisée</p>
+                    <h3>Trouvez la formation ou l'accompagnement qui vous correspond</h3>
+                    <p>Trois questions pour une proposition ciblée</p>
                 </div>
 
                 <div class="chatbot-body">
-                    <div class="chatbot-progress">
+                    <div class="chatbot-progress" aria-hidden="true">
                         <div class="chatbot-progress-dot active"></div>
-                        <div class="chatbot-progress-dot"></div>
-                        <div class="chatbot-progress-dot"></div>
-                        <div class="chatbot-progress-dot"></div>
-                        <div class="chatbot-progress-dot"></div>
                         <div class="chatbot-progress-dot"></div>
                         <div class="chatbot-progress-dot"></div>
                     </div>
 
                     <div id="chatbotQuestions">
 
-                        <!-- Question 1 -->
-                        <div class="chatbot-question" data-question="1">
-                            <div class="chatbot-question-text">Quel est le point de tension principal que vous traversez actuellement ?</div>
-                            <div class="chatbot-question-subtitle">(celui qui vous fait dire "il faut que ça change")</div>
-                            <div class="chatbot-multiselect-hint">Plusieurs réponses possibles</div>
+                        <!-- Question 1 : pour qui -->
+                        <div class="chatbot-question" data-question="1" role="group" aria-labelledby="q1-titre">
+                            <div class="chatbot-question-text" id="q1-titre">Pour qui cherchez-vous ?</div>
                             <div class="chatbot-options">
-                                <div class="chatbot-option" data-value="positionnement" data-tags="posture,positionnement,identite">
-                                    <div class="chatbot-option-icon">🧭</div>
-                                    <span>Clarifier ma posture, ma place, mon positionnement</span>
-                                </div>
-                                <div class="chatbot-option" data-value="impact" data-tags="prise-de-parole,impact,eloquence,media-training">
-                                    <div class="chatbot-option-icon">🎤</div>
-                                    <span>Prendre la parole avec plus d'impact et de justesse</span>
-                                </div>
-                                <div class="chatbot-option" data-value="stress" data-tags="stress,peur-jugement,gestion-emotions">
-                                    <div class="chatbot-option-icon">💆</div>
-                                    <span>Gérer mon stress et la peur du jugement lors des prises de parole</span>
-                                </div>
-                                <div class="chatbot-option" data-value="legitimite" data-tags="leadership,management,autorite">
-                                    <div class="chatbot-option-icon">👑</div>
-                                    <span>Asseoir ma légitimité dans mon rôle de dirigeant / manager</span>
-                                </div>
-                                <div class="chatbot-option" data-value="transition" data-tags="transition,evolution,bascule,changement">
-                                    <div class="chatbot-option-icon">🚀</div>
-                                    <span>Traverser une phase de transition ou de bascule professionnelle</span>
-                                </div>
-                                <div class="chatbot-option" data-value="situations-complexes" data-tags="gestion-conflits,equipe,pression,situations-complexes">
-                                    <div class="chatbot-option-icon">⚖️</div>
-                                    <span>Gérer des situations humaines complexes (équipe, conflits, pression)</span>
-                                </div>
-                                <div class="chatbot-option" data-value="decalage" data-tags="alignement,identite,authenticite,gestion-emotions">
-                                    <div class="chatbot-option-icon">🪞</div>
-                                    <span>Je ressens un décalage entre ce que je suis profondément et ce que j'incarne aujourd'hui</span>
-                                </div>
-                                <div class="chatbot-option" data-value="performance" data-tags="performance,productivite,efficacite,ia">
-                                    <div class="chatbot-option-icon">📈</div>
-                                    <span>Améliorer ma performance professionnelle</span>
-                                </div>
+                                <button type="button" class="chatbot-option" data-value="equipe" data-tags="equipe,collaborateurs" aria-pressed="false">
+                                    <span class="chatbot-option-icon" aria-hidden="true">👥</span>
+                                    <span>Mes équipes ou des collaborateurs</span>
+                                </button>
+                                <button type="button" class="chatbot-option" data-value="managers" data-tags="manager,managers,management,encadrant" aria-pressed="false">
+                                    <span class="chatbot-option-icon" aria-hidden="true">👔</span>
+                                    <span>Des managers</span>
+                                </button>
+                                <button type="button" class="chatbot-option" data-value="direction" data-tags="dirigeant,dirigeants,codir,comex,equipe-de-direction,haut-potentiel,talents,futur-dirigeant" aria-pressed="false">
+                                    <span class="chatbot-option-icon" aria-hidden="true">🏛️</span>
+                                    <span>Une équipe de direction ou des hauts potentiels</span>
+                                </button>
+                                <button type="button" class="chatbot-option" data-value="moi" data-tags="dirigeant,codir,referent-ia,individuel" aria-pressed="false">
+                                    <span class="chatbot-option-icon" aria-hidden="true">👤</span>
+                                    <span>Moi-même, en tant que dirigeant·e ou membre d'un CODIR</span>
+                                </button>
                             </div>
                         </div>
 
-                        <!-- Question 2 -->
-                        <div class="chatbot-question" data-question="2" style="display:none;">
-                            <div class="chatbot-question-text">Quelles thématiques vous intéressent ?</div>
-                            <div class="chatbot-multiselect-hint">Plusieurs réponses possibles</div>
+                        <!-- Question 2 : le sujet -->
+                        <div class="chatbot-question" data-question="2" role="group" aria-labelledby="q2-titre" style="display:none;">
+                            <div class="chatbot-question-text" id="q2-titre">Quel sujet voulez-vous faire avancer ?</div>
+                            <div class="chatbot-question-subtitle">Choisissez le plus important</div>
                             <div class="chatbot-options">
-                                <div class="chatbot-option" data-value="prise-parole" data-tags="prise-de-parole,eloquence,impact">
-                                    <div class="chatbot-option-icon">🎤</div>
-                                    <span>Prise de parole</span>
-                                </div>
-                                <div class="chatbot-option" data-value="media-training" data-tags="media-training,storytelling,interview,visibilite">
-                                    <div class="chatbot-option-icon">🎬</div>
-                                    <span>Média training & storytelling</span>
-                                </div>
-                                <div class="chatbot-option" data-value="emotions" data-tags="intelligence-emotionnelle,gestion-emotions,empathie">
-                                    <div class="chatbot-option-icon">💗</div>
-                                    <span>Intelligence émotionnelle</span>
-                                </div>
-                                <div class="chatbot-option" data-value="conflits" data-tags="gestion-conflits,situations-complexes,mediation">
-                                    <div class="chatbot-option-icon">⚖️</div>
-                                    <span>Gestion des conflits</span>
-                                </div>
-                                <div class="chatbot-option" data-value="management" data-tags="management,leadership,equipe">
-                                    <div class="chatbot-option-icon">👥</div>
-                                    <span>Management d'équipe</span>
-                                </div>
-                                <div class="chatbot-option" data-value="ia" data-tags="ia,innovation,technologie">
-                                    <div class="chatbot-option-icon">🤖</div>
-                                    <span>IA et ses applications</span>
-                                </div>
-                                <div class="chatbot-option" data-value="changement" data-tags="changement,transformation,adaptation">
-                                    <div class="chatbot-option-icon">🔄</div>
-                                    <span>Gestion du changement</span>
-                                </div>
-                                <div class="chatbot-option" data-value="strategie" data-tags="strategie,positionnement,vision">
-                                    <div class="chatbot-option-icon">🎯</div>
-                                    <span>Stratégie et positionnement</span>
-                                </div>
+                                <button type="button" class="chatbot-option" data-value="parole" data-tags="prise-de-parole,media-training,storytelling,trac,interview,impact,pitch,keynote,porte-parole,eloquence" aria-pressed="false">
+                                    <span class="chatbot-option-icon" aria-hidden="true">🎤</span>
+                                    <span>Prendre la parole avec impact (réunions, interviews, scène)</span>
+                                </button>
+                                <button type="button" class="chatbot-option" data-value="conflits" data-tags="gestion-conflits,gestion-des-conflits,situations-complexes,conversations-difficiles,tensions,mediation,assertivite,cnv" aria-pressed="false">
+                                    <span class="chatbot-option-icon" aria-hidden="true">⚖️</span>
+                                    <span>Désamorcer les tensions, l'agressivité et les conflits</span>
+                                </button>
+                                <button type="button" class="chatbot-option" data-value="emotions" data-tags="intelligence-emotionnelle,gestion-emotions,empathie,assertivite,ecoute,relations,affirmation-de-soi" aria-pressed="false">
+                                    <span class="chatbot-option-icon" aria-hidden="true">💗</span>
+                                    <span>Mieux gérer ses émotions et s'affirmer</span>
+                                </button>
+                                <button type="button" class="chatbot-option" data-value="performance" data-tags="gestion-stress,lacher-prise,performance-durable,perfectionnisme,charge-mentale,epuisement,equilibre,qvct,bien-etre-au-travail" aria-pressed="false">
+                                    <span class="chatbot-option-icon" aria-hidden="true">🌿</span>
+                                    <span>Rester performant sans s'épuiser</span>
+                                </button>
+                                <button type="button" class="chatbot-option" data-value="leadership" data-tags="management,leadership,legitimite,autorite,posture,decision,positionnement,influence" aria-pressed="false">
+                                    <span class="chatbot-option-icon" aria-hidden="true">👑</span>
+                                    <span>Manager, décider et incarner son leadership</span>
+                                </button>
+                                <button type="button" class="chatbot-option" data-value="ia-debut" data-tags="ia,intelligence-artificielle,prompting,debutant,niveau-1" aria-pressed="false">
+                                    <span class="chatbot-option-icon" aria-hidden="true">🤖</span>
+                                    <span>Démarrer avec l'IA générative</span>
+                                </button>
+                                <button type="button" class="chatbot-option" data-value="ia-metier" data-tags="ia,intelligence-artificielle,niveau-2,workflow,automatisation,productivite,gains-de-temps,metier" aria-pressed="false">
+                                    <span class="chatbot-option-icon" aria-hidden="true">⚙️</span>
+                                    <span>Ancrer l'IA dans les pratiques métier</span>
+                                </button>
+                                <button type="button" class="chatbot-option" data-value="changement-ia" data-tags="ia,conduite-du-changement,transformation,charte-ia,gouvernance-ia,feuille-de-route,resistance-au-changement,referent-ia" aria-pressed="false">
+                                    <span class="chatbot-option-icon" aria-hidden="true">🔄</span>
+                                    <span>Faire adopter l'IA et conduire le changement</span>
+                                </button>
                             </div>
                         </div>
 
-                        <!-- Question 3 - CONDITIONNELLE (prise de parole / média training) -->
-                        <div class="chatbot-question" data-question="3" data-conditional="true" style="display:none;">
-                            <div class="chatbot-question-text">Quel est votre niveau d'expérience en prise de parole ?</div>
+                        <!-- Question 3 : le format -->
+                        <div class="chatbot-question" data-question="3" role="group" aria-labelledby="q3-titre" style="display:none;">
+                            <div class="chatbot-question-text" id="q3-titre">Quel format vous conviendrait ?</div>
                             <div class="chatbot-options">
-                                <div class="chatbot-option" data-value="debutant" data-tags="debutant,niveau-1">
-                                    <div class="chatbot-option-icon">🌱</div>
-                                    <span>Débutant — je manque de confiance, j'évite les situations</span>
-                                </div>
-                                <div class="chatbot-option" data-value="intermediaire" data-tags="intermediaire,niveau-2">
-                                    <div class="chatbot-option-icon">📈</div>
-                                    <span>Intermédiaire — je me débrouille mais je veux progresser</span>
-                                </div>
-                                <div class="chatbot-option" data-value="avance" data-tags="avance,niveau-3,excellence">
-                                    <div class="chatbot-option-icon">⭐</div>
-                                    <span>Avancé — je suis à l'aise, je cherche l'excellence et l'impact</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Question 4 -->
-                        <div class="chatbot-question" data-question="4" style="display:none;">
-                            <div class="chatbot-question-text">De combien de temps disposez-vous ?</div>
-                            <div class="chatbot-multiselect-hint">Plusieurs réponses possibles</div>
-                            <div class="chatbot-options">
-                                <div class="chatbot-option" data-value="court" data-tags="intensif,1-jour">
-                                    <div class="chatbot-option-icon">⚡</div>
-                                    <span>1-2 jours (intensif)</span>
-                                </div>
-                                <div class="chatbot-option" data-value="moyen" data-tags="progressif,plusieurs-semaines">
-                                    <div class="chatbot-option-icon">📅</div>
-                                    <span>Plusieurs semaines (progressif)</span>
-                                </div>
-                                <div class="chatbot-option" data-value="long" data-tags="accompagnement,plusieurs-mois">
-                                    <div class="chatbot-option-icon">🗓️</div>
-                                    <span>Un travail en profondeur sur plusieurs mois</span>
-                                </div>
-                                <div class="chatbot-option" data-value="indetermine" data-tags="flexible,clarification">
-                                    <div class="chatbot-option-icon">❓</div>
+                                <button type="button" class="chatbot-option" data-value="formation" data-tags="" aria-pressed="false">
+                                    <span class="chatbot-option-icon" aria-hidden="true">📚</span>
+                                    <span>Une formation de 1 à 2 jours, en intra</span>
+                                </button>
+                                <button type="button" class="chatbot-option" data-value="parcours" data-tags="" aria-pressed="false">
+                                    <span class="chatbot-option-icon" aria-hidden="true">🗓️</span>
+                                    <span>Un parcours sur plusieurs mois</span>
+                                </button>
+                                <button type="button" class="chatbot-option" data-value="individuel" data-tags="" aria-pressed="false">
+                                    <span class="chatbot-option-icon" aria-hidden="true">🤝</span>
+                                    <span>Un accompagnement individuel et confidentiel</span>
+                                </button>
+                                <button type="button" class="chatbot-option" data-value="ouvert" data-tags="" aria-pressed="false">
+                                    <span class="chatbot-option-icon" aria-hidden="true">❓</span>
                                     <span>Je ne sais pas encore</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Question 5 -->
-                        <div class="chatbot-question" data-question="5" style="display:none;">
-                            <div class="chatbot-question-text">Quel est votre niveau de responsabilité actuel ?</div>
-                            <div class="chatbot-options">
-                                <div class="chatbot-option" data-value="dirigeant" data-tags="dirigeant,comex,dg">
-                                    <div class="chatbot-option-icon">🏛️</div>
-                                    <span>Dirigeant / Membre du COMEX</span>
-                                </div>
-                                <div class="chatbot-option" data-value="manager" data-tags="manager,responsable,encadrant">
-                                    <div class="chatbot-option-icon">👔</div>
-                                    <span>Manager / Responsable d'équipe</span>
-                                </div>
-                                <div class="chatbot-option" data-value="expert" data-tags="expert,consultant,independant">
-                                    <div class="chatbot-option-icon">🎯</div>
-                                    <span>Expert / Consultant / Indépendant</span>
-                                </div>
-                                <div class="chatbot-option" data-value="collaborateur" data-tags="collaborateur,contributeur">
-                                    <div class="chatbot-option-icon">💼</div>
-                                    <span>Collaborateur / Contributeur individuel</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Question 6 -->
-                        <div class="chatbot-question" data-question="6" style="display:none;">
-                            <div class="chatbot-question-text">Préférez-vous un format collectif ou individuel ?</div>
-                            <div class="chatbot-multiselect-hint">Plusieurs réponses possibles</div>
-                            <div class="chatbot-options">
-                                <div class="chatbot-option" data-value="groupe" data-tags="collectif,groupe,formation">
-                                    <div class="chatbot-option-icon">👥</div>
-                                    <span>Collectif — j'aime apprendre avec d'autres</span>
-                                </div>
-                                <div class="chatbot-option" data-value="solo" data-tags="individuel,sur-mesure,coaching">
-                                    <div class="chatbot-option-icon">👤</div>
-                                    <span>Individuel — je préfère un accompagnement personnalisé</span>
-                                </div>
-                                <div class="chatbot-option" data-value="mix" data-tags="mixte,hybride">
-                                    <div class="chatbot-option-icon">🔄</div>
-                                    <span>Mix des deux — selon les besoins</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Question 7 -->
-                        <div class="chatbot-question" data-question="7" style="display:none;">
-                            <div class="chatbot-question-text">Quelle est l'urgence de votre besoin ?</div>
-                            <div class="chatbot-options">
-                                <div class="chatbot-option" data-value="urgent" data-tags="urgent,echeance,immediat">
-                                    <div class="chatbot-option-icon">🚨</div>
-                                    <span>Urgent — j'ai une échéance proche</span>
-                                </div>
-                                <div class="chatbot-option" data-value="planifie" data-tags="planifie,anticipe">
-                                    <div class="chatbot-option-icon">📆</div>
-                                    <span>Planifié — je veux avancer dans les prochains mois</span>
-                                </div>
-                                <div class="chatbot-option" data-value="clarifier" data-tags="exploration,clarification">
-                                    <div class="chatbot-option-icon">🔍</div>
-                                    <span>Explorer — je veux d'abord clarifier mon besoin</span>
-                                </div>
+                                </button>
                             </div>
                         </div>
 
@@ -486,24 +387,28 @@
 
                     <!-- Navigation -->
                     <div class="chatbot-nav" id="chatbotNav">
-                        <button class="chatbot-btn secondary" id="btnPrev" onclick="prevQuestion()" disabled>Retour</button>
-                        <button class="chatbot-btn primary" id="btnNext" onclick="nextQuestion()" disabled>Suivant</button>
+                        <button type="button" class="chatbot-btn secondary" id="btnPrev" onclick="prevQuestion()" disabled>Retour</button>
+                        <button type="button" class="chatbot-btn primary" id="btnNext" onclick="nextQuestion()" disabled>Suivant</button>
                     </div>
 
-                    <!-- Result -->
-                    <div class="chatbot-result" id="chatbotResult">
+                    <!-- Résultat -->
+                    <div class="chatbot-result" id="chatbotResult" aria-live="polite">
                         <div class="result-section" id="formationResult">
-                            <div class="result-section-label">📚 Formation recommandée</div>
+                            <div class="result-section-label"></div>
                             <div class="result-card" id="mainFormation"></div>
-                            <a href="#" class="chatbot-btn primary result-link" id="formationLink">Découvrir cette formation</a>
+                            <a href="#" class="chatbot-btn primary result-link" id="formationLink"></a>
                         </div>
                         <div class="result-section" id="accompagnementResult">
-                            <div class="result-section-label">👤 Accompagnement individuel</div>
+                            <div class="result-section-label"></div>
                             <div class="result-card" id="mainAccompagnement"></div>
-                            <a href="#" class="chatbot-btn secondary result-link" id="accompagnementLink">En savoir plus</a>
+                            <a href="#" class="chatbot-btn secondary result-link" id="accompagnementLink"></a>
                         </div>
+                        <p class="result-call" id="resultCall">
+                            Besoin d'en parler avant de choisir ?
+                            <a href="https://calendly.com/laura-ballo1993/echangecoaching" target="_blank" rel="noopener">Réservez un échange offert de 30 minutes</a>
+                        </p>
                         <div class="result-reset">
-                            <button onclick="resetChatbot()">↻ Recommencer le questionnaire</button>
+                            <button type="button" onclick="resetChatbot()">↻ Recommencer</button>
                         </div>
                     </div>
                 </div>
@@ -518,109 +423,93 @@
 
     <script>
         // ============================================
-        // CHATBOT LOGIC — catalogue 2026 (7 formations)
+        // QUESTIONNAIRE « Trouvez la formation ou l'accompagnement qui vous correspond »
+        // 3 questions à choix unique : pour qui, quel sujet, quel format.
         // ============================================
 
-        // FORMATIONS COLLECTIVES (synchronisées avec Notion 📚 Formations)
+        // FORMATIONS : régénérées depuis Notion (📚 Formations, statut Publié)
+        // par _scripts/publish_formations.py. Une nouvelle formation publiée
+        // entre ici toute seule et se classe grâce à ses « Mots-clés (recherche) ».
         const formations = [
 {{CHATBOT_FORMATIONS_JS}}
         ];
 
-        // ACCOMPAGNEMENTS INDIVIDUELS (inchangés)
+        // ACCOMPAGNEMENTS INDIVIDUELS : les pages de /accompagnements/.
+        // « sujets » : le premier est le sujet principal de l'offre.
         const accompagnements = [
             {
-                id: 'A1', name: 'Diagnostic',
-                subtitle: 'Session unique de 90 min — Clarifier votre situation',
-                url: '/accompagnements/diagnostic.html', format: '90 min',
-                tags: ['diagnostic', 'clarification', 'tous', 'individuel', 'sur-mesure',
-                       'transition', 'positionnement', 'decalage', 'indetermine']
+                code: 'PO-SIG',
+                name: "Présence oratoire signature",
+                subtitle: "Incarner votre présence à l'oral avant une conférence, une interview ou une prise de parole à fort enjeu",
+                url: '/accompagnements/presence-oratoire-signature',
+                format: "Individuel, sur mesure",
+                sujets: ['parole']
             },
             {
-                id: 'A2', name: 'Positionnement stratégique',
-                subtitle: '3 sessions — Clarifier votre vision et votre axe',
-                url: '/accompagnements/positionnement.html', format: '3 sessions',
-                tags: ['positionnement', 'strategie', 'vision', 'individuel', 'sur-mesure',
-                       'transition', 'decalage', 'dirigeant', 'fondateur', 'entrepreneur',
-                       'durable', 'clarification']
+                code: 'PS',
+                name: "Présence signature — coaching de dirigeants",
+                subtitle: "Prendre votre place, incarner votre rôle, inspirer vos équipes",
+                url: '/accompagnements/presence-signature',
+                format: "6 mois · 12 séances",
+                sujets: ['leadership', 'emotions', 'performance', 'conflits']
             },
             {
-                id: 'A3', name: 'Préparer une prise de parole à enjeux',
-                subtitle: '3-4 sessions — Pour une échéance précise',
-                url: '/accompagnements/prise-de-parole.html', format: '3-4 sessions',
-                tags: ['prise-de-parole', 'echeance', 'pitch', 'keynote', 'individuel',
-                       'sur-mesure', 'urgent', 'stress', 'impact', 'media-training']
-            },
-            {
-                id: 'A4', name: 'Storytelling signature',
-                subtitle: '2-3 sessions — Structurer une parole juste et impactante',
-                url: '/accompagnements/storytelling.html', format: '2-3 sessions',
-                tags: ['storytelling', 'narration', 'positionnement', 'individuel',
-                       'sur-mesure', 'impact', 'durable']
-            },
-            {
-                id: 'A5', name: 'Présence et parole incarnée',
-                subtitle: '3 à 6 mois — Accompagnement en profondeur',
-                url: '/accompagnements/incarnation.html', format: '3-6 mois',
-                tags: ['leadership', 'prise-de-parole', 'media-training', 'storytelling',
-                       'positionnement', 'legitimite', 'decalage', 'individuel', 'sur-mesure',
-                       'plusieurs-mois', 'accompagnement', 'dirigeant', 'manager',
-                       'durable', 'avance', 'excellence']
+                code: 'LCIA',
+                name: "Leader de transformation IA",
+                subtitle: "Faire adopter l'IA en embarquant vos équipes : carte des acteurs, feuille de route, charte IA",
+                url: '/accompagnements/leader-changement-ia',
+                format: "3 à 4 mois · 10 séances",
+                sujets: ['changement-ia', 'ia-metier', 'ia-debut']
             }
         ];
 
+        // Sujet → formations à privilégier, par code Notion (stable, contrairement
+        // à l'ordre du tableau). La première est la réponse attendue, la seconde
+        // le complément proposé en alternative. Une formation absente d'ici reste
+        // proposée si ses mots-clés correspondent au sujet.
+        const SUJET_VERS_FORMATIONS = {
+            'parole': ['PDP-01', 'IE-01'],
+            'conflits': ['CONF-01', 'IE-01'],
+            'emotions': ['IE-01', 'CONF-01'],
+            'performance': ['PERF-01', 'IE-01'],
+            'leadership': ['MGIA-01', 'PE-01'],
+            'ia-debut': ['IA-01', 'IA-02'],
+            'ia-metier': ['IA-02', 'IA-01'],
+            'changement-ia': ['CHIA-01', 'MGIA-01']
+        };
+
+        const totalQuestions = 3;
         let currentQuestion = 1;
-        const totalQuestions = 7;
         let answers = {};
-        let collectedTags = [];
 
-        // Q3 (niveau prise de parole) affichée seulement si thématique parole/média
-        function shouldShowQuestion3() {
-            if (!answers[2] || !answers[2].values) return false;
-            const paroleRelated = ['prise-parole', 'media-training'];
-            return answers[2].values.some(v => paroleRelated.includes(v));
-        }
+        const estParcours = f => /mois/i.test(f.format || '');
+        const nbCommuns = (a, b) => a.filter(t => b.includes(t)).length;
 
-        function getNextQuestion(current) {
-            let next = current + 1;
-            if (next === 3 && !shouldShowQuestion3()) next = 4;
-            return next;
-        }
-        function getPrevQuestion(current) {
-            let prev = current - 1;
-            if (prev === 3 && !shouldShowQuestion3()) prev = 2;
-            return prev;
-        }
-
-        // Sélection multi
+        // Choix unique : un clic sélectionne la réponse et passe à la suite
         document.querySelectorAll('.chatbot-option').forEach(option => {
-            option.addEventListener('click', function() {
+            option.addEventListener('click', function () {
                 const question = this.closest('.chatbot-question');
-                const questionNum = question.dataset.question;
-                this.classList.toggle('selected');
-                const selectedOptions = question.querySelectorAll('.chatbot-option.selected');
-                if (selectedOptions.length > 0) {
-                    const values = [], tags = [];
-                    selectedOptions.forEach(opt => {
-                        values.push(opt.dataset.value);
-                        tags.push(...opt.dataset.tags.split(','));
-                    });
-                    answers[questionNum] = { values, tags: [...new Set(tags)] };
-                    document.getElementById('btnNext').disabled = false;
-                } else {
-                    delete answers[questionNum];
-                    document.getElementById('btnNext').disabled = true;
-                }
+                const num = Number(question.dataset.question);
+                question.querySelectorAll('.chatbot-option').forEach(o => {
+                    o.classList.remove('selected');
+                    o.setAttribute('aria-pressed', 'false');
+                });
+                this.classList.add('selected');
+                this.setAttribute('aria-pressed', 'true');
+                answers[num] = {
+                    value: this.dataset.value,
+                    tags: (this.dataset.tags || '').split(',').filter(Boolean)
+                };
+                document.getElementById('btnNext').disabled = false;
+                setTimeout(() => { if (currentQuestion === num) nextQuestion(); }, 250);
             });
         });
 
         function updateProgress() {
-            const dots = document.querySelectorAll('.chatbot-progress-dot');
-            let visualPosition = currentQuestion;
-            if (currentQuestion > 3 && !shouldShowQuestion3()) visualPosition = currentQuestion - 1;
-            dots.forEach((dot, index) => {
+            document.querySelectorAll('.chatbot-progress-dot').forEach((dot, i) => {
                 dot.classList.remove('active', 'completed');
-                if (index + 1 < visualPosition) dot.classList.add('completed');
-                else if (index + 1 === visualPosition) dot.classList.add('active');
+                if (i + 1 < currentQuestion) dot.classList.add('completed');
+                else if (i + 1 === currentQuestion) dot.classList.add('active');
             });
         }
 
@@ -629,166 +518,125 @@
             const question = document.querySelector(`.chatbot-question[data-question="${num}"]`);
             if (question) question.style.display = 'block';
             document.getElementById('btnPrev').disabled = num === 1;
-            document.getElementById('btnNext').disabled = !answers[num] || (answers[num].values && answers[num].values.length === 0);
-            document.getElementById('btnNext').textContent = num === totalQuestions ? 'Voir le résultat' : 'Suivant';
+            document.getElementById('btnNext').disabled = !answers[num];
+            document.getElementById('btnNext').textContent = num === totalQuestions ? 'Voir ma proposition' : 'Suivant';
             updateProgress();
         }
 
         function nextQuestion() {
-            const nextQ = getNextQuestion(currentQuestion);
-            if (nextQ <= totalQuestions) { currentQuestion = nextQ; showQuestion(currentQuestion); }
+            if (!answers[currentQuestion]) return;
+            if (currentQuestion < totalQuestions) { currentQuestion++; showQuestion(currentQuestion); }
             else showResult();
         }
         function prevQuestion() {
-            const prevQ = getPrevQuestion(currentQuestion);
-            if (prevQ >= 1) { currentQuestion = prevQ; showQuestion(currentQuestion); }
+            if (currentQuestion > 1) { currentQuestion--; showQuestion(currentQuestion); }
+        }
+
+        function scoreFormation(f, pub, sujet, format) {
+            const tags = f.tags || [];
+            let score = nbCommuns(tags, sujet.tags) * 2 + nbCommuns(tags, pub.tags);
+            const preferees = SUJET_VERS_FORMATIONS[sujet.value] || [];
+            const rang = preferees.indexOf(f.code);
+            if (rang === 0) score += 20;
+            else if (rang > 0) score += 8;
+            if (pub.value === 'managers' && f.code === 'MGIA-01') score += 6;
+
+            // Les programmes sur plusieurs mois (Présence exécutive) visent les
+            // équipes de direction et les hauts potentiels.
+            if (estParcours(f)) {
+                if (pub.value === 'equipe') score -= 10;
+                if (format.value === 'formation') score -= 10;
+                if (pub.value === 'direction') score += format.value === 'parcours' ? 35 : 6;
+            } else if (format.value === 'formation') {
+                score += 3;
+            }
+            return score;
+        }
+
+        function scoreAccompagnement(a, sujet) {
+            if (a.sujets[0] === sujet.value) return 20;
+            return a.sujets.includes(sujet.value) ? 12 : 0;
+        }
+
+        function afficherOffre(sectionId, carteId, lienId, offre, libelle, texteLien) {
+            const section = document.getElementById(sectionId);
+            const carte = document.getElementById(carteId);
+            const lien = document.getElementById(lienId);
+            if (!offre) { section.style.display = 'none'; return; }
+            section.style.display = '';
+            section.querySelector('.result-section-label').textContent = libelle;
+            carte.replaceChildren();
+            const titre = document.createElement('h4');
+            titre.textContent = offre.name;
+            const texte = document.createElement('p');
+            texte.textContent = offre.subtitle || '';
+            const format = document.createElement('span');
+            format.className = 'result-format';
+            format.textContent = offre.format || '';
+            carte.append(titre, texte, format);
+            lien.href = offre.url;
+            lien.textContent = texteLien;
         }
 
         function showResult() {
-            collectedTags = [];
-            Object.values(answers).forEach(a => { if (a.tags) collectedTags = collectedTags.concat(a.tags); });
+            const pub = answers[1], sujet = answers[2], format = answers[3];
+            if (!pub || !sujet || !format) return;
 
-            const getValues = (q) => answers[q]?.values || [];
-            const tensions = getValues(1);
-            const thematiques = getValues(2);
-            const niveauParole = getValues(3);
-            const durees = getValues(4);
-            const responsabilites = getValues(5);
-            const modes = getValues(6);
-            const urgences = getValues(7);
+            const formationsClassees = formations
+                .map(f => ({ ...f, score: scoreFormation(f, pub, sujet, format) }))
+                .sort((a, b) => b.score - a.score);
+            const accompagnementsClasses = accompagnements
+                .map(a => ({ ...a, score: scoreAccompagnement(a, sujet) }))
+                .sort((a, b) => b.score - a.score);
 
-            // ── SCORING FORMATIONS ──
-            const formationScores = formations.map(f => {
-                let score = 0;
-                score += f.tags.filter(t => collectedTags.includes(t)).length * 2;
+            const formation1 = formationsClassees[0];
+            const formation2 = formationsClassees[1];
+            const accompagnement = accompagnementsClasses[0];
 
-                // F1 PDP & Média training : toute demande parole/média/storytelling
-                if (f.id === 'F1' && (thematiques.includes('prise-parole') || thematiques.includes('media-training'))) score += 15;
-                if (f.id === 'F1' && tensions.includes('impact')) score += 10;
-                if (f.id === 'F1' && tensions.includes('stress')) score += 6;
-                if (f.id === 'F1' && urgences.includes('urgent')) score += 6;
+            // Un accompagnement en premier quand la personne cherche pour elle-même
+            // (sauf si elle demande une formation) ou demande de l'individuel.
+            const accompagnementDabord =
+                format.value === 'individuel' ||
+                (pub.value === 'moi' && format.value !== 'formation');
 
-                // F2 Conflits : situations complexes
-                if (f.id === 'F2' && thematiques.includes('conflits')) score += 15;
-                if (f.id === 'F2' && tensions.includes('situations-complexes')) score += 12;
-
-                // F3 Intelligence émotionnelle
-                if (f.id === 'F3' && thematiques.includes('emotions')) score += 15;
-                if (f.id === 'F3' && tensions.includes('stress')) score += 8;
-                if (f.id === 'F3' && tensions.includes('decalage')) score += 6;
-
-                // F4 Management augmenté : management + IA + légitimité
-                if (f.id === 'F4' && thematiques.includes('management')) score += 12;
-                if (f.id === 'F4' && tensions.includes('legitimite')) score += 10;
-                if (f.id === 'F4' && thematiques.includes('management') && thematiques.includes('ia')) score += 8;
-
-                // F5 IA niveau 1 : découverte, format court
-                if (f.id === 'F5' && thematiques.includes('ia')) score += 15;
-                if (f.id === 'F5' && tensions.includes('performance')) score += 8;
-                if (f.id === 'F5' && durees.includes('court')) score += 6;
-
-                // F6 IA niveau 2 : approfondissement
-                if (f.id === 'F6' && thematiques.includes('ia')) score += 12;
-                if (f.id === 'F6' && tensions.includes('performance')) score += 10;
-                if (f.id === 'F6' && (durees.includes('moyen') || durees.includes('long'))) score += 8;
-
-                // F7 Changement : transformation + transition
-                if (f.id === 'F7' && thematiques.includes('changement')) score += 15;
-                if (f.id === 'F7' && tensions.includes('transition')) score += 10;
-                if (f.id === 'F7' && tensions.includes('situations-complexes')) score += 6;
-                if (f.id === 'F7' && thematiques.includes('changement') && thematiques.includes('ia')) score += 8;
-
-                if (modes.includes('groupe') || modes.includes('mix')) score += 3;
-                return { ...f, score };
-            }).sort((a, b) => b.score - a.score);
-
-            // ── SCORING ACCOMPAGNEMENTS ──
-            const accompagnementScores = accompagnements.map(a => {
-                let score = 0;
-                score += a.tags.filter(t => collectedTags.includes(t)).length * 2;
-
-                if (a.id === 'A1' && urgences.includes('clarifier')) score += 20;
-                if (a.id === 'A1' && durees.includes('indetermine')) score += 15;
-                if (a.id === 'A1' && (tensions.includes('decalage') || tensions.includes('transition'))) score += 8;
-
-                if (a.id === 'A2' && thematiques.includes('strategie')) score += 15;
-                if (a.id === 'A2' && tensions.includes('positionnement')) score += 12;
-                if (a.id === 'A2' && tensions.includes('transition')) score += 8;
-
-                if (a.id === 'A3' && urgences.includes('urgent')) score += 20;
-                if (a.id === 'A3' && (thematiques.includes('prise-parole') || thematiques.includes('media-training'))) score += 10;
-                if (a.id === 'A3' && tensions.includes('stress')) score += 5;
-
-                if (a.id === 'A4' && thematiques.includes('media-training')) score += 10;
-                if (a.id === 'A4' && tensions.includes('positionnement')) score += 5;
-
-                if (a.id === 'A5' && durees.includes('long')) score += 15;
-                if (a.id === 'A5' && (responsabilites.includes('dirigeant') || responsabilites.includes('manager'))) score += 10;
-                if (a.id === 'A5' && (tensions.includes('decalage') || tensions.includes('legitimite'))) score += 8;
-                if (a.id === 'A5' && niveauParole.includes('avance')) score += 8;
-
-                if (modes.includes('solo')) score += 5;
-                return { ...a, score };
-            }).sort((a, b) => b.score - a.score);
-
-            const bestFormation = formationScores[0];
-            const bestAccompagnement = accompagnementScores[0];
-            const secondFormation = formationScores[1];
-            const secondAccompagnement = accompagnementScores[1];
-
-            const formationSection = document.getElementById('formationResult');
-            const accompagnementSection = document.getElementById('accompagnementResult');
-
-            if (modes.includes('solo') && !modes.includes('groupe') && !modes.includes('mix')) {
-                // MODE SOLO : 2 accompagnements
-                document.querySelector('#formationResult .result-section-label').textContent = '👤 Accompagnement recommandé';
-                document.getElementById('mainFormation').innerHTML = `<h4>${bestAccompagnement.name}</h4><p>${bestAccompagnement.subtitle}</p><span class="result-format">${bestAccompagnement.format}</span>`;
-                document.getElementById('formationLink').href = bestAccompagnement.url;
-                document.getElementById('formationLink').textContent = 'Découvrir cet accompagnement';
-
-                document.querySelector('#accompagnementResult .result-section-label').textContent = '👤 Alternative';
-                document.getElementById('mainAccompagnement').innerHTML = `<h4>${secondAccompagnement.name}</h4><p>${secondAccompagnement.subtitle}</p><span class="result-format">${secondAccompagnement.format}</span>`;
-                document.getElementById('accompagnementLink').href = secondAccompagnement.url;
-                document.getElementById('accompagnementLink').textContent = 'Voir cette option';
-            } else if (modes.includes('groupe') && !modes.includes('solo') && !modes.includes('mix')) {
-                // MODE GROUPE : 2 formations
-                document.querySelector('#formationResult .result-section-label').textContent = '📚 Formation recommandée';
-                document.getElementById('mainFormation').innerHTML = `<h4>${bestFormation.name}</h4><p>${bestFormation.subtitle}</p><span class="result-format">${bestFormation.format}</span>`;
-                document.getElementById('formationLink').href = bestFormation.url;
-                document.getElementById('formationLink').textContent = 'Découvrir cette formation';
-
-                document.querySelector('#accompagnementResult .result-section-label').textContent = '📚 Alternative';
-                document.getElementById('mainAccompagnement').innerHTML = `<h4>${secondFormation.name}</h4><p>${secondFormation.subtitle}</p><span class="result-format">${secondFormation.format}</span>`;
-                document.getElementById('accompagnementLink').href = secondFormation.url;
-                document.getElementById('accompagnementLink').textContent = 'Voir cette option';
+            if (accompagnementDabord) {
+                afficherOffre('formationResult', 'mainFormation', 'formationLink',
+                    accompagnement, '👤 Accompagnement recommandé', 'Découvrir cet accompagnement');
+                afficherOffre('accompagnementResult', 'mainAccompagnement', 'accompagnementLink',
+                    formation1, pub.value === 'moi' ? '📚 Pour vos équipes' : '📚 À envisager aussi', 'Voir cette formation');
             } else {
-                // MODE MIX : 1 formation + 1 accompagnement
-                document.querySelector('#formationResult .result-section-label').textContent = '📚 Formation collective';
-                document.getElementById('mainFormation').innerHTML = `<h4>${bestFormation.name}</h4><p>${bestFormation.subtitle}</p><span class="result-format">${bestFormation.format}</span>`;
-                document.getElementById('formationLink').href = bestFormation.url;
-                document.getElementById('formationLink').textContent = 'Découvrir cette formation';
-
-                document.querySelector('#accompagnementResult .result-section-label').textContent = '👤 Accompagnement individuel';
-                document.getElementById('mainAccompagnement').innerHTML = `<h4>${bestAccompagnement.name}</h4><p>${bestAccompagnement.subtitle}</p><span class="result-format">${bestAccompagnement.format}</span>`;
-                document.getElementById('accompagnementLink').href = bestAccompagnement.url;
-                document.getElementById('accompagnementLink').textContent = 'En savoir plus';
+                afficherOffre('formationResult', 'mainFormation', 'formationLink',
+                    formation1, '📚 Formation recommandée', 'Découvrir cette formation');
+                // En complément : l'accompagnement de la personne qui porte le sujet
+                // pour une équipe de direction ou un projet IA, sinon une autre formation.
+                const complementIndividuel = pub.value === 'direction' || pub.value === 'moi' || sujet.value === 'changement-ia';
+                if (complementIndividuel) {
+                    afficherOffre('accompagnementResult', 'mainAccompagnement', 'accompagnementLink',
+                        accompagnement,
+                        pub.value === 'moi' ? '👤 Pour vous, en individuel' : '👤 Pour la personne qui porte le sujet',
+                        'Découvrir cet accompagnement');
+                } else {
+                    afficherOffre('accompagnementResult', 'mainAccompagnement', 'accompagnementLink',
+                        formation2, '📚 À envisager aussi', 'Voir cette formation');
+                }
             }
 
-            formationSection.style.order = '1';
-            accompagnementSection.style.order = '2';
-            document.getElementById('formationLink').className = 'chatbot-btn primary result-link';
-            document.getElementById('accompagnementLink').className = 'chatbot-btn secondary result-link';
-
+            document.getElementById('resultCall').classList.toggle('mise-en-avant', format.value === 'ouvert');
             document.getElementById('chatbotQuestions').style.display = 'none';
             document.getElementById('chatbotNav').style.display = 'none';
+            document.querySelector('.chatbot-progress').style.display = 'none';
             document.getElementById('chatbotResult').classList.add('show');
         }
 
         function resetChatbot() {
-            currentQuestion = 1; answers = {}; collectedTags = [];
-            document.querySelectorAll('.chatbot-option').forEach(opt => opt.classList.remove('selected'));
+            currentQuestion = 1; answers = {};
+            document.querySelectorAll('.chatbot-option').forEach(o => {
+                o.classList.remove('selected');
+                o.setAttribute('aria-pressed', 'false');
+            });
             document.getElementById('chatbotQuestions').style.display = 'block';
             document.getElementById('chatbotNav').style.display = 'flex';
+            document.querySelector('.chatbot-progress').style.display = '';
             document.getElementById('chatbotResult').classList.remove('show');
             showQuestion(1);
         }
