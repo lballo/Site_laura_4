@@ -52,8 +52,8 @@ ICONES_DECLINAISONS = [
     '<path d="M18.5 3.5v3.6h-3.6"/><path d="M5.5 20.5v-3.6h3.6"/>',
 ]
 ICONE_HORLOGE = (
-    '<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7D6233" '
-    'stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/>'
+    '<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3D3128" '
+    'stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex: none"><circle cx="12" cy="12" r="9"/>'
     '<path d="M12 7v5l3 2"/></svg>'
 )
 
@@ -200,7 +200,12 @@ def configuration_reference(configs):
 I = " " * 16
 
 
+MARRON = "#3D3128"
+ACCENT = "#A83932"
+
+
 def html_declinaisons(lignes):
+    """Cartes blanches à filet rouge au survol (maquette Claude Design du 23/10/2026)."""
     cartes = []
     for n, ligne in enumerate(lignes):
         titre, texte, pied = titre_et_texte(ligne)
@@ -208,18 +213,28 @@ def html_declinaisons(lignes):
         pied_html = ""
         if pied:
             pied_html = (
-                f'{I}    <div class="pe-card-foot"><p>{ICONE_HORLOGE}{esc(majuscule(pied))}</p></div>\n'
+                '<div style="margin-top: auto; padding-top: 24px">\n'
+                '<p style="margin: 0; padding-top: 16px; border-top: 1px solid #E8DDD6; display: flex; align-items: center; '
+                'gap: 10px; font-size: 14px; font-weight: 500; line-height: 1.5; color: #2C2C2C">'
+                f"{ICONE_HORLOGE}{esc(majuscule(pied))}</p>\n"
+                "</div>\n"
             )
         cartes.append(
-            f'{I}<article class="pe-card">\n'
-            f'{I}    <span class="pe-card-icon"><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" '
-            f'fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">{icone}</svg></span>\n'
-            f'{I}    <h3 class="pe-card-title">{esc(titre)}</h3>\n'
-            + (f'{I}    <p class="pe-card-text">{esc(avec_point(majuscule(texte)))}</p>\n' if texte else "")
+            '<article class="pe-card pe-lift" style="position: relative; display: flex; flex-direction: column; '
+            'padding: 36px 32px; background: #FFFFFF; border: 1px solid #E8DDD6">\n'
+            '<span class="pe-bar" aria-hidden="true"></span>\n'
+            '<span class="pe-ico" style="display: flex; align-items: center; justify-content: center; width: 60px; '
+            f'height: 60px; border-radius: 50%; background: #F3ECE8; color: {MARRON}"><svg aria-hidden="true" width="28" '
+            'height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" '
+            f'stroke-linejoin="round">{icone}</svg></span>\n'
+            "<h3 style=\"margin: 22px 0 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 400; "
+            f'font-size: 26px; line-height: 1.22; color: #2C2C2C">{esc(titre)}</h3>\n'
+            + (f'<p style="margin: 10px 0 0; font-size: 15.5px; line-height: 1.6; color: #6C6059">'
+               f"{esc(avec_point(majuscule(texte)))}</p>\n" if texte else "")
             + pied_html
-            + f"{I}</article>"
+            + "</article>"
         )
-    return "\n".join(cartes)
+    return "\n\n".join(cartes)
 
 
 def html_socle(lignes):
@@ -227,24 +242,53 @@ def html_socle(lignes):
     for n, ligne in enumerate(lignes, start=1):
         titre, texte, _ = titre_et_texte(ligne)
         items.append(
-            f'{I}    <li><span class="pe-num" aria-hidden="true">{n}</span><div>'
-            f'<p class="pe-socle-title">{esc(titre)}</p>'
-            + (f'<p class="pe-socle-text">{esc(sans_point(majuscule(texte)))}</p>' if texte else "")
-            + "</div></li>"
+            '<div class="pe-lift-dark" style="display: flex; gap: 18px; padding: 20px 22px; background: #1F1A16">\n'
+            f"<span style=\"font-family: 'Playfair Display', Georgia, serif; font-size: 18px; color: #FFFFFF\">{n}</span>\n"
+            "<div><p style=\"margin: 0; font-family: 'Playfair Display', Georgia, serif; font-size: 19px; "
+            f'line-height: 1.3; color: #FFFFFF">{esc(titre)}</p>'
+            + (f'<p style="margin: 6px 0 0; font-size: 14px; line-height: 1.5; color: #FFFFFF">'
+               f"{esc(sans_point(majuscule(texte)))}</p>" if texte else "")
+            + "</div>\n</div>"
         )
     return "\n".join(items)
 
 
+ICONE_MOINS = (
+    '<span class="pe-acc-ico-open" aria-hidden="true" style="flex: none; display: flex; align-items: center; '
+    f'justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: {ACCENT}; color: #FFFFFF">'
+    '<svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7h8" fill="none" stroke="currentColor" '
+    'stroke-width="1.6" stroke-linecap="round"></path></svg></span>'
+)
+ICONE_PLUS = (
+    '<span class="pe-acc-ico-closed" aria-hidden="true" style="flex: none; display: flex; align-items: center; '
+    f'justify-content: center; width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid {ACCENT}; color: {ACCENT}">'
+    '<svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7h8M7 3v8" fill="none" stroke="currentColor" '
+    'stroke-width="1.6" stroke-linecap="round"></path></svg></span>'
+)
+
+
 def html_complementaires(lignes):
+    """Accordéon : titre du module, description dépliable (le premier est ouvert)."""
     items = []
-    for ligne in lignes:
+    for n, ligne in enumerate(lignes):
         titre, texte, _ = titre_et_texte(ligne)
-        items.append(
-            f'{I}    <li><span class="pe-num" aria-hidden="true">+</span><div>'
-            f'<p class="pe-extras-title">{esc(titre)}</p>'
-            + (f'<p class="pe-extras-text">{esc(sans_point(majuscule(texte)))}</p>' if texte else "")
-            + "</div></li>"
-        )
+        ouvert = "true" if n == 0 and texte else "false"
+        if texte:
+            bouton = (
+                f'<button type="button" data-acc-btn="m" aria-controls="pe-m-{n}" aria-expanded="{ouvert}" '
+                'style="width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; '
+                "padding: 20px 2px; min-height: 56px; background: none; border: 0; cursor: pointer; text-align: left; "
+                "font-family: 'Playfair Display', Georgia, serif; font-size: 19px; line-height: 1.3; color: #2C2C2C\">"
+                f"<span>{esc(titre)}</span>{ICONE_MOINS}{ICONE_PLUS}</button>\n"
+                f'<div class="pe-acc-panel" id="pe-m-{n}"><p style="margin: 0 0 22px; padding-right: 48px; '
+                f'font-size: 15px; line-height: 1.65; color: #6C6059">{esc(avec_point(majuscule(texte)))}</p></div>\n'
+            )
+        else:
+            bouton = (
+                "<p style=\"margin: 0; padding: 20px 2px; font-family: 'Playfair Display', Georgia, serif; "
+                f'font-size: 19px; line-height: 1.3; color: #2C2C2C">{esc(titre)}</p>\n'
+            )
+        items.append('<div style="border-bottom: 1px solid #D9CBBC">\n' + bouton + "</div>")
     return "\n".join(items)
 
 
@@ -253,15 +297,26 @@ def html_configurations(configs):
     items = []
     for c in configs:
         largeur = round(c["mois"][1] / max_mois * 100) if c["mois"] else 100
-        classe = "pe-config is-featured" if c["reference"] else "pe-config"
+        if c["reference"]:
+            cadre = ("border: 1px solid #E0D3BD; background: linear-gradient(155deg, rgba(224, 211, 189, 0.18) 0%, "
+                     "rgba(224, 211, 189, 0.05) 60%, rgba(168, 57, 50, 0.14) 100%)")
+            couleur_tag = "#E0D3BD"
+        else:
+            cadre = ("border: 1px solid rgba(250, 244, 239, 0.14); background: linear-gradient(155deg, #2E2621 0%, "
+                     "#1F1A16 55%, #2A1B17 100%)")
+            couleur_tag = "#E8DDD6"
         items.append(
-            f'{I}<li class="{classe}">\n'
-            + (f'{I}    <p class="pe-config-tag">{esc(majuscule(c["etiquette"]))}</p>\n' if c["etiquette"] else "")
-            + f'{I}    <p class="pe-config-duration">{esc(c["duree"])}</p>\n'
-            f'{I}    <div class="pe-config-bar" aria-hidden="true"><span style="width: {largeur}%"></span></div>\n'
-            f'{I}    <p class="pe-config-name">{esc(c["nom"])}</p>\n'
-            + (f'{I}    <p class="pe-config-text">{esc(avec_point(majuscule(c["composition"])))}</p>\n' if c["composition"] else "")
-            + f"{I}</li>"
+            f'<div class="pe-lift-dark" style="padding: 30px 28px; {cadre}">\n'
+            + (f'<p style="margin: 0; font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; '
+               f'color: {couleur_tag}">{esc(majuscule(c["etiquette"]))}</p>\n' if c["etiquette"] else "")
+            + "<p style=\"margin: 20px 0 0; font-family: 'Playfair Display', Georgia, serif; font-size: 44px; "
+            f'line-height: 1; color: #FAF4EF">{esc(c["duree"])}</p>\n'
+            '<div aria-hidden="true" style="margin-top: 20px; height: 3px; background: rgba(250, 244, 239, 0.1)">'
+            f'<div style="width: {largeur}%; height: 3px; background: #E0D3BD"></div></div>\n'
+            f'<p style="margin: 20px 0 0; font-size: 17px; font-weight: 600; color: #FAF4EF">{esc(c["nom"])}</p>\n'
+            + (f'<p style="margin: 10px 0 0; font-size: 14.5px; line-height: 1.6; color: #E8DDD6">'
+               f'{esc(avec_point(majuscule(c["composition"])))}</p>\n' if c["composition"] else "")
+            + "</div>"
         )
     return "\n".join(items)
 
@@ -272,11 +327,11 @@ def html_autres_sections(autres):
     for titre, lignes in autres:
         if not lignes:
             continue
-        out.append(f"{I}                <h3>{esc(titre)}</h3>")
-        out.append(f'{I}                <ul class="pe-dash-list">')
+        out.append(f"<h3>{esc(titre)}</h3>")
+        out.append('<ul class="pe-dash">')
         for l in lignes:
-            out.append(f"{I}                    <li>{esc(avec_point(majuscule(l)))}</li>")
-        out.append(f"{I}                </ul>")
+            out.append(f"<li>{esc(avec_point(majuscule(l)))}</li>")
+        out.append("</ul>")
     return "\n".join(out)
 
 
