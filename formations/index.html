@@ -287,8 +287,9 @@
         .card-meta { display: flex; gap: 16px; padding-top: 12px; border-top: 1px solid var(--warm-beige); margin-bottom: 16px; }
         .card-meta-item { display: flex; align-items: center; gap: 5px; font-size: 0.8rem; color: var(--warm-gray); }
         .card-meta-item svg { width: 14px; height: 14px; opacity: 0.7; }
-        .card-price { display: flex; align-items: baseline; gap: 4px; margin-bottom: 16px; }
+        .card-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px; margin-bottom: 16px; }
         .card-price .amount { font-family: var(--font-heading); font-size: 1.6rem; color: var(--black); }
+        .card-price .option { flex-basis: 100%; font-size: 0.8rem; color: var(--accent-dark); margin-top: 2px; }
         .card-price .suffix { font-size: 0.8rem; color: var(--text-muted); }
         .card-cta {
             display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%;
@@ -576,7 +577,7 @@
                             <div class="card-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>2 jours</div>
                             <div class="card-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>8 pers. max</div>
                         </div>
-                        <div class="card-price"><span class="amount">2 400€</span><span class="suffix">HT / groupe de 8 max.</span></div>
+                        <div class="card-price"><span class="amount">2 400€</span><span class="suffix">HT / groupe de 8 max.</span><span class="option">+ 800 € HT avec la 3e journée optionnelle</span></div>
                         <a href="/formations/management-augmente-ie-ia.html" class="card-cta">
                             Voir le programme<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                         </a>
