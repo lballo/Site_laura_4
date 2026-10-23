@@ -762,6 +762,7 @@
         .tarif-value { font-family: var(--font-heading); font-size: 1.8rem; color: var(--black); line-height: 1.1; margin-bottom: 8px; }
         .tarif-value small { font-family: var(--font-body); font-size: 0.8rem; color: var(--warm-gray); }
         .tarif-card p { font-size: 0.9rem; color: var(--text-dark); line-height: 1.6; }
+        .tarif-card .tarif-option { font-weight: 600; color: var(--black); margin-bottom: 8px; }
         .tarif-perimetre { margin-top: var(--space-md); background: var(--light-beige); border: 1px solid var(--warm-beige); border-radius: 12px; padding: var(--space-md); }
         .tarif-perimetre .pedagogy-title { margin-bottom: var(--space-xs); }
         .tarif-perimetre p { font-size: 0.92rem; line-height: 1.7; color: var(--text-dark); }
@@ -1377,6 +1378,7 @@
                         <div class="tarif-card">
                             <div class="tarif-label">Intra-entreprise</div>
                             <div class="tarif-value">{{TARIF_INTRA}} € <small>HT / groupe</small></div>
+{{OPTION_TARIF_CARTE}}
                             <p>Forfait pour un groupe de {{PARTICIPANTS_MAX}} personnes maximum, dans vos locaux ou à distance.</p>
                         </div>
                     </div>
@@ -1489,6 +1491,7 @@
                                 <div style="margin-left:auto; text-align:right;">
                                     <div class="sidebar-value price">{{TARIF_INTRA}} € <small>HT</small></div>
                                     <div class="sidebar-subinfo">forfait groupe</div>
+                                    {{OPTION_TARIF_SIDEBAR}}
                                 </div>
                             </div>
                             <div class="sidebar-row">
@@ -1558,7 +1561,7 @@
             <button class="modal-close" onclick="closeModalIntra()" aria-label="Fermer">&times;</button>
             <div class="modal-header">
                 <h2 class="modal-title">Le forfait intra-entreprise</h2>
-                <p class="modal-subtitle">{{TITLE}} — {{TARIF_INTRA}} € HT pour un groupe de {{PARTICIPANTS_MAX}} personnes maximum</p>
+                <p class="modal-subtitle">{{TITLE}} — {{TARIF_INTRA}} € HT pour un groupe de {{PARTICIPANTS_MAX}} personnes maximum{{OPTION_TARIF_DEVIS}}</p>
             </div>
             <div style="padding:0 var(--space-lg) var(--space-lg); line-height:1.7;">
                 {{PERIMETRE_INTRA_HTML}}

@@ -883,6 +883,12 @@ def render(template, data, avis):
     return out
 
 
+def option_tarif(page, gabarit):
+    """Propriété « Option tarifaire » mise en forme, ou rien si elle est vide."""
+    texte = prop(page, "Option tarifaire").strip()
+    return gabarit.format(esc(texte)) if texte else ""
+
+
 def build_data(client, page, avis, org=None, lignes_indicateurs=None, periode=("", "")):
     org = org or {}
     slug = prop(page, "slug") or "formation"
@@ -952,6 +958,10 @@ def build_data(client, page, avis, org=None, lignes_indicateurs=None, periode=("
         "DUREE": duree,
         "TARIF_INTER": f"{int(prop(page, 'Tarif HT inter', 'number') or 0):,}".replace(",", " "),
         "TARIF_INTRA": f"{int(prop(page, 'Tarif HT intra', 'number') or 0):,}".replace(",", " "),
+        # « Option tarifaire » (ex. 3e journée optionnelle), affichée sous le tarif intra
+        "OPTION_TARIF_CARTE": option_tarif(page, '<p class="tarif-option">{}</p>'),
+        "OPTION_TARIF_SIDEBAR": option_tarif(page, '<div class="sidebar-subinfo">{}</div>'),
+        "OPTION_TARIF_DEVIS": option_tarif(page, " ({})"),
         "PARTICIPANTS_MAX": int(prop(page, "Nbre participants max", "number") or 0),
         "CODE_FORMATION": esc(prop(page, "Code formation")),
         "IMAGE_URL": image_url(page),
@@ -1140,7 +1150,8 @@ def render_carte(page):
     else:
         tarif = f"{int(tarif_intra):,}".replace(",", " ")
         prix_html = (f'<span class="amount">{tarif}€</span>'
-                     f'<span class="suffix">HT / groupe de {maxi} max.</span>')
+                     f'<span class="suffix">HT / groupe de {maxi} max.</span>'
+                     + option_tarif(page, '<span class="option">{}</span>'))
 
     categorie = prop(page, "Catégorie", "select") or "communication"
     data_tags = mots_cles(page)
