@@ -34,7 +34,8 @@
     <link rel="preload" as="image" href="/assets/img/conference-hero.webp" fetchpriority="high">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@600&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/tokens.css">
     <link rel="stylesheet" href="/assets/css/footer.css">
     <link rel="stylesheet" href="/assets/css/cookies.css">
     <style>
@@ -145,8 +146,10 @@
         .pe-page .pe-legal a { color: #6C6059; }
         .pe-page .pe-legal a:hover { color: #2C2C2C; }
 
-        /* Pied de page partagé */
-        .footer { border-top: 1px solid rgba(250, 244, 239, 0.08); }
+        /* Pied de page global du site (assets/components/footer.html, injecté par includes.js) */
+        .footer { border-top: 1px solid rgba(250, 244, 239, 0.08); font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif; }
+        .footer a { text-decoration: none; }
+        .footer h3, .footer h4, .footer p { margin-top: 0; }
 
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
@@ -652,12 +655,11 @@
 </section>
 
 <!-- ============ APPEL À L'ACTION ============ -->
-<section id="contact" style="background: #FFFDFB">
-<div style="max-width: 1200px; margin: 0 auto; padding: 24px clamp(20px, 4vw, 40px) 96px">
-<div style="position: relative; overflow: hidden; display: flex; flex-wrap: wrap; background: #1F1A16; color: #FFFFFF">
+<section id="contact" style="position: relative; overflow: hidden; background: #1F1A16; color: #FFFFFF">
 <div class="pe-cta-bg" aria-hidden="true"></div>
 <div aria-hidden="true" style="position: absolute; inset: 0; background: rgba(31, 26, 22, 0.84)"></div>
-<div style="position: relative; flex: 2 1 520px; min-width: 0; padding: clamp(48px, 7vw, 88px) clamp(24px, 5vw, 64px)">
+<div style="position: relative; max-width: 1200px; margin: 0 auto; padding: clamp(72px, 9vw, 120px) clamp(20px, 4vw, 40px)">
+<div style="max-width: 760px">
 <h2 style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 400; font-size: clamp(38px, 4.4vw, 60px); line-height: 1.08; letter-spacing: -0.01em; color: #FFFFFF">Construisons votre programme ensemble</h2>
 <p style="margin: 22px 0 0; max-width: 640px; font-size: 18px; line-height: 1.7; color: rgba(255, 255, 255, 0.9)">Un temps de cadrage pour déterminer le format le plus adapté à votre organisation et co-construire le programme en fonction de vos enjeux.</p>
 <div style="margin-top: 32px; display: flex; flex-wrap: wrap; gap: 14px">
@@ -665,7 +667,6 @@
 <a href="https://calendly.com/laura-ballo1993/echangecoaching" target="_blank" rel="noopener" class="pe-btn" style="display: inline-flex; align-items: center; min-height: 54px; padding: 0 28px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.65); color: #FFFFFF; text-decoration: none; font-size: 15px; font-weight: 500">Réserver un appel</a>
 </div>
 <p style="margin: 24px 0 0; font-size: 14px; color: rgba(255, 255, 255, 0.9)"><a href="mailto:{{ORGANISME_EMAIL}}" style="color: #FFFFFF">{{ORGANISME_EMAIL}}</a> · <a href="tel:{{ORGANISME_TEL_HREF}}" style="color: #FFFFFF">{{ORGANISME_TEL}}</a></p>
-</div>
 </div>
 </div>
 </section>
