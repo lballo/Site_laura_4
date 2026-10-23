@@ -198,6 +198,74 @@
       box-shadow: 0 30px 60px -20px rgba(44,44,44,.25);
     }
 
+    /* ========== PANNEAU « EN SAVOIR PLUS » ========== */
+    .conference-card { display:flex; flex-direction:column; }
+    .conference-card > .p-6 { display:flex; flex-direction:column; flex:1; }
+    .conference-card.is-active { transform:translateY(-6px); box-shadow:0 0 0 2px var(--rouge), 0 30px 60px -20px rgba(168,57,50,.35); }
+    .conf-foot {
+      margin-top:auto; padding-top:1rem; border-top:1px solid rgba(44,44,44,.1);
+      display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;
+    }
+    .conf-meta { display:inline-flex; align-items:center; gap:.5rem; color:var(--text-dark); font-size:.875rem; font-weight:500; }
+    .conf-toggle {
+      display:inline-flex; align-items:center; gap:.5rem; cursor:pointer;
+      color:var(--rouge); font-weight:600; font-size:.875rem; background:none; border:0; padding:.5rem 0; min-height:44px;
+    }
+    .conf-toggle:hover { color:var(--rouge-hover); }
+    .conf-toggle:focus-visible, .conf-close:focus-visible { outline:2px solid var(--rouge); outline-offset:3px; border-radius:4px; }
+    .conf-chevron {
+      display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px; border-radius:50%;
+      border:1.5px solid currentColor; font-size:1rem; line-height:1; transition:transform .3s ease;
+    }
+    .conf-toggle[aria-expanded="true"] .conf-chevron { transform:rotate(45deg); }
+
+    .conf-panel { grid-column:1 / -1; display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease, opacity .35s ease; opacity:0; }
+    .conf-panel.open { grid-template-rows:1fr; opacity:1; }
+    .conf-panel[hidden] { display:none; }
+    .conf-panel > .conf-panel-inner { overflow:hidden; min-height:0; }
+    .conf-panel-inner {
+      position:relative; background:var(--white); border-radius:12px; border-top:3px solid var(--rouge);
+      box-shadow:0 30px 60px -25px rgba(44,44,44,.25);
+    }
+    .conf-panel.open .conf-panel-inner { padding:2.5rem 2.5rem 2.75rem; }
+    .conf-close {
+      position:absolute; top:1rem; right:1rem; width:40px; height:40px; border-radius:50%; cursor:pointer;
+      border:1px solid rgba(44,44,44,.15); background:var(--white); color:var(--text-dark); font-size:1.4rem; line-height:1;
+      transition:all .2s ease;
+    }
+    .conf-close:hover { background:var(--text-dark); color:#fff; }
+    .cd-kicker { color:var(--rouge); font-size:.75rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase; margin-bottom:.5rem; padding-right:3rem; }
+    .cd-title { color:var(--text-dark); font-size:clamp(1.5rem,2.6vw,2rem); line-height:1.2; margin-bottom:2rem; padding-right:3rem; }
+    .cd-title span { color:var(--rouge); font-style:italic; }
+    .cd-body { display:grid; grid-template-columns:1fr 1fr; gap:3rem; }
+    .cd-label { color:var(--brun-gris); font-size:.75rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; margin-bottom:.9rem; display:flex; align-items:center; gap:.6rem; }
+    .cd-label::before { content:''; width:24px; height:1px; background:var(--rouge); }
+    .cd-label:not(:first-child) { margin-top:2rem; }
+    .cd-text { color:var(--brun-gris); font-size:1rem; line-height:1.8; }
+    .cd-list, .cd-steps { list-style:none; margin:0; padding:0; }
+    .cd-facts dd { margin:0; }
+    .cd-list { display:grid; gap:.75rem; }
+    .cd-list li { position:relative; padding-left:1.6rem; color:var(--brun-gris); line-height:1.65; }
+    .cd-list li::before { content:'→'; position:absolute; left:0; color:var(--rouge); font-weight:700; }
+    .cd-steps { counter-reset:step; display:grid; gap:1rem; }
+    .cd-steps li { counter-increment:step; position:relative; padding-left:2.75rem; color:var(--brun-gris); line-height:1.6; }
+    .cd-steps li::before {
+      content:counter(step, decimal-leading-zero); position:absolute; left:0; top:-.15rem;
+      font-family:'Playfair Display', Georgia, serif; font-style:italic; color:var(--rouge); font-size:1.35rem;
+    }
+    .cd-steps b { color:var(--text-dark); font-weight:600; }
+    .cd-facts { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin:2rem 0; padding:1.25rem; background:var(--light-beige); border-radius:10px; }
+    .cd-facts dt { color:var(--taupe); font-size:.68rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; margin-bottom:.3rem; }
+    .cd-facts dd { color:var(--text-dark); font-size:.9rem; font-weight:600; line-height:1.4; }
+    .cd-cta { padding:.95rem 1.75rem; border-radius:6px; gap:.5rem; font-weight:600; font-size:.95rem; min-height:48px; }
+    @media (max-width:900px) {
+      .cd-body { grid-template-columns:1fr; gap:0; }
+      .cd-body > .cd-col + .cd-col { margin-top:2rem; }
+      .cd-facts { grid-template-columns:1fr; }
+      .conf-panel.open .conf-panel-inner { padding:2rem 1.5rem 2.25rem; }
+    }
+    @media (prefers-reduced-motion:reduce) { .conf-panel { transition:none; } }
+
     /* ========== MOBILE ========== */
     @media (max-width:768px) { .stat-pill { padding:1rem; } }
   </style>
@@ -299,7 +367,7 @@
 <section class="py-20 sm:py-24 lg:py-28 relative overflow-hidden" style="background:var(--white);">
   <div class="relative max-w-3xl mx-auto px-6 lg:px-12 text-center reveal">
     <div class="section-label mb-5" style="color:var(--brun-gris);font-size:.8125rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;">Pour qui</div>
-    <p class="mb-6" style="color:var(--brun-gris);font-size:1.0625rem;line-height:1.8;">J'interviens auprès d'<b>entreprises, organisations, associations, administrations et événements professionnels</b> qui osent remettre <b>l'humain au cœur de la performance</b>.</p>
+    <p class="mb-6" style="color:var(--brun-gris);font-size:1.0625rem;line-height:1.8;">J'interviens auprès d'<b>entreprises, organisations, associations et administrations</b> qui osent remettre <b>l'humain au cœur de la performance</b>.</p>
     <p style="color:var(--brun-gris);font-size:1.0625rem;line-height:1.8;">Mon approche cultive un équilibre rare&nbsp;: celui où l'empathie et la sensibilité ne s'opposent pas à l'exigence, mais la nourrissent.</p>
   </div>
 </section>
@@ -361,73 +429,233 @@
 </section>
 
 <!-- AUTRES CONFÉRENCES -->
+<!-- Chaque carte contient ses détails dans <div class="conf-details" hidden>.
+     Au clic sur « En savoir plus », ce contenu est copié dans le panneau pleine largeur (#conf-panel),
+     inséré sous la rangée de la carte. Le contenu reste dans le HTML : Google le lit.
+     Lien direct vers une conférence : /conferences-inspirantes#id-de-la-carte -->
 <section class="py-20 sm:py-24 lg:py-28" style="background:var(--light-beige);">
   <div class="max-w-7xl mx-auto px-6 lg:px-12">
     <div class="text-center mb-12 sm:mb-16 reveal">
       <p class="mb-4" style="color:var(--rouge);font-size:.875rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;">Autres conférences</p>
       <h2 class="title-playfair" style="color:var(--text-dark);font-size:clamp(1.75rem,3.8vw,2.875rem);line-height:1.2;">Explorez mes autres <span style="color:var(--rouge);font-style:italic;">thématiques</span></h2>
     </div>
-    <div class="grid sm:grid-cols-2 gap-6 sm:gap-8 lg:gap-10">
-      <article class="conference-card reveal">
+    <div id="conf-grid" class="grid sm:grid-cols-2 gap-6 sm:gap-8 lg:gap-10">
+
+      <!-- ===== 1. STORYTELLING ===== -->
+      <article id="storytelling-incarne" class="conference-card reveal">
         <div style="aspect-ratio:16/9;overflow:hidden;"><img src="/assets/img/blog/reussir-votre-storytelling-main.webp" alt="Conférence storytelling incarné" loading="lazy" width="640" height="360" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
         <div class="p-6 sm:p-8">
           <p class="mb-3" style="color:var(--brun-gris);font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;">Storytelling · Présence</p>
           <h3 class="title-playfair mb-4" style="color:var(--text-dark);font-size:clamp(1.375rem,2vw,1.625rem);line-height:1.2;">Faire vivre une expérience à votre public&nbsp;: <span style="color:var(--rouge);font-style:italic;">le storytelling incarné</span></h3>
           <p class="mb-6" style="color:var(--brun-gris);font-size:.9375rem;line-height:1.7;">Comment transformer une prise de parole en expérience marquante&nbsp;? Récit, corps, émotion, silence — pour que votre message cesse d'être entendu et commence à être ressenti.</p>
-          <div class="flex items-center gap-2 pt-4" style="border-top:1px solid rgba(44,44,44,.1);color:var(--text-dark);font-size:.875rem;font-weight:500;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--rouge);" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            <span>45 à 60 min · Présentiel ou distanciel</span>
+          <div class="conf-foot">
+            <span class="conf-meta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--rouge);" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>45 à 60 min · Présentiel ou distanciel</span>
+            <button type="button" class="conf-toggle" aria-expanded="false" aria-controls="conf-panel">En savoir plus <span class="conf-chevron" aria-hidden="true">+</span></button>
+          </div>
+        </div>
+        <div class="conf-details" hidden>
+          <div class="cd-col">
+            <p class="cd-label">Le propos</p>
+            <p class="cd-text">Un bon message ne suffit pas. Ce qui reste, c'est ce que le public a ressenti. Cette conférence montre comment le récit, le corps, la voix et le silence transforment une intervention en moment dont on se souvient.</p>
+            <p class="cd-label">Ce que votre public repart avec</p>
+            <ul class="cd-list">
+              <li>Une structure de récit simple, applicable à n'importe quelle prise de parole</li>
+              <li>Les leviers du corps et de la voix qui rendent un message vivant</li>
+              <li>L'art du silence et de l'émotion, sans jamais en faire trop</li>
+            </ul>
+          </div>
+          <div class="cd-col">
+            <p class="cd-label">Le déroulé</p>
+            <ol class="cd-steps">
+              <li><b>Le choc d'ouverture</b> — vivre soi-même ce qu'est un récit qui accroche</li>
+              <li><b>Anatomie d'une histoire</b> — tension, incarnation, résolution</li>
+              <li><b>Le corps raconte aussi</b> — présence, regard, voix, silence</li>
+              <li><b>Passage à l'acte</b> — chacun repart avec son histoire à raconter</li>
+            </ol>
+            <dl class="cd-facts">
+              <div><dt>Format</dt><dd>Conférence interactive</dd></div>
+              <div><dt>Durée</dt><dd>45 à 60 min</dd></div>
+              <div><dt>Pour</dt><dd>Managers, équipes commerciales, porte-parole</dd></div>
+            </dl>
+            <a href="#parlons-en" class="btn-primary cd-cta">Réserver cette conférence <span aria-hidden="true">→</span></a>
           </div>
         </div>
       </article>
-      <article class="conference-card reveal">
+
+      <!-- ===== 2. INTELLIGENCE ÉMOTIONNELLE ===== -->
+      <article id="intelligence-emotionnelle-leadership" class="conference-card reveal">
         <div style="aspect-ratio:16/9;overflow:hidden;"><img src="/assets/img/blog/charisme-inne-main.webp" alt="Conférence présence et intelligence émotionnelle dans le leadership" loading="lazy" width="640" height="360" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
         <div class="p-6 sm:p-8">
           <p class="mb-3" style="color:var(--brun-gris);font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;">Leadership · Intelligence émotionnelle</p>
           <h3 class="title-playfair mb-4" style="color:var(--text-dark);font-size:clamp(1.375rem,2vw,1.625rem);line-height:1.2;">Présence et <span style="color:var(--rouge);font-style:italic;">intelligence émotionnelle</span> dans le leadership</h3>
           <p class="mb-6" style="color:var(--brun-gris);font-size:.9375rem;line-height:1.7;">Et si la sensibilité était le matériau même d'un leadership d'impact&nbsp;? Une conférence pour repenser le management à partir de l'écoute et de la compréhension de soi.</p>
-          <div class="flex items-center gap-2 pt-4" style="border-top:1px solid rgba(44,44,44,.1);color:var(--text-dark);font-size:.875rem;font-weight:500;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--rouge);" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            <span>60 min · Conférence inspirante</span>
+          <div class="conf-foot">
+            <span class="conf-meta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--rouge);" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>60 min · Conférence inspirante</span>
+            <button type="button" class="conf-toggle" aria-expanded="false" aria-controls="conf-panel">En savoir plus <span class="conf-chevron" aria-hidden="true">+</span></button>
+          </div>
+        </div>
+        <div class="conf-details" hidden>
+          <div class="cd-col">
+            <p class="cd-label">Le propos</p>
+            <p class="cd-text">On a longtemps demandé aux managers de laisser leurs émotions au vestiaire. Résultat&nbsp;: des équipes qui se taisent. Cette conférence défend l'inverse. La sensibilité, bien comprise, est un outil de pilotage.</p>
+            <p class="cd-label">Ce que votre public repart avec</p>
+            <ul class="cd-list">
+              <li>Repérer ses propres émotions avant qu'elles ne décident à sa place</li>
+              <li>Lire ce qui se joue dans une équipe, au-delà des mots</li>
+              <li>Des réflexes d'écoute qui changent la qualité d'un échange</li>
+            </ul>
+          </div>
+          <div class="cd-col">
+            <p class="cd-label">Le déroulé</p>
+            <ol class="cd-steps">
+              <li><b>Le mythe du manager imperturbable</b> — ce qu'il coûte vraiment</li>
+              <li><b>Ce que disent les émotions</b> — repères simples et neurosciences</li>
+              <li><b>La présence</b> — être là, vraiment, face à son équipe</li>
+              <li><b>Un geste pour demain</b> — un engagement concret par participant</li>
+            </ol>
+            <dl class="cd-facts">
+              <div><dt>Format</dt><dd>Conférence inspirante</dd></div>
+              <div><dt>Durée</dt><dd>60 min</dd></div>
+              <div><dt>Pour</dt><dd>Managers, dirigeants, CODIR</dd></div>
+            </dl>
+            <a href="#parlons-en" class="btn-primary cd-cta">Réserver cette conférence <span aria-hidden="true">→</span></a>
           </div>
         </div>
       </article>
-      <article class="conference-card reveal">
+
+      <!-- ===== 3. CONFLITS ===== -->
+      <article id="gestion-conflits-assertivite" class="conference-card reveal">
         <div style="aspect-ratio:16/9;overflow:hidden;"><img src="/assets/img/blog/depasser_croyances_limitantes-main.webp" alt="Conférence gestion des conflits" loading="lazy" width="640" height="360" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
         <div class="p-6 sm:p-8">
           <p class="mb-3" style="color:var(--brun-gris);font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;">Conflits · Négociation</p>
           <h3 class="title-playfair mb-4" style="color:var(--text-dark);font-size:clamp(1.375rem,2vw,1.625rem);line-height:1.2;">Gestion des conflits et <span style="color:var(--rouge);font-style:italic;">assertivité</span></h3>
           <p class="mb-6" style="color:var(--brun-gris);font-size:.9375rem;line-height:1.7;">Désamorcer l'escalade émotionnelle, poser des limites claires et négocier sans perdre la relation — une approche qui allie ancrage corporel et communication consciente.</p>
-          <div class="flex items-center gap-2 pt-4" style="border-top:1px solid rgba(44,44,44,.1);color:var(--text-dark);font-size:.875rem;font-weight:500;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--rouge);" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            <span>60 à 90 min · Atelier interactif</span>
+          <div class="conf-foot">
+            <span class="conf-meta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--rouge);" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>60 à 90 min · Atelier interactif</span>
+            <button type="button" class="conf-toggle" aria-expanded="false" aria-controls="conf-panel">En savoir plus <span class="conf-chevron" aria-hidden="true">+</span></button>
+          </div>
+        </div>
+        <div class="conf-details" hidden>
+          <div class="cd-col">
+            <p class="cd-label">Le propos</p>
+            <p class="cd-text">Un conflit mal géré ne disparaît pas. Il s'installe. Cet atelier donne des clés pour reprendre la main quand le ton monte&nbsp;: comprendre ce qui se joue, rester ancré, et dire les choses sans casser le lien.</p>
+            <p class="cd-label">Ce que votre public repart avec</p>
+            <ul class="cd-list">
+              <li>Reconnaître les signaux d'escalade et les désamorcer tôt</li>
+              <li>Poser une limite claire sans agressivité ni culpabilité</li>
+              <li>Une méthode pour négocier en préservant la relation</li>
+            </ul>
+          </div>
+          <div class="cd-col">
+            <p class="cd-label">Le déroulé</p>
+            <ol class="cd-steps">
+              <li><b>Anatomie d'un conflit</b> — ce qui se passe dans le corps et dans la tête</li>
+              <li><b>L'ancrage</b> — rester stable quand l'autre s'emporte</li>
+              <li><b>Dire les choses</b> — les mots qui apaisent, ceux qui enveniment</li>
+              <li><b>Mises en situation</b> — s'entraîner sur des cas du terrain</li>
+            </ol>
+            <dl class="cd-facts">
+              <div><dt>Format</dt><dd>Atelier interactif</dd></div>
+              <div><dt>Durée</dt><dd>60 à 90 min</dd></div>
+              <div><dt>Pour</dt><dd>Managers, équipes en relation client</dd></div>
+            </dl>
+            <a href="#parlons-en" class="btn-primary cd-cta">Réserver cette conférence <span aria-hidden="true">→</span></a>
           </div>
         </div>
       </article>
-      <article class="conference-card reveal">
+
+      <!-- ===== 4. COMMUNICATION ASSERTIVE ===== -->
+      <article id="communication-assertive" class="conference-card reveal">
         <div style="aspect-ratio:16/9;overflow:hidden;"><img src="/assets/img/blog/empathie-hypersensible-main.webp" alt="Conférence communication assertive" loading="lazy" width="640" height="360" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
         <div class="p-6 sm:p-8">
           <p class="mb-3" style="color:var(--brun-gris);font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;">Assertivité · Affirmation de soi</p>
           <h3 class="title-playfair mb-4" style="color:var(--text-dark);font-size:clamp(1.375rem,2vw,1.625rem);line-height:1.2;">La communication assertive et <span style="color:var(--rouge);font-style:italic;">affirmation de soi</span></h3>
           <p class="mb-6" style="color:var(--brun-gris);font-size:.9375rem;line-height:1.7;">Dire non sans culpabiliser, trancher sans dominer, exprimer un désaccord sans dureté — des clés concrètes pour s'affirmer au quotidien tout en restant en lien.</p>
-          <div class="flex items-center gap-2 pt-4" style="border-top:1px solid rgba(44,44,44,.1);color:var(--text-dark);font-size:.875rem;font-weight:500;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--rouge);" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            <span>60 à 90 min · Atelier interactif</span>
+          <div class="conf-foot">
+            <span class="conf-meta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--rouge);" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>60 à 90 min · Atelier interactif</span>
+            <button type="button" class="conf-toggle" aria-expanded="false" aria-controls="conf-panel">En savoir plus <span class="conf-chevron" aria-hidden="true">+</span></button>
+          </div>
+        </div>
+        <div class="conf-details" hidden>
+          <div class="cd-col">
+            <p class="cd-label">Le propos</p>
+            <p class="cd-text">Trop gentil, on s'épuise. Trop dur, on abîme. L'assertivité, c'est le chemin entre les deux. Un atelier concret pour oser dire ce qu'on pense, sans s'excuser d'exister ni écraser l'autre.</p>
+            <p class="cd-label">Ce que votre public repart avec</p>
+            <ul class="cd-list">
+              <li>Savoir dire non, clairement et sans se justifier</li>
+              <li>Exprimer un désaccord en gardant la relation intacte</li>
+              <li>Des formulations prêtes à l'emploi pour les situations délicates</li>
+            </ul>
+          </div>
+          <div class="cd-col">
+            <p class="cd-label">Le déroulé</p>
+            <ol class="cd-steps">
+              <li><b>Passif, agressif, assertif</b> — se situer sans se juger</li>
+              <li><b>Ce qui nous empêche de dire</b> — peurs, croyances, habitudes</li>
+              <li><b>Les outils</b> — le non argumenté, la demande claire, le désaccord constructif</li>
+              <li><b>Entraînement</b> — jeux de rôle courts, à partir de vos situations</li>
+            </ol>
+            <dl class="cd-facts">
+              <div><dt>Format</dt><dd>Atelier interactif</dd></div>
+              <div><dt>Durée</dt><dd>60 à 90 min</dd></div>
+              <div><dt>Pour</dt><dd>Tous collaborateurs, managers</dd></div>
+            </dl>
+            <a href="#parlons-en" class="btn-primary cd-cta">Réserver cette conférence <span aria-hidden="true">→</span></a>
           </div>
         </div>
       </article>
-      <article class="conference-card reveal">
+
+      <!-- ===== 5. PRISE DE PAROLE ===== -->
+      <article id="prise-de-parole-transformation" class="conference-card reveal">
         <div style="aspect-ratio:16/9;overflow:hidden;"><img src="/assets/img/blog/prise-de-parole-et-emotions-main.webp" alt="Conférence prise de parole et transformation" loading="lazy" width="640" height="360" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
         <div class="p-6 sm:p-8">
           <p class="mb-3" style="color:var(--brun-gris);font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;">Prise de parole · Transformation</p>
           <h3 class="title-playfair mb-4" style="color:var(--text-dark);font-size:clamp(1.375rem,2vw,1.625rem);line-height:1.2;">Prise de parole et <span style="color:var(--rouge);font-style:italic;">transformation</span></h3>
           <p class="mb-6" style="color:var(--brun-gris);font-size:.9375rem;line-height:1.7;">Comment la parole peut impulser des transformations fortes au sein des équipes&nbsp;? Une conférence-expérience où la prise de parole devient incarnée, et l'émotion le cœur même du message.</p>
-          <div class="flex items-center gap-2 pt-4" style="border-top:1px solid rgba(44,44,44,.1);color:var(--text-dark);font-size:.875rem;font-weight:500;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--rouge);" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            <span>60 à 90 min · Présentiel ou distanciel</span>
+          <div class="conf-foot">
+            <span class="conf-meta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--rouge);" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>60 à 90 min · Présentiel ou distanciel</span>
+            <button type="button" class="conf-toggle" aria-expanded="false" aria-controls="conf-panel">En savoir plus <span class="conf-chevron" aria-hidden="true">+</span></button>
+          </div>
+        </div>
+        <div class="conf-details" hidden>
+          <div class="cd-col">
+            <p class="cd-label">Le propos</p>
+            <p class="cd-text">Un changement ne s'impose pas par un mail. Il se porte par une voix. Cette conférence-expérience montre comment une parole incarnée embarque une équipe, là où les slides échouent.</p>
+            <p class="cd-label">Ce que votre public repart avec</p>
+            <ul class="cd-list">
+              <li>Comprendre pourquoi certaines paroles mobilisent et d'autres non</li>
+              <li>Mettre de l'émotion juste au cœur d'un message de changement</li>
+              <li>Une première prise de parole testée devant le groupe</li>
+            </ul>
+          </div>
+          <div class="cd-col">
+            <p class="cd-label">Le déroulé</p>
+            <ol class="cd-steps">
+              <li><b>Ce que la parole déclenche</b> — expérience collective d'ouverture</li>
+              <li><b>Incarner son message</b> — corps, voix, conviction</li>
+              <li><b>Parler du changement</b> — rassurer sans édulcorer</li>
+              <li><b>Prendre la parole</b> — volontaires, retours, ancrage</li>
+            </ol>
+            <dl class="cd-facts">
+              <div><dt>Format</dt><dd>Conférence interactive</dd></div>
+              <div><dt>Durée</dt><dd>60 à 90 min</dd></div>
+              <div><dt>Pour</dt><dd>Dirigeants, managers, équipes en transformation</dd></div>
+            </dl>
+            <a href="#parlons-en" class="btn-primary cd-cta">Réserver cette conférence <span aria-hidden="true">→</span></a>
           </div>
         </div>
       </article>
+
+      <!-- Panneau de détail pleine largeur (rempli et positionné par le script en bas de page) -->
+      <div id="conf-panel" class="conf-panel" role="region" aria-label="Détails de la conférence" hidden>
+        <div class="conf-panel-inner">
+          <button type="button" class="conf-close" aria-label="Fermer les détails">×</button>
+          <p class="cd-kicker"></p>
+          <h3 class="cd-title title-playfair"></h3>
+          <div class="cd-body"></div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -473,6 +701,82 @@ const io = new IntersectionObserver((entries) => {
   });
 }, { threshold: .12, rootMargin: '0px 0px -80px 0px' });
 document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el => io.observe(el));
+// ===== Panneau « En savoir plus » pleine largeur =====
+(() => {
+  const grid  = document.getElementById('conf-grid');
+  const panel = document.getElementById('conf-panel');
+  if (!grid || !panel) return;
+  const cards  = [...grid.querySelectorAll('.conference-card')];
+  const kicker = panel.querySelector('.cd-kicker');
+  const title  = panel.querySelector('.cd-title');
+  const body   = panel.querySelector('.cd-body');
+  let active = null;
+
+  // Dernière carte de la rangée où se trouve « card » (le panneau s'insère juste après)
+  const rowEnd = (card) => {
+    const top = card.offsetTop;
+    return cards.filter(c => Math.abs(c.offsetTop - top) < 4).pop() || card;
+  };
+
+  const setExpanded = (card, val) => {
+    const btn = card.querySelector('.conf-toggle');
+    btn.setAttribute('aria-expanded', String(val));
+    btn.firstChild.textContent = val ? 'Refermer ' : 'En savoir plus ';
+    card.classList.toggle('is-active', val);
+  };
+
+  const close = (keepHash) => {
+    if (!active) return;
+    setExpanded(active, false);
+    const prev = active; active = null;
+    panel.classList.remove('open');
+    setTimeout(() => { if (!active) panel.hidden = true; }, 450);
+    if (!keepHash) history.replaceState(null, '', location.pathname + location.search);
+    prev.querySelector('.conf-toggle').focus({ preventScroll: true });
+  };
+
+  const open = (card, scroll = true) => {
+    if (active) setExpanded(active, false);
+    active = card;
+    kicker.textContent = card.querySelector('.p-6 > p').textContent;
+    title.innerHTML    = card.querySelector('h3').innerHTML;
+    body.innerHTML     = card.querySelector('.conf-details').innerHTML;
+    panel.hidden = false;
+    panel.classList.remove('open');
+    rowEnd(card).after(panel);
+    requestAnimationFrame(() => requestAnimationFrame(() => panel.classList.add('open')));
+    setExpanded(card, true);
+    history.replaceState(null, '', '#' + card.id);
+    if (scroll) setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 120);
+  };
+
+  cards.forEach(card => {
+    card.querySelector('.conf-toggle').addEventListener('click', () => {
+      active === card ? close() : open(card);
+    });
+  });
+  panel.querySelector('.conf-close').addEventListener('click', () => close());
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+
+  // Le bouton « Réserver » du panneau mène au contact sans effacer l'ancre de la conférence
+  panel.addEventListener('click', e => { if (e.target.closest('.cd-cta')) close(true); });
+
+  // Si la largeur change, on replace le panneau sous la bonne rangée
+  let rt;
+  window.addEventListener('resize', () => {
+    clearTimeout(rt);
+    rt = setTimeout(() => { if (active) rowEnd(active).after(panel); }, 150);
+  });
+
+  // Lien direct : /conferences-inspirantes#storytelling-incarne
+  const fromHash = cards.find(c => '#' + c.id === location.hash);
+  if (fromHash) {
+    fromHash.classList.add('in');
+    open(fromHash, false);
+    setTimeout(() => fromHash.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300);
+  }
+})();
+
 </script>
 <script src="/assets/js/includes.js"></script>
 </body>
