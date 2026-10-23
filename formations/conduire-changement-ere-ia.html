@@ -531,19 +531,10 @@
             display: flex;
             align-items: center;
             background: var(--black);
+            border-left: 6px solid var(--accent);
             border-radius: 8px;
             overflow: hidden;
             margin-bottom: var(--space-md);
-        }
-
-        .phase-number {
-            background: var(--accent);
-            color: var(--black);
-            font-size: 1.1rem;
-            font-weight: 700;
-            padding: 14px 20px;
-            min-width: 60px;
-            text-align: center;
         }
 
         .phase-title {
@@ -584,57 +575,16 @@
             margin-top: 2px;
         }
 
-        /* Module dans le programme */
-        .module-block {
-            background: var(--light-beige);
-            border-radius: 8px;
-            padding: var(--space-md);
-            margin-bottom: var(--space-md);
-        }
-
-        .module-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: var(--space-sm);
-            padding-bottom: var(--space-sm);
-            border-bottom: 1px solid var(--warm-beige);
-        }
-
-        .module-number {
-            background: var(--warm-gray);
-            color: var(--white);
-            font-size: 0.75rem;
-            font-weight: 600;
-            padding: 4px 10px;
-            border-radius: 4px;
-        }
-
-        .module-title {
-            font-weight: 600;
-            font-size: 0.95rem;
+        /* Sous-titre dans le programme */
+        .programme-soustitre {
+            font-weight: 700;
+            font-size: 1.05rem;
             color: var(--black);
+            margin: var(--space-md) 0 var(--space-xs);
         }
 
-        .module-items {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .module-items li {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            padding: 6px 0;
-            font-size: 0.9rem;
-            color: var(--warm-gray);
-        }
-
-        .module-items .chevron {
-            color: var(--accent);
-            flex-shrink: 0;
-            font-size: 0.8rem;
-            margin-top: 3px;
+        .phase-content > .programme-soustitre:first-child {
+            margin-top: 0;
         }
 
         .mise-en-situation {
@@ -1366,7 +1316,6 @@
                     <p class="section-meta">2 jours (14 heures) · programme mis à jour le 14/10/2026</p>
                 <div class="programme-phase">
                     <div class="phase-header">
-                        <span class="phase-number">01</span>
                         <span class="phase-title">Avant la formation</span>
                     </div>
                     <div class="phase-content">
@@ -1378,30 +1327,15 @@
                 </div>
                 <div class="programme-phase">
                     <div class="phase-header">
-                        <span class="phase-number">02</span>
                         <span class="phase-title">Jour 1 — Comprendre l&#x27;IA et ses usages</span>
                     </div>
                     <div class="phase-content">
-                    </div>
-                </div>
-                <div class="programme-phase">
-                    <div class="phase-header">
-                        <span class="phase-number">03</span>
-                        <span class="phase-title">Ouverture</span>
-                    </div>
-                    <div class="phase-content">
+                        <p class="programme-soustitre">Ouverture</p>
                         <ul class="phase-items">
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Tour de table : niveau IA de chacun et rapport à l&#x27;IA, des plus curieux aux plus réticents</span></div></li>
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Attentes et besoins individuels</span></div></li>
                         </ul>
-                    </div>
-                </div>
-                <div class="programme-phase">
-                    <div class="phase-header">
-                        <span class="phase-number">04</span>
-                        <span class="phase-title">Partie 1 — Définition et genèse de l&#x27;IA</span>
-                    </div>
-                    <div class="phase-content">
+                        <p class="programme-soustitre">Partie 1 — Définition et genèse de l&#x27;IA</p>
                         <ul class="phase-items">
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Définition de l’IA: de quoi parle-t-on?</span></div></li>
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Comprendre les évolutions de l’IA et le développement des modèles de language</span></div></li>
@@ -1409,39 +1343,18 @@
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Une seule IA ou des IAs différentes? Les différents types d’IA et leurs usages</span></div></li>
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Panorama des outils et comparaison des niveaux de confidentialité</span></div></li>
                         </ul>
-                    </div>
-                </div>
-                <div class="programme-phase">
-                    <div class="phase-header">
-                        <span class="phase-number">05</span>
-                        <span class="phase-title">Partie 2 — Atelier de prompting</span>
-                    </div>
-                    <div class="phase-content">
+                        <p class="programme-soustitre">Partie 2 — Atelier de prompting</p>
                         <ul class="phase-items">
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Comment parler à l’IA de manière précise avec la méthode CRAFT (Contexte, Rôle, Action, Format, Ton)</span></div></li>
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Ateliers progressifs : du prompt brut au prompt contextualisé (contexte, public, ton, contraintes)</span></div></li>
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Etude de cas pratiques par métiers en fonction des besoins des participants</span></div></li>
                         </ul>
-                    </div>
-                </div>
-                <div class="programme-phase">
-                    <div class="phase-header">
-                        <span class="phase-number">06</span>
-                        <span class="phase-title">Partie 3 : Cas d&#x27;usage de l&#x27;IA pour vos métiers</span>
-                    </div>
-                    <div class="phase-content">
+                        <p class="programme-soustitre">Partie 3 : Cas d&#x27;usage de l&#x27;IA pour vos métiers</p>
                         <ul class="phase-items">
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Cartographie des usages possibles : impact × facilité (maintenant / phase 2 / bonus)</span></div></li>
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Cas types démontrés : compte rendu de réunion, réponse à appel à projet, recrutement et RH, veille, procédures</span></div></li>
                         </ul>
-                    </div>
-                </div>
-                <div class="programme-phase">
-                    <div class="phase-header">
-                        <span class="phase-number">07</span>
-                        <span class="phase-title">Partie 4 : Automatisation et cas prioritaire</span>
-                    </div>
-                    <div class="phase-content">
+                        <p class="programme-soustitre">Partie 4 : Automatisation et cas prioritaire</p>
                         <ul class="phase-items">
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Mettre à plat ses processus : lesquels prennent du temps, lesquels sont complexes</span></div></li>
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>La logique d&#x27;un flux en trois blocs (déclencheur, condition, action) ; panorama des outils</span></div></li>
@@ -1451,18 +1364,10 @@
                 </div>
                 <div class="programme-phase">
                     <div class="phase-header">
-                        <span class="phase-number">08</span>
                         <span class="phase-title">Jour 2 — Poser le cadre et conduire le changement</span>
                     </div>
                     <div class="phase-content">
-                    </div>
-                </div>
-                <div class="programme-phase">
-                    <div class="phase-header">
-                        <span class="phase-number">09</span>
-                        <span class="phase-title">Partie 1 : Limites de l&#x27;IA et régulation</span>
-                    </div>
-                    <div class="phase-content">
+                        <p class="programme-soustitre">Partie 1 : Limites de l&#x27;IA et régulation</p>
                         <ul class="phase-items">
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Les limites structurelles de l’IA : hallucinations, biais, valeurs probables, sens de l’esthétique…</span></div></li>
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Consommation de ressources et enjeux écologiques</span></div></li>
@@ -1472,28 +1377,14 @@
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Pourquoi une charte? ( respect du cadre légal, confiance des équipes, clarté des usages)</span></div></li>
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Atelier charte en 4 groupes : ambition et périmètre · usages et données · responsabilité et gouvernance · formation, suivi et vie de la charte ; restitution et arbitrages en plénière</span></div></li>
                         </ul>
-                    </div>
-                </div>
-                <div class="programme-phase">
-                    <div class="phase-header">
-                        <span class="phase-number">10</span>
-                        <span class="phase-title">Partie 2 : Management du changement et IA</span>
-                    </div>
-                    <div class="phase-content">
+                        <p class="programme-soustitre">Partie 2 : Management du changement et IA</p>
                         <ul class="phase-items">
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Les peurs liées au changement et les cinq peurs spécifiques à l&#x27;IA, avec les réponses à apporter</span></div></li>
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>La carte des acteurs : avocats, ambassadeurs, partagés, passifs, non-concernés, détracteurs, opposants</span></div></li>
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Comment accompagner son équipe dans une démarche de gestion du changement IA? Comment adresser les différentes peurs?</span></div></li>
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Socle d’éléments de langage et avenir du travail</span></div></li>
                         </ul>
-                    </div>
-                </div>
-                <div class="programme-phase">
-                    <div class="phase-header">
-                        <span class="phase-number">11</span>
-                        <span class="phase-title">Partie 3 : Feuille de route à 12 mois</span>
-                    </div>
-                    <div class="phase-content">
+                        <p class="programme-soustitre">Partie 3 : Feuille de route à 12 mois</p>
                         <ul class="phase-items">
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Questions clés à se poser lors d’un changement IA: Quelles tâches confier à l’IA? Avec quel degré d’autonomie? Quelle vérification?</span></div></li>
                             <li><div class="phase-item-text"><span class="chevron">›</span><span>Feuille de route : cas prioritaires, gouvernance (référent, commission IA), plan de formation des équipes, indicateurs du changement</span></div></li>
@@ -1502,7 +1393,6 @@
                 </div>
                 <div class="programme-phase">
                     <div class="phase-header">
-                        <span class="phase-number">12</span>
                         <span class="phase-title">Après la formation</span>
                     </div>
                     <div class="phase-content">
@@ -1941,39 +1831,17 @@
                 <!-- Formations concernées -->
                 <div class="form-section-title">Formation(s) concernée(s) <span class="required">*</span></div>
 
-                <div class="form-checkboxes">
+                <!-- Liste complétée au chargement depuis /formations/catalogue.json
+                     (formations publiées dans Notion) ; la formation de la page
+                     reste proposée si ce fichier ne répond pas. -->
+                <div class="form-checkboxes" id="devisFormations">
                     <label class="checkbox-label">
-                        <input type="checkbox" name="formations" value="Niveau 1 : Gestion du stress et prise de parole en public">
+                        <input type="checkbox" name="formations" value="Conduire le changement à l&#x27;ère de l&#x27;IA" data-code="CHIA-01" checked>
                         <span class="checkbox-custom"></span>
-                        <span>Niveau 1 : Gestion du stress et prise de parole en public</span>
+                        <span>Conduire le changement à l&#x27;ère de l&#x27;IA</span>
                     </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="formations" value="Niveau 2 : Approfondissement prise de parole & storytelling">
-                        <span class="checkbox-custom"></span>
-                        <span>Niveau 2 : Approfondissement prise de parole &amp; storytelling</span>
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="formations" value="Formation en prise de parole et média training">
-                        <span class="checkbox-custom"></span>
-                        <span>Formation en prise de parole et média training</span>
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="formations" value="Leadership authentique & Management d'équipe">
-                        <span class="checkbox-custom"></span>
-                        <span>Leadership authentique &amp; Management d'équipe</span>
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="formations" value="Gestion des Conflits & Conversations difficiles">
-                        <span class="checkbox-custom"></span>
-                        <span>Gestion des Conflits &amp; Conversations difficiles</span>
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="formations" value="Réussir à s'affirmer – Développer un charisme sensible et authentique">
-                        <span class="checkbox-custom"></span>
-                        <span>Réussir à s'affirmer – Développer un charisme sensible et authentique</span>
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="formations" value="Autre – Prestation sur mesure">
+                    <label class="checkbox-label" data-autre>
+                        <input type="checkbox" name="formations" value="Autre – Prestation sur mesure" data-code="">
                         <span class="checkbox-custom"></span>
                         <span>Autre – Prestation sur mesure</span>
                     </label>
@@ -1989,7 +1857,14 @@
                     <textarea id="devis-message" name="message" rows="4" placeholder="Contexte, objectifs, contraintes de planning…"></textarea>
                 </div>
 
-                <button type="submit" class="btn-primary form-submit">Être recontacté</button>
+                <!-- Champ piège anti-robots : invisible, doit rester vide -->
+                <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;">
+                    <label for="devis-site">Ne pas remplir</label>
+                    <input type="text" id="devis-site" name="site_web" tabindex="-1" autocomplete="off">
+                </div>
+
+                <p class="form-erreur" id="devisErreur" role="alert" style="display:none;"></p>
+                <button type="submit" class="btn-primary form-submit" id="devisEnvoyer">Être recontacté</button>
             </form>
 
             <!-- Confirmation -->
@@ -2176,6 +2051,17 @@
             padding: 16px;
         }
 
+        .form-submit:disabled {
+            opacity: 0.6;
+            cursor: wait;
+        }
+
+        .form-erreur {
+            font-size: 0.85rem;
+            color: #A83932;
+            margin: 8px 0 0;
+        }
+
         /* Confirmation */
         .modal-confirmation {
             text-align: center;
@@ -2354,6 +2240,7 @@
             // Reset form si confirmation affichée
             document.getElementById('formDevis').style.display = '';
             document.getElementById('modalConfirmation').style.display = 'none';
+            document.getElementById('devisErreur').style.display = 'none';
             document.getElementById('formDevis').reset();
         }
 
@@ -2367,61 +2254,123 @@
             if (e.key === 'Escape') closeModalDevis();
         });
 
-        // Soumission du formulaire → mailto récapitulatif
+        // Liste des formations : formations publiées dans Notion, régénérée
+        // à chaque publication (formations/catalogue.json). La formation de
+        // la page est cochée d'office.
+        (function chargerFormationsDevis() {
+            var conteneur = document.getElementById('devisFormations');
+            var autre = conteneur.querySelector('[data-autre]');
+            var courante = conteneur.querySelector('input[data-code]:not([data-code=""])');
+            var codeCourant = courante ? courante.dataset.code : '';
+            fetch('/formations/catalogue.json', { cache: 'no-cache' })
+                .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+                .then(function (liste) {
+                    if (!Array.isArray(liste) || !liste.length) return;
+                    conteneur.querySelectorAll('.checkbox-label:not([data-autre])').forEach(function (l) { l.remove(); });
+                    liste.forEach(function (f) {
+                        var label = document.createElement('label');
+                        label.className = 'checkbox-label';
+                        var input = document.createElement('input');
+                        input.type = 'checkbox';
+                        input.name = 'formations';
+                        input.value = f.nom;
+                        input.dataset.code = f.code || '';
+                        input.checked = input.defaultChecked = (f.code === codeCourant);
+                        var coche = document.createElement('span');
+                        coche.className = 'checkbox-custom';
+                        var texte = document.createElement('span');
+                        texte.textContent = f.nom;
+                        label.append(input, coche, texte);
+                        conteneur.insertBefore(label, autre);
+                    });
+                })
+                .catch(function () { /* on garde la formation de la page et « Autre » */ });
+        })();
+
+        function recapitulatifDevis(d) {
+            return 'DEMANDE DE DEVIS – FORMATION INTRA-ENTREPRISE\n' +
+                '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n' +
+                'PERSONNE EN CHARGE\n' +
+                'Nom : ' + d.nom + '\n' +
+                'Prénom : ' + d.prenom + '\n' +
+                'Téléphone : ' + d.telephone + '\n' +
+                'Email : ' + d.email + '\n' +
+                'Entreprise : ' + d.entreprise + '\n' +
+                'Type : ' + d.type_entreprise + '\n' +
+                'Fonction : ' + d.fonction + '\n\n' +
+                '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n' +
+                'FORMATION(S) CONCERNÉE(S)\n' +
+                d.formations.map(function (f) { return '• ' + f.nom; }).join('\n') + '\n\n' +
+                'Nombre de personnes : ' + d.nb_personnes + '\n\n' +
+                '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n' +
+                'COMPLÉMENT\n' +
+                (d.message ? d.message : '(aucun complément)') + '\n\n' +
+                '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n' +
+                'Envoyé depuis le site lauraballo.com';
+        }
+
+        function afficherConfirmationDevis() {
+            document.getElementById('formDevis').style.display = 'none';
+            document.getElementById('modalConfirmation').style.display = 'block';
+        }
+
+        // Soumission : enregistrement dans Notion (opportunité, entreprise,
+        // contact). Si l'enregistrement échoue, repli sur un e-mail pré-rempli.
         document.getElementById('formDevis').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // Validation checkboxes
             var checked = document.querySelectorAll('input[name="formations"]:checked');
             if (checked.length === 0) {
                 alert('Veuillez sélectionner au moins une formation.');
                 return;
             }
 
-            // Collecter les données
-            var nom = document.getElementById('devis-nom').value;
-            var prenom = document.getElementById('devis-prenom').value;
-            var tel = document.getElementById('devis-tel').value;
-            var email = document.getElementById('devis-email').value;
-            var entreprise = document.getElementById('devis-entreprise').value;
-            var typeEntreprise = document.getElementById('devis-type').value;
-            var fonction = document.getElementById('devis-fonction').value;
-            var nbPersonnes = document.getElementById('devis-nb').value;
-            var message = document.getElementById('devis-message').value;
+            var donnees = {
+                nom: document.getElementById('devis-nom').value.trim(),
+                prenom: document.getElementById('devis-prenom').value.trim(),
+                telephone: document.getElementById('devis-tel').value.trim(),
+                email: document.getElementById('devis-email').value.trim(),
+                entreprise: document.getElementById('devis-entreprise').value.trim(),
+                type_entreprise: document.getElementById('devis-type').value,
+                fonction: document.getElementById('devis-fonction').value,
+                nb_personnes: document.getElementById('devis-nb').value,
+                message: document.getElementById('devis-message').value.trim(),
+                formations: Array.prototype.map.call(checked, function (cb) {
+                    return { nom: cb.value, code: cb.dataset.code || '' };
+                }),
+                site_web: document.getElementById('devis-site').value,
+                page: window.location.pathname
+            };
 
-            var formations = [];
-            checked.forEach(function(cb) { formations.push('• ' + cb.value); });
+            var bouton = document.getElementById('devisEnvoyer');
+            var erreur = document.getElementById('devisErreur');
+            if (bouton.disabled) return;
+            bouton.disabled = true;
+            bouton.textContent = 'Envoi en cours…';
+            erreur.style.display = 'none';
 
-            // Construire le corps du mail
-            var subject = encodeURIComponent('Demande de devis – Formation intra-entreprise');
-            var body = encodeURIComponent(
-                'DEMANDE DE DEVIS – FORMATION INTRA-ENTREPRISE\n' +
-                '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n' +
-                'PERSONNE EN CHARGE\n' +
-                'Nom : ' + nom + '\n' +
-                'Prénom : ' + prenom + '\n' +
-                'Téléphone : ' + tel + '\n' +
-                'Email : ' + email + '\n' +
-                'Entreprise : ' + entreprise + '\n' +
-                'Type : ' + typeEntreprise + '\n' +
-                'Fonction : ' + fonction + '\n\n' +
-                '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n' +
-                'FORMATION(S) CONCERNÉE(S)\n' +
-                formations.join('\n') + '\n\n' +
-                'Nombre de personnes : ' + nbPersonnes + '\n\n' +
-                '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n' +
-                'COMPLÉMENT\n' +
-                (message ? message : '(aucun complément)') + '\n\n' +
-                '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n' +
-                'Envoyé depuis le site lauraballo.com'
-            );
-
-            // Ouvrir le mailto
-            window.location.href = 'mailto:contact@lauraballo.com?subject=' + subject + '&body=' + body;
-
-            // Afficher la confirmation
-            document.getElementById('formDevis').style.display = 'none';
-            document.getElementById('modalConfirmation').style.display = 'block';
+            fetch('/api/devis', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(donnees)
+            })
+                .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; }); })
+                .then(function (res) {
+                    if (res.ok && res.j.success) { afficherConfirmationDevis(); return; }
+                    throw new Error(res.j.error || 'Erreur');
+                })
+                .catch(function () {
+                    // Repli : on ne perd pas la demande, elle part par e-mail.
+                    var subject = encodeURIComponent('Demande de devis – Formation intra-entreprise');
+                    var body = encodeURIComponent(recapitulatifDevis(donnees));
+                    erreur.textContent = "L'envoi automatique n'a pas abouti : votre messagerie s'ouvre avec la demande pré-remplie, il suffit de l'envoyer.";
+                    erreur.style.display = 'block';
+                    window.location.href = 'mailto:contact@lauraballo.com?subject=' + subject + '&body=' + body;
+                })
+                .finally(function () {
+                    bouton.disabled = false;
+                    bouton.textContent = 'Être recontacté';
+                });
         });
     </script>
 

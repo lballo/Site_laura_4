@@ -1,0 +1,47 @@
+[
+ {
+  "code": "CHIA-01",
+  "nom": "Conduire le changement à l'ère de l'IA",
+  "slug": "conduire-changement-ere-ia"
+ },
+ {
+  "code": "CONF-01",
+  "nom": "Savoir gérer l’agressivité et les conflits en situation professionnelle",
+  "slug": "gestion-conflits-situations-complexes"
+ },
+ {
+  "code": "IA-01",
+  "nom": "Les bases de l'intelligence artificielle",
+  "slug": "bases-intelligence-artificielle"
+ },
+ {
+  "code": "IA-02",
+  "nom": "Développer l'IA dans sa pratique professionnelle",
+  "slug": "developper-ia-pratique-professionnelle"
+ },
+ {
+  "code": "IE-01",
+  "nom": "Développer son affirmation de soi avec l’intelligence émotionnelle & relationnelle",
+  "slug": "intelligence-emotionnelle"
+ },
+ {
+  "code": "MGIA-01",
+  "nom": "Management augmenté : équilibrer intelligence émotionnelle et intelligence artificielle",
+  "slug": "management-augmente-ie-ia"
+ },
+ {
+  "code": "PDP-01",
+  "nom": "Prise de parole & Média training",
+  "slug": "prise-parole-media-training"
+ },
+ {
+  "code": "PE-01",
+  "nom": "Présence exécutive — Programme pour dirigeants à fort potentiel",
+  "slug": "presence-executive-dirigeants"
+ },
+ {
+  "code": "PERF-01",
+  "nom": "Comment performer sans s'oublier? Concilier ambition et équilibre de vie",
+  "slug": "performer-autrement-sans-s-oublier"
+ }
+]
