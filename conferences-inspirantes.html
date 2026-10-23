@@ -198,10 +198,9 @@
       box-shadow: 0 30px 60px -20px rgba(44,44,44,.25);
     }
 
-    /* ========== PANNEAU « EN SAVOIR PLUS » ========== */
+    /* ========== CARTES CONFÉRENCES ========== */
     .conference-card { display:flex; flex-direction:column; }
     .conference-card > .p-6 { display:flex; flex-direction:column; flex:1; }
-    .conference-card.is-active { transform:translateY(-6px); box-shadow:0 0 0 2px var(--rouge), 0 30px 60px -20px rgba(168,57,50,.35); }
     .conf-foot {
       margin-top:auto; padding-top:1rem; border-top:1px solid rgba(44,44,44,.1);
       display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;
@@ -211,60 +210,88 @@
       display:inline-flex; align-items:center; gap:.5rem; cursor:pointer;
       color:var(--rouge); font-weight:600; font-size:.875rem; background:none; border:0; padding:.5rem 0; min-height:44px;
     }
+    .conf-toggle svg { transition:transform .25s ease; }
     .conf-toggle:hover { color:var(--rouge-hover); }
-    .conf-toggle:focus-visible, .conf-close:focus-visible { outline:2px solid var(--rouge); outline-offset:3px; border-radius:4px; }
-    .conf-chevron {
-      display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px; border-radius:50%;
-      border:1.5px solid currentColor; font-size:1rem; line-height:1; transition:transform .3s ease;
-    }
-    .conf-toggle[aria-expanded="true"] .conf-chevron { transform:rotate(45deg); }
+    .conf-toggle:hover svg { transform:translateX(3px); }
+    .conf-toggle:focus-visible, .cm button:focus-visible, .cm a:focus-visible { outline:2px solid var(--rouge); outline-offset:3px; border-radius:4px; }
 
-    .conf-panel { grid-column:1 / -1; display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease, opacity .35s ease; opacity:0; }
-    .conf-panel.open { grid-template-rows:1fr; opacity:1; }
-    .conf-panel[hidden] { display:none; }
-    .conf-panel > .conf-panel-inner { overflow:hidden; min-height:0; }
-    .conf-panel-inner {
-      position:relative; background:var(--white); border-radius:12px; border-top:3px solid var(--rouge);
-      box-shadow:0 30px 60px -25px rgba(44,44,44,.25);
+    /* ========== FENÊTRE « EN SAVOIR PLUS » ========== */
+    .cm { position:fixed; inset:0; z-index:9000; display:flex; align-items:center; justify-content:center; padding:24px; }
+    .cm[hidden] { display:none; }
+    .cm-backdrop { position:absolute; inset:0; margin:0; padding:0; border:0; background:rgba(26,26,26,.62); cursor:pointer; opacity:0; transition:opacity .3s ease; }
+    .cm-dialog {
+      position:relative; width:min(1040px,100%); height:min(700px,100%);
+      display:grid; grid-template-columns:420px minmax(0,1fr);
+      background:var(--white); border-radius:14px; overflow:hidden; box-shadow:0 40px 90px -20px rgba(0,0,0,.5);
+      opacity:0; transform:translateY(16px) scale(.985); transition:opacity .3s ease, transform .3s ease;
     }
-    .conf-panel.open .conf-panel-inner { padding:2.5rem 2.5rem 2.75rem; }
-    .conf-close {
-      position:absolute; top:1rem; right:1rem; width:40px; height:40px; border-radius:50%; cursor:pointer;
-      border:1px solid rgba(44,44,44,.15); background:var(--white); color:var(--text-dark); font-size:1.4rem; line-height:1;
-      transition:all .2s ease;
+    .cm.is-open .cm-backdrop { opacity:1; }
+    .cm.is-open .cm-dialog { opacity:1; transform:none; }
+    .cm-media { position:relative; min-height:0; background:var(--black); }
+    .cm-media img { width:100%; height:100%; object-fit:cover; display:block; }
+    .cm-caption { position:absolute; left:0; right:0; bottom:0; padding:32px 34px 36px; background:rgba(26,26,26,.78); }
+    .cm-num { margin:0 0 14px; font-family:'Playfair Display', Georgia, serif; font-style:italic; font-size:20px; line-height:1; color:var(--ocre); }
+    .cm-num span { font-size:14px; color:var(--taupe); }
+    .cm-kicker { margin:0 0 10px; color:var(--warm-beige); font-size:11.5px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; }
+    .cm-title { margin:0; font-family:'Playfair Display', Georgia, serif; font-weight:400; font-size:29px; line-height:1.2; color:#fff; }
+    .cm-title span { color:var(--ocre); font-style:italic; }
+    .cm-close {
+      position:absolute; top:22px; right:22px; z-index:2; width:44px; height:44px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center; cursor:pointer;
+      border:1px solid rgba(44,44,44,.15); background:var(--white); color:var(--text-dark); transition:all .2s ease;
     }
-    .conf-close:hover { background:var(--text-dark); color:#fff; }
-    .cd-kicker { color:var(--rouge); font-size:.75rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase; margin-bottom:.5rem; padding-right:3rem; }
-    .cd-title { color:var(--text-dark); font-size:clamp(1.5rem,2.6vw,2rem); line-height:1.2; margin-bottom:2rem; padding-right:3rem; }
-    .cd-title span { color:var(--rouge); font-style:italic; }
-    .cd-body { display:grid; grid-template-columns:1fr 1fr; gap:3rem; }
-    .cd-label { color:var(--brun-gris); font-size:.75rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; margin-bottom:.9rem; display:flex; align-items:center; gap:.6rem; }
-    .cd-label::before { content:''; width:24px; height:1px; background:var(--rouge); }
-    .cd-label:not(:first-child) { margin-top:2rem; }
-    .cd-text { color:var(--brun-gris); font-size:1rem; line-height:1.8; }
-    .cd-list, .cd-steps { list-style:none; margin:0; padding:0; }
-    .cd-facts dd { margin:0; }
-    .cd-list { display:grid; gap:.75rem; }
-    .cd-list li { position:relative; padding-left:1.6rem; color:var(--brun-gris); line-height:1.65; }
-    .cd-list li::before { content:'→'; position:absolute; left:0; color:var(--rouge); font-weight:700; }
-    .cd-steps { counter-reset:step; display:grid; gap:1rem; }
-    .cd-steps li { counter-increment:step; position:relative; padding-left:2.75rem; color:var(--brun-gris); line-height:1.6; }
-    .cd-steps li::before {
-      content:counter(step, decimal-leading-zero); position:absolute; left:0; top:-.15rem;
-      font-family:'Playfair Display', Georgia, serif; font-style:italic; color:var(--rouge); font-size:1.35rem;
+    .cm-close:hover { background:var(--text-dark); color:#fff; }
+    .cm-body { display:flex; flex-direction:column; min-height:0; padding:36px 44px 28px; }
+    .cm-tabs { display:flex; gap:32px; border-bottom:1px solid rgba(44,44,44,.12); padding-right:56px; }
+    .cm-tab {
+      min-height:48px; margin:0 0 -1px; padding:0 0 2px; border:0; border-bottom:2px solid transparent; background:none; cursor:pointer;
+      font:inherit; font-size:15px; font-weight:600; color:var(--brun-gris); white-space:nowrap; transition:color .2s ease;
     }
-    .cd-steps b { color:var(--text-dark); font-weight:600; }
-    .cd-facts { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin:2rem 0; padding:1.25rem; background:var(--light-beige); border-radius:10px; }
-    .cd-facts dt { color:var(--taupe); font-size:.68rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; margin-bottom:.3rem; }
-    .cd-facts dd { color:var(--text-dark); font-size:.9rem; font-weight:600; line-height:1.4; }
-    .cd-cta { padding:.95rem 1.75rem; border-radius:6px; gap:.5rem; font-weight:600; font-size:.95rem; min-height:48px; }
-    @media (max-width:900px) {
-      .cd-body { grid-template-columns:1fr; gap:0; }
-      .cd-body > .cd-col + .cd-col { margin-top:2rem; }
-      .cd-facts { grid-template-columns:1fr; }
-      .conf-panel.open .conf-panel-inner { padding:2rem 1.5rem 2.25rem; }
+    .cm-tab:hover { color:var(--text-dark); }
+    .cm-tab[aria-selected="true"] { color:var(--text-dark); border-bottom-color:var(--rouge); }
+    .cm-panels { flex:1; min-height:0; overflow-y:auto; overscroll-behavior:contain; padding-top:30px; }
+    .cm-propos { margin:0 0 30px; font-size:17px; line-height:1.75; color:var(--text-dark); }
+    .cm-label { margin:0 0 14px; color:var(--brun-gris); font-size:12px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; }
+    .cm-gains { list-style:none; margin:0; padding:0; display:grid; gap:12px; }
+    .cm-gains li { display:flex; gap:12px; align-items:flex-start; font-size:15.5px; line-height:1.6; color:var(--text-dark); }
+    .cm-gains svg { flex-shrink:0; margin-top:3px; }
+    .cm-steps { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:28px 32px; }
+    .cm-steps li { display:flex; flex-direction:column; gap:6px; padding-top:14px; border-top:1px solid var(--creme-chaude); }
+    .cm-step-n { font-family:'Playfair Display', Georgia, serif; font-style:italic; font-size:30px; line-height:1; color:var(--rouge); }
+    .cm-step-t { font-family:'Playfair Display', Georgia, serif; font-size:18px; line-height:1.3; color:var(--text-dark); }
+    .cm-step-d { font-size:14.5px; line-height:1.6; color:var(--brun-gris); }
+    .cm-facts { margin:0; }
+    .cm-facts div { display:grid; grid-template-columns:140px minmax(0,1fr); gap:16px; padding:16px 0; border-bottom:1px solid rgba(44,44,44,.1); }
+    .cm-facts dt { padding-top:3px; color:var(--brun-gris); font-size:12px; font-weight:700; letter-spacing:.15em; text-transform:uppercase; }
+    .cm-facts dd { margin:0; font-size:16px; font-weight:500; color:var(--text-dark); }
+    .cm-note { margin:22px 0 0; font-family:'Playfair Display', Georgia, serif; font-style:italic; font-size:16px; line-height:1.6; color:var(--brun-gris); }
+    .cm-foot { display:flex; align-items:center; justify-content:space-between; gap:16px; padding-top:20px; border-top:1px solid rgba(44,44,44,.1); }
+    .cm-nav { display:flex; gap:20px; }
+    .cm-nav button {
+      display:inline-flex; align-items:center; gap:6px; min-height:44px; padding:0; border:0; background:none; cursor:pointer;
+      font:inherit; font-size:14px; font-weight:600; color:var(--brun-gris); transition:color .2s ease;
     }
-    @media (prefers-reduced-motion:reduce) { .conf-panel { transition:none; } }
+    .cm-nav button:hover { color:var(--rouge); }
+    .cm-cta { gap:10px; min-height:50px; padding:0 26px; border-radius:6px; font-size:15px; font-weight:600; }
+    @media (max-width:767px) {
+      .cm { padding:0; align-items:stretch; }
+      .cm-dialog { width:100%; height:100%; border-radius:0; grid-template-columns:1fr; grid-template-rows:260px minmax(0,1fr); }
+      .cm-caption { padding:18px 20px 20px; }
+      .cm-num { margin-bottom:8px; font-size:16px; }
+      .cm-kicker { margin-bottom:6px; font-size:10.5px; }
+      .cm-title { font-size:22px; }
+      .cm-close { top:14px; right:14px; border-color:transparent; box-shadow:0 6px 18px rgba(0,0,0,.2); }
+      .cm-body { padding:6px 20px 16px; }
+      .cm-tabs { gap:22px; padding-right:0; overflow-x:auto; }
+      .cm-panels { padding-top:22px; }
+      .cm-propos { font-size:16px; }
+      .cm-steps { grid-template-columns:1fr; gap:18px; }
+      .cm-facts div { grid-template-columns:105px minmax(0,1fr); gap:12px; }
+      .cm-foot { flex-wrap:wrap; padding-top:14px; gap:6px; }
+      .cm-cta { order:-1; width:100%; justify-content:center; }
+      .cm-nav { width:100%; justify-content:space-between; }
+    }
+    @media (prefers-reduced-motion:reduce) { .cm-backdrop, .cm-dialog, .conf-toggle svg { transition:none; } }
 
     /* ========== MOBILE ========== */
     @media (max-width:768px) { .stat-pill { padding:1rem; } }
@@ -429,9 +456,8 @@
 </section>
 
 <!-- AUTRES CONFÉRENCES -->
-<!-- Chaque carte contient ses détails dans <div class="conf-details" hidden>.
-     Au clic sur « En savoir plus », ce contenu est copié dans le panneau pleine largeur (#conf-panel),
-     inséré sous la rangée de la carte. Le contenu reste dans le HTML : Google le lit.
+<!-- Chaque carte contient ses détails dans <div class="conf-details" hidden> (lu par Google).
+     Au clic sur « En savoir plus », ce contenu est affiché dans la fenêtre #conf-modal (en bas de page).
      Lien direct vers une conférence : /conferences-inspirantes#id-de-la-carte -->
 <section class="py-20 sm:py-24 lg:py-28" style="background:var(--light-beige);">
   <div class="max-w-7xl mx-auto px-6 lg:px-12">
@@ -439,7 +465,7 @@
       <p class="mb-4" style="color:var(--rouge);font-size:.875rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;">Autres conférences</p>
       <h2 class="title-playfair" style="color:var(--text-dark);font-size:clamp(1.75rem,3.8vw,2.875rem);line-height:1.2;">Explorez mes autres <span style="color:var(--rouge);font-style:italic;">thématiques</span></h2>
     </div>
-    <div id="conf-grid" class="grid sm:grid-cols-2 gap-6 sm:gap-8 lg:gap-10">
+    <div id="conf-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
 
       <!-- ===== 1. STORYTELLING ===== -->
       <article id="storytelling-incarne" class="conference-card reveal">
@@ -450,7 +476,7 @@
           <p class="mb-6" style="color:var(--brun-gris);font-size:.9375rem;line-height:1.7;">Comment transformer une prise de parole en expérience marquante&nbsp;? Récit, corps, émotion, silence — pour que votre message cesse d'être entendu et commence à être ressenti.</p>
           <div class="conf-foot">
             <span class="conf-meta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--rouge);" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>45 à 60 min · Présentiel ou distanciel</span>
-            <button type="button" class="conf-toggle" aria-expanded="false" aria-controls="conf-panel">En savoir plus <span class="conf-chevron" aria-hidden="true">+</span></button>
+            <button type="button" class="conf-toggle" aria-haspopup="dialog" aria-controls="conf-modal">En savoir plus <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
           </div>
         </div>
         <div class="conf-details" hidden>
@@ -475,9 +501,9 @@
             <dl class="cd-facts">
               <div><dt>Format</dt><dd>Conférence interactive</dd></div>
               <div><dt>Durée</dt><dd>45 à 60 min</dd></div>
+              <div><dt>Modalité</dt><dd>Présentiel ou distanciel</dd></div>
               <div><dt>Pour</dt><dd>Managers, équipes commerciales, porte-parole</dd></div>
             </dl>
-            <a href="#parlons-en" class="btn-primary cd-cta">Réserver cette conférence <span aria-hidden="true">→</span></a>
           </div>
         </div>
       </article>
@@ -491,7 +517,7 @@
           <p class="mb-6" style="color:var(--brun-gris);font-size:.9375rem;line-height:1.7;">Et si la sensibilité était le matériau même d'un leadership d'impact&nbsp;? Une conférence pour repenser le management à partir de l'écoute et de la compréhension de soi.</p>
           <div class="conf-foot">
             <span class="conf-meta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--rouge);" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>60 min · Conférence inspirante</span>
-            <button type="button" class="conf-toggle" aria-expanded="false" aria-controls="conf-panel">En savoir plus <span class="conf-chevron" aria-hidden="true">+</span></button>
+            <button type="button" class="conf-toggle" aria-haspopup="dialog" aria-controls="conf-modal">En savoir plus <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
           </div>
         </div>
         <div class="conf-details" hidden>
@@ -516,9 +542,9 @@
             <dl class="cd-facts">
               <div><dt>Format</dt><dd>Conférence inspirante</dd></div>
               <div><dt>Durée</dt><dd>60 min</dd></div>
+              <div><dt>Modalité</dt><dd>Présentiel ou distanciel</dd></div>
               <div><dt>Pour</dt><dd>Managers, dirigeants, CODIR</dd></div>
             </dl>
-            <a href="#parlons-en" class="btn-primary cd-cta">Réserver cette conférence <span aria-hidden="true">→</span></a>
           </div>
         </div>
       </article>
@@ -532,7 +558,7 @@
           <p class="mb-6" style="color:var(--brun-gris);font-size:.9375rem;line-height:1.7;">Désamorcer l'escalade émotionnelle, poser des limites claires et négocier sans perdre la relation — une approche qui allie ancrage corporel et communication consciente.</p>
           <div class="conf-foot">
             <span class="conf-meta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--rouge);" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>60 à 90 min · Atelier interactif</span>
-            <button type="button" class="conf-toggle" aria-expanded="false" aria-controls="conf-panel">En savoir plus <span class="conf-chevron" aria-hidden="true">+</span></button>
+            <button type="button" class="conf-toggle" aria-haspopup="dialog" aria-controls="conf-modal">En savoir plus <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
           </div>
         </div>
         <div class="conf-details" hidden>
@@ -557,9 +583,9 @@
             <dl class="cd-facts">
               <div><dt>Format</dt><dd>Atelier interactif</dd></div>
               <div><dt>Durée</dt><dd>60 à 90 min</dd></div>
+              <div><dt>Modalité</dt><dd>Présentiel ou distanciel</dd></div>
               <div><dt>Pour</dt><dd>Managers, équipes en relation client</dd></div>
             </dl>
-            <a href="#parlons-en" class="btn-primary cd-cta">Réserver cette conférence <span aria-hidden="true">→</span></a>
           </div>
         </div>
       </article>
@@ -573,7 +599,7 @@
           <p class="mb-6" style="color:var(--brun-gris);font-size:.9375rem;line-height:1.7;">Dire non sans culpabiliser, trancher sans dominer, exprimer un désaccord sans dureté — des clés concrètes pour s'affirmer au quotidien tout en restant en lien.</p>
           <div class="conf-foot">
             <span class="conf-meta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--rouge);" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>60 à 90 min · Atelier interactif</span>
-            <button type="button" class="conf-toggle" aria-expanded="false" aria-controls="conf-panel">En savoir plus <span class="conf-chevron" aria-hidden="true">+</span></button>
+            <button type="button" class="conf-toggle" aria-haspopup="dialog" aria-controls="conf-modal">En savoir plus <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
           </div>
         </div>
         <div class="conf-details" hidden>
@@ -598,9 +624,9 @@
             <dl class="cd-facts">
               <div><dt>Format</dt><dd>Atelier interactif</dd></div>
               <div><dt>Durée</dt><dd>60 à 90 min</dd></div>
+              <div><dt>Modalité</dt><dd>Présentiel ou distanciel</dd></div>
               <div><dt>Pour</dt><dd>Tous collaborateurs, managers</dd></div>
             </dl>
-            <a href="#parlons-en" class="btn-primary cd-cta">Réserver cette conférence <span aria-hidden="true">→</span></a>
           </div>
         </div>
       </article>
@@ -614,7 +640,7 @@
           <p class="mb-6" style="color:var(--brun-gris);font-size:.9375rem;line-height:1.7;">Comment la parole peut impulser des transformations fortes au sein des équipes&nbsp;? Une conférence-expérience où la prise de parole devient incarnée, et l'émotion le cœur même du message.</p>
           <div class="conf-foot">
             <span class="conf-meta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--rouge);" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>60 à 90 min · Présentiel ou distanciel</span>
-            <button type="button" class="conf-toggle" aria-expanded="false" aria-controls="conf-panel">En savoir plus <span class="conf-chevron" aria-hidden="true">+</span></button>
+            <button type="button" class="conf-toggle" aria-haspopup="dialog" aria-controls="conf-modal">En savoir plus <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
           </div>
         </div>
         <div class="conf-details" hidden>
@@ -639,22 +665,12 @@
             <dl class="cd-facts">
               <div><dt>Format</dt><dd>Conférence interactive</dd></div>
               <div><dt>Durée</dt><dd>60 à 90 min</dd></div>
+              <div><dt>Modalité</dt><dd>Présentiel ou distanciel</dd></div>
               <div><dt>Pour</dt><dd>Dirigeants, managers, équipes en transformation</dd></div>
             </dl>
-            <a href="#parlons-en" class="btn-primary cd-cta">Réserver cette conférence <span aria-hidden="true">→</span></a>
           </div>
         </div>
       </article>
-
-      <!-- Panneau de détail pleine largeur (rempli et positionné par le script en bas de page) -->
-      <div id="conf-panel" class="conf-panel" role="region" aria-label="Détails de la conférence" hidden>
-        <div class="conf-panel-inner">
-          <button type="button" class="conf-close" aria-label="Fermer les détails">×</button>
-          <p class="cd-kicker"></p>
-          <h3 class="cd-title title-playfair"></h3>
-          <div class="cd-body"></div>
-        </div>
-      </div>
 
     </div>
   </div>
@@ -688,6 +704,42 @@
   </div>
 </section>
 
+<!-- Fenêtre de détail d'une conférence : remplie par le script en bas de page à partir de la carte cliquée
+     (contenu pris dans le bloc .conf-details de chaque carte). Lien direct : /conferences-inspirantes#id-de-la-carte -->
+<div id="conf-modal" class="cm" hidden>
+  <button type="button" class="cm-backdrop" aria-label="Fermer" tabindex="-1"></button>
+  <div class="cm-dialog" role="dialog" aria-modal="true" aria-labelledby="cm-title">
+    <div class="cm-media">
+      <img alt="" width="420" height="700">
+      <div class="cm-caption">
+        <p class="cm-num"></p>
+        <p class="cm-kicker"></p>
+        <h3 id="cm-title" class="cm-title"></h3>
+      </div>
+    </div>
+    <button type="button" class="cm-close" aria-label="Fermer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button>
+    <div class="cm-body">
+      <div class="cm-tabs" role="tablist" aria-label="Détails de la conférence">
+        <button type="button" class="cm-tab" role="tab" id="cm-tab-propos" data-tab="propos" aria-controls="cm-propos" aria-selected="true">Le propos</button>
+        <button type="button" class="cm-tab" role="tab" id="cm-tab-deroule" data-tab="deroule" aria-controls="cm-deroule" aria-selected="false" tabindex="-1">Le déroulé</button>
+        <button type="button" class="cm-tab" role="tab" id="cm-tab-pratique" data-tab="pratique" aria-controls="cm-pratique" aria-selected="false" tabindex="-1">En pratique</button>
+      </div>
+      <div class="cm-panels">
+        <div id="cm-propos" role="tabpanel" aria-labelledby="cm-tab-propos"></div>
+        <div id="cm-deroule" role="tabpanel" aria-labelledby="cm-tab-deroule" hidden></div>
+        <div id="cm-pratique" role="tabpanel" aria-labelledby="cm-tab-pratique" hidden></div>
+      </div>
+      <div class="cm-foot">
+        <div class="cm-nav">
+          <button type="button" class="cm-prev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>Précédente</button>
+          <button type="button" class="cm-next">Suivante<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></button>
+        </div>
+        <a href="#parlons-en" class="btn-primary cm-cta">Réserver cette conférence <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="footer-placeholder"></div>
 <div id="cookies-placeholder"></div>
 
@@ -701,82 +753,134 @@ const io = new IntersectionObserver((entries) => {
   });
 }, { threshold: .12, rootMargin: '0px 0px -80px 0px' });
 document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el => io.observe(el));
-// ===== Panneau « En savoir plus » pleine largeur =====
+// ===== Fenêtre « En savoir plus » des conférences =====
 (() => {
   const grid  = document.getElementById('conf-grid');
-  const panel = document.getElementById('conf-panel');
-  if (!grid || !panel) return;
-  const cards  = [...grid.querySelectorAll('.conference-card')];
-  const kicker = panel.querySelector('.cd-kicker');
-  const title  = panel.querySelector('.cd-title');
-  const body   = panel.querySelector('.cd-body');
-  let active = null;
+  const modal = document.getElementById('conf-modal');
+  if (!grid || !modal) return;
+  const cards = [...grid.querySelectorAll('.conference-card')];
+  const q = (s) => modal.querySelector(s);
+  const img = q('.cm-media img'), num = q('.cm-num'), kicker = q('.cm-kicker'), title = q('#cm-title');
+  const tabs  = [...modal.querySelectorAll('.cm-tab')];
+  const panes = { propos: q('#cm-propos'), deroule: q('#cm-deroule'), pratique: q('#cm-pratique') };
+  const scroller = q('.cm-panels');
+  const pad = (n) => String(n).padStart(2, '0');
+  const CHECK = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A83932" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+  let current = 0, lastFocus = null;
 
-  // Dernière carte de la rangée où se trouve « card » (le panneau s'insère juste après)
-  const rowEnd = (card) => {
-    const top = card.offsetTop;
-    return cards.filter(c => Math.abs(c.offsetTop - top) < 4).pop() || card;
-  };
-
-  const setExpanded = (card, val) => {
-    const btn = card.querySelector('.conf-toggle');
-    btn.setAttribute('aria-expanded', String(val));
-    btn.firstChild.textContent = val ? 'Refermer ' : 'En savoir plus ';
-    card.classList.toggle('is-active', val);
-  };
-
-  const close = (keepHash) => {
-    if (!active) return;
-    setExpanded(active, false);
-    const prev = active; active = null;
-    panel.classList.remove('open');
-    setTimeout(() => { if (!active) panel.hidden = true; }, 450);
-    if (!keepHash) history.replaceState(null, '', location.pathname + location.search);
-    prev.querySelector('.conf-toggle').focus({ preventScroll: true });
-  };
-
-  const open = (card, scroll = true) => {
-    if (active) setExpanded(active, false);
-    active = card;
+  const fill = (i) => {
+    const card = cards[i];
+    const d = card.querySelector('.conf-details');
+    const cimg = card.querySelector('img');
+    img.src = cimg.currentSrc || cimg.src;
+    img.alt = cimg.alt;
+    num.innerHTML = pad(i + 1) + ' <span>/ ' + pad(cards.length) + '</span>';
     kicker.textContent = card.querySelector('.p-6 > p').textContent;
-    title.innerHTML    = card.querySelector('h3').innerHTML;
-    body.innerHTML     = card.querySelector('.conf-details').innerHTML;
-    panel.hidden = false;
-    panel.classList.remove('open');
-    rowEnd(card).after(panel);
-    requestAnimationFrame(() => requestAnimationFrame(() => panel.classList.add('open')));
-    setExpanded(card, true);
-    history.replaceState(null, '', '#' + card.id);
-    if (scroll) setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 120);
+    title.innerHTML = card.querySelector('h3').innerHTML;
+    title.querySelectorAll('[style]').forEach((e) => e.removeAttribute('style'));
+
+    // Le propos
+    const p1 = panes.propos; p1.replaceChildren();
+    const propos = el('p', 'cm-propos', d.querySelector('.cd-text').textContent);
+    const ul = el('ul', 'cm-gains');
+    d.querySelectorAll('.cd-list li').forEach((li) => {
+      const item = el('li'); item.innerHTML = CHECK; item.append(el('span', null, li.textContent)); ul.append(item);
+    });
+    p1.append(propos, el('p', 'cm-label', 'Ce que votre public repart avec'), ul);
+
+    // Le déroulé
+    const p2 = panes.deroule; p2.replaceChildren();
+    const ol = el('ol', 'cm-steps');
+    d.querySelectorAll('.cd-steps li').forEach((li, k) => {
+      const t = li.querySelector('b').textContent.trim();
+      let desc = li.textContent.trim().slice(t.length).replace(/^\s*—\s*/, '');
+      desc = desc.charAt(0).toUpperCase() + desc.slice(1);
+      const item = el('li');
+      item.append(el('span', 'cm-step-n', pad(k + 1)), el('span', 'cm-step-t', t), el('span', 'cm-step-d', desc));
+      ol.append(item);
+    });
+    p2.append(ol);
+
+    // En pratique
+    const p3 = panes.pratique; p3.replaceChildren();
+    const dl = d.querySelector('.cd-facts').cloneNode(true);
+    dl.className = 'cm-facts';
+    p3.append(dl, el('p', 'cm-note', 'Chaque conférence est personnalisable selon votre contexte, votre public et vos enjeux.'));
   };
 
-  cards.forEach(card => {
-    card.querySelector('.conf-toggle').addEventListener('click', () => {
-      active === card ? close() : open(card);
+  const selectTab = (id, focus) => {
+    tabs.forEach((t) => {
+      const on = t.dataset.tab === id;
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+      if (on && focus) t.focus();
     });
+    Object.keys(panes).forEach((k) => { panes[k].hidden = k !== id; });
+    scroller.scrollTop = 0;
+  };
+
+  const open = (i, from) => {
+    current = (i + cards.length) % cards.length;
+    fill(current);
+    selectTab('propos');
+    if (modal.hidden) {
+      lastFocus = from || document.activeElement;
+      modal.hidden = false;
+      document.documentElement.style.overflow = 'hidden';
+      requestAnimationFrame(() => requestAnimationFrame(() => modal.classList.add('is-open')));
+      setTimeout(() => q('.cm-close').focus({ preventScroll: true }), 60);
+    }
+    history.replaceState(null, '', '#' + cards[current].id);
+  };
+
+  const close = (toContact) => {
+    if (modal.hidden) return;
+    modal.classList.remove('is-open');
+    document.documentElement.style.overflow = '';
+    setTimeout(() => { if (!modal.classList.contains('is-open')) modal.hidden = true; }, 300);
+    if (toContact) return;
+    history.replaceState(null, '', location.pathname + location.search);
+    const back = cards[current].querySelector('.conf-toggle') || lastFocus;
+    if (back) back.focus({ preventScroll: true });
+  };
+
+  cards.forEach((card, i) => {
+    card.querySelector('.conf-toggle').addEventListener('click', (e) => open(i, e.currentTarget));
   });
-  panel.querySelector('.conf-close').addEventListener('click', () => close());
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  q('.cm-close').addEventListener('click', () => close());
+  q('.cm-backdrop').addEventListener('click', () => close());
+  q('.cm-prev').addEventListener('click', () => open(current - 1));
+  q('.cm-next').addEventListener('click', () => open(current + 1));
+  q('.cm-cta').addEventListener('click', () => close(true));
+  tabs.forEach((t) => t.addEventListener('click', () => selectTab(t.dataset.tab)));
+  q('.cm-tabs').addEventListener('keydown', (e) => {
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+    e.preventDefault(); e.stopPropagation();
+    const k = tabs.findIndex((t) => t.getAttribute('aria-selected') === 'true');
+    const n = (k + (e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+    selectTab(tabs[n].dataset.tab, true);
+  });
 
-  // Le bouton « Réserver » du panneau mène au contact sans effacer l'ancre de la conférence
-  panel.addEventListener('click', e => { if (e.target.closest('.cd-cta')) close(true); });
-
-  // Si la largeur change, on replace le panneau sous la bonne rangée
-  let rt;
-  window.addEventListener('resize', () => {
-    clearTimeout(rt);
-    rt = setTimeout(() => { if (active) rowEnd(active).after(panel); }, 150);
+  document.addEventListener('keydown', (e) => {
+    if (modal.hidden) return;
+    if (e.key === 'Escape') { close(); return; }
+    if (e.key === 'ArrowRight') { open(current + 1); return; }
+    if (e.key === 'ArrowLeft')  { open(current - 1); return; }
+    if (e.key === 'Tab') {
+      // Garde le focus clavier dans la fenêtre
+      const f = [...modal.querySelectorAll('button, a[href]')].filter((x) => x.tabIndex >= 0 && x.offsetParent !== null);
+      if (!f.length) return;
+      const first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
   });
 
   // Lien direct : /conferences-inspirantes#storytelling-incarne
-  const fromHash = cards.find(c => '#' + c.id === location.hash);
-  if (fromHash) {
-    fromHash.classList.add('in');
-    open(fromHash, false);
-    setTimeout(() => fromHash.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300);
-  }
+  const k = cards.findIndex((c) => '#' + c.id === location.hash);
+  if (k >= 0) { cards[k].classList.add('in'); open(k); }
 })();
-
 </script>
 <script src="/assets/js/includes.js"></script>
 </body>
