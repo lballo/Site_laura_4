@@ -310,54 +310,71 @@ def render_presentation(blocks):
     return "\n".join(f"                        <p>{p}</p>" for p in paras)
 
 
+# Seuls les grands temps de la formation ont un bandeau noir et doré :
+# avant, chaque jour, après. Les autres titres saisis en ligne nue
+# (Ouverture, Partie 1…, Synthèse) deviennent des sous-titres du bandeau
+# précédent.
+GRAND_TITRE = re.compile(
+    r"^(jour\b|journée\b|demi-journée\b|j\s?\+?\s?\d|avant\b|après\b|programme\b)", re.I
+)
+AVANT_APRES = re.compile(r"^(avant|après)\b", re.I)
+
+
+def texte_brut(fragment):
+    return html_module.unescape(re.sub(r"<[^>]+>", "", fragment or "")).strip()
+
+
+def regrouper_phases(phases):
+    out = []
+    for phase in phases:
+        if GRAND_TITRE.match(texte_brut(phase["titre"])):
+            out.append({"titre": phase["titre"], "elements": list(phase["elements"])})
+            continue
+        dernier = out[-1] if out else None
+        # Pas de jour ouvert (formation d'une journée sans « Jour 1 ») :
+        # on ouvre un bandeau « Programme » plutôt que de ranger le
+        # sous-titre dans « Avant la formation ».
+        if dernier is None or AVANT_APRES.match(texte_brut(dernier["titre"])):
+            dernier = {"titre": "Programme", "elements": []}
+            out.append(dernier)
+        dernier["elements"].append(("module", phase["titre"]))
+        dernier["elements"].extend(phase["elements"])
+    return out
+
+
 def programme_html(phases):
     """
     phases : [{"titre": str, "elements": [("module"|"item", html)]}]
-    Rend les bandeaux numerotes, les sous-titres et les puces.
+    Rend les bandeaux (sans numéro), les sous-titres et les puces.
     """
     out = []
-    for n, phase in enumerate(phases, start=1):
+    for phase in regrouper_phases(phases):
         out.append('                <div class="programme-phase">')
         out.append('                    <div class="phase-header">')
-        out.append(f'                        <span class="phase-number">{n:02d}</span>')
         out.append(
             f'                        <span class="phase-title">{phase["titre"]}</span>'
         )
         out.append("                    </div>")
         out.append('                    <div class="phase-content">')
 
-        buffer, module = [], None
+        buffer = []
 
         def flush():
             if not buffer:
                 return
-            if module:
-                out.append('                        <div class="module-block">')
-                out.append('                            <div class="module-header">')
-                out.append('                                <span class="module-number">—</span>')
+            out.append('                        <ul class="phase-items">')
+            for i in buffer:
                 out.append(
-                    f'                                <span class="module-title">{module}</span>'
+                    '                            <li><div class="phase-item-text">'
+                    f'<span class="chevron">›</span><span>{i}</span></div></li>'
                 )
-                out.append("                            </div>")
-                out.append('                            <ul class="module-items">')
-                for i in buffer:
-                    out.append(f"                                <li>{i}</li>")
-                out.append("                            </ul>")
-                out.append("                        </div>")
-            else:
-                out.append('                        <ul class="phase-items">')
-                for i in buffer:
-                    out.append(
-                        '                            <li><div class="phase-item-text">'
-                        f'<span class="chevron">›</span><span>{i}</span></div></li>'
-                    )
-                out.append("                        </ul>")
+            out.append("                        </ul>")
             buffer.clear()
 
         for kind, texte in phase["elements"]:
             if kind == "module":
                 flush()
-                module = texte
+                out.append(f'                        <p class="programme-soustitre">{texte}</p>')
             else:
                 buffer.append(texte)
         flush()
@@ -1242,7 +1259,25 @@ def regenerer_index(client):
     cible = Path(OUTPUT_DIR) / "index.html"
     cible.write_text(html, encoding="utf-8")
     print(f"  ✓ {cible} — {len(publiees)} formation(s) au catalogue")
+    ecrire_liste_devis(publiees)
     return str(cible)
+
+
+def ecrire_liste_devis(publiees):
+    """formations/catalogue.json : les formations publiées, lues par la modale
+    de devis de chaque fiche. Régénéré avec le catalogue, il reste à jour sur
+    toutes les fiches, même celles qui ne sont pas republiées."""
+    liste = [
+        {
+            "code": prop(p, "Code formation"),
+            "nom": prop(p, "Nom de la formation", "title").strip(),
+            "slug": prop(p, "slug"),
+        }
+        for p in publiees
+    ]
+    cible = Path(OUTPUT_DIR) / "catalogue.json"
+    cible.write_text(json.dumps(liste, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    print(f"  ✓ {cible} — liste du formulaire de devis")
 
 
 # ═════════════════════════════════════════════════════════
