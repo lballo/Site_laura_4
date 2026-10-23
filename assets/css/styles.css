@@ -933,6 +933,25 @@ a {
 
 .cta-accompagnement-link svg { transition: transform 0.3s ease; }
 
+/* Encart à plusieurs liens (ex. formation + accompagnement) */
+.cta-accompagnement-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.cta-accompagnement-links .cta-accompagnement-link {
+  display: block;
+  line-height: 1.6;
+}
+
+.cta-accompagnement-links .cta-accompagnement-link svg {
+  display: inline-block;
+  vertical-align: -3px;
+  margin-left: 10px;
+}
+
 .cta-accompagnement-link:hover { color: var(--accent); }
 
 .cta-accompagnement-link:hover svg { transform: translateX(5px); }
