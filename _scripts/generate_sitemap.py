@@ -92,6 +92,10 @@ def discover_static_pages():
         if len(html_file.parts) == 1 and html_file.name.startswith(GOOGLE_VERIFICATION_PREFIX):
             continue
 
+        # Pages de renvoi (meta refresh) : elles ne font que rediriger
+        if 'http-equiv="refresh"' in html_file.read_text(encoding="utf-8", errors="ignore"):
+            continue
+
         # Construire l'URL propre (sans .html ni barre finale)
         loc = clean_url(path_str)
 
