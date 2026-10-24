@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test – Quel est votre mode de communication ? | Laura Ballo</title>
+<meta name="description" content="20 affirmations pour vous situer parmi les 4 modes de communication : dominant, assertif, soumis, indifférent.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --crimson: #A21542;
+    --prune: #7A1A40;
+    --title: #505050;
+    --text: #333333;
+    --muted: #686868;
+    --card: #F5F2F3;
+    --line: #E4DCDF;
+    --bg: #FFFFFF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Open Sans', Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 56px; }
+
+  /* Bandeau de progression */
+  .progress { position: sticky; top: 0; z-index: 10; background: var(--bg); border-bottom: 1px solid var(--line); }
+  .progress-inner { max-width: 760px; margin: 0 auto; padding: 10px 16px; display: flex; align-items: center; gap: 12px; }
+  .progress-bar { flex: 1; height: 8px; background: var(--card); border-radius: 8px; overflow: hidden; }
+  .progress-fill { height: 100%; width: 0; background: var(--crimson); transition: width .25s ease; }
+  .progress-count { font-size: 14px; font-weight: 700; color: var(--prune); min-width: 52px; text-align: right; }
+
+  header.intro { padding: 32px 0 8px; }
+  .logo { height: 44px; width: auto; display: block; margin-bottom: 20px; }
+  .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--crimson); margin-bottom: 10px; }
+  h1 { font-size: clamp(26px, 6vw, 36px); line-height: 1.15; font-weight: 800; color: var(--title); margin-bottom: 14px; }
+  h1 span { color: var(--crimson); }
+  .lead { font-size: 16px; color: var(--text); margin-bottom: 8px; }
+  .lead-muted { font-size: 14px; color: var(--muted); }
+
+  /* Questions */
+  form { margin-top: 24px; display: flex; flex-direction: column; gap: 14px; }
+  fieldset.q { border: none; background: var(--card); border-left: 6px solid var(--crimson); padding: 16px 16px 14px; transition: background .2s; }
+  fieldset.q.missing { background: #FBE9EF; }
+  legend.q-text { float: left; width: 100%; font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 12px; }
+  legend.q-text .num { color: var(--crimson); font-weight: 800; margin-right: 6px; }
+  .scale { clear: both; display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+  .scale label { position: relative; display: block; }
+  .scale input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .scale span { display: flex; align-items: center; justify-content: center; text-align: center; min-height: 44px; padding: 6px 2px; font-size: 12.5px; font-weight: 600; color: var(--prune); background: #FFFFFF; border: 1.5px solid var(--line); border-radius: 6px; cursor: pointer; transition: all .15s; line-height: 1.2; }
+  .scale input:focus-visible + span { outline: 3px solid #E9A6BC; outline-offset: 2px; }
+  .scale input:checked + span { background: var(--crimson); border-color: var(--crimson); color: #FFFFFF; }
+  .scale span:hover { border-color: var(--crimson); }
+
+  .actions { margin-top: 24px; display: flex; flex-direction: column; gap: 10px; align-items: stretch; }
+  button { font-family: inherit; font-size: 16px; font-weight: 700; border: none; cursor: pointer; padding: 15px 22px; border-radius: 6px; }
+  .btn-primary { background: var(--crimson); color: #FFFFFF; }
+  .btn-primary:hover { background: var(--prune); }
+  .btn-ghost { background: transparent; color: var(--crimson); border: 1.5px solid var(--crimson); }
+  .hint { font-size: 14px; color: var(--crimson); min-height: 20px; text-align: center; }
+
+  /* Résultats */
+  #results { display: none; margin-top: 36px; scroll-margin-top: 64px; }
+  #results.show { display: block; }
+  .result-head { background: var(--crimson); color: #FFFFFF; padding: 22px 20px; }
+  .result-head .eyebrow { color: #F6CFDC; margin-bottom: 6px; }
+  .result-head h2 { font-size: clamp(24px, 6vw, 32px); line-height: 1.15; font-weight: 800; margin-bottom: 8px; }
+  .result-head p { font-size: 16px; }
+  .result-block { background: var(--card); border-left: 6px solid var(--crimson); padding: 18px 18px; margin-top: 14px; }
+  .result-block h3 { font-size: 17px; font-weight: 800; color: var(--crimson); margin-bottom: 8px; }
+  .result-block p, .result-block li { font-size: 15.5px; }
+  .result-block ul { padding-left: 20px; display: flex; flex-direction: column; gap: 4px; }
+  .quadrant-box { background: #FFFFFF; border: 1px solid var(--line); padding: 10px; margin-top: 14px; }
+  .quadrant-box svg { width: 100%; height: auto; display: block; }
+  .bars { display: flex; flex-direction: column; gap: 12px; margin-top: 6px; }
+  .bar-row { display: grid; grid-template-columns: 96px 1fr 44px; gap: 10px; align-items: center; font-size: 15px; }
+  .bar-label { font-weight: 700; color: var(--title); }
+  .bar-track { height: 12px; background: #FFFFFF; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .bar-fill { height: 100%; background: var(--prune); border-radius: 12px; transition: width .6s ease; }
+  .bar-row.main .bar-fill { background: var(--crimson); }
+  .bar-row.main .bar-label { color: var(--crimson); }
+  .bar-val { text-align: right; font-weight: 700; color: var(--prune); }
+  .note { font-size: 14px; color: var(--muted); margin-top: 16px; }
+  footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); text-align: center; }
+  footer a { color: var(--crimson); text-decoration: none; font-weight: 600; }
+
+  @media (min-width: 600px) {
+    .actions { flex-direction: row; justify-content: center; }
+    .scale span { font-size: 13.5px; }
+    .result-head, .result-block { padding: 24px 28px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true">
+  <div class="progress-inner">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-count" id="progressCount">0 / 20</div>
+  </div>
+</div>
+
+<main class="wrap">
+  <header class="intro">
+    <img class="logo" src="/assets/img/Laura-Ballo-black-low-res.webp" alt="Laura Ballo Coaching">
+    <p class="eyebrow">Charisme authentique et affirmation de soi</p>
+    <h1>Quel est votre <span>mode de communication</span> ?</h1>
+    <p class="lead">20 affirmations, environ 5 minutes. Répondez spontanément, en pensant à votre quotidien professionnel.</p>
+    <p class="lead-muted">Il n’y a ni bonne ni mauvaise réponse. Vos réponses restent sur votre téléphone : rien n’est enregistré ni envoyé.</p>
+  </header>
+
+  <form id="quiz" novalidate></form>
+
+  <div class="actions">
+    <button type="button" class="btn-primary" id="submitBtn">Voir mon résultat</button>
+  </div>
+  <p class="hint" id="hint" role="status" aria-live="polite"></p>
+
+  <section id="results" aria-live="polite">
+    <div class="result-head">
+      <p class="eyebrow">Votre mode principal</p>
+      <h2 id="resTitle"></h2>
+      <p id="resSubtitle"></p>
+    </div>
+
+    <div class="quadrant-box">
+      <svg id="quadrant" viewBox="0 0 360 360" role="img" aria-label="Votre position sur le quadrant des modes de communication">
+        <rect x="20" y="20" width="160" height="160" fill="#F5F2F3"/>
+        <rect x="180" y="20" width="160" height="160" fill="#F6D9E3"/>
+        <rect x="20" y="180" width="160" height="160" fill="#F5F2F3"/>
+        <rect x="180" y="180" width="160" height="160" fill="#F5F2F3"/>
+        <line x1="180" y1="14" x2="180" y2="346" stroke="#A21542" stroke-width="2"/>
+        <line x1="14" y1="180" x2="346" y2="180" stroke="#A21542" stroke-width="2"/>
+        <text x="186" y="32" font-size="11" fill="#686868" font-family="Open Sans, Arial, sans-serif" font-weight="700">MOI +</text>
+        <text x="186" y="338" font-size="11" fill="#686868" font-family="Open Sans, Arial, sans-serif" font-weight="700">MOI −</text>
+        <text x="24" y="174" font-size="11" fill="#686868" font-family="Open Sans, Arial, sans-serif" font-weight="700">LES AUTRES −</text>
+        <text x="336" y="174" font-size="11" fill="#686868" font-family="Open Sans, Arial, sans-serif" font-weight="700" text-anchor="end">LES AUTRES +</text>
+        <text x="100" y="104" font-size="16" fill="#505050" font-family="Open Sans, Arial, sans-serif" font-weight="800" text-anchor="middle">Dominant</text>
+        <text x="260" y="104" font-size="16" fill="#A21542" font-family="Open Sans, Arial, sans-serif" font-weight="800" text-anchor="middle">Assertif</text>
+        <text x="100" y="264" font-size="16" fill="#505050" font-family="Open Sans, Arial, sans-serif" font-weight="800" text-anchor="middle">Indifférent</text>
+        <text x="260" y="264" font-size="16" fill="#505050" font-family="Open Sans, Arial, sans-serif" font-weight="800" text-anchor="middle">Soumis</text>
+        <circle id="dotHalo" cx="180" cy="180" r="16" fill="#A21542" opacity="0.18"/>
+        <circle id="dot" cx="180" cy="180" r="8" fill="#A21542" stroke="#FFFFFF" stroke-width="3"/>
+      </svg>
+    </div>
+
+    <div class="result-block">
+      <h3>Vos scores par mode</h3>
+      <div class="bars" id="bars"></div>
+    </div>
+
+    <div class="result-block">
+      <h3 id="descTitle"></h3>
+      <p id="descText"></p>
+    </div>
+
+    <div class="result-block">
+      <h3>Vos atouts</h3>
+      <ul id="strengths"></ul>
+    </div>
+
+    <div class="result-block">
+      <h3>Vos pistes de progrès</h3>
+      <ul id="tracks"></ul>
+    </div>
+
+    <p class="note">Ce test est un outil de réflexion, pas un diagnostic. Nous passons tous d’un mode à l’autre selon les situations, les interlocuteurs et notre état de fatigue. L’objectif : repérer votre mode refuge sous tension, et vous rapprocher de l’assertivité.</p>
+
+    <div class="actions">
+      <button type="button" class="btn-ghost" id="restartBtn">Recommencer le test</button>
+    </div>
+  </section>
+
+  <footer>
+    Test proposé dans le cadre des formations de <a href="https://lauraballo.com">Laura Ballo Coaching</a>
+  </footer>
+</main>
+
+<script>
+(function () {
+  // D = dominant, A = assertif, S = soumis, I = indifférent
+  var ITEMS = [
+    { m: 'D', t: 'Quand je suis sûr(e) d’avoir raison, j’impose mon point de vue.' },
+    { m: 'A', t: 'J’exprime clairement ce dont j’ai besoin, sans attaquer l’autre.' },
+    { m: 'S', t: 'J’accepte des tâches en plus, même quand je suis déjà débordé(e).' },
+    { m: 'I', t: 'En réunion, je reste en retrait : ça ne sert à rien de s’exprimer.' },
+    { m: 'A', t: 'Je sais dire non tout en proposant une alternative.' },
+    { m: 'S', t: 'Je n’ose pas donner mon avis, de peur de déranger ou de décevoir.' },
+    { m: 'D', t: 'Je coupe la parole pour faire avancer les choses.' },
+    { m: 'I', t: 'Quand il y a un désaccord, je laisse faire : ça m’est égal.' },
+    { m: 'S', t: 'Je m’excuse souvent, même quand je n’y suis pour rien.' },
+    { m: 'A', t: 'Avant de répondre, je cherche à comprendre le point de vue de l’autre.' },
+    { m: 'I', t: 'Je fais le strict nécessaire, sans m’impliquer dans les échanges.' },
+    { m: 'D', t: 'Je décide vite, quitte à ne pas consulter les autres.' },
+    { m: 'A', t: 'J’exprime un désaccord calmement, en m’appuyant sur des faits.' },
+    { m: 'I', t: 'Je me sens détaché(e) de ce qui se passe dans l’équipe.' },
+    { m: 'S', t: 'Je dis oui alors que je pense non.' },
+    { m: 'D', t: 'Quand on me contredit, j’ai du mal à me remettre en question.' },
+    { m: 'I', t: 'Je préfère éviter quelqu’un plutôt que d’aborder un sujet difficile.' },
+    { m: 'S', t: 'Je fais passer les besoins des autres avant les miens.' },
+    { m: 'A', t: 'Je cherche une solution qui tienne compte de mes besoins et de ceux des autres.' },
+    { m: 'D', t: 'Je hausse le ton quand les choses ne vont pas assez vite.' }
+  ];
+  var SCALE = ['Jamais', 'Rarement', 'Parfois', 'Souvent', 'Toujours'];
+
+  var MODES = {
+    D: {
+      name: 'Dominant',
+      sub: 'Moi + · les autres − : mon besoin prime sur celui des autres.',
+      desc: 'Sous tension, vous avez tendance à prendre les commandes : vous décidez, vous tranchez, vous imposez. C’est efficace dans l’urgence, mais l’autre peut se sentir peu écouté, et la remise en question devient difficile.',
+      strengths: ['Vous savez décider et trancher', 'Vous posez facilement des limites', 'Vous assumez votre point de vue'],
+      tracks: ['Développer l’écoute : questionner et reformuler avant de répondre', 'Accepter la remise en question', 'Passer du « il faut » au « j’ai besoin »']
+    },
+    A: {
+      name: 'Assertif',
+      sub: 'Moi + · les autres + : je priorise mon besoin et je considère celui des autres.',
+      desc: 'Vous cherchez l’équilibre : vous exprimez ce dont vous avez besoin, tout en tenant compte de l’autre. Votre style est participatif, propice à la négociation et à la coopération.',
+      strengths: ['Vous exprimez vos besoins clairement', 'Vous savez écouter et négocier', 'Vous dites non sans casser la relation'],
+      tracks: ['Garder cet équilibre sous pression, quand l’émotion monte', 'Repérer les situations où vous basculez dans un autre mode', 'Vous appuyer sur les faits quand le ton monte']
+    },
+    S: {
+      name: 'Soumis',
+      sub: 'Moi − · les autres + : le besoin des autres passe avant le mien.',
+      desc: 'Vous êtes à l’écoute et attentif(ve) aux autres, parfois au point de vous oublier. Peur de décevoir, manque de légitimité ou besoin d’être reconnu(e) peuvent vous pousser à dire oui quand vous pensez non. Ce qui n’est pas dit risque de ressortir plus tard, sous forme de fatigue ou de passif-agressivité.',
+      strengths: ['Votre écoute', 'Votre empathie', 'Votre sens du collectif'],
+      tracks: ['Oser dire non, avec une alternative si besoin', 'Exprimer vos besoins en « je »', 'Prendre votre place : votre avis compte autant que celui des autres']
+    },
+    I: {
+      name: 'Indifférent',
+      sub: 'Moi − · les autres − : ni moi, ni les autres.',
+      desc: 'Vous avez tendance à vous mettre en retrait : à quoi bon s’exprimer ? Ce mode est souvent un mode de protection, après des tensions ou une période de fatigue. Il peut mener au désengagement, voire à l’épuisement.',
+      strengths: ['Votre recul face aux tensions', 'Votre capacité à ne pas surréagir', 'Votre calme apparent'],
+      tracks: ['Repérer ce qui vous a amené(e) à vous retirer', 'Reprendre la parole sur un sujet qui compte pour vous', 'En parler à une personne de confiance si la fatigue s’installe']
+    }
+  };
+
+  var form = document.getElementById('quiz');
+  var answers = new Array(ITEMS.length).fill(null);
+
+  // Construction des questions
+  ITEMS.forEach(function (item, i) {
+    var fs = document.createElement('fieldset');
+    fs.className = 'q';
+    fs.id = 'q' + i;
+    var lg = document.createElement('legend');
+    lg.className = 'q-text';
+    lg.innerHTML = '<span class="num">' + (i + 1) + '.</span>' + item.t;
+    fs.appendChild(lg);
+    var scale = document.createElement('div');
+    scale.className = 'scale';
+    SCALE.forEach(function (label, v) {
+      var l = document.createElement('label');
+      var inp = document.createElement('input');
+      inp.type = 'radio';
+      inp.name = 'q' + i;
+      inp.value = v + 1;
+      inp.addEventListener('change', function () {
+        answers[i] = v + 1;
+        fs.classList.remove('missing');
+        updateProgress();
+      });
+      var sp = document.createElement('span');
+      sp.textContent = label;
+      l.appendChild(inp);
+      l.appendChild(sp);
+      scale.appendChild(l);
+    });
+    fs.appendChild(scale);
+    form.appendChild(fs);
+  });
+
+  function updateProgress() {
+    var n = answers.filter(function (a) { return a !== null; }).length;
+    document.getElementById('progressFill').style.width = (n / ITEMS.length * 100) + '%';
+    document.getElementById('progressCount').textContent = n + ' / ' + ITEMS.length;
+    if (n === ITEMS.length) document.getElementById('hint').textContent = '';
+  }
+
+  function compute() {
+    var sums = { D: 0, A: 0, S: 0, I: 0 }, counts = { D: 0, A: 0, S: 0, I: 0 };
+    ITEMS.forEach(function (item, i) { sums[item.m] += answers[i]; counts[item.m] += 1; });
+    var pct = {};
+    Object.keys(sums).forEach(function (k) {
+      var min = counts[k], max = counts[k] * 5;
+      pct[k] = Math.round((sums[k] - min) / (max - min) * 100);
+    });
+    return pct;
+  }
+
+  function showResults() {
+    var missing = [];
+    answers.forEach(function (a, i) { if (a === null) missing.push(i); });
+    if (missing.length) {
+      missing.forEach(function (i) { document.getElementById('q' + i).classList.add('missing'); });
+      document.getElementById('hint').textContent = 'Il reste ' + missing.length + ' affirmation' + (missing.length > 1 ? 's' : '') + ' sans réponse.';
+      document.getElementById('q' + missing[0]).scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    var pct = compute();
+    var order = Object.keys(pct).sort(function (a, b) { return pct[b] - pct[a]; });
+    var main = order[0], second = order[1];
+    var mode = MODES[main];
+
+    var title = mode.name;
+    var subtitle = mode.sub;
+    if (pct[main] - pct[second] <= 5) {
+      title = mode.name + ' / ' + MODES[second].name;
+      subtitle = 'Vous oscillez entre ces deux modes. ' + mode.sub;
+    }
+    document.getElementById('resTitle').textContent = title;
+    document.getElementById('resSubtitle').textContent = subtitle;
+    document.getElementById('descTitle').textContent = 'Le mode ' + mode.name.toLowerCase();
+    document.getElementById('descText').textContent = mode.desc;
+    fillList('strengths', mode.strengths);
+    fillList('tracks', mode.tracks);
+
+    var bars = document.getElementById('bars');
+    bars.innerHTML = '';
+    ['A', 'D', 'S', 'I'].forEach(function (k) {
+      var row = document.createElement('div');
+      row.className = 'bar-row' + (k === main ? ' main' : '');
+      row.innerHTML = '<span class="bar-label">' + MODES[k].name + '</span>' +
+        '<span class="bar-track"><span class="bar-fill" style="display:block;width:0"></span></span>' +
+        '<span class="bar-val">' + pct[k] + ' %</span>';
+      bars.appendChild(row);
+      setTimeout(function () { row.querySelector('.bar-fill').style.width = pct[k] + '%'; }, 50);
+    });
+
+    // Position sur le quadrant : axe horizontal = prise en compte des autres, axe vertical = prise en compte de soi
+    var x = ((pct.A + pct.S) - (pct.D + pct.I)) / 2;   // -100 à 100
+    var y = ((pct.D + pct.A) - (pct.S + pct.I)) / 2;   // -100 à 100
+    var cx = 180 + x / 100 * 150, cy = 180 - y / 100 * 150;
+    ['dot', 'dotHalo'].forEach(function (id) {
+      var c = document.getElementById(id);
+      c.setAttribute('cx', cx.toFixed(1));
+      c.setAttribute('cy', cy.toFixed(1));
+    });
+
+    var res = document.getElementById('results');
+    res.classList.add('show');
+    document.getElementById('submitBtn').style.display = 'none';
+    res.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function fillList(id, items) {
+    var ul = document.getElementById(id);
+    ul.innerHTML = '';
+    items.forEach(function (t) { var li = document.createElement('li'); li.textContent = t; ul.appendChild(li); });
+  }
+
+  document.getElementById('submitBtn').addEventListener('click', showResults);
+  document.getElementById('restartBtn').addEventListener('click', function () {
+    answers.fill(null);
+    form.reset();
+    document.querySelectorAll('fieldset.q').forEach(function (f) { f.classList.remove('missing'); });
+    document.getElementById('results').classList.remove('show');
+    document.getElementById('submitBtn').style.display = '';
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+</script>
+</body>
+</html>
