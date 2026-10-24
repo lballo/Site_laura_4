@@ -69,6 +69,12 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://lauraballo.com/formations/intelligence-emotionnelle</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://lauraballo.com/formations/management-augmente-ie-ia</loc>
     <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
@@ -137,6 +143,12 @@
   <url>
     <loc>https://lauraballo.com/quizz/hypersensibilite</loc>
     <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://lauraballo.com/quizz/modes-de-communication</loc>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
