@@ -25,6 +25,11 @@
   "slug": "charisme-authentique-affirmation-de-soi"
  },
  {
+  "code": "IE-02",
+  "nom": "Intelligence émotionnelle : gérer ses émotions et accueillir celles des autres",
+  "slug": "intelligence-emotionnelle"
+ },
+ {
   "code": "MGIA-01",
   "nom": "Management augmenté : équilibrer intelligence émotionnelle et intelligence artificielle",
   "slug": "management-augmente-ie-ia"
