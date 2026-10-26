@@ -1,0 +1,59 @@
+name: 🧱 Build statique (menu, pied de page, liste du blog)
+
+# Écrit en dur dans les pages le menu, le pied de page et la liste des articles,
+# pour que Google les voie sans exécuter de JavaScript (voir _scripts/build_static.py).
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '**.html'
+      - 'blog/articles.json'
+      - 'assets/components/**'
+      - '_scripts/build_static.py'
+  # Après chaque publication depuis Notion (leurs commits ne déclenchent pas « push »)
+  workflow_run:
+    workflows: ['📝 Publier articles Notion', '📚 Publier formations Notion']
+    types: [completed]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: notion-publish
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🐍 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 🧱 Écrire menu, pied de page et liste du blog dans les pages
+        run: python _scripts/build_static.py
+
+      - name: 💾 Commit
+        run: |
+          git config user.name "Build statique Bot"
+          git config user.email "bot@lauraballo.com"
+          git add -A -- '*.html'
+          if git diff --cached --quiet; then
+            echo "Aucun changement."
+          else
+            git commit -m "🧱 Build statique : menu, pied de page et liste du blog en HTML"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+
+      - name: 🗺️ Régénérer le sitemap
+        run: python _scripts/generate_sitemap.py

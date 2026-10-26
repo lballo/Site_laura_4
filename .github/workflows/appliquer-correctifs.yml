@@ -1,0 +1,52 @@
+name: 🩹 Appliquer un correctif
+
+# Outil ponctuel : applique les fichiers .patch déposés dans _scripts/correctifs/
+# en un seul commit, puis les supprime. Sans correctif présent, il ne fait rien.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '_scripts/correctifs/**'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: notion-publish
+  cancel-in-progress: false
+
+jobs:
+  appliquer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🐍 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 🩹 Appliquer et committer
+        run: |
+          shopt -s nullglob
+          patches=(_scripts/correctifs/*.patch)
+          if [ ${#patches[@]} -eq 0 ]; then echo "Aucun correctif."; exit 0; fi
+          git config user.name "Correctif Bot"
+          git config user.email "bot@lauraballo.com"
+          for p in "${patches[@]}"; do
+            echo "→ $p"
+            git apply --index "$p"
+            git rm -q "$p"
+          done
+          git commit -m "🔎 SEO : redirections 301, Analytics (consentement), menu et blog lisibles par Google, page /coaching-de-dirigeants"
+          git push origin HEAD:main
+
+      - name: 🗺️ Régénérer le sitemap
+        run: python _scripts/generate_sitemap.py
