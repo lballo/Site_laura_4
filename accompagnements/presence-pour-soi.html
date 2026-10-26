@@ -589,7 +589,7 @@ details[open] .faq-icon{transform:rotate(45deg);}
       <h2 class="mb-6" style="font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:700;color:var(--brown-d);">Cet accompagnement est pour vous si...</h2>
       <p class="mb-12 max-w-2xl mx-auto" style="color:var(--brown-m);font-size:1.125rem;line-height:1.7;">Toute personne qui souhaite s'affirmer davantage et qui a envie de reprendre son pouvoir&nbsp;: entrepreneur·e, salarié·e, manager, indépendant·e, au travail comme dans sa vie.</p>
     </div>
-    <div class="grid md:grid-cols-3 gap-8" id="whoFor"></div>
+    <div class="grid md:grid-cols-2 gap-8" id="whoFor"></div>
   </div>
 </section>
 
@@ -947,7 +947,7 @@ const probs = [
   ["On vous dit souvent que vous êtes « trop » ou « pas assez ».","Trop sensible, trop intense, pas assez affirmé·e : vous ne savez plus quelle version de vous montrer."],
   ["Vous avez peur du jugement","et de ne pas être compris·e, alors vous gardez pour vous ce que vous pensez vraiment."],
   ["Vous avez mis en place une carapace, ou une suradaptation émotionnelle.","Pour vous protéger, vous vous fermez pour ne plus être touché·e, ou vous vous ajustez à tout le monde jusqu'à vous oublier."],
-  ["Vous absorbez les émotions des autres.","Votre hyper-empathie brouille la frontière : vous ne savez plus toujours ce qui vous appartient et ce qui appartient à l'autre."],
+  ["Vous avez l'impression d'être bridé·e.","Un plafond de verre vous retient, et vous sentez que vous pourriez aller beaucoup plus loin."],
   ["Vous n'avez plus envie de porter des masques.","Vous voulez être vous-même, partout, y compris au travail."],
   ["Vous avez déjà fait un travail sur vous,","mais vous ne voyez pas encore comment être leader avec votre sensibilité."]
 ];
@@ -957,9 +957,11 @@ document.getElementById('probList').innerHTML = probs.map(([t,x])=>`<div class="
 const HEART = '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>';
 const SPROUT = '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></svg>';
 const CROWN = '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z"/><path d="M5 21h14"/></svg>';
+const COMPASS = '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16.24 7.76-2.12 6.36-6.36 2.12 2.12-6.36 6.36-2.12z"/></svg>';
 const who = [
   [HEART,"Vous êtes une personne sensible","Vous ressentez intensément, vous percevez beaucoup, et la sincérité et l'authenticité comptent énormément pour vous."],
   [SPROUT,"Vous avez déjà fait un travail sur vous","Vous connaissez une partie de votre fonctionnement. Il vous manque le passage à l'action : poser votre cadre et l'incarner."],
+  [COMPASS,"Vos valeurs sont prioritaires pour vous","Vous souhaitez créer votre réussite à vous, connectée à vos valeurs et à vos désirs."],
   [CROWN,"Vous voulez reprendre votre pouvoir","Entrepreneur·e, salarié·e, manager ou indépendant·e : vous voulez prendre votre place, être leader avec votre sensibilité et casser les plafonds de verre qui vous limitent."]
 ];
 document.getElementById('whoFor').innerHTML = who.map(([ic,t,d])=>`<div class="bg-white p-8 rounded-3xl shadow-lg reveal"><div class="w-24 h-24 flex items-center justify-center mx-auto mb-6" style="color:#A83932;">${ic}</div><h3 class="mb-4" style="color:var(--brown-d);font-size:1.25rem;font-weight:700;">${t}</h3><p style="color:var(--brown-m);font-size:1rem;line-height:1.6;">${d}</p></div>`).join('');
