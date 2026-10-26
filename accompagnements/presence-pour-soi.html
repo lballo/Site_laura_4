@@ -375,7 +375,7 @@ details[open] .faq-icon{transform:rotate(45deg);}
 /* Haut de page : photo en arrière-plan sous un voile crème */
 .pps-hero{display:flex;align-items:center;}
 .pps-hero-logo{position:absolute;right:2.5rem;bottom:1.75rem;z-index:20;}
-.pps-hero-logo img{height:64px;width:auto;}
+.pps-hero-logo img{height:64px;width:auto;filter:drop-shadow(0 1px 6px rgba(61,49,40,.45));}
 @media (max-width:767px){.pps-hero-logo{right:1rem;bottom:1rem;} .pps-hero-logo img{height:44px;}}
 .pps-hero-bg{position:absolute;top:0;right:0;bottom:0;width:62%;height:100%;object-fit:cover;object-position:50% 50%;z-index:0;}
 .pps-hero-veil{position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(250,244,239,1) 0%,rgba(250,244,239,.97) 38%,rgba(250,244,239,.6) 55%,rgba(250,244,239,.3) 75%,rgba(250,244,239,.2) 100%);}
@@ -427,7 +427,7 @@ details[open] .faq-icon{transform:rotate(45deg);}
 <section class="pps-hero relative overflow-hidden py-12" style="background:var(--cream);">
   <img class="pps-hero-bg" src="/assets/img/blog/ShootingLaura20.webp" alt="" aria-hidden="true" fetchpriority="high" width="1920" height="2878"/>
   <div class="pps-hero-veil" aria-hidden="true"></div>
-  <a href="/" class="pps-hero-logo" aria-label="Retour à l'accueil"><img src="/assets/img/Laura-Ballo-black-trim.png" alt="Laura Ballo" width="122" height="64" loading="eager" /></a>
+  <a href="/" class="pps-hero-logo" aria-label="Retour à l'accueil"><img src="/assets/img/Laura-Ballo-white-trim.png" alt="Laura Ballo" width="122" height="64" loading="eager" /></a>
   <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
     <div class="max-w-2xl">
       <div class="reveal">
@@ -442,7 +442,7 @@ details[open] .faq-icon{transform:rotate(45deg);}
           Le programme pour revenir à vous, prendre votre pouvoir, assumer votre place et incarner un leadership vrai <span style="white-space:nowrap;">et authentique.</span>
         </p>
         <p class="mb-8 max-w-xl pps-target" style="color:var(--brown-d);font-size:1.25rem;line-height:1.6;font-weight:600;margin-top:-1rem;">
-          Pour les personnes, entrepreneurs ou non, qui ont envie de construire une vraie autorité et une présence vraie et organique, <span style="white-space:nowrap;">sans s'épuiser.</span>
+          Pour les personnes, entrepreneurs ou non, qui ont envie de construire leur autorité intérieure et une présence vraie et organique, <span style="white-space:nowrap;">sans s'épuiser.</span>
         </p>
         <div class="flex flex-wrap gap-4 mb-8">
           <a href="#contact" class="btn-primary px-8 py-4 rounded-full inline-block" style="font-size:1rem;font-weight:600;">Réserver un appel découverte</a>
@@ -467,18 +467,20 @@ details[open] .faq-icon{transform:rotate(45deg);}
         Un nouveau mode de leadership est en marche, qui équilibre sensibilité et autorité. Vous n'avez pas envie de devoir vous couper de vous-même pour réussir. <b>Un accompagnement qui part de vous.</b>
       </p>
     </div>
-    <div class="grid lg:grid-cols-[450px_1fr] gap-12 lg:gap-24 items-start">
-      <div class="reveal-left">
-        <div class="photo-wrap overflow-hidden shadow-xl" style="aspect-ratio:3/4;">
-          <img src="/assets/img/Shooting-Laura-triste-1200.webp" alt="Laura Ballo, de profil, face à la fenêtre" class="w-full h-full object-cover" style="object-position:center 30%;" width="450" height="600" loading="lazy" />
-        </div>
-      </div>
-      <div class="reveal-right">
-        <div class="space-y-5" id="probList"></div>
-        <div class="mt-10">
-          <p class="mb-6" style="color:#A83932;font-size:1.125rem;font-weight:600;line-height:1.6;">Vous pouvez être sensible et vous faire respecter ✨</p>
-          <a href="#contact" class="btn-primary px-8 py-4 rounded-full inline-block" style="font-size:1rem;font-weight:600;">Échanger sur votre situation</a>
-        </div>
+    <div class="reveal" style="max-width:920px;margin:0 auto;">
+      <ul class="pour-vous__list">
+        <li><strong>Dire non a un vrai coût.</strong> Vous avez du mal à poser des limites et à faire respecter vos valeurs. Souvent, vous vous sentez en colère par rapport à cela.</li>
+        <li><strong>On vous dit souvent que vous êtes « trop » ou « pas assez ».</strong> Trop sensible, trop intense, pas assez affirmé·e. Vous sentez que cela vous touche, et vous auriez tendance à vouloir coller aux attentes des autres. Cela vous met dans une position où vous devez toujours prouver votre valeur.</li>
+        <li><strong>Vous avez mis en place une carapace, ou une suradaptation émotionnelle.</strong> Pour vous protéger, vous vous fermez pour ne plus être touché·e, ou vous vous ajustez à tout le monde jusqu'à vous oublier.</li>
+        <li><strong>Vous avez l'impression d'être bridé·e.</strong> Un plafond de verre vous retient, et vous sentez que vous pourriez aller beaucoup plus loin. Vous êtes très compétent·e, mais vous avez le sentiment de vous auto-limiter.</li>
+        <li><strong>Vous doutez beaucoup de vous-même et de votre positionnement.</strong> Vous ne vous sentez pas dans votre axe et vous changez régulièrement de positionnement.</li>
+        <li><strong>Vous avez le sentiment de vivre régulièrement des jeux de pouvoir.</strong></li>
+        <li><strong>Vous avez l'impression d'être facilement influençable</strong> et sensible aux émotions des autres ou à votre environnement. Vous avez tendance à vous laisser absorber.</li>
+        <li><strong>Vous avez déjà fait un travail sur vous,</strong> et pourtant ce que vous avez mis en place ne se traduit pas de manière concrète. Vous ne vous sentez pas nécessairement perçu·e à votre juste valeur.</li>
+      </ul>
+      <div class="mt-10 text-center">
+        <p class="mb-6" style="color:#A83932;font-size:1.125rem;font-weight:600;line-height:1.6;">Vous pouvez être sensible et vous faire respecter ✨</p>
+        <a href="#contact" class="btn-primary px-8 py-4 rounded-full inline-block" style="font-size:1rem;font-weight:600;">Échanger sur votre situation</a>
       </div>
     </div>
   </div>
@@ -915,20 +917,6 @@ details[open] .faq-icon{transform:rotate(45deg);}
 const X_ICON = '<svg class="flex-shrink-0 mt-1" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A83932" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>';
 const CHK_G = '<svg class="flex-shrink-0 mt-1" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
 
-// BESOINS
-const probs = [
-  ["Dire non vous coûte énormément.","Poser vos limites, et surtout les faire respecter, reste un combat."],
-  ["On vous dit souvent que vous êtes « trop » ou « pas assez ».","Trop sensible, trop intense, pas assez affirmé·e : vous ne savez plus quelle version de vous montrer."],
-  ["Vous avez peur du jugement","et de ne pas être compris·e, alors vous gardez pour vous ce que vous pensez vraiment."],
-  ["Vous avez mis en place une carapace, ou une suradaptation émotionnelle.","Pour vous protéger, vous vous fermez pour ne plus être touché·e, ou vous vous ajustez à tout le monde jusqu'à vous oublier."],
-  ["Vous avez l'impression d'être bridé·e.","Un plafond de verre vous retient, et vous sentez que vous pourriez aller beaucoup plus loin."],
-  ["Vous avez parfois l'impression de devoir prouver votre valeur","et vous ne vous sentez pas pleinement légitime."],
-  ["Vous doutez beaucoup de vous-même","et de votre positionnement."],
-  ["Vous vivez des relations conflictuelles","ou vous vous retrouvez pris·e dans des jeux de pouvoir."],
-  ["Vous avez l'impression d'être facilement influençable","et sensible aux émotions des autres ou à votre environnement. Vous avez tendance à vous laisser absorber."],
-  ["Vous avez déjà fait un travail sur vous,","et pourtant ce que vous avez mis en place ne se traduit pas de manière concrète."]
-];
-document.getElementById('probList').innerHTML = probs.map(([t,x])=>`<div class="flex gap-3 items-start">${X_ICON}<p style="color:var(--brown-d);font-size:.9375rem;line-height:1.65;"><b>${t}</b> ${x}</p></div>`).join('');
 
 // POUR QUI
 const HEART = '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>';
