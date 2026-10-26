@@ -372,6 +372,24 @@ details[open] .faq-icon{transform:rotate(45deg);}
 </style>
 <style>
 /* ===== Présence pour soi : compléments ===== */
+/* ===== Bénéfices : deux colonnes à puces losange ===== */
+.pour-vous{background:var(--light-beige);padding:96px 24px;font-family:var(--font-body);}
+.pour-vous__inner{max-width:920px;margin:0 auto;}
+.pour-vous__eyebrow{display:flex;align-items:center;justify-content:center;gap:14px;font-size:12px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:#A83932;margin:0 0 22px;}
+.pour-vous__eyebrow::before{content:"";width:28px;height:1px;background:currentColor;}
+.pour-vous__title{font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:clamp(30px,4.2vw,44px);line-height:1.18;color:#3D3128;text-align:center;max-width:20ch;margin:0 auto 28px;}
+.pour-vous__lead{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:19px;line-height:1.6;color:#6C6059;text-align:center;max-width:34em;margin:0 auto 64px;}
+.pour-vous__list{list-style:none;margin:0;padding:0;columns:2;column-gap:64px;}
+.pour-vous__list li{position:relative;break-inside:avoid;padding-left:32px;margin-bottom:24px;font-size:16px;line-height:1.6;color:#3D3128;text-align:left;}
+.pour-vous__list li::before{content:"";position:absolute;left:5px;top:9px;width:8px;height:8px;background:#C4A574;transform:rotate(45deg);}
+.pour-vous__list strong{font-weight:600;color:#AA564C;}
+@media (max-width:720px){
+  .pour-vous{padding:64px 16px !important;}
+  .pour-vous__lead{margin-bottom:40px;font-size:17px !important;}
+  .pour-vous__list{columns:1;}
+  .pour-vous__title{font-size:30px !important;}
+}
+
 .pth-ia--practice .pth-ia-label svg{stroke:var(--pth-red)}
 .pps-frame{display:flex;gap:1.5rem;align-items:flex-start;padding:2rem;border-radius:1rem;background:#fff;border:1.5px solid rgba(168,57,50,.15);}
 .pps-frame-ic{flex-shrink:0;width:3.5rem;height:3.5rem;border-radius:1rem;display:flex;align-items:center;justify-content:center;background:#3D3128;color:#fff;}
@@ -645,24 +663,24 @@ details[open] .faq-icon{transform:rotate(45deg);}
   </div>
 </section>
 
-<!-- BÉNÉFICES -->
-<section class="py-24 relative overflow-hidden" style="background:var(--light-beige);">
-  <div class="max-w-7xl mx-auto px-6 lg:px-12">
-    <div class="text-center mb-6 reveal">
-      <div class="divider"></div>
-      <h2 class="mb-6" style="font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--brown-d);">Ce qui va changer pour vous 🔥</h2>
-      <p class="max-w-3xl mx-auto mb-16" style="color:var(--brown-m);font-size:1.25rem;line-height:1.7;">
-        Une sensibilité qui vous porte.
-      </p>
-    </div>
-    <div class="grid lg:grid-cols-[1fr_520px] gap-12 lg:gap-20 items-center">
-      <div class="reveal-left space-y-5" id="benefits"></div>
-      <div class="reveal-right">
-        <div class="overflow-hidden shadow-xl" style="aspect-ratio:4/5;">
-          <img src="/assets/img/laura-joie.webp" alt="Laura Ballo, rieuse, au bord de la mer" class="w-full h-full object-cover" style="object-position:center 30%;" width="550" height="733" loading="lazy"/>
-        </div>
-      </div>
-    </div>
+<!-- BÉNÉFICES — deux colonnes à puces -->
+<section class="pour-vous">
+  <div class="pour-vous__inner reveal">
+    <p class="pour-vous__eyebrow">Les bénéfices</p>
+    <h2 class="pour-vous__title">Ce qui va changer pour vous 🔥</h2>
+    <p class="pour-vous__lead">Une sensibilité qui vous porte.</p>
+    <ul class="pour-vous__list">
+      <li><strong>Vous restez dans votre axe face aux émotions des autres.</strong> Vous savez vous positionner dans les situations chargées émotionnellement, sans tout prendre pour vous.</li>
+      <li><strong>Vous vous positionnez clairement.</strong> Vous trouvez votre axe et vous orientez votre énergie vers ce qui résonne réellement pour vous.</li>
+      <li><strong>Vous faites preuve d'autorité.</strong> Vous posez des limites fermes et vous les tenez, sans culpabilité et sans dureté.</li>
+      <li><strong>Vous performez autrement, sans vous nier.</strong> Vous passez à l'action à partir de vous, et non plus contre vous, et vous cassez les plafonds de verre qui vous limitaient.</li>
+      <li><strong>Vous reprenez votre pouvoir.</strong> Vous repérez les jeux de pouvoir et vous en sortez, au lieu de subir les dynamiques qui vous épuisent.</li>
+      <li><strong>Vous retrouvez votre liberté d'être.</strong> Vous repérez les schémas qui vous limitent et vous savez les désamorcer.</li>
+      <li><strong>Vous prenez la parole avec tout ce que vous êtes.</strong> En public comme en réunion, vous parlez en étant vrai·e et entier·e.</li>
+      <li><strong>Vous comprenez et communiquez vos émotions.</strong> Vous savez comment elles fonctionnent et comment les exprimer dans le milieu professionnel.</li>
+      <li><strong>Vous lâchez prise sur vos mécanismes de contrôle.</strong> Votre leadership devient plus organique, il suit votre énergie et votre axe.</li>
+      <li><strong>Vous vous sentez vivant·e.</strong> Vous vous autorisez à réaliser vraiment ce que vous désirez.</li>
+    </ul>
   </div>
 </section>
 
@@ -921,20 +939,6 @@ const who = [
 ];
 document.getElementById('whoFor').innerHTML = who.map(([ic,t,d])=>`<div class="bg-white p-8 rounded-3xl shadow-lg reveal"><div class="w-24 h-24 flex items-center justify-center mx-auto mb-6" style="color:#A83932;">${ic}</div><h3 class="mb-4" style="color:var(--brown-d);font-size:1.25rem;font-weight:700;">${t}</h3><p style="color:var(--brown-m);font-size:1rem;line-height:1.6;">${d}</p></div>`).join('');
 
-// BÉNÉFICES
-const benefits = [
-  ["Vous restez dans votre axe face aux émotions des autres","Vous savez vous positionner dans les situations chargées émotionnellement, sans tout prendre pour vous."],
-  ["Vous vous positionnez clairement","Vous trouvez votre axe et vous orientez votre énergie vers ce qui résonne réellement pour vous."],
-  ["Vous faites preuve d'autorité","Vous posez des limites fermes et vous les tenez, sans culpabilité et sans dureté."],
-  ["Vous performez autrement, sans vous nier","Vous passez à l'action à partir de vous, et non plus contre vous, et vous cassez les plafonds de verre qui vous limitaient."],
-  ["Vous reprenez votre pouvoir","Vous repérez les jeux de pouvoir et vous en sortez, au lieu de subir les dynamiques qui vous épuisent."],
-  ["Vous retrouvez votre liberté d'être","Vous repérez les schémas qui vous limitent et vous savez les désamorcer."],
-  ["Vous prenez la parole avec tout ce que vous êtes","En public comme en réunion, vous parlez en étant vrai·e et entier·e."],
-  ["Vous comprenez et communiquez vos émotions","Vous savez comment elles fonctionnent et comment les exprimer dans le milieu professionnel."],
-  ["Vous lâchez prise sur vos mécanismes de contrôle","Votre leadership devient plus organique, il suit votre énergie et votre axe."],
-  ["Vous vous sentez vivant·e","Vous vous autorisez à réaliser vraiment ce que vous désirez."]
-];
-document.getElementById('benefits').innerHTML = benefits.map(([t,x])=>`<div class="flex gap-3 items-start">${CHK_G}<p style="color:var(--brown-d);font-size:.9375rem;line-height:1.65;"><b>${t}</b>&nbsp;: ${x}</p></div>`).join('');
 
 
 // MODALITÉS
