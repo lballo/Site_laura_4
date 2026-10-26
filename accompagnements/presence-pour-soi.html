@@ -666,6 +666,40 @@ details[open] .faq-icon{transform:rotate(45deg);}
   </div>
 </section>
 
+<!-- DEUX PARCOURS POSSIBLES -->
+<section class="py-24 relative overflow-hidden" style="background:var(--white);">
+  <div class="max-w-5xl mx-auto px-6 lg:px-12">
+    <div class="text-center mb-14 reveal">
+      <div class="inline-block mb-4" style="color:#A83932;font-size:.875rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;">Deux parcours possibles</div>
+      <h2 class="mb-6 title-playfair" style="font-size:clamp(2rem,4vw,2.75rem);font-weight:700;color:var(--brown-d);">Mettre l'accent sur ce dont vous avez besoin</h2>
+      <p class="max-w-2xl mx-auto" style="color:var(--brown-m);font-size:1.125rem;line-height:1.7;">Le socle des six séances reste le même. Selon votre priorité, l'accompagnement suit l'un de ces deux parcours. Nous le choisissons ensemble lors de l'appel découverte, et il peut évoluer en cours de route.</p>
+    </div>
+    <div class="eq-cols reveal" style="margin-top:0;">
+      <div class="eq-card l" style="background:var(--light-beige);">
+        <span class="eq-card-k">Parcours prise de parole en public</span>
+        <h3>Vous exprimer avec authenticité</h3>
+        <ul>
+          <li>Transformer votre trac en présence</li>
+          <li>Vous dévoiler sans masque et vous exprimer de manière authentique</li>
+          <li>Être vrai·e, entier·e, et autoriser votre singularité à être</li>
+          <li>Oser bousculer les codes</li>
+        </ul>
+      </div>
+      <div class="eq-card r" style="background:var(--light-beige);text-align:left;">
+        <span class="eq-card-k">Parcours leadership sensible</span>
+        <h3>Équilibrer autorité et sensibilité</h3>
+        <ul>
+          <li>Mieux réguler vos mécanismes</li>
+          <li>Trouver l'équilibre entre l'empathie, la compréhension, l'écoute active de l'autre et l'autorité</li>
+          <li>Poser des limites fermes</li>
+          <li>Performer sans vous nier, en suivant votre flow</li>
+          <li>Réussir avec votre leadership sensible : charisme émotionnel, storytelling</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- TRANSITION — fond sombre -->
 <section class="py-20" style="background:#1A1A1A;">
   <div class="max-w-3xl mx-auto px-6 lg:px-12 text-center reveal">
@@ -761,39 +795,6 @@ details[open] .faq-icon{transform:rotate(45deg);}
 
     <div class="pth-cta-wrap">
       <a class="pth-cta" href="#contact">Parlons de votre situation<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    </div>
-  </div>
-</section>
-
-<!-- DEUX ORIENTATIONS POSSIBLES -->
-<section class="py-24 relative overflow-hidden" style="background:var(--light-beige);">
-  <div class="max-w-5xl mx-auto px-6 lg:px-12">
-    <div class="text-center mb-14 reveal">
-      <div class="inline-block mb-4" style="color:#A83932;font-size:.875rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;">Un parcours ajustable</div>
-      <h2 class="mb-6 title-playfair" style="font-size:clamp(2rem,4vw,2.75rem);font-weight:700;color:var(--brown-d);">Mettre l'accent sur ce dont vous avez besoin</h2>
-      <p class="max-w-2xl mx-auto" style="color:var(--brown-m);font-size:1.125rem;line-height:1.7;">Les six séances suivent ce fil, et l'accompagnement peut être davantage orienté vers l'un de ces deux axes. Nous le choisissons ensemble lors de l'appel découverte, et il peut évoluer en cours de route.</p>
-    </div>
-    <div class="eq-cols reveal" style="margin-top:0;">
-      <div class="eq-card l">
-        <span class="eq-card-k">Orientation hypersensibilité</span>
-        <h3>Apprivoiser votre intensité</h3>
-        <ul>
-          <li>Comprendre en profondeur votre fonctionnement émotionnel</li>
-          <li>Sortir de l'hyper-empathie et de la suradaptation</li>
-          <li>Poser vos limites et les tenir dans la durée</li>
-          <li>Trouver une stabilité émotionnelle sans vous nier</li>
-        </ul>
-      </div>
-      <div class="eq-card r">
-        <span class="eq-card-k">Orientation prise de parole</span>
-        <h3>Faire entendre votre voix</h3>
-        <ul>
-          <li>Prendre la parole en réunion sans vous effacer</li>
-          <li>Présenter, convaincre, tenir une position</li>
-          <li>Parler en public avec tout ce que vous êtes</li>
-          <li>Transformer le trac et la peur du jugement en présence</li>
-        </ul>
-      </div>
     </div>
   </div>
 </section>
@@ -1010,7 +1011,7 @@ document.getElementById('livrables').innerHTML = livrables.map(([ic,t,d])=>`<div
 // MODALITÉS
 const modalites = [
   ["🗓️","6 séances individuelles","Des séances de 1h30, environ toutes les deux semaines, soit un chemin d'environ trois mois."],
-  ["☎️","Un appel découverte offert","30 minutes pour faire connaissance, parler de votre situation et choisir l'orientation qui vous correspond."],
+  ["☎️","Un appel découverte offert","30 minutes pour faire connaissance, parler de votre situation et choisir le parcours qui vous correspond."],
   ["✍️","Entre les séances","Un geste concret à expérimenter dans votre quotidien, pour que le changement s'ancre dans la vraie vie."],
   ["📍","Présentiel ou visio","À Lyon ou à distance, selon ce qui vous convient le mieux."],
   ["💶","2 000 € l'accompagnement","Les 6 séances et vos repères écrits. TVA non applicable, article 293 B du CGI."],
@@ -1032,7 +1033,7 @@ const LINK = 'style="color:#A83932;text-decoration:underline;"';
 const faqs = [
   ["Comment savoir si je suis hypersensible ?",`L'hypersensibilité n'est pas un diagnostic médical. Si vous vous reconnaissez dans une sensibilité intense, une forte empathie et une tendance à vous suradapter, cet accompagnement peut vous correspondre. Pour y voir plus clair, <a href="/quizz/hypersensibilite.html" ${LINK}>faites le test</a>.`],
   ["Est-ce une thérapie ?","Non. Il s'agit d'un accompagnement leadership, centré sur l'action : vos limites, votre autorité, votre positionnement, votre parole. Il ne remplace pas un suivi médical ou psychologique, et peut tout à fait se faire en complément si vous êtes déjà suivi·e."],
-  ["Puis-je orienter l'accompagnement vers la prise de parole ?","Oui. Le parcours peut être davantage orienté vers la prise de parole (réunions, présentations, parole en public) ou vers le travail sur votre hypersensibilité (émotions, hyper-empathie, limites). Nous choisissons l'accent ensemble lors de l'appel découverte, et il peut évoluer en cours de route."],
+  ["Puis-je mettre l'accent sur la prise de parole ?","Oui. Deux parcours sont possibles sur le même socle de six séances : « Vous exprimer avec authenticité », centré sur la prise de parole en public, et « Équilibrer autorité et sensibilité », centré sur votre leadership sensible. Nous choisissons ensemble lors de l'appel découverte, et le parcours peut évoluer en cours de route."],
   ["Je ne suis pas manager, est-ce pour moi ?","Oui. Le leadership dont nous parlons, c'est d'abord la capacité à prendre votre place et à vous positionner. Il vous sert au travail, quel que soit votre poste, et dans votre vie personnelle."],
   ["J'ai déjà fait beaucoup de travail sur moi, qu'est-ce que cela va m'apporter de plus ?","Souvent, la compréhension est déjà là. Ce qui manque, c'est le passage à l'action : poser une limite, tenir une position, prendre la parole. Chaque séance part d'une situation réelle et se termine par un geste concret à expérimenter."],
   ["Pourquoi six séances ?","Six séances laissent le temps de comprendre votre fonctionnement, de poser votre cadre, puis de l'expérimenter dans votre quotidien entre deux rendez-vous. Un format court et concentré, pour avancer vite sans brûler les étapes."],
