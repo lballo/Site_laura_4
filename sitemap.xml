@@ -21,16 +21,16 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://lauraballo.com/accompagnements/presence-signature</loc>
-    <lastmod>2026-10-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://lauraballo.com/blog</loc>
     <lastmod>2026-10-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://lauraballo.com/coaching-de-dirigeants</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://lauraballo.com/conferences-inspirantes</loc>
@@ -111,36 +111,6 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://lauraballo.com/legal/cgv-formation</loc>
-    <lastmod>2026-10-26</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  <url>
-    <loc>https://lauraballo.com/legal/cgv</loc>
-    <lastmod>2026-10-26</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  <url>
-    <loc>https://lauraballo.com/legal/mentions-legales</loc>
-    <lastmod>2026-10-26</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  <url>
-    <loc>https://lauraballo.com/legal/politique-confidentialite</loc>
-    <lastmod>2026-10-26</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  <url>
-    <loc>https://lauraballo.com/legal/politique-cookies</loc>
-    <lastmod>2026-10-26</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  <url>
     <loc>https://lauraballo.com/mon-histoire</loc>
     <lastmod>2026-10-26</lastmod>
     <changefreq>monthly</changefreq>
@@ -148,12 +118,6 @@
   </url>
   <url>
     <loc>https://lauraballo.com/quizz/hypersensibilite</loc>
-    <lastmod>2026-10-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://lauraballo.com/quizz/modes-de-communication</loc>
     <lastmod>2026-10-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
