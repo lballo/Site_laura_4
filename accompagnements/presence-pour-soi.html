@@ -796,22 +796,6 @@ details[open] .faq-icon{transform:rotate(45deg);}
   </div>
 </section>
 
-<!-- LIVRABLES -->
-<section class="py-24 relative overflow-hidden" style="background:var(--brun-gris);">
-  <div class="absolute inset-0">
-    <div class="absolute top-10 left-1/4 w-[500px] h-[500px] rounded-full" style="background:rgba(61,49,40,.35);filter:blur(140px);"></div>
-    <div class="absolute bottom-10 right-1/4 w-[500px] h-[500px] rounded-full" style="background:rgba(61,49,40,.25);filter:blur(140px);"></div>
-  </div>
-  <div class="relative z-10 max-w-6xl mx-auto px-6 lg:px-12">
-    <div class="text-center mb-14 reveal">
-      <div class="inline-block mb-4" style="color:rgba(255,255,255,.7);font-size:.875rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;">Ce que vous gardez</div>
-      <h2 class="mb-6 text-white title-playfair" style="font-size:clamp(2rem,4vw,2.75rem);font-weight:700;">Des repères qui restent après les six séances</h2>
-      <p class="max-w-2xl mx-auto" style="color:rgba(255,255,255,.85);font-size:1.125rem;line-height:1.7;">Chaque séance laisse une trace concrète, construite avec vous, que vous continuez d'utiliser seul·e.</p>
-    </div>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-5" id="livrables"></div>
-  </div>
-</section>
-
 <!-- QUI SUIS-JE -->
 <section class="py-24 relative overflow-hidden" style="background:var(--white);">
   <div class="relative max-w-6xl mx-auto px-6 lg:px-12">
@@ -1001,15 +985,6 @@ const benefits = [
 ];
 document.getElementById('benefits').innerHTML = benefits.map(([t,x])=>`<div class="flex gap-3 items-start">${CHK_G}<p style="color:var(--brown-d);font-size:.9375rem;line-height:1.65;"><b>${t}</b>&nbsp;: ${x}</p></div>`).join('');
 
-// LIVRABLES
-const livrables = [
-  ["🧭","Vos mécanismes repérés","Vos schémas, vos limitations, vos signaux d'alerte."],
-  ["🌳","Vos valeurs et besoins clés","Ce qui vous enracine et vous donne de la stabilité."],
-  ["🛡️","Vos limites formulées","Ce que vous acceptez, ce que vous refusez, et comment le dire."],
-  ["🎯","Votre axe","Ce qui résonne vraiment pour vous, pour construire ce que vous désirez."],
-  ["🎤","Votre parole","Vos repères pour exprimer vos émotions et prendre la parole."]
-];
-document.getElementById('livrables').innerHTML = livrables.map(([ic,t,d])=>`<div class="glass p-6 rounded-2xl reveal" style="color:#fff;"><div class="text-3xl mb-3">${ic}</div><h3 class="mb-2" style="font-size:1.0625rem;font-weight:700;">${t}</h3><p style="color:rgba(255,255,255,.85);font-size:.9375rem;line-height:1.6;">${d}</p></div>`).join('');
 
 // MODALITÉS
 const modalites = [
