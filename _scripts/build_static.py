@@ -12,6 +12,10 @@
   2. Liste des articles de /blog écrite en HTML depuis
      blog/articles.json (blog.js la remplace ensuite à l'identique
      pour la recherche et les filtres).
+  2 bis. Maillage interne : bloc « Articles recommandés » écrit en
+     HTML en bas de chaque article (RELATED_COUNT articles proches par
+     thèmes et situations), en veillant à ce que chaque article reçoive
+     au moins MIN_INBOUND liens depuis les autres.
   3. Liens internes nettoyés : plus de « .html » et anciennes
      adresses remplacées par les nouvelles (LINK_REWRITES).
 
@@ -25,6 +29,7 @@
 
 import html
 import json
+import math
 import re
 from datetime import date
 from pathlib import Path
@@ -46,6 +51,11 @@ COMPONENTS = {
 LINK_REWRITES = {
     "/accompagnements/presence-signature": "/coaching-de-dirigeants",
 }
+
+# Maillage interne entre articles
+RELATED_COUNT = 3   # articles recommandés en bas de chaque article (grille de 3 colonnes)
+MIN_INBOUND = 2     # liens minimum reçus par chaque article
+ARTICLES_DIR = ROOT / "blog" / "articles"
 
 # Dossiers jamais modifiés
 SKIP_PARTS = {"_archives", "_templates", "_scripts", "node_modules", ".git", ".github"}
@@ -196,6 +206,108 @@ def build_blog_index(content):
 
 
 # ─────────────────────────────────────────────────────────
+# 2 bis. MAILLAGE INTERNE (articles recommandés)
+# ─────────────────────────────────────────────────────────
+def load_articles():
+    if not ARTICLES_JSON.exists():
+        return []
+    return json.loads(ARTICLES_JSON.read_text(encoding="utf-8")).get("articles", [])
+
+
+def compute_related(articles):
+    """Associe à chaque article ses RELATED_COUNT voisins les plus proches.
+    Proximité = thèmes communs (un thème rare pèse plus lourd qu'un thème
+    présent partout) + situations communes (poids moitié). Ensuite, on
+    rééquilibre pour qu'aucun article ne reste sans liens entrants."""
+    n = len(articles)
+    if n < 2:
+        return {}
+
+    def idf(counts, key):
+        return math.log((n + 1) / (counts.get(key, 0) + 1)) + 0.1
+
+    tag_df, sit_df = {}, {}
+    for a in articles:
+        for t in set(a.get("tags", [])):
+            tag_df[t] = tag_df.get(t, 0) + 1
+        for s_ in set(a.get("situations", [])):
+            sit_df[s_] = sit_df.get(s_, 0) + 1
+
+    def score(a, b):
+        tags = set(a.get("tags", [])) & set(b.get("tags", []))
+        sits = set(a.get("situations", [])) & set(b.get("situations", []))
+        return sum(idf(tag_df, t) for t in tags) + 0.5 * sum(idf(sit_df, s_) for s_ in sits)
+
+    slugs = [a["slug"] for a in articles]
+    by_slug = {a["slug"]: a for a in articles}
+    scores = {
+        (x, y): score(by_slug[x], by_slug[y])
+        for x in slugs for y in slugs if x != y
+    }
+    ranked = {
+        x: sorted((y for y in slugs if y != x), key=lambda y: (-scores[(x, y)], y))
+        for x in slugs
+    }
+    k = min(RELATED_COUNT, n - 1)
+    related = {x: ranked[x][:k] for x in slugs}
+
+    # Rééquilibrage : un article sous-lié prend la dernière place d'un voisin
+    # proche, à condition que l'article remplacé reste assez lié ailleurs.
+    def inbound():
+        counts = {x: 0 for x in slugs}
+        for lst in related.values():
+            for y in lst:
+                counts[y] += 1
+        return counts
+
+    for _ in range(3):
+        counts = inbound()
+        weak = sorted((x for x in slugs if counts[x] < MIN_INBOUND), key=lambda x: counts[x])
+        if not weak:
+            break
+        for target in weak:
+            for source in ranked[target]:  # sources les plus proches d'abord
+                if counts[target] >= MIN_INBOUND:
+                    break
+                lst = related[source]
+                if target in lst or source == target:
+                    continue
+                victim = lst[-1]
+                # On ne sacrifie pas la pertinence : le nouvel article doit rester
+                # proche de la source (au moins 60 % du score de celui qu'il remplace)
+                if counts[victim] - 1 < MIN_INBOUND or scores[(source, target)] < 0.6 * scores[(source, victim)]:
+                    continue
+                lst[-1] = target
+                lst.sort(key=lambda y: -scores[(source, y)])
+                counts[victim] -= 1
+                counts[target] += 1
+    return {x: [by_slug[y] for y in related[x]] for x in slugs}
+
+
+def related_cards_html(items):
+    return "\n".join(
+        f"""    <a href="{esc(a['url'])}" class="article-card">
+      <img src="{esc(a['image'])}" alt="{esc(a['title'])}" class="article-card-image" loading="lazy">
+      <div class="article-card-tags">
+        {''.join(f'<span class="tag">{esc(t)}</span>' for t in a.get('tags', [])[:2])}
+      </div>
+      <h4 class="article-card-title">{esc(a['title'])}</h4>
+      <p class="article-card-excerpt">{esc(a.get('excerpt'))}</p>
+      <p class="article-card-meta">{esc(a.get('readingTime'))}</p>
+    </a>"""
+        for a in items
+    )
+
+
+def build_related(content, items):
+    if not items:
+        return content
+    content = content.replace('<div class="articles-grid">', '<div class="articles-grid" data-static="1">', 1)
+    return replace_block(content, "related", related_cards_html(items),
+                         r'(<div class="articles-grid" data-static="1">\s*)<!-- Rempli dynamiquement par JS -->')
+
+
+# ─────────────────────────────────────────────────────────
 # MAIN
 # ─────────────────────────────────────────────────────────
 def iter_pages():
@@ -212,12 +324,15 @@ def main():
     print("  Build statique (menu, pied de page, liste du blog)")
     print("═" * 55)
     comps = load_components()
+    related = compute_related(load_articles())
     changed = 0
     for path in iter_pages():
         original = path.read_text(encoding="utf-8")
         content = inject_components(original, comps)
         if path == BLOG_INDEX:
             content = build_blog_index(content)
+        elif path.parent == ARTICLES_DIR and path.stem in related:
+            content = build_related(content, related[path.stem])
         content = clean_links(content)
         if content != original:
             path.write_text(content, encoding="utf-8")

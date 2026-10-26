@@ -259,6 +259,9 @@ function formatDate(dateStr) {
 // ========================================
 
 async function loadRelatedArticles(currentSlug, currentTags) {
+  // Bloc déjà écrit en HTML par _scripts/build_static.py (maillage interne) : on le garde
+  const staticGrid = document.querySelector('.articles-grid[data-static]');
+  if (staticGrid && staticGrid.querySelector('a')) return;
   try {
     const response = await fetch('/blog/articles.json');
     const data = await response.json();
