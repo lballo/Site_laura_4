@@ -141,7 +141,8 @@
   z-index: 100;
 }
 
-.nav-dropdown:hover .nav-dropdown-menu {
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown:focus-within .nav-dropdown-menu {
   opacity: 1;
   visibility: visible;
   transform: translateX(-50%) translateY(0);
@@ -165,6 +166,81 @@
 
 .nav-dropdown-menu a::before {
   display: none;
+}
+
+/* Sous-catégories empilées (Accompagnements : Professionnels / Particuliers).
+   Un clic sur la catégorie déplie ses parcours juste en dessous, pas à côté. */
+.nav-dropdown-menu--groups {
+  min-width: 290px;
+  padding: 8px 0;
+}
+
+.nav-group + .nav-group {
+  border-top: 1px solid var(--light-beige);
+}
+
+.nav-group > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 24px;
+  font-family: var(--font-nav);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dark);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  transition: color var(--transition-base);
+}
+
+.nav-group > summary::-webkit-details-marker {
+  display: none;
+}
+
+.nav-group > summary::after {
+  content: '';
+  border: solid currentColor;
+  border-width: 0 1.5px 1.5px 0;
+  padding: 2.5px;
+  transform: rotate(45deg);
+  margin-top: -3px;
+  transition: transform var(--transition-base);
+}
+
+.nav-group[open] > summary::after {
+  transform: rotate(-135deg);
+  margin-top: 3px;
+}
+
+.nav-group > summary:hover,
+.nav-group[open] > summary {
+  color: var(--rouge-hover);
+}
+
+.nav-group__items {
+  padding: 0 0 8px;
+}
+
+.nav-dropdown-menu .nav-group__items a {
+  padding: 9px 24px 9px 36px;
+  font-size: 0.975rem;
+}
+
+.nav-dropdown-menu .nav-group__items a:hover {
+  padding-left: 42px;
+}
+
+.nav-group__items a small {
+  display: block;
+  margin-top: 2px;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--taupe);
 }
 
 /* ============================================
@@ -348,7 +424,7 @@
   transition: transform var(--transition-base);
 }
 
-.nav-mobile .nav-mobile-dropdown[open] summary::after {
+.nav-mobile .nav-mobile-dropdown[open] > summary::after {
   transform: rotate(-135deg);
   margin-top: 4px;
 }
@@ -378,6 +454,43 @@
 .nav-mobile .nav-mobile-dropdown__items a:hover {
   color: var(--rouge-hover);
   transform: translateX(10px);
+}
+
+/* Le menu peut s'allonger quand une catégorie est dépliée */
+.nav-mobile {
+  overflow-y: auto;
+  justify-content: safe center;
+}
+
+/* Sous-catégories mobiles : Professionnels / Particuliers */
+.nav-mobile .nav-mobile-group summary {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brun-gris);
+}
+
+.nav-mobile .nav-mobile-group summary::after {
+  padding: 3px;
+  border-width: 0 1.5px 1.5px 0;
+  border-color: var(--brun-gris);
+}
+
+.nav-mobile .nav-mobile-group[open] summary {
+  color: var(--rouge-hover);
+}
+
+.nav-mobile .nav-mobile-group__items {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 18px 0 6px;
+}
+
+.nav-mobile .nav-mobile-group__items a {
+  font-size: 18px;
+  color: var(--brun-gris);
 }
 
 /* Bouton CTA mobile */
