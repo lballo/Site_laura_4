@@ -62,8 +62,7 @@
       "description": "Accompagnement leadership individuel en 6 séances pour les personnes hypersensibles : limites, autorité, stabilité émotionnelle, prise de parole. Il ne s'agit pas d'un suivi thérapeutique.",
       "url": "https://lauraballo.com/accompagnements/presence-pour-soi",
       "areaServed": "FR",
-      "provider": { "@id": "https://lauraballo.com/#laura" },
-      "offers": { "@type": "Offer", "price": "2000", "priceCurrency": "EUR", "url": "https://lauraballo.com/accompagnements/presence-pour-soi" }
+      "provider": { "@id": "https://lauraballo.com/#laura" }
     }
   ]
 }
@@ -838,11 +837,9 @@ details[open] .faq-icon{transform:rotate(45deg);}
 </section>
 
 <!-- STORYTELLING -->
-<section class="py-32 relative overflow-hidden">
-  <div class="absolute inset-0 bg-center bg-cover" style="background-image:url('/assets/img/blog/ShootingLaura9.webp');background-attachment:fixed;"></div>
-  <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(248,240,236,.55),rgba(255,255,255,.45),rgba(237,209,191,.55));"></div>
-  <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
-    <div class="max-w-4xl reveal" style="background:rgba(255,255,255,.88);padding:3rem 2.5rem;box-shadow:0 30px 60px -30px rgba(0,0,0,.25);">
+<section class="py-24 relative overflow-hidden" style="background:linear-gradient(135deg,#F8F0EC,#FFFFFF 50%,#EDD1BF);">
+  <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 grid lg:grid-cols-[1.25fr_0.75fr] gap-10 lg:gap-14 items-center">
+    <div class="reveal" style="background:rgba(255,255,255,.92);padding:3rem 2.5rem;box-shadow:0 30px 60px -30px rgba(0,0,0,.25);">
       <div class="inline-block mb-4" style="color:#A83932;font-size:.875rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;">Pourquoi je sais de quoi je parle</div>
       <h2 class="mb-10 title-playfair" style="font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--brown-d);line-height:1.2;">Une histoire vraie</h2>
       <div class="space-y-5" style="color:var(--brown-d);font-size:1.0625rem;line-height:1.85;">
@@ -850,6 +847,11 @@ details[open] .faq-icon{transform:rotate(45deg);}
         <p>Pendant plusieurs années, j'ai appris à baisser les barrières, à m'ouvrir à mes émotions et à les voir autrement : comme une ouverture à soi et au monde. Dans mes conférences comme dans mes accompagnements, je me mets en résonance avec les autres.</p>
         <p>En 2022, je vis un traumatisme important : dénigrement, relation toxique. Progressivement, je pose des limites fermes et non négociables. Je reprends mon pouvoir.</p>
         <p><b>Aujourd'hui, je n'ai pas besoin de prouver ni de chercher à être. Je suis vivante.</b></p>
+      </div>
+    </div>
+    <div class="reveal-scale">
+      <div class="photo-wrap overflow-hidden shadow-xl" style="aspect-ratio:3/4;">
+        <img src="/assets/img/entrepreneur-sensible.webp" alt="Laura Ballo, assise dans l'herbe, en train d'écrire" class="w-full h-full object-cover" style="object-position:center 60%;" width="480" height="640" loading="lazy"/>
       </div>
     </div>
   </div>
@@ -924,7 +926,6 @@ details[open] .faq-icon{transform:rotate(45deg);}
       <p class="mb-8 max-w-2xl mx-auto" style="color:rgba(255,255,255,.85);font-size:1.25rem;line-height:1.7;">
         Je vous accueille dans un cadre serein, confidentiel et sans jugement.
       </p>
-      <div class="mb-8"><span class="pps-price"><b>2 000 €</b><span>les 6 séances</span></span></div>
       <p class="mb-10 max-w-2xl mx-auto" style="color:rgba(255,255,255,.7);font-size:1.0625rem;line-height:1.7;">
         Échangeons 30 minutes sur votre situation, pour vérifier ensemble que cet accompagnement correspond à ce que vous cherchez.
       </p>
@@ -1014,7 +1015,7 @@ const modalites = [
   ["☎️","Un appel découverte offert","30 minutes pour faire connaissance, parler de votre situation et choisir le parcours qui vous correspond."],
   ["✍️","Entre les séances","Un geste concret à expérimenter dans votre quotidien, pour que le changement s'ancre dans la vraie vie."],
   ["📍","Présentiel ou visio","À Lyon ou à distance, selon ce qui vous convient le mieux."],
-  ["💶","2 000 € l'accompagnement","Les 6 séances et vos repères écrits. TVA non applicable, article 293 B du CGI."],
+  ["📝","Vos repères écrits","Une trace de chaque étape, construite avec vous, que vous gardez après l'accompagnement."],
   ["🔒","Confidentialité et déontologie","Ce qui se dit en séance reste en séance. Un cadre respectueux, sans jugement, à votre rythme."]
 ];
 document.getElementById('modalites').innerHTML = modalites.map(([ic,t,d])=>`<div class="p-8 rounded-2xl reveal" style="background:var(--white);border:1.5px solid rgba(168,57,50,.15);box-shadow:var(--shadow-sm);"><div class="text-3xl mb-4">${ic}</div><h3 class="mb-3" style="color:var(--brown-d);font-size:1.125rem;font-weight:700;">${t}</h3><p style="color:var(--brown-m);font-size:.9375rem;line-height:1.65;">${d}</p></div>`).join('');
@@ -1038,7 +1039,7 @@ const faqs = [
   ["J'ai déjà fait beaucoup de travail sur moi, qu'est-ce que cela va m'apporter de plus ?","Souvent, la compréhension est déjà là. Il reste à passer à l'action : poser une limite, tenir une position, prendre la parole. Chaque séance part d'une situation réelle et se termine par un geste concret à expérimenter."],
   ["Pourquoi six séances ?","Six séances laissent le temps de comprendre votre fonctionnement, de poser votre cadre, puis de l'expérimenter dans votre quotidien entre deux rendez-vous. Un format court et concentré, pour avancer vite sans brûler les étapes."],
   ["Quelle différence avec le coaching dirigeants ?",`Les deux reposent sur la méthode Présence. Le <a href="/accompagnements/presence-signature" ${LINK}>coaching dirigeants</a> s'adresse aux hauts dirigeants et s'étend sur six mois, avec un volet management. Présence pour soi est plus court, centré sur votre sensibilité, et ouvert à toute personne qui veut reprendre son pouvoir.`],
-  ["Quel est le tarif ?","L'accompagnement coûte 2 000 € pour les 6 séances (TVA non applicable). Les modalités de règlement sont précisées lors de l'appel découverte."],
+  ["Quel est le tarif ?","Le tarif et les modalités de règlement vous sont présentés lors de l'appel découverte."],
   ["La confidentialité est-elle garantie ?","Oui. Ce qui se dit en séance reste en séance. Je travaille avec une déontologie stricte : confidentialité, bienveillance, et transparence sur ce que l'accompagnement peut vous apporter."],
   ["Que se passe-t-il si cela ne me convient pas ?","Vous disposez de 15 jours après la première séance pour arrêter et être intégralement remboursé·e, sans justification."]
 ];
