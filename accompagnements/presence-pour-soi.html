@@ -374,11 +374,10 @@ details[open] .faq-icon{transform:rotate(45deg);}
 /* ===== Présence pour soi : compléments ===== */
 /* Haut de page : photo en arrière-plan sous un voile crème */
 .pps-hero{display:flex;align-items:center;}
-.pps-brand-line{display:flex;align-items:center;gap:.9rem;flex-wrap:wrap;}
-.pps-par{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:1.35rem;color:var(--brown-m);}
-.pps-logo{height:52px;width:auto;margin-top:.4rem;}
-@media (max-width:767px){.pps-logo{height:40px;}}
-.pps-hero-bg{position:absolute;top:0;right:0;bottom:0;width:62%;height:100%;object-fit:cover;object-position:50% 30%;z-index:0;}
+.pps-hero-logo{position:absolute;right:2.5rem;bottom:1.75rem;z-index:20;}
+.pps-hero-logo img{height:64px;width:auto;}
+@media (max-width:767px){.pps-hero-logo{right:1rem;bottom:1rem;} .pps-hero-logo img{height:44px;}}
+.pps-hero-bg{position:absolute;top:0;right:0;bottom:0;width:62%;height:100%;object-fit:cover;object-position:50% 50%;z-index:0;}
 .pps-hero-veil{position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(250,244,239,1) 0%,rgba(250,244,239,.97) 38%,rgba(250,244,239,.6) 55%,rgba(250,244,239,.3) 75%,rgba(250,244,239,.2) 100%);}
 .pps-hero > .relative{width:100%;}
 @media (max-width:1023px){
@@ -428,16 +427,12 @@ details[open] .faq-icon{transform:rotate(45deg);}
 <section class="pps-hero relative overflow-hidden py-12" style="background:var(--cream);">
   <img class="pps-hero-bg" src="/assets/img/blog/ShootingLaura20.webp" alt="" aria-hidden="true" fetchpriority="high" width="1920" height="2878"/>
   <div class="pps-hero-veil" aria-hidden="true"></div>
+  <a href="/" class="pps-hero-logo" aria-label="Retour à l'accueil"><img src="/assets/img/Laura-Ballo-black-trim.png" alt="Laura Ballo" width="122" height="64" loading="eager" /></a>
   <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
     <div class="max-w-2xl">
       <div class="reveal">
         <div class="pres-brand mb-5">
-          <div class="pps-brand-line">
-            <span class="pres-brand-word">Présence</span>
-            <span class="pps-par">par</span>
-            <a href="/" aria-label="Retour à l'accueil"><img class="pps-logo" src="/assets/img/Laura-Ballo-black-trim.png" alt="Laura Ballo" width="122" height="64" loading="eager" /></a>
-          </div>
-          <span class="pres-brand-sub">Pour soi · Leadership sensible et vrai · Particuliers</span>
+          <span class="pres-brand-word">Présence</span>
         </div>
         <h1 class="title-abhaya pps-h1 mb-6" style="color:var(--brown-d);font-size:clamp(1.5rem,2.5vw,2rem);line-height:1.3;">
           6 sessions pour prendre votre place, reprendre votre pouvoir<br/>
