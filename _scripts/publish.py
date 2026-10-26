@@ -453,7 +453,7 @@ def generate_html(template, data):
         "{{READING_TIME}}": data["reading_time"],
         "{{CONTENT}}": data["content_html"],
         "{{QUIZ_CTA}}": quiz_cta_html(data),
-        "{{OFFRE_CTA}}": offre_cta_html(data["category"], data.get("slug")),
+        "{{OFFRE_CTA}}": offre_cta_html(data["category"], data.get("slug"), bool(quiz_cta_html(data))),
         "{{IMAGE_URL}}": data["image"],
         "{{SLUG}}": data["slug"],
         "{{SEARCH_KEYWORDS_JS}}": json.dumps(data["tags_slugs"], ensure_ascii=False),

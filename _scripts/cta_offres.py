@@ -57,6 +57,20 @@ OFFRES = {
              "lien": "L'accompagnement leader de transformation"},
         ],
     },
+    "presence-pour-soi": {
+        "label": "Accompagnement",
+        "titre": "Envie d'aller plus loin ?",
+        "texte": "Vous êtes hypersensible et vous voulez poser vos limites, prendre votre place "
+                 "et faire de votre sensibilité une force ? Découvrez Présence pour soi, mon "
+                 "accompagnement en 6 séances, ou parlons-en lors d'un premier échange offert "
+                 "de 30 minutes.",
+        "liens": [
+            {"url": "/accompagnements/presence-pour-soi",
+             "lien": "Découvrir Présence pour soi"},
+            {"url": CALENDLY_URL,
+             "lien": "Réserver un appel offert"},
+        ],
+    },
     "appel-offert": {
         "label": "Échange offert",
         "titre": "Envie d'en parler ?",
@@ -77,6 +91,7 @@ CATEGORIE_VERS_OFFRE = {
     "Management": "coaching-dirigeants",
     "IA & automation": "leader-ia",
     "Gestion du changement": "leader-ia",
+    "Hypersensibilité": "presence-pour-soi",
 }
 
 # Slug d'article → offre. Prioritaire sur la catégorie.
@@ -90,8 +105,15 @@ ICONE_FLECHE = (
 )
 
 
-def offre_pour_categorie(categorie, slug=None):
-    cle = ARTICLE_VERS_OFFRE.get(slug or "") or CATEGORIE_VERS_OFFRE.get(categorie or "", "appel-offert")
+# Les articles sur l'hypersensibilité (même règle que l'encart quiz de publish.py)
+# renvoient vers Présence pour soi ET vers l'appel offert, quelle que soit leur catégorie.
+OFFRE_HYPERSENSIBLE = "presence-pour-soi"
+
+
+def offre_pour_categorie(categorie, slug=None, hypersensible=False):
+    cle = (ARTICLE_VERS_OFFRE.get(slug or "")
+           or (OFFRE_HYPERSENSIBLE if hypersensible else None)
+           or CATEGORIE_VERS_OFFRE.get(categorie or "", "appel-offert"))
     return OFFRES[cle]
 
 
@@ -106,9 +128,9 @@ def _lien_html(url, libelle):
     )
 
 
-def offre_cta_html(categorie, slug=None):
+def offre_cta_html(categorie, slug=None, hypersensible=False):
     """Bloc HTML de l'encart de fin d'article (offre de l'article, sinon de sa catégorie)."""
-    o = offre_pour_categorie(categorie, slug)
+    o = offre_pour_categorie(categorie, slug, hypersensible)
     liens = o.get("liens") or [{"url": o["url"], "lien": o["lien"]}]
     liens_html = "".join(_lien_html(l["url"], l["lien"]) for l in liens)
     if len(liens) > 1:
