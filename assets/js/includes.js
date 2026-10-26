@@ -37,17 +37,35 @@
   };
 
   // ===== GOOGLE ANALYTICS 4 =====
-  // Chargé immédiatement, en mode refusé par défaut (RGPD / Consent Mode v2)
-  // L'activation se fait dans applyConsent() après acceptation de l'utilisateur
+  // Chargé immédiatement (RGPD / Consent Mode v2).
+  // Le choix déjà enregistré par le visiteur est lu AVANT la balise : sans cela,
+  // la page vue partait toujours en mode « refusé » et n'apparaissait pas dans GA4.
+  // Pour un nouveau visiteur, la page vue est renvoyée au moment où il accepte.
 
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   window.gtag = gtag;
 
+  var storedConsent = null;
+  try {
+    var rawConsent = localStorage.getItem('cookie_consent');
+    if (rawConsent) {
+      var parsedConsent = JSON.parse(rawConsent);
+      if (parsedConsent.expires && new Date(parsedConsent.expires) > new Date()) {
+        storedConsent = parsedConsent;
+      }
+    }
+  } catch (e) {}
+
+  var analyticsGranted = !!(storedConsent && storedConsent.analytics);
+  var marketingGranted = !!(storedConsent && storedConsent.marketing);
+
   gtag('consent', 'default', {
-    analytics_storage: 'denied',
-    ad_storage:        'denied',
-    wait_for_update:   500
+    analytics_storage:  analyticsGranted ? 'granted' : 'denied',
+    ad_storage:         marketingGranted ? 'granted' : 'denied',
+    ad_user_data:       marketingGranted ? 'granted' : 'denied',
+    ad_personalization: marketingGranted ? 'granted' : 'denied',
+    wait_for_update:    500
   });
 
   gtag('js', new Date());
@@ -63,7 +81,7 @@
   async function loadComponent(name, config) {
     const placeholder = document.getElementById(config.placeholder);
     if (!placeholder) {
-      console.warn(`[Includes] Placeholder #${config.placeholder} non trouvé`);
+      // Composant déjà écrit en dur dans la page (build_static.py) ou absent
       return false;
     }
 
@@ -274,17 +292,23 @@
 
       if (consent.analytics) {
         gtag('consent', 'update', { analytics_storage: 'granted' });
-        console.log('✓ Cookies analytiques activés');
+        // Acceptation pendant la visite : la page vue initiale était partie en
+        // mode « refusé », on la renvoie pour qu'elle soit comptée.
+        if (!analyticsGranted) {
+          analyticsGranted = true;
+          gtag('event', 'page_view');
+        }
       } else {
         gtag('consent', 'update', { analytics_storage: 'denied' });
+        analyticsGranted = false;
       }
 
-      if (consent.marketing) {
-        gtag('consent', 'update', { ad_storage: 'granted' });
-        console.log('✓ Cookies marketing activés');
-      } else {
-        gtag('consent', 'update', { ad_storage: 'denied' });
-      }
+      var adState = consent.marketing ? 'granted' : 'denied';
+      gtag('consent', 'update', {
+        ad_storage:         adState,
+        ad_user_data:       adState,
+        ad_personalization: adState
+      });
       
       window.dispatchEvent(new CustomEvent('cookieConsentUpdated', { detail: consent }));
     }

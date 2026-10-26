@@ -9,16 +9,56 @@
     { "source": "/accompagnements/preparation-flash", "destination": "/accompagnements/presence-oratoire-signature", "statusCode": 301 },
     { "source": "/accompagnements/preparation-flash.html", "destination": "/accompagnements/presence-oratoire-signature", "statusCode": 301 },
     { "source": "/preparation-prise-de-parole-flash", "destination": "/accompagnements/presence-oratoire-signature", "statusCode": 301 },
-    {
-      "source": "/blog/articles/:slug.html",
-      "destination": "/:slug",
-      "statusCode": 301
-    },
-    {
-      "source": "/blog/articles/:slug",
-      "destination": "/:slug",
-      "statusCode": 301
-    }
+    { "source": "/accompagnements/presence-signature", "destination": "/coaching-de-dirigeants", "statusCode": 301 },
+    { "source": "/accompagnements/presence-signature.html", "destination": "/coaching-de-dirigeants", "statusCode": 301 },
+    { "source": "/stephane-malassagne", "destination": "/blog", "statusCode": 301 },
+    { "source": "/manque-charisme", "destination": "/charisme-definition", "statusCode": 301 },
+    { "source": "/comment-developper-votre-charisme", "destination": "/charisme-inne", "statusCode": 301 },
+    { "source": "/formation-en-charisme", "destination": "/formations/charisme-authentique-affirmation-de-soi", "statusCode": 301 },
+    { "source": "/savoir-incarner-une-emotion", "destination": "/prise-de-parole-et-emotions", "statusCode": 301 },
+    { "source": "/controler-nos-emotions", "destination": "/prise-de-parole-et-emotions", "statusCode": 301 },
+    { "source": "/portrait-orateur-samuel-p-chef-de-choeur-et-coach", "destination": "/blog", "statusCode": 301 },
+    { "source": "/reconversion-professionnelle-hypersensibles", "destination": "/metier-hypersensible", "statusCode": 301 },
+    { "source": "/renconversion-professionnelle-hypersensible", "destination": "/metier-hypersensible", "statusCode": 301 },
+    { "source": "/bilan-competences-hypersensibles", "destination": "/bilan-de-competences", "statusCode": 301 },
+    { "source": "/coach-hypersensible-force", "destination": "/accompagnements/presence-pour-soi", "statusCode": 301 },
+    { "source": "/gestion-du-stress-hypersensible", "destination": "/strategies-hypersensibles", "statusCode": 301 },
+    { "source": "/coach-en-prise-de-parole", "destination": "/accompagnements/presence-oratoire-signature", "statusCode": 301 },
+    { "source": "/differents-types-de-leadership", "destination": "/coach-en-leadership", "statusCode": 301 },
+    { "source": "/formation-management", "destination": "/formations/management-augmente-ie-ia", "statusCode": 301 },
+    { "source": "/formation-prise-de-parole", "destination": "/formations/prise-parole-media-training", "statusCode": 301 },
+    { "source": "/formation-story-telling", "destination": "/formations/prise-parole-media-training", "statusCode": 301 },
+    { "source": "/formation-gestion-des-emotions-et-intelligence-emotionnelle", "destination": "/formations/intelligence-emotionnelle", "statusCode": 301 },
+    { "source": "/formation-gestion-des-conflits", "destination": "/formations/gestion-conflits-situations-complexes", "statusCode": 301 },
+    { "source": "/techniques-de-gestion-des-conflits-au-travail", "destination": "/formations/gestion-conflits-situations-complexes", "statusCode": 301 },
+    { "source": "/story-telling", "destination": "/reussir-votre-storytelling", "statusCode": 301 },
+    { "source": "/prise-de-parole-en-public-conseils", "destination": "/3-conseils-originaux-pour-rendre-votre-intervention-orale-impactante", "statusCode": 301 },
+    { "source": "/5-erreurs-a-faire-pour-echouer-prise-de-parole", "destination": "/sentrainer-a-la-prise-de-parole", "statusCode": 301 },
+    { "source": "/comment-reussir-a-vaincre-son-stress", "destination": "/prise-de-parole-stress", "statusCode": 301 },
+    { "source": "/comment-choisir-sa-formation-en-gestion-du-stress", "destination": "/prise-de-parole-stress", "statusCode": 301 },
+    { "source": "/depasser_croyances_limitantes", "destination": "/peur-regard-autre", "statusCode": 301 },
+    { "source": "/strategie-entreprise-multipotentiel", "destination": "/art-du-positionnement", "statusCode": 301 },
+    { "source": "/une-methodologie-unique-et-singuliere", "destination": "/mon-histoire", "statusCode": 301 },
+    { "source": "/gourou-quand-le-cinema-france-effleure-lemprise-sans-vraiment-la-comprendre", "destination": "/gourou-quand-le-cinema-francais-effleure-lemprise-sans-vraiment-la-comprendre", "statusCode": 301 },
+    { "source": "/politique-de-cookies-ue", "destination": "/legal/politique-cookies", "statusCode": 301 },
+    { "source": "/temoignages-clients", "destination": "/", "statusCode": 301 },
+    { "source": "/nos-partenaires", "destination": "/", "statusCode": 301 },
+    { "source": "/appel-offert", "destination": "/", "statusCode": 301 },
+    { "source": "/la-spiritualite-comment-la-developper", "destination": "/blog", "statusCode": 301 },
+    { "source": "/developper-son-esprit-critique", "destination": "/blog", "statusCode": 301 },
+    { "source": "/pensee-positive", "destination": "/blog", "statusCode": 301 },
+    { "source": "/pourquoi-un-entrepreneur-nous-inspire", "destination": "/blog", "statusCode": 301 },
+    { "source": "/burn-out-risque-coachs-et-therapeutes", "destination": "/blog", "statusCode": 301 },
+    { "source": "/le-podcast", "destination": "/blog", "statusCode": 301 },
+    { "source": "/newsletter-leadership", "destination": "/blog", "statusCode": 301 },
+    { "source": "/blog-leadership", "destination": "/blog", "statusCode": 301 },
+    { "source": "/category/:slug*", "destination": "/blog", "statusCode": 301 },
+    { "source": "/tag/:slug*", "destination": "/blog", "statusCode": 301 },
+    { "source": "/author/:slug*", "destination": "/mon-histoire", "statusCode": 301 },
+    { "source": "/feed", "destination": "/blog", "statusCode": 301 },
+    { "source": "/wp-content/:path*", "destination": "/formations", "statusCode": 301 },
+    { "source": "/blog/articles/:slug.html", "destination": "/:slug", "statusCode": 301 },
+    { "source": "/blog/articles/:slug", "destination": "/:slug", "statusCode": 301 }
   ],
   "rewrites": [
     {
@@ -30,9 +70,36 @@
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "X-XSS-Protection", "value": "1; mode=block" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        }
+      ]
+    },
+    {
+      "source": "/assets/components/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
+    },
+    {
+      "source": "/replays/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
       ]
     }
   ]

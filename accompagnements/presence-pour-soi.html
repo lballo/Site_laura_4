@@ -638,7 +638,7 @@ details[open] .faq-icon{transform:rotate(45deg);}
         </div>
         <div>
           <h3 class="mb-2" style="font-size:1.25rem;font-weight:700;line-height:1.3;color:var(--brown-d);">La méthode Présence, pour vous</h3>
-          <p style="color:var(--brown-m);font-size:1.0625rem;line-height:1.75;">La méthode que j'utilise avec les dirigeants, adaptée à votre réalité : la même exigence, le même équilibre entre empathie et autorité. Si vous occupez un poste de direction, découvrez aussi le <a href="/accompagnements/presence-signature" style="color:#A83932;text-decoration:underline;">coaching dirigeants</a>.</p>
+          <p style="color:var(--brown-m);font-size:1.0625rem;line-height:1.75;">La méthode que j'utilise avec les dirigeants, adaptée à votre réalité : la même exigence, le même équilibre entre empathie et autorité. Si vous occupez un poste de direction, découvrez aussi le <a href="/coaching-de-dirigeants" style="color:#A83932;text-decoration:underline;">coaching dirigeants</a>.</p>
         </div>
       </div>
     </div>
@@ -831,7 +831,7 @@ details[open] .faq-icon{transform:rotate(45deg);}
     <span class="lib-eyebrow">Le test</span>
     <h2 class="mb-5 title-playfair" style="color:#fff;font-size:clamp(2rem,4vw,2.75rem);font-weight:700;">Suis-je hypersensible ?</h2>
     <p class="band-txt" style="margin-top:0;">Quelques minutes pour mieux comprendre votre fonctionnement, et savoir si cet accompagnement vous correspond.</p>
-    <a href="/quizz/hypersensibilite.html" class="inline-block px-10 py-4 rounded-full mt-8" style="background:#A83932;color:#fff;font-size:1.0625rem;font-weight:700;box-shadow:0 25px 50px -12px rgba(168,57,50,.4);">Je fais le test →</a>
+    <a href="/quizz/hypersensibilite" class="inline-block px-10 py-4 rounded-full mt-8" style="background:#A83932;color:#fff;font-size:1.0625rem;font-weight:700;box-shadow:0 25px 50px -12px rgba(168,57,50,.4);">Je fais le test →</a>
   </div>
 </section>
 
@@ -878,8 +878,8 @@ details[open] .faq-icon{transform:rotate(45deg);}
   <div class="max-w-6xl mx-auto px-6 lg:px-12">
     <nav aria-label="Liens légaux" class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 mb-4" style="font-size:.875rem;">
       <a href="/" style="color:var(--brown-m);" class="transition-colors">Accueil</a>
-      <a href="/accompagnements/presence-signature" style="color:var(--brown-m);" class="transition-colors">Coaching dirigeants</a>
-      <a href="/quizz/hypersensibilite.html" style="color:var(--brown-m);" class="transition-colors">Test hypersensibilité</a>
+      <a href="/coaching-de-dirigeants" style="color:var(--brown-m);" class="transition-colors">Coaching dirigeants</a>
+      <a href="/quizz/hypersensibilite" style="color:var(--brown-m);" class="transition-colors">Test hypersensibilité</a>
       <a href="/legal/mentions-legales" style="color:var(--brown-m);" class="transition-colors">Mentions légales</a>
       <a href="/legal/politique-confidentialite" style="color:var(--brown-m);" class="transition-colors">Confidentialité</a>
       <a href="/legal/cgv" style="color:var(--brown-m);" class="transition-colors">CGV coaching</a>
@@ -952,12 +952,12 @@ document.getElementById('modalites').innerHTML = modalites.map(([ic,t,d])=>`<div
 // FAQ
 const LINK = 'style="color:#A83932;text-decoration:underline;"';
 const faqs = [
-  ["Faut-il être hypersensible ?",`Non. L'accompagnement s'adresse aux personnes sensibles au sens large : une forte empathie, un grand besoin de sincérité et d'authenticité, parfois une tendance à se suradapter. Il s'adresse aussi à celles et ceux qui ont envie de développer leur intelligence émotionnelle et de l'intégrer à leur leadership. Si vous vous demandez si vous êtes hypersensible, <a href="/quizz/hypersensibilite.html" ${LINK}>faites le test</a>.`],
+  ["Faut-il être hypersensible ?",`Non. L'accompagnement s'adresse aux personnes sensibles au sens large : une forte empathie, un grand besoin de sincérité et d'authenticité, parfois une tendance à se suradapter. Il s'adresse aussi à celles et ceux qui ont envie de développer leur intelligence émotionnelle et de l'intégrer à leur leadership. Si vous vous demandez si vous êtes hypersensible, <a href="/quizz/hypersensibilite" ${LINK}>faites le test</a>.`],
   ["Est-ce une thérapie ?","Non. Même si certaines méthodes que j'utilise sont issues de la thérapie (PNL, hypnose, travail corporel), il s'agit d'un accompagnement leadership, centré sur l'action : vos limites, votre autorité, votre positionnement, votre parole. Il ne remplace pas un suivi médical ou psychologique, et peut tout à fait se faire en complément si vous êtes déjà suivi·e."],
   ["Je suis entrepreneur·e ou je ne suis pas manager, est-ce pour moi ?","Oui. Le leadership dont nous parlons commence par la capacité à prendre votre place et à vous positionner. Il vous sert au travail, quel que soit votre poste, et dans votre vie personnelle. L'accompagnement convient très bien aux entrepreneur·es et aux indépendant·es, qui portent souvent seul·es leurs décisions et leur parole."],
   ["J'ai déjà fait beaucoup de travail sur moi, qu'est-ce que cela va m'apporter de plus ?","Souvent, la compréhension est déjà là. Il reste à passer à l'action : poser une limite, tenir une position, prendre la parole. Chaque séance part d'une situation réelle et se termine par un geste concret à expérimenter."],
   ["Pourquoi six séances ?","Six séances laissent le temps de comprendre votre fonctionnement, de poser votre cadre, puis de l'expérimenter dans votre quotidien entre deux rendez-vous. Un format court et concentré, pour avancer vite sans brûler les étapes."],
-  ["Quelle différence avec le coaching dirigeants ?",`Les deux reposent sur la méthode Présence. Le <a href="/accompagnements/presence-signature" ${LINK}>coaching dirigeants</a> s'adresse aux hauts dirigeants et s'étend sur six mois, avec un volet management. Présence pour soi est plus court, centré sur votre sensibilité, et ouvert à toute personne qui veut reprendre son pouvoir.`],
+  ["Quelle différence avec le coaching dirigeants ?",`Les deux reposent sur la méthode Présence. Le <a href="/coaching-de-dirigeants" ${LINK}>coaching dirigeants</a> s'adresse aux hauts dirigeants et s'étend sur six mois, avec un volet management. Présence pour soi est plus court, centré sur votre sensibilité, et ouvert à toute personne qui veut reprendre son pouvoir.`],
   ["Quel est le tarif ?","Le tarif et les modalités de règlement vous sont présentés lors de l'appel découverte."],
   ["La confidentialité est-elle garantie ?","Oui. Ce qui se dit en séance reste en séance. Je travaille avec une déontologie stricte : confidentialité, bienveillance, et transparence sur ce que l'accompagnement peut vous apporter."],
   ["Que se passe-t-il si cela ne me convient pas ?","Vous disposez de 15 jours après la première séance pour arrêter et être intégralement remboursé·e, sans justification."]
@@ -977,7 +977,93 @@ const io = new IntersectionObserver((entries)=>{
 document.querySelectorAll('.reveal,.reveal-scale,.reveal-left,.reveal-right').forEach(el=>io.observe(el));
 </script>
 <!-- COOKIES (chargé automatiquement) -->
-<div id="cookies-placeholder"></div>
+<!-- include:cookies -->
+<!-- ============================================
+     BANNIÈRE COOKIES RGPD
+     Fichier : assets/components/cookies.html
+     ============================================ -->
+
+<!-- Overlay d'arrière-plan -->
+<div class="cc-overlay" id="ccOverlay"></div>
+
+<!-- Bannière principale -->
+<div class="cc-banner" id="ccBanner" role="dialog" aria-labelledby="ccTitle" aria-describedby="ccText">
+  <div class="cc-wrapper">
+    <!-- Titre -->
+    <h2 class="cc-title" id="ccTitle">🍪 Gestion des cookies</h2>
+    
+    <!-- Texte légal -->
+    <p class="cc-text" id="ccText">
+      Pour vous offrir la meilleure expérience, nous utilisons des technologies telles que les cookies 
+      pour stocker et accéder aux informations de votre appareil. Consentir à ces technologies nous permet 
+      de traiter des données comme votre comportement de navigation ou les identifiants uniques sur ce site. 
+      Ne pas consentir ou retirer votre consentement peut affecter certaines fonctionnalités.
+    </p>
+    
+    <!-- Boutons principaux -->
+    <div class="cc-buttons">
+      <button class="cc-btn cc-btn-accept" id="ccAcceptAll">Tout accepter</button>
+      <button class="cc-btn cc-btn-reject" id="ccRejectAll">Tout refuser</button>
+      <button class="cc-btn cc-btn-settings" id="ccShowSettings">Paramétrer mes choix</button>
+    </div>
+    
+    <!-- Panneau des paramètres détaillés -->
+    <div class="cc-settings-panel" id="ccSettingsPanel">
+      <h3 class="cc-settings-title">Paramétrer vos préférences</h3>
+      
+      <!-- Cookies nécessaires (toujours actifs) -->
+      <div class="cc-option">
+        <div class="cc-option-info">
+          <p class="cc-option-label">Cookies nécessaires</p>
+          <p class="cc-option-desc">
+            Essentiels au fonctionnement du site. Ils permettent la navigation et l'accès aux zones sécurisées.
+          </p>
+        </div>
+        <label class="cc-toggle">
+          <input type="checkbox" checked disabled>
+          <span class="cc-toggle-slider"></span>
+        </label>
+      </div>
+      
+      <!-- Cookies analytiques -->
+      <div class="cc-option">
+        <div class="cc-option-info">
+          <p class="cc-option-label">Cookies analytiques</p>
+          <p class="cc-option-desc">
+            Nous aident à comprendre comment les visiteurs interagissent avec le site, de manière anonyme.
+          </p>
+        </div>
+        <label class="cc-toggle">
+          <input type="checkbox" id="ccAnalytics">
+          <span class="cc-toggle-slider"></span>
+        </label>
+      </div>
+      
+      <!-- Cookies marketing -->
+      <div class="cc-option">
+        <div class="cc-option-info">
+          <p class="cc-option-label">Cookies marketing</p>
+          <p class="cc-option-desc">
+            Utilisés pour vous proposer des contenus et publicités adaptés à vos centres d'intérêt.
+          </p>
+        </div>
+        <label class="cc-toggle">
+          <input type="checkbox" id="ccMarketing">
+          <span class="cc-toggle-slider"></span>
+        </label>
+      </div>
+      
+      <!-- Boutons de sauvegarde -->
+      <div class="cc-settings-buttons">
+        <button class="cc-btn cc-btn-accept" id="ccSaveSettings">Enregistrer mes choix</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Lien pour modifier les choix (affiché après consentement) -->
+<button class="cc-reopen-link" id="ccReopenLink">🍪 Gérer les cookies</button>
+<!-- /include:cookies -->
 <script>
 /* Parcours 6 mois : la frise se remplit au défilement */
 (function () {

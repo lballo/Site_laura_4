@@ -70,7 +70,37 @@
 
 <body>
   <!-- Navigation chargée par includes.js -->
-  <div id="header-formation-placeholder"></div>
+  <!-- include:header-formation -->
+<!-- ============================================
+     HEADER FORMATION - Navigation épurée
+     Fichier : assets/components/header-formation.html
+     ============================================ -->
+
+<!-- NAVIGATION -->
+<nav class="nav" id="nav">
+  <div class="nav-progress" id="navProgress"></div>
+  <a href="/" class="nav-logo">
+    <img src="/assets/img/Laura-Ballo-black-low-res.png" alt="Laura Ballo - Coaching Leadership Premium">
+  </a>
+  <div class="nav-links">
+    <a href="/">Accueil</a>
+    <a href="/blog">Blog</a>
+    <a href="https://calendly.com/laura-ballo1993/echangecoaching" class="btn btn-secondary" target="_blank" rel="noopener">Réserver un appel</a>
+  </div>
+  <button class="nav-burger" id="navBurger" onclick="toggleMobileMenu()" aria-label="Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="nav-mobile" id="navMobile">
+  <a href="/" onclick="closeMobileMenu()">Accueil</a>
+  <a href="/blog" onclick="closeMobileMenu()">Blog</a>
+  <a href="https://calendly.com/laura-ballo1993/echangecoaching" class="btn btn-primary" target="_blank" rel="noopener" onclick="closeMobileMenu()">Réserver un appel</a>
+</div>
+<!-- /include:header-formation -->
 
   <!-- Hero -->
   <section class="hero">
@@ -210,10 +240,152 @@
   </section>
 
   <!-- Footer chargé par includes.js -->
-  <div id="footer-placeholder"></div>
+  <!-- include:footer -->
+<!-- ============================================
+     FOOTER
+     Fichier : assets/components/footer.html
+     ============================================ -->
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h3>Laura Ballo</h3>
+      <p>
+Coaching en leadership et prise de parole pour dirigeants, fondateurs et créateurs.
+Développer une présence forte, un charisme naturel et une parole qui marque.
+      </p>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/in/lauraballo-coach-leadership/" class="social-link" aria-label="LinkedIn" target="_blank" rel="noopener">
+          <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/laura_ballo_coaching/" class="social-link" aria-label="Instagram" target="_blank" rel="noopener">
+          <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-column">
+      <h4>Ressources</h4>
+      <a href="/blog">Blog</a>
+      <a href="/formations">Formations</a>
+      <a href="/resultats">Nos résultats</a>
+      <a href="/#temoignages">Témoignages</a>
+      <a href="/#faq">FAQ</a>
+    </div>
+    
+    <div class="footer-column">
+      <h4>Contact</h4>
+      <a href="mailto:contact@lauraballo.com">contact@lauraballo.com</a>
+      <a href="tel:+33643037926">+33 6 43 03 79 26</a>
+      <a href="/#contact">Réserver un appel</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 Laura Ballo • Coaching Leadership Premium • Tous droits réservés</p>
+    <div class="footer-legal">
+      <a href="/legal/mentions-legales">Mentions légales</a>
+      <a href="/legal/politique-confidentialite">Confidentialité</a>
+      <a href="/legal/cgv">CGV coaching</a>
+      <a href="/legal/cgv-formation">CGV formation</a>
+      <button onclick="CookieConsent.showBanner()" class="footer-cookie-btn">Cookies</button>
+    </div>
+  </div>
+</footer>
+<!-- /include:footer -->
 
   <!-- Cookies chargé par includes.js -->
-  <div id="cookies-placeholder"></div>
+  <!-- include:cookies -->
+<!-- ============================================
+     BANNIÈRE COOKIES RGPD
+     Fichier : assets/components/cookies.html
+     ============================================ -->
+
+<!-- Overlay d'arrière-plan -->
+<div class="cc-overlay" id="ccOverlay"></div>
+
+<!-- Bannière principale -->
+<div class="cc-banner" id="ccBanner" role="dialog" aria-labelledby="ccTitle" aria-describedby="ccText">
+  <div class="cc-wrapper">
+    <!-- Titre -->
+    <h2 class="cc-title" id="ccTitle">🍪 Gestion des cookies</h2>
+    
+    <!-- Texte légal -->
+    <p class="cc-text" id="ccText">
+      Pour vous offrir la meilleure expérience, nous utilisons des technologies telles que les cookies 
+      pour stocker et accéder aux informations de votre appareil. Consentir à ces technologies nous permet 
+      de traiter des données comme votre comportement de navigation ou les identifiants uniques sur ce site. 
+      Ne pas consentir ou retirer votre consentement peut affecter certaines fonctionnalités.
+    </p>
+    
+    <!-- Boutons principaux -->
+    <div class="cc-buttons">
+      <button class="cc-btn cc-btn-accept" id="ccAcceptAll">Tout accepter</button>
+      <button class="cc-btn cc-btn-reject" id="ccRejectAll">Tout refuser</button>
+      <button class="cc-btn cc-btn-settings" id="ccShowSettings">Paramétrer mes choix</button>
+    </div>
+    
+    <!-- Panneau des paramètres détaillés -->
+    <div class="cc-settings-panel" id="ccSettingsPanel">
+      <h3 class="cc-settings-title">Paramétrer vos préférences</h3>
+      
+      <!-- Cookies nécessaires (toujours actifs) -->
+      <div class="cc-option">
+        <div class="cc-option-info">
+          <p class="cc-option-label">Cookies nécessaires</p>
+          <p class="cc-option-desc">
+            Essentiels au fonctionnement du site. Ils permettent la navigation et l'accès aux zones sécurisées.
+          </p>
+        </div>
+        <label class="cc-toggle">
+          <input type="checkbox" checked disabled>
+          <span class="cc-toggle-slider"></span>
+        </label>
+      </div>
+      
+      <!-- Cookies analytiques -->
+      <div class="cc-option">
+        <div class="cc-option-info">
+          <p class="cc-option-label">Cookies analytiques</p>
+          <p class="cc-option-desc">
+            Nous aident à comprendre comment les visiteurs interagissent avec le site, de manière anonyme.
+          </p>
+        </div>
+        <label class="cc-toggle">
+          <input type="checkbox" id="ccAnalytics">
+          <span class="cc-toggle-slider"></span>
+        </label>
+      </div>
+      
+      <!-- Cookies marketing -->
+      <div class="cc-option">
+        <div class="cc-option-info">
+          <p class="cc-option-label">Cookies marketing</p>
+          <p class="cc-option-desc">
+            Utilisés pour vous proposer des contenus et publicités adaptés à vos centres d'intérêt.
+          </p>
+        </div>
+        <label class="cc-toggle">
+          <input type="checkbox" id="ccMarketing">
+          <span class="cc-toggle-slider"></span>
+        </label>
+      </div>
+      
+      <!-- Boutons de sauvegarde -->
+      <div class="cc-settings-buttons">
+        <button class="cc-btn cc-btn-accept" id="ccSaveSettings">Enregistrer mes choix</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Lien pour modifier les choix (affiché après consentement) -->
+<button class="cc-reopen-link" id="ccReopenLink">🍪 Gérer les cookies</button>
+<!-- /include:cookies -->
 
   <!-- Includes.js : charge header, footer, cookies + init navigation -->
   <script src="/assets/js/includes.js"></script>

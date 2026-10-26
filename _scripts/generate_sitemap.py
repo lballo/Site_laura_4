@@ -14,6 +14,7 @@
 """
 
 import json
+import re
 import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
@@ -92,8 +93,14 @@ def discover_static_pages():
         if len(html_file.parts) == 1 and html_file.name.startswith(GOOGLE_VERIFICATION_PREFIX):
             continue
 
+        page_html = html_file.read_text(encoding="utf-8", errors="ignore")
+
         # Pages de renvoi (meta refresh) : elles ne font que rediriger
-        if 'http-equiv="refresh"' in html_file.read_text(encoding="utf-8", errors="ignore"):
+        if 'http-equiv="refresh"' in page_html:
+            continue
+
+        # Pages en noindex : Google ne doit pas les indexer, donc pas de sitemap
+        if re.search(r'<meta[^>]+name=["\']robots["\'][^>]*noindex', page_html, re.I):
             continue
 
         # Construire l'URL propre (sans .html ni barre finale)

@@ -33,7 +33,7 @@ OFFRES = {
         "titre": "Envie d'aller plus loin ?",
         "texte": "J'accompagne les dirigeants à prendre leur place, incarner leur rôle et "
                  "inspirer leurs équipes, dans un coaching individuel sur six mois.",
-        "url": "/accompagnements/presence-signature",
+        "url": "/coaching-de-dirigeants",
         "lien": "Découvrir le coaching dirigeants",
     },
     "leader-ia": {

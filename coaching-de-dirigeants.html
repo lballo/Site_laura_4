@@ -12,13 +12,13 @@
 <meta name="keywords" content="coaching dirigeant, accompagnement haut dirigeant, leadership empathique, autorité du leader, courage managérial, pouvoir personnel, posture de dirigeant, prise de parole dirigeant, IA dirigeant" />
 <meta name="author" content="Laura Ballo" />
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
-<link rel="canonical" href="https://lauraballo.com/accompagnements/presence-signature" />
+<link rel="canonical" href="https://lauraballo.com/coaching-de-dirigeants" />
 
 <!-- OPEN GRAPH -->
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="fr_FR" />
 <meta property="og:site_name" content="Laura Ballo" />
-<meta property="og:url" content="https://lauraballo.com/accompagnements/presence-signature" />
+<meta property="og:url" content="https://lauraballo.com/coaching-de-dirigeants" />
 <meta property="og:title" content="Présence — Prendre votre place. Incarner votre rôle de dirigeant. Inspirer vos équipes." />
 <meta property="og:description" content="Être un leader empathique et un leader d'autorité. Pas l'un ou l'autre : les deux. Accompagnement de 6 mois pour dirigeants." />
 <meta property="og:image" content="https://lauraballo.com/assets/img/laura-portrait.webp" />
@@ -60,7 +60,7 @@
       "name": "Présence Signature — Accompagnement dirigeant",
       "serviceType": "Coaching de dirigeant",
       "description": "Accompagnement individuel de 6 mois pour hauts dirigeants : pouvoir personnel, vision, courage managérial, prise de parole, avec l'appui de l'IA.",
-      "url": "https://lauraballo.com/accompagnements/presence-signature",
+      "url": "https://lauraballo.com/coaching-de-dirigeants",
       "areaServed": "FR",
       "provider": { "@id": "https://lauraballo.com/#laura" }
     }
@@ -973,7 +973,93 @@ const io = new IntersectionObserver((entries)=>{
 document.querySelectorAll('.reveal,.reveal-scale,.reveal-left,.reveal-right').forEach(el=>io.observe(el));
 </script>
 <!-- COOKIES (chargé automatiquement) -->
-<div id="cookies-placeholder"></div>
+<!-- include:cookies -->
+<!-- ============================================
+     BANNIÈRE COOKIES RGPD
+     Fichier : assets/components/cookies.html
+     ============================================ -->
+
+<!-- Overlay d'arrière-plan -->
+<div class="cc-overlay" id="ccOverlay"></div>
+
+<!-- Bannière principale -->
+<div class="cc-banner" id="ccBanner" role="dialog" aria-labelledby="ccTitle" aria-describedby="ccText">
+  <div class="cc-wrapper">
+    <!-- Titre -->
+    <h2 class="cc-title" id="ccTitle">🍪 Gestion des cookies</h2>
+    
+    <!-- Texte légal -->
+    <p class="cc-text" id="ccText">
+      Pour vous offrir la meilleure expérience, nous utilisons des technologies telles que les cookies 
+      pour stocker et accéder aux informations de votre appareil. Consentir à ces technologies nous permet 
+      de traiter des données comme votre comportement de navigation ou les identifiants uniques sur ce site. 
+      Ne pas consentir ou retirer votre consentement peut affecter certaines fonctionnalités.
+    </p>
+    
+    <!-- Boutons principaux -->
+    <div class="cc-buttons">
+      <button class="cc-btn cc-btn-accept" id="ccAcceptAll">Tout accepter</button>
+      <button class="cc-btn cc-btn-reject" id="ccRejectAll">Tout refuser</button>
+      <button class="cc-btn cc-btn-settings" id="ccShowSettings">Paramétrer mes choix</button>
+    </div>
+    
+    <!-- Panneau des paramètres détaillés -->
+    <div class="cc-settings-panel" id="ccSettingsPanel">
+      <h3 class="cc-settings-title">Paramétrer vos préférences</h3>
+      
+      <!-- Cookies nécessaires (toujours actifs) -->
+      <div class="cc-option">
+        <div class="cc-option-info">
+          <p class="cc-option-label">Cookies nécessaires</p>
+          <p class="cc-option-desc">
+            Essentiels au fonctionnement du site. Ils permettent la navigation et l'accès aux zones sécurisées.
+          </p>
+        </div>
+        <label class="cc-toggle">
+          <input type="checkbox" checked disabled>
+          <span class="cc-toggle-slider"></span>
+        </label>
+      </div>
+      
+      <!-- Cookies analytiques -->
+      <div class="cc-option">
+        <div class="cc-option-info">
+          <p class="cc-option-label">Cookies analytiques</p>
+          <p class="cc-option-desc">
+            Nous aident à comprendre comment les visiteurs interagissent avec le site, de manière anonyme.
+          </p>
+        </div>
+        <label class="cc-toggle">
+          <input type="checkbox" id="ccAnalytics">
+          <span class="cc-toggle-slider"></span>
+        </label>
+      </div>
+      
+      <!-- Cookies marketing -->
+      <div class="cc-option">
+        <div class="cc-option-info">
+          <p class="cc-option-label">Cookies marketing</p>
+          <p class="cc-option-desc">
+            Utilisés pour vous proposer des contenus et publicités adaptés à vos centres d'intérêt.
+          </p>
+        </div>
+        <label class="cc-toggle">
+          <input type="checkbox" id="ccMarketing">
+          <span class="cc-toggle-slider"></span>
+        </label>
+      </div>
+      
+      <!-- Boutons de sauvegarde -->
+      <div class="cc-settings-buttons">
+        <button class="cc-btn cc-btn-accept" id="ccSaveSettings">Enregistrer mes choix</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Lien pour modifier les choix (affiché après consentement) -->
+<button class="cc-reopen-link" id="ccReopenLink">🍪 Gérer les cookies</button>
+<!-- /include:cookies -->
 <script>
 /* Parcours 6 mois : la frise se remplit au défilement */
 (function () {
