@@ -7,4 +7,4 @@ depuis Notion, sans attendre le passage automatique de 8h.
 
 Sur github.com : ouvrir ce fichier → icône crayon → changer la date → « Commit changes ».
 
-Dernière republication demandée : 2026-10-27 12:45 (MGIA-01)
+Dernière republication demandée : 2026-10-27 12:36 (IE-02)
