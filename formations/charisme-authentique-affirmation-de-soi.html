@@ -423,6 +423,19 @@
             cursor: pointer;
         }
 
+        a.share-btn { text-decoration: none; }
+
+        .share-msg {
+            margin: 0;
+            padding: 0 var(--space-md) var(--space-md);
+            font-size: 13px;
+            line-height: 1.45;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        .share-msg:empty { display: none; }
+
         .share-btn:hover {
             background: var(--black);
             color: var(--white);
@@ -1671,29 +1684,22 @@
                         <button class="btn-primary" onclick="openModalDevis()">Faire une demande de devis</button>
                     </div>
 
-                    <!-- Share -->
-                    <div class="sidebar-share">
-                        <button class="share-btn" title="Télécharger le programme">
-                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-                            </svg>
+                    <!-- Partage : programme PDF, favoris, partage, e-mail -->
+                    <div class="sidebar-share" id="partage" data-titre="Charisme authentique et affirmation de soi" data-url="https://lauraballo.com/formations/charisme-authentique-affirmation-de-soi" data-pdf="/formations/programmes/charisme-authentique-affirmation-de-soi.pdf">
+                        <a class="share-btn" id="btn-programme" href="/formations/programmes/charisme-authentique-affirmation-de-soi.pdf" download title="Télécharger le programme (PDF)" aria-label="Télécharger le programme (PDF)">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        </a>
+                        <button type="button" class="share-btn" id="btn-favori" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
                         </button>
-                        <button class="share-btn" title="Ajouter aux favoris">
-                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                            </svg>
+                        <button type="button" class="share-btn" id="btn-partager" title="Partager" aria-label="Partager cette formation">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
                         </button>
-                        <button class="share-btn" title="Partager">
-                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
-                            </svg>
-                        </button>
-                        <button class="share-btn" title="Envoyer par email">
-                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                            </svg>
-                        </button>
+                        <a class="share-btn" id="btn-email" href="mailto:" title="Envoyer par e-mail" aria-label="Envoyer cette formation par e-mail">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        </a>
                     </div>
+                    <p class="share-msg" id="share-msg" role="status" aria-live="polite"></p>
 
                 </div>
             </div>
@@ -2341,5 +2347,63 @@
         });
     </script>
 
+
+    <script>
+    /* Boutons sous « Faire une demande de devis » : programme PDF, favoris, partage, e-mail */
+    (function () {
+        var bloc = document.getElementById('partage');
+        if (!bloc) return;
+        var titre = bloc.getAttribute('data-titre') || document.title;
+        var url = bloc.getAttribute('data-url') || window.location.href.split('#')[0];
+        var pdf = bloc.getAttribute('data-pdf') || '';
+        var msg = document.getElementById('share-msg');
+        var minuteur;
+        function annoncer(texte) {
+            msg.textContent = texte;
+            clearTimeout(minuteur);
+            minuteur = setTimeout(function () { msg.textContent = ''; }, 6000);
+        }
+
+        // Programme : PDF du site, ou demande par e-mail s'il n'est pas encore en ligne
+        var prog = document.getElementById('btn-programme');
+        if (!pdf) {
+            prog.removeAttribute('download');
+            prog.href = 'mailto:contact@lauraballo.com?subject=' + encodeURIComponent('Demande du programme – ' + titre);
+            prog.title = 'Recevoir le programme par e-mail';
+            prog.setAttribute('aria-label', 'Recevoir le programme par e-mail');
+        }
+
+        // Favoris : les navigateurs n'autorisent plus l'ajout par script, on donne le raccourci
+        document.getElementById('btn-favori').addEventListener('click', function () {
+            var mac = /Mac|iPhone|iPad|iPod/.test(navigator.platform || navigator.userAgent);
+            var tactile = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+            annoncer(tactile
+                ? 'Pour garder cette formation : menu de votre navigateur, puis « Ajouter aux favoris ».'
+                : 'Pour ajouter cette page à vos favoris : ' + (mac ? '⌘ + D' : 'Ctrl + D') + '.');
+        });
+
+        // Partage : menu de partage du téléphone, sinon copie du lien
+        document.getElementById('btn-partager').addEventListener('click', function () {
+            if (navigator.share) {
+                navigator.share({ title: titre, text: 'Formation : ' + titre, url: url }).catch(function () {});
+                return;
+            }
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(
+                    function () { annoncer('Lien copié : vous pouvez le coller où vous voulez.'); },
+                    function () { annoncer('Lien de la page : ' + url); }
+                );
+            } else {
+                annoncer('Lien de la page : ' + url);
+            }
+        });
+
+        // E-mail : message pré-rempli avec le lien de la fiche et du programme
+        var corps = 'Bonjour,\n\nCette formation pourrait vous intéresser : ' + titre + '\n' + url +
+            (pdf ? '\n\nProgramme détaillé (PDF) : https://lauraballo.com' + pdf : '') + '\n';
+        document.getElementById('btn-email').href = 'mailto:?subject=' +
+            encodeURIComponent('Formation : ' + titre) + '&body=' + encodeURIComponent(corps);
+    })();
+    </script>
 </body>
 </html>
