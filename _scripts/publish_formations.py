@@ -1005,6 +1005,11 @@ def build_data(client, page, avis, org=None, lignes_indicateurs=None, periode=("
     }
     data["ORGANISME_TEL_HREF"] = esc(premium.telephone(org.get("telephone", ""))[1])
 
+    # Programme PDF copié sur le site pour toutes les fiches : le bouton
+    # « Télécharger le programme » pointe dessus (vide = proposé par e-mail).
+    pdf_url = programme_pdf(page, slug)
+    data["PROGRAMME_PDF_URL"] = esc(pdf_url)
+
     if est_premium(page):
         data.update(
             premium.slots(
@@ -1013,7 +1018,7 @@ def build_data(client, page, avis, org=None, lignes_indicateurs=None, periode=("
                 avis,
                 periode,
                 CRITERES_A_CHAUD,
-                programme_pdf(page, slug),
+                pdf_url,
             )
         )
         data["SCHEMA_JSON"] = build_schema(data, avis, sur_devis=True)
