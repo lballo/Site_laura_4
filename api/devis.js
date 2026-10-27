@@ -121,6 +121,8 @@ export default async function handler(req, res) {
           Type: { select: { name: "Entreprise" } },
           Statut: { select: { name: "Lead" } },
           Source: { select: { name: SOURCE } },
+          "Type de client": { select: { name: "En propre" } },
+          "Mode de sollicitation": { select: { name: "Questionnaire en ligne" } },
           ...(TYPES_ENTREPRISE.includes(d.typeEntreprise)
             ? { "Type d'entreprise": { select: { name: d.typeEntreprise } } }
             : {}),
