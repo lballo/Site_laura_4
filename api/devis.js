@@ -17,6 +17,7 @@ const BASES = {
   formations: "2fd075e127d2817c9efdf1339b79a765",
 };
 const SOURCE = "Site web / Inbound";
+const TYPES_ENTREPRISE = ["PME", "ETI", "Grand groupe", "Administration publique", "Association", "Autre"];
 
 function notion(chemin, methode, corps) {
   return fetch(`https://api.notion.com/v1/${chemin}`, {
@@ -120,10 +121,12 @@ export default async function handler(req, res) {
           Type: { select: { name: "Entreprise" } },
           Statut: { select: { name: "Lead" } },
           Source: { select: { name: SOURCE } },
+          ...(TYPES_ENTREPRISE.includes(d.typeEntreprise)
+            ? { "Type d'entreprise": { select: { name: d.typeEntreprise } } }
+            : {}),
           "Notes internes": {
             rich_text: richText(
-              `Créée depuis une demande de devis du site le ${dateParis()}.` +
-                (d.typeEntreprise ? ` Taille indiquée : ${d.typeEntreprise}.` : "")
+              `Créée depuis une demande de devis du site le ${dateParis()}.`
             ),
           },
         },
@@ -167,7 +170,7 @@ export default async function handler(req, res) {
     const notes = [
       `Demande de devis envoyée depuis lauraballo.com${d.page} le ${dateParis()}.`,
       `Contact : ${d.prenom} ${d.nom} — ${d.fonction} — ${d.email} — ${d.telephone}`,
-      d.typeEntreprise ? `Taille de l'entreprise : ${d.typeEntreprise}` : "",
+      d.typeEntreprise ? `Type d'entreprise : ${d.typeEntreprise}` : "",
       `Formation(s) : ${intitules.join(" ; ")}`,
       d.nb ? `Nombre de personnes : ${d.nb}` : "",
     ]
