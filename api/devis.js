@@ -170,7 +170,6 @@ export default async function handler(req, res) {
       d.typeEntreprise ? `Taille de l'entreprise : ${d.typeEntreprise}` : "",
       `Formation(s) : ${intitules.join(" ; ")}`,
       d.nb ? `Nombre de personnes : ${d.nb}` : "",
-      d.message ? `Message :\n${d.message}` : "",
     ]
       .filter(Boolean)
       .join("\n");
@@ -189,6 +188,8 @@ export default async function handler(req, res) {
     };
     if (formationsIds.length) proprietes["Formation envisagée"] = { relation: formationsIds };
     if (d.nb) proprietes["Nb participants estimé"] = { number: d.nb };
+    // « Nous en dire plus sur votre besoin » : première trace de l'analyse du besoin (ind. 4)
+    if (d.message) proprietes["Besoin de formation (site internet)"] = { rich_text: richText(d.message) };
 
     await notion("pages", "POST", { parent: { database_id: BASES.opportunites }, properties: proprietes });
 
