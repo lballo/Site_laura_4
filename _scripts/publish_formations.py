@@ -952,7 +952,6 @@ def build_data(client, page, avis, org=None, lignes_indicateurs=None, periode=("
         "META_DESCRIPTION": esc(prop(page, "Méta-description")),
         "SLUG": slug,
         "ACCROCHE": esc(prop(page, "Accroche")),
-        "BADGE": "Formation certifiée Qualiopi",
         "MODALITES": esc(prop(page, "Modalités", "select")),
         "NIVEAU_LABEL": niveau_label,
         "DUREE": duree,
@@ -1169,7 +1168,6 @@ def render_carte(page):
         f'                         data-tags="{data_tags}">\n'
         '                    <div class="formation-card-image">\n'
         f'                        <img src="{image_url(page)}" alt="Formation {esc(nom)}" loading="lazy">\n'
-        f'                        <div class="card-badge">{ICONE_BOUCLIER}Qualiopi</div>\n'
         "                    </div>\n"
         '                    <div class="formation-card-content">\n'
         '                        <div class="card-tags">\n'
