@@ -155,6 +155,15 @@
             *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
         }
 {{RESULTATS_CSS}}
+        /* MOBILE-FIX-2026-10 */
+        @media (max-width: 640px) {
+            nav[aria-label="Navigation de la page"] { padding-top: 14px !important; padding-bottom: 6px !important; }
+            nav[aria-label="Navigation de la page"] > div { flex-wrap: nowrap !important; overflow-x: auto; gap: 0 18px !important; width: 100%; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+            nav[aria-label="Navigation de la page"] > div::-webkit-scrollbar { display: none; }
+            nav[aria-label="Navigation de la page"] > div > a { white-space: nowrap; font-size: 13px !important; flex-shrink: 0; }
+            .pe-page [style*="font-size: 11px"] { font-size: 12px !important; }
+            .pe-page img { max-width: 100%; height: auto; }
+        }
     </style>
 <!-- Vercel Web Analytics (sans cookies) -->
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>

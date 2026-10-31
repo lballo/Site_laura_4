@@ -220,6 +220,11 @@
             color: var(--text-muted);
             text-decoration: underline;
         }
+        /* MOBILE-FIX-2026-10 */
+        @media (max-width: 640px) {
+            .card-tag { font-size: 0.75rem; }
+            .formation-card p { font-size: 0.9rem; }
+        }
     </style>
 <!-- Vercel Web Analytics (sans cookies) -->
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
