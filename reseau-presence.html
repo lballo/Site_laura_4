@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#A83932" />
+  <title>Rejoindre le Réseau Présence — tarif fondateur | Laura Ballo</title>
+  <meta name="description" content="Inscription au Réseau Présence de Laura Ballo. Tarif fondateur dès 30 € par mois pendant 6 mois pour les premiers membres, 14 jours d'essai gratuit." />
+  <meta name="robots" content="noindex, follow" />
+  <link rel="canonical" href="https://lauraballo.com/reseau-presence" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:site_name" content="Laura Ballo" />
+  <meta property="og:url" content="https://lauraballo.com/reseau-presence" />
+  <meta property="og:title" content="Rejoindre le Réseau Présence" />
+  <meta property="og:description" content="Tarif fondateur dès 30 € par mois pendant 6 mois pour les premiers membres." />
+  <meta property="og:image" content="https://lauraballo.com/assets/img/blog/ShootingLaura9.webp" />
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <link rel="stylesheet" href="/assets/css/tokens.css" />
+  <link rel="stylesheet" href="/assets/css/nav.css" />
+  <link rel="stylesheet" href="/assets/css/footer.css" />
+  <link rel="stylesheet" href="/assets/css/cookies.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <script src="https://js.stripe.com/v3/"></script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); color: var(--text-dark); -webkit-font-smoothing: antialiased; background: var(--light-beige); margin: 0; }
+
+    .rp-wrap { max-width: 1120px; margin: 0 auto; padding: 0 1.5rem; }
+    .rp-hero { padding: 10rem 0 3rem; }
+    .rp-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 3.5rem; align-items: start; }
+    @media (max-width: 900px) { .rp-grid { grid-template-columns: 1fr; gap: 2.5rem; } .rp-hero { padding: 7.5rem 0 2rem; } }
+
+    .rp-label { display: inline-flex; align-items: center; gap: .75rem; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: var(--rouge); font-weight: 600; }
+    .rp-label::before { content: ''; width: 32px; height: 1px; background: var(--rouge); }
+
+    .rp-h1 { font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: clamp(2.1rem, 4.4vw, 3.2rem); line-height: 1.12; margin: 1.1rem 0 1.4rem; color: var(--text-dark); }
+    .rp-h1 em { color: var(--rouge); font-style: italic; font-weight: 400; }
+    .rp-lead { font-size: 1.125rem; line-height: 1.75; color: var(--brun-gris); max-width: 34rem; }
+
+    .rp-points { list-style: none; padding: 0; margin: 2rem 0 0; display: grid; gap: .9rem; }
+    .rp-points li { display: flex; gap: .85rem; align-items: flex-start; line-height: 1.6; color: var(--text-dark); }
+    .rp-points li::before { content: ''; flex: none; width: 8px; height: 8px; margin-top: .6rem; border-radius: 50%; background: var(--ocre); }
+
+    /* Barème */
+    .rp-card { background: var(--white); border: 1px solid var(--warm-beige); border-radius: 14px; box-shadow: 0 24px 48px -28px rgba(61,49,40,.35); padding: 2rem; }
+    .rp-card h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.35rem; font-weight: 600; margin: 0 0 .35rem; }
+    .rp-card .rp-sub { font-size: .92rem; color: var(--brun-gris); margin: 0 0 1.4rem; line-height: 1.55; }
+
+    .rp-tiers { list-style: none; padding: 0; margin: 0; display: grid; gap: .5rem; }
+    .rp-tier { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: .75rem; padding: .8rem 1rem; border-radius: 10px; border: 1px solid var(--warm-beige); background: var(--light-beige); transition: all .2s ease; }
+    .rp-tier .rp-places { font-size: .88rem; color: var(--brun-gris); }
+    .rp-tier .rp-price { font-weight: 700; font-size: 1.05rem; color: var(--text-dark); white-space: nowrap; }
+    .rp-tier .rp-price small { font-weight: 500; font-size: .78rem; color: var(--brun-gris); }
+    .rp-tier.is-full { opacity: .55; }
+    .rp-tier.is-full .rp-price { text-decoration: line-through; }
+    .rp-tier.is-current { background: var(--rouge); border-color: var(--rouge); box-shadow: 0 12px 26px -14px rgba(168,57,50,.7); transform: scale(1.02); }
+    .rp-tier.is-current .rp-places, .rp-tier.is-current .rp-price, .rp-tier.is-current .rp-price small { color: #fff; }
+    .rp-tier .rp-tag { display: block; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; font-weight: 600; margin-top: .15rem; }
+    .rp-tier.is-current .rp-tag { color: #fff; }
+    .rp-tier.is-full .rp-tag { color: var(--brun-gris); }
+    .rp-tier.is-standard { background: var(--white); border-style: dashed; }
+
+    .rp-note { font-size: .85rem; color: var(--brun-gris); line-height: 1.6; margin: 1.2rem 0 0; }
+
+    .rp-skel { height: 46px; border-radius: 10px; background: linear-gradient(90deg, var(--warm-beige) 0%, var(--light-beige) 50%, var(--warm-beige) 100%); background-size: 200% 100%; animation: rp-shimmer 1.4s infinite; }
+    @keyframes rp-shimmer { to { background-position: -200% 0; } }
+
+    /* Paiement */
+    .rp-pay { padding: 1rem 0 5rem; scroll-margin-top: 1rem; }
+    .rp-pay-card { max-width: 760px; margin: 0 auto; }
+    .rp-pay-head { text-align: center; margin-bottom: 1.6rem; }
+    .rp-pay-head h2 { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(1.6rem, 3vw, 2.1rem); font-weight: 600; margin: 0 0 .6rem; }
+    .rp-pay-head p { color: var(--brun-gris); margin: 0; line-height: 1.6; }
+    .rp-current { display: inline-block; margin-top: 1rem; padding: .45rem 1rem; border-radius: 999px; background: rgba(168,57,50,.08); color: var(--rouge); font-weight: 600; font-size: .92rem; }
+    #checkout { min-height: 420px; background: var(--white); border-radius: 14px; border: 1px solid var(--warm-beige); padding: 1rem; }
+    .rp-msg { text-align: center; padding: 3rem 1.5rem; color: var(--brun-gris); line-height: 1.7; }
+    .rp-msg strong { color: var(--text-dark); }
+    .rp-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 1.8rem; border-radius: 6px; background: var(--rouge); color: #fff; font-weight: 600; text-decoration: none; transition: all .25s ease; margin-top: 2rem; }
+    .rp-btn:hover { background: var(--rouge-hover); transform: translateY(-2px); box-shadow: 0 10px 25px -10px rgba(168,57,50,.5); }
+
+    .rp-legal { text-align: center; font-size: .8rem; color: var(--taupe); margin-top: 1.2rem; line-height: 1.6; }
+    .rp-legal a { color: var(--brun-gris); }
+
+    /* Merci */
+    .rp-thanks { max-width: 640px; margin: 0 auto; padding: 5rem 1.5rem 6rem; text-align: center; }
+    .rp-thanks h1 { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 600; margin: 1rem 0; }
+    .rp-thanks p { color: var(--brun-gris); line-height: 1.75; font-size: 1.08rem; }
+  </style>
+  <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+<div id="header-placeholder"></div>
+
+<main id="main">
+
+  <!-- ÉTAT : INSCRIPTION -->
+  <div id="rp-signup">
+    <section class="rp-hero">
+      <div class="rp-wrap rp-grid">
+        <div>
+          <span class="rp-label">Réseau Présence</span>
+          <h1 class="rp-h1">Rejoignez le réseau dès maintenant, <em>au tarif fondateur</em></h1>
+          <p class="rp-lead">
+            Les premiers membres entrent à un tarif réduit pendant leurs six premiers mois.
+            Il démarre à 30 € par mois et augmente de 10 € toutes les 10 places :
+            plus vous arrivez tôt, plus il est doux.
+          </p>
+          <ul class="rp-points">
+            <li>14 jours d'essai gratuit, aucun prélèvement avant la fin de l'essai.</li>
+            <li>Votre tarif fondateur s'applique pendant 6 mois, puis l'abonnement continue à 90 € par mois, sans démarche de votre part.</li>
+            <li>Sans engagement : vous pouvez résilier à tout moment.</li>
+          </ul>
+          <a href="#paiement" class="rp-btn">Je réserve ma place</a>
+        </div>
+
+        <aside class="rp-card" aria-labelledby="rp-bareme-title">
+          <h2 id="rp-bareme-title">Les places fondatrices</h2>
+          <p class="rp-sub">Le tarif indiqué s'applique pendant 6 mois.</p>
+          <ul class="rp-tiers" id="rp-tiers" aria-live="polite">
+            <li class="rp-skel"></li><li class="rp-skel"></li><li class="rp-skel"></li>
+            <li class="rp-skel"></li><li class="rp-skel"></li><li class="rp-skel"></li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="rp-pay" id="paiement">
+      <div class="rp-wrap">
+        <div class="rp-pay-card">
+          <div class="rp-pay-head">
+            <h2>Votre inscription</h2>
+            <p>Paiement sécurisé par Stripe. Votre carte n'est débitée qu'à la fin des 14 jours d'essai.</p>
+            <span class="rp-current" id="rp-current" hidden></span>
+          </div>
+          <div id="checkout"><div class="rp-msg">Chargement du formulaire…</div></div>
+          <p class="rp-legal">
+            En vous inscrivant, vous acceptez les <a href="/legal/cgv">conditions générales de vente</a>
+            et la <a href="/legal/politique-confidentialite">politique de confidentialité</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ÉTAT : MERCI -->
+  <section class="rp-thanks" id="rp-thanks" hidden>
+    <span class="rp-label">Réseau Présence</span>
+    <h1>Bienvenue dans le réseau</h1>
+    <p id="rp-thanks-text">Votre inscription est confirmée. Vous allez recevoir un email de confirmation de Stripe.</p>
+    <a href="/" class="rp-btn">Retour à l'accueil</a>
+  </section>
+
+</main>
+
+<div id="footer-placeholder"></div>
+<div id="cookies-placeholder"></div>
+
+<script>
+(function () {
+  'use strict';
+  var API = '/api/reseau-presence';
+  var params = new URLSearchParams(window.location.search);
+  var sessionId = params.get('session_id');
+
+  function euros(n) { return n + ' €'; }
+  function plural(n, word) { return n + ' ' + word + (n > 1 ? 's' : ''); }
+
+  // ── Retour après paiement ──
+  if (sessionId) {
+    document.getElementById('rp-signup').hidden = true;
+    document.getElementById('rp-thanks').hidden = false;
+    fetch(API + '?session_id=' + encodeURIComponent(sessionId))
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        var text = document.getElementById('rp-thanks-text');
+        if (d.status === 'complete') {
+          text.textContent = 'Votre inscription est confirmée' + (d.email ? ' pour ' + d.email : '') +
+            '. Vous allez recevoir un email de confirmation. Votre essai gratuit de 14 jours commence aujourd’hui.';
+        } else {
+          text.textContent = 'Votre inscription n’a pas abouti. Vous pouvez recommencer depuis la page d’inscription.';
+          document.querySelector('#rp-thanks h1').textContent = 'Inscription non finalisée';
+          document.querySelector('#rp-thanks .rp-btn').setAttribute('href', '/reseau-presence');
+          document.querySelector('#rp-thanks .rp-btn').textContent = 'Revenir à l’inscription';
+        }
+      })
+      .catch(function () {});
+    return;
+  }
+
+  // ── Barème des places ──
+  function renderTiers(data) {
+    var list = document.getElementById('rp-tiers');
+    var html = '';
+    var current = data.current;
+    data.tiers.forEach(function (t) {
+      var state = t.remaining === 0 ? 'is-full' : (current && t.price === current.price ? 'is-current' : '');
+      var tag = state === 'is-full' ? 'Complet'
+        : state === 'is-current' ? 'Palier en cours · ' + plural(t.remaining, 'place') + ' restante' + (t.remaining > 1 ? 's' : '')
+        : '';
+      html += '<li class="rp-tier ' + state + '">' +
+        '<span class="rp-places">Places ' + t.firstPlace + ' à ' + t.lastPlace +
+        (tag ? '<span class="rp-tag">' + tag + '</span>' : '') + '</span>' +
+        '<span class="rp-price">' + euros(t.price) + ' <small>/ mois</small></span></li>';
+    });
+    html += '<li class="rp-tier is-standard' + (current ? '' : ' is-current') + '">' +
+      '<span class="rp-places">Tarif normal' + (current ? '' : '<span class="rp-tag">Tarif en vigueur</span>') + '</span>' +
+      '<span class="rp-price">' + euros(data.fullPrice) + ' <small>/ mois</small></span></li>';
+    list.innerHTML = html;
+
+    var badge = document.getElementById('rp-current');
+    badge.hidden = false;
+    badge.textContent = current
+      ? 'Votre tarif : ' + euros(current.price) + ' par mois pendant 6 mois, puis ' + euros(data.fullPrice)
+      : 'Tarif : ' + euros(data.fullPrice) + ' par mois';
+  }
+
+  function showError(msg) {
+    document.getElementById('checkout').innerHTML =
+      '<div class="rp-msg"><strong>Le formulaire ne s’est pas chargé.</strong><br>' + msg +
+      '<br>Si le problème persiste, écrivez-moi à <a href="mailto:contact@lauraballo.com">contact@lauraballo.com</a>.</div>';
+  }
+
+  fetch(API)
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      if (data.error) throw new Error(data.error);
+      renderTiers(data);
+      var stripe = Stripe(data.publishableKey);
+      return stripe.initEmbeddedCheckout({
+        fetchClientSecret: function () {
+          return fetch(API, { method: 'POST' })
+            .then(function (r) { return r.json(); })
+            .then(function (d) {
+              if (d.error) throw new Error(d.error);
+              return d.clientSecret;
+            });
+        }
+      });
+    })
+    .then(function (checkout) {
+      document.getElementById('checkout').innerHTML = '';
+      checkout.mount('#checkout');
+    })
+    .catch(function (err) {
+      showError(err && err.message ? err.message : 'Réessayez dans quelques minutes.');
+    });
+})();
+</script>
+<script src="/assets/js/includes.js"></script>
+</body>
+</html>
