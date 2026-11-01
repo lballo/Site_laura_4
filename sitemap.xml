@@ -123,6 +123,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://lauraballo.com/reseau-presence</loc>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
     <loc>https://lauraballo.com/resultats</loc>
     <lastmod>2026-11-01</lastmod>
     <changefreq>weekly</changefreq>
