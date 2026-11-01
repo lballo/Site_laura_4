@@ -28,6 +28,9 @@
  *   GET  /api/reseau-presence                 → palier en cours + places restantes
  *   GET  /api/reseau-presence?session_id=…    → statut d'une inscription (page de retour)
  *   POST /api/reseau-presence                 → crée le paiement intégré (client secret)
+ *        corps JSON facultatif : { "returnUrl": "https://…page de vente…" }
+ *
+ * Intégration sur une page de vente : voir assets/js/reseau-presence-embed.js
  */
 
 const FULL_PRICE = 90;          // €/mois
@@ -159,11 +162,35 @@ function siteOrigin(req) {
   return `${proto}://${host}`;
 }
 
+// Adresse de retour après paiement : la page de vente qui intègre le formulaire,
+// sinon la page d'inscription du site.
+function returnUrl(req) {
+  let base = `${siteOrigin(req)}${PAGE_PATH}`;
+  const asked = req.body && typeof req.body === 'object' ? req.body.returnUrl : null;
+  if (typeof asked === 'string' && asked.length < 1000) {
+    try {
+      const u = new URL(asked);
+      if (u.protocol === 'https:' || u.hostname === 'localhost') {
+        u.searchParams.delete('session_id');
+        u.hash = '';
+        base = u.href;
+      }
+    } catch (_) { /* adresse invalide : on garde la page du site */ }
+  }
+  return `${base}${base.includes('?') ? '&' : '?'}session_id={CHECKOUT_SESSION_ID}`;
+}
+
 // ─────────────────────────────────────────
 // Handler
 // ─────────────────────────────────────────
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
+  // Le formulaire peut être intégré sur une page de vente hébergée ailleurs
+  res.setHeader('Access-Control-Allow-Origin', req.headers.origin || '*');
+  res.setHeader('Vary', 'Origin');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  if (req.method === 'OPTIONS') return res.status(204).end();
 
   if (!process.env.STRIPE_SECRET_KEY || !process.env.STRIPE_PUBLISHABLE_KEY) {
     return res.status(500).json({ error: 'Configuration Stripe manquante' });
@@ -209,7 +236,7 @@ export default async function handler(req, res) {
         },
         billing_address_collection: 'auto',
         payment_method_collection: 'always',
-        return_url: `${siteOrigin(req)}${PAGE_PATH}?session_id={CHECKOUT_SESSION_ID}`,
+        return_url: returnUrl(req),
         metadata: { offre: 'reseau-presence' },
       };
       if (open) params.discounts = [{ coupon: open.id }];
