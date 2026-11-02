@@ -50,9 +50,26 @@
       img[style*="height: 6"] { height: 420px !important; }
     }
     @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+    .rp-jauge[hidden] { display: none !important; }
+    @keyframes rp-pousse { from { transform: scaleY(0.15); opacity: 0; } to { transform: scaleY(1); opacity: 1; } }
+    .rp-marche { transform-origin: bottom; animation: rp-pousse .9s cubic-bezier(.2,.7,.2,1) both; transition: transform .25s ease, box-shadow .25s ease, background .25s ease; }
+    .rp-palier:hover .rp-marche { transform: translateY(-6px); }
+    .rp-palier:focus-visible { outline: 2px solid #A83932; outline-offset: 4px; border-radius: 18px; }
+    @media (max-width: 640px) {
+      .rp-stairs { gap: 5px !important; }
+      .rp-marche { padding-top: 12px !important; border-radius: 12px 12px 4px 4px !important; }
+      .rp-prix { font-size: 19px !important; }
+      .rp-mois, .rp-tag { display: none !important; }
+      .rp-places { font-size: 10px !important; line-height: 1.2; }
+      .rp-frise-ligne { display: none; }
+      section > p.rp-note { font-size: 14px !important; }
+    }
+    @media (prefers-reduced-motion: reduce) { .rp-marche { animation: none; } }
   </style>
 </head>
 <body>
+
+
 <div style="width: 100%; background: #F3ECE8; color: #6C6059; font-family: 'Figtree', system-ui, sans-serif; font-size: 18px; line-height: 1.5; -webkit-font-smoothing: antialiased">
 
   <!-- En-tête : photo en fond avec un voile clair, inspiré de Présence pour soi -->
@@ -73,7 +90,7 @@
     <div style="position: relative; max-width: 1200px; margin: 0 auto; padding: 40px 40px 120px; box-sizing: border-box">
       <div style="max-width: 640px">
         <img src="/assets/img/logo-presence-rouge.png" alt="Présence — Prendre votre place, incarner votre présence" style="display: block; width: 440px; max-width: 100%; height: auto">
-        <h1 style="margin: 40px 0 0; font-family: 'Newsreader', Georgia, serif; font-weight: 400; font-size: 54px; line-height: 1.08; letter-spacing: -0.02em; color: #6C6059">Un réseau pour <em style="color: #AA564C">prendre sa place</em> : un leadership <em style="color: #AA564C">vivant et incarné.</em></h1>
+        <h1 style="margin: 40px 0 0; font-family: 'Newsreader', Georgia, serif; font-weight: 400; font-size: 44px; line-height: 1.12; letter-spacing: -0.02em; color: #6C6059">Un réseau pour prendre sa place : un leadership <em>vivant et incarné.</em></h1>
         <p style="margin: 28px 0 0; max-width: 560px; color: #6C6059">Pour les leaders <strong style="color: #6C6059; font-weight: 600">sensibles et ambitieux</strong> qui veulent grandir sans se durcir. Un cercle choisi où l'on peut poser l'armure, se soutenir, se rencontrer en vrai et s'entraîner à l'oral avec <strong style="color: #6C6059; font-weight: 600">Présence AI</strong>.</p>
         <div style="margin-top: 38px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap">
           <a href="#candidater" class="btn-main" style="background: #A83932; color: #FFFFFF; text-decoration: none; border-radius: 999px; padding: 17px 32px; font-size: 16px; font-weight: 500">Réserver mon appel de 15 min</a>
@@ -97,15 +114,15 @@
       </div>
       <ul style="flex: 1.4 1 480px; margin: 0; padding: 0; list-style: none; color: #6C6059">
         
-          <li style="display: flex; gap: 18px; padding: 22px 0; border-top: 1px solid #E8DDD6"><span aria-hidden="true" style="flex: none; margin-top: 11px; width: 18px; height: 1px; background: #AA564C"></span><span>Vous sentez les tensions d’une équipe avant qu’elles ne soient dites, et vous les portez encore longtemps après la réunion.</span></li>
+          <li style="display: flex; gap: 16px; padding: 12px 0"><span aria-hidden="true" style="flex: none; margin-top: 10px; width: 7px; height: 7px; border-radius: 50%; background: #AA564C"></span><span>Vous sentez les tensions d’une équipe avant qu’elles ne soient dites, et vous les portez encore longtemps après la réunion.</span></li>
         
-          <li style="display: flex; gap: 18px; padding: 22px 0; border-top: 1px solid #E8DDD6"><span aria-hidden="true" style="flex: none; margin-top: 11px; width: 18px; height: 1px; background: #AA564C"></span><span>On vous trouve « trop sensible » quand vous défendez ce qui compte, alors vous arrondissez les angles.</span></li>
+          <li style="display: flex; gap: 16px; padding: 12px 0"><span aria-hidden="true" style="flex: none; margin-top: 10px; width: 7px; height: 7px; border-radius: 50%; background: #AA564C"></span><span>On vous trouve « trop sensible » quand vous défendez ce qui compte, alors vous arrondissez les angles.</span></li>
         
-          <li style="display: flex; gap: 18px; padding: 22px 0; border-top: 1px solid #E8DDD6"><span aria-hidden="true" style="flex: none; margin-top: 11px; width: 18px; height: 1px; background: #AA564C"></span><span>Vous avez de l’ambition, mais les codes du pouvoir autour de vous ne vous ressemblent pas.</span></li>
+          <li style="display: flex; gap: 16px; padding: 12px 0"><span aria-hidden="true" style="flex: none; margin-top: 10px; width: 7px; height: 7px; border-radius: 50%; background: #AA564C"></span><span>Vous avez de l’ambition, mais les codes du pouvoir autour de vous ne vous ressemblent pas.</span></li>
         
-          <li style="display: flex; gap: 18px; padding: 22px 0; border-top: 1px solid #E8DDD6"><span aria-hidden="true" style="flex: none; margin-top: 11px; width: 18px; height: 1px; background: #AA564C"></span><span>Vous avez beaucoup lu et beaucoup appris, et pourtant ce savoir peine à passer dans votre façon de prendre la parole.</span></li>
+          <li style="display: flex; gap: 16px; padding: 12px 0"><span aria-hidden="true" style="flex: none; margin-top: 10px; width: 7px; height: 7px; border-radius: 50%; background: #AA564C"></span><span>Vous avez beaucoup lu et beaucoup appris, et pourtant ce savoir peine à passer dans votre façon de prendre la parole.</span></li>
         
-          <li style="display: flex; gap: 18px; padding: 22px 0; border-top: 1px solid #E8DDD6"><span aria-hidden="true" style="flex: none; margin-top: 11px; width: 18px; height: 1px; background: #AA564C"></span><span>Il vous manque des pairs qui comprennent à la fois votre exigence et votre sensibilité.</span></li>
+          <li style="display: flex; gap: 16px; padding: 12px 0"><span aria-hidden="true" style="flex: none; margin-top: 10px; width: 7px; height: 7px; border-radius: 50%; background: #AA564C"></span><span>Il vous manque des pairs qui comprennent à la fois votre exigence et votre sensibilité.</span></li>
         
       </ul>
     </div>
@@ -144,32 +161,32 @@
             <div style="display: flex; gap: 20px; padding: 22px 0; border-top: 1px solid #E8DDD6">
               <span style="flex: none; width: 44px; height: 44px; border-radius: 50%; background: #F3ECE8; color: #A83932; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path></svg></span>
               <div>
-                <h3 style="margin: 0; font-family: 'Abhaya Libre', Georgia, serif; font-weight: 500; font-size: 24px; line-height: 1.2">Un cercle choisi</h3>
-                <p style="margin: 6px 0 0; font-size: 16px; color: #6C6059">Chaque entrée passe par un échange d’une quinzaine de minutes avec Laura. Vous savez avec qui vous partagez.</p>
+                <h3 style="margin: 0; font-family: 'Abhaya Libre', Georgia, serif; font-weight: 500; font-size: 24px; line-height: 1.2">Un cercle choisi qui vous soutient</h3>
+                <p style="margin: 6px 0 0; font-size: 16px; color: #6C6059">Chaque membre est sélectionné après un échange d’une quinzaine de minutes avec Laura : vous savez avec qui vous partagez. Le groupe vous soutient dans vos défis, et les opportunités circulent entre membres : projets, partenariats, mises en relation.</p>
               </div>
             </div>
           
             <div style="display: flex; gap: 20px; padding: 22px 0; border-top: 1px solid #E8DDD6">
-              <span style="flex: none; width: 44px; height: 44px; border-radius: 50%; background: #F3ECE8; color: #A83932; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></span>
+              <span style="flex: none; width: 44px; height: 44px; border-radius: 50%; background: #F3ECE8; color: #A83932; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10zM9 12l2 2 4-4"></path></svg></span>
               <div>
-                <h3 style="margin: 0; font-family: 'Abhaya Libre', Georgia, serif; font-weight: 500; font-size: 24px; line-height: 1.2">Des espaces protégés</h3>
-                <p style="margin: 6px 0 0; font-size: 16px; color: #6C6059">Les ruches peuvent rester privées, leurs événements ne sont jamais publics, et le lieu des rencontres n’est visible que des inscrits.</p>
+                <h3 style="margin: 0; font-family: 'Abhaya Libre', Georgia, serif; font-weight: 500; font-size: 24px; line-height: 1.2">Une vraie safe place</h3>
+                <p style="margin: 6px 0 0; font-size: 16px; color: #6C6059">Une charte éthique sur laquelle chaque membre s’engage, une modération attentive (les opportunités du forum sont relues avant publication) et des événements sélectionnés avant d’entrer au programme, dont le lieu n’est visible que des inscrits.</p>
               </div>
             </div>
           
             <div style="display: flex; gap: 20px; padding: 22px 0; border-top: 1px solid #E8DDD6">
-              <span style="flex: none; width: 44px; height: 44px; border-radius: 50%; background: #F3ECE8; color: #A83932; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg></span>
+              <span style="flex: none; width: 44px; height: 44px; border-radius: 50%; background: #F3ECE8; color: #A83932; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM16.24 7.76l-1.8 5.41a2 2 0 0 1-1.27 1.27L7.76 16.24l1.8-5.41a2 2 0 0 1 1.27-1.27z"></path></svg></span>
               <div>
-                <h3 style="margin: 0; font-family: 'Abhaya Libre', Georgia, serif; font-weight: 500; font-size: 24px; line-height: 1.2">Des retours qui font grandir</h3>
-                <p style="margin: 6px 0 0; font-size: 16px; color: #6C6059">Sur vos vidéos comme dans le forum, les retours se donnent avec bienveillance et précision, pour vous aider à avancer, jamais pour juger.</p>
+                <h3 style="margin: 0; font-family: 'Abhaya Libre', Georgia, serif; font-weight: 500; font-size: 24px; line-height: 1.2">Un parcours de leadership structuré</h3>
+                <p style="margin: 6px 0 0; font-size: 16px; color: #6C6059">« Prendre sa place » vous guide étape par étape, avec des contenus et des exercices concrets, pour faire grandir votre leadership à votre rythme.</p>
               </div>
             </div>
           
             <div style="display: flex; gap: 20px; padding: 22px 0; border-top: 1px solid #E8DDD6">
-              <span style="flex: none; width: 44px; height: 44px; border-radius: 50%; background: #F3ECE8; color: #A83932; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 11V7a5 5 0 0 1 10 0v4M5 11h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2z"></path></svg></span>
+              <span style="flex: none; width: 44px; height: 44px; border-radius: 50%; background: #F3ECE8; color: #A83932; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3ZM19 10v2a7 7 0 0 1-14 0v-2M12 19v3"></path></svg></span>
               <div>
-                <h3 style="margin: 0; font-family: 'Abhaya Libre', Georgia, serif; font-weight: 500; font-size: 24px; line-height: 1.2">Une intimité respectée</h3>
-                <p style="margin: 6px 0 0; font-size: 16px; color: #6C6059">Votre journal personnel reste privé, et votre coach Présence ne retient ce que vous écrivez qu’avec votre accord.</p>
+                <h3 style="margin: 0; font-family: 'Abhaya Libre', Georgia, serif; font-weight: 500; font-size: 24px; line-height: 1.2">S’entraîner à prendre la parole et s’inspirer des autres</h3>
+                <p style="margin: 6px 0 0; font-size: 16px; color: #6C6059">Le Talk Show, les retours vidéo du forum et l’analyse vidéo de Présence IA pour vous exercer, et les prises de parole des autres membres pour vous inspirer.</p>
               </div>
             </div>
           
@@ -179,7 +196,7 @@
   </section>
 
   <!-- Les avantages -->
-  <section id="reseau" style="padding: 0 40px 130px">
+  <section id="reseau" style="padding: 120px 40px 130px">
     <div style="max-width: 1200px; margin: 0 auto">
       <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; flex-wrap: wrap">
         <div>
@@ -221,7 +238,7 @@
         
           <article style="flex: 1 1 320px; background: #FFFFFF; border-radius: 26px; padding: 38px 34px 40px; box-sizing: border-box">
             <span style="width: 46px; height: 46px; border-radius: 50%; background: #F3ECE8; color: #A83932; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"></path></svg></span>
-            <h3 style="margin: 24px 0 0; font-family: 'Abhaya Libre', Georgia, serif; font-weight: 500; font-size: 27px; line-height: 1.2">Des opportunités qui circulent</h3>
+            <h3 style="margin: 24px 0 0; font-family: 'Abhaya Libre', Georgia, serif; font-weight: 500; font-size: 27px; line-height: 1.2">De nouvelles opportunités</h3>
             <p style="margin: 14px 0 0; font-size: 16px; color: #6C6059">Recrutements, financeurs, partenaires : un espace du forum leur est dédié, relu avant publication, pour que les bonnes portes s’ouvrent entre membres.</p>
           </article>
         
@@ -230,54 +247,54 @@
   </section>
 
   <!-- Ce qui va changer pour vous -->
-  <section style="background: linear-gradient(180deg, #F3ECE8, #FFFFFF 40%, #FFFFFF 70%, #F3ECE8); padding: 120px 40px">
+  <section style="background: linear-gradient(160deg, #1A1A1A 0%, #2A211B 50%, #4A3B30 100%); color: #E8DDD6; padding: 120px 40px">
     <div style="max-width: 1200px; margin: 0 auto">
       <div style="text-align: center">
         <div aria-hidden="true" style="width: 64px; height: 3px; margin: 0 auto 26px; border-radius: 2px; background: linear-gradient(90deg, transparent, #A83932, transparent)"></div>
-        <h2 style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-weight: 400; font-size: 54px; line-height: 1.08; letter-spacing: -0.02em">Ce qui va changer <em style="color: #AA564C">pour vous</em></h2>
-        <p style="margin: 24px auto 0; max-width: 700px; color: #6C6059">Au sein du réseau Présence, vous vivez une <strong style="color: #6C6059; font-weight: 600">transformation profonde</strong>. Voici ce qui change concrètement, dans votre vie comme dans votre leadership.</p>
+        <h2 style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-weight: 400; font-size: 54px; line-height: 1.08; letter-spacing: -0.02em; color: #FFFFFF">Ce qui va changer <em style="color: #AFA098">pour vous</em></h2>
+        <p style="margin: 24px auto 0; max-width: 700px; color: #CFC3BB">Au sein du réseau Présence, vous vivez une <strong style="color: #FFFFFF; font-weight: 600">transformation profonde</strong>. Voici ce qui change concrètement, dans votre vie comme dans votre leadership.</p>
       </div>
       <div style="margin-top: 64px; display: flex; flex-wrap: wrap; gap: 72px; align-items: flex-start">
         <div style="flex: 1.2 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 22px">
           
             <div style="display: flex; gap: 16px; align-items: flex-start">
-              <span style="flex: none; margin-top: 4px; width: 26px; height: 26px; border-radius: 50%; background: #F3ECE8; color: #A83932; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></span>
-              <p style="margin: 0; font-size: 18px; line-height: 1.7; color: #6C6059"><strong style="font-weight: 600; color: #6C6059">Prendre votre place sans demander la permission</strong> : oser occuper l’espace qui est le vôtre, sans vous justifier ni vous excuser, dans votre vie comme dans votre vie professionnelle.</p>
+              <span style="flex: none; margin-top: 4px; width: 26px; height: 26px; border-radius: 50%; background: #A83932; color: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></span>
+              <p style="margin: 0; font-size: 18px; line-height: 1.7; color: #CFC3BB"><strong style="font-weight: 600; color: #FFFFFF">Prendre votre place sans demander la permission</strong> : oser occuper l’espace qui est le vôtre, sans vous justifier ni vous excuser, dans votre vie comme dans votre vie professionnelle.</p>
             </div>
           
             <div style="display: flex; gap: 16px; align-items: flex-start">
-              <span style="flex: none; margin-top: 4px; width: 26px; height: 26px; border-radius: 50%; background: #F3ECE8; color: #A83932; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></span>
-              <p style="margin: 0; font-size: 18px; line-height: 1.7; color: #6C6059"><strong style="font-weight: 600; color: #6C6059">Affirmer votre autorité et votre avis, même quand il détonne</strong> : porter votre vision singulière avec confiance, et ouvrir la voie.</p>
+              <span style="flex: none; margin-top: 4px; width: 26px; height: 26px; border-radius: 50%; background: #A83932; color: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></span>
+              <p style="margin: 0; font-size: 18px; line-height: 1.7; color: #CFC3BB"><strong style="font-weight: 600; color: #FFFFFF">Affirmer votre autorité et votre avis, même quand il détonne</strong> : porter votre vision singulière avec confiance, et ouvrir la voie.</p>
             </div>
           
             <div style="display: flex; gap: 16px; align-items: flex-start">
-              <span style="flex: none; margin-top: 4px; width: 26px; height: 26px; border-radius: 50%; background: #F3ECE8; color: #A83932; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></span>
-              <p style="margin: 0; font-size: 18px; line-height: 1.7; color: #6C6059"><strong style="font-weight: 600; color: #6C6059">Poser des limites fermes, parfois non négociables</strong> : dire non sans culpabilité, vous protéger sans devenir rigide, cesser de vous effacer pour les autres.</p>
+              <span style="flex: none; margin-top: 4px; width: 26px; height: 26px; border-radius: 50%; background: #A83932; color: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></span>
+              <p style="margin: 0; font-size: 18px; line-height: 1.7; color: #CFC3BB"><strong style="font-weight: 600; color: #FFFFFF">Poser des limites fermes, parfois non négociables</strong> : dire non sans culpabilité, vous protéger sans devenir rigide, cesser de vous effacer pour les autres.</p>
             </div>
           
             <div style="display: flex; gap: 16px; align-items: flex-start">
-              <span style="flex: none; margin-top: 4px; width: 26px; height: 26px; border-radius: 50%; background: #F3ECE8; color: #A83932; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></span>
-              <p style="margin: 0; font-size: 18px; line-height: 1.7; color: #6C6059"><strong style="font-weight: 600; color: #6C6059">Fonctionner en cohérence avec qui vous êtes</strong> : prendre des décisions qui découlent de vos valeurs, plutôt que des attentes des autres ou des « il faut » qui ne vous appartiennent pas.</p>
+              <span style="flex: none; margin-top: 4px; width: 26px; height: 26px; border-radius: 50%; background: #A83932; color: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></span>
+              <p style="margin: 0; font-size: 18px; line-height: 1.7; color: #CFC3BB"><strong style="font-weight: 600; color: #FFFFFF">Fonctionner en cohérence avec qui vous êtes</strong> : prendre des décisions qui découlent de vos valeurs, plutôt que des attentes des autres ou des « il faut » qui ne vous appartiennent pas.</p>
             </div>
           
             <div style="display: flex; gap: 16px; align-items: flex-start">
-              <span style="flex: none; margin-top: 4px; width: 26px; height: 26px; border-radius: 50%; background: #F3ECE8; color: #A83932; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></span>
-              <p style="margin: 0; font-size: 18px; line-height: 1.7; color: #6C6059"><strong style="font-weight: 600; color: #6C6059">Faire de votre sensibilité une force d’impact</strong> : en faire un atout stratégique plutôt qu’une faiblesse, sans vous amputer d’une partie de vous.</p>
+              <span style="flex: none; margin-top: 4px; width: 26px; height: 26px; border-radius: 50%; background: #A83932; color: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></span>
+              <p style="margin: 0; font-size: 18px; line-height: 1.7; color: #CFC3BB"><strong style="font-weight: 600; color: #FFFFFF">Faire de votre sensibilité une force d’impact</strong> : en faire un atout stratégique plutôt qu’une faiblesse, sans vous amputer d’une partie de vous.</p>
             </div>
           
             <div style="display: flex; gap: 16px; align-items: flex-start">
-              <span style="flex: none; margin-top: 4px; width: 26px; height: 26px; border-radius: 50%; background: #F3ECE8; color: #A83932; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></span>
-              <p style="margin: 0; font-size: 18px; line-height: 1.7; color: #6C6059"><strong style="font-weight: 600; color: #6C6059">Vous sentir pleinement légitime</strong> : assumer des fonctions à responsabilité en vous sentant à la hauteur, sans vous nier.</p>
+              <span style="flex: none; margin-top: 4px; width: 26px; height: 26px; border-radius: 50%; background: #A83932; color: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></span>
+              <p style="margin: 0; font-size: 18px; line-height: 1.7; color: #CFC3BB"><strong style="font-weight: 600; color: #FFFFFF">Vous sentir pleinement légitime</strong> : assumer des fonctions à responsabilité en vous sentant à la hauteur, sans vous nier.</p>
             </div>
           
             <div style="display: flex; gap: 16px; align-items: flex-start">
-              <span style="flex: none; margin-top: 4px; width: 26px; height: 26px; border-radius: 50%; background: #F3ECE8; color: #A83932; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></span>
-              <p style="margin: 0; font-size: 18px; line-height: 1.7; color: #6C6059"><strong style="font-weight: 600; color: #6C6059">Incarner votre parole et votre présence avec justesse</strong> : porter des messages forts qui vous ressemblent et oser vous mettre en lumière.</p>
+              <span style="flex: none; margin-top: 4px; width: 26px; height: 26px; border-radius: 50%; background: #A83932; color: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></span>
+              <p style="margin: 0; font-size: 18px; line-height: 1.7; color: #CFC3BB"><strong style="font-weight: 600; color: #FFFFFF">Incarner votre parole et votre présence avec justesse</strong> : porter des messages forts qui vous ressemblent et oser vous mettre en lumière.</p>
             </div>
           
             <div style="display: flex; gap: 16px; align-items: flex-start">
-              <span style="flex: none; margin-top: 4px; width: 26px; height: 26px; border-radius: 50%; background: #F3ECE8; color: #A83932; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></span>
-              <p style="margin: 0; font-size: 18px; line-height: 1.7; color: #6C6059"><strong style="font-weight: 600; color: #6C6059">Vous libérer du besoin de validation</strong> : construire une autorité naturelle, ancrée en vous, qui ne dépend plus du regard ni de l’accord des autres.</p>
+              <span style="flex: none; margin-top: 4px; width: 26px; height: 26px; border-radius: 50%; background: #A83932; color: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></span>
+              <p style="margin: 0; font-size: 18px; line-height: 1.7; color: #CFC3BB"><strong style="font-weight: 600; color: #FFFFFF">Vous libérer du besoin de validation</strong> : construire une autorité naturelle, ancrée en vous, qui ne dépend plus du regard ni de l’accord des autres.</p>
             </div>
           
         </div>
@@ -286,70 +303,81 @@
     </div>
   </section>
 
-  <section style="background: #6C6059; padding: 96px 40px; text-align: center">
-    <p style="margin: 0 auto; max-width: 900px; font-family: 'Newsreader', Georgia, serif; font-style: italic; font-size: 36px; line-height: 1.3; letter-spacing: -0.01em; color: #FFFFFF">« Lorsque vous prenez votre place, vous n'avez plus besoin de prouver, d'être validé·e par les autres ou de chercher à être. Vous incarnez votre présence et votre message. »</p>
-  </section>
-
   <!-- Parcours Prendre sa place -->
   <section id="parcours" style="background: #FFFFFF; padding: 120px 40px">
     <div style="max-width: 1200px; margin: 0 auto">
       <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-end; justify-content: space-between">
         <div style="flex: 1 1 520px">
           <p style="margin: 0; font-size: 12px; font-weight: 500; letter-spacing: 0.22em; color: #A83932">LE PARCOURS SOCLE, OUVERT À TOUS LES MEMBRES</p>
-          <h2 style="margin: 20px 0 0; font-family: 'Newsreader', Georgia, serif; font-weight: 400; font-size: 52px; line-height: 1.08; letter-spacing: -0.02em"><em style="color: #AA564C">Prendre sa place</em> <span style="color: #6C6059">: un leadership vivant et incarné</span></h2>
+          <h2 style="margin: 20px 0 0; font-family: 'Newsreader', Georgia, serif; font-weight: 400; font-size: 52px; line-height: 1.08; letter-spacing: -0.02em; color: #6C6059">Un parcours complet de leadership <em>pour prendre sa place</em></h2>
         </div>
         <p style="flex: 0 1 400px; margin: 0; font-size: 16px; color: #6C6059">Un module par semaine, des tests de personnalité qui enrichissent votre profil, et un journal personnel pour garder trace de ce qui bouge en vous.</p>
       </div>
-      <div style="margin-top: 60px; display: flex; flex-wrap: wrap; border-top: 1px solid #6C6059">
-        
-          <div style="flex: 1 1 250px; padding: 30px 28px 10px 0; box-sizing: border-box">
-            <p style="margin: 0; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; color: #A83932">FONDATIONS</p>
-            <h3 style="margin: 14px 0 0; font-family: 'Abhaya Libre', Georgia, serif; font-weight: 500; font-size: 27px; line-height: 1.2">Faire le point</h3>
-            <ul style="margin: 16px 0 0; padding: 0; list-style: none; font-size: 15px; color: #6C6059">
-              
-                <li style="padding: 6px 0">Faire le point sur son leadership</li>
-              
-                <li style="padding: 6px 0">S’ancrer dans ses valeurs</li>
-              
-            </ul>
-          </div>
-        
-          <div style="flex: 1 1 250px; padding: 30px 28px 10px 0; box-sizing: border-box">
-            <p style="margin: 0; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; color: #A83932">PRÉSENCE ET ÉMOTIONS</p>
-            <h3 style="margin: 14px 0 0; font-family: 'Abhaya Libre', Georgia, serif; font-weight: 500; font-size: 27px; line-height: 1.2">Se relier à soi</h3>
-            <ul style="margin: 16px 0 0; padding: 0; list-style: none; font-size: 15px; color: #6C6059">
-              
-                <li style="padding: 6px 0">Se libérer d’être soi</li>
-              
-                <li style="padding: 6px 0">Se relier à ses émotions</li>
-              
-                <li style="padding: 6px 0">Cultiver la présence</li>
-              
-            </ul>
-          </div>
-        
-          <div style="flex: 1 1 250px; padding: 30px 28px 10px 0; box-sizing: border-box">
-            <p style="margin: 0; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; color: #A83932">AUTHENTICITÉ ET JUSTE PLACE</p>
-            <h3 style="margin: 14px 0 0; font-family: 'Abhaya Libre', Georgia, serif; font-weight: 500; font-size: 27px; line-height: 1.2">Trouver sa juste place</h3>
-            <ul style="margin: 16px 0 0; padding: 0; list-style: none; font-size: 15px; color: #6C6059">
-              
-                <li style="padding: 6px 0">Habiter son rôle en restant soi</li>
-              
-            </ul>
-          </div>
-        
-          <div style="flex: 1 1 250px; padding: 30px 28px 10px 0; box-sizing: border-box">
-            <p style="margin: 0; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; color: #A83932">PAROLE ET ANCRAGE</p>
-            <h3 style="margin: 14px 0 0; font-family: 'Abhaya Libre', Georgia, serif; font-weight: 500; font-size: 27px; line-height: 1.2">Prendre la parole</h3>
-            <ul style="margin: 16px 0 0; padding: 0; list-style: none; font-size: 15px; color: #6C6059">
-              
-                <li style="padding: 6px 0">Prendre la parole avec impact</li>
-              
-                <li style="padding: 6px 0">Ancrer sa pratique</li>
-              
-            </ul>
-          </div>
-        
+      <div style="margin-top: 60px; position: relative">
+        <div class="rp-frise-ligne" aria-hidden="true" style="position: absolute; left: 24px; right: 24px; top: 24px; height: 2px; background: linear-gradient(90deg, #A83932, #E8DDD6)"></div>
+        <ol style="position: relative; margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px">
+          
+            <li style="display: flex; flex-direction: column">
+              <span style="width: 50px; height: 50px; border-radius: 50%; background: #A83932; color: #FFFFFF; border: 2px solid #A83932; display: flex; align-items: center; justify-content: center; font-family: 'Newsreader', Georgia, serif; font-size: 24px; box-sizing: border-box">1</span>
+              <div style="margin-top: 18px; flex: 1; border-radius: 24px; background: #F3ECE8; padding: 24px 24px 22px">
+                <p style="margin: 0; font-size: 11px; font-weight: 600; letter-spacing: 0.2em; color: #A83932">FONDATIONS</p>
+                <h3 style="margin: 10px 0 0; font-family: 'Newsreader', Georgia, serif; font-weight: 400; font-size: 26px; line-height: 1.2; color: #1A1A1A">Faire le point</h3>
+                <ul style="margin: 14px 0 0; padding: 0; list-style: none; font-size: 15px; color: #6C6059">
+                  
+                    <li style="display: flex; gap: 10px; align-items: baseline; padding: 4px 0"><span aria-hidden="true" style="flex: none; width: 6px; height: 6px; border-radius: 50%; background: #AFA098; transform: translateY(-2px)"></span>Faire le point sur son leadership</li>
+                  
+                    <li style="display: flex; gap: 10px; align-items: baseline; padding: 4px 0"><span aria-hidden="true" style="flex: none; width: 6px; height: 6px; border-radius: 50%; background: #AFA098; transform: translateY(-2px)"></span>S’ancrer dans ses valeurs</li>
+                  
+                </ul>
+              </div>
+            </li>
+          
+            <li style="display: flex; flex-direction: column">
+              <span style="width: 50px; height: 50px; border-radius: 50%; background: #FFFFFF; color: #A83932; border: 2px solid #A83932; display: flex; align-items: center; justify-content: center; font-family: 'Newsreader', Georgia, serif; font-size: 24px; box-sizing: border-box">2</span>
+              <div style="margin-top: 18px; flex: 1; border-radius: 24px; background: #F3ECE8; padding: 24px 24px 22px">
+                <p style="margin: 0; font-size: 11px; font-weight: 600; letter-spacing: 0.2em; color: #A83932">PRÉSENCE ET ÉMOTIONS</p>
+                <h3 style="margin: 10px 0 0; font-family: 'Newsreader', Georgia, serif; font-weight: 400; font-size: 26px; line-height: 1.2; color: #1A1A1A">Se relier à soi</h3>
+                <ul style="margin: 14px 0 0; padding: 0; list-style: none; font-size: 15px; color: #6C6059">
+                  
+                    <li style="display: flex; gap: 10px; align-items: baseline; padding: 4px 0"><span aria-hidden="true" style="flex: none; width: 6px; height: 6px; border-radius: 50%; background: #AFA098; transform: translateY(-2px)"></span>Se libérer d’être soi</li>
+                  
+                    <li style="display: flex; gap: 10px; align-items: baseline; padding: 4px 0"><span aria-hidden="true" style="flex: none; width: 6px; height: 6px; border-radius: 50%; background: #AFA098; transform: translateY(-2px)"></span>Se relier à ses émotions</li>
+                  
+                    <li style="display: flex; gap: 10px; align-items: baseline; padding: 4px 0"><span aria-hidden="true" style="flex: none; width: 6px; height: 6px; border-radius: 50%; background: #AFA098; transform: translateY(-2px)"></span>Cultiver la présence</li>
+                  
+                </ul>
+              </div>
+            </li>
+          
+            <li style="display: flex; flex-direction: column">
+              <span style="width: 50px; height: 50px; border-radius: 50%; background: #FFFFFF; color: #A83932; border: 2px solid #A83932; display: flex; align-items: center; justify-content: center; font-family: 'Newsreader', Georgia, serif; font-size: 24px; box-sizing: border-box">3</span>
+              <div style="margin-top: 18px; flex: 1; border-radius: 24px; background: #F3ECE8; padding: 24px 24px 22px">
+                <p style="margin: 0; font-size: 11px; font-weight: 600; letter-spacing: 0.2em; color: #A83932">AUTHENTICITÉ</p>
+                <h3 style="margin: 10px 0 0; font-family: 'Newsreader', Georgia, serif; font-weight: 400; font-size: 26px; line-height: 1.2; color: #1A1A1A">Trouver sa juste place</h3>
+                <ul style="margin: 14px 0 0; padding: 0; list-style: none; font-size: 15px; color: #6C6059">
+                  
+                    <li style="display: flex; gap: 10px; align-items: baseline; padding: 4px 0"><span aria-hidden="true" style="flex: none; width: 6px; height: 6px; border-radius: 50%; background: #AFA098; transform: translateY(-2px)"></span>Habiter son rôle en restant soi</li>
+                  
+                </ul>
+              </div>
+            </li>
+          
+            <li style="display: flex; flex-direction: column">
+              <span style="width: 50px; height: 50px; border-radius: 50%; background: #FFFFFF; color: #A83932; border: 2px solid #A83932; display: flex; align-items: center; justify-content: center; font-family: 'Newsreader', Georgia, serif; font-size: 24px; box-sizing: border-box">4</span>
+              <div style="margin-top: 18px; flex: 1; border-radius: 24px; background: #F3ECE8; padding: 24px 24px 22px">
+                <p style="margin: 0; font-size: 11px; font-weight: 600; letter-spacing: 0.2em; color: #A83932">PAROLE ET ANCRAGE</p>
+                <h3 style="margin: 10px 0 0; font-family: 'Newsreader', Georgia, serif; font-weight: 400; font-size: 26px; line-height: 1.2; color: #1A1A1A">Prendre la parole</h3>
+                <ul style="margin: 14px 0 0; padding: 0; list-style: none; font-size: 15px; color: #6C6059">
+                  
+                    <li style="display: flex; gap: 10px; align-items: baseline; padding: 4px 0"><span aria-hidden="true" style="flex: none; width: 6px; height: 6px; border-radius: 50%; background: #AFA098; transform: translateY(-2px)"></span>Prendre la parole avec impact</li>
+                  
+                    <li style="display: flex; gap: 10px; align-items: baseline; padding: 4px 0"><span aria-hidden="true" style="flex: none; width: 6px; height: 6px; border-radius: 50%; background: #AFA098; transform: translateY(-2px)"></span>Ancrer sa pratique</li>
+                  
+                </ul>
+              </div>
+            </li>
+          
+        </ol>
       </div>
     </div>
   </section>
@@ -407,16 +435,18 @@
     <div style="max-width: 1120px; margin: 0 auto">
       <h2 style="margin: 0; text-align: center; font-family: 'Newsreader', Georgia, serif; font-weight: 400; font-size: 50px; line-height: 1.1; letter-spacing: -0.02em">Présence est fait pour vous <em style="color: #AA564C">si…</em></h2>
       <div style="margin-top: 56px; display: flex; flex-wrap: wrap; gap: 24px">
-        <div style="flex: 1.2 1 420px; background: #F3ECE8; border-radius: 26px; padding: 38px 40px; box-sizing: border-box">
+        <div style="flex: 1.2 1 420px; background: #A83932; border-radius: 26px; padding: 38px 40px; box-sizing: border-box">
           <ul style="margin: 0; padding: 0; list-style: none">
             
-              <li style="display: flex; gap: 14px; padding: 12px 0; color: #6C6059"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#A83932" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 4px"><path d="M20 6 9 17l-5-5"></path></svg><span>Vous dirigez, managez ou entreprenez, et vous voulez assumer votre autorité sans renier votre sensibilité.</span></li>
+              <li style="display: flex; gap: 14px; padding: 12px 0; color: #FFFFFF"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#F3ECE8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 4px"><path d="M20 6 9 17l-5-5"></path></svg><span>Vous dirigez, managez ou entreprenez, et vous voulez assumer votre autorité sans renier votre sensibilité.</span></li>
             
-              <li style="display: flex; gap: 14px; padding: 12px 0; color: #6C6059"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#A83932" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 4px"><path d="M20 6 9 17l-5-5"></path></svg><span>Vous cherchez un cercle exigeant et bienveillant, où l’on peut parler vrai et poser l’armure.</span></li>
+              <li style="display: flex; gap: 14px; padding: 12px 0; color: #FFFFFF"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#F3ECE8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 4px"><path d="M20 6 9 17l-5-5"></path></svg><span>Vous cherchez un cercle exigeant et bienveillant, où l’on peut parler vrai et poser l’armure.</span></li>
             
-              <li style="display: flex; gap: 14px; padding: 12px 0; color: #6C6059"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#A83932" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 4px"><path d="M20 6 9 17l-5-5"></path></svg><span>Vous avez envie de vous entraîner à prendre la parole et d’oser être vu·e.</span></li>
+              <li style="display: flex; gap: 14px; padding: 12px 0; color: #FFFFFF"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#F3ECE8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 4px"><path d="M20 6 9 17l-5-5"></path></svg><span>Vous souhaitez de vraies méthodes de leadership, qui allient profondeur, motivation et entraide.</span></li>
             
-              <li style="display: flex; gap: 14px; padding: 12px 0; color: #6C6059"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#A83932" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 4px"><path d="M20 6 9 17l-5-5"></path></svg><span>Vous êtes prêt·e à donner autant qu’à recevoir.</span></li>
+              <li style="display: flex; gap: 14px; padding: 12px 0; color: #FFFFFF"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#F3ECE8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 4px"><path d="M20 6 9 17l-5-5"></path></svg><span>Vous avez envie de prendre la parole et de prendre réellement votre place. Vous n’avez plus envie de rester dans l’ombre.</span></li>
+            
+              <li style="display: flex; gap: 14px; padding: 12px 0; color: #FFFFFF"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#F3ECE8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 4px"><path d="M20 6 9 17l-5-5"></path></svg><span>Vous êtes prêt·e à donner autant qu’à recevoir.</span></li>
             
           </ul>
         </div>
@@ -426,6 +456,8 @@
             
               <li style="display: flex; gap: 14px; padding: 12px 0; color: #6C6059; font-size: 16px"><span aria-hidden="true" style="flex: none; margin-top: 12px; width: 12px; height: 1px; background: #AFA098"></span><span>Vous cherchez avant tout un réseau d’affaires centré sur l’échange de cartes de visite.</span></li>
             
+              <li style="display: flex; gap: 14px; padding: 12px 0; color: #6C6059; font-size: 16px"><span aria-hidden="true" style="flex: none; margin-top: 12px; width: 12px; height: 1px; background: #AFA098"></span><span>Vous cherchez un groupe de coaching qui reste en surface, uniquement motivationnel.</span></li>
+            
               <li style="display: flex; gap: 14px; padding: 12px 0; color: #6C6059; font-size: 16px"><span aria-hidden="true" style="flex: none; margin-top: 12px; width: 12px; height: 1px; background: #AFA098"></span><span>Vous attendez des recettes toutes faites, sans vous impliquer.</span></li>
             
               <li style="display: flex; gap: 14px; padding: 12px 0; color: #6C6059; font-size: 16px"><span aria-hidden="true" style="flex: none; margin-top: 12px; width: 12px; height: 1px; background: #AFA098"></span><span>Vous traversez une souffrance qui demande d’abord un suivi médical ou psychologique.</span></li>
@@ -434,6 +466,11 @@
         </div>
       </div>
     </div>
+  </section>
+
+  <!-- Citation -->
+  <section style="background: #AFA098; padding: 90px 40px; text-align: center">
+    <p style="margin: 0 auto; max-width: 900px; font-family: 'Newsreader', Georgia, serif; font-style: italic; font-size: 27px; line-height: 1.4; letter-spacing: -0.01em; color: #FFFFFF">« Lorsque vous prenez votre place, vous n'avez plus besoin de prouver, d'être validé·e par les autres ou de chercher à être. Vous incarnez votre présence et votre message. »</p>
   </section>
 
   <!-- Laura : style éditorial -->
@@ -455,7 +492,7 @@
   </section>
 
   <!-- Tarif fondateur : paliers de 10 places -->
-  <section id="tarif" style="background: #E8DDD6; padding: 120px 40px">
+  <section id="tarif" style="background: #FFFFFF; padding: 120px 40px">
     <div style="max-width: 1160px; margin: 0 auto">
       <div style="text-align: center">
         <div aria-hidden="true" style="width: 64px; height: 3px; margin: 0 auto 26px; border-radius: 2px; background: linear-gradient(90deg, transparent, #A83932, transparent)"></div>
@@ -465,77 +502,84 @@
 
       <!-- Barème en direct : rempli par reseau-presence-embed.js ; l'escalier ci-dessous sert de repli -->
       <div id="rp-bareme">
-      <div role="list" aria-label="Paliers du tarif fondateur" style="margin-top: 64px; display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-end">
+      <div class="rp-jauge" hidden style="margin-top: 56px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 22px; font-size: 14px; color: #6C6059">
+        <span style="display: inline-flex; align-items: center; gap: 8px"><span style="width: 10px; height: 10px; border-radius: 50%; background: #A83932; box-shadow: 0 0 0 4px rgba(168,57,50,0.15)"></span>Palier ouvert : il reste <strong id="rp-restantes" style="color: #1A1A1A"></strong> à <span id="rp-prix-ouvert"></span></span>
+        <span style="width: 180px; height: 8px; border-radius: 999px; background: #F3ECE8; overflow: hidden"><span id="rp-barre" style="display: block; width: 0%; height: 100%; border-radius: 999px; background: linear-gradient(90deg, #AA564C, #A83932)"></span></span>
+        <span id="rp-prises"></span>
+      </div>
+      <div class="rp-stairs" role="list" aria-label="Paliers du tarif fondateur" style="margin-top: 34px; display: flex; gap: 12px; align-items: flex-end">
         
-          <div role="listitem" style="flex: 1 1 130px; min-width: 0; display: flex; flex-direction: column; align-items: stretch; gap: 12px">
-            
-              <span style="align-self: center; white-space: nowrap; background: #A83932; color: #FFFFFF; font-size: 10px; font-weight: 600; letter-spacing: 0.16em; border-radius: 999px; padding: 6px 12px">PREMIER PALIER</span>
-            
-            <div style="height: 150px; border-radius: 18px 18px 6px 6px; background: #A83932; border: 0; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding-top: 22px; box-sizing: border-box; box-shadow: 0 24px 40px -22px rgba(168,57,50,0.6)">
-              <span style="font-family: 'Newsreader', Georgia, serif; font-size: 44px; line-height: 1; letter-spacing: -0.03em; color: #FFFFFF">30 €</span>
-              <span style="margin-top: 6px; font-size: 13px; color: #F3ECE8">/mois</span>
-            </div>
-            <p style="margin: 0; text-align: center; font-size: 14px; font-weight: 500; color: #6C6059">Places 1 à 10</p>
-          </div>
+          <button type="button" role="listitem" class="rp-palier" aria-pressed="true" style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: stretch; gap: 10px; border: 0; background: transparent; padding: 0; font: inherit; cursor: pointer">
+            <span class="rp-tag" style="align-self: center; height: 22px; white-space: nowrap; background: #A83932; color: #FFFFFF; font-size: 10px; font-weight: 600; letter-spacing: 0.16em; border-radius: 999px; padding: 0 10px; display: inline-flex; align-items: center">OUVERT</span>
+            <span class="rp-marche" style="height: 150px; animation-delay: 0.00s; border-radius: 18px 18px 6px 6px; background: rgb(168,57,50); border: 0; display: flex; flex-direction: column; align-items: center; padding-top: 20px; box-sizing: border-box; box-shadow: 0 26px 40px -22px rgba(61,49,40,0.65)">
+              <span class="rp-prix" style="font-family: 'Newsreader', Georgia, serif; font-size: 40px; line-height: 1; letter-spacing: -0.03em; color: #FFFFFF">30 €</span>
+              <span class="rp-mois" style="margin-top: 6px; font-size: 12px; color: #F3ECE8">/mois</span>
+            </span>
+            <span class="rp-places" style="text-align: center; font-size: 13px; font-weight: 600; color: #1A1A1A">Places 1 à 10</span>
+          </button>
         
-          <div role="listitem" style="flex: 1 1 130px; min-width: 0; display: flex; flex-direction: column; align-items: stretch; gap: 12px">
-            
-            <div style="height: 180px; border-radius: 18px 18px 6px 6px; background: #FFFFFF; border: 1.5px solid rgba(168,57,50,0.2); display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding-top: 22px; box-sizing: border-box; box-shadow: none">
-              <span style="font-family: 'Newsreader', Georgia, serif; font-size: 44px; line-height: 1; letter-spacing: -0.03em; color: #6C6059">40 €</span>
-              <span style="margin-top: 6px; font-size: 13px; color: #6C6059">/mois</span>
-            </div>
-            <p style="margin: 0; text-align: center; font-size: 14px; font-weight: 500; color: #6C6059">Places 11 à 20</p>
-          </div>
+          <button type="button" role="listitem" class="rp-palier" aria-pressed="false" style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: stretch; gap: 10px; border: 0; background: transparent; padding: 0; font: inherit; cursor: pointer">
+            <span class="rp-tag" style="align-self: center; height: 22px; white-space: nowrap; background: transparent; color: #AFA098; font-size: 10px; font-weight: 600; letter-spacing: 0.16em; border-radius: 999px; padding: 0 10px; display: inline-flex; align-items: center">À VENIR</span>
+            <span class="rp-marche" style="height: 180px; animation-delay: 0.08s; border-radius: 18px 18px 6px 6px; background: linear-gradient(180deg, #FFFFFF 0%, rgba(232,221,214,0.42) 100%); border: 1.5px solid #E8DDD6; display: flex; flex-direction: column; align-items: center; padding-top: 20px; box-sizing: border-box; box-shadow: none">
+              <span class="rp-prix" style="font-family: 'Newsreader', Georgia, serif; font-size: 40px; line-height: 1; letter-spacing: -0.03em; color: #6C6059">40 €</span>
+              <span class="rp-mois" style="margin-top: 6px; font-size: 12px; color: #6C6059">/mois</span>
+            </span>
+            <span class="rp-places" style="text-align: center; font-size: 13px; font-weight: 500; color: #6C6059">Places 11 à 20</span>
+          </button>
         
-          <div role="listitem" style="flex: 1 1 130px; min-width: 0; display: flex; flex-direction: column; align-items: stretch; gap: 12px">
-            
-            <div style="height: 210px; border-radius: 18px 18px 6px 6px; background: #FFFFFF; border: 1.5px solid rgba(168,57,50,0.2); display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding-top: 22px; box-sizing: border-box; box-shadow: none">
-              <span style="font-family: 'Newsreader', Georgia, serif; font-size: 44px; line-height: 1; letter-spacing: -0.03em; color: #6C6059">50 €</span>
-              <span style="margin-top: 6px; font-size: 13px; color: #6C6059">/mois</span>
-            </div>
-            <p style="margin: 0; text-align: center; font-size: 14px; font-weight: 500; color: #6C6059">Places 21 à 30</p>
-          </div>
+          <button type="button" role="listitem" class="rp-palier" aria-pressed="false" style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: stretch; gap: 10px; border: 0; background: transparent; padding: 0; font: inherit; cursor: pointer">
+            <span class="rp-tag" style="align-self: center; height: 22px; white-space: nowrap; background: transparent; color: #AFA098; font-size: 10px; font-weight: 600; letter-spacing: 0.16em; border-radius: 999px; padding: 0 10px; display: inline-flex; align-items: center">À VENIR</span>
+            <span class="rp-marche" style="height: 210px; animation-delay: 0.16s; border-radius: 18px 18px 6px 6px; background: linear-gradient(180deg, #FFFFFF 0%, rgba(232,221,214,0.54) 100%); border: 1.5px solid #E8DDD6; display: flex; flex-direction: column; align-items: center; padding-top: 20px; box-sizing: border-box; box-shadow: none">
+              <span class="rp-prix" style="font-family: 'Newsreader', Georgia, serif; font-size: 40px; line-height: 1; letter-spacing: -0.03em; color: #6C6059">50 €</span>
+              <span class="rp-mois" style="margin-top: 6px; font-size: 12px; color: #6C6059">/mois</span>
+            </span>
+            <span class="rp-places" style="text-align: center; font-size: 13px; font-weight: 500; color: #6C6059">Places 21 à 30</span>
+          </button>
         
-          <div role="listitem" style="flex: 1 1 130px; min-width: 0; display: flex; flex-direction: column; align-items: stretch; gap: 12px">
-            
-            <div style="height: 240px; border-radius: 18px 18px 6px 6px; background: #FFFFFF; border: 1.5px solid rgba(168,57,50,0.2); display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding-top: 22px; box-sizing: border-box; box-shadow: none">
-              <span style="font-family: 'Newsreader', Georgia, serif; font-size: 44px; line-height: 1; letter-spacing: -0.03em; color: #6C6059">60 €</span>
-              <span style="margin-top: 6px; font-size: 13px; color: #6C6059">/mois</span>
-            </div>
-            <p style="margin: 0; text-align: center; font-size: 14px; font-weight: 500; color: #6C6059">Places 31 à 40</p>
-          </div>
+          <button type="button" role="listitem" class="rp-palier" aria-pressed="false" style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: stretch; gap: 10px; border: 0; background: transparent; padding: 0; font: inherit; cursor: pointer">
+            <span class="rp-tag" style="align-self: center; height: 22px; white-space: nowrap; background: transparent; color: #AFA098; font-size: 10px; font-weight: 600; letter-spacing: 0.16em; border-radius: 999px; padding: 0 10px; display: inline-flex; align-items: center">À VENIR</span>
+            <span class="rp-marche" style="height: 240px; animation-delay: 0.24s; border-radius: 18px 18px 6px 6px; background: linear-gradient(180deg, #FFFFFF 0%, rgba(232,221,214,0.66) 100%); border: 1.5px solid #E8DDD6; display: flex; flex-direction: column; align-items: center; padding-top: 20px; box-sizing: border-box; box-shadow: none">
+              <span class="rp-prix" style="font-family: 'Newsreader', Georgia, serif; font-size: 40px; line-height: 1; letter-spacing: -0.03em; color: #6C6059">60 €</span>
+              <span class="rp-mois" style="margin-top: 6px; font-size: 12px; color: #6C6059">/mois</span>
+            </span>
+            <span class="rp-places" style="text-align: center; font-size: 13px; font-weight: 500; color: #6C6059">Places 31 à 40</span>
+          </button>
         
-          <div role="listitem" style="flex: 1 1 130px; min-width: 0; display: flex; flex-direction: column; align-items: stretch; gap: 12px">
-            
-            <div style="height: 270px; border-radius: 18px 18px 6px 6px; background: #FFFFFF; border: 1.5px solid rgba(168,57,50,0.2); display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding-top: 22px; box-sizing: border-box; box-shadow: none">
-              <span style="font-family: 'Newsreader', Georgia, serif; font-size: 44px; line-height: 1; letter-spacing: -0.03em; color: #6C6059">70 €</span>
-              <span style="margin-top: 6px; font-size: 13px; color: #6C6059">/mois</span>
-            </div>
-            <p style="margin: 0; text-align: center; font-size: 14px; font-weight: 500; color: #6C6059">Places 41 à 50</p>
-          </div>
+          <button type="button" role="listitem" class="rp-palier" aria-pressed="false" style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: stretch; gap: 10px; border: 0; background: transparent; padding: 0; font: inherit; cursor: pointer">
+            <span class="rp-tag" style="align-self: center; height: 22px; white-space: nowrap; background: transparent; color: #AFA098; font-size: 10px; font-weight: 600; letter-spacing: 0.16em; border-radius: 999px; padding: 0 10px; display: inline-flex; align-items: center">À VENIR</span>
+            <span class="rp-marche" style="height: 270px; animation-delay: 0.32s; border-radius: 18px 18px 6px 6px; background: linear-gradient(180deg, #FFFFFF 0%, rgba(232,221,214,0.78) 100%); border: 1.5px solid #E8DDD6; display: flex; flex-direction: column; align-items: center; padding-top: 20px; box-sizing: border-box; box-shadow: none">
+              <span class="rp-prix" style="font-family: 'Newsreader', Georgia, serif; font-size: 40px; line-height: 1; letter-spacing: -0.03em; color: #6C6059">70 €</span>
+              <span class="rp-mois" style="margin-top: 6px; font-size: 12px; color: #6C6059">/mois</span>
+            </span>
+            <span class="rp-places" style="text-align: center; font-size: 13px; font-weight: 500; color: #6C6059">Places 41 à 50</span>
+          </button>
         
-          <div role="listitem" style="flex: 1 1 130px; min-width: 0; display: flex; flex-direction: column; align-items: stretch; gap: 12px">
-            
-            <div style="height: 300px; border-radius: 18px 18px 6px 6px; background: #FFFFFF; border: 1.5px solid rgba(168,57,50,0.2); display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding-top: 22px; box-sizing: border-box; box-shadow: none">
-              <span style="font-family: 'Newsreader', Georgia, serif; font-size: 44px; line-height: 1; letter-spacing: -0.03em; color: #6C6059">80 €</span>
-              <span style="margin-top: 6px; font-size: 13px; color: #6C6059">/mois</span>
-            </div>
-            <p style="margin: 0; text-align: center; font-size: 14px; font-weight: 500; color: #6C6059">Places 51 à 60</p>
-          </div>
+          <button type="button" role="listitem" class="rp-palier" aria-pressed="false" style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: stretch; gap: 10px; border: 0; background: transparent; padding: 0; font: inherit; cursor: pointer">
+            <span class="rp-tag" style="align-self: center; height: 22px; white-space: nowrap; background: transparent; color: #AFA098; font-size: 10px; font-weight: 600; letter-spacing: 0.16em; border-radius: 999px; padding: 0 10px; display: inline-flex; align-items: center">À VENIR</span>
+            <span class="rp-marche" style="height: 300px; animation-delay: 0.40s; border-radius: 18px 18px 6px 6px; background: linear-gradient(180deg, #FFFFFF 0%, rgba(232,221,214,0.90) 100%); border: 1.5px solid #E8DDD6; display: flex; flex-direction: column; align-items: center; padding-top: 20px; box-sizing: border-box; box-shadow: none">
+              <span class="rp-prix" style="font-family: 'Newsreader', Georgia, serif; font-size: 40px; line-height: 1; letter-spacing: -0.03em; color: #6C6059">80 €</span>
+              <span class="rp-mois" style="margin-top: 6px; font-size: 12px; color: #6C6059">/mois</span>
+            </span>
+            <span class="rp-places" style="text-align: center; font-size: 13px; font-weight: 500; color: #6C6059">Places 51 à 60</span>
+          </button>
         
-          <div role="listitem" style="flex: 1 1 130px; min-width: 0; display: flex; flex-direction: column; align-items: stretch; gap: 12px">
-            
-            <div style="height: 330px; border-radius: 18px 18px 6px 6px; background: #6C6059; border: 0; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding-top: 22px; box-sizing: border-box; box-shadow: none">
-              <span style="font-family: 'Newsreader', Georgia, serif; font-size: 44px; line-height: 1; letter-spacing: -0.03em; color: #FFFFFF">90 €</span>
-              <span style="margin-top: 6px; font-size: 13px; color: #F3ECE8">/mois</span>
-            </div>
-            <p style="margin: 0; text-align: center; font-size: 14px; font-weight: 500; color: #6C6059">Au-delà de 60 membres</p>
-          </div>
+          <button type="button" role="listitem" class="rp-palier" aria-pressed="false" style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: stretch; gap: 10px; border: 0; background: transparent; padding: 0; font: inherit; cursor: pointer">
+            <span class="rp-tag" style="align-self: center; height: 22px; white-space: nowrap; background: transparent; color: #AFA098; font-size: 10px; font-weight: 600; letter-spacing: 0.16em; border-radius: 999px; padding: 0 10px; display: inline-flex; align-items: center">TARIF NORMAL</span>
+            <span class="rp-marche" style="height: 330px; animation-delay: 0.48s; border-radius: 18px 18px 6px 6px; background: linear-gradient(180deg, #FFFFFF 0%, rgba(232,221,214,1.02) 100%); border: 1.5px solid #E8DDD6; display: flex; flex-direction: column; align-items: center; padding-top: 20px; box-sizing: border-box; box-shadow: none">
+              <span class="rp-prix" style="font-family: 'Newsreader', Georgia, serif; font-size: 40px; line-height: 1; letter-spacing: -0.03em; color: #6C6059">90 €</span>
+              <span class="rp-mois" style="margin-top: 6px; font-size: 12px; color: #6C6059">/mois</span>
+            </span>
+            <span class="rp-places" style="text-align: center; font-size: 13px; font-weight: 500; color: #6C6059">Au-delà de 60</span>
+          </button>
         
+      </div>
+      <div style="margin-top: 26px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px; border-radius: 22px; background: linear-gradient(115deg, #4A3B30 0%, #2A211B 55%, #1A1A1A 100%); color: #E8DDD6; padding: 22px 28px">
+        <span id="rp-sel-ligne" style="font-size: 15px">Entrer au palier 1 : 30 €/mois pendant vos 6 premiers mois, puis 90 €/mois.</span>
+        <span style="display: inline-flex; align-items: baseline; gap: 8px"><span id="rp-sel-eco" style="font-family: 'Newsreader', Georgia, serif; font-size: 34px; line-height: 1; color: #FFFFFF">360 €</span><span id="rp-sel-eco-lbl" style="font-size: 13px; color: #CFC3BB">économisés sur 6 mois</span></span>
       </div>
 
       </div>
-      <div style="margin-top: 56px; background: #FFFFFF; border-radius: 22px; padding: 40px 44px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center; box-shadow: 0 20px 40px -24px rgba(108,96,89,0.25)">
+      <div style="margin-top: 56px; background: #F3ECE8; border-radius: 22px; padding: 40px 44px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center">
         <div style="flex: 1 1 380px; min-width: 0">
           <h3 style="margin: 0; font-family: 'Abhaya Libre', Georgia, serif; font-weight: 600; font-size: 30px; line-height: 1.15; color: #6C6059">Le même réseau, quel que soit votre palier</h3>
           <p style="margin: 12px 0 0; font-size: 16px; color: #6C6059">Votre tarif fondateur s'applique pendant vos 6 premiers mois. L'abonnement passe ensuite automatiquement à 90 €/mois, sans aucune démarche de votre part. Vous commencez par 14 jours d'essai.</p>
@@ -564,37 +608,37 @@
   </section>
 
   <!-- Candidature -->
-  <section id="candidater" style="padding: 120px 40px">
+  <section id="candidater" style="background: #6C6059; padding: 120px 40px">
     <div style="max-width: 1120px; margin: 0 auto">
       <div style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between; align-items: flex-end">
         <div style="flex: 1 1 520px">
-          <p style="margin: 0; font-size: 12px; font-weight: 500; letter-spacing: 0.22em; color: #A83932">COMMENT REJOINDRE PRÉSENCE</p>
-          <h2 style="margin: 20px 0 0; font-family: 'Newsreader', Georgia, serif; font-weight: 400; font-size: 52px; line-height: 1.08; letter-spacing: -0.02em">Un court échange avant d'entrer, <em style="color: #AA564C">pour préserver la safe place.</em></h2>
+          <p style="margin: 0; font-size: 12px; font-weight: 500; letter-spacing: 0.22em; color: #E8DDD6">COMMENT REJOINDRE PRÉSENCE</p>
+          <h2 style="margin: 20px 0 0; font-family: 'Newsreader', Georgia, serif; font-weight: 400; font-size: 52px; line-height: 1.08; letter-spacing: -0.02em; color: #FFFFFF">Un court échange avant d'entrer, <em style="color: #E8DDD6">pour préserver la safe place.</em></h2>
         </div>
-        <div style="flex: 0 1 400px; display: flex; flex-direction: column; gap: 18px; align-items: flex-start"><p style="margin: 0; font-size: 16px; color: #6C6059">Avant de rejoindre Présence, nous prenons une quinzaine de minutes pour nous parler. C'est ainsi que le réseau reste un lieu sûr, où chacun peut parler vrai et se montrer tel qu'il est.</p><a href="https://calendly.com/laura-ballo1993/rendez-vous-reseau-presence" target="_blank" rel="noopener" class="btn-main" style="background: #A83932; color: #FFFFFF; text-decoration: none; border-radius: 999px; padding: 15px 28px; font-size: 15px; font-weight: 600">Réserver mon appel</a></div>
+        <div style="flex: 0 1 400px; display: flex; flex-direction: column; gap: 18px; align-items: flex-start"><p style="margin: 0; font-size: 16px; color: #F3ECE8">Avant de rejoindre Présence, nous prenons une quinzaine de minutes pour nous parler. C'est ainsi que le réseau reste un lieu sûr, où chacun peut parler vrai et se montrer tel qu'il est.</p><a href="https://calendly.com/laura-ballo1993/rendez-vous-reseau-presence" target="_blank" rel="noopener" class="btn-main" style="background: #A83932; color: #FFFFFF; text-decoration: none; border-radius: 999px; padding: 15px 28px; font-size: 15px; font-weight: 600">Réserver mon appel</a></div>
       </div>
       <div style="margin-top: 56px; display: flex; flex-wrap: wrap; gap: 24px">
         
           <div style="flex: 1 1 230px; background: #FFFFFF; border-radius: 26px; padding: 36px 34px; box-sizing: border-box">
-            <span style="width: 46px; height: 46px; border-radius: 50%; border: 1px solid #E8DDD6; color: #A83932; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"></path></svg></span>
+            <span style="width: 64px; height: 64px; border-radius: 50%; background: #F3ECE8; color: #A83932; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"></path></svg></span>
             <h3 style="margin: 22px 0 0; font-family: 'Abhaya Libre', Georgia, serif; font-weight: 500; font-size: 26px; line-height: 1.2">Vous réservez votre appel</h3>
             <p style="margin: 12px 0 0; font-size: 16px; color: #6C6059">Vous choisissez le créneau qui vous convient pour un échange d’environ 15 minutes avec Laura.</p>
           </div>
         
           <div style="flex: 1 1 230px; background: #FFFFFF; border-radius: 26px; padding: 36px 34px; box-sizing: border-box">
-            <span style="width: 46px; height: 46px; border-radius: 50%; border: 1px solid #E8DDD6; color: #A83932; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></span>
+            <span style="width: 64px; height: 64px; border-radius: 50%; background: #F3ECE8; color: #A83932; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></span>
             <h3 style="margin: 22px 0 0; font-family: 'Abhaya Libre', Georgia, serif; font-weight: 500; font-size: 26px; line-height: 1.2">Nous faisons connaissance</h3>
             <p style="margin: 12px 0 0; font-size: 16px; color: #6C6059">Au créneau choisi, nous parlons de votre parcours, de votre façon de diriger et de ce que vous venez chercher dans le réseau.</p>
           </div>
         
           <div style="flex: 1 1 230px; background: #FFFFFF; border-radius: 26px; padding: 36px 34px; box-sizing: border-box">
-            <span style="width: 46px; height: 46px; border-radius: 50%; border: 1px solid #E8DDD6; color: #A83932; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 11V7a5 5 0 0 1 10 0v4M5 11h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2z"></path></svg></span>
+            <span style="width: 64px; height: 64px; border-radius: 50%; background: #F3ECE8; color: #A83932; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 11V7a5 5 0 0 1 10 0v4M5 11h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2z"></path></svg></span>
             <h3 style="margin: 22px 0 0; font-family: 'Abhaya Libre', Georgia, serif; font-weight: 500; font-size: 26px; line-height: 1.2">Vous finalisez votre inscription</h3>
             <p style="margin: 12px 0 0; font-size: 16px; color: #6C6059">Si Présence vous correspond, vous recevez après l’appel votre lien personnel pour activer votre abonnement, au tarif du palier ouvert.</p>
           </div>
         
           <div style="flex: 1 1 230px; background: #FFFFFF; border-radius: 26px; padding: 36px 34px; box-sizing: border-box">
-            <span style="width: 46px; height: 46px; border-radius: 50%; border: 1px solid #E8DDD6; color: #A83932; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10ZM2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path></svg></span>
+            <span style="width: 64px; height: 64px; border-radius: 50%; background: #F3ECE8; color: #A83932; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10ZM2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path></svg></span>
             <h3 style="margin: 22px 0 0; font-family: 'Abhaya Libre', Georgia, serif; font-weight: 500; font-size: 26px; line-height: 1.2">Vous entrez dans le réseau</h3>
             <p style="margin: 12px 0 0; font-size: 16px; color: #6C6059">Une réunion de bienvenue, votre profil à compléter, et vos premiers pas dans le parcours « Prendre sa place ».</p>
           </div>
@@ -608,6 +652,7 @@
     <div style="max-width: 860px; margin: 0 auto">
       <h2 style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-weight: 400; font-size: 46px; line-height: 1.1; letter-spacing: -0.02em">Vos questions</h2>
       <div style="margin-top: 36px; border-top: 1px solid #E8DDD6">
+        
           <details class="rp-faq" open>
             <summary>Pourquoi un appel avant d’entrer ?<span aria-hidden="true" class="rp-faq-sign"></span></summary>
             <p>Pour préserver l’esprit du réseau : un cercle bienveillant et exigeant, où chacun peut se montrer tel qu’il est. L’appel dure environ 15 minutes. Il nous permet de faire connaissance et de vérifier ensemble que Présence répond bien à ce que vous venez chercher.</p>
@@ -624,26 +669,78 @@
             <summary>Je suis accompagné·e individuellement par Laura : ai-je accès au réseau ?<span aria-hidden="true" class="rp-faq-sign"></span></summary>
             <p>Oui. Les personnes en accompagnement individuel font partie du réseau pendant leur accompagnement, et jusqu’à 6 mois après la fin de celui-ci.</p>
           </details>
+        
       </div>
     </div>
   </section>
 
   <!-- Appel final -->
-  <section style="padding: 130px 40px; text-align: center">
-    <h2 style="margin: 0 auto; max-width: 900px; font-family: 'Newsreader', Georgia, serif; font-weight: 400; font-size: 64px; line-height: 1.05; letter-spacing: -0.025em; color: #6C6059">Prêt·e à <em style="color: #AA564C">prendre votre place</em>, dans un cercle où vous êtes en sécurité ?</h2>
+  <section style="background: #1A1A1A; padding: 130px 40px; text-align: center">
+    <h2 style="margin: 0 auto; max-width: 780px; font-family: 'Newsreader', Georgia, serif; font-weight: 400; font-size: 46px; line-height: 1.12; letter-spacing: -0.02em; color: #FFFFFF">Prêt·e à <em style="color: #AFA098">prendre votre place</em>, dans un cercle où vous êtes en sécurité ?</h2>
     <a href="#candidater" class="btn-main" style="display: inline-block; margin-top: 44px; background: #A83932; color: #FFFFFF; text-decoration: none; border-radius: 999px; padding: 18px 36px; font-size: 16px; font-weight: 500">Réserver mon appel de 15 min</a>
-    <p style="margin: 22px 0 0; font-size: 14px; color: #6C6059">Tarif fondateur dès 30 €/mois pour les 10 premières places, puis 10 € de plus toutes les 10 places, pendant vos 6 premiers mois.</p>
+    <p class="rp-note" style="margin: 22px 0 0; font-size: 14px; color: #CFC3BB">Tarif fondateur dès 30 €/mois pour les 10 premières places, puis 10 € de plus toutes les 10 places, pendant vos 6 premiers mois.</p>
   </section>
 
-  <footer style="border-top: 1px solid #E8DDD6; padding: 34px 40px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; max-width: 1200px; margin: 0 auto; box-sizing: border-box; font-size: 13px; color: #6C6059">
-    <span style="display: flex; align-items: center; gap: 14px"><img loading="lazy" src="/assets/img/logo-presence-rouge.png" alt="Présence" style="height: 40px; width: auto"> un réseau imaginé par Laura Ballo</span>
-    <span><a href="/" style="color: #6C6059">lauraballo.com</a> · <a href="/legal/mentions-legales" style="color: #6C6059">Mentions légales</a> · <a href="/legal/cgv" style="color: #6C6059">CGV</a> · <a href="/legal/politique-confidentialite" style="color: #6C6059">Confidentialité</a></span>
+  <footer style="background: #1A1A1A; border-top: 1px solid rgba(243,236,232,0.12); padding: 34px 40px; font-size: 13px; color: #AFA098">
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px">
+    <span style="display: flex; align-items: center; gap: 14px"><img loading="lazy" src="/assets/img/logo-presence-blanc.png" alt="Présence" style="height: 40px; width: auto"> un réseau imaginé par Laura Ballo</span>
+    <span><a href="/" style="color: #AFA098">lauraballo.com</a> · <a href="/legal/mentions-legales" style="color: #AFA098">Mentions légales</a> · <a href="/legal/cgv" style="color: #AFA098">CGV</a> · <a href="/legal/politique-confidentialite" style="color: #AFA098">Confidentialité</a></span>
+    </div>
   </footer>
 </div>
 <!-- Sur lauraballo.com, ajouter en fin de page (pour le barème uniquement ; le paiement est sur la page d'inscription envoyée après l'appel) : <script src="https://lauraballo.com/assets/js/reseau-presence-embed.js" async></script> -->
 
-  <!-- Barème des paliers en direct -->
-  <script src="https://lauraballo.com/assets/js/reseau-presence-embed.js" async></script>
+
+  <!-- Barème : places restantes en direct et choix du palier -->
+  <script>
+  (function () {
+    var btns = Array.prototype.slice.call(document.querySelectorAll('.rp-palier'));
+    if (!btns.length) return;
+    var line = document.getElementById('rp-sel-ligne'), save = document.getElementById('rp-sel-eco'), saveLbl = document.getElementById('rp-sel-eco-lbl');
+    var open = 0;
+    function mix(t) { var a = [168, 57, 50], b = [26, 26, 26]; return 'rgb(' + a.map(function (v, k) { return Math.round(v + (b[k] - v) * t); }).join(',') + ')'; }
+    function paint(sel) {
+      btns.forEach(function (btn, i) {
+        var on = i === sel, cur = i === open, m = btn.querySelector('.rp-marche');
+        m.style.background = on ? mix(i / 6) : (cur ? 'rgba(168,57,50,0.10)' : 'linear-gradient(180deg, #FFFFFF 0%, rgba(232,221,214,' + (0.3 + i * 0.12).toFixed(2) + ') 100%)');
+        m.style.border = on ? '0' : '1.5px solid ' + (cur ? 'rgba(168,57,50,0.45)' : '#E8DDD6');
+        m.style.boxShadow = on ? '0 26px 40px -22px rgba(61,49,40,0.65)' : 'none';
+        btn.querySelector('.rp-prix').style.color = on ? '#FFFFFF' : (cur ? '#A83932' : '#6C6059');
+        btn.querySelector('.rp-mois').style.color = on ? '#F3ECE8' : '#6C6059';
+        var pl = btn.querySelector('.rp-places'); pl.style.fontWeight = on ? '600' : '500'; pl.style.color = on ? '#1A1A1A' : '#6C6059';
+        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      var price = 30 + sel * 10;
+      if (line) line.textContent = sel === 6 ? 'Au-delà de 60 membres, l’abonnement est à 90 €/mois.' : 'Entrer au palier ' + (sel + 1) + ' : ' + price + ' €/mois pendant vos 6 premiers mois, puis 90 €/mois.';
+      if (save) save.textContent = sel === 6 ? '90 €' : ((90 - price) * 6) + ' €';
+      if (saveLbl) saveLbl.textContent = sel === 6 ? 'par mois' : 'économisés sur 6 mois';
+    }
+    function tags() {
+      btns.forEach(function (btn, i) {
+        var t = btn.querySelector('.rp-tag'), cur = i === open, past = i < open;
+        t.textContent = cur ? 'OUVERT' : (i === 6 ? 'TARIF NORMAL' : (past ? 'COMPLET' : 'À VENIR'));
+        t.style.background = cur ? '#A83932' : 'transparent';
+        t.style.color = cur ? '#FFFFFF' : '#AFA098';
+      });
+    }
+    btns.forEach(function (btn, i) { btn.addEventListener('click', function () { paint(i); }); });
+    fetch('/api/reseau-presence').then(function (r) { return r.json(); }).then(function (d) {
+      if (!d || d.error || !d.tiers) return;
+      var idx = -1;
+      d.tiers.forEach(function (t, i) { if (idx < 0 && d.current && t.price === d.current.price) idx = i; });
+      open = idx < 0 ? 6 : idx;
+      tags(); paint(open);
+      if (idx >= 0) {
+        var t = d.tiers[idx], taken = 10 - t.remaining;
+        document.getElementById('rp-restantes').textContent = t.remaining + (t.remaining > 1 ? ' places' : ' place');
+        document.getElementById('rp-prix-ouvert').textContent = t.price + ' €';
+        document.getElementById('rp-prises').textContent = taken + ' / 10 places prises';
+        document.getElementById('rp-barre').style.width = (taken * 10) + '%';
+        document.querySelector('.rp-jauge').hidden = false;
+      }
+    }).catch(function () {});
+  })();
+  </script>
   <!-- Vercel Web Analytics (sans cookies) -->
   <script defer src="/_vercel/insights/script.js"></script>
 </body>
