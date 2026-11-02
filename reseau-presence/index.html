@@ -736,6 +736,7 @@
         document.getElementById('rp-prix-ouvert').textContent = t.price + ' €';
         document.getElementById('rp-prises').textContent = taken + ' / 10 places prises';
         document.getElementById('rp-barre').style.width = (taken * 10) + '%';
+        if (taken < 1) { document.getElementById('rp-prises').hidden = true; document.getElementById('rp-barre').parentNode.hidden = true; }
         document.querySelector('.rp-jauge').hidden = false;
       }
     }).catch(function () {});
