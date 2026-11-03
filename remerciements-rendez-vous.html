@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Rendez-vous confirmé | Laura Ballo</title>
+  <meta name="description" content="Votre rendez-vous d'exploration avec Laura Ballo est réservé.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --fond: var(--light-beige, #FAF4EF);
+      --ligne: var(--warm-beige, #E8DDD6);
+      --texte: var(--brun-gris, #6C6059);
+      --titre: var(--text-dark, #2C2C2C);
+      --accent: var(--rouge, #A83932);
+      --doux: var(--taupe, #AFA098);
+      --serif: 'Playfair Display', Georgia, serif;
+      --sous-titre: 'Abhaya Libre', Georgia, serif;
+      --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--fond);
+      color: var(--texte);
+      font-family: var(--sans);
+      font-size: 17px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: var(--accent); }
+    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    .entete { max-width: 1160px; margin: 0 auto; padding: 28px 40px; }
+    .entete img { height: 46px; width: auto; }
+
+    .page {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 40px 40px 100px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 72px;
+      align-items: start;
+    }
+
+    .surtitre { margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--doux); }
+    h1 {
+      margin: 18px 0 0;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(2.3rem, 4.4vw, 3.4rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--titre);
+      text-wrap: balance;
+    }
+    h1 em { color: var(--accent); }
+
+    .date {
+      margin: 30px 0 0;
+      display: none;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 22px;
+      background: #FFFFFF;
+      border-radius: 16px;
+      box-shadow: 0 24px 50px -36px rgba(108, 96, 89, 0.45);
+      font-size: 17px;
+      color: var(--titre);
+    }
+    .date.visible { display: inline-flex; }
+    .date svg { flex: none; color: var(--accent); }
+
+    .intro { margin: 28px 0 0; font-size: 18px; line-height: 1.8; }
+    .intro p { margin: 0 0 14px; }
+
+    h2 {
+      margin: 52px 0 0;
+      font-family: var(--sous-titre);
+      font-weight: 500;
+      font-size: 28px;
+      line-height: 1.2;
+      color: var(--titre);
+    }
+
+    .conseils { margin: 22px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--ligne); }
+    .conseils li { display: flex; gap: 18px; padding: 22px 0; border-bottom: 1px solid var(--ligne); }
+    .conseils .pastille {
+      flex: none; width: 42px; height: 42px; border-radius: 50%;
+      background: #FFFFFF; color: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .conseils h3 { margin: 0; font-family: var(--sous-titre); font-weight: 600; font-size: 21px; line-height: 1.3; color: var(--titre); }
+    .conseils p { margin: 4px 0 0; font-size: 16px; }
+
+    .preparer { margin: 30px 0 0; font-size: 16px; }
+
+    .portrait { position: sticky; top: 28px; }
+    .portrait img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: 50% 20%;
+      border-radius: 28px;
+    }
+    .portrait blockquote {
+      margin: 26px 0 0;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 21px;
+      line-height: 1.45;
+      color: var(--titre);
+    }
+    .portrait cite { display: block; margin-top: 8px; font-family: var(--sans); font-style: normal; font-size: 14px; color: var(--doux); }
+
+    .aide { margin: 40px 0 0; padding: 20px 0 0; border-top: 1px solid var(--ligne); font-size: 14px; color: var(--doux); }
+    .aide p { margin: 0 0 6px; }
+
+    .pied { border-top: 1px solid var(--ligne); }
+    .pied div {
+      max-width: 1160px; margin: 0 auto; padding: 26px 40px;
+      display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px;
+      font-size: 13px; color: var(--doux);
+    }
+    .pied a { color: var(--doux); }
+
+    @media (max-width: 900px) {
+      .entete { padding: 22px 20px; }
+      .page { grid-template-columns: minmax(0, 1fr); gap: 44px; padding: 20px 20px 72px; }
+      .portrait { position: static; max-width: 420px; }
+      .pied div { padding: 22px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="entete">
+    <a href="/"><img src="/assets/img/Laura-Ballo-black-low-res.png" alt="Laura Ballo" width="160" height="46"></a>
+  </header>
+
+  <main class="page">
+    <section aria-labelledby="titre">
+      <p class="surtitre">Rendez-vous confirmé</p>
+      <h1 id="titre"><span id="salutation">Merci</span>, votre rendez-vous est réservé.<br><em>Je me réjouis de faire votre connaissance.</em></h1>
+
+      <p class="date" id="date-rdv">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="2"/><path d="M16 3v3M8 3v3M3 10h18"/></svg>
+        <span id="date-texte"></span>
+      </p>
+
+      <div class="intro">
+        <p>Vous allez recevoir un e-mail de confirmation avec le lien de connexion. Pensez à vérifier vos courriers indésirables si vous ne le voyez pas arriver.</p>
+        <p>Ce premier rendez-vous sert à comprendre où vous en êtes, ce que vous aimeriez voir évoluer et ce qui vous freine aujourd'hui. À la fin de l'échange, je vous dirai si et comment je peux vous accompagner.</p>
+      </div>
+
+      <h2>Pour que ce moment soit vraiment le vôtre</h2>
+      <ul class="conseils">
+        <li>
+          <span class="pastille" aria-hidden="true"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 4l9 6.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span>
+          <div>
+            <h3>Installez-vous dans un endroit calme</h3>
+            <p>Choisissez une pièce où personne ne viendra vous interrompre, avec une connexion stable. Coupez les notifications de votre téléphone et de votre ordinateur.</p>
+          </div>
+        </li>
+        <li>
+          <span class="pastille" aria-hidden="true"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+          <div>
+            <h3>Réservez véritablement ce temps</h3>
+            <p>Bloquez le créneau dans votre agenda et laissez un peu de marge avant et après. Évitez d'enchaîner avec une réunion : vous arriverez plus disponible, et vous repartirez avec le temps de laisser l'échange infuser.</p>
+          </div>
+        </li>
+        <li>
+          <span class="pastille" aria-hidden="true"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 0 1 0 8h-1M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4zM6 2v2M10 2v2M14 2v2"/></svg></span>
+          <div>
+            <h3>Mettez-vous à l'aise</h3>
+            <p>Une tenue dans laquelle vous vous sentez bien, un verre d'eau ou une tasse de thé, des écouteurs si vous en avez. Gardez aussi de quoi noter.</p>
+          </div>
+        </li>
+      </ul>
+
+      <p class="preparer">Si vous le souhaitez, prenez quelques minutes avant notre échange pour noter ce qui vous amène et ce que vous aimeriez avoir changé d'ici quelques mois. Rien d'obligatoire : venez simplement comme vous êtes.</p>
+
+      <div class="aide">
+        <p>Un empêchement ? Vous pouvez déplacer ou annuler le rendez-vous depuis l'e-mail de confirmation.</p>
+        <p>Une question d'ici là ? Écrivez-moi à <a href="mailto:contact@lauraballo.com">contact@lauraballo.com</a>.</p>
+      </div>
+    </section>
+
+    <aside class="portrait">
+      <img src="/assets/img/laura-portrait.webp" alt="Laura Ballo" width="640" height="800">
+      <blockquote>« Vous avez le droit d'exister comme vous êtes, avec vos émotions et votre singularité. »<cite>Laura Ballo</cite></blockquote>
+    </aside>
+  </main>
+
+  <footer class="pied">
+    <div>
+      <span>Laura Ballo Coaching</span>
+      <span><a href="/legal/mentions-legales">Mentions légales</a> · <a href="/legal/politique-confidentialite">Confidentialité</a></span>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var get = function (k) { return (params.get(k) || '').trim(); };
+
+      var prenom = get('invitee_first_name') || get('invitee_full_name').split(' ')[0];
+      if (prenom) {
+        document.getElementById('salutation').textContent = 'Merci ' + prenom;
+      }
+
+      var debut = get('event_start_time');
+      if (debut) {
+        var d = new Date(debut);
+        if (!isNaN(d)) {
+          var jour = d.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
+          var heure = d.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }).replace(':', ' h ');
+          document.getElementById('date-texte').textContent = 'Nous nous retrouvons le ' + jour + ' à ' + heure.replace(/ h 00$/, ' h');
+          document.getElementById('date-rdv').classList.add('visible');
+        }
+      }
+
+      // Enregistrement du rendez-vous dans le CRM (une seule fois par réservation)
+      var email = get('invitee_email');
+      var uuid = get('invitee_uuid');
+      if (email && uuid) {
+        var cle = 'rdv-' + uuid;
+        var dejaEnvoye = false;
+        try { dejaEnvoye = sessionStorage.getItem(cle) === '1'; } catch (e) {}
+        if (!dejaEnvoye) {
+          var donnees = {};
+          ['invitee_uuid', 'invitee_email', 'invitee_first_name', 'invitee_last_name', 'invitee_full_name',
+           'event_type_name', 'event_type_uuid', 'event_start_time', 'event_end_time',
+           'utm_source', 'utm_medium', 'utm_campaign',
+           'answer_1', 'answer_2', 'answer_3', 'answer_4', 'answer_5'].forEach(function (k) {
+            if (get(k)) donnees[k] = get(k);
+          });
+          fetch('/api/rdv-exploration', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(donnees),
+            keepalive: true
+          }).then(function (r) {
+            if (r.ok) { try { sessionStorage.setItem(cle, '1'); } catch (e) {} }
+          }).catch(function () {});
+        }
+      }
+
+      // Retire les données personnelles de la barre d'adresse
+      if (window.location.search && window.history && window.history.replaceState) {
+        window.history.replaceState(null, '', window.location.pathname);
+      }
+    })();
+  </script>
+</body>
+</html>
