@@ -228,31 +228,8 @@
         }
       }
 
-      // Enregistrement du rendez-vous dans le CRM (une seule fois par réservation)
-      var email = get('invitee_email');
-      var uuid = get('invitee_uuid');
-      if (email && uuid) {
-        var cle = 'rdv-' + uuid;
-        var dejaEnvoye = false;
-        try { dejaEnvoye = sessionStorage.getItem(cle) === '1'; } catch (e) {}
-        if (!dejaEnvoye) {
-          var donnees = {};
-          ['invitee_uuid', 'invitee_email', 'invitee_first_name', 'invitee_last_name', 'invitee_full_name',
-           'event_type_name', 'event_type_uuid', 'event_start_time', 'event_end_time',
-           'utm_source', 'utm_medium', 'utm_campaign',
-           'answer_1', 'answer_2', 'answer_3', 'answer_4', 'answer_5'].forEach(function (k) {
-            if (get(k)) donnees[k] = get(k);
-          });
-          fetch('/api/rdv-exploration', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(donnees),
-            keepalive: true
-          }).then(function (r) {
-            if (r.ok) { try { sessionStorage.setItem(cle, '1'); } catch (e) {} }
-          }).catch(function () {});
-        }
-      }
+      // L'enregistrement dans CRM People est fait par n8n (webhook Calendly),
+      // workflow « Coaching · RDV d'exploration Calendly → CRM ». Cette page ne fait qu'afficher.
 
       // Retire les données personnelles de la barre d'adresse
       if (window.location.search && window.history && window.history.replaceState) {
