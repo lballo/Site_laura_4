@@ -92,7 +92,7 @@ async function contexte(ins) {
   const siretIns = nombre(ins, "SIRET");
   const adresseEnt = texte(ins, "Adresse entreprise") || [texte(entreprise, "Adresse"), [texte(entreprise, "Code postal"), texte(entreprise, "Ville")].filter(Boolean).join(" ")].filter(Boolean).join(", ");
   const vars = {
-    programme: texte(offre, "Titre") || texte(offre, "Nav") || texte(ins, "Titre"),
+    programme: texte(offre, "Titre") || texte(offre, "Nav"),
     objectif: texte(ins, "Objectif").replace(/[.\s]+$/, ""),
     client_nom: clientNom,
     entreprise_denomination: texte(ins, "Dénomination sociale") || texte(entreprise, "Nom"),
@@ -104,7 +104,7 @@ async function contexte(ins) {
     versement: m.versement,
   };
   const manque = [];
-  if (!vars.programme) manque.push("l'offre (champ Programme)");
+  if (!offreId || !offre) manque.push("l'offre (champ Programme, et accès de l'intégration Notion du site à « Offres Accompagnements »)");
   if (!tarif) manque.push("le tarif");
   if (!vars.seances) manque.push("le nombre de séances");
   if (!vars.objectif) manque.push("l'objectif");
@@ -138,7 +138,8 @@ async function rendre(ctx, extra = {}) {
       if (si) { pile.push(conditions[si[1].toLowerCase()] === true); return; }
       if (/^\[\[FIN\]\]$/i.test(brut)) { pile.pop(); return; }
       if (pile.some((c) => !c)) return;
-      const r2 = runs.map((r) => ({ ...r, text: remplir(r.text) })).filter((r) => r.text);
+      // Espaces insécables de la typographie française (guillemets, deux-points, point-virgule)
+      const r2 = runs.map((r) => ({ ...r, text: remplir(r.text).replace(/« /g, "«\u00a0").replace(/ (»|:|;|\?|!)/g, "\u00a0$1") })).filter((r) => r.text);
       if (!r2.length || !r2.map((r) => r.text).join("").trim()) return;
       const kind = type === "heading_1" ? "h1" : type.startsWith("heading") ? "h2" : type === "numbered_list_item" && i === 0 ? "li" : type === "bulleted_list_item" && i === 0 ? "bullet" : "p";
       const item = { kind, runs: r2 };
