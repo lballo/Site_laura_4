@@ -10,51 +10,82 @@
   <style>
     :root {
       --bg: #FBF4EE; --white: #FFFFFF; --section-dark: #E8DDD6; --btn: #A08E84; --btn-hover: #7a6b62;
-      --dark: #2C2420; --text: #4a3c35; --text-light: #8a7068; --border: #d9cec7; --error: #8b2e1f;
+      --dark: #2C2420; --text: #4a3c35; --text-light: #8a7068; --border: #d9cec7; --error: #8b2e1f; --ok: #4f6b4a; --accent: #b0563f;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Jost', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
     header { background: var(--section-dark); padding: 18px 24px; display: flex; align-items: center; gap: 16px; }
     header img { height: 48px; width: auto; display: block; }
     header .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; color: var(--dark); letter-spacing: 0.08em; font-weight: 500; }
-    .container { max-width: 760px; margin: 0 auto; padding: 36px 16px 80px; }
+    .container { max-width: 900px; margin: 0 auto; padding: 36px 16px 80px; }
+    .etroit { max-width: 640px; margin: 0 auto; }
     .intro { text-align: center; margin-bottom: 28px; }
     .intro .tag { display: inline-block; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--btn); border: 1px solid var(--btn); padding: 6px 16px; border-radius: 20px; margin-bottom: 16px; }
     .intro h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.7rem, 4vw, 2.4rem); color: var(--dark); font-weight: 400; line-height: 1.2; margin-bottom: 10px; }
-    .intro p { font-size: 1rem; line-height: 1.7; font-weight: 300; max-width: 560px; margin: 0 auto; }
-    .card { background: var(--white); border-radius: 16px; padding: 40px; box-shadow: 0 2px 16px rgba(44,36,32,0.05); margin-bottom: 24px; }
+    .intro p { font-size: 1.05rem; line-height: 1.7; font-weight: 300; max-width: 600px; margin: 0 auto; }
+    .card { background: var(--white); border-radius: 16px; padding: 36px 40px; box-shadow: 0 2px 16px rgba(44,36,32,0.05); margin-bottom: 24px; }
     @media (max-width: 560px) { .card { padding: 24px 18px; } }
-    .contrat { font-size: 0.95rem; line-height: 1.65; color: var(--dark); }
-    .contrat h2.titre { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 500; line-height: 1.25; margin-bottom: 18px; }
-    .contrat h3 { font-size: 0.95rem; font-weight: 500; letter-spacing: 0.04em; margin: 26px 0 8px; }
-    .contrat p { margin: 0 0 8px; }
-    .contrat p.indent { padding-left: 26px; margin-top: -4px; }
-    .contrat .li { display: grid; grid-template-columns: 26px 1fr; margin: 0 0 8px; }
-    .contrat b { font-weight: 500; }
-    .contrat .vide { color: var(--text-light); font-style: italic; }
-    .section-title { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; color: var(--dark); font-weight: 500; margin-bottom: 6px; }
-    .aide { font-size: 0.88rem; color: var(--text-light); line-height: 1.6; margin-bottom: 22px; }
+    .etapes { list-style: none; counter-reset: e; margin: 4px 0 26px; }
+    .etapes li { counter-increment: e; display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: start; font-size: 1rem; line-height: 1.6; margin-bottom: 10px; }
+    .etapes li::before { content: counter(e); width: 28px; height: 28px; border-radius: 50%; background: var(--section-dark); color: var(--dark); display: grid; place-items: center; font-size: 0.9rem; font-weight: 500; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; color: var(--dark); font-weight: 500; margin-bottom: 8px; }
+    .aide { font-size: 0.95rem; color: var(--text-light); line-height: 1.6; margin-bottom: 22px; }
     .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 22px; }
     label, .label { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-light); }
-    input[type="text"] { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 8px; font-family: 'Jost', sans-serif; font-size: 1rem; color: var(--dark); background: var(--white); outline: none; }
+    input[type="text"] { width: 100%; padding: 13px 16px; border: 1.5px solid var(--border); border-radius: 8px; font-family: 'Jost', sans-serif; font-size: 1.05rem; color: var(--dark); background: var(--white); outline: none; }
     input[type="text"]:focus { border-color: var(--btn); }
-    .pad { position: relative; border: 1.5px dashed var(--border); border-radius: 10px; background: #fff; touch-action: none; }
-    .pad canvas { display: block; width: 100%; height: 100%; cursor: crosshair; border-radius: 10px; }
-    .pad.paraphe { width: 220px; height: 110px; max-width: 100%; }
-    .pad.signature { width: 100%; height: 190px; }
-    .pad .indice { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); text-align: center; color: #c9bdb6; font-size: 0.9rem; pointer-events: none; }
-    .effacer { align-self: flex-start; background: none; border: none; color: var(--btn-hover); font-family: 'Jost', sans-serif; font-size: 0.85rem; text-decoration: underline; cursor: pointer; padding: 2px 0; }
-    .check { display: flex; gap: 12px; align-items: flex-start; font-size: 0.95rem; line-height: 1.55; margin: 6px 0 24px; cursor: pointer; text-transform: none; letter-spacing: 0; font-weight: 400; color: var(--text); }
-    .check input { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--btn-hover); flex-shrink: 0; }
-    .actions { text-align: center; }
-    .btn { display: inline-block; background: var(--btn); color: var(--white); border: none; padding: 16px 44px; border-radius: 50px; font-family: 'Jost', sans-serif; font-size: 0.95rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: background 0.2s; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--btn); color: var(--white); border: none; padding: 15px 40px; border-radius: 50px; font-family: 'Jost', sans-serif; font-size: 0.95rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: background 0.2s; }
     .btn:hover { background: var(--btn-hover); }
-    .btn:disabled { opacity: 0.6; cursor: not-allowed; }
-    .erreur { display: none; margin-top: 16px; padding: 14px 18px; border-radius: 10px; background: #fdf0ee; border: 1px solid #e8b4a8; color: var(--error); font-size: 0.92rem; }
+    .btn:disabled { opacity: 0.55; cursor: not-allowed; }
+    .btn.leger { background: var(--white); color: var(--btn-hover); border: 1.5px solid var(--border); padding: 10px 18px; font-size: 0.82rem; letter-spacing: 0.05em; }
+    .btn.leger:hover { border-color: var(--btn); background: #fdf9f6; }
+    .lien { background: none; border: none; color: var(--btn-hover); font-family: 'Jost', sans-serif; font-size: 0.88rem; text-decoration: underline; cursor: pointer; padding: 2px 0; }
+    .erreur { display: none; margin-top: 16px; padding: 14px 18px; border-radius: 10px; background: #fdf0ee; border: 1px solid #e8b4a8; color: var(--error); font-size: 0.95rem; line-height: 1.5; }
     .etat { text-align: center; padding: 56px 24px; }
     .etat h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--dark); font-weight: 400; margin-bottom: 12px; }
-    .etat p { color: var(--text-light); line-height: 1.7; max-width: 440px; margin: 0 auto 24px; }
-    .cache { display: none; }
+    .etat p { color: var(--text-light); line-height: 1.7; max-width: 460px; margin: 0 auto 24px; }
+    .cache { display: none !important; }
+    .intro p.mobile-seul { display: none; margin-top: 10px; font-size: 0.95rem; color: var(--text-light); }
+    @media (max-width: 700px) { .intro p.mobile-seul { display: block; } .barre .btn.leger { padding: 8px 14px; } }
+
+    /* Barre d'outils de lecture */
+    .barre { position: sticky; top: 0; z-index: 5; background: rgba(251,244,238,0.96); backdrop-filter: blur(6px); border-bottom: 1px solid var(--border); margin: 0 -16px 24px; padding: 12px 16px; display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: space-between; }
+    .progression { font-size: 0.95rem; color: var(--dark); display: flex; align-items: center; gap: 10px; }
+    .progression .jauge { width: 120px; height: 6px; border-radius: 3px; background: var(--section-dark); overflow: hidden; }
+    .progression .jauge span { display: block; height: 100%; width: 0; background: var(--ok); transition: width 0.25s; }
+    .outils { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    /* Pages A4 */
+    .page { position: relative; width: 100%; aspect-ratio: 595.28 / 841.89; background: #fff; box-shadow: 0 2px 18px rgba(44,36,32,0.10); margin: 0 auto 28px; border-radius: 2px; }
+    .page svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    .page .num { position: absolute; top: -22px; right: 0; font-size: 0.78rem; color: var(--text-light); }
+    .zone { position: absolute; border-radius: 4px; }
+    .zone.paraphe { border: 2px solid var(--accent); background: rgba(176,86,63,0.07); cursor: pointer; display: grid; place-items: center; font-family: 'Jost', sans-serif; font-size: clamp(0.62rem, 1.6vw, 0.85rem); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); animation: appel 1.8s ease-in-out infinite; }
+    .zone.paraphe:hover { background: rgba(176,86,63,0.14); }
+    .zone.paraphe.fait { border: 1.5px solid #b9c7b5; background: #fff; animation: none; }
+    .zone.paraphe img { max-width: 92%; max-height: 86%; }
+    @keyframes appel { 0%, 100% { box-shadow: 0 0 0 0 rgba(176,86,63,0.25); } 50% { box-shadow: 0 0 0 6px rgba(176,86,63,0); } }
+    .zone.signature { display: grid; place-items: center; cursor: pointer; }
+    .zone.signature span { font-size: clamp(0.6rem, 1.5vw, 0.82rem); color: var(--accent); text-decoration: underline; }
+    .zone.signature img { max-width: 94%; max-height: 74%; margin-top: 8%; }
+    .zone.mention { font-family: Helvetica, Arial, sans-serif; color: #736b66; white-space: nowrap; transform: translateY(-80%); }
+
+    /* Signature */
+    .pad { position: relative; border: 1.5px dashed var(--border); border-radius: 10px; background: #fff; touch-action: none; }
+    .pad canvas { display: block; width: 100%; height: 100%; cursor: crosshair; border-radius: 10px; }
+    .pad.signature { width: 100%; height: 190px; }
+    .pad.paraphe { width: 100%; height: 130px; }
+    .pad .indice { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); text-align: center; color: #c9bdb6; font-size: 0.95rem; pointer-events: none; }
+    .check { display: flex; gap: 12px; align-items: flex-start; font-size: 1rem; line-height: 1.55; margin: 6px 0 24px; cursor: pointer; text-transform: none; letter-spacing: 0; font-weight: 400; color: var(--text); }
+    .check input { width: 20px; height: 20px; margin-top: 3px; accent-color: var(--btn-hover); flex-shrink: 0; }
+    .statut { font-size: 0.95rem; line-height: 1.55; padding: 12px 16px; border-radius: 10px; margin-bottom: 22px; background: #fbf1ec; color: var(--accent); }
+    .statut.ok { background: #eef3ec; color: var(--ok); }
+    .actions { text-align: center; }
+
+    /* Fenêtre du paraphe */
+    dialog { border: none; border-radius: 16px; padding: 28px; width: min(440px, calc(100vw - 32px)); box-shadow: 0 10px 40px rgba(44,36,32,0.25); color: var(--text); }
+    dialog::backdrop { background: rgba(44,36,32,0.45); }
+    dialog .boutons { display: flex; gap: 10px; justify-content: space-between; align-items: center; margin-top: 18px; flex-wrap: wrap; }
     footer { text-align: center; padding: 24px; font-size: 0.78rem; color: var(--text-light); }
   </style>
 </head>
@@ -65,148 +96,289 @@
 </header>
 
 <div class="container">
-  <div id="chargement" class="card etat"><p>Chargement de votre contrat…</p></div>
+  <div id="chargement" class="card etat etroit"><p>Chargement de votre contrat…</p></div>
 
-  <div id="message" class="card etat cache"><h2 id="message-titre"></h2><p id="message-texte"></p><a id="message-lien" class="btn cache" href="#">Télécharger le contrat signé</a></div>
+  <div id="message" class="card etat etroit cache"><h2 id="message-titre"></h2><p id="message-texte"></p><a id="message-lien" class="btn cache" href="#">Télécharger le contrat signé</a></div>
 
-  <div id="lecture" class="cache">
+  <!-- 1. Informations qui figurent dans le contrat -->
+  <div id="infos" class="etroit cache">
     <div class="intro">
       <div class="tag">Votre contrat de coaching</div>
       <h1 id="intro-titre"></h1>
-      <p>Prenez le temps de lire votre contrat. Vous le signez en bas de page : un paraphe, la mention « Lu et approuvé » et votre signature. Vous pourrez ensuite télécharger l'exemplaire signé.</p>
+      <p id="intro-programme"></p>
     </div>
-    <div class="card contrat" id="contrat"></div>
-
-    <form class="card" id="formulaire" novalidate>
-      <div class="section-title">Signer le contrat</div>
-      <p class="aide">Votre paraphe est reproduit sur chaque page du contrat, et votre signature à la fin. Dessinez-les au doigt ou à la souris.</p>
-
+    <form class="card" id="form-infos" novalidate>
+      <ol class="etapes">
+        <li>Vous indiquez ci-dessous ce qui doit figurer dans le contrat.</li>
+        <li>Vous lisez le contrat page par page et vous paraphez chaque page. Vous pouvez l'imprimer ou l'enregistrer en PDF avant de signer.</li>
+        <li>Vous signez en bas du contrat, puis vous téléchargez votre exemplaire signé.</li>
+      </ol>
       <div class="field cache" id="champ-adresse">
         <label for="adresse">Votre adresse postale</label>
         <input type="text" id="adresse" autocomplete="street-address" placeholder="Numéro, rue, code postal, ville" />
       </div>
       <div class="field cache" id="champ-signataire">
-        <label for="signataire">Nom et qualité du signataire</label>
+        <label for="signataire">Nom et qualité de la personne qui signe pour <span id="nom-entreprise"></span></label>
         <input type="text" id="signataire" autocomplete="name" placeholder="Ex. : Paul Durand, directeur général" />
       </div>
+      <div class="actions"><button type="submit" class="btn" id="afficher">Afficher mon contrat</button></div>
+      <div class="erreur" id="erreur-infos"></div>
+    </form>
+  </div>
 
-      <div class="field">
-        <span class="label">Votre paraphe (initiales)</span>
-        <div class="pad paraphe" id="pad-paraphe"><canvas></canvas><span class="indice">Paraphe</span></div>
-        <button type="button" class="effacer" data-efface="pad-paraphe">Effacer</button>
+  <!-- 2. Lecture page par page, paraphes -->
+  <div id="lecture" class="cache">
+    <div class="barre">
+      <div class="progression"><span id="compteur">Pages paraphées : 0 / 0</span><div class="jauge"><span id="jauge"></span></div></div>
+      <div class="outils">
+        <button type="button" class="btn leger" id="ouvrir-pdf" disabled>Imprimer</button>
+        <button type="button" class="btn leger" id="telecharger-pdf" disabled>Enregistrer en PDF</button>
       </div>
+    </div>
+    <div class="intro">
+      <h1>Lisez et paraphez chaque page</h1>
+      <p>En bas de chaque page, cliquez sur <b>Parapher</b>. Vous dessinez votre paraphe une fois, puis vous l'apposez page après page. Les boutons <b>Imprimer</b> et <b>Enregistrer en PDF</b> vous donnent le contrat complet avant de signer.</p>
+      <p class="mobile-seul">Sur téléphone, écartez deux doigts pour agrandir une page, ou ouvrez le contrat avec «&nbsp;Imprimer&nbsp;» pour le lire en PDF.</p>
+      <p style="margin-top:10px"><button type="button" class="lien" id="modifier-infos">Modifier mes informations</button></p>
+    </div>
+    <div id="pages"></div>
 
+    <!-- 3. Signature -->
+    <form class="card etroit" id="formulaire" novalidate>
+      <div class="section-title">Signer le contrat</div>
+      <div class="statut" id="statut-paraphes"></div>
       <div class="field">
-        <label for="mention">Écrivez « Lu et approuvé »</label>
+        <label for="mention">Écrivez « Lu et approuvé »</label>
         <input type="text" id="mention" autocomplete="off" placeholder="Lu et approuvé" />
       </div>
-
       <div class="field">
         <span class="label">Votre signature</span>
-        <div class="pad signature" id="pad-signature"><canvas></canvas><span class="indice">Signature</span></div>
-        <button type="button" class="effacer" data-efface="pad-signature">Effacer</button>
+        <div class="pad signature" id="pad-signature"><canvas></canvas><span class="indice">Signez ici, au doigt ou à la souris</span></div>
+        <button type="button" class="lien" style="align-self:flex-start" id="effacer-signature">Effacer</button>
       </div>
-
       <label class="check"><input type="checkbox" id="accepte" /> <span>J'ai lu l'intégralité du contrat et j'en accepte les termes. Je signe électroniquement ce contrat, qui a la même valeur qu'une signature manuscrite.</span></label>
-
       <div class="actions"><button type="submit" class="btn" id="signer">Signer le contrat</button></div>
       <div class="erreur" id="erreur"></div>
     </form>
   </div>
 </div>
 
+<dialog id="fenetre-paraphe">
+  <div class="section-title">Votre paraphe</div>
+  <p class="aide" style="margin-bottom:14px">Vos initiales, au doigt ou à la souris. Il sera apposé sur la page choisie, puis sur chaque page où vous cliquerez «&nbsp;Parapher&nbsp;».</p>
+  <div class="pad paraphe" id="pad-paraphe"><canvas></canvas><span class="indice">Paraphe</span></div>
+  <div class="boutons">
+    <button type="button" class="lien" id="effacer-paraphe">Effacer</button>
+    <span style="display:flex;gap:8px"><button type="button" class="btn leger" id="annuler-paraphe">Annuler</button><button type="button" class="btn" style="padding:12px 24px" id="valider-paraphe">Valider</button></span>
+  </div>
+</dialog>
+
 <footer>Laura Ballo Coaching — Contrat confidentiel</footer>
 
 <script>
   const jeton = new URLSearchParams(location.search).get("t") || "";
   const $ = (id) => document.getElementById(id);
-  let donnees = null;
+  const SVG = "http://www.w3.org/2000/svg";
+  let etat = null, apercu = null, infos = {}, paraphe = null, paraphes = new Set(), pageEnAttente = 0;
+  let pdfLecture = null, lectureOuverte = false, signature = null;
 
-  function montrer(id) { ["chargement", "message", "lecture"].forEach((x) => $(x).classList.toggle("cache", x !== id)); }
+  function montrer(id) { ["chargement", "message", "infos", "lecture"].forEach((x) => $(x).classList.toggle("cache", x !== id)); window.scrollTo({ top: 0 }); }
   function message(titre, texte, lien) {
     $("message-titre").textContent = titre; $("message-texte").textContent = texte;
     $("message-lien").classList.toggle("cache", !lien); if (lien) $("message-lien").href = lien;
-    montrer("message"); window.scrollTo({ top: 0 });
+    montrer("message");
+  }
+  const erreurDans = (id) => (t) => { const e = $(id); e.textContent = t; e.style.display = t ? "block" : "none"; };
+  const erreur = erreurDans("erreur"), erreurInfos = erreurDans("erreur-infos");
+  const api = (corps) => fetch("/api/contrat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ t: jeton, ...infos, ...corps }) });
+
+  // ── Dessin d'une page à partir de sa mise en page (la même que le PDF) ──
+  const couleur = (c) => c ? `rgb(${c.map((v) => Math.round(v * 255)).join(",")})` : "none";
+  function dessinerPage(ops, L, H, images) {
+    const svg = document.createElementNS(SVG, "svg");
+    svg.setAttribute("viewBox", `0 0 ${L} ${H}`);
+    const el = (nom, attrs) => { const e = document.createElementNS(SVG, nom); for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v); svg.appendChild(e); return e; };
+    for (const o of ops) {
+      if (o.t === "T") {
+        const t = el("text", { x: o.x, y: H - o.y, "font-family": "Helvetica, Arial, sans-serif", "font-size": o.z, "font-weight": o.f === "F2" ? "700" : "400", fill: couleur(o.c) });
+        if (o.a) t.setAttribute("transform", `rotate(${-o.a} ${o.x} ${H - o.y})`);
+        t.setAttribute("xml:space", "preserve"); t.textContent = o.s;
+      } else if (o.t === "L") el("line", { x1: o.x1, y1: H - o.y1, x2: o.x2, y2: H - o.y2, stroke: couleur(o.c), "stroke-width": o.w });
+      else if (o.t === "R") el("rect", { x: o.x, y: H - o.y - o.h, width: o.w, height: o.h, fill: couleur(o.fl), stroke: couleur(o.s), "stroke-width": o.lw, "stroke-dasharray": o.d ? "3 2" : "none" });
+      else if (o.t === "I" && images[o.n]) el("image", { href: images[o.n], x: o.x, y: H - o.y - o.h, width: o.w, height: o.h, preserveAspectRatio: "xMidYMid meet" });
+    }
+    return svg;
+  }
+  function placer(div, z, L, H) {
+    Object.assign(div.style, { left: (z.x / L) * 100 + "%", top: ((H - z.y - z.h) / H) * 100 + "%", width: (z.w / L) * 100 + "%", height: (z.h / H) * 100 + "%" });
   }
 
-  // ── Affichage du contrat ──
-  function runs(el, liste) {
-    for (const r of liste) {
-      const parts = r.text.split(/(\(à compléter ci-dessous\)|\(à la signature\))/);
-      for (const p of parts) {
-        if (!p) continue;
-        const vide = /^\(à /.test(p);
-        const n = document.createElement(r.bold ? "b" : vide ? "span" : "span");
-        if (vide) n.className = "vide";
-        n.textContent = p; el.appendChild(n);
+  function afficherPages() {
+    const { pages, largeur: L, hauteur: H, zones, images } = apercu;
+    const c = $("pages"); c.innerHTML = "";
+    pages.forEach((ops, i) => {
+      const p = document.createElement("div"); p.className = "page"; p.id = "page-" + (i + 1);
+      p.appendChild(dessinerPage(ops, L, H, images));
+      const n = document.createElement("div"); n.className = "num"; n.textContent = `Page ${i + 1} sur ${pages.length}`; p.appendChild(n);
+      // Case du paraphe
+      const z = zones.paraphes[i], b = document.createElement("button");
+      b.type = "button"; b.className = "zone paraphe"; b.dataset.page = i + 1; placer(b, z, L, H);
+      b.addEventListener("click", () => cliquerParaphe(i + 1));
+      p.appendChild(b);
+      // Signature et mention sur la dernière page
+      if (zones.signature.page === i + 1) {
+        const s = document.createElement("div"); s.className = "zone signature"; s.id = "zone-signature"; placer(s, zones.signature, L, H);
+        s.addEventListener("click", () => $("formulaire").scrollIntoView({ behavior: "smooth" }));
+        p.appendChild(s);
+        const m = document.createElement("div"); m.className = "zone mention"; m.id = "zone-mention";
+        Object.assign(m.style, { left: (zones.mention.x / L) * 100 + "%", top: ((H - zones.mention.y) / H) * 100 + "%" });
+        p.appendChild(m);
       }
+      c.appendChild(p);
+    });
+    majParaphes(); majSignature(); majMention();
+    const ajusterTexte = () => { const m = $("zone-mention"); if (m) m.style.fontSize = (10.5 * $("pages").clientWidth / L) + "px"; };
+    ajusterTexte(); window.addEventListener("resize", ajusterTexte);
+  }
+
+  // ── Paraphes ──
+  function majParaphes() {
+    const total = apercu ? apercu.pages.length : 0;
+    document.querySelectorAll(".zone.paraphe").forEach((b) => {
+      const fait = paraphes.has(+b.dataset.page);
+      b.classList.toggle("fait", fait);
+      b.innerHTML = fait ? `<img alt="Paraphe" src="${paraphe}">` : "Parapher";
+      b.title = fait ? "Retirer le paraphe de cette page" : "Parapher cette page";
+    });
+    $("compteur").textContent = `Pages paraphées : ${paraphes.size} / ${total}`;
+    $("jauge").style.width = total ? (paraphes.size / total) * 100 + "%" : "0";
+    const reste = [...Array(total).keys()].map((i) => i + 1).filter((p) => !paraphes.has(p));
+    const st = $("statut-paraphes");
+    st.classList.toggle("ok", !reste.length);
+    st.innerHTML = "";
+    if (!reste.length) st.textContent = `✓ Les ${total} pages sont paraphées.`;
+    else {
+      st.append(`Il reste ${reste.length} page${reste.length > 1 ? "s" : ""} à parapher : `);
+      reste.forEach((p, k) => { const a = document.createElement("button"); a.type = "button"; a.className = "lien"; a.style.color = "inherit"; a.textContent = "page " + p; a.addEventListener("click", () => $("page-" + p).scrollIntoView({ behavior: "smooth", block: "end" })); st.append(a); if (k < reste.length - 1) st.append(", "); });
+      st.append(".");
     }
   }
-  function afficher(items) {
-    const c = $("contrat"); c.innerHTML = "";
-    for (const it of items) {
-      let el;
-      if (it.kind === "h1") { el = document.createElement("h2"); el.className = "titre"; }
-      else if (it.kind === "h2") el = document.createElement("h3");
-      else if (it.kind === "li" || it.kind === "bullet") {
-        el = document.createElement("div"); el.className = "li";
-        const num = document.createElement("span"); num.textContent = it.kind === "li" ? it.num + ")" : "•"; el.appendChild(num);
-        const corps = document.createElement("span"); runs(corps, it.runs); el.appendChild(corps); c.appendChild(el); continue;
-      } else { el = document.createElement("p"); if (it.indent) el.className = "indent"; }
-      runs(el, it.runs); c.appendChild(el);
-    }
+  function cliquerParaphe(n) {
+    if (paraphes.has(n)) { paraphes.delete(n); return majParaphes(); }
+    if (!paraphe) { pageEnAttente = n; ouvrirParaphe(); return; }
+    paraphes.add(n); majParaphes();
   }
+  let padParaphe = null;
+  function ouvrirParaphe() {
+    $("fenetre-paraphe").showModal();
+    if (!padParaphe) padParaphe = zone("pad-paraphe", 2.2); else padParaphe.taille();
+  }
+  $("annuler-paraphe").addEventListener("click", () => $("fenetre-paraphe").close());
+  $("effacer-paraphe").addEventListener("click", () => padParaphe.effacer());
+  $("valider-paraphe").addEventListener("click", () => {
+    if (padParaphe.vide()) return;
+    paraphe = padParaphe.jpeg();
+    $("fenetre-paraphe").close();
+    if (pageEnAttente) paraphes.add(pageEnAttente);
+    pageEnAttente = 0; majParaphes();
+  });
 
   // ── Zones de dessin ──
-  function zone(id) {
+  function zone(id, epaisseur) {
     const box = $(id), cv = box.querySelector("canvas"), ctx = cv.getContext("2d"), indice = box.querySelector(".indice");
-    let traits = 0, dessin = false, dernier = null;
+    let traits = 0, dessin = false, dernier = null, rappel = null;
     function taille() {
       const r = box.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+      if (!r.width) return;
       const ancien = traits ? cv.toDataURL() : null;
       cv.width = Math.round(r.width * dpr); cv.height = Math.round(r.height * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.lineCap = "round"; ctx.lineJoin = "round"; ctx.strokeStyle = "#1a1a1a"; ctx.lineWidth = id === "pad-paraphe" ? 2.2 : 2.6;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.lineCap = "round"; ctx.lineJoin = "round"; ctx.strokeStyle = "#1a1a1a"; ctx.lineWidth = epaisseur;
       if (ancien) { const im = new Image(); im.onload = () => ctx.drawImage(im, 0, 0, r.width, r.height); im.src = ancien; }
     }
     const pos = (e) => { const r = cv.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
     cv.addEventListener("pointerdown", (e) => { e.preventDefault(); cv.setPointerCapture(e.pointerId); dessin = true; dernier = pos(e); ctx.beginPath(); ctx.arc(dernier.x, dernier.y, ctx.lineWidth / 2, 0, Math.PI * 2); ctx.fillStyle = "#1a1a1a"; ctx.fill(); traits++; indice.style.display = "none"; });
     cv.addEventListener("pointermove", (e) => { if (!dessin) return; const p = pos(e); ctx.beginPath(); ctx.moveTo(dernier.x, dernier.y); ctx.lineTo(p.x, p.y); ctx.stroke(); dernier = p; });
-    const fin = () => { dessin = false; };
+    const fin = () => { if (dessin && rappel) rappel(); dessin = false; };
     cv.addEventListener("pointerup", fin); cv.addEventListener("pointercancel", fin); cv.addEventListener("pointerleave", fin);
     window.addEventListener("resize", taille);
     taille();
     return {
+      taille,
+      apresTrait: (f) => { rappel = f; },
       vide: () => traits === 0,
-      effacer: () => { ctx.clearRect(0, 0, cv.width, cv.height); traits = 0; indice.style.display = ""; },
+      effacer: () => { ctx.clearRect(0, 0, cv.width, cv.height); traits = 0; indice.style.display = ""; if (rappel) rappel(); },
       jpeg: () => { const o = document.createElement("canvas"); o.width = cv.width; o.height = cv.height; const x = o.getContext("2d"); x.fillStyle = "#fff"; x.fillRect(0, 0, o.width, o.height); x.drawImage(cv, 0, 0); return o.toDataURL("image/jpeg", 0.9); },
     };
   }
+  function majSignature() {
+    const z = $("zone-signature"); if (!z) return;
+    z.innerHTML = signature && !signature.vide() ? `<img alt="Votre signature" src="${signature.jpeg()}">` : "<span>Signer ici</span>";
+  }
+  function majMention() { const m = $("zone-mention"); if (m) m.textContent = $("mention").value.trim() ? `« ${$("mention").value.trim()} »` : ""; }
+  $("mention").addEventListener("input", majMention);
+  $("effacer-signature").addEventListener("click", () => signature.effacer());
 
-  let paraphe, signature;
-  document.querySelectorAll("[data-efface]").forEach((b) => b.addEventListener("click", () => (b.dataset.efface === "pad-paraphe" ? paraphe : signature).effacer()));
+  // ── Exemplaire de lecture (PDF) : imprimer ou enregistrer avant de signer ──
+  async function preparerPdf() {
+    pdfLecture = null;
+    ["ouvrir-pdf", "telecharger-pdf"].forEach((b) => ($(b).disabled = true));
+    try {
+      const r = await api({ action: "lecture" });
+      if (!r.ok) throw new Error();
+      pdfLecture = URL.createObjectURL(await r.blob());
+      ["ouvrir-pdf", "telecharger-pdf"].forEach((b) => ($(b).disabled = false));
+    } catch { /* les boutons restent grisés */ }
+  }
+  $("ouvrir-pdf").addEventListener("click", () => { if (!pdfLecture) return; lectureOuverte = true; window.open(pdfLecture, "_blank"); });
+  $("telecharger-pdf").addEventListener("click", () => {
+    if (!pdfLecture) return; lectureOuverte = true;
+    const a = document.createElement("a"); a.href = pdfLecture; a.download = "Contrat de coaching - exemplaire de lecture.pdf"; document.body.appendChild(a); a.click(); a.remove();
+  });
 
-  function erreur(t) { const e = $("erreur"); e.textContent = t; e.style.display = t ? "block" : "none"; }
+  // ── Étape 1 → 2 ──
+  async function chargerApercu() {
+    const r = await api({ action: "apercu" });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(j.error || "Le contrat n'a pas pu être affiché. Réessayez dans un instant.");
+    apercu = j; paraphes = new Set();
+    afficherPages();
+    montrer("lecture");
+    if (!signature) { signature = zone("pad-signature", 2.6); signature.apresTrait(majSignature); } else signature.taille();
+    preparerPdf();
+  }
+  $("form-infos").addEventListener("submit", async (e) => {
+    e.preventDefault(); erreurInfos("");
+    infos = etat.entreprise ? { signataire: $("signataire").value.trim() } : { adresse: $("adresse").value.trim() };
+    if (!etat.entreprise && infos.adresse.length < 8) return erreurInfos("Indiquez votre adresse postale complète.");
+    if (etat.entreprise && infos.signataire.length < 3) return erreurInfos("Indiquez le nom et la qualité de la personne qui signe.");
+    const b = $("afficher"); b.disabled = true; b.textContent = "Préparation du contrat…";
+    try { await chargerApercu(); } catch (err) { erreurInfos(err.message); }
+    b.disabled = false; b.textContent = "Afficher mon contrat";
+  });
+  $("modifier-infos").addEventListener("click", () => montrer("infos"));
 
+  // ── Étape 3 : signature ──
   $("formulaire").addEventListener("submit", async (e) => {
     e.preventDefault(); erreur("");
-    const entreprise = !!donnees.entreprise;
-    const adresse = $("adresse").value.trim(), signataire = $("signataire").value.trim(), mention = $("mention").value.trim();
-    if (!entreprise && adresse.length < 8) return erreur("Indiquez votre adresse postale.");
-    if (entreprise && signataire.length < 3) return erreur("Indiquez le nom et la qualité du signataire.");
-    if (paraphe.vide()) return erreur("Dessinez votre paraphe.");
+    const mention = $("mention").value.trim();
+    if (paraphes.size < apercu.pages.length) return erreur("Paraphez chaque page du contrat avant de signer.");
     if (mention.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/\s+/g, " ") !== "lu et approuve") return erreur("Écrivez la mention « Lu et approuvé ».");
     if (signature.vide()) return erreur("Dessinez votre signature.");
     if (!$("accepte").checked) return erreur("Cochez la case pour confirmer que vous acceptez le contrat.");
     const btn = $("signer"); btn.disabled = true; btn.textContent = "Signature en cours…";
     try {
-      const r = await fetch("/api/contrat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action: "signer", t: jeton, empreinte: donnees.empreinte, mention, adresse, signataire, accepte: true, paraphe: paraphe.jpeg(), signature: signature.jpeg() }) });
+      const r = await api({ action: "signer", empreinte: apercu.empreinte, paraphes: [...paraphes], paraphe, mention, signature: signature.jpeg(), accepte: true, lecture: lectureOuverte });
       const j = await r.json().catch(() => ({}));
+      if (r.status === 409 && j.recharger) {
+        await chargerApercu();
+        throw new Error(j.error + " Paraphez à nouveau chaque page.");
+      }
       if (!r.ok) throw new Error(j.error || "La signature n'a pas pu être enregistrée.");
       message("Votre contrat est signé", "Merci. Votre exemplaire signé est prêt : téléchargez-le et conservez-le. Laura reçoit le sien.", j.pdf);
     } catch (err) {
       erreur(err.message || "La signature n'a pas pu être enregistrée. Réessayez dans un instant.");
-      btn.disabled = false; btn.textContent = "Signer le contrat";
     }
+    btn.disabled = false; btn.textContent = "Signer le contrat";
   });
 
   (async () => {
@@ -217,13 +389,14 @@
       if (r.status === 404) return message("Lien invalide", "Ce lien ne correspond à aucun contrat en cours. Écrivez à contact@lauraballo.com et Laura vous renverra le bon lien.");
       if (!r.ok) return message("Contrat pas encore disponible", j.error || "Réessayez dans un instant.");
       if (j.etat === "signe") return message("Contrat déjà signé", "Ce contrat a déjà été signé. Vous pouvez télécharger l'exemplaire signé.", "/api/contrat?t=" + encodeURIComponent(jeton) + "&pdf=1");
-      donnees = j;
-      $("intro-titre").textContent = j.client ? j.client + ", voici votre contrat" : "Voici votre contrat";
-      afficher(j.items);
+      etat = j;
+      const prenom = (j.client || "").split(" ")[0];
+      $("intro-titre").textContent = prenom ? prenom + ", voici votre contrat" : "Voici votre contrat";
+      $("intro-programme").textContent = j.programme ? "Accompagnement « " + j.programme + " »" : "";
       $("champ-adresse").classList.toggle("cache", !!j.entreprise);
       $("champ-signataire").classList.toggle("cache", !j.entreprise);
-      montrer("lecture");
-      paraphe = zone("pad-paraphe"); signature = zone("pad-signature");
+      $("nom-entreprise").textContent = j.entreprise || "l'entreprise";
+      montrer("infos");
     } catch {
       message("Connexion impossible", "Vérifiez votre connexion puis rechargez la page.");
     }

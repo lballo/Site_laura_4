@@ -1,5 +1,6 @@
 // Petit générateur de PDF sans dépendance, pour les contrats de coaching.
-// Polices standard Helvetica et Helvetica-Bold (encodage WinAnsi), images JPEG, rectangles.
+// Polices standard Helvetica et Helvetica-Bold (encodage WinAnsi), images JPEG et PNG, traits et cadres.
+// Une page garde la liste de ce qu'on y dessine (ops) : la même liste sert au PDF et à l'aperçu à l'écran.
 import zlib from "node:zlib";
 
 // Largeurs des caractères 32 à 255 (1/1000 du corps), encodage WinAnsi
@@ -34,6 +35,13 @@ export function widthOf(str, font, size) {
 
 const hex = (bytes) => "<" + bytes.map((b) => b.toString(16).padStart(2, "0")).join("") + ">";
 const n = (x) => (Math.round(x * 100) / 100).toString();
+const r2 = (x) => Math.round(x * 100) / 100;
+const col = (c) => c.map(n).join(" ");
+
+/** Chaîne PDF littérale, en WinAnsi. */
+export const chainePdf = (s) => "(" + Buffer.from(encode(s)).toString("latin1").replace(/[\\()]/g, (m) => "\\" + m) + ")";
+
+// ---------- Images ----------
 
 /** Dimensions d'un JPEG (marqueur SOFn). */
 export function jpegSize(buf) {
@@ -50,36 +58,139 @@ export function jpegSize(buf) {
   throw new Error("Image JPEG illisible");
 }
 
-/** Une page : on y écrit du texte, des images et des rectangles. Coordonnées en points, origine en bas à gauche. */
+/** Décode un PNG en pixels RVB + alpha (8 bits). Gère les PNG courants, sans entrelacement. */
+export function decodePng(buf) {
+  if (buf.readUInt32BE(0) !== 0x89504e47) throw new Error("PNG illisible");
+  let o = 8, ihdr, plte, trns;
+  const idat = [];
+  while (o < buf.length) {
+    const len = buf.readUInt32BE(o), type = buf.toString("latin1", o + 4, o + 8), data = buf.subarray(o + 8, o + 8 + len);
+    if (type === "IHDR") ihdr = { w: data.readUInt32BE(0), h: data.readUInt32BE(4), depth: data[8], ctype: data[9], interlace: data[12] };
+    else if (type === "PLTE") plte = data;
+    else if (type === "tRNS") trns = data;
+    else if (type === "IDAT") idat.push(data);
+    else if (type === "IEND") break;
+    o += 12 + len;
+  }
+  const { w, h, depth, ctype, interlace } = ihdr;
+  if (interlace) throw new Error("PNG entrelacé non pris en charge");
+  const canaux = { 0: 1, 2: 3, 3: 1, 4: 2, 6: 4 }[ctype];
+  const bitsPx = canaux * depth, bpp = Math.max(1, bitsPx >> 3), ligne = Math.ceil((w * bitsPx) / 8);
+  const raw = zlib.inflateSync(Buffer.concat(idat));
+  const px = Buffer.alloc(ligne * h);
+  for (let y = 0; y < h; y++) {
+    const f = raw[y * (ligne + 1)], src = y * (ligne + 1) + 1, dst = y * ligne;
+    for (let x = 0; x < ligne; x++) {
+      const a = x >= bpp ? px[dst + x - bpp] : 0, b = y ? px[dst - ligne + x] : 0, c = x >= bpp && y ? px[dst - ligne + x - bpp] : 0;
+      let v = raw[src + x];
+      if (f === 1) v += a; else if (f === 2) v += b; else if (f === 3) v += (a + b) >> 1;
+      else if (f === 4) { const p = a + b - c, pa = Math.abs(p - a), pb = Math.abs(p - b), pc = Math.abs(p - c); v += pa <= pb && pa <= pc ? a : pb <= pc ? b : c; }
+      px[dst + x] = v & 255;
+    }
+  }
+  const rgb = Buffer.alloc(w * h * 3), alpha = Buffer.alloc(w * h, 255);
+  const echantillon = (y, i) => { // i-ème échantillon de la ligne y, ramené sur 8 bits
+    if (depth === 8) return px[y * ligne + i];
+    if (depth === 16) return px[y * ligne + i * 2];
+    const bit = i * depth, octet = px[y * ligne + (bit >> 3)], v = (octet >> (8 - depth - (bit & 7))) & ((1 << depth) - 1);
+    return ctype === 3 ? v : Math.round((v * 255) / ((1 << depth) - 1));
+  };
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+    const p = y * w + x;
+    let r, g, b, a = 255;
+    if (ctype === 0) { r = g = b = echantillon(y, x); }
+    else if (ctype === 4) { r = g = b = echantillon(y, x * 2); a = echantillon(y, x * 2 + 1); }
+    else if (ctype === 2) { r = echantillon(y, x * 3); g = echantillon(y, x * 3 + 1); b = echantillon(y, x * 3 + 2); }
+    else if (ctype === 6) { r = echantillon(y, x * 4); g = echantillon(y, x * 4 + 1); b = echantillon(y, x * 4 + 2); a = echantillon(y, x * 4 + 3); }
+    else { const k = echantillon(y, x); r = plte[k * 3]; g = plte[k * 3 + 1]; b = plte[k * 3 + 2]; if (trns && k < trns.length) a = trns[k]; }
+    rgb[p * 3] = r; rgb[p * 3 + 1] = g; rgb[p * 3 + 2] = b; alpha[p] = a;
+  }
+  return { width: w, height: h, rgb, alpha };
+}
+
+/** Rend transparent le fond blanc d'une image opaque (encre sur papier blanc), en gardant la couleur de l'encre. */
+export function blancTransparent({ width, height, rgb, alpha }) {
+  if (alpha.some((a) => a < 255)) return { width, height, rgb, alpha };
+  const out = Buffer.from(rgb), al = Buffer.alloc(width * height);
+  for (let p = 0; p < width * height; p++) {
+    const r = rgb[p * 3], g = rgb[p * 3 + 1], b = rgb[p * 3 + 2];
+    const a = 255 - Math.min(r, g, b);
+    al[p] = a < 12 ? 0 : a;
+    if (a > 0) for (let k = 0; k < 3; k++) out[p * 3 + k] = Math.max(0, Math.min(255, Math.round(255 - ((255 - rgb[p * 3 + k]) * 255) / a)));
+  }
+  return { width, height, rgb: out, alpha: al };
+}
+
+// ---------- Pages ----------
+
+/** Une page : la liste de ce qu'on y dessine. Coordonnées en points, origine en bas à gauche. */
 export class Page {
-  constructor(doc) { this.doc = doc; this.ops = []; }
-  text(str, x, y, { font = "F1", size = 10, color = [0.1, 0.1, 0.1] } = {}) {
-    this.ops.push(`BT ${color.map(n).join(" ")} rg /${font} ${n(size)} Tf ${n(x)} ${n(y)} Td ${hex(encode(str))} Tj ET`);
+  constructor(width, height) { this.width = width; this.height = height; this.ops = []; }
+  text(s, x, y, { font = "F1", size = 10, color = [0.1, 0.1, 0.1], angle = 0 } = {}) {
+    const op = { t: "T", s, x: r2(x), y: r2(y), f: font, z: size, c: color };
+    if (angle) op.a = angle;
+    this.ops.push(op);
   }
   line(x1, y1, x2, y2, { width = 0.5, color = [0.75, 0.72, 0.7] } = {}) {
-    this.ops.push(`${color.map(n).join(" ")} RG ${n(width)} w ${n(x1)} ${n(y1)} m ${n(x2)} ${n(y2)} l S`);
+    this.ops.push({ t: "L", x1: r2(x1), y1: r2(y1), x2: r2(x2), y2: r2(y2), w: width, c: color });
   }
-  image(name, x, y, w, h) {
-    this.doc.usedImages.add(name);
-    this.ops.push(`q ${n(w)} 0 0 ${n(h)} ${n(x)} ${n(y)} cm /${name} Do Q`);
+  rect(x, y, w, h, { stroke = null, fill = null, width = 0.6, dash = false } = {}) {
+    this.ops.push({ t: "R", x: r2(x), y: r2(y), w: r2(w), h: r2(h), s: stroke, fl: fill, lw: width, d: dash });
   }
-  /** Rectangles pleins dans un repère « image » (y vers le bas), mis à l'échelle dans une boîte. */
-  rects(list, srcW, srcH, x, y, w, h, color = [0.1, 0.1, 0.1]) {
-    const s = Math.min(w / srcW, h / srcH);
-    const ox = x, oy = y;
-    const body = list.map(([rx, ry, rw, rh]) => `${n(ox + rx * s)} ${n(oy + (srcH - ry - rh) * s)} ${n(rw * s)} ${n(rh * s)} re`).join(" ");
-    this.ops.push(`q ${color.map(n).join(" ")} rg ${body} f Q`);
+  /** Image centrée dans la boîte, proportions gardées. */
+  image(name, x, y, w, h) { this.ops.push({ t: "I", n: name, x: r2(x), y: r2(y), w: r2(w), h: r2(h) }); }
+}
+
+/** Place une image de w×h pixels dans une boîte, centrée, sans la déformer. */
+export function ajuster(im, op) {
+  const s = Math.min(op.w / im.width, op.h / im.height);
+  const w = im.width * s, h = im.height * s;
+  return { x: op.x + (op.w - w) / 2, y: op.y + (op.h - h) / 2, w, h };
+}
+
+function opsPdf(page, images) {
+  const out = [];
+  for (const o of page.ops) {
+    if (o.t === "T") {
+      if (o.a) {
+        const a = (o.a * Math.PI) / 180, c = Math.cos(a), s = Math.sin(a);
+        out.push(`BT ${col(o.c)} rg /${o.f} ${n(o.z)} Tf ${n(c)} ${n(s)} ${n(-s)} ${n(c)} ${n(o.x)} ${n(o.y)} Tm ${hex(encode(o.s))} Tj ET`);
+      } else out.push(`BT ${col(o.c)} rg /${o.f} ${n(o.z)} Tf ${n(o.x)} ${n(o.y)} Td ${hex(encode(o.s))} Tj ET`);
+    } else if (o.t === "L") out.push(`${col(o.c)} RG ${n(o.w)} w ${n(o.x1)} ${n(o.y1)} m ${n(o.x2)} ${n(o.y2)} l S`);
+    else if (o.t === "R") {
+      const parts = ["q"];
+      if (o.fl) parts.push(`${col(o.fl)} rg`);
+      if (o.s) parts.push(`${col(o.s)} RG ${n(o.lw)} w ${o.d ? "[3 2] 0 d" : ""}`);
+      parts.push(`${n(o.x)} ${n(o.y)} ${n(o.w)} ${n(o.h)} re ${o.fl && o.s ? "B" : o.fl ? "f" : "S"} Q`);
+      out.push(parts.join(" "));
+    } else if (o.t === "I") {
+      const im = images.get(o.n);
+      if (!im) continue;
+      const b = ajuster(im, o);
+      out.push(`q ${n(b.w)} 0 0 ${n(b.h)} ${n(b.x)} ${n(b.y)} cm /${o.n} Do Q`);
+    }
   }
+  return out.join("\n");
 }
 
 export class PdfDoc {
   constructor({ width = 595.28, height = 841.89 } = {}) {
     this.width = width; this.height = height;
-    this.pages = []; this.images = new Map(); this.usedImages = new Set();
+    this.pages = []; this.images = new Map();
   }
-  addPage() { const p = new Page(this); this.pages.push(p); return p; }
-  addJpeg(name, buf) { this.images.set(name, { buf, ...jpegSize(buf) }); }
-  render({ title = "", author = "" } = {}) {
+  addPage() { const p = new Page(this.width, this.height); this.pages.push(p); return p; }
+  addJpeg(name, buf) { const s = jpegSize(buf); this.images.set(name, { kind: "jpeg", buf, width: s.width, height: s.height, comps: s.comps }); }
+  /** Image décodée (rgb + alpha). */
+  addPixels(name, { width, height, rgb, alpha }) {
+    const opaque = !alpha || alpha.every((a) => a === 255);
+    this.images.set(name, { kind: "pixels", width, height, rgb: zlib.deflateSync(rgb), alpha: opaque ? null : zlib.deflateSync(alpha) });
+  }
+
+  /**
+   * Le PDF. Avec `sceau`, réserve un emplacement de signature numérique (PAdES) sur la dernière page :
+   * renvoie alors { pdf, emplacement } pour que l'appelant y écrive la signature CMS.
+   */
+  render({ title = "", author = "", subject = "", sceau = null } = {}) {
     const objs = [];
     const add = (body) => { objs.push(body); return objs.length; };
     const catalog = add(null), pagesId = add(null);
@@ -87,20 +198,35 @@ export class PdfDoc {
     const f2 = add("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>");
     const imgIds = {};
     for (const [name, im] of this.images) {
-      imgIds[name] = add({ dict: `<< /Type /XObject /Subtype /Image /Width ${im.width} /Height ${im.height} /ColorSpace /${im.comps === 1 ? "DeviceGray" : "DeviceRGB"} /BitsPerComponent 8 /Filter /DCTDecode /Length ${im.buf.length} >>`, data: im.buf });
+      if (im.kind === "jpeg") {
+        imgIds[name] = add({ dict: `<< /Type /XObject /Subtype /Image /Width ${im.width} /Height ${im.height} /ColorSpace /${im.comps === 1 ? "DeviceGray" : "DeviceRGB"} /BitsPerComponent 8 /Filter /DCTDecode /Length ${im.buf.length} >>`, data: im.buf });
+      } else {
+        const smask = im.alpha ? add({ dict: `<< /Type /XObject /Subtype /Image /Width ${im.width} /Height ${im.height} /ColorSpace /DeviceGray /BitsPerComponent 8 /Filter /FlateDecode /Length ${im.alpha.length} >>`, data: im.alpha }) : 0;
+        imgIds[name] = add({ dict: `<< /Type /XObject /Subtype /Image /Width ${im.width} /Height ${im.height} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /FlateDecode ${smask ? `/SMask ${smask} 0 R ` : ""}/Length ${im.rgb.length} >>`, data: im.rgb });
+      }
     }
     const xobj = Object.keys(imgIds).length ? `/XObject << ${Object.entries(imgIds).map(([k, v]) => `/${k} ${v} 0 R`).join(" ")} >>` : "";
-    const kids = [];
-    for (const p of this.pages) {
-      const data = zlib.deflateSync(Buffer.from(p.ops.join("\n"), "latin1"));
-      const content = add({ dict: `<< /Length ${data.length} /Filter /FlateDecode >>`, data });
-      kids.push(add(`<< /Type /Page /Parent ${pagesId} 0 R /MediaBox [0 0 ${n(this.width)} ${n(this.height)}] /Resources << /Font << /F1 ${f1} 0 R /F2 ${f2} 0 R >> ${xobj} >> /Contents ${content} 0 R >>`));
-    }
-    objs[catalog - 1] = `<< /Type /Catalog /Pages ${pagesId} 0 R >>`;
-    objs[pagesId - 1] = `<< /Type /Pages /Kids [${kids.map((k) => `${k} 0 R`).join(" ")}] /Count ${kids.length} >>`;
-    const info = add(`<< /Title ${hex(encode(title))} /Author ${hex(encode(author))} /Producer (lauraballo.com) >>`);
 
-    const chunks = [Buffer.from("%PDF-1.4\n%\xe2\xe3\xcf\xd3\n", "latin1")];
+    // Emplacement du sceau : un champ de signature invisible sur la dernière page
+    let sigField = 0, sigDict = 0;
+    if (sceau) {
+      sigDict = add(`<< /Type /Sig /Filter /Adobe.PPKLite /SubFilter /ETSI.CAdES.detached /ByteRange [0 ********** ********** **********] /Contents <${"0".repeat(sceau.taille * 2)}> /M ${chainePdf(sceau.date)} /Name ${chainePdf(sceau.nom)} /Reason ${chainePdf(sceau.motif)} /Location ${chainePdf(sceau.lieu)} /ContactInfo ${chainePdf(sceau.contact || "")} >>`);
+      sigField = add(null);
+    }
+
+    const kids = [];
+    this.pages.forEach((p, i) => {
+      const data = zlib.deflateSync(Buffer.from(opsPdf(p, this.images), "latin1"));
+      const content = add({ dict: `<< /Length ${data.length} /Filter /FlateDecode >>`, data });
+      const annots = sigField && i === this.pages.length - 1 ? ` /Annots [${sigField} 0 R]` : "";
+      kids.push(add(`<< /Type /Page /Parent ${pagesId} 0 R /MediaBox [0 0 ${n(this.width)} ${n(this.height)}] /Resources << /Font << /F1 ${f1} 0 R /F2 ${f2} 0 R >> ${xobj} >> /Contents ${content} 0 R${annots} >>`));
+    });
+    if (sigField) objs[sigField - 1] = `<< /Type /Annot /Subtype /Widget /FT /Sig /T ${chainePdf("Sceau Laura Ballo Coaching")} /V ${sigDict} 0 R /F 132 /Rect [0 0 0 0] /P ${kids[kids.length - 1]} 0 R >>`;
+    objs[catalog - 1] = `<< /Type /Catalog /Pages ${pagesId} 0 R${sigField ? ` /AcroForm << /Fields [${sigField} 0 R] /SigFlags 3 >>` : ""} >>`;
+    objs[pagesId - 1] = `<< /Type /Pages /Kids [${kids.map((k) => `${k} 0 R`).join(" ")}] /Count ${kids.length} >>`;
+    const info = add(`<< /Title ${hex(encode(title))} /Author ${hex(encode(author))} /Subject ${hex(encode(subject))} /Producer (lauraballo.com) >>`);
+
+    const chunks = [Buffer.from("%PDF-1.7\n%\xe2\xe3\xcf\xd3\n", "latin1")];
     let offset = chunks[0].length;
     const offsets = [];
     objs.forEach((o, i) => {
@@ -112,6 +238,27 @@ export class PdfDoc {
     });
     const xref = [`xref\n0 ${objs.length + 1}\n0000000000 65535 f \n`, ...offsets.map((o) => `${String(o).padStart(10, "0")} 00000 n \n`)].join("");
     chunks.push(Buffer.from(`${xref}trailer\n<< /Size ${objs.length + 1} /Root ${catalog} 0 R /Info ${info} 0 R >>\nstartxref\n${offset}\n%%EOF\n`, "latin1"));
-    return Buffer.concat(chunks);
+    const pdf = Buffer.concat(chunks);
+    if (!sceau) return pdf;
+
+    // ByteRange : tout le fichier sauf la valeur hexadécimale de /Contents
+    const debut = pdf.indexOf("/Contents <" + "0".repeat(32)) + "/Contents ".length;
+    const fin = debut + sceau.taille * 2 + 2;
+    const plage = [0, debut, fin, pdf.length - fin];
+    const repere = pdf.indexOf("[0 ********** ********** **********]");
+    const texte = `[${plage.join(" ")}]`.padEnd("[0 ********** ********** **********]".length, " ");
+    pdf.write(texte, repere, "latin1");
+    return { pdf, plage, debut, fin };
   }
 }
+
+/** Écrit la signature CMS (DER) dans l'emplacement réservé. */
+export function poserSignature({ pdf, debut, fin }, der) {
+  const h = der.toString("hex");
+  if (h.length > fin - debut - 2) throw new Error("Signature trop longue pour l'emplacement réservé");
+  pdf.write(h.padEnd(fin - debut - 2, "0"), debut + 1, "latin1");
+  return pdf;
+}
+
+/** Les octets couverts par la signature. */
+export const octetsSignes = ({ pdf, debut, fin }) => Buffer.concat([pdf.subarray(0, debut), pdf.subarray(fin)]);

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vérifier un contrat — Laura Ballo Coaching</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="referrer" content="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root { --bg: #FBF4EE; --white: #FFFFFF; --section-dark: #E8DDD6; --btn: #A08E84; --btn-hover: #7a6b62; --dark: #2C2420; --text: #4a3c35; --text-light: #8a7068; --border: #d9cec7; --ok: #4f6b4a; --error: #8b2e1f; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Jost', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    header { background: var(--section-dark); padding: 18px 24px; display: flex; align-items: center; gap: 16px; }
+    header img { height: 48px; width: auto; display: block; }
+    header .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; color: var(--dark); letter-spacing: 0.08em; font-weight: 500; }
+    .container { max-width: 640px; margin: 0 auto; padding: 40px 16px 80px; }
+    h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 4vw, 2.4rem); color: var(--dark); font-weight: 400; text-align: center; margin-bottom: 12px; }
+    .intro { text-align: center; font-weight: 300; line-height: 1.7; margin-bottom: 28px; font-size: 1.05rem; }
+    .card { background: var(--white); border-radius: 16px; padding: 36px; box-shadow: 0 2px 16px rgba(44,36,32,0.05); }
+    @media (max-width: 560px) { .card { padding: 24px 18px; } }
+    .depot { display: block; border: 2px dashed var(--border); border-radius: 12px; padding: 40px 20px; text-align: center; cursor: pointer; color: var(--text-light); line-height: 1.6; transition: border-color 0.2s, background 0.2s; }
+    .depot:hover, .depot.survol { border-color: var(--btn); background: #fdf9f6; }
+    .depot b { color: var(--dark); font-weight: 500; }
+    .depot input { display: none; }
+    .resultat { display: none; margin-top: 22px; padding: 18px 20px; border-radius: 12px; line-height: 1.6; }
+    .resultat.ok { display: block; background: #eef3ec; color: var(--ok); }
+    .resultat.ko { display: block; background: #fdf0ee; color: var(--error); }
+    .resultat.attente { display: block; background: #f6f1ed; color: var(--text-light); }
+    .resultat strong { display: block; font-size: 1.1rem; margin-bottom: 4px; }
+    .note { margin-top: 22px; font-size: 0.88rem; color: var(--text-light); line-height: 1.6; }
+    footer { text-align: center; padding: 24px; font-size: 0.78rem; color: var(--text-light); }
+  </style>
+</head>
+<body>
+<header>
+  <img src="/assets/img/Laura-Ballo-white-low-res.webp" alt="Laura Ballo" />
+  <div class="logo">Laura Ballo Coaching</div>
+</header>
+<div class="container">
+  <h1>Vérifier un contrat signé</h1>
+  <p class="intro">Déposez le PDF d'un contrat de coaching signé : le site vérifie qu'il est identique, à l'octet près, à l'original enregistré au moment de la signature.</p>
+  <div class="card">
+    <label class="depot" id="depot">
+      <input type="file" id="fichier" accept="application/pdf,.pdf" />
+      <b>Choisir le PDF</b><br />ou le glisser ici
+    </label>
+    <div class="resultat" id="resultat"></div>
+    <p class="note">Le fichier reste sur votre appareil : seule son empreinte (une suite de 64 caractères calculée par votre navigateur) est envoyée pour la comparaison.</p>
+  </div>
+</div>
+<footer>Laura Ballo Coaching</footer>
+<script>
+  const res = document.getElementById("resultat"), depot = document.getElementById("depot");
+  const afficher = (classe, titre, texte) => { res.className = "resultat " + classe; res.innerHTML = ""; const s = document.createElement("strong"); s.textContent = titre; res.append(s, texte || ""); };
+  async function verifier(f) {
+    if (!f) return;
+    afficher("attente", "Vérification en cours…");
+    try {
+      const h = Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256", await f.arrayBuffer()))).map((b) => b.toString(16).padStart(2, "0")).join("");
+      const r = await fetch("/api/contrat?verifier=" + h);
+      const j = await r.json();
+      if (!r.ok) throw new Error();
+      if (j.trouve) {
+        const quand = j.signeLe ? new Date(j.signeLe).toLocaleString("fr-FR", { timeZone: "Europe/Paris", dateStyle: "long", timeStyle: "short" }) : "";
+        afficher("ok", "✓ Contrat original et intact", `Contrat de coaching${j.programme ? " « " + j.programme + " »" : ""}${j.client ? ", " + j.client : ""}${quand ? ", signé le " + quand : ""}.`);
+      } else afficher("ko", "Ce PDF ne correspond à aucun contrat signé", "Le fichier a pu être modifié, ou ce n'est pas l'exemplaire signé téléchargé à la fin de la signature (l'exemplaire de lecture non signé ne peut pas être vérifié). En cas de doute, écrivez à contact@lauraballo.com.");
+    } catch { afficher("ko", "La vérification n'a pas abouti", "Réessayez dans un instant."); }
+  }
+  document.getElementById("fichier").addEventListener("change", (e) => verifier(e.target.files[0]));
+  ["dragenter", "dragover"].forEach((t) => depot.addEventListener(t, (e) => { e.preventDefault(); depot.classList.add("survol"); }));
+  ["dragleave", "drop"].forEach((t) => depot.addEventListener(t, (e) => { e.preventDefault(); depot.classList.remove("survol"); }));
+  depot.addEventListener("drop", (e) => verifier(e.dataTransfer.files[0]));
+</script>
+</body>
+</html>

@@ -1,18 +1,24 @@
-// Contrat de coaching : généré depuis Notion, signé en ligne par un lien personnel, rendu en PDF.
+// Contrat de coaching : généré depuis Notion, lu page par page, paraphé et signé en ligne par un lien personnel.
 //
 // POST /api/contrat { action: "preparer", inscriptionId }
 //   Appelé par n8n quand « Programme validé le » est daté dans l'inscription.
 //   Crée le jeton personnel et écrit « Lien contrat » dans l'inscription. Ne renvoie jamais le jeton.
-// GET  /api/contrat?t=JETON          → le contrat à lire (JSON)
-// GET  /api/contrat?t=JETON&pdf=1    → le contrat signé (PDF)
-// POST /api/contrat { action: "signer", t, empreinte, mention, signature, paraphe, adresse?, signataire? }
+// GET  /api/contrat?t=JETON                         → l'état du contrat (à signer, signé)
+// POST /api/contrat { action: "apercu", t, adresse | signataire } → les pages A4 telles qu'elles seront signées (JSON)
+// POST /api/contrat { action: "lecture", t, adresse | signataire } → l'exemplaire de lecture non signé (PDF)
+// POST /api/contrat { action: "signer", t, empreinte, adresse | signataire, paraphe, paraphes, mention, signature, accepte }
+// GET  /api/contrat?t=JETON&pdf=1                   → le contrat signé (PDF)
+// GET  /api/contrat?verifier=SHA256                 → ce PDF est-il un original signé ?
 //
 // Le texte vient de la fiche « Contrat · Contrat de coaching » (base Modèles documents et mails) :
 // les {{variables}} sont remplies depuis l'inscription, l'offre, la fiche CRM et l'entreprise ;
 // les lignes [[SI particulier]] / [[SI entreprise]] … [[FIN]] ne gardent que le cas du client ; les encadrés sont des notes internes.
-// La signature de Laura est le fichier SVG du champ « Fichier » de cette fiche (hors du dépôt public).
+// La signature de Laura est le fichier PNG du champ « Fichier » de cette fiche (hors du dépôt public).
+// Une seule mise en page sert à l'aperçu, à l'exemplaire de lecture et au PDF signé : le client signe exactement ce qu'il a lu.
+// Le PDF signé est scellé (PAdES + horodatage) quand la variable CONTRAT_SCEAU est configurée, voir _sceau.js.
 import crypto from "node:crypto";
-import { PdfDoc, widthOf } from "./_pdf.js";
+import { PdfDoc, widthOf, decodePng, blancTransparent, octetsSignes, poserSignature } from "./_pdf.js";
+import { identite, signerCms } from "./_sceau.js";
 
 const NOTION_VERSION = "2022-06-28";
 const MODELE = "40d075e127d28129b397fe147f0f2ce0";
@@ -110,8 +116,8 @@ async function contexte(ins) {
   if (!vars.objectif) manque.push("l'objectif");
   if (estEntreprise && !vars.entreprise_denomination) manque.push("l'entreprise");
   const fichiers = (prop(modele, "Fichier") && prop(modele, "Fichier").files) || [];
-  const svg = fichiers.find((f) => /\.svg$/i.test(f.name || ""));
-  return { vars, estEntreprise, clientNom, email: (prop(client, "Email") && prop(client, "Email").email) || "", manque, signatureCoach: svg ? (svg.file ? svg.file.url : svg.external.url) : "" };
+  const png = fichiers.find((f) => /\.png$/i.test(f.name || ""));
+  return { vars, estEntreprise, clientNom, email: (prop(client, "Email") && prop(client, "Email").email) || "", manque, signatureCoach: png ? (png.file ? png.file.url : png.external.url) : "" };
 }
 
 /** Les paragraphes du modèle, conditions appliquées, variables remplacées. */
@@ -151,127 +157,141 @@ async function rendre(ctx, extra = {}) {
   return items;
 }
 
-const empreinte = (items) => crypto.createHash("sha256").update(JSON.stringify(items)).digest("hex");
 
-// ---------- PDF ----------
-function svgRects(svg) {
-  const vb = /viewBox="0 0 ([\d.]+) ([\d.]+)"/.exec(svg);
-  const rects = [];
-  const re = /M([\d.]+) ([\d.]+)h([\d.]+)v([\d.]+)h-[\d.]+z/g;
-  let m;
-  while ((m = re.exec(svg))) rects.push([+m[1], +m[2], +m[3], +m[4]]);
-  return { w: vb ? +vb[1] : 1, h: vb ? +vb[2] : 1, rects };
+
+// ---------- Mise en page A4 ----------
+const A4 = { l: 595.28, h: 841.89 };
+const G = 64, D = A4.l - 64, LARGEUR = D - G, HAUT = A4.h - 66, BAS = 118;
+const GRIS = [0.45, 0.42, 0.4];
+const CORPS = 11.5, INTERLIGNE = 16;
+
+/** Coupe des morceaux de texte (gras ou non) en lignes de largeur max. */
+function couper(runs, size, max) {
+  const mots = [];
+  for (const r of runs) for (const [i, w] of r.text.split(" ").entries()) {
+    if (i > 0) mots.push({ space: true, font: r.bold ? "F2" : "F1" });
+    if (w) mots.push({ text: w, font: r.bold ? "F2" : "F1" });
+  }
+  const lignes = [];
+  let ligne = [], largeur = 0;
+  for (const m of mots) {
+    if (m.space) { if (ligne.length) { ligne.push(m); largeur += widthOf(" ", m.font, size); } continue; }
+    const w = widthOf(m.text, m.font, size);
+    if (largeur + w > max && ligne.length) {
+      while (ligne.length && ligne[ligne.length - 1].space) ligne.pop();
+      lignes.push(ligne); ligne = []; largeur = 0;
+    }
+    ligne.push(m); largeur += w;
+  }
+  if (ligne.length) lignes.push(ligne);
+  return lignes;
 }
 
-function jpegDepuisDataUrl(d) {
-  const m = /^data:image\/jpeg;base64,([A-Za-z0-9+/=]+)$/.exec(d || "");
-  if (!m) return null;
-  const buf = Buffer.from(m[1], "base64");
-  return buf.length > 1000 && buf.length < 1.5e6 && buf[0] === 0xff && buf[1] === 0xd8 ? buf : null;
-}
-
-function fabriquerPdf({ items, ctx, signature, paraphe, mention, preuve, coach }) {
-  const doc = new PdfDoc();
-  doc.addJpeg("Sig", signature);
-  doc.addJpeg("Par", paraphe);
-  const W = doc.width, H = doc.height, G = 62, D = W - 62, LARGEUR = D - G, HAUT = H - 64, BAS = 96;
-  const pages = [];
-  let page, y;
-  const nouvelle = () => { page = doc.addPage(); pages.push(page); y = HAUT; };
-  nouvelle();
-
-  const ecrire = (runs, { size = 10, lead = 14.2, gauche = G, retrait = 0, puce = "" } = {}) => {
-    // Découpe en mots, chacun avec sa police
-    const mots = [];
-    for (const r of runs) for (const [i, w] of r.text.split(" ").entries()) {
-      if (i > 0) mots.push({ space: true, font: r.bold ? "F2" : "F1" });
-      if (w) mots.push({ text: w, font: r.bold ? "F2" : "F1" });
-    }
-    const lignes = [];
-    let ligne = [], largeur = 0;
-    const max = LARGEUR - (gauche - G) - retrait;
-    for (const m of mots) {
-      if (m.space) { if (ligne.length) { ligne.push(m); largeur += widthOf(" ", m.font, size); } continue; }
-      const w = widthOf(m.text, m.font, size);
-      if (largeur + w > max && ligne.length) {
-        while (ligne.length && ligne[ligne.length - 1].space) ligne.pop();
-        lignes.push(ligne); ligne = []; largeur = 0;
-      }
-      ligne.push(m); largeur += w;
-    }
-    if (ligne.length) lignes.push(ligne);
-    lignes.forEach((l, i) => {
-      if (y - lead < BAS) nouvelle();
-      y -= lead;
-      if (i === 0 && puce) page.text(puce, gauche, y, { font: "F1", size });
-      let x = gauche + retrait;
+/** Un rédacteur de pages : écrit des paragraphes et passe à la page suivante quand il faut. */
+function redacteur(doc) {
+  const st = { pages: [], page: null, y: 0 };
+  st.nouvelle = () => { st.page = doc.addPage(); st.pages.push(st.page); st.y = HAUT; };
+  st.ecrire = (runs, { size = CORPS, lead = INTERLIGNE, retrait = 0, puce = "", color } = {}) => {
+    for (const [i, l] of couper(runs, size, LARGEUR - retrait).entries()) {
+      if (st.y - lead < BAS) st.nouvelle();
+      st.y -= lead;
+      if (i === 0 && puce) st.page.text(puce, G, st.y, { size, color });
+      let x = G + retrait;
       for (const m of l) {
         if (m.space) { x += widthOf(" ", m.font, size); continue; }
-        page.text(m.text, x, y, { font: m.font, size });
+        st.page.text(m.text, x, st.y, { font: m.font, size, color });
         x += widthOf(m.text, m.font, size);
       }
-    });
+    }
   };
+  st.nouvelle();
+  return st;
+}
 
+/**
+ * Les pages du contrat, sans les traces du client (paraphes, mention, signature).
+ * Renvoie aussi l'emplacement de ces traces : un paraphe en bas de chaque page, la signature sur la dernière.
+ */
+function mettreEnPage(items, ctx, doc = new PdfDoc()) {
+  const st = redacteur(doc);
   for (const it of items) {
-    if (it.kind === "h1") { y -= 6; ecrire(it.runs.map((r) => ({ ...r, bold: true })), { size: 15, lead: 20 }); y -= 10; }
-    else if (it.kind === "h2") { if (y - 40 < BAS) nouvelle(); y -= 10; ecrire(it.runs.map((r) => ({ ...r, bold: true })), { size: 11, lead: 15 }); y -= 2; }
-    else if (it.kind === "li") { y -= 3; ecrire(it.runs, { gauche: G, retrait: 16, puce: `${it.num})` }); }
-    else if (it.kind === "bullet") { y -= 3; ecrire(it.runs, { gauche: G, retrait: 16, puce: "•" }); }
-    else { y -= it.indent ? 1 : 4; ecrire(it.runs, { gauche: G, retrait: it.indent ? 16 : 0 }); }
+    if (it.kind === "h1") { st.y -= 4; st.ecrire(it.runs.map((r) => ({ ...r, bold: true })), { size: 16, lead: 21 }); st.y -= 10; }
+    else if (it.kind === "h2") { if (st.y - 48 < BAS) st.nouvelle(); st.y -= 12; st.ecrire(it.runs.map((r) => ({ ...r, bold: true })), { size: 12, lead: 17 }); st.y -= 2; }
+    else if (it.kind === "li") { st.y -= 4; st.ecrire(it.runs, { retrait: 20, puce: `${it.num})` }); }
+    else if (it.kind === "bullet") { st.y -= 4; st.ecrire(it.runs, { retrait: 20, puce: "•" }); }
+    else { st.y -= it.indent ? 1 : 5; st.ecrire(it.runs, { retrait: it.indent ? 20 : 0 }); }
   }
 
   // Bloc des signatures
-  if (y - 190 < BAS) nouvelle();
-  y -= 30;
-  const colonne = (x, titre, nom, mentionTxt) => {
-    page.text(titre, x, y, { font: "F2", size: 10 });
-    page.text(nom, x, y - 15, { size: 10 });
-    page.text(`« ${mentionTxt} »`, x, y - 30, { size: 10, color: [0.3, 0.3, 0.3] });
-  };
-  colonne(G, "LE CLIENT", ctx.estEntreprise && preuve.signataire ? preuve.signataire : ctx.clientNom, mention);
-  colonne(G + LARGEUR / 2 + 10, "LE COACH", "Laura BALLO", "Lu et approuvé");
-  page.image("Sig", G, y - 140, 170, 95);
-  if (coach) page.rects(coach.rects, coach.w, coach.h, G + LARGEUR / 2 + 10, y - 140, 150, 95);
-  y -= 160;
+  if (st.y - 200 < BAS) st.nouvelle();
+  st.y -= 30;
+  const y = st.y, p = st.page, colonne = (LARGEUR - 24) / 2, xc = G + colonne + 24;
+  p.text("LE CLIENT", G, y, { font: "F2", size: 11 });
+  p.text(ctx.estEntreprise ? ctx.vars.entreprise_denomination : ctx.clientNom, G, y - 17, { size: 10.5 });
+  p.text("LE COACH", xc, y, { font: "F2", size: 11 });
+  p.text("Laura BALLO", xc, y - 17, { size: 10.5 });
+  p.text("« Lu et approuvé »", xc, y - 33, { size: 10.5, color: GRIS });
+  const boite = { x: G, y: y - 160, w: colonne, h: 112 };
+  p.rect(boite.x, boite.y, boite.w, boite.h, { stroke: [0.8, 0.77, 0.75], dash: true });
+  p.text("Signature du client", G + 6, boite.y + boite.h - 12, { size: 8, color: GRIS });
+  p.image("Coach", xc, y - 160, Math.min(colonne, 190), 112);
+  const zones = { signature: { page: st.pages.length, ...boite }, mention: { page: st.pages.length, x: G, y: y - 33 }, paraphes: [] };
 
-  // Page de preuve
-  nouvelle();
-  y -= 4;
-  ecrire([{ text: "Certificat de signature électronique", bold: true }], { size: 15, lead: 20 });
-  y -= 12;
-  const lignesPreuve = [
-    ["Document", `Contrat de coaching · ${ctx.vars.programme}`],
-    ["Signataire", preuve.signataire ? `${preuve.signataire}, pour le compte de ${ctx.vars.entreprise_denomination}, au bénéfice de ${ctx.clientNom}` : ctx.clientNom],
-    ["Adresse e-mail du client", ctx.email || "non renseignée"],
-    ["Date et heure de signature", `${preuve.dateLocale} (heure de Paris) · ${preuve.dateIso} UTC`],
-    ["Adresse IP", preuve.ip || "inconnue"],
-    ["Navigateur", preuve.ua || "inconnu"],
-    ["Accès", "lien personnel et individuel envoyé au client par Laura Ballo"],
-    ["Mention manuscrite saisie", `« ${mention} »`],
-    ["Paraphe", `apposé par le client et reproduit sur chacune des ${pages.length - 1} pages du contrat`],
-    ["Signature du coach", "Laura BALLO, signature enregistrée apposée à l'émission du contrat"],
-    ["Empreinte SHA-256 du texte signé", preuve.empreinte],
-    ["Référence", `inscription ${preuve.inscription}`],
-  ];
-  for (const [k, v] of lignesPreuve) {
-    y -= 6;
-    ecrire([{ text: k, bold: true }], { size: 9.5, lead: 13 });
-    ecrire([{ text: v, bold: false }], { size: 9.5, lead: 13 });
-  }
-
-  // Pied de page : paraphe sur chaque page du contrat, numérotation
-  const total = pages.length;
-  pages.forEach((p, i) => {
-    p.line(G, 78, D, 78);
-    p.text(`Contrat de coaching · ${ctx.clientNom}`, G, 62, { size: 8, color: [0.45, 0.42, 0.4] });
-    p.text(`Page ${i + 1} / ${total}`, G, 50, { size: 8, color: [0.45, 0.42, 0.4] });
-    if (i < total - 1) {
-      p.text("Paraphe du client", D - 120, 62, { size: 8, color: [0.45, 0.42, 0.4] });
-      p.image("Par", D - 50, 36, 50, 34);
-    }
+  // Pied de page : client, numéro, case du paraphe
+  const total = st.pages.length;
+  st.pages.forEach((pg, i) => {
+    pg.line(G, 104, D, 104);
+    pg.text(`Contrat de coaching · ${ctx.clientNom}`, G, 90, { size: 8.5, color: GRIS });
+    pg.text(`Page ${i + 1} / ${total}`, G, 76, { size: 8.5, color: GRIS });
+    pg.text("Paraphe du client", D - 120, 90, { size: 8, color: GRIS });
+    pg.rect(D - 120, 36, 120, 46, { stroke: [0.8, 0.77, 0.75], dash: true });
+    zones.paraphes.push({ page: i + 1, x: D - 120, y: 36, w: 120, h: 46 });
   });
-  return doc.render({ title: `Contrat de coaching · ${ctx.clientNom}`, author: "Laura Ballo" });
+  return { doc, pages: st.pages, zones };
+}
+
+const empreinteDe = (pages) => crypto.createHash("sha256").update(JSON.stringify(pages.map((p) => p.ops))).digest("hex");
+
+/** La page « Certificat de signature » ajoutée à la fin du PDF signé. */
+function pageCertificat(doc, lignes, nbPages) {
+  const st = redacteur(doc);
+  st.ecrire([{ text: "Certificat de signature électronique", bold: true }], { size: 16, lead: 21 });
+  st.y -= 4;
+  st.ecrire([{ text: `Annexe au contrat de ${nbPages} pages qui précède.`, bold: false }], { size: 10, lead: 14, color: GRIS });
+  st.y -= 6;
+  for (const [k, v] of lignes) {
+    st.y -= 7;
+    st.ecrire([{ text: k, bold: true }], { size: 10, lead: 14 });
+    st.ecrire([{ text: v, bold: false }], { size: 10, lead: 14 });
+  }
+  for (const pg of st.pages) {
+    pg.line(G, 104, D, 104);
+    pg.text("Certificat de signature · annexe au contrat", G, 90, { size: 8.5, color: GRIS });
+  }
+}
+
+/** La signature de Laura (PNG de la fiche modèle) : l'original pour l'écran, les pixels pour le PDF. */
+async function signatureCoach(ctx) {
+  if (!ctx.signatureCoach) return null;
+  const r = await fetch(ctx.signatureCoach);
+  if (!r.ok) return null;
+  const png = Buffer.from(await r.arrayBuffer());
+  try { return { png, pixels: blancTransparent(decodePng(png)) }; } catch (e) { console.error("signature coach", e.message); return null; }
+}
+
+/** L'exemplaire de lecture : la mise en page finale, marquée « non signé ». */
+function pdfLecture(items, ctx, coach) {
+  const { doc, pages } = mettreEnPage(items, ctx);
+  if (coach) doc.addPixels("Coach", coach.pixels);
+  const quand = new Date().toLocaleString("fr-FR", { timeZone: "Europe/Paris", dateStyle: "long", timeStyle: "short" });
+  // Filigrane en diagonale, centré, sous le texte
+  const fil = "EXEMPLAIRE DE LECTURE · NON SIGNÉ", taille = 30, angle = 50, rad = (angle * Math.PI) / 180, lw = widthOf(fil, "F2", taille);
+  const fx = A4.l / 2 - (lw / 2) * Math.cos(rad) + (taille / 3) * Math.sin(rad), fy = A4.h / 2 - (lw / 2) * Math.sin(rad) - (taille / 3) * Math.cos(rad);
+  for (const p of pages) {
+    p.ops.unshift({ t: "T", s: fil, x: Math.round(fx), y: Math.round(fy), f: "F2", z: taille, c: [0.92, 0.89, 0.87], a: angle });
+    p.text(`Exemplaire de lecture, non signé · préparé le ${quand}`, G, A4.h - 36, { size: 8.5, color: [0.6, 0.35, 0.3] });
+  }
+  return doc.render({ title: `Contrat de coaching · ${ctx.clientNom} (exemplaire de lecture)`, author: "Laura Ballo", subject: "Exemplaire de lecture non signé" });
 }
 
 // ---------- Envoi du PDF dans Notion ----------
@@ -293,26 +313,65 @@ async function deposerPdf(pageId, pdf, nomFichier, champs) {
   });
 }
 
+
 // ---------- Point d'entrée ----------
 const jetonValide = (t) => typeof t === "string" && /^[A-Za-z0-9_-]{30,64}$/.test(t);
 const signe = (ins) => { const v = prop(ins, "Contrat signé"); return !!(v && v.checkbox); };
+const aujourdhui = (d = new Date()) => d.toLocaleDateString("fr-FR", { timeZone: "Europe/Paris", day: "numeric", month: "long", year: "numeric" });
+
+async function inscriptionOuvert(t) {
+  if (!jetonValide(t)) return null;
+  const ins = await inscriptionParJeton(t);
+  return ins && choix(ins, "Statut") !== "Abandonné" ? ins : null;
+}
+
+/** L'adresse (particulier) ou le signataire (entreprise) saisis avant la lecture : ils figurent dans le contrat. */
+function infosClient(ctx, body) {
+  const adresse = String(body.adresse || "").trim().replace(/\s+/g, " ").slice(0, 300);
+  const signataire = String(body.signataire || "").trim().replace(/\s+/g, " ").slice(0, 200);
+  if (!ctx.estEntreprise && adresse.length < 8) return { erreur: "Indiquez votre adresse postale." };
+  if (ctx.estEntreprise && signataire.length < 3) return { erreur: "Indiquez le nom et la qualité du signataire." };
+  return { adresse: ctx.estEntreprise ? "" : adresse, signataire: ctx.estEntreprise ? signataire : "" };
+}
+
+/** Le texte du contrat pour ce client, à la date du jour. */
+const texteDuJour = (ctx, infos, date = new Date()) => rendre(ctx, { client_adresse: infos.adresse || "…", representant: infos.signataire || "…", date_signature: aujourdhui(date) });
+
+function jpegDepuisDataUrl(d) {
+  const m = /^data:image\/jpeg;base64,([A-Za-z0-9+/=]+)$/.exec(d || "");
+  if (!m) return null;
+  const buf = Buffer.from(m[1], "base64");
+  return buf.length > 1000 && buf.length < 1.5e6 && buf[0] === 0xff && buf[1] === 0xd8 ? buf : null;
+}
 
 export default async function handler(req, res) {
   res.setHeader("Cache-Control", "no-store");
   if (!process.env.NOTION_API_KEY) return res.status(500).json({ error: "Configuration manquante" });
   try {
     if (req.method === "GET" && req.query.check) {
-      // Vérifie que la clé Notion du site accède aux bases du contrat
+      // Vérifie que la clé Notion du site accède aux bases du contrat, et que le sceau est configuré
       const bases = { Inscriptions: `databases/${INSCRIPTIONS}`, "Offres Accompagnements": "databases/313075e127d2805097a0e81b0e4efc86", "CRM People": "databases/127075e127d28112b16dde7180b01a42", Entreprises: "databases/2fd075e127d2819f9fabd4820a69f7f8", "Modèle de contrat": `pages/${MODELE}` };
       const out = {};
       for (const [nom, chemin] of Object.entries(bases)) out[nom] = await notion(chemin).then(() => "ok", (e) => e.message);
+      const id = identite();
+      out.Sceau = id ? `ok · ${id.nom} · expire le ${id.expire}` : process.env.CONTRAT_SCEAU ? "variable CONTRAT_SCEAU illisible" : "non configuré (variable CONTRAT_SCEAU absente)";
       return res.status(200).json(out);
     }
+
+    if (req.method === "GET" && req.query.verifier) {
+      // Le PDF déposé sur la page de vérification est-il un original signé ? (empreinte calculée dans le navigateur)
+      const h = String(req.query.verifier).toLowerCase();
+      if (!/^[0-9a-f]{64}$/.test(h)) return res.status(400).json({ error: "Empreinte invalide" });
+      const r = await notion(`databases/${INSCRIPTIONS}/query`, "POST", { page_size: 2, filter: { property: "⚙ Contrat empreinte", rich_text: { contains: `pdf ${h}` } } });
+      const ins = r.results[0];
+      if (!ins) return res.status(200).json({ trouve: false });
+      const ctx = await contexte(ins).catch(() => null);
+      return res.status(200).json({ trouve: true, client: ctx ? ctx.clientNom : "", programme: ctx ? ctx.vars.programme : "", signeLe: (prop(ins, "Contrat signé le") || {}).date?.start || null });
+    }
+
     if (req.method === "GET") {
-      const t = req.query.t;
-      if (!jetonValide(t)) return res.status(404).json({ error: "Lien invalide" });
-      const ins = await inscriptionParJeton(t);
-      if (!ins || choix(ins, "Statut") === "Abandonné") return res.status(404).json({ error: "Lien invalide" });
+      const ins = await inscriptionOuvert(req.query.t);
+      if (!ins) return res.status(404).json({ error: "Lien invalide" });
 
       if (req.query.pdf) {
         const f = ((prop(ins, "Contrat (PDF)") || {}).files || [])[0];
@@ -327,8 +386,7 @@ export default async function handler(req, res) {
       const ctx = await contexte(ins);
       if (signe(ins)) return res.status(200).json({ etat: "signe", client: ctx.clientNom, programme: ctx.vars.programme, signeLe: (prop(ins, "Contrat signé le") || {}).date?.start || null });
       if (ctx.manque.length) return res.status(409).json({ error: "Le contrat n'est pas encore prêt : Laura le finalise. Réessayez un peu plus tard.", manque: ctx.manque });
-      const items = await rendre(ctx, { client_adresse: "(à compléter ci-dessous)", representant: "(à compléter ci-dessous)", date_signature: "(à la signature)" });
-      return res.status(200).json({ etat: "a_signer", client: ctx.clientNom, programme: ctx.vars.programme, entreprise: ctx.estEntreprise ? ctx.vars.entreprise_denomination : "", items, empreinte: empreinte(items) });
+      return res.status(200).json({ etat: "a_signer", client: ctx.clientNom, programme: ctx.vars.programme, entreprise: ctx.estEntreprise ? ctx.vars.entreprise_denomination || "votre entreprise" : "" });
     }
 
     if (req.method !== "POST") return res.status(405).json({ error: "Méthode non autorisée" });
@@ -349,57 +407,109 @@ export default async function handler(req, res) {
       return res.status(200).json({ ok: true });
     }
 
-    if (body.action === "signer") {
-      if (!jetonValide(body.t)) return res.status(404).json({ error: "Lien invalide" });
-      const ins = await inscriptionParJeton(body.t);
-      if (!ins || choix(ins, "Statut") === "Abandonné") return res.status(404).json({ error: "Lien invalide" });
-      if (signe(ins)) return res.status(409).json({ error: "Ce contrat est déjà signé." });
-      const ctx = await contexte(ins);
-      if (ctx.manque.length) return res.status(409).json({ error: "Le contrat n'est pas encore prêt." });
+    if (!["apercu", "lecture", "signer"].includes(body.action)) return res.status(400).json({ error: "Action inconnue" });
+    const ins = await inscriptionOuvert(body.t);
+    if (!ins) return res.status(404).json({ error: "Lien invalide" });
+    if (signe(ins)) return res.status(409).json({ error: "Ce contrat est déjà signé.", signe: true });
+    const ctx = await contexte(ins);
+    if (ctx.manque.length) return res.status(409).json({ error: "Le contrat n'est pas encore prêt : Laura le finalise. Réessayez un peu plus tard." });
+    const infos = infosClient(ctx, body);
+    if (infos.erreur) return res.status(400).json({ error: infos.erreur });
+    const [items, coach] = await Promise.all([texteDuJour(ctx, infos), signatureCoach(ctx)]);
 
-      const mention = String(body.mention || "").trim().replace(/\s+/g, " ");
-      if (mention.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "") !== "lu et approuve") return res.status(400).json({ error: "Écrivez la mention « Lu et approuvé »." });
-      const adresse = String(body.adresse || "").trim().slice(0, 300);
-      const signataire = String(body.signataire || "").trim().slice(0, 200);
-      if (!ctx.estEntreprise && adresse.length < 8) return res.status(400).json({ error: "Indiquez votre adresse postale." });
-      if (ctx.estEntreprise && signataire.length < 3) return res.status(400).json({ error: "Indiquez le nom et la qualité du signataire." });
-      if (body.accepte !== true) return res.status(400).json({ error: "Cochez la case d'acceptation du contrat." });
-      const signature = jpegDepuisDataUrl(body.signature), paraphe = jpegDepuisDataUrl(body.paraphe);
-      if (!signature || !paraphe) return res.status(400).json({ error: "Dessinez votre paraphe et votre signature." });
-
-      // Le texte lu doit être celui qu'on signe
-      const apercu = await rendre(ctx, { client_adresse: "(à compléter ci-dessous)", representant: "(à compléter ci-dessous)", date_signature: "(à la signature)" });
-      if (empreinte(apercu) !== body.empreinte) return res.status(409).json({ error: "Le contrat a été mis à jour depuis votre lecture. Rechargez la page pour lire la dernière version." });
-
-      const maintenant = new Date();
-      const dateLongue = maintenant.toLocaleDateString("fr-FR", { timeZone: "Europe/Paris", day: "numeric", month: "long", year: "numeric" });
-      const items = await rendre(ctx, { client_adresse: adresse, representant: signataire, date_signature: dateLongue });
-      const emp = empreinte(items);
-      let coach = null;
-      if (ctx.signatureCoach) { const r = await fetch(ctx.signatureCoach); if (r.ok) coach = svgRects(await r.text()); }
-      const ip = String(req.headers["x-forwarded-for"] || "").split(",")[0].trim() || String(req.headers["x-real-ip"] || "");
-      const preuve = {
-        signataire: ctx.estEntreprise ? signataire : "",
-        dateLocale: maintenant.toLocaleString("fr-FR", { timeZone: "Europe/Paris", dateStyle: "long", timeStyle: "medium" }),
-        dateIso: maintenant.toISOString().replace("T", " ").slice(0, 19),
-        ip, ua: String(req.headers["user-agent"] || "").slice(0, 180), empreinte: emp, inscription: ins.id,
-      };
-      const pdf = fabriquerPdf({ items, ctx, signature, paraphe, mention, preuve, coach });
-      const empPdf = crypto.createHash("sha256").update(pdf).digest("hex");
-      const nomFichier = `Contrat de coaching - ${ctx.clientNom}.pdf`.replace(/[\/\\]/g, "-");
-      await deposerPdf(ins.id, pdf, nomFichier, {
-        "Contrat signé": { checkbox: true },
-        "Contrat signé le": { date: { start: maintenant.toISOString() } },
-        "⚙ Contrat empreinte": { rich_text: [{ type: "text", text: { content: `texte ${emp} · pdf ${empPdf}` } }] },
+    if (body.action === "apercu") {
+      const { pages, zones } = mettreEnPage(items, ctx);
+      return res.status(200).json({
+        largeur: A4.l, hauteur: A4.h, pages: pages.map((p) => p.ops), zones, empreinte: empreinteDe(pages),
+        images: coach ? { Coach: `data:image/png;base64,${coach.png.toString("base64")}` } : {},
       });
-      return res.status(200).json({ ok: true, pdf: `/api/contrat?t=${body.t}&pdf=1` });
     }
 
-    return res.status(400).json({ error: "Action inconnue" });
+    if (body.action === "lecture") {
+      const pdf = pdfLecture(items, ctx, coach);
+      res.setHeader("Content-Type", "application/pdf");
+      res.setHeader("Content-Disposition", `inline; filename="Contrat de coaching - exemplaire de lecture.pdf"`);
+      return res.status(200).send(pdf);
+    }
+
+    // ── Signature ──
+    const mention = String(body.mention || "").trim().replace(/\s+/g, " ");
+    if (mention.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "") !== "lu et approuve") return res.status(400).json({ error: "Écrivez la mention « Lu et approuvé »." });
+    if (body.accepte !== true) return res.status(400).json({ error: "Cochez la case d'acceptation du contrat." });
+    const signature = jpegDepuisDataUrl(body.signature), paraphe = jpegDepuisDataUrl(body.paraphe);
+    if (!paraphe) return res.status(400).json({ error: "Dessinez votre paraphe." });
+    if (!signature) return res.status(400).json({ error: "Dessinez votre signature." });
+
+    // Ce qui est signé doit être exactement ce qui a été lu (même texte, même mise en page, même date)
+    const maintenant = new Date();
+    const { pages: lues } = mettreEnPage(items, ctx);
+    const emp = empreinteDe(lues);
+    if (emp !== body.empreinte) return res.status(409).json({ error: "Le contrat a été mis à jour depuis votre lecture. La page va se recharger avec la dernière version.", recharger: true });
+    const paraphes = Array.isArray(body.paraphes) ? body.paraphes.map(Number) : [];
+    if (lues.some((_, i) => !paraphes.includes(i + 1))) return res.status(400).json({ error: "Paraphez chaque page du contrat." });
+
+    const id = identite();
+    const ip = String(req.headers["x-forwarded-for"] || "").split(",")[0].trim() || String(req.headers["x-real-ip"] || "");
+    const meta = { title: `Contrat de coaching · ${ctx.clientNom}`, author: "Laura Ballo", subject: `Contrat signé le ${aujourdhui(maintenant)}` };
+
+    /** Le PDF signé : pages lues + traces du client + certificat. `sceau` : null, "horodate" ou "sans_horodatage". */
+    const assembler = (sceau) => {
+      const doc = new PdfDoc();
+      const { pages, zones } = mettreEnPage(items, ctx, doc);
+      doc.addJpeg("Par", paraphe);
+      doc.addJpeg("Sig", signature);
+      if (coach) doc.addPixels("Coach", coach.pixels);
+      for (const z of zones.paraphes) pages[z.page - 1].image("Par", z.x + 4, z.y + 3, z.w - 8, z.h - 6);
+      const zs = zones.signature;
+      pages[zs.page - 1].image("Sig", zs.x + 6, zs.y + 4, zs.w - 12, zs.h - 20);
+      pages[zones.mention.page - 1].text(`« ${mention} »`, zones.mention.x, zones.mention.y, { size: 10.5, color: GRIS });
+      const texteSceau = sceau && `ce PDF est scellé par « ${id.nom} » (certificat émis par Laura Ballo, empreinte SHA-256 ${id.empreinte})${sceau === "horodate" ? " et horodaté par un service indépendant" : ""}. Toute modification du fichier rompt le sceau : le panneau Signatures d'Adobe Acrobat Reader l'indique.`;
+      pageCertificat(doc, [
+        ["Document", `Contrat de coaching · ${ctx.vars.programme}, ${pages.length} pages`],
+        ["Signataire", ctx.estEntreprise ? `${infos.signataire}, pour le compte de ${ctx.vars.entreprise_denomination}, au bénéfice de ${ctx.clientNom}` : `${ctx.clientNom}, ${infos.adresse}`],
+        ["Adresse e-mail du client", ctx.email || "non renseignée"],
+        ["Date et heure de signature", `${maintenant.toLocaleString("fr-FR", { timeZone: "Europe/Paris", dateStyle: "long", timeStyle: "medium" })} (heure de Paris) · ${maintenant.toISOString().replace("T", " ").slice(0, 19)} UTC`],
+        ["Adresse IP", ip || "inconnue"],
+        ["Navigateur", String(req.headers["user-agent"] || "inconnu").slice(0, 200)],
+        ["Accès", "lien personnel et individuel envoyé au client par Laura Ballo"],
+        ["Lecture", `contrat affiché page par page avant la signature ; exemplaire de lecture en PDF ${body.lecture ? "ouvert ou téléchargé par le client" : "proposé au client"}`],
+        ["Paraphes", `apposés par le client sur chacune des ${pages.length} pages, une à une`],
+        ["Mention saisie", `« ${mention} »`],
+        ["Signature du coach", "Laura BALLO, signature enregistrée apposée à l'émission du contrat"],
+        ["Empreinte SHA-256 du contrat lu et signé", emp],
+        ...(texteSceau ? [["Sceau électronique", texteSceau]] : []),
+        ["Vérification", "déposez ce PDF sur lauraballo.com/contrat/verifier : le site confirme qu'il est identique à l'original enregistré."],
+        ["Référence", `inscription ${ins.id}`],
+      ], pages.length);
+      if (!sceau) return doc.render(meta);
+      const d = maintenant.toISOString().replace(/[-:T]/g, "").slice(0, 14);
+      return doc.render({ ...meta, sceau: { taille: 24000, date: `D:${d}Z`, nom: id.nom, motif: "Contrat de coaching signé par le client", lieu: "lauraballo.com", contact: "contact@lauraballo.com" } });
+    };
+
+    let pdf, horodatage = "";
+    if (id) {
+      let emplacement = assembler("horodate");
+      let cms = await signerCms(octetsSignes(emplacement), { id });
+      if (!cms.horodatage) { // Service d'horodatage injoignable : le certificat ne doit pas l'annoncer
+        emplacement = assembler("sans_horodatage");
+        cms = await signerCms(octetsSignes(emplacement), { id, tsa: null });
+      }
+      pdf = poserSignature(emplacement, cms.der);
+      horodatage = cms.horodatage;
+    } else pdf = assembler(null);
+
+    const empPdf = crypto.createHash("sha256").update(pdf).digest("hex");
+    const nomFichier = `Contrat de coaching - ${ctx.clientNom}.pdf`.replace(/[\/\\]/g, "-");
+    await deposerPdf(ins.id, pdf, nomFichier, {
+      "Contrat signé": { checkbox: true },
+      "Contrat signé le": { date: { start: maintenant.toISOString() } },
+      "⚙ Contrat empreinte": { rich_text: [{ type: "text", text: { content: `pdf ${empPdf} · texte ${emp} · sceau ${id ? "oui" : "non"} · horodatage ${horodatage || "aucun"}` } }] },
+    });
+    return res.status(200).json({ ok: true, pdf: `/api/contrat?t=${body.t}&pdf=1` });
   } catch (e) {
     console.error("contrat", e);
     return res.status(500).json({ error: "Une erreur est survenue. Réessayez dans un instant ou écrivez à contact@lauraballo.com." });
   }
 }
 
-export { rendre, contexte, fabriquerPdf, svgRects, modalites };
+export { rendre, contexte, mettreEnPage, modalites };
