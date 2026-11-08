@@ -2,6 +2,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
+    { "source": "/satisfaction", "destination": "https://presence-platform.onrender.com/satisfaction", "permanent": false },
     { "source": "/accompagnements/mentorat", "destination": "/accompagnements/presence-oratoire-signature", "statusCode": 301 },
     { "source": "/accompagnements/mentorat.html", "destination": "/accompagnements/presence-oratoire-signature", "statusCode": 301 },
     { "source": "/mentorat", "destination": "/accompagnements/presence-oratoire-signature", "statusCode": 301 },
