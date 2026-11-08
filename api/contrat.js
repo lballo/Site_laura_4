@@ -318,7 +318,7 @@ export default async function handler(req, res) {
 
       const ctx = await contexte(ins);
       if (signe(ins)) return res.status(200).json({ etat: "signe", client: ctx.clientNom, programme: ctx.vars.programme, signeLe: (prop(ins, "Contrat signé le") || {}).date?.start || null });
-      if (ctx.manque.length) return res.status(409).json({ error: "Le contrat n'est pas encore prêt : Laura le finalise. Réessayez un peu plus tard." });
+      if (ctx.manque.length) return res.status(409).json({ error: "Le contrat n'est pas encore prêt : Laura le finalise. Réessayez un peu plus tard.", manque: ctx.manque });
       const items = await rendre(ctx, { client_adresse: "(à compléter ci-dessous)", representant: "(à compléter ci-dessous)", date_signature: "(à la signature)" });
       return res.status(200).json({ etat: "a_signer", client: ctx.clientNom, programme: ctx.vars.programme, entreprise: ctx.estEntreprise ? ctx.vars.entreprise_denomination : "", items, empreinte: empreinte(items) });
     }
