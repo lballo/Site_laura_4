@@ -300,6 +300,13 @@ export default async function handler(req, res) {
   res.setHeader("Cache-Control", "no-store");
   if (!process.env.NOTION_API_KEY) return res.status(500).json({ error: "Configuration manquante" });
   try {
+    if (req.method === "GET" && req.query.check) {
+      // Vérifie que la clé Notion du site accède aux bases du contrat
+      const bases = { Inscriptions: `databases/${INSCRIPTIONS}`, "Offres Accompagnements": "databases/313075e127d2805097a0e81b0e4efc86", "CRM People": "databases/127075e127d28112b16dde7180b01a42", Entreprises: "databases/2fd075e127d2819f9fabd4820a69f7f8", "Modèle de contrat": `pages/${MODELE}` };
+      const out = {};
+      for (const [nom, chemin] of Object.entries(bases)) out[nom] = await notion(chemin).then(() => "ok", (e) => e.message);
+      return res.status(200).json(out);
+    }
     if (req.method === "GET") {
       const t = req.query.t;
       if (!jetonValide(t)) return res.status(404).json({ error: "Lien invalide" });
