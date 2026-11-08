@@ -509,6 +509,7 @@
   const programme = params.get("p") || "";
   const prenom = params.get("prenom") || "";
   const clientId = params.get("client") || "";
+  const inscriptionId = params.get("i") || "";
 
   // Titre personnalisé
   if (prenom) {
@@ -550,6 +551,7 @@
 
     const payload = {
       clientId,
+      inscriptionId,
       prenom,
       programme,
       satisfaction,
