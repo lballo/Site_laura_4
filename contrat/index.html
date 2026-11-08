@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Votre contrat de coaching — Laura Ballo Coaching</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="referrer" content="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #FBF4EE; --white: #FFFFFF; --section-dark: #E8DDD6; --btn: #A08E84; --btn-hover: #7a6b62;
+      --dark: #2C2420; --text: #4a3c35; --text-light: #8a7068; --border: #d9cec7; --error: #8b2e1f;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Jost', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    header { background: var(--section-dark); padding: 18px 24px; display: flex; align-items: center; gap: 16px; }
+    header img { height: 48px; width: auto; display: block; }
+    header .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; color: var(--dark); letter-spacing: 0.08em; font-weight: 500; }
+    .container { max-width: 760px; margin: 0 auto; padding: 36px 16px 80px; }
+    .intro { text-align: center; margin-bottom: 28px; }
+    .intro .tag { display: inline-block; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--btn); border: 1px solid var(--btn); padding: 6px 16px; border-radius: 20px; margin-bottom: 16px; }
+    .intro h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.7rem, 4vw, 2.4rem); color: var(--dark); font-weight: 400; line-height: 1.2; margin-bottom: 10px; }
+    .intro p { font-size: 1rem; line-height: 1.7; font-weight: 300; max-width: 560px; margin: 0 auto; }
+    .card { background: var(--white); border-radius: 16px; padding: 40px; box-shadow: 0 2px 16px rgba(44,36,32,0.05); margin-bottom: 24px; }
+    @media (max-width: 560px) { .card { padding: 24px 18px; } }
+    .contrat { font-size: 0.95rem; line-height: 1.65; color: var(--dark); }
+    .contrat h2.titre { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 500; line-height: 1.25; margin-bottom: 18px; }
+    .contrat h3 { font-size: 0.95rem; font-weight: 500; letter-spacing: 0.04em; margin: 26px 0 8px; }
+    .contrat p { margin: 0 0 8px; }
+    .contrat p.indent { padding-left: 26px; margin-top: -4px; }
+    .contrat .li { display: grid; grid-template-columns: 26px 1fr; margin: 0 0 8px; }
+    .contrat b { font-weight: 500; }
+    .contrat .vide { color: var(--text-light); font-style: italic; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; color: var(--dark); font-weight: 500; margin-bottom: 6px; }
+    .aide { font-size: 0.88rem; color: var(--text-light); line-height: 1.6; margin-bottom: 22px; }
+    .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 22px; }
+    label, .label { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-light); }
+    input[type="text"] { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 8px; font-family: 'Jost', sans-serif; font-size: 1rem; color: var(--dark); background: var(--white); outline: none; }
+    input[type="text"]:focus { border-color: var(--btn); }
+    .pad { position: relative; border: 1.5px dashed var(--border); border-radius: 10px; background: #fff; touch-action: none; }
+    .pad canvas { display: block; width: 100%; height: 100%; cursor: crosshair; border-radius: 10px; }
+    .pad.paraphe { width: 220px; height: 110px; max-width: 100%; }
+    .pad.signature { width: 100%; height: 190px; }
+    .pad .indice { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); text-align: center; color: #c9bdb6; font-size: 0.9rem; pointer-events: none; }
+    .effacer { align-self: flex-start; background: none; border: none; color: var(--btn-hover); font-family: 'Jost', sans-serif; font-size: 0.85rem; text-decoration: underline; cursor: pointer; padding: 2px 0; }
+    .check { display: flex; gap: 12px; align-items: flex-start; font-size: 0.95rem; line-height: 1.55; margin: 6px 0 24px; cursor: pointer; text-transform: none; letter-spacing: 0; font-weight: 400; color: var(--text); }
+    .check input { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--btn-hover); flex-shrink: 0; }
+    .actions { text-align: center; }
+    .btn { display: inline-block; background: var(--btn); color: var(--white); border: none; padding: 16px 44px; border-radius: 50px; font-family: 'Jost', sans-serif; font-size: 0.95rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: background 0.2s; }
+    .btn:hover { background: var(--btn-hover); }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .erreur { display: none; margin-top: 16px; padding: 14px 18px; border-radius: 10px; background: #fdf0ee; border: 1px solid #e8b4a8; color: var(--error); font-size: 0.92rem; }
+    .etat { text-align: center; padding: 56px 24px; }
+    .etat h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--dark); font-weight: 400; margin-bottom: 12px; }
+    .etat p { color: var(--text-light); line-height: 1.7; max-width: 440px; margin: 0 auto 24px; }
+    .cache { display: none; }
+    footer { text-align: center; padding: 24px; font-size: 0.78rem; color: var(--text-light); }
+  </style>
+</head>
+<body>
+<header>
+  <img src="/assets/img/Laura-Ballo-white-low-res.webp" alt="Laura Ballo" />
+  <div class="logo">Laura Ballo Coaching</div>
+</header>
+
+<div class="container">
+  <div id="chargement" class="card etat"><p>Chargement de votre contrat…</p></div>
+
+  <div id="message" class="card etat cache"><h2 id="message-titre"></h2><p id="message-texte"></p><a id="message-lien" class="btn cache" href="#">Télécharger le contrat signé</a></div>
+
+  <div id="lecture" class="cache">
+    <div class="intro">
+      <div class="tag">Votre contrat de coaching</div>
+      <h1 id="intro-titre"></h1>
+      <p>Prenez le temps de lire votre contrat. Vous le signez en bas de page : un paraphe, la mention « Lu et approuvé » et votre signature. Vous pourrez ensuite télécharger l'exemplaire signé.</p>
+    </div>
+    <div class="card contrat" id="contrat"></div>
+
+    <form class="card" id="formulaire" novalidate>
+      <div class="section-title">Signer le contrat</div>
+      <p class="aide">Votre paraphe est reproduit sur chaque page du contrat, et votre signature à la fin. Dessinez-les au doigt ou à la souris.</p>
+
+      <div class="field cache" id="champ-adresse">
+        <label for="adresse">Votre adresse postale</label>
+        <input type="text" id="adresse" autocomplete="street-address" placeholder="Numéro, rue, code postal, ville" />
+      </div>
+      <div class="field cache" id="champ-signataire">
+        <label for="signataire">Nom et qualité du signataire</label>
+        <input type="text" id="signataire" autocomplete="name" placeholder="Ex. : Paul Durand, directeur général" />
+      </div>
+
+      <div class="field">
+        <span class="label">Votre paraphe (initiales)</span>
+        <div class="pad paraphe" id="pad-paraphe"><canvas></canvas><span class="indice">Paraphe</span></div>
+        <button type="button" class="effacer" data-efface="pad-paraphe">Effacer</button>
+      </div>
+
+      <div class="field">
+        <label for="mention">Écrivez « Lu et approuvé »</label>
+        <input type="text" id="mention" autocomplete="off" placeholder="Lu et approuvé" />
+      </div>
+
+      <div class="field">
+        <span class="label">Votre signature</span>
+        <div class="pad signature" id="pad-signature"><canvas></canvas><span class="indice">Signature</span></div>
+        <button type="button" class="effacer" data-efface="pad-signature">Effacer</button>
+      </div>
+
+      <label class="check"><input type="checkbox" id="accepte" /> <span>J'ai lu l'intégralité du contrat et j'en accepte les termes. Je signe électroniquement ce contrat, qui a la même valeur qu'une signature manuscrite.</span></label>
+
+      <div class="actions"><button type="submit" class="btn" id="signer">Signer le contrat</button></div>
+      <div class="erreur" id="erreur"></div>
+    </form>
+  </div>
+</div>
+
+<footer>Laura Ballo Coaching — Contrat confidentiel</footer>
+
+<script>
+  const jeton = new URLSearchParams(location.search).get("t") || "";
+  const $ = (id) => document.getElementById(id);
+  let donnees = null;
+
+  function montrer(id) { ["chargement", "message", "lecture"].forEach((x) => $(x).classList.toggle("cache", x !== id)); }
+  function message(titre, texte, lien) {
+    $("message-titre").textContent = titre; $("message-texte").textContent = texte;
+    $("message-lien").classList.toggle("cache", !lien); if (lien) $("message-lien").href = lien;
+    montrer("message"); window.scrollTo({ top: 0 });
+  }
+
+  // ── Affichage du contrat ──
+  function runs(el, liste) {
+    for (const r of liste) {
+      const parts = r.text.split(/(\(à compléter ci-dessous\)|\(à la signature\))/);
+      for (const p of parts) {
+        if (!p) continue;
+        const vide = /^\(à /.test(p);
+        const n = document.createElement(r.bold ? "b" : vide ? "span" : "span");
+        if (vide) n.className = "vide";
+        n.textContent = p; el.appendChild(n);
+      }
+    }
+  }
+  function afficher(items) {
+    const c = $("contrat"); c.innerHTML = "";
+    for (const it of items) {
+      let el;
+      if (it.kind === "h1") { el = document.createElement("h2"); el.className = "titre"; }
+      else if (it.kind === "h2") el = document.createElement("h3");
+      else if (it.kind === "li" || it.kind === "bullet") {
+        el = document.createElement("div"); el.className = "li";
+        const num = document.createElement("span"); num.textContent = it.kind === "li" ? it.num + ")" : "•"; el.appendChild(num);
+        const corps = document.createElement("span"); runs(corps, it.runs); el.appendChild(corps); c.appendChild(el); continue;
+      } else { el = document.createElement("p"); if (it.indent) el.className = "indent"; }
+      runs(el, it.runs); c.appendChild(el);
+    }
+  }
+
+  // ── Zones de dessin ──
+  function zone(id) {
+    const box = $(id), cv = box.querySelector("canvas"), ctx = cv.getContext("2d"), indice = box.querySelector(".indice");
+    let traits = 0, dessin = false, dernier = null;
+    function taille() {
+      const r = box.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+      const ancien = traits ? cv.toDataURL() : null;
+      cv.width = Math.round(r.width * dpr); cv.height = Math.round(r.height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.lineCap = "round"; ctx.lineJoin = "round"; ctx.strokeStyle = "#1a1a1a"; ctx.lineWidth = id === "pad-paraphe" ? 2.2 : 2.6;
+      if (ancien) { const im = new Image(); im.onload = () => ctx.drawImage(im, 0, 0, r.width, r.height); im.src = ancien; }
+    }
+    const pos = (e) => { const r = cv.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
+    cv.addEventListener("pointerdown", (e) => { e.preventDefault(); cv.setPointerCapture(e.pointerId); dessin = true; dernier = pos(e); ctx.beginPath(); ctx.arc(dernier.x, dernier.y, ctx.lineWidth / 2, 0, Math.PI * 2); ctx.fillStyle = "#1a1a1a"; ctx.fill(); traits++; indice.style.display = "none"; });
+    cv.addEventListener("pointermove", (e) => { if (!dessin) return; const p = pos(e); ctx.beginPath(); ctx.moveTo(dernier.x, dernier.y); ctx.lineTo(p.x, p.y); ctx.stroke(); dernier = p; });
+    const fin = () => { dessin = false; };
+    cv.addEventListener("pointerup", fin); cv.addEventListener("pointercancel", fin); cv.addEventListener("pointerleave", fin);
+    window.addEventListener("resize", taille);
+    taille();
+    return {
+      vide: () => traits === 0,
+      effacer: () => { ctx.clearRect(0, 0, cv.width, cv.height); traits = 0; indice.style.display = ""; },
+      jpeg: () => { const o = document.createElement("canvas"); o.width = cv.width; o.height = cv.height; const x = o.getContext("2d"); x.fillStyle = "#fff"; x.fillRect(0, 0, o.width, o.height); x.drawImage(cv, 0, 0); return o.toDataURL("image/jpeg", 0.9); },
+    };
+  }
+
+  let paraphe, signature;
+  document.querySelectorAll("[data-efface]").forEach((b) => b.addEventListener("click", () => (b.dataset.efface === "pad-paraphe" ? paraphe : signature).effacer()));
+
+  function erreur(t) { const e = $("erreur"); e.textContent = t; e.style.display = t ? "block" : "none"; }
+
+  $("formulaire").addEventListener("submit", async (e) => {
+    e.preventDefault(); erreur("");
+    const entreprise = !!donnees.entreprise;
+    const adresse = $("adresse").value.trim(), signataire = $("signataire").value.trim(), mention = $("mention").value.trim();
+    if (!entreprise && adresse.length < 8) return erreur("Indiquez votre adresse postale.");
+    if (entreprise && signataire.length < 3) return erreur("Indiquez le nom et la qualité du signataire.");
+    if (paraphe.vide()) return erreur("Dessinez votre paraphe.");
+    if (mention.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/\s+/g, " ") !== "lu et approuve") return erreur("Écrivez la mention « Lu et approuvé ».");
+    if (signature.vide()) return erreur("Dessinez votre signature.");
+    if (!$("accepte").checked) return erreur("Cochez la case pour confirmer que vous acceptez le contrat.");
+    const btn = $("signer"); btn.disabled = true; btn.textContent = "Signature en cours…";
+    try {
+      const r = await fetch("/api/contrat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action: "signer", t: jeton, empreinte: donnees.empreinte, mention, adresse, signataire, accepte: true, paraphe: paraphe.jpeg(), signature: signature.jpeg() }) });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(j.error || "La signature n'a pas pu être enregistrée.");
+      message("Votre contrat est signé", "Merci. Votre exemplaire signé est prêt : téléchargez-le et conservez-le. Laura reçoit le sien.", j.pdf);
+    } catch (err) {
+      erreur(err.message || "La signature n'a pas pu être enregistrée. Réessayez dans un instant.");
+      btn.disabled = false; btn.textContent = "Signer le contrat";
+    }
+  });
+
+  (async () => {
+    if (!jeton) return message("Lien incomplet", "Ce lien ne contient pas votre contrat. Utilisez le lien reçu par mail, ou écrivez à contact@lauraballo.com.");
+    try {
+      const r = await fetch("/api/contrat?t=" + encodeURIComponent(jeton));
+      const j = await r.json().catch(() => ({}));
+      if (r.status === 404) return message("Lien invalide", "Ce lien ne correspond à aucun contrat en cours. Écrivez à contact@lauraballo.com et Laura vous renverra le bon lien.");
+      if (!r.ok) return message("Contrat pas encore disponible", j.error || "Réessayez dans un instant.");
+      if (j.etat === "signe") return message("Contrat déjà signé", "Ce contrat a déjà été signé. Vous pouvez télécharger l'exemplaire signé.", "/api/contrat?t=" + encodeURIComponent(jeton) + "&pdf=1");
+      donnees = j;
+      $("intro-titre").textContent = j.client ? j.client + ", voici votre contrat" : "Voici votre contrat";
+      afficher(j.items);
+      $("champ-adresse").classList.toggle("cache", !!j.entreprise);
+      $("champ-signataire").classList.toggle("cache", !j.entreprise);
+      montrer("lecture");
+      paraphe = zone("pad-paraphe"); signature = zone("pad-signature");
+    } catch {
+      message("Connexion impossible", "Vérifiez votre connexion puis rechargez la page.");
+    }
+  })();
+</script>
+</body>
+</html>
