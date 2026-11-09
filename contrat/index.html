@@ -130,7 +130,7 @@
 <div class="container">
   <div id="chargement" class="carte etat etroit"><p>Chargement de votre contrat…</p></div>
 
-  <div id="message" class="carte etat etroit cache"><h2 id="message-titre"></h2><p id="message-texte"></p><a id="message-lien" class="btn cache" href="#">Télécharger le contrat signé</a></div>
+  <div id="message" class="carte etat etroit cache"><h2 id="message-titre"></h2><p id="message-texte"></p><div style="display:flex;flex-direction:column;align-items:center;gap:12px"><a id="message-paiement" class="btn cache" href="#">Régler mon accompagnement</a><a id="message-lien" class="btn cache" href="#">Télécharger le contrat signé</a></div></div>
 
   <div id="lecture" class="cache">
     <section class="intro">
@@ -451,7 +451,11 @@
         throw new Error(j.error + " Paraphez à nouveau chaque page.");
       }
       if (!r.ok) throw new Error(j.error || "La signature n'a pas pu être enregistrée.");
-      message("Votre contrat est signé", "Merci. Votre exemplaire signé est prêt : téléchargez-le et conservez-le. Laura reçoit le sien.", j.pdf);
+      message("Votre contrat est signé", j.paiement ? "Merci. Téléchargez votre exemplaire signé et conservez-le. Il reste à régler votre accompagnement : le premier versement se fait par carte, en quelques secondes." : "Merci. Votre exemplaire signé est prêt : téléchargez-le et conservez-le. Laura reçoit le sien.", j.pdf);
+      if (j.paiement) {
+        $("message-paiement").href = j.paiement; $("message-paiement").classList.remove("cache");
+        $("message-lien").classList.add("leger");
+      }
     } catch (err) {
       erreur(err.message || "La signature n'a pas pu être enregistrée. Réessayez dans un instant.");
     }

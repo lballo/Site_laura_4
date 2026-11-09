@@ -19,6 +19,7 @@
 import crypto from "node:crypto";
 import { PdfDoc, widthOf, decodePng, blancTransparent, octetsSignes, poserSignature } from "./_pdf.js";
 import { identite, signerCms } from "./_sceau.js";
+import { echeancier, phraseModalites, eurosCentimes, FINANCEMENT_EN_LIGNE } from "./_echeancier.js";
 
 const NOTION_VERSION = "2022-06-28";
 const MODELE = "40d075e127d28129b397fe147f0f2ce0";
@@ -71,11 +72,10 @@ const euros = (x) => {
   return arrondi.toLocaleString("fr-FR", { minimumFractionDigits: Number.isInteger(arrondi) ? 0 : 2, maximumFractionDigits: 2 }).replace(/[  ]/g, " ");
 };
 
-function modalites(nb, tarif) {
-  const v = euros(tarif / nb);
-  if (nb === 2) return { phrase: `Ce montant est réglé en deux versements de ${v} euros : avant le démarrage de la prestation, puis à mi-parcours.`, versement: v };
-  if (nb === 3) return { phrase: `Ce montant est réglé en trois versements mensuels de ${v} euros, le premier avant le démarrage de la prestation.`, versement: v };
-  return { phrase: "Ce montant est réglé en une seule fois avant le démarrage de la prestation.", versement: euros(tarif) };
+/** Article V : nombre de versements, montants et délais, calculés comme sur la page de paiement. */
+function modalites(nb, tarif, dureeMois = null, enLigne = false) {
+  const e = echeancier(tarif, nb, dureeMois);
+  return { phrase: phraseModalites(e, enLigne), versement: eurosCentimes(e.suivant), echeancier: e };
 }
 
 /** Tout ce que le contrat reprend de Notion, pour une inscription. */
@@ -94,7 +94,8 @@ async function contexte(ins) {
   const estEntreprise = ENTREPRISE.includes(choix(ins, "Financeur"));
   const tarif = nombre(ins, "Tarif appliqué") || 0;
   const nb = parseInt(choix(ins, "Paiement en"), 10) || 1;
-  const m = modalites(nb, tarif);
+  const enLigne = FINANCEMENT_EN_LIGNE.includes(choix(ins, "Financeur"));
+  const m = modalites(nb, tarif, nombre(offre, "Durée (mois)"), enLigne);
   const siretIns = nombre(ins, "SIRET");
   const adresseEnt = texte(ins, "Adresse entreprise") || [texte(entreprise, "Adresse"), [texte(entreprise, "Code postal"), texte(entreprise, "Ville")].filter(Boolean).join(" ")].filter(Boolean).join(", ");
   const vars = {
@@ -117,7 +118,7 @@ async function contexte(ins) {
   if (estEntreprise && !vars.entreprise_denomination) manque.push("l'entreprise");
   const fichiers = (prop(modele, "Fichier") && prop(modele, "Fichier").files) || [];
   const png = fichiers.find((f) => /\.png$/i.test(f.name || ""));
-  return { vars, estEntreprise, clientNom, email: (prop(client, "Email") && prop(client, "Email").email) || "", manque, signatureCoach: png ? (png.file ? png.file.url : png.external.url) : "" };
+  return { vars, estEntreprise, enLigne, echeancier: m.echeancier, clientNom, email: (prop(client, "Email") && prop(client, "Email").email) || "", manque, signatureCoach: png ? (png.file ? png.file.url : png.external.url) : "" };
 }
 
 /** Les paragraphes du modèle, conditions appliquées, variables remplacées. */
@@ -404,6 +405,8 @@ export default async function handler(req, res) {
       await notion(`pages/${id}`, "PATCH", { properties: {
         "⚙ Contrat jeton": { rich_text: [{ type: "text", text: { content: jeton } }] },
         "Lien contrat": { url: `${SITE}/contrat?t=${jeton}` },
+        // Paiement par carte seulement quand le client finance lui-même (même jeton que le contrat)
+        ...(FINANCEMENT_EN_LIGNE.includes(choix(ins, "Financeur")) ? { "Lien paiement": { url: `${SITE}/paiement?t=${jeton}` }, "Statut paiement": { select: { name: "En attente" } } } : {}),
       } });
       return res.status(200).json({ ok: true });
     }
@@ -517,11 +520,12 @@ export default async function handler(req, res) {
       "Contrat signé le": { date: { start: maintenant.toISOString() } },
       "⚙ Contrat empreinte": { rich_text: [{ type: "text", text: { content: `pdf ${empPdf} · texte ${emp} · sceau ${id ? "oui" : "non"} · horodatage ${horodatage || "aucun"}` } }] },
     });
-    return res.status(200).json({ ok: true, pdf: `/api/contrat?t=${body.t}&pdf=1` });
+    const dejaPaye = ["En cours", "Payé"].includes(choix(ins, "Statut paiement"));
+    return res.status(200).json({ ok: true, pdf: `/api/contrat?t=${body.t}&pdf=1`, paiement: ctx.enLigne && !dejaPaye ? `/paiement?t=${body.t}` : "" });
   } catch (e) {
     console.error("contrat", e);
     return res.status(500).json({ error: "Une erreur est survenue. Réessayez dans un instant ou écrivez à contact@lauraballo.com." });
   }
 }
 
-export { rendre, contexte, mettreEnPage, modalites };
+export { rendre, contexte, mettreEnPage, modalites, notion, inscriptionParJeton, choix, nombre, texte, prop, INSCRIPTIONS, SITE };
