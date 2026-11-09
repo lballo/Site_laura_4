@@ -223,7 +223,7 @@ function mettreEnPage(items, ctx, doc = new PdfDoc()) {
   }
 
   // Bloc des signatures
-  if (st.y - 200 < BAS) st.nouvelle();
+  if (st.y - 230 < BAS) st.nouvelle();
   st.y -= 30;
   const y = st.y, p = st.page, colonne = (LARGEUR - 24) / 2, xc = G + colonne + 24;
   p.text("LE CLIENT", G, y, { font: "F2", size: 11 });
@@ -235,7 +235,7 @@ function mettreEnPage(items, ctx, doc = new PdfDoc()) {
   p.rect(boite.x, boite.y, boite.w, boite.h, { stroke: [0.8, 0.77, 0.75], dash: true });
   p.text("Signature du client", G + 6, boite.y + boite.h - 12, { size: 8, color: GRIS });
   p.image("Coach", xc, y - 160, Math.min(colonne, 190), 112);
-  const zones = { signature: { page: st.pages.length, ...boite }, mention: { page: st.pages.length, x: G, y: y - 33 }, paraphes: [] };
+  const zones = { signature: { page: st.pages.length, ...boite }, mention: { page: st.pages.length, x: G, y: y - 33 }, identite: { page: st.pages.length, x: G, y: boite.y - 15, w: colonne }, paraphes: [] };
 
   // Pied de page : client, numéro, case du paraphe
   const total = st.pages.length;
@@ -325,17 +325,18 @@ async function inscriptionOuvert(t) {
   return ins && choix(ins, "Statut") !== "Abandonné" ? ins : null;
 }
 
-/** L'adresse (particulier) ou le signataire (entreprise) saisis avant la lecture : ils figurent dans le contrat. */
-function infosClient(ctx, body) {
-  const adresse = String(body.adresse || "").trim().replace(/\s+/g, " ").slice(0, 300);
-  const signataire = String(body.signataire || "").trim().replace(/\s+/g, " ").slice(0, 200);
+/** Saisi au moment de signer : nom et prénom, et l'adresse (particulier) ou la fonction (entreprise). Imprimés sous la signature. */
+function identiteSignataire(ctx, body) {
+  const net = (v, max) => String(v || "").trim().replace(/\s+/g, " ").slice(0, max);
+  const nom = net(body.nom, 120), adresse = net(body.adresse, 300), fonction = net(body.fonction, 120);
+  if (nom.length < 3 || !/\s/.test(nom)) return { erreur: "Écrivez votre prénom et votre nom." };
   if (!ctx.estEntreprise && adresse.length < 8) return { erreur: "Indiquez votre adresse postale." };
-  if (ctx.estEntreprise && signataire.length < 3) return { erreur: "Indiquez le nom et la qualité du signataire." };
-  return { adresse: ctx.estEntreprise ? "" : adresse, signataire: ctx.estEntreprise ? signataire : "" };
+  if (ctx.estEntreprise && fonction.length < 2) return { erreur: "Indiquez votre fonction dans l'entreprise." };
+  return { nom, adresse: ctx.estEntreprise ? "" : adresse, fonction: ctx.estEntreprise ? fonction : "" };
 }
 
-/** Le texte du contrat pour ce client, à la date du jour. */
-const texteDuJour = (ctx, infos, date = new Date()) => rendre(ctx, { client_adresse: infos.adresse || "…", representant: infos.signataire || "…", date_signature: aujourdhui(date) });
+/** Le texte du contrat à la date du jour. */
+const texteDuJour = (ctx, date = new Date()) => rendre(ctx, { date_signature: aujourdhui(date) });
 
 function jpegDepuisDataUrl(d) {
   const m = /^data:image\/jpeg;base64,([A-Za-z0-9+/=]+)$/.exec(d || "");
@@ -413,9 +414,7 @@ export default async function handler(req, res) {
     if (signe(ins)) return res.status(409).json({ error: "Ce contrat est déjà signé.", signe: true });
     const ctx = await contexte(ins);
     if (ctx.manque.length) return res.status(409).json({ error: "Le contrat n'est pas encore prêt : Laura le finalise. Réessayez un peu plus tard." });
-    const infos = infosClient(ctx, body);
-    if (infos.erreur) return res.status(400).json({ error: infos.erreur });
-    const [items, coach] = await Promise.all([texteDuJour(ctx, infos), signatureCoach(ctx)]);
+    const [items, coach] = await Promise.all([texteDuJour(ctx), signatureCoach(ctx)]);
 
     if (body.action === "apercu") {
       const { pages, zones } = mettreEnPage(items, ctx);
@@ -436,6 +435,8 @@ export default async function handler(req, res) {
     const mention = String(body.mention || "").trim().replace(/\s+/g, " ");
     if (mention.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "") !== "lu et approuve") return res.status(400).json({ error: "Écrivez la mention « Lu et approuvé »." });
     if (body.accepte !== true) return res.status(400).json({ error: "Cochez la case d'acceptation du contrat." });
+    const infos = identiteSignataire(ctx, body);
+    if (infos.erreur) return res.status(400).json({ error: infos.erreur });
     const signature = jpegDepuisDataUrl(body.signature), paraphe = jpegDepuisDataUrl(body.paraphe);
     if (!paraphe) return res.status(400).json({ error: "Dessinez votre paraphe." });
     if (!signature) return res.status(400).json({ error: "Dessinez votre signature." });
@@ -463,10 +464,21 @@ export default async function handler(req, res) {
       const zs = zones.signature;
       pages[zs.page - 1].image("Sig", zs.x + 6, zs.y + 4, zs.w - 12, zs.h - 20);
       pages[zones.mention.page - 1].text(`« ${mention} »`, zones.mention.x, zones.mention.y, { size: 10.5, color: GRIS });
+      // Sous la signature : le nom saisi, puis l'adresse ou la fonction
+      const zi = zones.identite, pi = pages[zi.page - 1];
+      let yi = zi.y;
+      for (const [k, v] of [["Signé par", infos.nom], ctx.estEntreprise ? ["Fonction", infos.fonction] : ["Adresse", infos.adresse]]) {
+        for (const [n, l] of couper([{ text: `${k} : `, bold: true }, { text: v }], 9.5, zi.w).entries()) {
+          let x = zi.x;
+          for (const m of l) { if (m.space) { x += widthOf(" ", m.font, 9.5); continue; } pi.text(m.text, x, yi, { font: m.font, size: 9.5 }); x += widthOf(m.text, m.font, 9.5); }
+          yi -= 13;
+          if (n === 1) break;
+        }
+      }
       const texteSceau = sceau && `ce PDF est scellé par « ${id.nom} » (certificat émis par Laura Ballo, empreinte SHA-256 ${id.empreinte})${sceau === "horodate" ? " et horodaté par un service indépendant" : ""}. Toute modification du fichier rompt le sceau : le panneau Signatures d'Adobe Acrobat Reader l'indique.`;
       pageCertificat(doc, [
         ["Document", `Contrat de coaching · ${ctx.vars.programme}, ${pages.length} pages`],
-        ["Signataire", ctx.estEntreprise ? `${infos.signataire}, pour le compte de ${ctx.vars.entreprise_denomination}, au bénéfice de ${ctx.clientNom}` : `${ctx.clientNom}, ${infos.adresse}`],
+        ["Signataire", ctx.estEntreprise ? `${infos.nom}, ${infos.fonction}, pour le compte de ${ctx.vars.entreprise_denomination}, au bénéfice de ${ctx.clientNom}` : `${infos.nom}, ${infos.adresse}`],
         ["Adresse e-mail du client", ctx.email || "non renseignée"],
         ["Date et heure de signature", `${maintenant.toLocaleString("fr-FR", { timeZone: "Europe/Paris", dateStyle: "long", timeStyle: "medium" })} (heure de Paris) · ${maintenant.toISOString().replace("T", " ").slice(0, 19)} UTC`],
         ["Adresse IP", ip || "inconnue"],

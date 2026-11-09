@@ -68,6 +68,8 @@
     .zone.signature { display: grid; place-items: center; cursor: pointer; }
     .zone.signature span { font-size: clamp(0.6rem, 1.5vw, 0.82rem); color: var(--accent); text-decoration: underline; }
     .zone.signature img { max-width: 94%; max-height: 74%; margin-top: 8%; }
+    .zone.identite { font-family: Helvetica, Arial, sans-serif; color: #1a1a1a; line-height: 1.37; transform: translateY(-1.02em); }
+    .zone.identite b { font-weight: 700; }
     .zone.mention { font-family: Helvetica, Arial, sans-serif; color: #736b66; white-space: nowrap; transform: translateY(-80%); }
 
     /* Signature */
@@ -83,7 +85,7 @@
     .actions { text-align: center; }
 
     /* Fenêtre du paraphe */
-    dialog { border: none; border-radius: 16px; padding: 28px; width: min(440px, calc(100vw - 32px)); box-shadow: 0 10px 40px rgba(44,36,32,0.25); color: var(--text); }
+    dialog { margin: auto; position: fixed; inset: 0; max-height: calc(100vh - 32px); overflow: auto; border: none; border-radius: 16px; padding: 28px; width: min(440px, calc(100vw - 32px)); box-shadow: 0 10px 40px rgba(44,36,32,0.25); color: var(--text); }
     dialog::backdrop { background: rgba(44,36,32,0.45); }
     dialog .boutons { display: flex; gap: 10px; justify-content: space-between; align-items: center; margin-top: 18px; flex-wrap: wrap; }
     footer { text-align: center; padding: 24px; font-size: 0.78rem; color: var(--text-light); }
@@ -100,32 +102,6 @@
 
   <div id="message" class="card etat etroit cache"><h2 id="message-titre"></h2><p id="message-texte"></p><a id="message-lien" class="btn cache" href="#">Télécharger le contrat signé</a></div>
 
-  <!-- 1. Informations qui figurent dans le contrat -->
-  <div id="infos" class="etroit cache">
-    <div class="intro">
-      <div class="tag">Votre contrat de coaching</div>
-      <h1 id="intro-titre"></h1>
-      <p id="intro-programme"></p>
-    </div>
-    <form class="card" id="form-infos" novalidate>
-      <ol class="etapes">
-        <li>Vous indiquez ci-dessous ce qui doit figurer dans le contrat.</li>
-        <li>Vous lisez le contrat page par page et vous paraphez chaque page. Vous pouvez l'imprimer ou l'enregistrer en PDF avant de signer.</li>
-        <li>Vous signez en bas du contrat, puis vous téléchargez votre exemplaire signé.</li>
-      </ol>
-      <div class="field cache" id="champ-adresse">
-        <label for="adresse">Votre adresse postale</label>
-        <input type="text" id="adresse" autocomplete="street-address" placeholder="Numéro, rue, code postal, ville" />
-      </div>
-      <div class="field cache" id="champ-signataire">
-        <label for="signataire">Nom et qualité de la personne qui signe pour <span id="nom-entreprise"></span></label>
-        <input type="text" id="signataire" autocomplete="name" placeholder="Ex. : Paul Durand, directeur général" />
-      </div>
-      <div class="actions"><button type="submit" class="btn" id="afficher">Afficher mon contrat</button></div>
-      <div class="erreur" id="erreur-infos"></div>
-    </form>
-  </div>
-
   <!-- 2. Lecture page par page, paraphes -->
   <div id="lecture" class="cache">
     <div class="barre">
@@ -136,10 +112,11 @@
       </div>
     </div>
     <div class="intro">
-      <h1>Lisez et paraphez chaque page</h1>
+      <div class="tag">Votre contrat de coaching</div>
+      <h1 id="intro-titre">Votre contrat</h1>
+      <p id="intro-programme" style="margin-bottom:12px"></p>
       <p>En bas de chaque page, cliquez sur <b>Parapher</b>. Vous dessinez votre paraphe une fois, puis vous l'apposez page après page. Les boutons <b>Imprimer</b> et <b>Enregistrer en PDF</b> vous donnent le contrat complet avant de signer.</p>
       <p class="mobile-seul">Sur téléphone, écartez deux doigts pour agrandir une page, ou ouvrez le contrat avec «&nbsp;Imprimer&nbsp;» pour le lire en PDF.</p>
-      <p style="margin-top:10px"><button type="button" class="lien" id="modifier-infos">Modifier mes informations</button></p>
     </div>
     <div id="pages"></div>
 
@@ -147,6 +124,18 @@
     <form class="card etroit" id="formulaire" novalidate>
       <div class="section-title">Signer le contrat</div>
       <div class="statut" id="statut-paraphes"></div>
+      <div class="field">
+        <label for="nom">Votre prénom et votre nom</label>
+        <input type="text" id="nom" autocomplete="name" placeholder="Prénom Nom" />
+      </div>
+      <div class="field cache" id="champ-adresse">
+        <label for="adresse">Votre adresse postale</label>
+        <input type="text" id="adresse" autocomplete="street-address" placeholder="Numéro, rue, code postal, ville" />
+      </div>
+      <div class="field cache" id="champ-fonction">
+        <label for="fonction">Votre fonction dans <span id="nom-entreprise">l'entreprise</span></label>
+        <input type="text" id="fonction" autocomplete="organization-title" placeholder="Ex. : directeur général" />
+      </div>
       <div class="field">
         <label for="mention">Écrivez « Lu et approuvé »</label>
         <input type="text" id="mention" autocomplete="off" placeholder="Lu et approuvé" />
@@ -179,18 +168,18 @@
   const jeton = new URLSearchParams(location.search).get("t") || "";
   const $ = (id) => document.getElementById(id);
   const SVG = "http://www.w3.org/2000/svg";
-  let etat = null, apercu = null, infos = {}, paraphe = null, paraphes = new Set(), pageEnAttente = 0;
+  let etat = null, apercu = null, paraphe = null, paraphes = new Set(), pageEnAttente = 0;
   let pdfLecture = null, lectureOuverte = false, signature = null;
 
-  function montrer(id) { ["chargement", "message", "infos", "lecture"].forEach((x) => $(x).classList.toggle("cache", x !== id)); window.scrollTo({ top: 0 }); }
+  function montrer(id) { ["chargement", "message", "lecture"].forEach((x) => $(x).classList.toggle("cache", x !== id)); window.scrollTo({ top: 0 }); }
   function message(titre, texte, lien) {
     $("message-titre").textContent = titre; $("message-texte").textContent = texte;
     $("message-lien").classList.toggle("cache", !lien); if (lien) $("message-lien").href = lien;
     montrer("message");
   }
   const erreurDans = (id) => (t) => { const e = $(id); e.textContent = t; e.style.display = t ? "block" : "none"; };
-  const erreur = erreurDans("erreur"), erreurInfos = erreurDans("erreur-infos");
-  const api = (corps) => fetch("/api/contrat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ t: jeton, ...infos, ...corps }) });
+  const erreur = erreurDans("erreur");
+  const api = (corps) => fetch("/api/contrat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ t: jeton, ...corps }) });
 
   // ── Dessin d'une page à partir de sa mise en page (la même que le PDF) ──
   const couleur = (c) => c ? `rgb(${c.map((v) => Math.round(v * 255)).join(",")})` : "none";
@@ -230,6 +219,9 @@
         const s = document.createElement("div"); s.className = "zone signature"; s.id = "zone-signature"; placer(s, zones.signature, L, H);
         s.addEventListener("click", () => $("formulaire").scrollIntoView({ behavior: "smooth" }));
         p.appendChild(s);
+        const ident = document.createElement("div"); ident.className = "zone identite"; ident.id = "zone-identite";
+        Object.assign(ident.style, { left: (zones.identite.x / L) * 100 + "%", top: ((H - zones.identite.y) / H) * 100 + "%", width: (zones.identite.w / L) * 100 + "%" });
+        p.appendChild(ident);
         const m = document.createElement("div"); m.className = "zone mention"; m.id = "zone-mention";
         Object.assign(m.style, { left: (zones.mention.x / L) * 100 + "%", top: ((H - zones.mention.y) / H) * 100 + "%" });
         p.appendChild(m);
@@ -237,7 +229,11 @@
       c.appendChild(p);
     });
     majParaphes(); majSignature(); majMention();
-    const ajusterTexte = () => { const m = $("zone-mention"); if (m) m.style.fontSize = (10.5 * $("pages").clientWidth / L) + "px"; };
+    const ajusterTexte = () => {
+      const k = $("pages").clientWidth / L;
+      if ($("zone-mention")) $("zone-mention").style.fontSize = 10.5 * k + "px";
+      if ($("zone-identite")) $("zone-identite").style.fontSize = 9.5 * k + "px";
+    };
     ajusterTexte(); window.addEventListener("resize", ajusterTexte);
   }
 
@@ -314,8 +310,15 @@
     const z = $("zone-signature"); if (!z) return;
     z.innerHTML = signature && !signature.vide() ? `<img alt="Votre signature" src="${signature.jpeg()}">` : "<span>Signer ici</span>";
   }
-  function majMention() { const m = $("zone-mention"); if (m) m.textContent = $("mention").value.trim() ? `« ${$("mention").value.trim()} »` : ""; }
-  $("mention").addEventListener("input", majMention);
+  function majMention() {
+    const m = $("zone-mention"); if (m) m.textContent = $("mention").value.trim() ? `« ${$("mention").value.trim()} »` : "";
+    const z = $("zone-identite"); if (!z) return;
+    z.innerHTML = "";
+    const ligne = (k, v) => { if (!v) return; const d = document.createElement("div"); const b = document.createElement("b"); b.textContent = k + " : "; d.append(b, v); z.appendChild(d); };
+    ligne("Signé par", $("nom").value.trim());
+    if (etat && etat.entreprise) ligne("Fonction", $("fonction").value.trim()); else ligne("Adresse", $("adresse").value.trim());
+  }
+  ["mention", "nom", "adresse", "fonction"].forEach((id) => $(id).addEventListener("input", majMention));
   $("effacer-signature").addEventListener("click", () => signature.effacer());
 
   // ── Exemplaire de lecture (PDF) : imprimer ou enregistrer avant de signer ──
@@ -335,7 +338,7 @@
     const a = document.createElement("a"); a.href = pdfLecture; a.download = "Contrat de coaching - exemplaire de lecture.pdf"; document.body.appendChild(a); a.click(); a.remove();
   });
 
-  // ── Étape 1 → 2 ──
+  // ── Lecture ──
   async function chargerApercu() {
     const r = await api({ action: "apercu" });
     const j = await r.json().catch(() => ({}));
@@ -346,28 +349,21 @@
     if (!signature) { signature = zone("pad-signature", 2.6); signature.apresTrait(majSignature); } else signature.taille();
     preparerPdf();
   }
-  $("form-infos").addEventListener("submit", async (e) => {
-    e.preventDefault(); erreurInfos("");
-    infos = etat.entreprise ? { signataire: $("signataire").value.trim() } : { adresse: $("adresse").value.trim() };
-    if (!etat.entreprise && infos.adresse.length < 8) return erreurInfos("Indiquez votre adresse postale complète.");
-    if (etat.entreprise && infos.signataire.length < 3) return erreurInfos("Indiquez le nom et la qualité de la personne qui signe.");
-    const b = $("afficher"); b.disabled = true; b.textContent = "Préparation du contrat…";
-    try { await chargerApercu(); } catch (err) { erreurInfos(err.message); }
-    b.disabled = false; b.textContent = "Afficher mon contrat";
-  });
-  $("modifier-infos").addEventListener("click", () => montrer("infos"));
-
   // ── Étape 3 : signature ──
   $("formulaire").addEventListener("submit", async (e) => {
     e.preventDefault(); erreur("");
     const mention = $("mention").value.trim();
+    const nom = $("nom").value.trim().replace(/\s+/g, " "), adresse = $("adresse").value.trim(), fonction = $("fonction").value.trim();
     if (paraphes.size < apercu.pages.length) return erreur("Paraphez chaque page du contrat avant de signer.");
+    if (nom.length < 3 || !nom.includes(" ")) return erreur("Écrivez votre prénom et votre nom.");
+    if (!etat.entreprise && adresse.length < 8) return erreur("Indiquez votre adresse postale.");
+    if (etat.entreprise && fonction.length < 2) return erreur("Indiquez votre fonction dans l'entreprise.");
     if (mention.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/\s+/g, " ") !== "lu et approuve") return erreur("Écrivez la mention « Lu et approuvé ».");
     if (signature.vide()) return erreur("Dessinez votre signature.");
     if (!$("accepte").checked) return erreur("Cochez la case pour confirmer que vous acceptez le contrat.");
     const btn = $("signer"); btn.disabled = true; btn.textContent = "Signature en cours…";
     try {
-      const r = await api({ action: "signer", empreinte: apercu.empreinte, paraphes: [...paraphes], paraphe, mention, signature: signature.jpeg(), accepte: true, lecture: lectureOuverte });
+      const r = await api({ action: "signer", empreinte: apercu.empreinte, paraphes: [...paraphes], paraphe, mention, nom, adresse, fonction, signature: signature.jpeg(), accepte: true, lecture: lectureOuverte });
       const j = await r.json().catch(() => ({}));
       if (r.status === 409 && j.recharger) {
         await chargerApercu();
@@ -394,11 +390,11 @@
       $("intro-titre").textContent = prenom ? prenom + ", voici votre contrat" : "Voici votre contrat";
       $("intro-programme").textContent = j.programme ? "Accompagnement « " + j.programme + " »" : "";
       $("champ-adresse").classList.toggle("cache", !!j.entreprise);
-      $("champ-signataire").classList.toggle("cache", !j.entreprise);
+      $("champ-fonction").classList.toggle("cache", !j.entreprise);
       $("nom-entreprise").textContent = j.entreprise || "l'entreprise";
-      montrer("infos");
-    } catch {
-      message("Connexion impossible", "Vérifiez votre connexion puis rechargez la page.");
+      await chargerApercu();
+    } catch (err) {
+      message("Contrat indisponible", (err && err.message) || "Vérifiez votre connexion puis rechargez la page.");
     }
   })();
 </script>
