@@ -20,6 +20,7 @@ import crypto from "node:crypto";
 import { PdfDoc, widthOf, decodePng, blancTransparent, octetsSignes, poserSignature } from "./_pdf.js";
 import { identite, signerCms } from "./_sceau.js";
 import { echeancier, phraseModalites, eurosCentimes, FINANCEMENT_EN_LIGNE } from "./_echeancier.js";
+import { brouillon, enRichText, MODELE_MAIL } from "./_mail-inscription.js";
 
 const NOTION_VERSION = "2022-06-28";
 const MODELE = "40d075e127d28129b397fe147f0f2ce0";
@@ -118,7 +119,7 @@ async function contexte(ins) {
   if (estEntreprise && !vars.entreprise_denomination) manque.push("l'entreprise");
   const fichiers = (prop(modele, "Fichier") && prop(modele, "Fichier").files) || [];
   const png = fichiers.find((f) => /\.png$/i.test(f.name || ""));
-  return { vars, estEntreprise, enLigne, echeancier: m.echeancier, clientNom, email: (prop(client, "Email") && prop(client, "Email").email) || "", manque, signatureCoach: png ? (png.file ? png.file.url : png.external.url) : "" };
+  return { vars, estEntreprise, enLigne, echeancier: m.echeancier, clientNom, prenom: prenom || clientNom.split(" ")[0], email: (prop(client, "Email") && prop(client, "Email").email) || "", manque, signatureCoach: png ? (png.file ? png.file.url : png.external.url) : "" };
 }
 
 /** Les paragraphes du modèle, conditions appliquées, variables remplacées. */
@@ -394,20 +395,31 @@ export default async function handler(req, res) {
     if (req.method !== "POST") return res.status(405).json({ error: "Méthode non autorisée" });
     const body = req.body || {};
 
-    if (body.action === "preparer") {
+    if (body.action === "preparer" || body.action === "brouillon") {
       const id = String(body.inscriptionId || "").replace(/-/g, "");
       if (!/^[0-9a-f]{32}$/i.test(id)) return res.status(400).json({ error: "Inscription invalide" });
       const ins = await notion(`pages/${id}`);
       if ((ins.parent && String(ins.parent.database_id || "").replace(/-/g, "")) !== INSCRIPTIONS) return res.status(400).json({ error: "Inscription invalide" });
       if (!(prop(ins, "Programme validé le") || {}).date) return res.status(409).json({ error: "Programme pas encore validé" });
-      if (texte(ins, "⚙ Contrat jeton")) return res.status(200).json({ ok: true, deja: true });
-      const jeton = crypto.randomBytes(24).toString("base64url");
-      await notion(`pages/${id}`, "PATCH", { properties: {
-        "⚙ Contrat jeton": { rich_text: [{ type: "text", text: { content: jeton } }] },
-        "Lien contrat": { url: `${SITE}/contrat?t=${jeton}` },
-        // Paiement par carte seulement quand le client finance lui-même (même jeton que le contrat)
-        ...(FINANCEMENT_EN_LIGNE.includes(choix(ins, "Financeur")) ? { "Lien paiement": { url: `${SITE}/paiement?t=${jeton}` }, "Statut paiement": { select: { name: "En attente" } } } : {}),
-      } });
+      let jeton = texte(ins, "⚙ Contrat jeton");
+      const enLigne = FINANCEMENT_EN_LIGNE.includes(choix(ins, "Financeur"));
+      if (!jeton && body.action === "preparer") {
+        jeton = crypto.randomBytes(24).toString("base64url");
+        await notion(`pages/${id}`, "PATCH", { properties: {
+          "⚙ Contrat jeton": { rich_text: [{ type: "text", text: { content: jeton } }] },
+          "Lien contrat": { url: `${SITE}/contrat?t=${jeton}` },
+          // Paiement par carte seulement quand le client finance lui-même (même jeton que le contrat)
+          ...(enLigne ? { "Lien paiement": { url: `${SITE}/paiement?t=${jeton}` }, "Statut paiement": { select: { name: "En attente" } } } : {}),
+        } });
+      }
+      if (!jeton) return res.status(409).json({ error: "Contrat pas encore préparé" });
+      // Brouillon du mail d'inscription, sans écraser une version déjà relue
+      let mail = texte(ins, "Mail d'inscription");
+      if (!mail) {
+        const [ctx, modele, blocsMail] = await Promise.all([contexte(ins), notion(`pages/${MODELE_MAIL}`), blocs(MODELE_MAIL)]);
+        mail = brouillon({ prenom: ctx.prenom, programme: ctx.vars.programme, lienContrat: `${SITE}/contrat?t=${jeton}`, lienPaiement: enLigne ? `${SITE}/paiement?t=${jeton}` : "" }, modele, blocsMail);
+        await notion(`pages/${id}`, "PATCH", { properties: { "Mail d'inscription": { rich_text: enRichText(mail) } } });
+      }
       return res.status(200).json({ ok: true });
     }
 
