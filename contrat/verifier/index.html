@@ -8,13 +8,13 @@
   <meta name="referrer" content="no-referrer" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
-    :root { --bg: #FBF4EE; --white: #FFFFFF; --section-dark: #E8DDD6; --btn: #A08E84; --btn-hover: #7a6b62; --dark: #2C2420; --text: #4a3c35; --text-light: #8a7068; --border: #d9cec7; --ok: #4f6b4a; --error: #8b2e1f; }
+    :root { --bg: #F7F1EC; --white: #FFFFFF; --section-dark: #E8DDD6; --btn: #A08E84; --btn-hover: #7a6b62; --dark: #2C2420; --text: #4a3c35; --text-light: #8a7068; --border: #d9cec7; --ok: #4f6b4a; --error: #8b2e1f; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Jost', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
-    header { background: var(--section-dark); padding: 18px 24px; display: flex; align-items: center; gap: 16px; }
-    header img { height: 48px; width: auto; display: block; }
-    header .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; color: var(--dark); letter-spacing: 0.08em; font-weight: 500; }
-    .container { max-width: 640px; margin: 0 auto; padding: 40px 16px 80px; }
+    header { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 40px 24px 28px; }
+    header img { height: 78px; width: auto; display: block; }
+    header .filet { width: 64px; height: 1px; background: #C4A574; }
+    .container { max-width: 640px; margin: 0 auto; padding: 8px 16px 80px; }
     h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 4vw, 2.4rem); color: var(--dark); font-weight: 400; text-align: center; margin-bottom: 12px; }
     .intro { text-align: center; font-weight: 300; line-height: 1.7; margin-bottom: 28px; font-size: 1.05rem; }
     .card { background: var(--white); border-radius: 16px; padding: 36px; box-shadow: 0 2px 16px rgba(44,36,32,0.05); }
@@ -34,8 +34,8 @@
 </head>
 <body>
 <header>
-  <img src="/assets/img/Laura-Ballo-white-low-res.webp" alt="Laura Ballo" />
-  <div class="logo">Laura Ballo Coaching</div>
+  <img src="/assets/img/Laura-Ballo-black-trim.png" alt="Laura Ballo Coaching" />
+  <span class="filet" aria-hidden="true"></span>
 </header>
 <div class="container">
   <h1>Vérifier un contrat signé</h1>
