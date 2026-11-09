@@ -12,7 +12,7 @@ export default async function handler(req, res) {
 
   if (!NOTION_API_KEY) return res.status(500).json({ error: "Clé API manquante" });
 
-  const { clientId: rawClient, inscriptionId: rawInscription, prenom, programme, satisfaction, besoin, professionnalisme, disponibilite, remarques } = req.body;
+  const { clientId: rawClient, inscriptionId: rawInscription, prenom, programme, satisfaction, besoin, professionnalisme, disponibilite, remarques, publicAutorise } = req.body;
 
   if (!satisfaction) return res.status(400).json({ error: "Champs obligatoires manquants" });
 
@@ -34,6 +34,9 @@ export default async function handler(req, res) {
     "Disponibilité du coach": { number: parseInt(disponibilite) },
     "Axes d amélioration et remarques": { rich_text: [{ text: { content: remarques || "" } }] },
     "Statut traitement": { select: { name: "Nouveau" } },
+    "Prénom": { rich_text: [{ text: { content: String(prenom || "").slice(0, 100) } }] },
+    // Accord explicite du client pour publier son avis sur lauraballo.com (prénom + initiale du nom)
+    "Avis public autorisé": { checkbox: publicAutorise === true },
   };
 
   // Relier à l'inscription (accompagnement évalué), lien envoyé depuis le suivi coaching de Présence

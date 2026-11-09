@@ -181,6 +181,9 @@
       .form-card { padding: 24px 20px; }
     }
 
+    .accord-public { display: flex; gap: 12px; align-items: flex-start; margin-top: 18px; padding: 14px 16px; border-radius: 10px; background: #FAF6F3; font-size: 0.98rem; line-height: 1.55; color: var(--text, #4a3c35); cursor: pointer; text-transform: none; letter-spacing: 0; font-weight: 400; }
+    .accord-public input { width: 20px; height: 20px; margin-top: 3px; flex-shrink: 0; accent-color: #A83932; }
+    .accord-note { color: #8a7068; }
     .field {
       display: flex;
       flex-direction: column;
@@ -476,6 +479,10 @@
           <label>Avez-vous des axes d'amélioration, des remarques ou recommandations ?</label>
           <textarea name="remarques" id="remarques" placeholder="Partagez librement vos observations…"></textarea>
         </div>
+        <label class="accord-public">
+          <input type="checkbox" id="public" />
+          <span>J'accepte que mon avis soit publié sur lauraballo.com, avec mon prénom et l'initiale de mon nom. <span class="accord-note">Je peux retirer cet accord à tout moment en écrivant à contact@lauraballo.com.</span></span>
+        </label>
       </div>
 
       <!-- Submit -->
@@ -559,6 +566,7 @@
       professionnalisme,
       disponibilite,
       remarques: document.getElementById("remarques").value.trim(),
+      publicAutorise: document.getElementById("public").checked,
     };
 
     try {
