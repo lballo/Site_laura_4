@@ -137,6 +137,36 @@
 
   <!-- Articles de blog -->
   <url>
+    <loc>https://lauraballo.com/sois-parfait-performer-avec-soi</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://lauraballo.com/performer-sans-s-oublier</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://lauraballo.com/gestion-conflits-prevenir-le-conflit</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://lauraballo.com/gestion-conflits-mediation</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://lauraballo.com/gestion-conflits-communication-non-violente</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://lauraballo.com/singularite-questionner-les-codes-leadership</loc>
     <lastmod>2026-10-26</lastmod>
     <changefreq>monthly</changefreq>
