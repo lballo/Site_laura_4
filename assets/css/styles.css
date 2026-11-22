@@ -554,12 +554,17 @@ a {
 }
 
 /* ==================== ARTICLE CONTENT ==================== */
-/* Bande de l'article élargie (1 200 px) pour accueillir les schémas ;
-   le texte garde sa largeur de lecture (780 px), centré dans la bande */
+/* Bande de l'article : 900 px, élargie à 1 200 px seulement quand
+   l'article contient un schéma (« schéma: » dans Notion). Le texte garde
+   toujours sa largeur de lecture (780 px), centré dans la bande. */
 .content-section {
   padding: 100px 60px;
-  max-width: 1200px;
+  max-width: 900px;
   margin: 0 auto;
+}
+
+.content-section:has(.article-figure) {
+  max-width: 1200px;
 }
 
 .section-content > *:not(.full-image):not(.article-figure) {
