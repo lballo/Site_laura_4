@@ -5,6 +5,10 @@
       "label": "Leadership"
     },
     {
+      "slug": "management",
+      "label": "Management"
+    },
+    {
       "slug": "strategie",
       "label": "Stratégie"
     },
@@ -47,9 +51,169 @@
     {
       "slug": "intelligence-emotionnelle",
       "label": "Intelligence émotionnelle"
+    },
+    {
+      "slug": "developpement-personnel",
+      "label": "Développement personnel"
     }
   ],
   "articles": [
+    {
+      "id": "sois-parfait-performer-avec-soi",
+      "title": "Sortir du « sois parfait » : apprendre à performer avec soi (partie 2)",
+      "slug": "sois-parfait-performer-avec-soi",
+      "url": "/sois-parfait-performer-avec-soi",
+      "date": "2026-11-22",
+      "readingTime": "3 min",
+      "excerpt": "Le « sois parfait » bloque la performance. Ce que les parcours de Simone Biles et de Léon Marchand enseignent sur une performance incarnée, avec soi.",
+      "tags": [
+        "leadership",
+        "developpement-personnel",
+        "comprehension-de-soi",
+        "gestion-des-emotions"
+      ],
+      "situations": [
+        "stress",
+        "jugement"
+      ],
+      "searchKeywords": [
+        "sois",
+        "parfait",
+        "sortir",
+        "apprendre",
+        "performer",
+        "avec",
+        "soi",
+        "partie"
+      ],
+      "category": "Leadership",
+      "image": "/assets/img/blog/sois-parfait-performer-avec-soi-main.webp",
+      "featured": false
+    },
+    {
+      "id": "performer-sans-s-oublier",
+      "title": "Performer sans s'oublier : pourquoi avons-nous tendance à performer en nous niant ? (partie 1)",
+      "slug": "performer-sans-s-oublier",
+      "url": "/performer-sans-s-oublier",
+      "date": "2026-11-22",
+      "readingTime": "4 min",
+      "excerpt": "Pourquoi performons-nous contre nous-mêmes ? Drivers, « sois parfait », corps qui lâche : comment performer sans s'oublier, avec l'exemple de Simone Biles.",
+      "tags": [
+        "leadership",
+        "developpement-personnel",
+        "comprehension-de-soi",
+        "gestion-des-emotions"
+      ],
+      "situations": [
+        "stress",
+        "limites"
+      ],
+      "searchKeywords": [
+        "performer",
+        "sans",
+        "s'oublier",
+        "oublier",
+        "pourquoi",
+        "avons",
+        "tendance",
+        "niant",
+        "partie"
+      ],
+      "category": "Leadership",
+      "image": "/assets/img/blog/performer-sans-s-oublier-main.webp",
+      "featured": false
+    },
+    {
+      "id": "gestion-conflits-prevenir-le-conflit",
+      "title": "Gérer un conflit dans la sphère professionnelle - Savoir prévenir le conflit",
+      "slug": "gestion-conflits-prevenir-le-conflit",
+      "url": "/gestion-conflits-prevenir-le-conflit",
+      "date": "2026-11-22",
+      "readingTime": "4 min",
+      "excerpt": "Comment prévenir les conflits en entreprise avant qu’ils n’éclatent ? Rôles clairs, communication orientée besoins, qualité du lien : les leviers concrets.",
+      "tags": [
+        "gestion-des-conflits",
+        "communication",
+        "leadership",
+        "management"
+      ],
+      "situations": [
+        "stress",
+        "limites"
+      ],
+      "searchKeywords": [
+        "prévenir",
+        "conflit",
+        "travail",
+        "gérer",
+        "sphère",
+        "professionnelle",
+        "savoir"
+      ],
+      "category": "Gestion des conflits",
+      "image": "/assets/img/blog/gestion-conflits-prevenir-le-conflit-main.webp",
+      "featured": false
+    },
+    {
+      "id": "gestion-conflits-mediation",
+      "title": "Gérer un conflit dans la sphère professionnelle - La médiation",
+      "slug": "gestion-conflits-mediation",
+      "url": "/gestion-conflits-mediation",
+      "date": "2026-11-22",
+      "readingTime": "5 min",
+      "excerpt": "Quand prévention et communication ne suffisent plus, la médiation s’impose. Cadre sécurisé, identification des besoins, accord minimum viable : comment accompagner un conflit bloqué.",
+      "tags": [
+        "gestion-des-conflits",
+        "communication",
+        "intelligence-emotionnelle",
+        "management",
+        "leadership"
+      ],
+      "situations": [],
+      "searchKeywords": [
+        "médiation",
+        "conflit",
+        "travail",
+        "gérer",
+        "sphère",
+        "professionnelle"
+      ],
+      "category": "Gestion des conflits",
+      "image": "/assets/img/blog/gestion-conflits-mediation-main.webp",
+      "featured": false
+    },
+    {
+      "id": "gestion-conflits-communication-non-violente",
+      "title": "Gérer un conflit dans la sphère professionnelle - La communication non-violente",
+      "slug": "gestion-conflits-communication-non-violente",
+      "url": "/gestion-conflits-communication-non-violente",
+      "date": "2026-11-22",
+      "readingTime": "6 min",
+      "excerpt": "Découvrez comment la Communication Non-Violente (CNV) permet de désamorcer les conflits en entreprise : observation, ressenti, besoin, demande — les 4 étapes de Marshall Rosenberg appliquées au monde professionnel.",
+      "tags": [
+        "gestion-des-conflits",
+        "communication",
+        "intelligence-emotionnelle",
+        "management"
+      ],
+      "situations": [
+        "limites",
+        "leadership"
+      ],
+      "searchKeywords": [
+        "communication",
+        "non",
+        "violente",
+        "conflit",
+        "travail",
+        "gérer",
+        "sphère",
+        "professionnelle"
+      ],
+      "category": "Gestion des conflits",
+      "image": "/assets/img/blog/gestion-conflits-communication-non-violente-main.webp",
+      "featured": false
+    },
     {
       "id": "singularite-questionner-les-codes-leadership",
       "title": "Et si la clé du changement était la singularité?",
