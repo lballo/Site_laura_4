@@ -89,6 +89,7 @@ CATEGORIE_VERS_OFFRE = {
     "Communication": "presence-oratoire",
     "Leadership": "coaching-dirigeants",
     "Management": "coaching-dirigeants",
+    "Performance": "coaching-dirigeants",
     "IA & automation": "leader-ia",
     "Gestion du changement": "leader-ia",
     "Hypersensibilité": "presence-pour-soi",
