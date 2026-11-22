@@ -683,8 +683,10 @@ a {
 
 .article-figure img {
   display: block;
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   height: auto;
+  margin: 0 auto;
   border-radius: 8px;
 }
 
