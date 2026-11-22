@@ -55,6 +55,10 @@
     {
       "slug": "developpement-personnel",
       "label": "Développement personnel"
+    },
+    {
+      "slug": "performance",
+      "label": "Performance"
     }
   ],
   "articles": [
@@ -67,12 +71,14 @@
       "readingTime": "3 min",
       "excerpt": "Le « sois parfait » bloque la performance. Ce que les parcours de Simone Biles et de Léon Marchand enseignent sur une performance incarnée, avec soi.",
       "tags": [
+        "performance",
         "leadership",
         "developpement-personnel",
         "comprehension-de-soi",
         "gestion-des-emotions"
       ],
       "situations": [
+        "performance",
         "stress",
         "jugement"
       ],
@@ -86,7 +92,7 @@
         "soi",
         "partie"
       ],
-      "category": "Leadership",
+      "category": "Performance",
       "image": "/assets/img/blog/sois-parfait-performer-avec-soi-main.webp",
       "featured": false
     },
@@ -99,12 +105,14 @@
       "readingTime": "4 min",
       "excerpt": "Pourquoi performons-nous contre nous-mêmes ? Drivers, « sois parfait », corps qui lâche : comment performer sans s'oublier, avec l'exemple de Simone Biles.",
       "tags": [
+        "performance",
         "leadership",
         "developpement-personnel",
         "comprehension-de-soi",
         "gestion-des-emotions"
       ],
       "situations": [
+        "performance",
         "stress",
         "limites"
       ],
@@ -119,7 +127,7 @@
         "niant",
         "partie"
       ],
-      "category": "Leadership",
+      "category": "Performance",
       "image": "/assets/img/blog/performer-sans-s-oublier-main.webp",
       "featured": false
     },
