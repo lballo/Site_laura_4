@@ -554,10 +554,18 @@ a {
 }
 
 /* ==================== ARTICLE CONTENT ==================== */
+/* Bande de l'article élargie (1 200 px) pour accueillir les schémas ;
+   le texte garde sa largeur de lecture (780 px), centré dans la bande */
 .content-section {
   padding: 100px 60px;
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
+}
+
+.section-content > *:not(.full-image):not(.article-figure) {
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .section-content {
@@ -667,13 +675,10 @@ a {
 }
 
 /* Schémas et infographies (légende Notion « schéma: ») : image entière,
-   un peu plus large que la colonne de texte, jamais recadrée */
+   à la largeur de la bande de l'article, jamais recadrée */
 .article-figure {
   margin: 60px 0;
-  width: min(1100px, calc(100vw - 48px));
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
+  width: 100%;
 }
 
 .article-figure a {
@@ -694,6 +699,9 @@ a {
   .article-figure {
     margin: 40px 0;
     width: calc(100vw - 32px);
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 
