@@ -223,6 +223,37 @@
       "featured": false
     },
     {
+      "id": "pouvoir-de-la-douceur",
+      "title": "La douceur, cette force sous-estimée du leadership",
+      "slug": "pouvoir-de-la-douceur",
+      "url": "/pouvoir-de-la-douceur",
+      "date": "2026-11-22",
+      "readingTime": "5 min",
+      "excerpt": "Pourquoi la douceur n'est pas une faiblesse mais une force stratégique qui transforme votre impact et crée une autorité durable.",
+      "tags": [
+        "leadership",
+        "hypersensibilite",
+        "communication"
+      ],
+      "situations": [
+        "sensible",
+        "leadership"
+      ],
+      "searchKeywords": [
+        "pouvoir",
+        "de",
+        "la",
+        "douceur",
+        "force",
+        "sous",
+        "estimée",
+        "leadership"
+      ],
+      "category": "Leadership",
+      "image": "/assets/img/blog/pouvoir-de-la-douceur-main.webp",
+      "featured": false
+    },
+    {
       "id": "singularite-questionner-les-codes-leadership",
       "title": "Et si la clé du changement était la singularité?",
       "slug": "singularite-questionner-les-codes-leadership",
@@ -977,34 +1008,6 @@
       ],
       "category": "Hypersensibilité",
       "image": "/assets/img/blog/poser-limites-hypersensible-main.webp",
-      "featured": false
-    },
-    {
-      "id": "pouvoir-de-la-douceur",
-      "title": "Le pouvoir de la douceur en leadership",
-      "slug": "pouvoir-de-la-douceur",
-      "url": "/pouvoir-de-la-douceur",
-      "date": "2026-05-05",
-      "readingTime": "4 min",
-      "excerpt": "Pourquoi la douceur n'est pas une faiblesse mais une force stratégique qui transforme votre impact et crée une autorité durable.",
-      "tags": [
-        "leadership",
-        "hypersensibilite",
-        "communication"
-      ],
-      "situations": [
-        "sensible",
-        "leadership"
-      ],
-      "searchKeywords": [
-        "pouvoir",
-        "de",
-        "la",
-        "douceur",
-        "leadership"
-      ],
-      "category": "Leadership",
-      "image": "/assets/img/blog/pouvoir-de-la-douceur-main.webp",
       "featured": false
     }
   ]
