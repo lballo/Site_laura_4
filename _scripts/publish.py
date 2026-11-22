@@ -293,6 +293,16 @@ def blocks_to_html(blocks, client=None, slug="article", img_counter=None):
             else:
                 url = ""
             raw_caption = rich_text_to_plain(img_data.get("caption", []))
+            # Légende commençant par « schéma: » : image affichée entière, sans
+            # recadrage, dans un cadre plus étroit que la pleine largeur
+            # (schémas, infographies). Le reste de la légende suit le format habituel.
+            is_figure = False
+            prefix = raw_caption.strip().lower()
+            for marker in ("schéma:", "schema:"):
+                if prefix.startswith(marker):
+                    is_figure = True
+                    raw_caption = raw_caption.strip()[len(marker):].strip()
+                    break
             if raw_caption.lower().startswith("alt:"):
                 rest = raw_caption[4:].strip()
                 if "|" in rest:
@@ -317,11 +327,19 @@ def blocks_to_html(blocks, client=None, slug="article", img_counter=None):
                 f'\n      <p class="image-caption">{html_module.escape(caption_text)}</p>'
                 if caption_text else ""
             )
-            html_parts.append(
-                f'    <div class="full-image">\n'
-                f'      <img src="{url}" alt="{html_module.escape(alt_text)}" loading="lazy">'
-                f"{cap_html}\n    </div>"
-            )
+            if is_figure:
+                html_parts.append(
+                    f'    <figure class="article-figure">\n'
+                    f'      <a href="{url}" target="_blank" rel="noopener">'
+                    f'<img src="{url}" alt="{html_module.escape(alt_text)}" loading="lazy"></a>'
+                    f"{cap_html}\n    </figure>"
+                )
+            else:
+                html_parts.append(
+                    f'    <div class="full-image">\n'
+                    f'      <img src="{url}" alt="{html_module.escape(alt_text)}" loading="lazy">'
+                    f"{cap_html}\n    </div>"
+                )
             first_p = False
  
         elif btype == "toggle":

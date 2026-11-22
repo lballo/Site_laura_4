@@ -666,6 +666,35 @@ a {
   object-position: center 18%;
 }
 
+/* Schémas et infographies (légende Notion « schéma: ») : image entière,
+   un peu plus large que la colonne de texte, jamais recadrée */
+.article-figure {
+  margin: 60px 0;
+  width: min(1100px, calc(100vw - 48px));
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.article-figure a {
+  display: block;
+  cursor: zoom-in;
+}
+
+.article-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .article-figure {
+    margin: 40px 0;
+    width: calc(100vw - 32px);
+  }
+}
+
 .image-caption {
   text-align: center;
   margin-top: 25px;
