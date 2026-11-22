@@ -14,10 +14,20 @@
     <meta property="og:description" content="{{META_DESCRIPTION}}">
     <meta property="og:url" content="https://lauraballo.com/formations/{{SLUG}}">
     <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Laura Ballo">
+    <meta property="og:image" content="{{IMAGE_PARTAGE}}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="{{IMAGE_ALT}}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{TITLE_SEO}}">
+    <meta name="twitter:description" content="{{META_DESCRIPTION}}">
+    <meta name="twitter:image" content="{{IMAGE_PARTAGE}}">
+    <link rel="preload" as="image" href="{{IMAGE_URL}}" fetchpriority="high">
     <script type="application/ld+json">{{SCHEMA_JSON}}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Serif+Display&display=swap" rel="stylesheet">
     <style>
         /* ============================================
            VARIABLES (Charte Laura Ballo adaptée)
@@ -93,6 +103,34 @@
             max-width: 900px;
             position: relative;
             z-index: 1;
+        }
+
+        /* Photo de la formation, à droite du titre */
+        .hero-inner {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(260px, 400px);
+            gap: var(--space-xl);
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-image {
+            margin: 0;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-image img {
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+        }
+        @media (max-width: 900px) {
+            .hero-inner { grid-template-columns: minmax(0, 1fr); gap: var(--space-lg); }
+            .hero-image img { aspect-ratio: 16 / 9; }
         }
 
         .hero-badge {
@@ -1199,6 +1237,7 @@
          HERO
          ============================================ -->
     <header class="hero">
+        <div class="hero-inner">
         <div class="hero-container">
             <h1 class="hero-title">{{TITLE}}</h1>
             <p class="hero-subtitle">{{ACCROCHE}}</p>
@@ -1237,6 +1276,10 @@
                     <span>Programme mis à jour le {{DATE_MAJ}}</span>
                 </div>
             </div>
+        </div>
+        <figure class="hero-image">
+            <img src="{{IMAGE_URL}}" alt="{{IMAGE_ALT}}" width="{{IMAGE_LARGEUR}}" height="{{IMAGE_HAUTEUR}}" fetchpriority="high" decoding="async">
+        </figure>
         </div>
     </header>
 

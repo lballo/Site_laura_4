@@ -830,6 +830,7 @@ def build_schema(d, avis, sur_devis=False):
         "description": d["META_DESCRIPTION"],
         "url": f"{SITE_URL}/formations/{d['SLUG']}",
         "courseCode": d["CODE_FORMATION"],
+        "image": d.get("IMAGE_PARTAGE") or f"{SITE_URL}{d.get('IMAGE_URL', '')}",
         "provider": {
             "@type": "Organization",
             "name": "Laura Ballo Coaching",
@@ -964,6 +965,10 @@ def build_data(client, page, avis, org=None, lignes_indicateurs=None, periode=("
         "PARTICIPANTS_MAX": int(prop(page, "Nbre participants max", "number") or 0),
         "CODE_FORMATION": esc(prop(page, "Code formation")),
         "IMAGE_URL": image_url(page),
+        "IMAGE_ALT": "",
+        "IMAGE_PARTAGE": "",
+        "IMAGE_LARGEUR": "",
+        "IMAGE_HAUTEUR": "",
         "DATE_MAJ": date_maj_formation(page),
         "DELAIS_ACCES": texte_avec_liens(org.get("delais_acces", "")),
         "MODALITES_ACCES_HTML": paragraphes_avec_liens(org.get("modalites_acces", "")),
@@ -1020,6 +1025,13 @@ def build_data(client, page, avis, org=None, lignes_indicateurs=None, periode=("
                 pdf_url,
             )
         )
+    # Photo de la formation : visible en tête de fiche et reprise en aperçu
+    # de partage (og:image), ce qui évite un lien LinkedIn sans visuel.
+    data["IMAGE_ALT"] = esc(f"Formation {texte_brut(data['TITLE'])}")
+    data["IMAGE_PARTAGE"] = image_partage(data["IMAGE_URL"])
+    largeur, hauteur = dimensions_image(data["IMAGE_URL"])
+    data["IMAGE_LARGEUR"], data["IMAGE_HAUTEUR"] = largeur, hauteur
+    if est_premium(page):
         data["SCHEMA_JSON"] = build_schema(data, avis, sur_devis=True)
     else:
         data["SCHEMA_JSON"] = build_schema(data, avis)
@@ -1092,6 +1104,41 @@ def image_url(page):
         print(f"    ⚠️  image absente du dépôt : {chemin}")
         return IMAGE_PAR_DEFAUT
     return f"/{IMAGES_DIR}/{nom}"
+
+
+# Image de partage (LinkedIn, mails, messageries) : 1200 × 630 en JPG,
+# format que tous les réseaux affichent (le WebP n'est pas toujours lu).
+# Elle est fabriquée une fois à partir de la photo de la formation.
+PARTAGE_DIR = f"{IMAGES_DIR}/partage"
+PARTAGE_TAILLE = (1200, 630)
+
+
+def dimensions_image(url):
+    """Largeur et hauteur de l'image du dépôt, pour réserver sa place à l'écran."""
+    try:
+        from PIL import Image
+        with Image.open(url.lstrip("/")) as im:
+            return im.size
+    except Exception:
+        return (1200, 675)
+
+
+def image_partage(url):
+    """Renvoie l'URL absolue de l'image de partage, en la créant si besoin."""
+    source = Path(url.lstrip("/"))
+    cible = Path(PARTAGE_DIR) / f"{source.stem}.jpg"
+    if not cible.exists():
+        try:
+            from PIL import Image, ImageOps
+            with Image.open(source) as im:
+                im = ImageOps.fit(im.convert("RGB"), PARTAGE_TAILLE, Image.LANCZOS)
+                cible.parent.mkdir(parents=True, exist_ok=True)
+                im.save(cible, "JPEG", quality=85, optimize=True, progressive=True)
+            print(f"    ✓ image de partage créée : {cible}")
+        except Exception as e:
+            print(f"    ⚠️  image de partage non créée ({e}) : photo d'origine utilisée")
+            return f"{SITE_URL}{url}"
+    return f"{SITE_URL}/{cible.as_posix()}"
 
 
 ICONE_HORLOGE = (
@@ -1313,6 +1360,9 @@ def git_commit(fichiers, message):
         subprocess.run(["git", "config", "user.email", "bot@lauraballo.com"], check=True)
         subprocess.run(["git", "add", "-A", OUTPUT_DIR], check=True)
         Path(IMAGES_DIR).mkdir(parents=True, exist_ok=True)
+        # Images de partage fabriquées pendant la génération
+        if Path(PARTAGE_DIR).exists():
+            subprocess.run(["git", "add", "-A", PARTAGE_DIR], check=True)
         status = subprocess.run(
             ["git", "status", "--porcelain"], capture_output=True, text=True
         )
