@@ -63,6 +63,7 @@ TAG_SLUG_MAP_FALLBACK = {
     "IA & automation": "ia-automation",
     "Intelligence émotionnelle": "intelligence-emotionnelle",
     "Développement personnel": "developpement-personnel",
+    "Performance": "performance",
 }
  
 TAG_SLUG_MAP = dict(TAG_SLUG_MAP_FALLBACK)
