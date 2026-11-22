@@ -14,6 +14,16 @@
     <meta property="og:description" content="2 jours pour piloter l&#x27;arrivée de l&#x27;IA : comprendre les usages et les impacts métier, cartographier les acteurs, construire charte IA, gouvernance et feuille de route.">
     <meta property="og:url" content="https://lauraballo.com/formations/conduire-changement-ere-ia">
     <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Laura Ballo">
+    <meta property="og:image" content="https://lauraballo.com/assets/img/formations/partage/conduire-changement-ere-ia.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Formation Conduire le changement à l&#x27;ère de l&#x27;IA">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Formation Conduire le changement à l&#x27;ère de l&#x27;IA • Usages, charte et feuille de route">
+    <meta name="twitter:description" content="2 jours pour piloter l&#x27;arrivée de l&#x27;IA : comprendre les usages et les impacts métier, cartographier les acteurs, construire charte IA, gouvernance et feuille de route.">
+    <meta name="twitter:image" content="https://lauraballo.com/assets/img/formations/partage/conduire-changement-ere-ia.jpg">
+    <link rel="preload" as="image" href="/assets/img/formations/conduire-changement-ere-ia.webp" fetchpriority="high">
     <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "Course",
@@ -21,6 +31,7 @@
   "description": "2 jours pour piloter l&#x27;arrivée de l&#x27;IA : comprendre les usages et les impacts métier, cartographier les acteurs, construire charte IA, gouvernance et feuille de route.",
   "url": "https://lauraballo.com/formations/conduire-changement-ere-ia",
   "courseCode": "CHIA-01",
+  "image": "https://lauraballo.com/assets/img/formations/partage/conduire-changement-ere-ia.jpg",
   "provider": {
     "@type": "Organization",
     "name": "Laura Ballo Coaching",
@@ -116,6 +127,34 @@
             max-width: 900px;
             position: relative;
             z-index: 1;
+        }
+
+        /* Photo de la formation, à droite du titre */
+        .hero-inner {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(260px, 400px);
+            gap: var(--space-xl);
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-image {
+            margin: 0;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-image img {
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+        }
+        @media (max-width: 900px) {
+            .hero-inner { grid-template-columns: minmax(0, 1fr); gap: var(--space-lg); }
+            .hero-image img { aspect-ratio: 16 / 9; }
         }
 
         .hero-badge {
@@ -1268,6 +1307,7 @@
          HERO
          ============================================ -->
     <header class="hero">
+        <div class="hero-inner">
         <div class="hero-container">
             <h1 class="hero-title">Conduire le changement à l&#x27;ère de l&#x27;IA</h1>
             <p class="hero-subtitle">Un jour pour comprendre ce que l&#x27;IA change, un jour pour embarquer vos équipes</p>
@@ -1300,6 +1340,10 @@
                     <span>Programme mis à jour le 14/10/2026</span>
                 </div>
             </div>
+        </div>
+        <figure class="hero-image">
+            <img src="/assets/img/formations/conduire-changement-ere-ia.webp" alt="Formation Conduire le changement à l&#x27;ère de l&#x27;IA" width="800" height="800" fetchpriority="high" decoding="async">
+        </figure>
         </div>
     </header>
 

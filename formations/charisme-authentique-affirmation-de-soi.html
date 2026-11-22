@@ -14,6 +14,16 @@
     <meta property="og:description" content="2 jours pour s’affirmer avec clarté et respect : émotions, écoute active, prise de parole et storytelling au service d’un charisme authentique.">
     <meta property="og:url" content="https://lauraballo.com/formations/charisme-authentique-affirmation-de-soi">
     <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Laura Ballo">
+    <meta property="og:image" content="https://lauraballo.com/assets/img/formations/partage/charisme-authentique.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Formation Charisme authentique et affirmation de soi">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Formation Charisme authentique et affirmation de soi">
+    <meta name="twitter:description" content="2 jours pour s’affirmer avec clarté et respect : émotions, écoute active, prise de parole et storytelling au service d’un charisme authentique.">
+    <meta name="twitter:image" content="https://lauraballo.com/assets/img/formations/partage/charisme-authentique.jpg">
+    <link rel="preload" as="image" href="/assets/img/formations/charisme-authentique.webp" fetchpriority="high">
     <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "Course",
@@ -21,6 +31,7 @@
   "description": "2 jours pour s’affirmer avec clarté et respect : émotions, écoute active, prise de parole et storytelling au service d’un charisme authentique.",
   "url": "https://lauraballo.com/formations/charisme-authentique-affirmation-de-soi",
   "courseCode": "IE-01",
+  "image": "https://lauraballo.com/assets/img/formations/partage/charisme-authentique.jpg",
   "provider": {
     "@type": "Organization",
     "name": "Laura Ballo Coaching",
@@ -116,6 +127,34 @@
             max-width: 900px;
             position: relative;
             z-index: 1;
+        }
+
+        /* Photo de la formation, à droite du titre */
+        .hero-inner {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(260px, 400px);
+            gap: var(--space-xl);
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-image {
+            margin: 0;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-image img {
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+        }
+        @media (max-width: 900px) {
+            .hero-inner { grid-template-columns: minmax(0, 1fr); gap: var(--space-lg); }
+            .hero-image img { aspect-ratio: 16 / 9; }
         }
 
         .hero-badge {
@@ -1268,6 +1307,7 @@
          HERO
          ============================================ -->
     <header class="hero">
+        <div class="hero-inner">
         <div class="hero-container">
             <h1 class="hero-title">Charisme authentique et affirmation de soi</h1>
             <p class="hero-subtitle">Faire de sa sensibilité une force pour s’affirmer</p>
@@ -1300,6 +1340,10 @@
                     <span>Programme mis à jour le 24/10/2026</span>
                 </div>
             </div>
+        </div>
+        <figure class="hero-image">
+            <img src="/assets/img/formations/charisme-authentique.webp" alt="Formation Charisme authentique et affirmation de soi" width="1536" height="1024" fetchpriority="high" decoding="async">
+        </figure>
         </div>
     </header>
 

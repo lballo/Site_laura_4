@@ -14,6 +14,16 @@
     <meta property="og:description" content="2 jours pour industrialiser l&#x27;IA dans son métier : bibliothèque de prompts par famille de tâches, workflow sur un processus réel, première automatisation, gains mesurés.">
     <meta property="og:url" content="https://lauraballo.com/formations/developper-ia-pratique-professionnelle">
     <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Laura Ballo">
+    <meta property="og:image" content="https://lauraballo.com/assets/img/formations/partage/developper-ia-pratique-professionnelle.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Formation Développer l&#x27;IA dans sa pratique professionnelle">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Formation Développer l&#x27;IA dans sa pratique professionnelle • Niveau 2 métier">
+    <meta name="twitter:description" content="2 jours pour industrialiser l&#x27;IA dans son métier : bibliothèque de prompts par famille de tâches, workflow sur un processus réel, première automatisation, gains mesurés.">
+    <meta name="twitter:image" content="https://lauraballo.com/assets/img/formations/partage/developper-ia-pratique-professionnelle.jpg">
+    <link rel="preload" as="image" href="/assets/img/formations/developper-ia-pratique-professionnelle.webp" fetchpriority="high">
     <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "Course",
@@ -21,6 +31,7 @@
   "description": "2 jours pour industrialiser l&#x27;IA dans son métier : bibliothèque de prompts par famille de tâches, workflow sur un processus réel, première automatisation, gains mesurés.",
   "url": "https://lauraballo.com/formations/developper-ia-pratique-professionnelle",
   "courseCode": "IA-02",
+  "image": "https://lauraballo.com/assets/img/formations/partage/developper-ia-pratique-professionnelle.jpg",
   "provider": {
     "@type": "Organization",
     "name": "Laura Ballo Coaching",
@@ -116,6 +127,34 @@
             max-width: 900px;
             position: relative;
             z-index: 1;
+        }
+
+        /* Photo de la formation, à droite du titre */
+        .hero-inner {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(260px, 400px);
+            gap: var(--space-xl);
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-image {
+            margin: 0;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-image img {
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+        }
+        @media (max-width: 900px) {
+            .hero-inner { grid-template-columns: minmax(0, 1fr); gap: var(--space-lg); }
+            .hero-image img { aspect-ratio: 16 / 9; }
         }
 
         .hero-badge {
@@ -1268,6 +1307,7 @@
          HERO
          ============================================ -->
     <header class="hero">
+        <div class="hero-inner">
         <div class="hero-container">
             <h1 class="hero-title">Développer l&#x27;IA dans sa pratique professionnelle</h1>
             <p class="hero-subtitle">Passer d&#x27;un usage ponctuel à une pratique métier outillée, mesurée et sécurisée</p>
@@ -1300,6 +1340,10 @@
                     <span>Programme mis à jour le 14/10/2026</span>
                 </div>
             </div>
+        </div>
+        <figure class="hero-image">
+            <img src="/assets/img/formations/developper-ia-pratique-professionnelle.webp" alt="Formation Développer l&#x27;IA dans sa pratique professionnelle" width="1200" height="675" fetchpriority="high" decoding="async">
+        </figure>
         </div>
     </header>
 
